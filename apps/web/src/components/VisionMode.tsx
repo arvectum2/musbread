@@ -17,7 +17,7 @@ function getSnapshot() {
 }
 function getServerSnapshot() { return false; }
 
-export default function VisionMode() {
+export default function VisionMode({ locale = "ru" }: { locale?: "ru" | "en" }) {
   const on = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   useEffect(() => {
     document.documentElement.dataset.visionMode = on ? "on" : "off";
@@ -29,6 +29,6 @@ export default function VisionMode() {
     window.dispatchEvent(new Event(CHANGE));
   }
   return <button className="vision-toggle" type="button" aria-pressed={on} onClick={toggle}>
-    {on ? "Обычная версия" : "Для слабовидящих"}
+    {locale === "en" ? (on ? "Standard view" : "High contrast") : (on ? "Обычная версия" : "Для слабовидящих")}
   </button>;
 }

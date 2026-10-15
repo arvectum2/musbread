@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import "./globals.scss";
+import "../globals.scss";
 const siteApproved = process.env.MUSBREAD_SITE_APPROVED === "true";
 export const metadata: Metadata = {
   title: { default: "Музей Хлеба — предконтрактный прототип", template: "%s | Музей Хлеба" },

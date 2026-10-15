@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MuseumDocument;
 use App\Models\MuseumEntry;
 use App\Support\MuseumDocumentInspector;
+use App\Support\MuseumLegacySpreadsheetNormalizer;
 use App\Support\MuseumSectionAccess;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
@@ -34,7 +35,8 @@ final class MuseumDocumentController extends Controller
         return view('documents.index', compact('entries', 'documents'));
     }
 
-    public function store(Request $request, MuseumDocumentInspector $inspector): RedirectResponse
+    public function store(Request $request, MuseumDocumentInspector $inspector,
+        MuseumLegacySpreadsheetNormalizer $normalizer): RedirectResponse
     {
         $validated = $request->validate([
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
@@ -45,11 +47,20 @@ final class MuseumDocumentController extends Controller
         $this->requireEntry($entry);
 
         $upload = $request->file('document');
-        $ext = strtolower($upload->getClientOriginalExtension());
-        $inspector->verify($upload->getRealPath(), $ext);
-        $raw = file_get_contents($upload->getRealPath());
-        if (! is_string($raw)) abort(422);
-
+        $sourceExt = strtolower($upload->getClientOriginalExtension());
+        $ext = $sourceExt === 'xls' ? 'xlsx' : $sourceExt;
+        $normalizedPath = null;
+        try {
+            if ($sourceExt === 'xls') {
+                $normalizedPath = $normalizer->normalize($upload->getRealPath());
+            }
+            $filePath = $normalizedPath ?? $upload->getRealPath();
+            $inspector->verify($filePath, $ext);
+            $raw = file_get_contents($filePath);
+            if (! is_string($raw)) abort(422);
+        } finally {
+            if ($normalizedPath !== null) @unlink($normalizedPath);
+        }
         $sha = hash('sha256', $raw);
         $path = 'museum/documents/'.Str::uuid().'.'.$ext;
         if (! Storage::disk('local')->put($path, $raw)) abort(500);
@@ -58,6 +69,7 @@ final class MuseumDocumentController extends Controller
                 'museum_entry_id' => $entry->id,
                 'label' => $validated['label'],
                 'file_type' => $ext,
+                'source_type' => $sourceExt === 'xls' ? 'xls' : null,
                 'storage_path' => $path,
                 'sha256' => $sha,
                 'size_bytes' => strlen($raw),
@@ -68,6 +80,27 @@ final class MuseumDocumentController extends Controller
             throw $error;
         }
         return redirect()->route('museum.documents.index')->with('status', 'Документ загружен.');
+    }
+
+    public function accessibility(Request $request, MuseumDocument $document): RedirectResponse
+    {
+        $this->requireEntry($document->entry);
+        $validated = $request->validate([
+            'accessibility_note' => ['nullable', 'string', 'max:2000'],
+            'accessibility_reviewed' => ['required', 'boolean'],
+        ]);
+        if ((bool) $validated['accessibility_reviewed']
+            && mb_strlen(trim((string) ($validated['accessibility_note'] ?? ''))) < 40) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'accessibility_note' => 'Для подтверждения необходима содержательная HTML-альтернатива либо описание (от 40 символов).',
+            ]);
+        }
+        $document->update([
+            'accessibility_note' => $validated['accessibility_note'] ?? null,
+            'accessibility_reviewed' => (bool) $validated['accessibility_reviewed'],
+        ]);
+        return redirect()->route('museum.documents.index')
+            ->with('status', 'Отметка редакторской проверки доступности сохранена.');
     }
 
     public function destroy(MuseumDocument $document): RedirectResponse

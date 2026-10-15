@@ -11,7 +11,7 @@ use ZipArchive;
  */
 final class MuseumDocumentInspector
 {
-    public const EXTENSIONS = ['pdf', 'docx', 'xls', 'xlsx'];
+    public const EXTENSIONS = ['pdf', 'docx', 'xlsx'];
     public const MAX_BYTES = 15 * 1024 * 1024;
 
     public function verify(string $path, string $extension): void

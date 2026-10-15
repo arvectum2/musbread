@@ -264,6 +264,49 @@ class MuseumMediaTest extends TestCase
         $this->assertDatabaseCount('museum_media', 1);
     }
 
+    public function test_safe_svg_is_rasterized_to_webp_without_publishing_svg_source(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry('published');
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="60" viewBox="0 0 80 60">'
+            .'<rect width="80" height="60" fill="#197e87"/>'
+            .'<circle cx="32" cy="30" r="15" fill="white"/></svg>';
+        $this->post('/admin/museum-media', [
+            'museum_entry_id' => $entry->id, 'alt' => 'Схематическое зерно внутри круга',
+            'image' => UploadedFile::fake()->createWithContent('diagram.svg', $svg),
+        ])->assertRedirect(route('museum.media.index'));
+        $item = MuseumMedia::firstOrFail();
+        $this->assertSame('image/webp', $item->mime);
+        $this->assertSame(80, $item->width);
+        $this->assertSame(60, $item->height);
+        $this->assertSame(IMAGETYPE_WEBP,
+            getimagesizefromstring(Storage::disk('local')->get($item->storage_path))[2]);
+        $this->assertStringNotContainsString('<svg', Storage::disk('local')->get($item->storage_path));
+    }
+
+    public function test_svg_scripts_external_refs_doctype_and_embedded_images_are_rejected(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry();
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $payloads = [
+            '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="60"><script>alert(1)</script></svg>',
+            '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="60"><image href="https://external.example/pic.png"/></svg>',
+            '<!DOCTYPE svg [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><svg xmlns="http://www.w3.org/2000/svg" width="80" height="60">&xxe;</svg>',
+            '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="60"><rect width="80" height="60" fill="url(https://evil.example/a)"/></svg>',
+            '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="60"><foreignObject><p>bad</p></foreignObject></svg>',
+            '<svg xmlns="http://www.w3.org/2000/svg" width="5000" height="60"><rect width="10" height="10"/></svg>',
+        ];
+        foreach ($payloads as $index => $svg) {
+            $this->post('/admin/museum-media', [
+                'museum_entry_id' => $entry->id, 'alt' => 'Попытка загрузить опасный SVG',
+                'image' => UploadedFile::fake()->createWithContent('bad'.$index.'.svg', $svg),
+            ])->assertSessionHasErrors('image');
+        }
+        $this->assertDatabaseCount('museum_media', 0);
+    }
+
     public function test_editor_can_access_media_library(): void
     {
         $roleId = \MoonShine\Laravel\Models\MoonshineUserRole::where('name', 'Editor')->firstOrFail()->id;

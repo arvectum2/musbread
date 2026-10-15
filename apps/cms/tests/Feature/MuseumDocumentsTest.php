@@ -82,7 +82,64 @@ class MuseumDocumentsTest extends TestCase
         $this->assertDatabaseCount('museum_documents', 3);
     }
 
-    public function test_invalid_scripts_bogus_pdf_macros_and_legacy_xls_are_rejected(): void
+    public function test_synthetic_legacy_xls_becomes_values_only_xlsx_without_formula_execution(): void
+    {
+        Storage::fake('local');
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $entry = $this->entry('spreadsheet-normalized');
+        $raw = file_get_contents(base_path('../../tests/fixtures/synthetic-legacy.xls'));
+        $this->upload($entry->id, UploadedFile::fake()->createWithContent('museum-legacy.xls', $raw))
+            ->assertRedirect();
+        $document = MuseumDocument::firstOrFail();
+        $this->assertSame('xlsx', $document->file_type);
+        $this->assertSame('xls', $document->source_type);
+        $this->assertStringEndsWith('.xlsx', $document->storage_path);
+        $this->assertNotSame(hash('sha256', $raw), $document->sha256);
+        $xlsx = Storage::disk('local')->get($document->storage_path);
+        $temp = tempnam(sys_get_temp_dir(), 'normalized');
+        file_put_contents($temp, $xlsx);
+        try {
+            $zip = new ZipArchive();
+            $this->assertTrue($zip->open($temp) === true);
+            $worksheet = $zip->getFromName('xl/worksheets/sheet1.xml');
+            $this->assertStringContainsString('Ticket test', $worksheet);
+            $this->assertStringContainsString('HYPERLINK', $worksheet);
+            $this->assertStringNotContainsString('<f>', $worksheet);
+            $this->assertFalse($zip->locateName('xl/vbaProject.bin'));
+            $zip->close();
+        } finally {
+            @unlink($temp);
+        }
+        $this->get(route('museum.documents.download', $document))
+            ->assertOk()->assertHeader('Content-Type', 'application/octet-stream');
+    }
+
+    public function test_production_rejects_legacy_xls_before_conversion_and_storage(): void
+    {
+        Storage::fake('local');
+        $previous = app()->environment();
+        app()->instance('env', 'production');
+        try {
+            $this->expectException(\Illuminate\Validation\ValidationException::class);
+            app(\App\Support\MuseumLegacySpreadsheetNormalizer::class)
+                ->normalize(base_path('../../tests/fixtures/synthetic-legacy.xls'));
+        } finally {
+            app()->instance('env', $previous);
+        }
+    }
+
+    public function test_fake_or_corrupt_xls_is_rejected_without_persisting(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry('xls-invalid');
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $this->upload($entry->id, UploadedFile::fake()->createWithContent(
+            'bogus.xls', "\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1".str_repeat('x', 200)
+        ))->assertSessionHasErrors('document');
+        $this->assertDatabaseCount('museum_documents', 0);
+    }
+
+    public function test_invalid_scripts_bogus_pdf_macros_and_malformed_xls_are_rejected(): void
     {
         Storage::fake('local');
         $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
@@ -181,6 +238,61 @@ class MuseumDocumentsTest extends TestCase
             $this->artisan('museum:export', ['--output' => $out]);
         } finally {
             @unlink($out);
+        }
+    }
+
+    public function test_document_accessibility_review_requires_meaningful_text_and_has_acl(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry('document-a11y', 'published');
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $this->upload($entry->id, $this->pdf())->assertRedirect();
+        $doc = MuseumDocument::firstOrFail();
+        $this->assertFalse($doc->accessibility_reviewed);
+        // Editor drafts are private until review; the public snapshot must not contain them.
+        $draft = 'Черновое и ещё не проверенное редактором пояснение, не предназначенное для сайта.';
+        $doc->update(['accessibility_note' => $draft, 'accessibility_reviewed' => false]);
+        $draftOut = storage_path('framework/testing/a11y-unreviewed.json');
+        $draftManifest = storage_path('framework/testing/a11y-unreviewed-manifest.json');
+        $draftAssets = storage_path('framework/testing/a11y-unreviewed-assets');
+        try {
+            $this->artisan('museum:export', [
+                '--output' => $draftOut, '--manifest' => $draftManifest,
+                '--document-output-dir' => $draftAssets,
+            ])->assertSuccessful();
+            $this->assertStringNotContainsString($draft, file_get_contents($draftOut));
+        } finally {
+            @unlink($draftOut); @unlink($draftManifest);
+            foreach (glob($draftAssets.'/*') ?: [] as $asset) @unlink($asset);
+            @rmdir($draftAssets);
+        }
+        $this->patch(route('museum.documents.accessibility', $doc), [
+            'accessibility_reviewed' => 1, 'accessibility_note' => 'Коротко',
+        ])->assertSessionHasErrors('accessibility_note');
+        $this->assertFalse($doc->fresh()->accessibility_reviewed);
+
+        $note = 'Альтернативный текст включает сведения о дате, стоимости и доступных маршрутах посещения.';
+        $this->patch(route('museum.documents.accessibility', $doc), [
+            'accessibility_reviewed' => 1, 'accessibility_note' => $note,
+        ])->assertRedirect();
+        $this->assertTrue($doc->fresh()->accessibility_reviewed);
+        $this->assertSame($note, $doc->fresh()->accessibility_note);
+
+        $out = storage_path('framework/testing/a11y-document.json');
+        $manifest = storage_path('framework/testing/a11y-document-manifest.json');
+        $assets = storage_path('framework/testing/a11y-document-assets');
+        try {
+            $this->artisan('museum:export', [
+                '--output' => $out, '--manifest' => $manifest,
+                '--document-output-dir' => $assets,
+            ])->assertSuccessful();
+            $payload = json_decode(file_get_contents($out), true, flags: JSON_THROW_ON_ERROR);
+            $this->assertTrue($payload['entries'][0]['documents'][0]['accessibility_reviewed']);
+            $this->assertSame($note, $payload['entries'][0]['documents'][0]['accessibility_note']);
+        } finally {
+            @unlink($out); @unlink($manifest);
+            foreach (glob($assets.'/*') ?: [] as $asset) @unlink($asset);
+            @rmdir($assets);
         }
     }
 

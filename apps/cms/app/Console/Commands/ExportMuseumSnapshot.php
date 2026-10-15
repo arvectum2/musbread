@@ -131,6 +131,10 @@ class ExportMuseumSnapshot extends Command
                         'label' => $document->label,
                         'format' => $document->file_type,
                         'size_bytes' => $document->size_bytes,
+                        'accessibility_reviewed' => $document->accessibility_reviewed,
+                        // Unreviewed editorial notes must never leak to the public JSON.
+                        'accessibility_note' => $document->accessibility_reviewed
+                            ? $document->accessibility_note : null,
                     ];
                 }
 

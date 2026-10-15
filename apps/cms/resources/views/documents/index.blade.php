@@ -17,7 +17,7 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,s
 <body><main>
 <a href="/admin">← MoonShine</a>
 <h1>Документы материалов (закрытый контур)</h1>
-<p class="warning">Предварительная версия. Поддерживаются PDF, DOCX и XLSX до 15 МБ. Старый формат XLS требует отдельного антивирусного конвейера и пока отклоняется. Документы публикуются только вместе с утверждённым материалом. Не загружайте реальные материалы музея без прав.</p>
+<p class="warning">Предварительная версия. Поддерживаются PDF, DOCX и XLSX до 15 МБ. В разработке поддерживается XLS: конвертируется в XLSX без формул, макросов и объектов; на production загрузка XLS закрыта до проверки антивирусом. Документы публикуются только вместе с утверждённым материалом. Не загружайте реальные материалы музея без прав.</p>
 @if(session('status')) <p role="status">{{ session('status') }}</p> @endif
 @if($errors->any())<div role="alert"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 <section>
@@ -29,15 +29,26 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,s
 @foreach($entries as $entry)<option value="{{ $entry->id }}" @selected(old('museum_entry_id') == $entry->id)>{{ $entry->title }} ({{ $entry->slug }})</option>@endforeach
 </select>
 <label for="label">Короткое доступное название файла</label><input name="label" id="label" maxlength="180" minlength="3" value="{{ old('label') }}" required>
-<label for="document">Файл PDF / DOCX / XLSX</label><input type="file" name="document" id="document" accept=".pdf,.docx,.xlsx" required>
+<label for="document">Файл PDF / DOCX / XLSX</label><input type="file" name="document" id="document" accept=".pdf,.docx,.xlsx,.xls" required>
 <button type="submit">Сохранить в закрытой медиатеке</button>
 </form></section>
 <section><h2>Загружено: {{ $documents->total() }}</h2>
 <table><thead><tr><th>Название</th><th>Формат</th><th>Материал</th><th>Действие</th></tr></thead><tbody>
 @foreach($documents as $document)<tr>
-<td>{{ $document->label }}</td><td>{{ strtoupper($document->file_type) }} ({{ round($document->size_bytes/1024) }} КБ)</td>
+<td>{{ $document->label }}</td><td>{{ strtoupper($document->file_type) }} @if($document->source_type === "xls")(из XLS, только значения)@endif ({{ round($document->size_bytes/1024) }} КБ)
+<p>{{ $document->accessibility_reviewed ? 'HTML-альтернатива проверена редактором' : 'Доступность не подтверждена' }}</p></td>
 <td>{{ $document->entry?->title }}</td>
 <td><a href="{{ route('museum.documents.download', $document) }}">Скачать</a>
+<form action="{{ route('museum.documents.accessibility', $document) }}" method="post">
+@csrf @method('PATCH')
+<label for="accessibility-{{ $document->id }}">Текстовая альтернатива или пояснение по доступности</label>
+<textarea id="accessibility-{{ $document->id }}" name="accessibility_note" maxlength="2000"
+  rows="3" style="width:100%">{{ $document->accessibility_note }}</textarea>
+<input type="hidden" name="accessibility_reviewed" value="0">
+<label for="reviewed-{{ $document->id }}"><input id="reviewed-{{ $document->id }}"
+  name="accessibility_reviewed" type="checkbox" value="1"
+  @checked($document->accessibility_reviewed)> Редактор проверил полноту HTML-альтернативы (не означает PDF/UA)</label>
+<button type="submit">Сохранить доступность</button></form>
 <form action="{{ route('museum.documents.destroy', $document) }}" method="post">@csrf @method('DELETE')
 <button type="submit">Удалить</button></form></td>
 </tr>@endforeach

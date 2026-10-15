@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MuseumEntry;
 use App\Models\MuseumMedia;
 use App\Support\MuseumSectionAccess;
+use App\Support\MuseumSvgRasterizer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,27 +37,35 @@ final class MuseumMediaController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, MuseumSvgRasterizer $svgRasterizer): RedirectResponse
     {
         $validated = $request->validate([
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
             'alt' => ['required', 'string', 'min:3', 'max:255'],
             'caption' => ['nullable', 'string', 'max:255'],
-            'image' => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,webp,gif', 'max:5120',
-                'dimensions:max_width=4096,max_height=4096'],
+            'image' => ['required', 'file', 'max:5120'],
         ]);
 
         $entry = MuseumEntry::findOrFail($validated['museum_entry_id']);
         $this->requireEntry($entry);
         $upload = $request->file('image');
         $raw = file_get_contents($upload->getRealPath());
-        $details = @getimagesizefromstring($raw);
-        $allowed = [IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_WEBP, IMAGETYPE_GIF];
-        if ($details === false || ! in_array($details[2], $allowed, true)) {
-            throw ValidationException::withMessages(['image' => 'Недопустимый формат изображения.']);
+        if (! is_string($raw)) {
+            throw ValidationException::withMessages(['image' => 'Не удалось прочитать файл.']);
         }
-        [$width, $height] = $details;
-        if ($width < 1 || $height < 1 || $width * $height > 16000000) {
+        $extension = strtolower($upload->getClientOriginalExtension());
+        if ($extension === 'svg') {
+            [$raw, $width, $height] = $svgRasterizer->render($raw);
+        } else {
+            $types = ['png' => IMAGETYPE_PNG, 'jpg' => IMAGETYPE_JPEG,
+                'jpeg' => IMAGETYPE_JPEG, 'webp' => IMAGETYPE_WEBP, 'gif' => IMAGETYPE_GIF];
+            $details = @getimagesizefromstring($raw);
+            if (! isset($types[$extension]) || $details === false || $details[2] !== $types[$extension]) {
+                throw ValidationException::withMessages(['image' => 'Недопустимый формат изображения.']);
+            }
+            [$width, $height] = $details;
+        }
+        if ($width < 1 || $height < 1 || $width > 4096 || $height > 4096 || $width * $height > 16000000) {
             throw ValidationException::withMessages(['image' => 'Изображение превышает ограничения.']);
         }
 

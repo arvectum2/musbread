@@ -64,6 +64,10 @@ export default async function MuseumEntryPage({ params }: Props) {
           <a href={document.href} download className="text-link">
             {document.label} ({document.format.toUpperCase()}, {Math.ceil(document.size_bytes / 1024)} КБ)
           </a>
+          {document.accessibility_reviewed && document.accessibility_note
+            ? <p className="museum-document-accessibility">{document.accessibility_note}</p>
+            : <p className="museum-document-accessibility">Доступность документа ещё проверяется редактором;
+              основную информацию можно прочесть в тексте этой страницы.</p>}
         </li>)}
       </ul>
       <p>Файлы скачиваются на устройство. Для доступного просмотра используйте описание на этой странице.</p>

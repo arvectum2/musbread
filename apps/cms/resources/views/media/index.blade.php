@@ -40,7 +40,7 @@
 <main>
     <h1>Изображения материалов</h1>
     <p><a href="{{ route('museum.documents.index') }}">К библиотеке PDF/DOCX/XLSX →</a></p>
-    <p>Файлы до 5 МБ: JPG, PNG, WebP, GIF (только первый кадр, без анимации). Изображение привязывается к странице или новости. EXIF и другие метаданные удаляются при перекодировании в WebP. Файлы в черновиках не попадают на публичный сайт.</p>
+    <p>Файлы до 5 МБ: JPG, PNG, WebP, GIF (первый кадр) и SVG (строгая геометрия, преобразование в WebP). Изображение привязывается к странице или новости. EXIF и другие метаданные удаляются при перекодировании в WebP. Файлы в черновиках не попадают на публичный сайт.</p>
     @if(session('status')) <p role="status" class="notice">{{ session('status') }}</p> @endif
     @if($errors->any())
         <div role="alert" class="panel error">
@@ -68,7 +68,7 @@
             <label for="image">Изображение *</label>
             <div class="drop" id="drop">
                 <p>Перетащите изображение сюда или выберите файл</p>
-                <input id="image" name="image" type="file" accept="image/png,image/jpeg,image/webp,image/gif" required>
+                <input id="image" name="image" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg" required>
             </div>
             <button type="submit">Загрузить изображение</button>
         </form>

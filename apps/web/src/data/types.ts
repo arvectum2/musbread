@@ -18,6 +18,8 @@ export interface MuseumPublishedDocument {
   label: string;
   format: "pdf" | "docx" | "xlsx";
   size_bytes: number;
+  accessibility_reviewed?: boolean;
+  accessibility_note?: string | null;
 }
 export interface MuseumEntryEnglish {
   title: string;
