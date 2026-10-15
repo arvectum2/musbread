@@ -42,6 +42,8 @@ php artisan serve --host=127.0.0.1 --port=8766
 - `fixtures/content.json`: исключительно тестовые материалы, не от имени музея.
 - `scripts/publish_snapshot.py`: fixture-exporter с SHA256 manifest; Laravel-команда `museum:export` выпускает тот же формат. Для промышленной схемы ещё нужны согласованный канал, полная атомарность пакетов, реестр версий и rollback.
 
+Мелкие подзадачи текущего спринта: [SPRINT-2026-10-15](docs/SPRINT-2026-10-15.md).
+
 Подробнее: [ROADMAP](docs/ROADMAP.md), [REQUIREMENTS](docs/REQUIREMENTS.md), [ARCHITECTURE](docs/ARCHITECTURE.md), [SYNC](docs/SYNC.md).
 
 **Не размещать в публичном репозитории** приватные документы заказчика, логины, личные данные, секреты и материалы интервью.
@@ -53,3 +55,7 @@ php artisan serve --host=127.0.0.1 --port=8766
 ## Типизированные материалы музея
 
 В MoonShine есть раздел «Материалы музея»: `page`, `news`, `excursion`, `exhibition`, `document`. С помощью `museum:export` только опубликованные и наступившие по времени записи попадают в `entries` статического JSON; Next.js создаёт информационные маршруты `/museum/`, `/news/`, `/excursions/`, `/exhibitions/`, `/documents/`. Все примеры — выдуманные демонстрационные данные.
+
+## Полная демонстрационная публикация без Docker
+
+`sh scripts/demo_publish.sh` последовательно выполняет экспорт Laravel, сборку Next.js, размещение версии и проверку контрольных сумм. Laravel Scheduler знает почасовое задание `museum:export`, но **сам Scheduler на Mac mini постоянно не запущен**: оно требует отдельного schedule runner и само по себе не передаёт файлы в сеть музея.

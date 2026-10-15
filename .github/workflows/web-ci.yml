@@ -70,3 +70,43 @@ jobs:
           php artisan db:seed --class=DemoMuseumContentSeeder --force
           php artisan museum:export
           python3 ../../scripts/publish_snapshot.py --check
+  integration:
+    name: CMS editor → build → verified public release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3
+          coverage: none
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend and frontend
+        run: |
+          cd apps/cms
+          composer install --prefer-dist --no-interaction --no-progress
+          cp .env.example .env
+          php artisan key:generate
+          touch database/database.sqlite
+          php artisan migrate --force
+          php artisan db:seed --class=DemoMuseumContentSeeder --force
+          cd ../web
+          npm ci
+      - name: Execute native cross-stack publication
+        run: sh scripts/demo_publish.sh
+      - name: Verify static site and release
+        run: |
+          python3 scripts/release_site.py verify
+          test -f deploy/local/current/index.html
+          test -f deploy/local/current/museum/museum-about/index.html
+          test -f deploy/local/current/news/demo-news/index.html
+          test -f deploy/local/current/excursions/demo-tour/index.html
+          cd apps/cms
+          php artisan schedule:list | grep 'museum:export'
