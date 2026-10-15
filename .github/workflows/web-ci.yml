@@ -40,6 +40,9 @@ jobs:
           test -f out/index.html
           test -f out/events/index.html
           test -f out/events/bread-history/index.html
+          test -f out/museum/museum-about/index.html
+          test -f out/news/demo-news/index.html
+          test -f out/excursions/demo-tour/index.html
           if grep -R -E '(DATABASE_URL|APP_KEY|MOONSHINE_SECRET)' out/; then
             echo "Potential secret in site export"
             exit 1

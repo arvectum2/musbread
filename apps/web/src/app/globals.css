@@ -59,3 +59,11 @@ h1,h2,h3,p{margin-top:0}h1,h2{font-weight:690;line-height:1.1;letter-spacing:-.0
 .mobile-nav summary::-webkit-details-marker{display:none}
 .mobile-nav nav{position:absolute;top:calc(100% + .8rem);right:0;min-width:180px;display:flex;flex-direction:column;gap:.7rem;background:#fff;box-shadow:0 4px 25px #0002;border:1px solid var(--line);padding:1.2rem;z-index:70}
 @media(max-width:960px){.mobile-nav{display:block}.header-action{display:none}}
+
+
+.museum-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;max-width:1060px}
+.museum-list-item{display:block;background:#fff;border:1px solid var(--line);padding:1.6rem;min-width:0}
+.museum-list-item h2{font-size:1.65rem;letter-spacing:-.025em;margin:0 0 .7rem}
+.museum-list-item p{color:var(--mute);margin:0}
+.museum-detail .article-content{font-size:1.1rem;max-width:760px;white-space:pre-line}
+@media(max-width:650px){.museum-list{grid-template-columns:1fr}}

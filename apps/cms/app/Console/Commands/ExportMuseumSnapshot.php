@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\MuseumEvent;
+use App\Models\MuseumEntry;
 use Illuminate\Console\Command;
 
 class ExportMuseumSnapshot extends Command
@@ -27,6 +28,25 @@ class ExportMuseumSnapshot extends Command
                 'excerpt' => $event->excerpt, 'body' => $event->body,
             ])->all();
 
+        $entries = MuseumEntry::query()
+            ->public()
+            ->orderBy('type')
+            ->orderBy('sort_order')
+            ->orderBy('slug')
+            ->get()
+            ->map(fn (MuseumEntry $entry) => [
+                'type' => $entry->type,
+                'slug' => $entry->slug,
+                'title' => $entry->title,
+                'h1' => $entry->h1,
+                'parent_slug' => $entry->parent_slug,
+                'excerpt' => $entry->excerpt,
+                'body' => $entry->body,
+                'seo_title' => $entry->seo_title,
+                'seo_description' => $entry->seo_description,
+                'sort_order' => $entry->sort_order,
+            ])->all();
+
         // Public export intentionally excludes draft/private properties, role info and PII.
         $data = [
             'schema_version' => 1,
@@ -36,6 +56,7 @@ class ExportMuseumSnapshot extends Command
                 'description' => 'Предконтрактный прототип информационного сайта музея.',
             ],
             'events' => $events,
+            'entries' => $entries,
         ];
         // Match the Python fixture publisher canonical JSON serializer.
         $normalize = function ($obj) use (&$normalize) {
@@ -49,6 +70,7 @@ class ExportMuseumSnapshot extends Command
             'schema_version' => 1,
             'files' => ['published.json' => ['sha256' => hash('sha256', $payload), 'bytes' => strlen($payload)]],
             'event_count' => count($events),
+            'entry_count' => count($entries),
         ];
         $manifestData = json_encode($normalize($audit), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n";
 
@@ -61,7 +83,7 @@ class ExportMuseumSnapshot extends Command
                 throw new \RuntimeException('Unable to publish snapshot file: '.$target);
             }
         }
-        $this->info('Published '.count($events).' events; SHA-256='.hash('sha256', $payload));
+        $this->info('Published '.count($events).' events and '.count($entries).' entries; SHA-256='.hash('sha256', $payload));
         return self::SUCCESS;
     }
 }

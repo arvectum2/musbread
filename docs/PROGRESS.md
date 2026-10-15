@@ -9,11 +9,11 @@
 | MB-001 Требования | DONE (база) | docs/REQUIREMENTS.md; предстоит расширить матрицу по каждому носителю |
 | MB-002 Архитектура | DONE (проект) | docs/ARCHITECTURE.md, deployment в музей — после согласования |
 | MB-003 Laravel | DONE | PHP 8.4.26 native, Laravel 13.36.0, php artisan test |
-| MB-004 MoonShine | PARTIAL | пакет 4.19.5, /admin route и модель события/CRUD, роли и реальный рабочий UX-процесс редактора ещё не закрыты |
+| MB-004 MoonShine | PARTIAL | MoonShine 4.19.5, CRUD событий и материалов, логин и роли проверены HTTP-тестами; реальный ручной браузерный аудит ещё не закрыт |
 | MB-005 Next.js | DONE (прототип) | 16.4.1 static export, страницы главная/афиша/событие |
 | MB-006 CI | DONE (проверка) | GitHub Actions web-ci.yml: PHP, Python, Next.js |
-| MB-007 Модели контента | PARTIAL | MuseumEvent, SEO fields; остальные разделы и модели — в очереди |
-| MB-008 Роли | PARTIAL | MoonShine auth middleware работает; расширенные роли редактора — впереди |
+| MB-007 Модели контента | PARTIAL | MuseumEvent + MuseumEntry (страницы/новости/экскурсии/выставки/документы), SEO, CRUD и статический экспорт работают; медиатека/сотрудники и сложная иерархия ещё в очереди |
+| MB-008 Роли | DONE (v1) | Системный Admin/Editor, запрет доступа редактора к пользователям/ролям на уровне серверных ресурсов, HTTP тесты |
 | MB-009 Экспорт | DONE (v1) | museum:export и Python fixture parity: SHA256 manifest |
 | MB-010 Publisher | PARTIAL | проверка целостности, локальная версионированная публикация и rollback готовы; защищённый канал и промышленная установка остаются после согласования |
 | MB-011 Статический сайт | DONE (v1) | Next.js строит HTML без API к CMS |

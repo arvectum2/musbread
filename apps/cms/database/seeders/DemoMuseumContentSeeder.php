@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\MuseumEvent;
+use App\Models\MuseumEntry;
 use Illuminate\Database\Seeder;
 
 class DemoMuseumContentSeeder extends Seeder
@@ -16,7 +17,8 @@ class DemoMuseumContentSeeder extends Seeder
         if (! is_file($file)) {
             throw new \RuntimeException('Demo fixture not found');
         }
-        $events = json_decode(file_get_contents($file), true, flags: JSON_THROW_ON_ERROR)['events'];
+        $fixture = json_decode(file_get_contents($file), true, flags: JSON_THROW_ON_ERROR);
+        $events = $fixture['events'];
         foreach ($events as $event) {
             MuseumEvent::query()->updateOrCreate(
                 ['slug' => $event['slug']],
@@ -26,6 +28,12 @@ class DemoMuseumContentSeeder extends Seeder
                     'body' => $event['body'], 'status' => 'published',
                     'published_at' => now()->subDay(),
                 ]
+            );
+        }
+        foreach ($fixture['entries'] ?? [] as $entry) {
+            MuseumEntry::query()->updateOrCreate(
+                ['slug' => $entry['slug']],
+                array_merge($entry, ['status' => 'published', 'published_at' => now()->subDay()])
             );
         }
     }

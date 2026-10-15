@@ -45,6 +45,20 @@ class SnapshotTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             pub.build(self.source, self.dest, self.manifest)
 
+    def test_unknown_content_type_rejected(self):
+        self.doc["entries"] = [{"type": "script", "slug": "bad",
+                                "title": "Wrong", "body": "Test"}]
+        self.source.write_text(json.dumps(self.doc), encoding="utf-8")
+        with self.assertRaises(ValueError):
+            pub.build(self.source, self.dest, self.manifest)
+
+    def test_duplicate_content_slug_rejected(self):
+        item = {"type": "page", "slug": "duplicate", "title": "Page", "body": "Test"}
+        self.doc["entries"] = [item, item.copy()]
+        self.source.write_text(json.dumps(self.doc), encoding="utf-8")
+        with self.assertRaises(ValueError):
+            pub.build(self.source, self.dest, self.manifest)
+
     def test_modified_snapshot_detected(self):
         pub.build(self.source, self.dest, self.manifest)
         self.dest.write_text("{}")
