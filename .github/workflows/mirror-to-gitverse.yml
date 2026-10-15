@@ -1,0 +1,59 @@
+name: Mirror to GitVerse
+
+on:
+  push:
+    branches: ['**']
+    tags: ['**']
+  workflow_dispatch:
+  schedule:
+    - cron: '37 3 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: musbread-gitverse-mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    name: GitHub → GitVerse
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Verify GitVerse token exists
+        env:
+          GV_TOKEN: ${{ secrets.GITVERSE_TOKEN }}
+        run: |
+          test -n "$GV_TOKEN" || { echo "::error::GITVERSE_TOKEN is missing"; exit 1; }
+
+      - name: Clone GitHub refs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --mirror "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repository.git
+
+      - name: Sync branches and tags
+        env:
+          GV_TOKEN: ${{ secrets.GITVERSE_TOKEN }}
+          GIT_TERMINAL_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/gitverse-askpass.sh" <<'ASKPASS'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' 'arvectum' ;;
+            *Password*) printf '%s\n' "$GV_TOKEN" ;;
+            *) exit 1 ;;
+          esac
+          ASKPASS
+          chmod 700 "$RUNNER_TEMP/gitverse-askpass.sh"
+          export GIT_ASKPASS="$RUNNER_TEMP/gitverse-askpass.sh"
+          cd repository.git
+          git remote add gitverse 'https://gitverse.ru/arvectum/musbread.git'
+          git push --force --prune gitverse 'refs/heads/*:refs/heads/*' 'refs/tags/*:refs/tags/*'
+          gh_sha="$(git rev-parse refs/heads/main)"
+          gv_sha="$(git ls-remote gitverse refs/heads/main | cut -f1)"
+          test "$gh_sha" = "$gv_sha"
+          echo "Mirrored main: $gv_sha" >> "$GITHUB_STEP_SUMMARY"
