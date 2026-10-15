@@ -98,6 +98,9 @@ def main() -> int:
                      "--output=" + str(output), "--manifest=" + str(manifest),
                      "--media-output-dir=" + str(media_folder)], CMS, env)
                 snapshot = json.loads(output.read_text(encoding="utf-8"))
+                event_slugs = {item["slug"] for item in snapshot["events"]}
+                if "qa-browser-event" not in event_slugs or "qa-private-draft" in event_slugs:
+                    raise RuntimeError("UI-created event not exported or draft leaked")
                 assets = [item for entry in snapshot["entries"] for item in entry.get("media", [])]
                 if not any(item["alt"] == "QA: экспонат на тестовом изображении" for item in assets):
                     raise RuntimeError("Uploaded QA image missing from CMS export")
@@ -109,7 +112,7 @@ def main() -> int:
                     digest = hashlib.sha256(path.read_bytes()).hexdigest()
                     if audit["files"]["media/" + path.name]["sha256"] != digest:
                         raise RuntimeError("QA exported media checksum mismatch")
-                print("Verified browser-created material and image in static CMS export", flush=True)
+                print("Verified browser-created event, article, image; draft excluded from public export", flush=True)
             except Exception:
                 print("QA server output tail (without login credentials):", flush=True)
                 print((root / "server.log").read_text(errors="replace")[-2500:], flush=True)

@@ -108,6 +108,9 @@ jobs:
           composer install --prefer-dist --no-interaction --no-progress
           cp .env.example .env
           php artisan key:generate
+          # composer install does not run post-update-cmd: MoonShine/TinyMCE
+          # assets otherwise return 404 and Alpine x-cloak hides the login.
+          php artisan vendor:publish --tag=laravel-assets --force
           touch database/database.sqlite
           php artisan migrate --force
           php artisan db:seed --class=DemoMuseumContentSeeder --force

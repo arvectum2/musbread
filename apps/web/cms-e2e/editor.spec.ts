@@ -20,9 +20,32 @@ test("реальный вход и редактор материалов в Moon
     .fill('Демонстрационная публикация из браузерного теста');
   await page.locator('select[name="status"]').selectOption('published');
   await page.locator('button[type="submit"]').filter({ hasText: 'Save' }).click();
-  await expect(page).toHaveURL(/museum-entry-form-page/);
+  await expect(page).toHaveURL(/museum-entry-form-page\/\d+/, { timeout: 10_000 });
 
+  // CP-12 acceptance: create an actual event through the MoonShine browser UI.
+  await page.goto("/admin/resource/museum-event-resource/museum-event-form-page");
+  await expect(page.locator('input[name="title"]')).toBeVisible();
+  await page.locator('input[name="title"]').fill('QA: музейное событие из браузера');
+  await page.locator('input[name="slug"]').fill('qa-browser-event');
+  await page.locator('input[name="category"]').fill('Тестовая экскурсия');
+  await page.locator('input[name="starts_at"]').fill('2026-11-20');
+  await page.locator('textarea[name="excerpt"]').fill('Тестовый анонс события');
+  await page.locator('textarea[name="body"]').fill('Описание тестового события');
+  await page.locator('select[name="status"]').selectOption('published');
+  await page.locator('button[type="submit"]').filter({ hasText: 'Save' }).click();
+  await expect(page).toHaveURL(/museum-event-form-page\/\d+/, { timeout: 10_000 });
 
+  // A draft must not appear in public content.
+  await page.goto("/admin/resource/museum-event-resource/museum-event-form-page");
+  await page.locator('input[name="title"]').fill('QA: закрытый черновик');
+  await page.locator('input[name="slug"]').fill('qa-private-draft');
+  await page.locator('input[name="category"]').fill('Тест');
+  await page.locator('input[name="starts_at"]').fill('2026-11-21');
+  await page.locator('textarea[name="excerpt"]').fill('Тестовый черновик');
+  await page.locator('textarea[name="body"]').fill('Не публиковать');
+  await page.locator('select[name="status"]').selectOption('draft');
+  await page.locator('button[type="submit"]').filter({ hasText: 'Save' }).click();
+  await expect(page).toHaveURL(/museum-event-form-page\/\d+/, { timeout: 10_000 });
 });
 
 test("закрытая медиатека поддерживает загрузку и alt-текст", async ({ page }) => {
