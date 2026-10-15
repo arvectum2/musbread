@@ -16,7 +16,12 @@ cd apps/web
 npm ci
 npm run lint
 npm run build
-# Просмотр статических файлов: python3 -m http.server 8765 -d out
+# Проверить локальную публикацию и развёртывание:
+cd ../..
+python3 scripts/release_site.py deploy
+python3 scripts/release_site.py verify
+# При необходимости: python3 scripts/release_site.py rollback
+# Просмотр статических файлов: python3 -m http.server 8765 -d apps/web/out
 ```
 
 Laravel:
@@ -40,3 +45,7 @@ php artisan serve --host=127.0.0.1 --port=8766
 Подробнее: [ROADMAP](docs/ROADMAP.md), [REQUIREMENTS](docs/REQUIREMENTS.md), [ARCHITECTURE](docs/ARCHITECTURE.md), [SYNC](docs/SYNC.md).
 
 **Не размещать в публичном репозитории** приватные документы заказчика, логины, личные данные, секреты и материалы интервью.
+
+## Локальный релиз (до обследования музея)
+
+Скрипт `scripts/release_site.py` сверяет SHA256 CMS-экспорта с манифестом, проверяет каждый статический файл, создаёт неизменяемую версию в `deploy/local/releases/` и атомарно переключает симлинк `current` с возможностью `rollback`. Это проверка схемы релизов на Mac mini, **а не** реализация закрытого сетевого канала музея. Каталог `deploy/local/` исключён из Git.

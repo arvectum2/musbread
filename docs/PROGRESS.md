@@ -13,7 +13,7 @@
 | MB-007 Модели контента | PARTIAL | MuseumEvent, SEO fields; остальные разделы и модели — в очереди |
 | MB-008 Роли | PARTIAL | MoonShine auth middleware работает; расширенные роли редактора — впереди |
 | MB-009 Экспорт | DONE (v1) | museum:export и Python fixture parity: SHA256 manifest |
-| MB-010 Publisher | PARTIAL | проверка целостности и atomic write пофайлово готовы; атомарный релиз целиком, secure channel, rollback требуют разработки |
+| MB-010 Publisher | PARTIAL | проверка целостности, локальная версионированная публикация и rollback готовы; защищённый канал и промышленная установка остаются после согласования |
 | MB-011 Статический сайт | DONE (v1) | Next.js строит HTML без API к CMS |
 | MB-012 Сквозной тест | PARTIAL | Laravel seed → export → Next build; UI операции из MoonShine ещё не покрыты end-to-end |
 | MB-013 Навигация | PARTIAL | главная, афиша, хлебные крошки, поиск событий, мобильное меню; полная структура ТЗ впереди |
