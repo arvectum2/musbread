@@ -12,12 +12,19 @@ class OriginalTenderTraceTests(unittest.TestCase):
 
     def test_high_risk_omissions_not_misrepresented_as_ready(self):
         rows = {r['ID']: r for r in read_rows()}
-        for requirement in ('TZ-018', 'TZ-085', 'TZ-124', 'TZ-127',
+        for requirement in ('TZ-018', 'TZ-124', 'TZ-127',
                             'TZ-189', 'TZ-316'):
             self.assertEqual(rows[requirement]['Учли в плане'], 'Нет')
             self.assertEqual(rows[requirement]['Фактически готово'], 'Нет')
         # A prior omission may be genuinely closed during later development.
         self.assertEqual(rows['TZ-222']['Фактически готово'], 'Да')
+        # Former omission now has a private demo-only workflow, not a live form.
+        self.assertEqual(rows['TZ-085']['Учли в плане'], 'Нет')
+        self.assertEqual(rows['TZ-085']['Фактически готово'], 'Частично')
+        self.assertEqual(rows['TZ-091']['Фактически готово'], 'Частично')
+        self.assertEqual(rows['TZ-080']['Фактически готово'], 'Нет')
+        self.assertEqual(rows['TZ-081']['Фактически готово'], 'Нет')
+        self.assertEqual(rows['TZ-283']['Фактически готово'], 'Нет')
 
     def test_original_structure_from_1_to_appendix_preserved(self):
         rows = read_rows()

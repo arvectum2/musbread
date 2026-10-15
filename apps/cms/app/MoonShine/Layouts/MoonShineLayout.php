@@ -13,6 +13,8 @@ use App\MoonShine\Resources\MuseumEvent\MuseumEventResource;
 use MoonShine\MenuManager\MenuItem;
 use App\MoonShine\Resources\MuseumEntry\MuseumEntryResource;
 use App\MoonShine\Resources\MuseumSection\MuseumSectionResource;
+use App\MoonShine\Resources\MuseumRequest\MuseumRequestResource;
+use App\MoonShine\Resources\MuseumRequestTransition\MuseumRequestTransitionResource;
 use App\MoonShine\Resources\MuseumAuditRecord\MuseumAuditRecordResource;
 use App\MoonShine\Resources\MuseumPublicationRun\MuseumPublicationRunResource;
 
@@ -37,6 +39,8 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(MuseumEventResource::class, 'События'),
             MenuItem::make(MuseumEntryResource::class, 'Материалы музея'),
             MenuItem::make(MuseumSectionResource::class, 'Структура сайта'),
+            MenuItem::make(MuseumRequestResource::class, 'Обращения (демо)'),
+            MenuItem::make(MuseumRequestTransitionResource::class, 'История обращений'),
             MenuItem::make('/admin/museum-media', 'Медиатека'),
             MenuItem::make(MuseumAuditRecordResource::class, 'Журнал изменений'),
             MenuItem::make(MuseumPublicationRunResource::class, 'Публикации'),

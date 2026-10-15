@@ -13,6 +13,8 @@ use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use App\MoonShine\Resources\MuseumEvent\MuseumEventResource;
 use App\MoonShine\Resources\MuseumEntry\MuseumEntryResource;
 use App\MoonShine\Resources\MuseumSection\MuseumSectionResource;
+use App\MoonShine\Resources\MuseumRequest\MuseumRequestResource;
+use App\MoonShine\Resources\MuseumRequestTransition\MuseumRequestTransitionResource;
 use App\MoonShine\Resources\MuseumAuditRecord\MuseumAuditRecordResource;
 use App\MoonShine\Resources\MuseumPublicationRun\MuseumPublicationRunResource;
 
@@ -30,6 +32,8 @@ class MoonShineServiceProvider extends ServiceProvider
                 MuseumEventResource::class,
                 MuseumEntryResource::class,
                 MuseumSectionResource::class,
+                MuseumRequestResource::class,
+                MuseumRequestTransitionResource::class,
                 MuseumAuditRecordResource::class,
                 MuseumPublicationRunResource::class,
             ])
