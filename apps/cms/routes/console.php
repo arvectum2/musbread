@@ -13,6 +13,7 @@ Artisan::command('inspire', function () {
 // customer's isolated public server must be configured after network approval.
 if (config('museum.queue_publication', false)) {
     Schedule::command('museum:queue-export')->hourly()->withoutOverlapping();
+    Schedule::command('museum:recover-stale-publications')->everyTenMinutes()->withoutOverlapping();
 } else {
     Schedule::command('museum:export')->hourly()->withoutOverlapping();
 }

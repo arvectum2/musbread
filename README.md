@@ -92,3 +92,9 @@ php artisan serve --host=127.0.0.1 --port=8766
 ### CMS в WebKit
 
 Для изолированной проверки закрытой CMS: MUSBREAD_E2E_BROWSER=webkit python3 scripts/qa_cms_browser.py. По умолчанию используется Chromium. Пароль и SQLite временные.
+
+## Публикация и восстановление
+
+Скрипт `python3 scripts/release_site.py verify` проверяет содержимое immutable release; `rollback` отказывает при несовпадении хешей. Операции защищены файловой блокировкой.
+
+Laravel с опциональной очередью (`MUSEUM_USE_PUBLISH_QUEUE=true`) сериализует запросы, хранит журнал и периодически восстанавливает неактуальные queued/running состояния командой `php artisan museum:recover-stale-publications`. Постоянно запущенный worker *не включён*: он требуется только на согласованной инфраструктуре заказчика. Перед включением соблюдать рабочий timeout <=600 секунд и DB_QUEUE_RETRY_AFTER >=900 секунд.

@@ -29,7 +29,7 @@ final class PublishMuseumSnapshot implements ShouldQueue
     public function handle(): void
     {
         $run = MuseumPublicationRun::findOrFail($this->publicationRunId);
-        if ($run->status === 'succeeded') {
+        if (in_array($run->status, ['succeeded', 'abandoned'], true)) {
             return; // Idempotency: never re-export a completed request on retry.
         }
 
