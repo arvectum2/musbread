@@ -1,0 +1,11 @@
+[Unit]
+Description=Run MusBread scheduler every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+AccuracySec=10s
+Persistent=true
+Unit=musbread-scheduler.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,24 @@
+# Pre-award Linux template. Do NOT enable until Musem deployment is approved.
+[Unit]
+Description=MusBread CMS queued publication worker
+After=network.target
+ConditionPathExists=/srv/musbread/cms/artisan
+
+[Service]
+Type=simple
+User=musbread
+Group=musbread
+WorkingDirectory=/srv/musbread/cms
+EnvironmentFile=/etc/musbread/cms.env
+ExecStart=/usr/bin/php8.4 artisan queue:work database --queue=museum-publish --sleep=3 --tries=3 --timeout=600 --backoff=30
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=660
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/musbread/cms/storage /srv/musbread/cms/bootstrap/cache
+
+[Install]
+WantedBy=multi-user.target

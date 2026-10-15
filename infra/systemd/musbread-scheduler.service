@@ -1,0 +1,17 @@
+# Pre-award Linux template, one execution only.
+[Unit]
+Description=MusBread Laravel scheduler
+ConditionPathExists=/srv/musbread/cms/artisan
+
+[Service]
+Type=oneshot
+User=musbread
+Group=musbread
+WorkingDirectory=/srv/musbread/cms
+EnvironmentFile=/etc/musbread/cms.env
+ExecStart=/usr/bin/php8.4 artisan schedule:run
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/musbread/cms/storage /srv/musbread/cms/bootstrap/cache
