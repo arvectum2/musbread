@@ -20,6 +20,13 @@ export default function Home() {
       <div className="section-title-row"><div><span className="eyebrow">02 / СОБЫТИЯ</span><h2>Афиша музея</h2></div><Link className="text-link" href="/events/">Вся афиша <span aria-hidden="true">↗</span></Link></div>
       <div className="events-grid">{events.map((event,index)=><EventCard event={event} index={index} key={event.slug}/>)}</div>
     </section>
+    <section className="section visit-info">
+      <div className="section-title-row"><div><span className="eyebrow">ПОСЕЩЕНИЕ МУЗЕЯ</span><h2>Спланировать визит</h2></div></div>
+      <p><strong>Адрес:</strong> Санкт-Петербург, ул. Михайлова, д. 2, лит. А · метро «Площадь Ленина».</p>
+      <p><strong>Режим:</strong> среда — понедельник 10:00–18:00, вход и касса до 17:00; вторник — выходной. Последний четверг месяца — санитарный день.</p>
+      <p>Предварительные данные с действующего сайта музея; актуальность необходимо подтвердить перед публикацией.</p>
+      <div className="hero-actions"><Link className="primary-button" href="/guide/plan-visit/">Как посетить музей →</Link><Link className="secondary-button" href="/guide/tickets-and-benefits/">Билеты и льготы</Link></div>
+    </section>
     <section className="closing-banner"><div><span className="eyebrow">ТЕХНИЧЕСКАЯ ДЕМОНСТРАЦИЯ</span><h2>Сайт, доступный каждому.</h2><p>Адаптивный интерфейс, клавиатурная навигация и страницы, собираемые исключительно из проверенных данных.</p></div><span className="closing-icon" aria-hidden="true">✳</span></section>
   </>;
 }

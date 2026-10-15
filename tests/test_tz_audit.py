@@ -13,9 +13,11 @@ class OriginalTenderTraceTests(unittest.TestCase):
     def test_high_risk_omissions_not_misrepresented_as_ready(self):
         rows = {r['ID']: r for r in read_rows()}
         for requirement in ('TZ-018', 'TZ-085', 'TZ-124', 'TZ-127',
-                            'TZ-189', 'TZ-222', 'TZ-250', 'TZ-316'):
+                            'TZ-189', 'TZ-316'):
             self.assertEqual(rows[requirement]['Учли в плане'], 'Нет')
             self.assertEqual(rows[requirement]['Фактически готово'], 'Нет')
+        # A prior omission may be genuinely closed during later development.
+        self.assertEqual(rows['TZ-222']['Фактически готово'], 'Да')
 
     def test_original_structure_from_1_to_appendix_preserved(self):
         rows = read_rows()

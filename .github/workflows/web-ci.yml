@@ -46,12 +46,18 @@ jobs:
       - run: npm ci
       - name: Check production Node.js dependencies
         run: npm audit --omit=dev --audit-level=high
+      - name: Enforce rem/em typography from tender specification
+        run: python3 ../../scripts/check_css_font_units.py src/app/globals.scss
       - run: npm run lint
+      - name: Verify reference menu structure and factual contacts
+        run: npm run test:reference
       - name: Offline integrations contract tests
         run: npm run test:integrations
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'
+      - name: Block premature search indexing
+        run: python3 ../../scripts/check_preaward_seo.py out
       - name: Install headless Chromium (Playwright)
         run: npx playwright install --with-deps chromium
       - name: Browser smoke tests

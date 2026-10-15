@@ -4,12 +4,16 @@ test("главная и музейные разделы открываются",
   await page.goto("/");
   await expect(page.locator("h1")).toContainText("Хлеб");
   await expect(page.getByText("Демонстрационный интерфейс")).toBeVisible();
-  await page.getByRole("navigation", { name: "Основное меню" })
-    .getByRole("link", { name: "Музей" }).click();
-  await expect(page).toHaveURL(/\/museum\/$/);
+  const museumMenu = page.locator(".main-nav .mega-group").first();
+  await museumMenu.locator("summary").click();
+  await museumMenu.getByRole("link", { name: "Все подразделы: Музей" }).click();
+  await expect(page).toHaveURL(/\/guide\/museum\/$/);
   await expect(page.getByRole("heading", { name: "Музей", exact: true })).toBeVisible();
-  await page.getByRole("link", { name: /Музей и его история/ }).click();
-  await expect(page).toHaveURL(/\/museum\/museum-about\/$/);
+  await page.locator("main").getByRole("link", { name: /История музея/ }).click();
+  await expect(page).toHaveURL(/\/guide\/museum-history\/$/);
+  await expect(page.getByRole("heading", { name: "История музея", exact: true })).toBeVisible();
+  // Existing CMS-snapshot routes still work independently of the new guide.
+  await page.goto("/museum/museum-about/");
   await expect(page.getByRole("heading", { name: "История музея (тест)" })).toBeVisible();
 });
 
@@ -52,17 +56,21 @@ test("поиск: отсутствие результатов сообщает �
   await expect(page.getByRole("listbox")).toBeHidden();
 });
 
-test("ссылка Контакты из внутреннего раздела ведёт на главную", async ({ page }) => {
+test("Контакты из музея ведут на страницу с подтверждённым адресом", async ({ page }) => {
   await page.goto("/events/");
-  await page.getByRole("navigation", { name: "Основное меню" })
-    .getByRole("link", { name: "Контакты" }).click();
-  await expect(page).toHaveURL(/\/#contacts$/);
+  const museumMenu = page.locator(".main-nav .mega-group").first();
+  await museumMenu.locator("summary").click();
+  await museumMenu.getByRole("link", { name: "Контакты" }).click();
+  await expect(page).toHaveURL(/\/guide\/museum-contacts\/$/);
+  await expect(page.getByRole("heading", { name: "Контакты" })).toBeVisible();
+  await expect(page.locator("main")).toContainText("Михайлова");
+  await expect(page.locator("main")).toContainText("294-50-82");
 });
 
 test("на мобильной ширине меню и ссылки доступны", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await page.locator(".mobile-nav summary").click();
+  await page.locator(".mobile-nav > summary").click();
   const navigation = page.getByRole("navigation", { name: "Мобильное меню" });
   await expect(navigation).toBeVisible();
   await navigation.getByRole("link", { name: "Новости" }).click();
