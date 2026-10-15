@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:cms": "playwright test --config playwright.cms.config.ts"
   },
   "dependencies": {
     "next": "16.4.1",

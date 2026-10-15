@@ -11,7 +11,7 @@
 | MB-001 Требования | DONE (база) | docs/REQUIREMENTS.md; предстоит расширить матрицу по каждому носителю |
 | MB-002 Архитектура | DONE (проект) | docs/ARCHITECTURE.md, deployment в музей — после согласования |
 | MB-003 Laravel | DONE | PHP 8.4.26 native, Laravel 13.36.0, php artisan test |
-| MB-004 MoonShine | PARTIAL | MoonShine 4.19.5, CRUD событий и материалов, логин и роли проверены HTTP-тестами; реальный ручной браузерный аудит ещё не закрыт |
+| MB-004 MoonShine | PARTIAL | MoonShine 4.19.5, CRUD событий и материалов, логин и роли проверены HTTP-тестами; реальный Playwright E2E CMS/login/editor/media готов; ручной Safari аудит ещё не закрыт |
 | MB-005 Next.js | DONE (прототип) | 16.4.1 static export, страницы главная/афиша/событие |
 | MB-006 CI | DONE (проверка) | GitHub Actions web-ci.yml: PHP, Python, Next.js |
 | MB-007 Модели контента | PARTIAL | MuseumEvent + MuseumEntry (страницы/новости/экскурсии/выставки/документы), SEO, CRUD и статический экспорт работают; медиатека/сотрудники и сложная иерархия ещё в очереди |
@@ -24,7 +24,7 @@
 | MB-014 UX/UI | PARTIAL | нейтральный адаптивный дизайн без согласованной айдентики |
 | MB-015 Доступность | PARTIAL | skip link, focus-visible, мобильное меню, русскоязычная разметка; полный аудит/scale 200% и тесты — впереди |
 | MB-016 CMS-редактор | PARTIAL | формы событий и SEO-поля, WYSIWYG + двойная HTML-очистка реализованы, журнал аудита только для Admin; отдельная закрытая медиатека с upload/WebP/alt/caption/drag-and-drop и SHA-256 экспортом, браузерная ручная проверка ещё впереди |
-| MB-017 Demo/UAT | PARTIAL | CI green, автоматические Chromium Playwright + axe-core a11y проверки публичного UI; CMS browser UAT ещё впереди; ручная проверка CMS, Safari и протокол ещё впереди |
+| MB-017 Demo/UAT | PARTIAL | CI green, автоматические Chromium Playwright + axe-core a11y проверки публичного UI; закрытый MoonShine CMS Playwright E2E через временный стенд; ручной Safari/Chromium-GOST и официальный UAT ещё впереди; ручная проверка CMS, Safari и протокол ещё впереди |
 
 ## Локальное окружение
 

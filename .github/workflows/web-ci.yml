@@ -72,7 +72,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3
+          extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3, gd
           coverage: none
       - run: composer install --prefer-dist --no-interaction --no-progress
       - run: cp .env.example .env
@@ -92,7 +92,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3
+          extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3, gd
           coverage: none
       - uses: actions/setup-node@v4
         with:
@@ -124,3 +124,9 @@ jobs:
           test -f deploy/local/current/excursions/demo-tour/index.html
           cd apps/cms
           php artisan schedule:list | grep 'museum:export'
+      - name: Install Chromium for isolated private CMS browser QA
+        run: |
+          cd apps/web
+          npx playwright install --with-deps chromium
+      - name: Browser E2E with temporary SQLite and ephemeral QA account
+        run: python3 scripts/qa_cms_browser.py
