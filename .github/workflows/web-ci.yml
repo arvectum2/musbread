@@ -30,6 +30,8 @@ jobs:
           cache: npm
           cache-dependency-path: apps/web/package-lock.json
       - run: npm ci
+      - name: Check production Node.js dependencies
+        run: npm audit --omit=dev --audit-level=high
       - run: npm run lint
       - run: npm run build
         env:
@@ -49,6 +51,8 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
       - run: python3 ../../scripts/release_site.py deploy && python3 ../../scripts/release_site.py verify
+      - name: Reject private files and secrets in static export
+        run: python3 ../../scripts/audit_public_artifacts.py out
       - name: Check public export
         run: |
           test -f out/index.html
@@ -75,6 +79,8 @@ jobs:
           extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3, gd
           coverage: none
       - run: composer install --prefer-dist --no-interaction --no-progress
+      - name: Check PHP dependency advisories
+        run: composer audit --locked --no-interaction
       - run: cp .env.example .env
       - run: php artisan key:generate
       - run: mkdir -p database && touch database/database.sqlite && php artisan migrate --force
