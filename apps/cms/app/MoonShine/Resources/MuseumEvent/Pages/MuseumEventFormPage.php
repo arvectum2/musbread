@@ -13,6 +13,7 @@ use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\Select;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
+use Illuminate\Validation\Rule;
 
 final class MuseumEventFormPage extends FormPage
 {
@@ -30,6 +31,7 @@ final class MuseumEventFormPage extends FormPage
                 Select::make('Статус', 'status')
                     ->options(['draft' => 'Черновик', 'published' => 'Опубликовано'])
                     ->default('draft')->required(),
+                Date::make('Публиковать с (дата и время)', 'published_at')->withTime()->nullable(),
                 Text::make('SEO-заголовок', 'seo_title'),
                 Textarea::make('SEO-описание', 'seo_description'),
             ]),
@@ -39,13 +41,14 @@ final class MuseumEventFormPage extends FormPage
     protected function rules(DataWrapperContract $item): array
     {
         return [
-            'slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
+            'slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('museum_events', 'slug')->ignore($item->getKey())],
             'title' => ['required', 'string', 'max:255'],
             'category' => ['required', 'string', 'max:255'],
             'starts_at' => ['required', 'date'],
             'excerpt' => ['required', 'string'],
             'body' => ['required', 'string'],
             'status' => ['required', 'in:draft,published'],
+            'published_at' => ['nullable', 'date'],
         ];
     }
 }
