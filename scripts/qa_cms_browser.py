@@ -8,6 +8,7 @@ import base64
 import hashlib
 import json
 import os
+import shutil
 import secrets
 import socket
 import subprocess
@@ -31,6 +32,50 @@ def free_port() -> int:
 
 def run(command: list[str], cwd: Path, env: dict[str, str]) -> None:
     subprocess.run(command, cwd=cwd, env=env, check=True)
+
+
+def verify_browser_created_static_site(workspace: Path, published: Path,
+                                       manifest: Path, media: Path,
+                                       env: dict[str, str]) -> None:
+    """Build Next.js from the *actual browser-created* CMS snapshot in a disposable tree.
+
+    Never replace the tracked developer fixture or touch the normal Next.js build.
+    npm dependencies are reused through a symlink; no second npm install or Docker.
+    """
+    isolated_web = workspace / "web-build"
+    shutil.copytree(
+        WEB, isolated_web,
+        ignore=shutil.ignore_patterns("node_modules", ".next", "out",
+                                      "test-results", "playwright-report"),
+    )
+    (isolated_web / "node_modules").symlink_to(WEB / "node_modules",
+                                                target_is_directory=True)
+    shutil.copyfile(published, isolated_web / "src/data/published.json")
+    shutil.copyfile(manifest, isolated_web / "public/snapshot-manifest.json")
+    if media.exists():
+        shutil.copytree(media, isolated_web / "public/media", dirs_exist_ok=True)
+    build_env = dict(env)
+    build_env["NEXT_TELEMETRY_DISABLED"] = "1"
+    print("Building isolated Next.js from browser-created CMS content", flush=True)
+    run(["npm", "run", "build", "--", "--webpack"], isolated_web, build_env)
+
+    out = isolated_web / "out"
+    expected_paths = [
+        (out / "events/qa-browser-event/index.html", "QA: музейное событие из браузера"),
+        (out / "news/qa-browser-news/index.html", "QA: публикация из настоящего браузера"),
+    ]
+    for path, expected in expected_paths:
+        if not path.is_file() or expected not in path.read_text(encoding="utf-8"):
+            raise RuntimeError("Browser-created CMS record missing from static HTML: " + str(path))
+
+    if (out / "events/qa-private-draft/index.html").exists():
+        raise RuntimeError("Private browser-created draft was exported into the public website")
+    for asset in (item for item in media.glob("*.webp")):
+        public_file = out / "media" / asset.name
+        if not public_file.is_file() or hashlib.sha256(public_file.read_bytes()).hexdigest() != hashlib.sha256(asset.read_bytes()).hexdigest():
+            raise RuntimeError("Browser-uploaded media missing or modified by static release")
+
+    print("Verified UI-created news/event and images in Next.js HTML; draft excluded", flush=True)
 
 
 def main() -> int:
@@ -112,6 +157,7 @@ def main() -> int:
                     digest = hashlib.sha256(path.read_bytes()).hexdigest()
                     if audit["files"]["media/" + path.name]["sha256"] != digest:
                         raise RuntimeError("QA exported media checksum mismatch")
+                verify_browser_created_static_site(root, output, manifest, media_folder, env)
                 print("Verified browser-created event, article, image; draft excluded from public export", flush=True)
             except Exception:
                 print("QA server output tail (without login credentials):", flush=True)
