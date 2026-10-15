@@ -38,6 +38,16 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Browser smoke tests
         run: npm run test:e2e
+      - name: Save demo screenshots / failure traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-public-browser-evidence
+          path: |
+            apps/web/test-results/**/*.png
+            apps/web/test-results/**/*.zip
+          if-no-files-found: ignore
+          retention-days: 7
       - run: python3 ../../scripts/release_site.py deploy && python3 ../../scripts/release_site.py verify
       - name: Check public export
         run: |

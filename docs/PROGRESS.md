@@ -24,7 +24,7 @@
 | MB-014 UX/UI | PARTIAL | нейтральный адаптивный дизайн без согласованной айдентики |
 | MB-015 Доступность | PARTIAL | skip link, focus-visible, мобильное меню, русскоязычная разметка; полный аудит/scale 200% и тесты — впереди |
 | MB-016 CMS-редактор | PARTIAL | формы событий и SEO-поля, WYSIWYG + двойная HTML-очистка реализованы, drag-n-drop медиатека и журнал — впереди |
-| MB-017 Demo/UAT | PARTIAL | CI green, автоматические Chromium browser tests 4/4 для публичного UI; ручная проверка CMS, Safari и протокол ещё впереди |
+| MB-017 Demo/UAT | PARTIAL | CI green, автоматические Chromium Playwright + axe-core a11y проверки публичного UI; CMS browser UAT ещё впереди; ручная проверка CMS, Safari и протокол ещё впереди |
 
 ## Локальное окружение
 

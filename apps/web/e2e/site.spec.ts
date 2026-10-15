@@ -43,3 +43,11 @@ test("skip-link получает клавиатурный фокус", async ({ 
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#main$/);
 });
+
+test("снимки тестового интерфейса для протокола", async ({ page }, testInfo) => {
+  await page.goto("/");
+  await page.screenshot({ path: testInfo.outputPath("musbread-desktop.png"), fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload();
+  await page.screenshot({ path: testInfo.outputPath("musbread-mobile.png"), fullPage: true });
+});
