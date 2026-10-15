@@ -31,6 +31,35 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(rel.rollback(self.dest), a)
         self.assertEqual((self.dest / "current/index.html").read_text(), "version one")
 
+    def test_existing_release_manifest_corruption_prevents_redeployment(self):
+        rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        active = (self.dest / "current").resolve()
+        manifest = active / "release-manifest.json"
+        doc = json.loads(manifest.read_text())
+        doc["release"] = "evil-mismatched-id"
+        manifest.write_text(json.dumps(doc))
+        with self.assertRaisesRegex(ValueError, "identity mismatch"):
+            rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+
+    def test_corrupted_previous_release_cannot_be_rolled_back(self):
+        rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        (self.site / "index.html").write_text("version two")
+        rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        before = (self.dest / "current").readlink()
+        previous = (self.dest / "previous").resolve()
+        (previous / "index.html").write_text("TAMPERED")
+        with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+            rel.rollback(self.dest)
+        self.assertEqual((self.dest / "current").readlink(), before)
+
+    def test_current_release_verification_rejects_tampering(self):
+        rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        active = (self.dest / "current").resolve()
+        self.assertTrue(rel.validate_release(active))
+        (active / "index.html").write_text("altered")
+        with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+            rel.validate_release(active)
+
     def test_corrupt_snapshot_rejected(self):
         self.snapshot.write_text("tampered")
         with self.assertRaises(ValueError):

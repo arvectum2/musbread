@@ -6,6 +6,8 @@ transfer. Never deploy directly to customer systems without signed approval.
 """
 from __future__ import annotations
 import argparse
+import fcntl
+from contextlib import contextmanager
 import hashlib
 import json
 import os
@@ -32,7 +34,51 @@ def files_with_hashes(src: Path) -> dict[str, str]:
     return result
 
 
+@contextmanager
+def release_lock(dest: Path):
+    """Serialize deploy/rollback/verify; no two releases may switch current together."""
+    dest.mkdir(parents=True, exist_ok=True)
+    if dest.is_symlink():
+        raise ValueError("Release destination must not be a symlink")
+    path = dest / ".release.lock"
+    if path.is_symlink():
+        raise ValueError("Release lock must not be a symlink")
+    with path.open("a+b") as lockfile:
+        fcntl.flock(lockfile.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(lockfile.fileno(), fcntl.LOCK_UN)
+
+
+def validate_release(path: Path) -> str:
+    """Reject tampered or incomplete immutable releases before they become public."""
+    if not path.is_dir() or path.is_symlink():
+        raise ValueError("Release directory missing or unsafe")
+    manifest_path = path / "release-manifest.json"
+    if not manifest_path.is_file() or manifest_path.is_symlink():
+        raise ValueError("Release manifest missing")
+    info = json.loads(manifest_path.read_text(encoding="utf-8"))
+    expected = info["files"]
+    if not isinstance(expected, dict) or "index.html" not in expected:
+        raise ValueError("Release manifest has an invalid file inventory")
+    actual = files_with_hashes(path)
+    actual.pop("release-manifest.json", None)
+    if actual != expected:
+        raise ValueError("Release checksum mismatch")
+    canonical = json.dumps(expected, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    release_id = hashlib.sha256(canonical).hexdigest()[:16]
+    if info.get("release") != release_id or path.name != release_id:
+        raise ValueError("Release identity mismatch")
+    return release_id
+
+
 def prepare(source: Path, snapshot: Path, manifest: Path, dest: Path) -> str:
+    with release_lock(dest):
+        return _prepare_unlocked(source, snapshot, manifest, dest)
+
+
+def _prepare_unlocked(source: Path, snapshot: Path, manifest: Path, dest: Path) -> str:
     if not source.is_dir() or not snapshot.is_file() or not manifest.is_file():
         raise ValueError("Build the site and export CMS snapshot first")
     raw = json.loads(manifest.read_text(encoding="utf-8"))
@@ -58,13 +104,12 @@ def prepare(source: Path, snapshot: Path, manifest: Path, dest: Path) -> str:
     releases.mkdir(parents=True, exist_ok=True)
     final = releases / release_id
 
-    if final.is_dir():
-        if files_with_hashes(final) != checksums:
-            # The release contains its own manifest, so ignore it during comparison.
-            actual = files_with_hashes(final)
-            actual.pop("release-manifest.json", None)
-            if actual != checksums:
-                raise ValueError("Existing release files have changed")
+    if final.exists() or final.is_symlink():
+        validate_release(final)
+        existing = files_with_hashes(final)
+        existing.pop("release-manifest.json", None)
+        if existing != checksums:
+            raise ValueError("Existing release files have changed")
     else:
         staging = Path(tempfile.mkdtemp(prefix=".release-", dir=releases))
         try:
@@ -96,6 +141,11 @@ def _swap_link(link: Path, target: Path) -> None:
 
 
 def rollback(dest: Path) -> str:
+    with release_lock(dest):
+        return _rollback_unlocked(dest)
+
+
+def _rollback_unlocked(dest: Path) -> str:
     previous = dest / "previous"
     current = dest / "current"
     if not previous.is_symlink() or not current.is_symlink():
@@ -105,6 +155,7 @@ def rollback(dest: Path) -> str:
     release = (dest / old).resolve()
     if not release.is_dir() or release.parent != (dest / "releases").resolve():
         raise ValueError("Invalid rollback target")
+    validate_release(release)
     _swap_link(current, old)
     _swap_link(previous, new)
     return release.name
@@ -124,16 +175,14 @@ def main() -> None:
         elif args.action == "rollback":
             print("ROLLED BACK " + rollback(args.dest))
         else:
-            current = args.dest / "current"
-            if not current.is_symlink() or not current.resolve().is_dir():
-                raise ValueError("No current release to verify")
-            path = current.resolve()
-            manifest = json.loads((path / "release-manifest.json").read_text())
-            actual = files_with_hashes(path)
-            actual.pop("release-manifest.json", None)
-            if actual != manifest["files"]:
-                raise ValueError("Deployed release checksums do not match")
-            print("VERIFIED " + manifest["release"])
+            with release_lock(args.dest):
+                current = args.dest / "current"
+                if not current.is_symlink() or not current.resolve().is_dir():
+                    raise ValueError("No current release to verify")
+                path = current.resolve()
+                if path.parent != (args.dest / "releases").resolve():
+                    raise ValueError("Current release target outside release directory")
+                print("VERIFIED " + validate_release(path))
     except (ValueError, OSError, KeyError) as e:
         parser.exit(1, str(e) + "\n")
 
