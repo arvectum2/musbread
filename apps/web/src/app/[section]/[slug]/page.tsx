@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { content, findEntry, isMuseumSection, sections } from "@/data/content";
+import RichText from "@/components/RichText";
 
 type Props = { params: Promise<{ section: string; slug: string }> };
 
@@ -37,7 +38,7 @@ export default async function MuseumEntryPage({ params }: Props) {
     <span className="eyebrow">{sections[section].title} · ТЕСТОВЫЙ МАТЕРИАЛ</span>
     <h1>{entry.h1 || entry.title}</h1>
     {entry.excerpt && <p className="lead">{entry.excerpt}</p>}
-    <div className="article-content"><p>{entry.body}</p></div>
+    <RichText html={entry.body} />
     <Link className="text-link" href={`/${section}/`}>← К списку материалов</Link>
   </article>;
 }

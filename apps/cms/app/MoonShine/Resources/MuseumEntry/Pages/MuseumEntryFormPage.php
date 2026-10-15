@@ -14,6 +14,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use MoonShine\TinyMce\Fields\TinyMce;
 
 final class MuseumEntryFormPage extends FormPage
 {
@@ -29,7 +30,13 @@ final class MuseumEntryFormPage extends FormPage
                 Text::make('H1', 'h1'),
                 Text::make('Родительский раздел (slug)', 'parent_slug'),
                 Textarea::make('Анонс', 'excerpt'),
-                Textarea::make('Основной текст', 'body')->required(),
+                TinyMce::make('Основной текст', 'body')
+                    ->locale('ru')
+                    ->plugins(['autolink', 'link', 'lists', 'wordcount', 'autoresize'])
+                    ->menubar(false)
+                    ->toolbar('undo redo | blocks | bold italic | bullist numlist | link | removeformat')
+                    ->addOption('license_key', 'gpl')
+                    ->required(),
                 Select::make('Статус', 'status')
                     ->options(['draft' => 'Черновик', 'published' => 'Опубликовано'])
                     ->default('draft')->required(),

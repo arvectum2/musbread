@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use App\Support\MuseumHtmlSanitizer;
 
 class MuseumEntry extends Model
 {
@@ -31,6 +32,10 @@ class MuseumEntry extends Model
     protected static function booted(): void
     {
         static::saving(static function (self $entry): void {
+            if ($entry->isDirty('body') && $entry->body !== null) {
+                $entry->body = app(MuseumHtmlSanitizer::class)->clean((string) $entry->body);
+            }
+
             if ($entry->status === 'published' && $entry->published_at === null) {
                 $entry->published_at = now();
             }
