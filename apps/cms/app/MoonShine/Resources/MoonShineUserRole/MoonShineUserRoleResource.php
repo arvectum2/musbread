@@ -13,6 +13,8 @@ use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\Icon;
 use MoonShine\Support\Enums\Action;
 use MoonShine\Support\ListOf;
+use MoonShine\Laravel\MoonShineAuth;
+use MoonShine\Support\Enums\Ability;
 
 /**
  * @extends ModelResource<MoonshineUserRole, MoonShineUserRoleIndexPage, MoonShineUserRoleFormPage, null>
@@ -22,6 +24,17 @@ use MoonShine\Support\ListOf;
 #[Order(1)]
 class MoonShineUserRoleResource extends ModelResource
 {
+    /**
+     * System user and role administration is limited to superusers.
+     * Enforced on CRUD requests even when resource URLs are requested directly.
+     */
+    protected function isCan(Ability $ability): bool
+    {
+        $user = MoonShineAuth::getGuard()->user();
+
+        return $user !== null && $user->isSuperUser() && parent::isCan($ability);
+    }
+
     protected string $model = MoonshineUserRole::class;
 
     protected string $column = 'name';
