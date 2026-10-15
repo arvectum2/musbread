@@ -19,12 +19,12 @@
 | MB-009 Экспорт | DONE (v1) | museum:export и Python fixture parity: SHA256 manifest |
 | MB-010 Publisher | PARTIAL | SHA-256, версионирование, rollback, часовой schedule и demo_publish.sh готовы. Очереди, журнал, физический канал и промышленная установка ещё не готовы |
 | MB-011 Статический сайт | DONE (v1) | Next.js строит HTML без API к CMS |
-| MB-012 Сквозной тест | PARTIAL | HTTP CRUD MoonShine → экспорт + CI native publish → Next.js → release; реальное браузерное E2E с кликами/скриншотами ещё не закрыто |
+| MB-012 Сквозной тест | PARTIAL | HTTP CRUD MoonShine → экспорт + CI native publish → Next.js → release; Chromium browser E2E публичного сайта работает, UI-формы CMS с настоящим браузером и скриншоты приёмки ещё не закрыты |
 | MB-013 Навигация | PARTIAL | главная, афиша, хлебные крошки, поиск событий, мобильное меню; полная структура ТЗ впереди |
 | MB-014 UX/UI | PARTIAL | нейтральный адаптивный дизайн без согласованной айдентики |
 | MB-015 Доступность | PARTIAL | skip link, focus-visible, мобильное меню, русскоязычная разметка; полный аудит/scale 200% и тесты — впереди |
 | MB-016 CMS-редактор | PARTIAL | формы событий и SEO-поля, WYSIWYG + двойная HTML-очистка реализованы, drag-n-drop медиатека и журнал — впереди |
-| MB-017 Demo/UAT | PARTIAL | CI green, ручная проверка UI и протокол ещё впереди |
+| MB-017 Demo/UAT | PARTIAL | CI green, автоматические Chromium browser tests 4/4 для публичного UI; ручная проверка CMS, Safari и протокол ещё впереди |
 
 ## Локальное окружение
 

@@ -11,3 +11,5 @@ playwright-report/
 # Local release outputs, never ship deployment artifacts or client data
 /deploy/local/
 /__pycache__/
+
+test-results/

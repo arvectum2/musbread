@@ -34,6 +34,10 @@ jobs:
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'
+      - name: Install headless Chromium (Playwright)
+        run: npx playwright install --with-deps chromium
+      - name: Browser smoke tests
+        run: npm run test:e2e
       - run: python3 ../../scripts/release_site.py deploy && python3 ../../scripts/release_site.py verify
       - name: Check public export
         run: |
