@@ -16,6 +16,20 @@ jobs:
           python-version: '3.12'
       - run: python3 -m unittest discover -s tests -v
       - run: python3 scripts/publish_snapshot.py --check
+      - name: Prepare deterministic pre-award handoff sample
+        run: |
+          python3 scripts/handoff_bundle.py build --output /tmp/musbread-preaward.zip
+          python3 scripts/handoff_bundle.py verify /tmp/musbread-preaward.zip
+          unzip -tq /tmp/musbread-preaward.zip
+          mkdir -p /tmp/musbread-delivery-extract
+          unzip -q /tmp/musbread-preaward.zip -d /tmp/musbread-delivery-extract
+          python3 /tmp/musbread-delivery-extract/source/scripts/handoff_bundle.py verify /tmp/musbread-preaward.zip
+      - name: Upload pre-award demo bundle (no credentials)
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-preaward-demo-handoff
+          path: /tmp/musbread-preaward.zip
+          retention-days: 7
   web:
     name: Next.js lint, types and static export
     runs-on: ubuntu-latest

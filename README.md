@@ -130,3 +130,7 @@ npm run test:webkit (WebKit) либо npm run test:chrome (установлен�
 ## Интервью, исследование UX и шаблоны концепций
 
 Рабочий бриф в docs/research/INTERVIEW_BRIEF.md, UX методика и согласия в docs/research, пустой CSV для реальных анонимных попыток. Подсчёт после исследования: python3 scripts/score_ux.py <private_results.csv> (два раунда, минимум 5 участников каждый, порог 85%). Три пятистраничных PDF-каркаса и HTML-источники — docs/design/templates. Пересборка на Mac: cd apps/web && node scripts/build_concept_templates.mjs. Эти PDF пока не являются финальными концепциями.
+
+## Предконтрактный комплект передачи (CP-22)
+
+См. docs/handoff/README.md. Команда: python3 scripts/handoff_bundle.py build --output /tmp/musbread_preaward.zip. Проверка: python3 scripts/handoff_bundle.py verify /tmp/musbread_preaward.zip. ZIP только для демонстрации — не содержит реальные базы и секреты, указывает отсутствующие дизайны, не является актом передачи. GitHub Actions публикует образец как временный CI-артефакт.
