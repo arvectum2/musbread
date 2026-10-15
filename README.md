@@ -111,3 +111,14 @@ Laravel с опциональной очередью (`MUSEUM_USE_PUBLISH_QUEUE=
 Скрипт sh scripts/demo_publish.sh помещает build-specific CSP в deploy/local/csp.generated.conf (не публичный каталог). В реальном контуре конфигурацию Nginx необходимо установить вместе с релизом и перезагрузить Nginx, включая rollback. Порядок и ограничения: docs/SECURITY.md и infra/README.md.
 
 Laravel ограничивает POST входа MoonShine и загрузки файлов; Nginx содержит дополнительный шаблон ограничения. Пентест и реальные доступы музея не выполнялись.
+
+
+## Предконтрактный браузерный аудит
+
+После сборки Next.js в apps/web выполнить npm run test:e2e (Chromium),
+npm run test:webkit (WebKit) либо npm run test:chrome (установленный Google Chrome).
+Все три команды пересоздают CSP из текущей сборки; Chrome идёт последовательно.
+На Mac mini команда sh scripts/qa_native_safari.sh открывает и закрывает собственное окно
+настоящего Safari для проверки трёх публичных страниц. В Linux CI она не запускается.
+Проверка ссылок: python3 scripts/audit_static_navigation.py apps/web/out.
+Актуальный QA отчёт: docs/QA_PREAWARD_REPORT.md.

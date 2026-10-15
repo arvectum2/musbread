@@ -12,7 +12,7 @@ export default function SiteHeader() {
           <Link href="/events/">Афиша</Link>
           <Link href="/museum/">Музей</Link>
           <Link href="/news/">Новости</Link>
-          <a href="#contacts">Контакты</a>
+          <Link href="/#contacts">Контакты</Link>
         </nav>
         <details className="mobile-nav">
           <summary aria-label="Открыть меню">Меню ☰</summary>

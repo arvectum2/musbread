@@ -47,3 +47,11 @@
 
 
 Последняя предконтрактная проверка CP-19: 53 PHP feature tests, 27 Python unittest и 12 Playwright browser tests в каждом из Chromium и WebKit; GitHub Actions 38744506681 — 5/5 success. Реальная сеть/пентест отдельно #12.
+
+
+## CP-17 текущий регресс (15.10.2026)
+
+Клавиатурный поиск афиши дополнен ArrowUp/Down, Enter и Escape. Исправлена ссылка Контакты.
+Выполнен нативный Safari smoke трёх маршрутов на Mac mini с сохранением текущих пользовательских окон; Chromium/WebKit и установленный Chrome прошли по 15 browser tests.
+Из статической сборки проверены 16 HTML-файлов и 250 внутренних ссылок/якорей.
+Подробный отчёт: docs/QA_PREAWARD_REPORT.md. Это не официальная приёмка музея.

@@ -16,12 +16,47 @@ test("главная и музейные разделы открываются",
 test("поиск по афише работает с клавиатуры", async ({ page }) => {
   await page.goto("/events/");
   const search = page.getByRole("combobox", { name: "Поиск по событиям" });
+  await expect(search).toHaveAttribute("data-ready", "true");
   await search.fill("экскурсия");
   const results = page.getByRole("listbox");
   await expect(results.getByRole("option")).toHaveCount(1);
   await expect(results).toContainText("История хлеба");
   await results.getByRole("option").first().click();
   await expect(page).toHaveURL(/\/events\/bread-history\/$/);
+});
+
+test("поиск: стрелки, Enter и Escape доступны без мыши", async ({ page }) => {
+  await page.goto("/events/");
+  const search = page.getByRole("combobox", { name: "Поиск по событиям" });
+  await expect(search).toHaveAttribute("data-ready", "true");
+  await search.fill("экскурсия");
+  await search.press("ArrowDown");
+  await expect(search).toHaveAttribute("aria-expanded", "true");
+  expect(await search.getAttribute("aria-activedescendant")).toBeTruthy();
+  await expect(page.locator('[role="option"][aria-selected="true"]')).toHaveCount(1);
+  await search.press("Escape");
+  await expect(search).toHaveAttribute("aria-expanded", "false");
+  await expect(search).toBeFocused();
+  await search.press("ArrowDown");
+  await search.press("Enter");
+  await expect(page).toHaveURL(/\/events\/bread-history\/$/);
+});
+
+test("поиск: отсутствие результатов сообщает статус, варианты скрыты", async ({ page }) => {
+  await page.goto("/events/");
+  const search = page.getByRole("combobox", { name: "Поиск по событиям" });
+  await expect(search).toHaveAttribute("data-ready", "true");
+  await search.fill("несуществующеесобытие");
+  await expect(page.getByRole("status")).toContainText("не найдено");
+  await expect(search).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByRole("listbox")).toBeHidden();
+});
+
+test("ссылка Контакты из внутреннего раздела ведёт на главную", async ({ page }) => {
+  await page.goto("/events/");
+  await page.getByRole("navigation", { name: "Основное меню" })
+    .getByRole("link", { name: "Контакты" }).click();
+  await expect(page).toHaveURL(/\/#contacts$/);
 });
 
 test("на мобильной ширине меню и ссылки доступны", async ({ page }) => {

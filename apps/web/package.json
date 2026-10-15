@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test:e2e": "python3 ../../scripts/build_csp.py out --output .csp-header.txt && playwright test",
     "test:cms": "playwright test --config playwright.cms.config.ts",
-    "test:webkit": "playwright test --config playwright.webkit.config.ts"
+    "test:webkit": "python3 ../../scripts/build_csp.py out --output .csp-header.txt && playwright test --config playwright.webkit.config.ts",
+    "test:chrome": "python3 ../../scripts/build_csp.py out --output .csp-header.txt && playwright test --config playwright.chrome.config.ts"
   },
   "dependencies": {
     "next": "16.4.1",

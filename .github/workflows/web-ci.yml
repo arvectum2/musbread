@@ -53,6 +53,8 @@ jobs:
       - run: python3 ../../scripts/release_site.py deploy && python3 ../../scripts/release_site.py verify
       - name: Reject private files and secrets in static export
         run: python3 ../../scripts/audit_public_artifacts.py out
+      - name: Verify all internal routes and anchors
+        run: python3 ../../scripts/audit_static_navigation.py out
       - name: Check public export
         run: |
           test -f out/index.html

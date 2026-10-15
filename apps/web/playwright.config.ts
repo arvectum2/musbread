@@ -6,7 +6,7 @@ export default defineConfig({
   timeout: 20_000,
   expect: { timeout: 8_000 },
   retries: process.env.CI ? 1 : 0,
-  workers: 2,
+  workers: 1,
   reporter: process.env.CI ? "github" : "list",
   use: {
     ...devices["Desktop Chrome"],

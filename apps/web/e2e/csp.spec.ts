@@ -27,6 +27,7 @@ test("Next.js hydration, navigation and search work under strict script-hash CSP
   await page.goto("/events/");
   await expect(page.getByRole("heading", { name: "Афиша" })).toBeVisible();
   const search = page.getByRole("combobox", { name: "Поиск по событиям" });
+  await expect(search).toHaveAttribute("data-ready", "true");
   await search.fill("экскурсия");
   await expect(page.getByRole("listbox").getByRole("option")).toHaveCount(1);
   await page.getByRole("listbox").getByRole("option").click();
