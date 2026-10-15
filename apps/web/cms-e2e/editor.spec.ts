@@ -2,9 +2,9 @@ import { test, expect } from "@playwright/test";
 
 test("реальный вход и редактор материалов в MoonShine", async ({ page }) => {
   await page.goto("/admin/login");
-  await expect(page.getByRole("textbox", { name: /Логин|E-mail|Username/i })).toBeVisible();
-  await page.getByRole("textbox", { name: /Логин|E-mail|Username/i })
-    .fill(process.env.MUSBREAD_E2E_USERNAME!);
+  const login = page.locator('input[name="username"]');
+  await expect(login).toBeVisible({ timeout: 12_000 });
+  await login.fill(process.env.MUSBREAD_E2E_USERNAME!);
   await page.locator('input[type="password"]').fill(process.env.MUSBREAD_E2E_PASSWORD!);
   await page.locator('button[type="submit"]').click();
   await expect(page).toHaveURL(/\/admin/);
@@ -27,6 +27,7 @@ test("реальный вход и редактор материалов в Moon
 
 test("закрытая медиатека поддерживает загрузку и alt-текст", async ({ page }) => {
   await page.goto("/admin/login");
+  await expect(page.locator('input[name="username"]')).toBeVisible({ timeout: 12_000 });
   await page.locator('input[name="username"]').fill(process.env.MUSBREAD_E2E_USERNAME!);
   await page.locator('input[type="password"]').fill(process.env.MUSBREAD_E2E_PASSWORD!);
   await page.locator('button[type="submit"]').click();

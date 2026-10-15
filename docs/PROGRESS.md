@@ -24,7 +24,7 @@
 | MB-014 UX/UI | PARTIAL | нейтральный адаптивный дизайн без согласованной айдентики |
 | MB-015 Доступность | PARTIAL | skip link, focus-visible, мобильное меню, русскоязычная разметка; полный аудит/scale 200% и тесты — впереди |
 | MB-016 CMS-редактор | PARTIAL | формы событий и SEO-поля, WYSIWYG + двойная HTML-очистка реализованы, журнал аудита только для Admin; отдельная закрытая медиатека с upload/WebP/alt/caption/drag-and-drop и SHA-256 экспортом, браузерная ручная проверка ещё впереди |
-| MB-017 Demo/UAT | PARTIAL | CI green, автоматические Chromium Playwright + axe-core a11y проверки публичного UI; закрытый MoonShine CMS Playwright E2E через временный стенд; ручной Safari/Chromium-GOST и официальный UAT ещё впереди; ручная проверка CMS, Safari и протокол ещё впереди |
+| MB-017 Demo/UAT | PARTIAL | CI green, автоматические Chromium Playwright + axe-core a11y проверки публичного UI; закрытый MoonShine CMS Playwright E2E через временный стенд; Playwright WebKit на Mac mini 9/9, ручной Safari/Chromium-GOST и официальный UAT ещё впереди; ручная проверка CMS, Safari и протокол ещё впереди |
 
 ## Локальное окружение
 

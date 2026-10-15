@@ -36,9 +36,11 @@ test("на мобильной ширине меню и ссылки доступ
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
 });
 
-test("skip-link получает клавиатурный фокус", async ({ page }) => {
+test("skip-link получает клавиатурный фокус", async ({ page, browserName }) => {
   await page.goto("/");
-  await page.keyboard.press("Tab");
+  // Safari/WebKit defaults to Option+Tab for focusing links unless
+  // "Press Tab to highlight each item" is enabled in browser settings.
+  await page.keyboard.press(browserName === "webkit" ? "Alt+Tab" : "Tab");
   await expect(page.getByRole("link", { name: "Перейти к содержимому" })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#main$/);
