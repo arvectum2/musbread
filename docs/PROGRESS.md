@@ -1,0 +1,34 @@
+# MusBread — checkpoints
+
+Дата: 15 октября 2026. Исходный статус закупки: заявка 39 000 ₽, результаты ожидаются 20 октября. Все материалы сайта и мероприятия сейчас демонстрационные.
+
+| ID | Статус | Подтверждение |
+|---|---|---|
+| MB-001 Требования | DONE (база) | docs/REQUIREMENTS.md; предстоит расширить матрицу по каждому носителю |
+| MB-002 Архитектура | DONE (проект) | docs/ARCHITECTURE.md, deployment в музей — после согласования |
+| MB-003 Laravel | DONE | PHP 8.4.26 native, Laravel 13.36.0, php artisan test |
+| MB-004 MoonShine | PARTIAL | пакет 4.19.5, /admin route и модель события/CRUD, роли и реальный рабочий UX-процесс редактора ещё не закрыты |
+| MB-005 Next.js | DONE (прототип) | 16.4.1 static export, страницы главная/афиша/событие |
+| MB-006 CI | DONE (проверка) | GitHub Actions web-ci.yml: PHP, Python, Next.js |
+| MB-007 Модели контента | PARTIAL | MuseumEvent, SEO fields; остальные разделы и модели — в очереди |
+| MB-008 Роли | PARTIAL | MoonShine auth middleware работает; расширенные роли редактора — впереди |
+| MB-009 Экспорт | DONE (v1) | museum:export и Python fixture parity: SHA256 manifest |
+| MB-010 Publisher | PARTIAL | проверка целостности и atomic write пофайлово готовы; атомарный релиз целиком, secure channel, rollback требуют разработки |
+| MB-011 Статический сайт | DONE (v1) | Next.js строит HTML без API к CMS |
+| MB-012 Сквозной тест | PARTIAL | Laravel seed → export → Next build; UI операции из MoonShine ещё не покрыты end-to-end |
+| MB-013 Навигация | PARTIAL | главная, афиша, хлебные крошки, поиск событий, мобильное меню; полная структура ТЗ впереди |
+| MB-014 UX/UI | PARTIAL | нейтральный адаптивный дизайн без согласованной айдентики |
+| MB-015 Доступность | PARTIAL | skip link, focus-visible, мобильное меню, русскоязычная разметка; полный аудит/scale 200% и тесты — впереди |
+| MB-016 CMS-редактор | PARTIAL | формы событий и SEO-поля, WYSIWYG/drag-n-drop медиатека/журнал/расписание — впереди |
+| MB-017 Demo/UAT | PARTIAL | CI green, ручная проверка UI и протокол ещё впереди |
+
+## Локальное окружение
+
+- Homebrew `php@8.4` установлен нативно, PHP-FPM не запускаем постоянно.
+- Composer PHAR находится в `~/.local/share/musbread/composer.phar` и запускается `~/.local/bin/musbread-composer`.
+- Node.js/npm нативно. Laravel SQLite dev, без постоянно запущенного контейнера Docker.
+- Локальные значения секретов, базы и .env не коммитить. MoonShine /admin требует вход; существование формы входа не означает созданную учётную запись.
+
+## Не запускать до согласования
+
+Реальные билетные/платёжные сервисы, клиентские сети, обработку ПДн, финальную айдентику. Официальную публикацию на musbread.ru только после подписания контракта и согласования музеем.

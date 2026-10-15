@@ -13,6 +13,10 @@ export default function SiteHeader() {
           <a href="#museum">О музее</a>
           <a href="#contacts">Контакты</a>
         </nav>
+        <details className="mobile-nav">
+          <summary aria-label="Открыть меню">Меню ☰</summary>
+          <nav aria-label="Мобильное меню"><Link href="/">Главная</Link><Link href="/events/">Афиша</Link><Link href="/#museum">О музее</Link><Link href="/#contacts">Контакты</Link></nav>
+        </details>
         <Link className="header-action" href="/events/">Посетить музей <span aria-hidden="true">↗</span></Link>
       </div>
     </header>

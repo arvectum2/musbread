@@ -41,3 +41,21 @@ h1,h2,h3,p{margin-top:0}h1,h2{font-weight:690;line-height:1.1;letter-spacing:-.0
 @media(max-width:960px){.main-nav{display:none}.hero{grid-template-columns:1fr;min-height:initial;padding-top:3rem}.hero-art{min-height:350px}.introduction{grid-template-columns:1fr}.events-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.header-inner{min-height:70px}.wordmark{font-size:.95rem}.brand-mark{font-size:2.1rem}.header-action{font-size:.78rem}.hero{gap:2rem}.hero h1{font-size:clamp(2.8rem,11vw,4.2rem)}.hero-art{min-height:270px}.hero-symbol{font-size:13rem}.section{padding:3.3rem 5%}.events-grid{grid-template-columns:1fr}.section-title-row{align-items:start;flex-direction:column}.closing-banner{padding:3rem 5%}.closing-icon{display:none}.site-footer{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+
+/* Accessible, keyboard-operated basic search. Production autocomplete ARIA will use
+   listbox focus management once the full museum search index is available. */
+.search-box{max-width:700px;margin:-1rem 0 2.5rem;position:relative}
+.search-box label{display:block;font-weight:650;margin-bottom:.5rem}
+.search-box input{width:100%;font:inherit;border:1px solid #8c9b89;border-radius:5px;background:#fff;padding:.85rem 1rem}
+.search-hint{color:var(--mute);font-size:.78rem;margin:.3rem 0}
+.search-results{position:relative;background:#fff}
+.search-results a{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);padding:.8rem 1rem}
+.search-results a:focus,.search-results a:hover{background:#edf3e8}
+.search-results a span{font-size:.8rem;color:var(--mute)}
+.search-empty{padding:1rem;color:var(--mute)}
+.mobile-nav{display:none;position:relative}
+.mobile-nav summary{list-style:none;cursor:pointer;font-weight:650;border:1px solid var(--line);border-radius:4px;padding:.35rem .65rem}
+.mobile-nav summary::-webkit-details-marker{display:none}
+.mobile-nav nav{position:absolute;top:calc(100% + .8rem);right:0;min-width:180px;display:flex;flex-direction:column;gap:.7rem;background:#fff;box-shadow:0 4px 25px #0002;border:1px solid var(--line);padding:1.2rem;z-index:70}
+@media(max-width:960px){.mobile-nav{display:block}.header-action{display:none}}
