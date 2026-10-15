@@ -89,7 +89,7 @@ def main() -> int:
                     time.sleep(0.25)
                 else:
                     raise RuntimeError("QA PHP server failed readiness")
-                print("Running MoonShine real browser smoke tests against loopback", flush=True)
+                print("Running isolated MoonShine browser smoke tests against loopback", flush=True)
                 run(["npm", "run", "test:cms"], WEB, env)
                 output = root / "published.json"
                 manifest = root / "manifest.json"

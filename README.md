@@ -88,3 +88,7 @@ php artisan serve --host=127.0.0.1 --port=8766
 
 
 Для дополнительной проверки Safari-подобного движка на Mac mini: cd apps/web && npx playwright install webkit && npm run test:webkit. Это тест WebKit Playwright, а не официальный сертификат Safari.
+
+### CMS в WebKit
+
+Для изолированной проверки закрытой CMS: MUSBREAD_E2E_BROWSER=webkit python3 scripts/qa_cms_browser.py. По умолчанию используется Chromium. Пароль и SQLite временные.
