@@ -122,3 +122,7 @@ npm run test:webkit (WebKit) либо npm run test:chrome (установлен�
 настоящего Safari для проверки трёх публичных страниц. В Linux CI она не запускается.
 Проверка ссылок: python3 scripts/audit_static_navigation.py apps/web/out.
 Актуальный QA отчёт: docs/QA_PREAWARD_REPORT.md.
+
+## Интеграции до победы
+
+Семь типов интеграций из ТЗ описаны в docs/INTEGRATIONS.md. PHP hub и adapters находятся в apps/cms/app/Integrations; по умолчанию всё выключено. Публичный Next.js имеет только безопасные типизированные HTTPS-ссылки, тестируемые через npm run test:integrations. Реальные билеты и персональные заявки не подключены.
