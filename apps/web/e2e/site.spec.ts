@@ -53,3 +53,20 @@ test("снимки тестового интерфейса для протоко
   await page.reload();
   await page.screenshot({ path: testInfo.outputPath("musbread-mobile.png"), fullPage: true });
 });
+
+test("адаптивность при масштабировании контента до 200%", async ({ page }) => {
+  // At 200% browser zoom on a 1280px window, the effective CSS viewport is
+  // 640px. Using 640 CSS pixels triggers the same responsive breakpoints.
+  // This checks reflow, not OS/Safari's zoom UI or all WCAG criteria.
+  await page.setViewportSize({ width: 640, height: 800 });
+  for (const route of ["/", "/events/", "/museum/", "/news/demo-news/"]) {
+    await page.goto(route);
+    const heading = page.locator("main h1").first();
+    await expect(heading).toBeVisible();
+    const measures = await page.evaluate(() => ({
+      content: document.documentElement.scrollWidth,
+      viewport: window.innerWidth,
+    }));
+    expect(measures.content, `Horizontal overflow at ${route}`).toBeLessThanOrEqual(measures.viewport + 1);
+  }
+});
