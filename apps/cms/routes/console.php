@@ -11,4 +11,8 @@ Artisan::command('inspire', function () {
 
 // Prepare a read-only content export every hour. The actual transport to the
 // customer's isolated public server must be configured after network approval.
-Schedule::command('museum:export')->hourly()->withoutOverlapping();
+if (config('museum.queue_publication', false)) {
+    Schedule::command('museum:queue-export')->hourly()->withoutOverlapping();
+} else {
+    Schedule::command('museum:export')->hourly()->withoutOverlapping();
+}
