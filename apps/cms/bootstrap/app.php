@@ -12,7 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // MoonShine registers its own middleware group instead of `web`.
+        // Global middleware covers both its login route and our upload routes.
+        $middleware->append(\App\Http\Middleware\ThrottleMuseumWrites::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
