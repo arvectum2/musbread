@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { findGuidePage, findMenuGroup, guidePages, legacyUrl, menuGroups, museumReference, REFERENCE_DATE } from "@/data/museum-reference";
+import { legacyUrl, museumReference, REFERENCE_DATE } from "@/data/museum-reference";
+import { findGuidePage, findMenuGroup, guidePages, menuGroups } from "@/data/navigation";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -28,7 +29,11 @@ export default async function GuidePage({ params }: Props) {
   return <article className="section inner-page guide-page">
     <nav aria-label="Хлебные крошки" className="breadcrumbs">
       <Link href="/">Главная</Link><span aria-hidden="true">/</span>
-      {page ? <><Link href={"/guide/" + parent.slug + "/"}>{parent.title}</Link><span aria-hidden="true">/</span></> : null}
+      {page ? page.ancestors.map((ancestor) =>
+        <span className="crumb-node" key={ancestor.slug}>
+          <Link href={"/guide/" + ancestor.slug + "/"}>{ancestor.title}</Link>
+          <span aria-hidden="true">/</span>
+        </span>) : null}
       <span aria-current="page">{title}</span>
     </nav>
     <span className="eyebrow">ПРЕДВАРИТЕЛЬНАЯ СТРУКТУРА · {REFERENCE_DATE}</span>
@@ -63,6 +68,6 @@ export default async function GuidePage({ params }: Props) {
       <a href={sourceUrl} target="_blank" rel="noopener noreferrer">Посмотреть актуальные сведения на действующем сайте музея ↗</a>
     </p>}
     {page?.tenderOnly && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
-    {page && <p><Link href={"/guide/" + parent.slug + "/"} className="text-link">← Ко всем подразделам «{parent.title}»</Link></p>}
+    {page && <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>}
   </article>;
 }

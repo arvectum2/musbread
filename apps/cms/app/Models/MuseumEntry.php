@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Support\MuseumSectionAccess;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\MuseumHtmlSanitizer;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,7 +21,7 @@ class MuseumEntry extends Model
     ];
 
     protected $fillable = [
-        'type', 'slug', 'title', 'h1', 'parent_slug', 'excerpt', 'body',
+        'type', 'slug', 'title', 'h1', 'parent_slug', 'museum_section_id', 'excerpt', 'body',
         'status', 'published_at', 'seo_title', 'seo_description', 'sort_order',
     ];
 
@@ -27,12 +30,27 @@ class MuseumEntry extends Model
         return [
             'published_at' => 'datetime',
             'sort_order' => 'integer',
+            'museum_section_id' => 'integer',
         ];
     }
 
     protected static function booted(): void
     {
+        static::deleting(static function (self $entry): void {
+            $actor = MuseumSectionAccess::user();
+            if ($actor && ! MuseumSectionAccess::mayEdit($actor, $entry->museum_section_id)) {
+                throw new AuthorizationException('Удаление материала другого раздела запрещено.');
+            }
+        });
         static::saving(static function (self $entry): void {
+            $actor = MuseumSectionAccess::user();
+            if ($actor && ! $actor->isSuperUser()) {
+                $oldSection = $entry->exists ? $entry->getRawOriginal('museum_section_id') : null;
+                if (! MuseumSectionAccess::mayEdit($actor, $entry->museum_section_id)
+                    || ($entry->exists && ! MuseumSectionAccess::mayEdit($actor, $oldSection))) {
+                    throw new AuthorizationException('Редактор не назначен на этот раздел.');
+                }
+            }
             if ($entry->isDirty('body') && $entry->body !== null) {
                 $entry->body = app(MuseumHtmlSanitizer::class)->clean((string) $entry->body);
             }
@@ -43,9 +61,20 @@ class MuseumEntry extends Model
         });
     }
 
+    public function section(): BelongsTo
+    {
+        return $this->belongsTo(MuseumSection::class, 'museum_section_id');
+    }
+
     public function media(): HasMany
     {
         return $this->hasMany(MuseumMedia::class, 'museum_entry_id');
+    }
+
+    public function scopeEditableBy(Builder $query, \MoonShine\Laravel\Models\MoonshineUser $user): Builder
+    {
+        if ($user->isSuperUser()) return $query;
+        return $query->whereIn('museum_section_id', MuseumSectionAccess::allowedIds($user));
     }
 
     public function scopePublic(Builder $query): Builder

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\MuseumEvent;
 use App\Models\MuseumEntry;
+use App\Models\MuseumSection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Console\Command;
 
@@ -31,13 +32,39 @@ class ExportMuseumSnapshot extends Command
                 'excerpt' => $event->excerpt, 'body' => $event->body,
             ])->all();
 
+        // A section is public only when all its ancestors are approved as well.
+        // No editing rights, user emails or permission mappings leave the CMS.
+        $allSections = MuseumSection::query()->orderByRaw('CASE WHEN parent_id IS NULL THEN 0 ELSE 1 END')->orderBy('sort_order')->orderBy('slug')->get();
+        $byId = $allSections->keyBy('id');
+        $publishedSections = $allSections->filter(static function (MuseumSection $section) use ($byId): bool {
+            $seen = [];
+            $node = $section;
+            while ($node !== null) {
+                if ($node->status !== 'published' || isset($seen[$node->id])) return false;
+                $seen[$node->id] = true;
+                if ($node->parent_id !== null && ! $byId->has($node->parent_id)) return false;
+                $node = $node->parent_id === null ? null : $byId->get($node->parent_id);
+            }
+            return true;
+        });
+        $approvedIds = $publishedSections->modelKeys();
+        $sections = $publishedSections->map(static fn (MuseumSection $section) => [
+            'slug' => $section->slug,
+            'title' => $section->title,
+            'parent_slug' => $section->parent_id === null ? null : $byId->get($section->parent_id)?->slug,
+            'sort_order' => $section->sort_order,
+            'legacy_path' => $section->legacy_path,
+        ])->values()->all();
+
         $entries = MuseumEntry::query()
             ->public()
             ->orderBy('type')
             ->orderBy('sort_order')
             ->orderBy('slug')
-            ->with('media')
+            ->with(['media', 'section'])
             ->get()
+            ->filter(static fn (MuseumEntry $entry) =>
+                $entry->museum_section_id === null || in_array($entry->museum_section_id, $approvedIds, true))
             ->map(function (MuseumEntry $entry) use (&$mediaFiles, $mediaDir): array {
                 $images = [];
                 foreach ($entry->media as $image) {
@@ -75,14 +102,19 @@ class ExportMuseumSnapshot extends Command
                 'title' => $entry->title,
                 'h1' => $entry->h1,
                 'parent_slug' => $entry->parent_slug,
+                'section_slug' => $entry->section?->slug,
                 'excerpt' => $entry->excerpt,
                 'body' => $entry->body,
                 'seo_title' => $entry->seo_title,
                 'seo_description' => $entry->seo_description,
                 'sort_order' => $entry->sort_order,
                 'media' => $images,
-            ], static fn ($value, $key) => $key !== 'media' || count($value) > 0, ARRAY_FILTER_USE_BOTH);
-            })->all();
+            ], static function ($value, $key): bool {
+                if ($key === 'media') return count($value) > 0;
+                if ($key === 'section_slug') return $value !== null;
+                return true;
+            }, ARRAY_FILTER_USE_BOTH);
+            })->values()->all();
 
         // Prune assets withdrawn by the editor from this *generated-only* folder.
         // Otherwise a formerly published image would remain publicly accessible.
@@ -105,6 +137,11 @@ class ExportMuseumSnapshot extends Command
             'events' => $events,
             'entries' => $entries,
         ];
+        // Preserve the original schema for fixture parity when the seed is absent.
+        // CMS-controlled navigation becomes authoritative once sections are created.
+        if ($allSections->isNotEmpty()) {
+            $data['sections'] = $sections;
+        }
         // Match the Python fixture publisher canonical JSON serializer.
         $normalize = function ($obj) use (&$normalize) {
             if (! is_array($obj)) return $obj;
@@ -119,6 +156,9 @@ class ExportMuseumSnapshot extends Command
             'event_count' => count($events),
             'entry_count' => count($entries),
         ];
+        if ($allSections->isNotEmpty()) {
+            $audit['section_count'] = count($sections);
+        }
         $manifestData = json_encode($normalize($audit), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n";
 
         foreach ([[$output, $payload], [$manifest, $manifestData]] as [$target, $contents]) {

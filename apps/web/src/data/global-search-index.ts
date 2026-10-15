@@ -1,5 +1,5 @@
 import { content, events, sections } from "./content";
-import { guidePages, menuGroups } from "./museum-reference";
+import { guidePages, menuGroups } from "./navigation";
 
 export type SearchItem = { title: string; href: string; section: string; excerpt: string };
 export const searchItems: readonly SearchItem[] = [

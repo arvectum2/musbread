@@ -3,7 +3,8 @@ import Link from "next/link";
 import type { MouseEvent } from "react";
 import GlobalSearch from "@/components/GlobalSearch";
 import VisionMode from "@/components/VisionMode";
-import { menuGroups, museumReference } from "@/data/museum-reference";
+import { museumReference } from "@/data/museum-reference";
+import { menuGroups } from "@/data/navigation";
 
 function closeAfterNavigation(event: MouseEvent<HTMLElement>) {
   if (!(event.target instanceof Element) || !event.target.closest("a")) return;

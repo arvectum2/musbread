@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\MuseumEntry;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use MoonShine\Laravel\MoonShineAuth;
+use MoonShine\Support\Enums\Ability;
+use App\Support\MuseumSectionAccess;
 use App\Models\MuseumEntry;
 use App\MoonShine\Resources\MuseumEntry\Pages\MuseumEntryIndexPage;
 use App\MoonShine\Resources\MuseumEntry\Pages\MuseumEntryFormPage;
@@ -18,6 +22,32 @@ use MoonShine\Contracts\Core\PageContract;
  */
 class MuseumEntryResource extends ModelResource
 {
+    protected function modifyQueryBuilder(\Illuminate\Contracts\Database\Eloquent\Builder $builder): \Illuminate\Contracts\Database\Eloquent\Builder
+    {
+        $user = MuseumSectionAccess::user();
+        return $user === null ? $builder->whereRaw('1=0') : $builder->editableBy($user);
+    }
+
+    protected function modifyItemQueryBuilder(\Illuminate\Contracts\Database\Eloquent\Builder $builder): \Illuminate\Contracts\Database\Eloquent\Builder
+    {
+        $user = MuseumSectionAccess::user();
+        return $user === null ? $builder->whereRaw('1=0') : $builder->editableBy($user);
+    }
+
+    protected function isCan(Ability $ability): bool
+    {
+        $user = MoonShineAuth::getGuard()->user();
+        if ($user === null) return false;
+        if (! $user->isSuperUser()) {
+            if ($ability === Ability::CREATE) {
+                if (count(MuseumSectionAccess::allowedIds($user)) === 0) return false;
+            } elseif ($ability === Ability::MASS_DELETE) {
+                return false;
+            }
+        }
+        return parent::isCan($ability);
+    }
+
     protected string $model = MuseumEntry::class;
 
     protected string $title = 'Материалы музея';

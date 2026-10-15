@@ -18,6 +18,7 @@ final class MuseumEntryIndexPage extends IndexPage
             Text::make('Название', 'title'),
             Text::make('Адрес', 'slug'),
             Text::make('Статус', 'status'),
+            Text::make('Раздел ID', 'museum_section_id'),
         ];
     }
 }

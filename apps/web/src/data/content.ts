@@ -1,6 +1,7 @@
 import snapshot from "./published.json";
 import type { MuseumEntry, MuseumSnapshot } from "./types";
 
+const typedSnapshot = snapshot as MuseumSnapshot;
 const allowedTypes = ["page", "news", "excursion", "exhibition", "document"] as const;
 function parseType(type: string): MuseumEntry["type"] {
   if (!allowedTypes.some((candidate) => candidate === type)) {
@@ -10,8 +11,9 @@ function parseType(type: string): MuseumEntry["type"] {
 }
 
 export const content: MuseumSnapshot = {
-  ...snapshot,
-  entries: snapshot.entries.map((entry) => ({
+  ...typedSnapshot,
+  sections: typedSnapshot.sections,
+  entries: typedSnapshot.entries.map((entry) => ({
     ...entry,
     type: parseType(entry.type),
   })),

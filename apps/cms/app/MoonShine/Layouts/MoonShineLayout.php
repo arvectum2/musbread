@@ -12,6 +12,7 @@ use MoonShine\Contracts\ColorManager\PaletteContract;
 use App\MoonShine\Resources\MuseumEvent\MuseumEventResource;
 use MoonShine\MenuManager\MenuItem;
 use App\MoonShine\Resources\MuseumEntry\MuseumEntryResource;
+use App\MoonShine\Resources\MuseumSection\MuseumSectionResource;
 use App\MoonShine\Resources\MuseumAuditRecord\MuseumAuditRecordResource;
 use App\MoonShine\Resources\MuseumPublicationRun\MuseumPublicationRunResource;
 
@@ -35,6 +36,7 @@ final class MoonShineLayout extends AppLayout
             ...parent::menu(),
             MenuItem::make(MuseumEventResource::class, 'События'),
             MenuItem::make(MuseumEntryResource::class, 'Материалы музея'),
+            MenuItem::make(MuseumSectionResource::class, 'Структура сайта'),
             MenuItem::make('/admin/museum-media', 'Медиатека'),
             MenuItem::make(MuseumAuditRecordResource::class, 'Журнал изменений'),
             MenuItem::make(MuseumPublicationRunResource::class, 'Публикации'),

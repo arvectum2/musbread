@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\MuseumEntry;
+use App\Models\MuseumSection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use MoonShine\Laravel\Models\MoonshineUser;
 use MoonShine\Laravel\Models\MoonshineUserRole;
@@ -17,11 +18,18 @@ class EditorialPublicationJourneyTest extends TestCase
         $editorRole = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
         $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $editorRole->id]);
 
+        $section = MuseumSection::create([
+            'slug' => 'museum-news', 'title' => 'Новости музея',
+            'status' => 'published',
+        ]);
+        $section->editors()->attach($editor->id);
+
         $this->actingAs($editor, 'moonshine');
 
         foreach ([['private-draft', 'draft'], ['approved-news', 'published']] as [$slug, $status]) {
             $this->post('/admin/resource/museum-entry-resource/crud', [
                 'type' => 'news',
+                'museum_section_id' => $section->id,
                 'slug' => $slug,
                 'title' => 'Тестовый материал '.$slug,
                 'body' => 'Демо-текст новости',

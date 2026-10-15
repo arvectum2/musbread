@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\MuseumEntry\Pages;
 
 use App\Models\MuseumEntry;
+use App\Models\MuseumSection;
+use App\Support\MuseumSectionAccess;
 use Illuminate\Validation\Rule;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Laravel\Pages\Crud\FormPage;
@@ -28,7 +30,12 @@ final class MuseumEntryFormPage extends FormPage
                 Text::make('Название', 'title')->required(),
                 Text::make('URL (латиница, через дефис)', 'slug')->required(),
                 Text::make('H1', 'h1'),
-                Text::make('Родительский раздел (slug)', 'parent_slug'),
+                Select::make('Раздел сайта', 'museum_section_id')
+                    ->options(MuseumSection::query()
+                        ->whereIn('id', MuseumSectionAccess::user()
+                            ? MuseumSectionAccess::allowedIds(MuseumSectionAccess::user()) : [])
+                        ->orderBy('sort_order')->pluck('title', 'id')->all())
+                    ->nullable(),
                 Textarea::make('Анонс', 'excerpt'),
                 TinyMce::make('Основной текст', 'body')
                     ->locale('ru')
@@ -54,6 +61,7 @@ final class MuseumEntryFormPage extends FormPage
             'slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('museum_entries', 'slug')->ignore($item->getKey())],
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
+            'museum_section_id' => ['nullable', 'integer', Rule::exists('museum_sections', 'id')],
             'status' => ['required', 'in:draft,published'],
             'published_at' => ['nullable', 'date'],
         ];

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\MuseumEntry;
 use App\Models\MuseumEvent;
 use App\Models\MuseumMedia;
+use App\Models\MuseumSection;
 use App\Observers\MuseumContentAuditObserver;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         MuseumEntry::observe(MuseumContentAuditObserver::class);
         MuseumEvent::observe(MuseumContentAuditObserver::class);
         MuseumMedia::observe(MuseumContentAuditObserver::class);
+        MuseumSection::observe(MuseumContentAuditObserver::class);
         //
     }
 }

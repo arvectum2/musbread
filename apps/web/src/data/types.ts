@@ -19,6 +19,7 @@ export interface MuseumEntry {
   title: string;
   h1: string | null;
   parent_slug: string | null;
+  section_slug?: string;
   excerpt: string | null;
   body: string;
   seo_title: string | null;
@@ -26,9 +27,17 @@ export interface MuseumEntry {
   sort_order: number;
   media?: MuseumPublishedImage[];
 }
+export interface PublishedSection {
+  slug: string;
+  title: string;
+  parent_slug: string | null;
+  sort_order: number;
+  legacy_path: string | null;
+}
 export interface MuseumSnapshot {
   schema_version: number;
   site: { name: string; subtitle: string; description: string };
   events: MuseumEvent[];
   entries: MuseumEntry[];
+  sections?: PublishedSection[];
 }

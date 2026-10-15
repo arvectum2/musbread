@@ -1,0 +1,440 @@
+{
+  "source": "https://muzei-xleb.ru/",
+  "checked_at": "2026-10-15",
+  "sections": [
+    {
+      "slug": "museum",
+      "title": "Музей",
+      "parent_slug": null,
+      "sort_order": 0,
+      "legacy_path": null
+    },
+    {
+      "slug": "museum-history",
+      "title": "История музея",
+      "parent_slug": "museum",
+      "sort_order": 0,
+      "legacy_path": "/o-muzee"
+    },
+    {
+      "slug": "building-history",
+      "title": "История здания",
+      "parent_slug": "museum",
+      "sort_order": 1,
+      "legacy_path": "/istoriya-zdaniya"
+    },
+    {
+      "slug": "museum-exposition",
+      "title": "Экспозиция",
+      "parent_slug": "museum",
+      "sort_order": 2,
+      "legacy_path": "/ekspozicii"
+    },
+    {
+      "slug": "museum-team",
+      "title": "Команда и администрация",
+      "parent_slug": "museum",
+      "sort_order": 3,
+      "legacy_path": "/administraciya"
+    },
+    {
+      "slug": "friends",
+      "title": "Друзья музея",
+      "parent_slug": "museum",
+      "sort_order": 4,
+      "legacy_path": null
+    },
+    {
+      "slug": "museum-documents",
+      "title": "Официальные документы",
+      "parent_slug": "museum",
+      "sort_order": 5,
+      "legacy_path": "/oficialnye-dokumenty-muzeya"
+    },
+    {
+      "slug": "museum-finance",
+      "title": "Финансово-хозяйственная деятельность",
+      "parent_slug": "museum",
+      "sort_order": 6,
+      "legacy_path": "/finansovo-hozyaystvennaya-deyatelnost"
+    },
+    {
+      "slug": "museum-science-administration",
+      "title": "Научно-организационная деятельность",
+      "parent_slug": "museum",
+      "sort_order": 7,
+      "legacy_path": "/nauchno-organizacionnaya-deyatelnost"
+    },
+    {
+      "slug": "museum-scientific-council",
+      "title": "Научно-методический совет",
+      "parent_slug": "museum",
+      "sort_order": 8,
+      "legacy_path": "/nauchno-metodicheskiy-sovet"
+    },
+    {
+      "slug": "museum-accounting-policy",
+      "title": "Учётная политика",
+      "parent_slug": "museum",
+      "sort_order": 9,
+      "legacy_path": "/uchetnaya-politika"
+    },
+    {
+      "slug": "museum-anti-corruption",
+      "title": "Противодействие коррупции",
+      "parent_slug": "museum",
+      "sort_order": 10,
+      "legacy_path": "/protivodeystvie-korrupcii"
+    },
+    {
+      "slug": "museum-anti-terror",
+      "title": "Противодействие терроризму",
+      "parent_slug": "museum",
+      "sort_order": 11,
+      "legacy_path": "/protivodeystvie-terrorizmu"
+    },
+    {
+      "slug": "museum-antimonopoly",
+      "title": "Антимонопольный комплаенс",
+      "parent_slug": "museum",
+      "sort_order": 12,
+      "legacy_path": "/antimonopolnyy-komplaens"
+    },
+    {
+      "slug": "museum-accessibility-policy",
+      "title": "Политика обеспечения доступности",
+      "parent_slug": "museum",
+      "sort_order": 13,
+      "legacy_path": "/politika-obespecheniya-usloviy-dostupnosti-dlya-invalidov-i-drugih-mobilnyh-grazhdan"
+    },
+    {
+      "slug": "museum-privacy",
+      "title": "Политика конфиденциальности и обработки ПДн",
+      "parent_slug": "museum",
+      "sort_order": 14,
+      "legacy_path": "/politika-konfidencialnosti-i-obrabotki-personalnyh-dannyh"
+    },
+    {
+      "slug": "museum-media",
+      "title": "Медиа",
+      "parent_slug": "museum",
+      "sort_order": 15,
+      "legacy_path": "/video"
+    },
+    {
+      "slug": "museum-vacancies",
+      "title": "Вакансии",
+      "parent_slug": "museum",
+      "sort_order": 16,
+      "legacy_path": "/vakansii"
+    },
+    {
+      "slug": "museum-contacts",
+      "title": "Контакты",
+      "parent_slug": "museum",
+      "sort_order": 17,
+      "legacy_path": "/kontakty"
+    },
+    {
+      "slug": "visitors",
+      "title": "Посетителям",
+      "parent_slug": null,
+      "sort_order": 1,
+      "legacy_path": null
+    },
+    {
+      "slug": "plan-visit",
+      "title": "Спланировать визит",
+      "parent_slug": "visitors",
+      "sort_order": 0,
+      "legacy_path": "/posetitelyam"
+    },
+    {
+      "slug": "tickets-and-benefits",
+      "title": "Билеты и льготы",
+      "parent_slug": "visitors",
+      "sort_order": 1,
+      "legacy_path": "/stoimost"
+    },
+    {
+      "slug": "pushkin-card",
+      "title": "Пушкинская карта",
+      "parent_slug": "visitors",
+      "sort_order": 2,
+      "legacy_path": null
+    },
+    {
+      "slug": "accessible-museum",
+      "title": "Доступная среда",
+      "parent_slug": "visitors",
+      "sort_order": 3,
+      "legacy_path": "/informaciya-dlya-mgn"
+    },
+    {
+      "slug": "museum-shop",
+      "title": "Магазин (без продажи)",
+      "parent_slug": "visitors",
+      "sort_order": 4,
+      "legacy_path": null
+    },
+    {
+      "slug": "faq",
+      "title": "Частые вопросы",
+      "parent_slug": "visitors",
+      "sort_order": 5,
+      "legacy_path": null
+    },
+    {
+      "slug": "museum-donors",
+      "title": "Информация для дарителей",
+      "parent_slug": "visitors",
+      "sort_order": 6,
+      "legacy_path": "/informaciya-dlya-dariteley"
+    },
+    {
+      "slug": "museum-feedback",
+      "title": "Гостевая книга (действующий сайт)",
+      "parent_slug": "visitors",
+      "sort_order": 7,
+      "legacy_path": "/gostevaya-kniga"
+    },
+    {
+      "slug": "ticket-refunds",
+      "title": "Правила возврата билетов",
+      "parent_slug": "visitors",
+      "sort_order": 8,
+      "legacy_path": "/ceny-i-usloviya-predostavleniya-uslug"
+    },
+    {
+      "slug": "agenda",
+      "title": "Афиша",
+      "parent_slug": null,
+      "sort_order": 2,
+      "legacy_path": null
+    },
+    {
+      "slug": "agenda-events",
+      "title": "Все события",
+      "parent_slug": "agenda",
+      "sort_order": 0,
+      "legacy_path": null
+    },
+    {
+      "slug": "agenda-excursions",
+      "title": "Экскурсии",
+      "parent_slug": "agenda",
+      "sort_order": 1,
+      "legacy_path": null
+    },
+    {
+      "slug": "agenda-children",
+      "title": "Детям",
+      "parent_slug": "agenda",
+      "sort_order": 2,
+      "legacy_path": null
+    },
+    {
+      "slug": "agenda-exhibitions",
+      "title": "Выставки",
+      "parent_slug": "agenda",
+      "sort_order": 3,
+      "legacy_path": null
+    },
+    {
+      "slug": "agenda-meetings",
+      "title": "Встречи",
+      "parent_slug": "agenda",
+      "sort_order": 4,
+      "legacy_path": null
+    },
+    {
+      "slug": "agenda-festivals",
+      "title": "Фестивали",
+      "parent_slug": "agenda",
+      "sort_order": 5,
+      "legacy_path": null
+    },
+    {
+      "slug": "agenda-workshops",
+      "title": "Мастер-классы",
+      "parent_slug": "agenda",
+      "sort_order": 6,
+      "legacy_path": null
+    },
+    {
+      "slug": "agenda-archive",
+      "title": "Архив",
+      "parent_slug": "agenda",
+      "sort_order": 7,
+      "legacy_path": null
+    },
+    {
+      "slug": "excursions-guide",
+      "title": "Экскурсии",
+      "parent_slug": null,
+      "sort_order": 3,
+      "legacy_path": null
+    },
+    {
+      "slug": "excursion-overview",
+      "title": "Обзорная экскурсия",
+      "parent_slug": "excursions-guide",
+      "sort_order": 0,
+      "legacy_path": "/obzornaya-ekskursiya"
+    },
+    {
+      "slug": "excursion-interactive",
+      "title": "Интерактивные экскурсии",
+      "parent_slug": "excursions-guide",
+      "sort_order": 1,
+      "legacy_path": "/interaktivnye-zanyatiya"
+    },
+    {
+      "slug": "excursion-thematic",
+      "title": "Тематические экскурсии",
+      "parent_slug": "excursions-guide",
+      "sort_order": 2,
+      "legacy_path": "/tematicheskie-ekskursii"
+    },
+    {
+      "slug": "excursion-workshops-adults",
+      "title": "Мастер-классы для взрослых",
+      "parent_slug": "excursions-guide",
+      "sort_order": 3,
+      "legacy_path": null
+    },
+    {
+      "slug": "excursion-theatrical",
+      "title": "Театрализованные экскурсии",
+      "parent_slug": "excursions-guide",
+      "sort_order": 4,
+      "legacy_path": "/teatralizovannye-ekskursii"
+    },
+    {
+      "slug": "children",
+      "title": "Детям",
+      "parent_slug": null,
+      "sort_order": 4,
+      "legacy_path": null
+    },
+    {
+      "slug": "children-interactive",
+      "title": "Интерактивные экскурсии",
+      "parent_slug": "children",
+      "sort_order": 0,
+      "legacy_path": null
+    },
+    {
+      "slug": "children-thematic",
+      "title": "Тематические экскурсии",
+      "parent_slug": "children",
+      "sort_order": 1,
+      "legacy_path": null
+    },
+    {
+      "slug": "children-workshops",
+      "title": "Мастер-классы для детей",
+      "parent_slug": "children",
+      "sort_order": 2,
+      "legacy_path": null
+    },
+    {
+      "slug": "children-pushkin-card",
+      "title": "Пушкинская карта",
+      "parent_slug": "children",
+      "sort_order": 3,
+      "legacy_path": null
+    },
+    {
+      "slug": "exhibitions-guide",
+      "title": "Выставки",
+      "parent_slug": null,
+      "sort_order": 5,
+      "legacy_path": null
+    },
+    {
+      "slug": "exhibitions-current",
+      "title": "Текущие выставки",
+      "parent_slug": "exhibitions-guide",
+      "sort_order": 0,
+      "legacy_path": "/vistavky/tekushchie-vystavki"
+    },
+    {
+      "slug": "exhibitions-future",
+      "title": "Будущие выставки",
+      "parent_slug": "exhibitions-guide",
+      "sort_order": 1,
+      "legacy_path": null
+    },
+    {
+      "slug": "exhibitions-traveling",
+      "title": "Передвижные и выездные выставки",
+      "parent_slug": "exhibitions-guide",
+      "sort_order": 2,
+      "legacy_path": "/vistavky/vyezdnye-vystavki"
+    },
+    {
+      "slug": "exhibitions-past",
+      "title": "Прошедшие выставки",
+      "parent_slug": "exhibitions-guide",
+      "sort_order": 3,
+      "legacy_path": "/vistavky/proshedshie-vystavki"
+    },
+    {
+      "slug": "exhibitions-virtual",
+      "title": "Виртуальные выставки",
+      "parent_slug": "exhibitions-guide",
+      "sort_order": 4,
+      "legacy_path": "/vistavky/virtualnye-vystavki"
+    },
+    {
+      "slug": "exhibitions-pushkin-card",
+      "title": "Пушкинская карта",
+      "parent_slug": "exhibitions-guide",
+      "sort_order": 5,
+      "legacy_path": null
+    },
+    {
+      "slug": "science",
+      "title": "Наука",
+      "parent_slug": null,
+      "sort_order": 6,
+      "legacy_path": null
+    },
+    {
+      "slug": "science-conferences",
+      "title": "Семинары и конференции",
+      "parent_slug": "science",
+      "sort_order": 0,
+      "legacy_path": null
+    },
+    {
+      "slug": "science-publications",
+      "title": "Публикации",
+      "parent_slug": "science",
+      "sort_order": 1,
+      "legacy_path": null
+    },
+    {
+      "slug": "science-collection",
+      "title": "Коллекция",
+      "parent_slug": "science",
+      "sort_order": 2,
+      "legacy_path": null
+    },
+    {
+      "slug": "science-researchers",
+      "title": "Исследователям",
+      "parent_slug": "science",
+      "sort_order": 3,
+      "legacy_path": null
+    },
+    {
+      "slug": "science-materials",
+      "title": "Материалы по теме",
+      "parent_slug": "science",
+      "sort_order": 4,
+      "legacy_path": null
+    }
+  ]
+}

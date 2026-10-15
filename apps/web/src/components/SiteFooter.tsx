@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { menuGroups, museumReference, REFERENCE_DATE } from "@/data/museum-reference";
+import { museumReference, REFERENCE_DATE } from "@/data/museum-reference";
+import { menuGroups } from "@/data/navigation";
 
 export default function SiteFooter() {
   return <footer id="contacts" className="site-footer">
