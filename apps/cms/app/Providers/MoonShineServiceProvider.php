@@ -12,6 +12,7 @@ use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use App\MoonShine\Resources\MuseumEvent\MuseumEventResource;
 use App\MoonShine\Resources\MuseumEntry\MuseumEntryResource;
+use App\MoonShine\Resources\MuseumAuditRecord\MuseumAuditRecordResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 MoonShineUserRoleResource::class,
                 MuseumEventResource::class,
                 MuseumEntryResource::class,
+                MuseumAuditRecordResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\MuseumEntry;
+use App\Models\MuseumEvent;
+use App\Observers\MuseumContentAuditObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        MuseumEntry::observe(MuseumContentAuditObserver::class);
+        MuseumEvent::observe(MuseumContentAuditObserver::class);
         //
     }
 }
