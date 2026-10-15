@@ -126,3 +126,7 @@ npm run test:webkit (WebKit) либо npm run test:chrome (установлен�
 ## Интеграции до победы
 
 Семь типов интеграций из ТЗ описаны в docs/INTEGRATIONS.md. PHP hub и adapters находятся в apps/cms/app/Integrations; по умолчанию всё выключено. Публичный Next.js имеет только безопасные типизированные HTTPS-ссылки, тестируемые через npm run test:integrations. Реальные билеты и персональные заявки не подключены.
+
+## Интервью, исследование UX и шаблоны концепций
+
+Рабочий бриф в docs/research/INTERVIEW_BRIEF.md, UX методика и согласия в docs/research, пустой CSV для реальных анонимных попыток. Подсчёт после исследования: python3 scripts/score_ux.py <private_results.csv> (два раунда, минимум 5 участников каждый, порог 85%). Три пятистраничных PDF-каркаса и HTML-источники — docs/design/templates. Пересборка на Mac: cd apps/web && node scripts/build_concept_templates.mjs. Эти PDF пока не являются финальными концепциями.
