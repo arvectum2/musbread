@@ -215,6 +215,55 @@ class MuseumMediaTest extends TestCase
         }
     }
 
+    public function test_gif_upload_is_safely_flattened_to_first_frame_webp(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry();
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $response = $this->post('/admin/museum-media', [
+            'museum_entry_id' => $entry->id,
+            'alt' => 'Первый кадр исторической анимации (демо)',
+            'image' => UploadedFile::fake()->image('photo.gif', 40, 30),
+        ]);
+        $response->assertRedirect();
+        $media = MuseumMedia::firstOrFail();
+        $this->assertSame('image/webp', $media->mime);
+        $this->assertSame(IMAGETYPE_WEBP,
+            getimagesizefromstring(Storage::disk('local')->get($media->storage_path))[2]);
+    }
+
+    public function test_editor_cannot_view_modify_or_remove_media_from_other_section(): void
+    {
+        Storage::fake('local');
+        $own = \App\Models\MuseumSection::create([
+            'slug' => 'editable-images', 'title' => 'Свой', 'status' => 'published',
+        ]);
+        $restricted = \App\Models\MuseumSection::create([
+            'slug' => 'secret-images', 'title' => 'Чужой', 'status' => 'published',
+        ]);
+        $entry = $this->entry();
+        $entry->update(['museum_section_id' => $restricted->id]);
+        $role = \MoonShine\Laravel\Models\MoonshineUserRole::where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $own->editors()->attach($editor->id);
+
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine')
+            ->post('/admin/museum-media', [
+                'museum_entry_id' => $entry->id, 'alt' => 'Не показывать этому редактору',
+                'image' => UploadedFile::fake()->image('secret.png', 25, 25),
+            ])->assertRedirect();
+        $item = MuseumMedia::firstOrFail();
+
+        $this->actingAs($editor, 'moonshine');
+        $this->get('/admin/museum-media')->assertOk()->assertDontSee('Не показывать этому редактору');
+        $this->get(route('museum.media.preview', $item))->assertForbidden();
+        $this->delete(route('museum.media.destroy', $item))->assertForbidden();
+        $this->patch(route('museum.media.update', $item), [
+            'museum_entry_id' => $entry->id, 'alt' => 'Подмена чужого alt',
+        ])->assertForbidden();
+        $this->assertDatabaseCount('museum_media', 1);
+    }
+
     public function test_editor_can_access_media_library(): void
     {
         $roleId = \MoonShine\Laravel\Models\MoonshineUserRole::where('name', 'Editor')->firstOrFail()->id;

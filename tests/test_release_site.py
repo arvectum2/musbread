@@ -90,6 +90,30 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Missing or unsafe"):
             rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
 
+    def test_document_export_is_verified_and_tamper_blocks_release(self):
+        directory = self.site / "documents"
+        directory.mkdir()
+        name = hashlib.sha256(b"office-fixture").hexdigest() + ".docx"
+        document = directory / name
+        document.write_bytes(b"office-fixture")
+        meta = json.loads(self.manifest.read_text())
+        meta["files"]["documents/" + name] = {
+            "sha256": hashlib.sha256(document.read_bytes()).hexdigest(),
+            "bytes": document.stat().st_size,
+        }
+        self.manifest.write_text(json.dumps(meta))
+        rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        document.write_bytes(b"MODIFIED")
+        with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+            rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+
+    def test_unexpected_document_filename_is_rejected(self):
+        meta = json.loads(self.manifest.read_text())
+        meta["files"]["documents/../../bad.pdf"] = {"sha256": "b" * 64, "bytes": 10}
+        self.manifest.write_text(json.dumps(meta))
+        with self.assertRaisesRegex(ValueError, "Unexpected asset path"):
+            rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+
     def test_export_symlink_rejected(self):
         (self.site / "unsafe").symlink_to(self.snapshot)
         with self.assertRaises(ValueError):

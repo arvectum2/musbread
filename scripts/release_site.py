@@ -10,6 +10,9 @@ import fcntl
 from contextlib import contextmanager
 import hashlib
 import json
+import re
+
+VALID_DOCUMENT = re.compile(r"^documents/[a-f0-9]{64}\.(?:pdf|docx|xlsx)$")
 import os
 import shutil
 import tempfile
@@ -90,8 +93,9 @@ def _prepare_unlocked(source: Path, snapshot: Path, manifest: Path, dest: Path) 
     for name, info in raw["files"].items():
         if name == "published.json":
             continue
-        if not name.startswith("media/") or "/" in name[len("media/"):] or not name.endswith(".webp"):
-            raise ValueError("Unexpected media path in publication manifest")
+        valid_media = name.startswith("media/") and "/" not in name[6:] and name.endswith(".webp")
+        if not valid_media and not VALID_DOCUMENT.fullmatch(name):
+            raise ValueError("Unexpected asset path in publication manifest")
         public_file = source / name
         if not public_file.is_file() or public_file.is_symlink():
             raise ValueError("Missing or unsafe exported media file: " + name)

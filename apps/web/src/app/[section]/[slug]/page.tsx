@@ -22,6 +22,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: entry?.seo_title || entry?.title || "Материал не найден",
     description: entry?.seo_description || entry?.excerpt || undefined,
+    ...(entry?.translations?.en ? { alternates: {
+      canonical: "/" + section + "/" + slug + "/",
+      languages: { "ru-RU": "/" + section + "/" + slug + "/",
+        "en-US": "/en/" + section + "/" + slug + "/" },
+    } } : {}),
   };
 }
 
@@ -38,6 +43,8 @@ export default async function MuseumEntryPage({ params }: Props) {
     </nav>
     <span className="eyebrow">{sections[section].title} · ТЕСТОВЫЙ МАТЕРИАЛ</span>
     <h1>{entry.h1 || entry.title}</h1>
+    {entry.translations?.en && <p><Link href={"/en/" + section + "/" + slug + "/"} lang="en"
+      className="text-link">Read in English →</Link></p>}
     {entry.excerpt && <p className="lead">{entry.excerpt}</p>}
     <RichText html={entry.body} />
     {entry.media && entry.media.length > 0 && <section className="museum-gallery" aria-label="Галерея изображений">
@@ -49,6 +56,17 @@ export default async function MuseumEntryPage({ params }: Props) {
           {media.caption && <figcaption>{media.caption}</figcaption>}
         </figure>)}
       </div>
+    </section>}
+    {entry.documents && entry.documents.length > 0 && <section aria-label="Документы для скачивания" className="museum-documents">
+      <h2>Документы</h2>
+      <ul>
+        {entry.documents.map((document) => <li key={document.href}>
+          <a href={document.href} download className="text-link">
+            {document.label} ({document.format.toUpperCase()}, {Math.ceil(document.size_bytes / 1024)} КБ)
+          </a>
+        </li>)}
+      </ul>
+      <p>Файлы скачиваются на устройство. Для доступного просмотра используйте описание на этой странице.</p>
     </section>}
     <Link className="text-link" href={`/${section}/`}>← К списку материалов</Link>
   </article>;

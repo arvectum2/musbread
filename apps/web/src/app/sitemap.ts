@@ -13,6 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(usesCmsNavigation ? guidePages.map((page) => page.href) : []),
     ...Object.keys(sections).map((section) => "/" + section + "/"),
     ...events.map((event) => "/events/" + event.slug + "/"),
+    ...content.entries.filter((entry) => entry.translations?.en)
+      .flatMap((entry) => Object.entries(sections)
+        .filter(([, section]) => section.type === entry.type)
+        .map(([section]) => "/en/" + section + "/" + entry.slug + "/")),
     ...content.entries.flatMap((entry) => Object.entries(sections)
       .filter(([, section]) => section.type === entry.type)
       .map(([section]) => "/" + section + "/" + entry.slug + "/")),

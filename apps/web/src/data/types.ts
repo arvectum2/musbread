@@ -13,6 +13,19 @@ export interface MuseumPublishedImage {
   width: number;
   height: number;
 }
+export interface MuseumPublishedDocument {
+  href: string;
+  label: string;
+  format: "pdf" | "docx" | "xlsx";
+  size_bytes: number;
+}
+export interface MuseumEntryEnglish {
+  title: string;
+  excerpt: string | null;
+  body: string;
+  seo_title: string | null;
+  seo_description: string | null;
+}
 export interface MuseumEntry {
   type: "page" | "news" | "excursion" | "exhibition" | "document";
   slug: string;
@@ -26,6 +39,8 @@ export interface MuseumEntry {
   seo_description: string | null;
   sort_order: number;
   media?: MuseumPublishedImage[];
+  documents?: MuseumPublishedDocument[];
+  translations?: { en: MuseumEntryEnglish };
 }
 export interface PublishedSection {
   slug: string;

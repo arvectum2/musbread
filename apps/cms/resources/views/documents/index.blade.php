@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Документы · MusBread CMS</title>
+<style>
+body{font:1rem/1.5 system-ui;color:#172433;background:#f5f7f8;margin:0}
+main{max-width:63rem;margin:2rem auto;padding:1rem}
+section{background:white;padding:1.5rem;margin:1rem 0;border:1px solid #c6cdd2;border-radius:.6rem}
+label{display:block;margin-top:.7rem}
+input,select,button{font:inherit;padding:.45rem}
+input,select{max-width:100%}
+table{border-collapse:collapse;width:100%}td,th{padding:.65rem;border-bottom:1px solid #d7dcdf;text-align:left}
+button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:.2rem solid #1679be}
+.warning{border-left:.35rem solid #c47411;padding:.8rem;background:#fff4dc}
+</style></head>
+<body><main>
+<a href="/admin">← MoonShine</a>
+<h1>Документы материалов (закрытый контур)</h1>
+<p class="warning">Предварительная версия. Поддерживаются PDF, DOCX и XLSX до 15 МБ. Старый формат XLS требует отдельного антивирусного конвейера и пока отклоняется. Документы публикуются только вместе с утверждённым материалом. Не загружайте реальные материалы музея без прав.</p>
+@if(session('status')) <p role="status">{{ session('status') }}</p> @endif
+@if($errors->any())<div role="alert"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+<section>
+<h2>Добавить файл</h2>
+<form action="{{ route('museum.documents.store') }}" method="post" enctype="multipart/form-data">
+@csrf
+<label for="entry">Связанный материал</label>
+<select name="museum_entry_id" id="entry" required><option value="">Выберите материал</option>
+@foreach($entries as $entry)<option value="{{ $entry->id }}" @selected(old('museum_entry_id') == $entry->id)>{{ $entry->title }} ({{ $entry->slug }})</option>@endforeach
+</select>
+<label for="label">Короткое доступное название файла</label><input name="label" id="label" maxlength="180" minlength="3" value="{{ old('label') }}" required>
+<label for="document">Файл PDF / DOCX / XLSX</label><input type="file" name="document" id="document" accept=".pdf,.docx,.xlsx" required>
+<button type="submit">Сохранить в закрытой медиатеке</button>
+</form></section>
+<section><h2>Загружено: {{ $documents->total() }}</h2>
+<table><thead><tr><th>Название</th><th>Формат</th><th>Материал</th><th>Действие</th></tr></thead><tbody>
+@foreach($documents as $document)<tr>
+<td>{{ $document->label }}</td><td>{{ strtoupper($document->file_type) }} ({{ round($document->size_bytes/1024) }} КБ)</td>
+<td>{{ $document->entry?->title }}</td>
+<td><a href="{{ route('museum.documents.download', $document) }}">Скачать</a>
+<form action="{{ route('museum.documents.destroy', $document) }}" method="post">@csrf @method('DELETE')
+<button type="submit">Удалить</button></form></td>
+</tr>@endforeach
+</tbody></table>{{ $documents->links() }}</section>
+</main></body></html>

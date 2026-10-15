@@ -5,12 +5,13 @@ namespace App\Console\Commands;
 use App\Models\MuseumEvent;
 use App\Models\MuseumEntry;
 use App\Models\MuseumSection;
+use App\Support\MuseumDocumentInspector;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Console\Command;
 
 class ExportMuseumSnapshot extends Command
 {
-    protected $signature = 'museum:export {--output= : Path to generated JSON} {--manifest= : Path to integrity manifest} {--media-output-dir= : Destination for static WebP assets}';
+    protected $signature = 'museum:export {--output= : Path to generated JSON} {--manifest= : Path to integrity manifest} {--media-output-dir= : Destination for static WebP assets} {--document-output-dir= : Destination for downloadable approved documents}';
     protected $description = 'Publish approved CMS content into an offline static-site snapshot';
 
     public function handle(): int
@@ -19,6 +20,9 @@ class ExportMuseumSnapshot extends Command
         $manifest = $this->option('manifest') ?: base_path('../web/public/snapshot-manifest.json');
         $mediaDir = $this->option('media-output-dir') ?: base_path('../web/public/media');
         $mediaFiles = [];
+        $documentDir = $this->option('document-output-dir') ?: base_path('../web/public/documents');
+        $documentFiles = [];
+        $inspector = app(MuseumDocumentInspector::class);
 
         $events = MuseumEvent::query()
             ->public()
@@ -61,11 +65,11 @@ class ExportMuseumSnapshot extends Command
             ->orderBy('type')
             ->orderBy('sort_order')
             ->orderBy('slug')
-            ->with(['media', 'section'])
+            ->with(['media', 'documents', 'section'])
             ->get()
             ->filter(static fn (MuseumEntry $entry) =>
                 $entry->museum_section_id === null || in_array($entry->museum_section_id, $approvedIds, true))
-            ->map(function (MuseumEntry $entry) use (&$mediaFiles, $mediaDir): array {
+            ->map(function (MuseumEntry $entry) use (&$mediaFiles, &$documentFiles, $mediaDir, $documentDir, $inspector): array {
                 $images = [];
                 foreach ($entry->media as $image) {
                     $raw = Storage::disk('local')->get($image->storage_path);
@@ -96,6 +100,40 @@ class ExportMuseumSnapshot extends Command
                         'width' => $image->width, 'height' => $image->height,
                     ];
                 }
+                $documents = [];
+                foreach ($entry->documents as $document) {
+                    $path = Storage::disk('local')->path($document->storage_path);
+                    if (! is_file($path) || hash_file('sha256', $path) !== $document->sha256
+                        || filesize($path) !== $document->size_bytes
+                        || ! in_array($document->file_type, ['pdf', 'docx', 'xlsx'], true)) {
+                        throw new \RuntimeException('Document checksum or format invalid: '.$document->id);
+                    }
+                    $inspector->verify($path, $document->file_type);
+                    if (! preg_match('/^[a-f0-9]{64}$/D', $document->sha256)) {
+                        throw new \RuntimeException('Invalid document digest');
+                    }
+                    if (! is_dir($documentDir) && ! mkdir($documentDir, 0755, true) && ! is_dir($documentDir)) {
+                        throw new \RuntimeException('Cannot create static document directory');
+                    }
+                    $name = $document->sha256.'.'.$document->file_type;
+                    $target = rtrim($documentDir, '/').'/'.$name;
+                    if (! is_file($target) || hash_file('sha256', $target) !== $document->sha256) {
+                        $temp = $target.'.tmp.'.getmypid();
+                        if (! copy($path, $temp) || ! rename($temp, $target)) {
+                            throw new \RuntimeException('Cannot publish document');
+                        }
+                    }
+                    $documentFiles['documents/'.$name] = [
+                        'sha256' => $document->sha256, 'bytes' => $document->size_bytes,
+                    ];
+                    $documents[] = [
+                        'href' => '/documents/'.$name,
+                        'label' => $document->label,
+                        'format' => $document->file_type,
+                        'size_bytes' => $document->size_bytes,
+                    ];
+                }
+
                 return array_filter([
                 'type' => $entry->type,
                 'slug' => $entry->slug,
@@ -109,9 +147,20 @@ class ExportMuseumSnapshot extends Command
                 'seo_description' => $entry->seo_description,
                 'sort_order' => $entry->sort_order,
                 'media' => $images,
+                'documents' => $documents,
+                'translations' => trim((string) $entry->title_en) !== ''
+                    && trim((string) $entry->body_en) !== '' ? [
+                        'en' => [
+                            'title' => $entry->title_en,
+                            'excerpt' => $entry->excerpt_en,
+                            'body' => $entry->body_en,
+                            'seo_title' => $entry->seo_title_en,
+                            'seo_description' => $entry->seo_description_en,
+                        ],
+                    ] : null,
             ], static function ($value, $key): bool {
-                if ($key === 'media') return count($value) > 0;
-                if ($key === 'section_slug') return $value !== null;
+                if ($key === 'media' || $key === 'documents') return count($value) > 0;
+                if ($key === 'section_slug' || $key === 'translations') return $value !== null;
                 return true;
             }, ARRAY_FILTER_USE_BOTH);
             })->values()->all();
@@ -121,6 +170,18 @@ class ExportMuseumSnapshot extends Command
         if (is_dir($mediaDir)) {
             foreach (glob(rtrim($mediaDir, '/').'/*.webp') ?: [] as $existing) {
                 if (! array_key_exists('media/'.basename($existing), $mediaFiles)) {
+                    unlink($existing);
+                }
+            }
+        }
+
+        // Withdraw generated documents removed by the editor or hidden by draft status.
+        // Never touch arbitrary files beyond the content-addressed export directory.
+        if (is_dir($documentDir)) {
+            foreach (glob(rtrim($documentDir, '/').'/*') ?: [] as $existing) {
+                if (is_file($existing)
+                    && preg_match('/^[a-f0-9]{64}\\.(?:pdf|docx|xlsx)$/D', basename($existing))
+                    && ! array_key_exists('documents/'.basename($existing), $documentFiles)) {
                     unlink($existing);
                 }
             }
@@ -152,7 +213,7 @@ class ExportMuseumSnapshot extends Command
         $payload = json_encode($normalize($data), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n";
         $audit = [
             'schema_version' => 1,
-            'files' => array_merge(['published.json' => ['sha256' => hash('sha256', $payload), 'bytes' => strlen($payload)]], $mediaFiles),
+            'files' => array_merge(['published.json' => ['sha256' => hash('sha256', $payload), 'bytes' => strlen($payload)]], $mediaFiles, $documentFiles),
             'event_count' => count($events),
             'entry_count' => count($entries),
         ];

@@ -12,6 +12,29 @@ class ArtifactAuditTests(unittest.TestCase):
         self.root = Path(self.folder.name)
         (self.root / "index.html").write_text("<h1>Public</h1>", encoding="utf-8")
 
+    def test_document_with_valid_content_address_passes_manifest_check(self):
+        import hashlib
+        import json
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "index.html").write_text("<html></html>")
+            folder = root / "documents"
+            folder.mkdir()
+            raw = b"synthetic document sample"
+            name = hashlib.sha256(raw).hexdigest() + ".pdf"
+            (folder / name).write_bytes(raw)
+            (root / "snapshot-manifest.json").write_text(json.dumps({
+                "files": {"documents/" + name: {
+                    "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)
+                }}
+            }))
+            self.assertGreater(audit(root)["files_checked"], 1)
+            (folder / name).write_bytes(b"tampered")
+            with self.assertRaisesRegex(ValueError, "integrity check failed"):
+                audit(root)
+
     def test_simple_static_export_passes(self):
         (self.root / "museum").mkdir()
         (self.root / "museum/index.html").write_text("Museum", encoding="utf-8")

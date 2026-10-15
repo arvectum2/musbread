@@ -8,6 +8,7 @@ use App\Models\MuseumEvent;
 use App\Models\MuseumMedia;
 use App\Models\MuseumSection;
 use App\Models\MuseumRequest;
+use App\Models\MuseumDocument;
 use App\Observers\MuseumContentAuditObserver;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         MuseumMedia::observe(MuseumContentAuditObserver::class);
         MuseumSection::observe(MuseumContentAuditObserver::class);
         MuseumRequest::observe(MuseumContentAuditObserver::class);
+        MuseumDocument::observe(MuseumContentAuditObserver::class);
         //
     }
 }

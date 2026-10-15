@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MuseumEntry;
 use App\Models\MuseumMedia;
+use App\Support\MuseumSectionAccess;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,11 +16,23 @@ use MoonShine\Laravel\MoonShineAuth;
 
 final class MuseumMediaController extends Controller
 {
+    private function requireEntry(MuseumEntry $entry): void
+    {
+        if (! MuseumSectionAccess::mayEdit(MuseumSectionAccess::user(), $entry->museum_section_id)) {
+            throw new AuthorizationException('Нет доступа к медиатеке этого раздела.');
+        }
+    }
+
     public function index(): \Illuminate\Contracts\View\View
     {
+        $user = MuseumSectionAccess::user();
+        if ($user === null) throw new AuthorizationException();
+        $entries = MuseumEntry::query()->editableBy($user)
+            ->orderBy('title')->get(['id', 'title', 'slug', 'status']);
         return view('media.index', [
-            'entries' => MuseumEntry::query()->orderBy('title')->get(['id', 'title', 'slug', 'status']),
-            'media' => MuseumMedia::query()->with('entry:id,title,status')->latest()->paginate(30),
+            'entries' => $entries,
+            'media' => MuseumMedia::query()->with('entry:id,title,status')
+                ->whereIn('museum_entry_id', $entries->pluck('id'))->latest()->paginate(30),
         ]);
     }
 
@@ -28,14 +42,16 @@ final class MuseumMediaController extends Controller
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
             'alt' => ['required', 'string', 'min:3', 'max:255'],
             'caption' => ['nullable', 'string', 'max:255'],
-            'image' => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,webp', 'max:5120',
+            'image' => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,webp,gif', 'max:5120',
                 'dimensions:max_width=4096,max_height=4096'],
         ]);
 
+        $entry = MuseumEntry::findOrFail($validated['museum_entry_id']);
+        $this->requireEntry($entry);
         $upload = $request->file('image');
         $raw = file_get_contents($upload->getRealPath());
         $details = @getimagesizefromstring($raw);
-        $allowed = [IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_WEBP];
+        $allowed = [IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_WEBP, IMAGETYPE_GIF];
         if ($details === false || ! in_array($details[2], $allowed, true)) {
             throw ValidationException::withMessages(['image' => 'Недопустимый формат изображения.']);
         }
@@ -47,6 +63,12 @@ final class MuseumMediaController extends Controller
         $source = @imagecreatefromstring($raw);
         if ($source === false) {
             throw ValidationException::withMessages(['image' => 'Изображение повреждено.']);
+        }
+        // GIFs are palette-based; flatten to a true-color first frame
+        // because GD WebP refuses indexed images. Animation is NOT preserved.
+        if (imageistruecolor($source) === false && ! imagepalettetotruecolor($source)) {
+            imagedestroy($source);
+            throw ValidationException::withMessages(['image' => 'Не удалось обработать цветовую палитру.']);
         }
         // Decode and re-encode: discard EXIF, scripts, metadata and original name.
         ob_start();
@@ -91,6 +113,8 @@ final class MuseumMediaController extends Controller
             'caption' => ['nullable', 'string', 'max:255'],
         ]);
 
+        $this->requireEntry($media->entry);
+        $this->requireEntry(MuseumEntry::findOrFail($validated['museum_entry_id']));
         $media->update($validated);
 
         return redirect()->route('museum.media.index')->with('status', 'Подпись и привязка обновлены.');
@@ -98,6 +122,7 @@ final class MuseumMediaController extends Controller
 
     public function destroy(MuseumMedia $media): RedirectResponse
     {
+        $this->requireEntry($media->entry);
         $path = $media->storage_path;
         $media->delete();
         Storage::disk('local')->delete($path);
@@ -107,6 +132,7 @@ final class MuseumMediaController extends Controller
 
     public function preview(MuseumMedia $media): Response
     {
+        $this->requireEntry($media->entry);
         if (! Storage::disk('local')->exists($media->storage_path)) {
             abort(404);
         }

@@ -20,6 +20,7 @@ final class ThrottleMuseumWrites
         $budget = match (true) {
             $request->isMethod('POST') && $request->is('admin/authenticate') => ['login', 8],
             $request->isMethod('POST') && $request->is('admin/museum-media') => ['upload', 30],
+            $request->isMethod('POST') && $request->is('admin/museum-documents') => ['document-upload', 15],
             default => null,
         };
 

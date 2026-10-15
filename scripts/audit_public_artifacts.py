@@ -6,10 +6,13 @@ Pre-award static build check, *not* a substitute for penetration testing.
 import argparse
 import hashlib
 import json
+import re
+
+VALID_DOCUMENT = re.compile(r"^documents/[a-f0-9]{64}\.(?:pdf|docx|xlsx)$")
 from pathlib import Path
 
 ALLOWED = {".html", ".js", ".css", ".txt", ".json", ".ico", ".svg",
-           ".webp", ".png", ".jpg", ".jpeg", ".xml", ".pdf", ".woff", ".woff2"}
+           ".webp", ".png", ".jpg", ".jpeg", ".xml", ".pdf", ".docx", ".xlsx", ".woff", ".woff2"}
 FORBIDDEN_DIRS = {"admin", "api", "storage", "vendor", "database", "node_modules", ".git"}
 FORBIDDEN_NAMES = {
     "artisan", "composer.json", "composer.lock", "package-lock.json",
@@ -49,7 +52,8 @@ def audit(root: Path) -> dict[str, int]:
         for name, meta in data["files"].items():
             if name == "published.json":
                 continue  # JSON is compiled into HTML/JS, not shipped as a standalone file.
-            if not name.startswith("media/") or "/" in name[6:] or not name.endswith(".webp"):
+            valid_media = name.startswith("media/") and "/" not in name[6:] and name.endswith(".webp")
+            if not valid_media and not VALID_DOCUMENT.fullmatch(name):
                 raise ValueError("Unexpected path in CMS manifest: " + name)
             media = root / name
             if not media.is_file() or media.is_symlink():
