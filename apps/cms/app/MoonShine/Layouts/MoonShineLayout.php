@@ -11,6 +11,7 @@ use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
 use App\MoonShine\Resources\MuseumEvent\MuseumEventResource;
 use MoonShine\MenuManager\MenuItem;
+use App\MoonShine\Resources\MuseumEntry\MuseumEntryResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -31,6 +32,7 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
             MenuItem::make(MuseumEventResource::class, 'События'),
+            MenuItem::make(MuseumEntryResource::class, 'Материалы музея'),
         ];
     }
 

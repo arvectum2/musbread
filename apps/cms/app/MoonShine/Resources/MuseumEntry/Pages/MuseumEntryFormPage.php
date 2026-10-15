@@ -1,0 +1,54 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\MoonShine\Resources\MuseumEntry\Pages;
+
+use App\Models\MuseumEntry;
+use Illuminate\Validation\Rule;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
+use MoonShine\Laravel\Pages\Crud\FormPage;
+use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Date;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Select;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
+
+final class MuseumEntryFormPage extends FormPage
+{
+    protected function fields(): iterable
+    {
+        return [
+            Box::make([
+                ID::make(),
+                Select::make('Раздел', 'type')
+                    ->options(MuseumEntry::TYPES)->required(),
+                Text::make('Название', 'title')->required(),
+                Text::make('URL (латиница, через дефис)', 'slug')->required(),
+                Text::make('H1', 'h1'),
+                Text::make('Родительский раздел (slug)', 'parent_slug'),
+                Textarea::make('Анонс', 'excerpt'),
+                Textarea::make('Основной текст', 'body')->required(),
+                Select::make('Статус', 'status')
+                    ->options(['draft' => 'Черновик', 'published' => 'Опубликовано'])
+                    ->default('draft')->required(),
+                Date::make('Публиковать с (дата и время)', 'published_at')->withTime()->nullable(),
+                Text::make('SEO-заголовок', 'seo_title'),
+                Textarea::make('SEO-описание', 'seo_description'),
+            ]),
+        ];
+    }
+
+    protected function rules(DataWrapperContract $item): array
+    {
+        return [
+            'type' => ['required', Rule::in(array_keys(MuseumEntry::TYPES))],
+            'slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('museum_entries', 'slug')->ignore($item->getKey())],
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string'],
+            'status' => ['required', 'in:draft,published'],
+            'published_at' => ['nullable', 'date'],
+        ];
+    }
+}
