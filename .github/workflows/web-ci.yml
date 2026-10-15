@@ -16,6 +16,17 @@ jobs:
           python-version: '3.12'
       - run: python3 -m pip install "xlrd==2.0.2"
       - run: python3 -m unittest discover -s tests -v
+      - name: Pre-award delivery template and blocker audit
+        run: |
+          python3 scripts/audit_delivery_readiness.py --require-complete-drafts             --json /tmp/musbread-delivery-readiness.json             --markdown /tmp/musbread-delivery-readiness.md
+      - name: Preserve pre-award delivery audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-delivery-readiness-evidence
+          path: |
+            /tmp/musbread-delivery-readiness.json
+            /tmp/musbread-delivery-readiness.md
+          retention-days: 7
       - run: python3 scripts/publish_snapshot.py --check
       - name: Prepare deterministic pre-award handoff sample
         run: |
@@ -57,6 +68,19 @@ jobs:
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'
+      - name: Check ALL static HTML landmarks, language, document hashes and alt attributes
+        run: |
+          python3 ../../scripts/audit_accessibility_content.py out             --snapshot src/data/published.json             --json /tmp/musbread-static-content-audit.json             --markdown /tmp/musbread-static-content-audit.md
+      - name: Preserve accessibility audit (not ГОСТ/PDF-UA certification)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-static-accessibility-audit
+          path: |
+            /tmp/musbread-static-content-audit.json
+            /tmp/musbread-static-content-audit.md
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Block premature search indexing
         run: python3 ../../scripts/check_preaward_seo.py out
       - name: Install headless Chromium (Playwright)

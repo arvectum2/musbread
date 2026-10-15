@@ -79,3 +79,7 @@ Playwright Chromium и WebKit проходят 10/10 тестов, включа�
 ## Infrastructure and secret-gate checks
 
 CP-18: публичный и закрытый Nginx проходят nginx -t на Linux runner, проверяются unit-файлы, timeout и отсутствие публичного FastCGI или proxy в коде конфигурации. CP-19: Python gate проверяет все статические файлы на серверные артефакты, секреты и контрольные суммы экспортированного медиа. Composer и npm production audit автоматически запускаются в CI. Проверки недостаточны для реального пентеста и требований на реальной сети музея.
+
+## CP-28D: статический аудит и исправление 404
+
+Скрипт scripts/audit_accessibility_content.py проверяет все HTML и CMS-выгрузку, тесты tests/test_audit_accessibility_content.py подкладывают заведомые ошибки. Исправлена глобальная 404 (lang, main, заголовок, noindex, skip-link); Playwright/axe проверяют её. Отчёт не удостоверяет ГОСТ, PDF/UA или конечную доступность музейных сервисов.
