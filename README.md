@@ -98,3 +98,7 @@ php artisan serve --host=127.0.0.1 --port=8766
 Скрипт `python3 scripts/release_site.py verify` проверяет содержимое immutable release; `rollback` отказывает при несовпадении хешей. Операции защищены файловой блокировкой.
 
 Laravel с опциональной очередью (`MUSEUM_USE_PUBLISH_QUEUE=true`) сериализует запросы, хранит журнал и периодически восстанавливает неактуальные queued/running состояния командой `php artisan museum:recover-stale-publications`. Постоянно запущенный worker *не включён*: он требуется только на согласованной инфраструктуре заказчика. Перед включением соблюдать рабочий timeout <=600 секунд и DB_QUEUE_RETRY_AFTER >=900 секунд.
+
+## Сквозной browser-to-static E2E
+
+Запуск: python3 scripts/qa_cms_browser.py. Создаётся временная MoonShine CMS, браузер отправляет новость, событие и черновик, затем из экспорта в отдельной временной копии Next.js строится реальный HTML и WebP. Проверяется отсутствие закрытых записей. Основной frontend не затрагивается; webpack нужен для временной директории с симлинком node_modules.
