@@ -102,3 +102,12 @@ Laravel с опциональной очередью (`MUSEUM_USE_PUBLISH_QUEUE=
 ## Сквозной browser-to-static E2E
 
 Запуск: python3 scripts/qa_cms_browser.py. Создаётся временная MoonShine CMS, браузер отправляет новость, событие и черновик, затем из экспорта в отдельной временной копии Next.js строится реальный HTML и WebP. Проверяется отсутствие закрытых записей. Основной frontend не затрагивается; webpack нужен для временной директории с симлинком node_modules.
+
+## CSP и rate-limit
+
+Строгая для inline-JavaScript CSP автоматически вычисляется командой:
+    python3 scripts/build_csp.py apps/web/out --output /tmp/musbread-csp.conf
+
+Скрипт sh scripts/demo_publish.sh помещает build-specific CSP в deploy/local/csp.generated.conf (не публичный каталог). В реальном контуре конфигурацию Nginx необходимо установить вместе с релизом и перезагрузить Nginx, включая rollback. Порядок и ограничения: docs/SECURITY.md и infra/README.md.
+
+Laravel ограничивает POST входа MoonShine и загрузки файлов; Nginx содержит дополнительный шаблон ограничения. Пентест и реальные доступы музея не выполнялись.

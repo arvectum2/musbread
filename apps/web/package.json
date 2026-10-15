@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:e2e": "playwright test",
+    "test:e2e": "python3 ../../scripts/build_csp.py out --output .csp-header.txt && playwright test",
     "test:cms": "playwright test --config playwright.cms.config.ts",
     "test:webkit": "playwright test --config playwright.webkit.config.ts"
   },

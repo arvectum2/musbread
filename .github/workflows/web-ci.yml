@@ -152,8 +152,20 @@ jobs:
         run: python3 -m unittest tests/test_infra_templates.py -v
       - name: Parse both Linux Nginx examples
         run: |
+          mkdir -p /tmp/musbread-csp-fixture
+          printf '<html><script>window.__test = true;</script></html>' > /tmp/musbread-csp-fixture/index.html
+          python3 scripts/build_csp.py /tmp/musbread-csp-fixture --output /tmp/musbread-csp.conf
+          sudo cp /tmp/musbread-csp.conf /etc/nginx/musbread-csp.conf
           sudo apt-get update -qq
           sudo apt-get install -y -qq nginx
+          sudo cp infra/nginx/http-rates.conf /etc/nginx/conf.d/musbread-rates.conf
           sudo cp infra/nginx/public-static.conf /etc/nginx/sites-enabled/musbread-public.conf
           sudo cp infra/nginx/private-cms.conf /etc/nginx/sites-enabled/musbread-private.conf
           sudo nginx -t
+          sudo mkdir -p /srv/musbread/public/current
+          sudo cp /tmp/musbread-csp-fixture/index.html /srv/musbread/public/current/index.html
+          sudo nginx
+          curl -fsSI http://127.0.0.1:18080/ | grep -qi 'content-security-policy:'
+          curl -fsSI http://127.0.0.1:18080/ | grep -qi 'x-content-type-options: nosniff'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/admin/login)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/test.php)" = 404

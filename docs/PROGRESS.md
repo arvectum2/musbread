@@ -43,4 +43,4 @@
 
 ## CP-19 — security baseline (issue #11)
 
-Добавлен scripts/audit_public_artifacts.py, который отклоняет секреты, серверные файлы и неподтверждённые медиа в публичном out. Composer audit и production npm audit включены в CI. CSP и реальный пентест остаются отдельными задачами после согласования инфраструктуры.
+Добавлен scripts/audit_public_artifacts.py. Composer audit и production npm audit включены в CI. CSP из SHA-256 inline-JS и HTTP rate-limit POST (8/мин login, 30/мин upload) проверены; Playwright Chromium/WebKit, CSRF, SQLi-like slug и HTML sanitization. Продакшен TLS/firewall/IP и независимый pentest ещё не проведены.

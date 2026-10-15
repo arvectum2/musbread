@@ -12,12 +12,27 @@ class InfraTemplateTests(unittest.TestCase):
         self.assertNotIn("proxy_pass", "\n".join(line for line in config.splitlines() if not line.lstrip().startswith("#")))
         self.assertIn("return 404;", config)
         self.assertIn("root /srv/musbread/public/current", config)
+        self.assertIn("include /etc/nginx/musbread-csp.conf;", config)
+        # A location-level add_header would silently mask inherited CSP.
+        for section in config.split("location /_next/static/")[1:]:
+            self.assertNotIn("add_header", "\n".join(
+                line for line in section.split("location /media/")[0].splitlines()
+                if not line.strip().startswith("#")
+            ))
 
     def test_private_cms_is_loopback_and_uses_php_fpm(self):
         config = (ROOT / "infra/nginx/private-cms.conf").read_text()
         self.assertIn("listen 127.0.0.1:18082;", config)
         self.assertIn("fastcgi_pass unix:/run/php/php8.4-fpm.sock;", config)
         self.assertIn("client_max_body_size 6m;", config)
+        self.assertIn("limit_req zone=musbread_auth burst=5 nodelay;", config)
+        self.assertIn("limit_req zone=musbread_upload burst=15 nodelay;", config)
+        self.assertIn("frame-ancestors 'none'", config)
+        rates = (ROOT / "infra/nginx/http-rates.conf").read_text()
+        self.assertIn("map $request_method $musbread_write_ip", rates)
+        self.assertIn("POST $binary_remote_addr;", rates)
+        self.assertIn("rate=8r/m", rates)
+        self.assertIn("rate=30r/m", rates)
 
     def test_worker_timeout_must_be_lower_than_retry_window(self):
         queue = (ROOT / "infra/systemd/musbread-publisher.service").read_text()

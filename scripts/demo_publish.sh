@@ -24,11 +24,13 @@ else
   php_binary="$(command -v php)"
 fi
 
-echo "[1/4] Export approved CMS content (private)"
+echo "[1/5] Export approved CMS content (private)"
 (cd apps/cms && "$php_binary" artisan museum:export)
-echo "[2/4] Build static HTML"
+echo "[2/5] Build static HTML"
 (cd apps/web && NEXT_TELEMETRY_DISABLED=1 npm run build)
-echo "[3/4] Validate release and atomically switch current"
+echo "[3/5] Generate strict, build-specific CSP for a future approved Nginx deployment"
+python3 scripts/build_csp.py apps/web/out --output deploy/local/csp.generated.conf
+echo "[4/5] Validate release and atomically switch current"
 python3 scripts/release_site.py deploy
-echo "[4/4] Verify all released checksums"
+echo "[5/5] Verify all released checksums"
 python3 scripts/release_site.py verify

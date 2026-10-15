@@ -30,6 +30,20 @@ class MuseumEntryEditorTest extends TestCase
         $this->assertSame(0, MuseumEntry::public()->count());
     }
 
+    public function test_sql_injection_like_slug_is_rejected_before_persistence(): void
+    {
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine')
+            ->post('/admin/resource/museum-entry-resource/crud', [
+                'type' => 'news',
+                'title' => 'SQL injection smoke',
+                'slug' => "x' OR 1=1--",
+                'body' => 'Placeholder',
+                'status' => 'draft',
+            ])->assertRedirect();
+
+        $this->assertSame(0, MuseumEntry::count());
+    }
+
     public function test_invalid_type_cannot_be_published_from_moonshine(): void
     {
         $this->actingAs(MoonshineUser::factory()->create(), 'moonshine')

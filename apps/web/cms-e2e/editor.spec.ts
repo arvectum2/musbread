@@ -9,6 +9,13 @@ test("реальный вход и редактор материалов в Moon
   await page.locator('button[type="submit"]').click();
   await expect(page).toHaveURL(/\/admin/);
 
+  // A real HTTP request made with the authenticated session but without
+  // Laravel's CSRF token must be rejected before touching protected media.
+  const csrfDenied = await page.request.post("/admin/museum-media", {
+    data: { alt: "No CSRF token", museum_entry_id: "1" },
+  });
+  expect(csrfDenied.status(), "Private media POST requires a CSRF token").toBe(419);
+
   await page.goto("/admin/resource/museum-entry-resource/museum-entry-form-page");
   await expect(page.getByText("Основной текст")).toBeVisible();
   await expect(page.locator("iframe.tox-edit-area__iframe")).toBeVisible();
