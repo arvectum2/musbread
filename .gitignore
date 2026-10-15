@@ -13,3 +13,4 @@ playwright-report/
 /__pycache__/
 
 test-results/
+\n# Generated media assets are private until explicitly approved and exported\n/apps/web/public/media/\n/apps/cms/storage/app/private/museum/\n

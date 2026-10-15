@@ -39,6 +39,18 @@ def prepare(source: Path, snapshot: Path, manifest: Path, dest: Path) -> str:
     expected = raw["files"]["published.json"]["sha256"]
     if digest(snapshot) != expected:
         raise ValueError("Public data SHA256 does not match manifest")
+    # Independently authenticate each media file announced by the CMS exporter.
+    # Missing or replaced static assets invalidate the entire release.
+    for name, info in raw["files"].items():
+        if name == "published.json":
+            continue
+        if not name.startswith("media/") or "/" in name[len("media/"):] or not name.endswith(".webp"):
+            raise ValueError("Unexpected media path in publication manifest")
+        public_file = source / name
+        if not public_file.is_file() or public_file.is_symlink():
+            raise ValueError("Missing or unsafe exported media file: " + name)
+        if public_file.stat().st_size != info["bytes"] or digest(public_file) != info["sha256"]:
+            raise ValueError("Exported media checksum mismatch: " + name)
     checksums = files_with_hashes(source)
     body = json.dumps(checksums, sort_keys=True, separators=(",", ":")).encode("utf-8")
     release_id = hashlib.sha256(body).hexdigest()[:16]

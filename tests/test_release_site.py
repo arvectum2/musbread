@@ -36,6 +36,31 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
 
+    def test_tampered_media_asset_rejected_before_release_switch(self):
+        media = self.site / "media"
+        media.mkdir()
+        item = media / ("a" * 64 + ".webp")
+        item.write_bytes(b"safe-public-webp-test")
+        meta = json.loads(self.manifest.read_text())
+        meta["files"]["media/" + item.name] = {
+            "sha256": hashlib.sha256(item.read_bytes()).hexdigest(),
+            "bytes": item.stat().st_size,
+        }
+        self.manifest.write_text(json.dumps(meta))
+        release_id = rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        self.assertEqual((self.dest / "current/media" / item.name).read_bytes(), item.read_bytes())
+        self.assertTrue(release_id)
+        item.write_bytes(b"altered-after-export")
+        with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+            rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+
+    def test_missing_media_asset_rejected(self):
+        meta = json.loads(self.manifest.read_text())
+        meta["files"]["media/" + "b" * 64 + ".webp"] = {"sha256": "b" * 64, "bytes": 8}
+        self.manifest.write_text(json.dumps(meta))
+        with self.assertRaisesRegex(ValueError, "Missing or unsafe"):
+            rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+
     def test_export_symlink_rejected(self):
         (self.site / "unsafe").symlink_to(self.snapshot)
         with self.assertRaises(ValueError):

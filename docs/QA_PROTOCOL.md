@@ -13,7 +13,7 @@
 | QA-05 | Сквозной экспорт CMS, сборка Next, версия и rollback | GitHub CI integration |
 | QA-06 | Browser UI: главная, новости, афиша, поиск и mobile | Chromium Playwright |
 | QA-07 | Автоматическая проверка доступности четырёх страниц | axe-core: нет serious/critical при пройденных тестах |
-| QA-08 | Скриншоты desktop и mobile | Playwright PNG, в CI артефакт без реальных данных |
+| QA-08 | Скриншоты desktop и mobile | Playwright PNG, в CI артефакт без реальных данных |\n| QA-09 | Закрытая медиатека | Feature tests: доступ, MIME, размеры, WebP перекодирование, alt и редактирование, удаление |\n| QA-10 | Медиа-публикация | Только approved entry, SHA-256, отзыв ранее опубликованного изображения и блокировка повреждённого файла |\n| QA-11 | Audit | CRUD записывает actor_id и имена полей, без текста; только admin read-only; недоступно публично |
 
 ## Как воспроизвести
 

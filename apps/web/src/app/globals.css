@@ -69,3 +69,10 @@ h1,h2,h3,p{margin-top:0}h1,h2{font-weight:690;line-height:1.1;letter-spacing:-.0
 @media(max-width:650px){.museum-list{grid-template-columns:1fr}}
 
 .rich-text{white-space:normal}.rich-text p{margin-bottom:1rem}.rich-text ul,.rich-text ol{padding-left:1.75rem}.rich-text a{text-decoration:underline;color:var(--green)}
+
+
+.museum-gallery { margin-top:3rem; }
+.museum-gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1rem; }
+.museum-gallery-grid figure { margin:0; border:1px solid var(--line); background:#fff; padding:.75rem; }
+.museum-gallery-grid img { width:100%; height:auto; max-height:360px; object-fit:contain; }
+.museum-gallery-grid figcaption { margin-top:.7rem; color:var(--mute); font-size:.93rem; }

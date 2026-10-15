@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\MuseumHtmlSanitizer;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MuseumEntry extends Model
 {
@@ -40,6 +41,11 @@ class MuseumEntry extends Model
                 $entry->published_at = now();
             }
         });
+    }
+
+    public function media(): HasMany
+    {
+        return $this->hasMany(MuseumMedia::class, 'museum_entry_id');
     }
 
     public function scopePublic(Builder $query): Builder

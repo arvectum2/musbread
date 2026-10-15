@@ -34,6 +34,7 @@ final class MoonShineLayout extends AppLayout
             ...parent::menu(),
             MenuItem::make(MuseumEventResource::class, 'События'),
             MenuItem::make(MuseumEntryResource::class, 'Материалы музея'),
+            MenuItem::make('/admin/museum-media', 'Медиатека'),
             MenuItem::make(MuseumAuditRecordResource::class, 'Журнал изменений'),
         ];
     }

@@ -6,6 +6,13 @@ export interface MuseumEvent {
   excerpt: string;
   body: string;
 }
+export interface MuseumPublishedImage {
+  src: string;
+  alt: string;
+  caption: string | null;
+  width: number;
+  height: number;
+}
 export interface MuseumEntry {
   type: "page" | "news" | "excursion" | "exhibition" | "document";
   slug: string;
@@ -17,6 +24,7 @@ export interface MuseumEntry {
   seo_title: string | null;
   seo_description: string | null;
   sort_order: number;
+  media?: MuseumPublishedImage[];
 }
 export interface MuseumSnapshot {
   schema_version: number;

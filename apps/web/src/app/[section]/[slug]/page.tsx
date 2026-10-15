@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { content, findEntry, isMuseumSection, sections } from "@/data/content";
 import RichText from "@/components/RichText";
+import Image from "next/image";
 
 type Props = { params: Promise<{ section: string; slug: string }> };
 
@@ -39,6 +40,16 @@ export default async function MuseumEntryPage({ params }: Props) {
     <h1>{entry.h1 || entry.title}</h1>
     {entry.excerpt && <p className="lead">{entry.excerpt}</p>}
     <RichText html={entry.body} />
+    {entry.media && entry.media.length > 0 && <section className="museum-gallery" aria-label="Галерея изображений">
+      <h2>Галерея</h2>
+      <div className="museum-gallery-grid">
+        {entry.media.map((media, index) => <figure key={media.src + "-" + index}>
+          <Image src={media.src} width={media.width} height={media.height}
+            unoptimized alt={media.alt} loading="lazy" />
+          {media.caption && <figcaption>{media.caption}</figcaption>}
+        </figure>)}
+      </div>
+    </section>}
     <Link className="text-link" href={`/${section}/`}>← К списку материалов</Link>
   </article>;
 }

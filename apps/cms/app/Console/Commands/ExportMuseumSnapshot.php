@@ -4,17 +4,20 @@ namespace App\Console\Commands;
 
 use App\Models\MuseumEvent;
 use App\Models\MuseumEntry;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Console\Command;
 
 class ExportMuseumSnapshot extends Command
 {
-    protected $signature = 'museum:export {--output= : Path to generated JSON} {--manifest= : Path to integrity manifest}';
+    protected $signature = 'museum:export {--output= : Path to generated JSON} {--manifest= : Path to integrity manifest} {--media-output-dir= : Destination for static WebP assets}';
     protected $description = 'Publish approved CMS content into an offline static-site snapshot';
 
     public function handle(): int
     {
         $output = $this->option('output') ?: base_path('../web/src/data/published.json');
         $manifest = $this->option('manifest') ?: base_path('../web/public/snapshot-manifest.json');
+        $mediaDir = $this->option('media-output-dir') ?: base_path('../web/public/media');
+        $mediaFiles = [];
 
         $events = MuseumEvent::query()
             ->public()
@@ -33,8 +36,40 @@ class ExportMuseumSnapshot extends Command
             ->orderBy('type')
             ->orderBy('sort_order')
             ->orderBy('slug')
+            ->with('media')
             ->get()
-            ->map(fn (MuseumEntry $entry) => [
+            ->map(function (MuseumEntry $entry) use (&$mediaFiles, $mediaDir): array {
+                $images = [];
+                foreach ($entry->media as $image) {
+                    $raw = Storage::disk('local')->get($image->storage_path);
+                    if (! is_string($raw) || hash('sha256', $raw) !== $image->sha256
+                        || strlen($raw) !== $image->size_bytes
+                        || (@getimagesizefromstring($raw)[2] ?? null) !== IMAGETYPE_WEBP) {
+                        throw new \RuntimeException('Uploaded image checksum or format invalid: '.$image->id);
+                    }
+                    if (! is_dir($mediaDir) && ! mkdir($mediaDir, 0755, true) && ! is_dir($mediaDir)) {
+                        throw new \RuntimeException('Cannot create public media directory');
+                    }
+                    if (! preg_match('/^[a-f0-9]{64}$/D', $image->sha256)) {
+                        throw new \RuntimeException('Invalid image digest');
+                    }
+                    $target = rtrim($mediaDir, '/').'/'.$image->sha256.'.webp';
+                    if (! is_file($target) || hash_file('sha256', $target) !== $image->sha256) {
+                        $tmp = $target.'.tmp.'.getmypid();
+                        if (file_put_contents($tmp, $raw, LOCK_EX) === false || ! rename($tmp, $target)) {
+                            throw new \RuntimeException('Cannot publish media file');
+                        }
+                    }
+                    $mediaFiles['media/'.$image->sha256.'.webp'] = [
+                        'sha256' => $image->sha256, 'bytes' => $image->size_bytes,
+                    ];
+                    $images[] = [
+                        'src' => '/media/'.$image->sha256.'.webp',
+                        'alt' => $image->alt, 'caption' => $image->caption,
+                        'width' => $image->width, 'height' => $image->height,
+                    ];
+                }
+                return array_filter([
                 'type' => $entry->type,
                 'slug' => $entry->slug,
                 'title' => $entry->title,
@@ -45,7 +80,19 @@ class ExportMuseumSnapshot extends Command
                 'seo_title' => $entry->seo_title,
                 'seo_description' => $entry->seo_description,
                 'sort_order' => $entry->sort_order,
-            ])->all();
+                'media' => $images,
+            ], static fn ($value, $key) => $key !== 'media' || count($value) > 0, ARRAY_FILTER_USE_BOTH);
+            })->all();
+
+        // Prune assets withdrawn by the editor from this *generated-only* folder.
+        // Otherwise a formerly published image would remain publicly accessible.
+        if (is_dir($mediaDir)) {
+            foreach (glob(rtrim($mediaDir, '/').'/*.webp') ?: [] as $existing) {
+                if (! array_key_exists('media/'.basename($existing), $mediaFiles)) {
+                    unlink($existing);
+                }
+            }
+        }
 
         // Public export intentionally excludes draft/private properties, role info and PII.
         $data = [
@@ -68,7 +115,7 @@ class ExportMuseumSnapshot extends Command
         $payload = json_encode($normalize($data), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n";
         $audit = [
             'schema_version' => 1,
-            'files' => ['published.json' => ['sha256' => hash('sha256', $payload), 'bytes' => strlen($payload)]],
+            'files' => array_merge(['published.json' => ['sha256' => hash('sha256', $payload), 'bytes' => strlen($payload)]], $mediaFiles),
             'event_count' => count($events),
             'entry_count' => count($entries),
         ];
