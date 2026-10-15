@@ -44,3 +44,6 @@
 ## CP-19 — security baseline (issue #11)
 
 Добавлен scripts/audit_public_artifacts.py. Composer audit и production npm audit включены в CI. CSP из SHA-256 inline-JS и HTTP rate-limit POST (8/мин login, 30/мин upload) проверены; Playwright Chromium/WebKit, CSRF, SQLi-like slug и HTML sanitization. Продакшен TLS/firewall/IP и независимый pentest ещё не проведены.
+
+
+Последняя предконтрактная проверка CP-19: 53 PHP feature tests, 27 Python unittest и 12 Playwright browser tests в каждом из Chromium и WebKit; GitHub Actions 38744506681 — 5/5 success. Реальная сеть/пентест отдельно #12.
