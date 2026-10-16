@@ -202,9 +202,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install native SVG rasterizer and read-only XLS dependency
+      - name: Install native SVG/GIF converters and read-only XLS dependency
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin
+          sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin webp
           python3 -m pip install "xlrd==2.0.2"
       - run: composer install --prefer-dist --no-interaction --no-progress
       - name: Check PHP dependency advisories

@@ -197,3 +197,7 @@ Feature-тесты: Editor с грантом видит/пишет к своей
 ## TZ-115/117/118/125/138/139/173/174 public UI checks
 
 Playwright suites `header-a11y-tz.spec.ts`, `visitor-info-tz.spec.ts`, `a11y-coverage-tz.spec.ts`: six widths including 320px, seven sections desktop/mobile, toggled 1.25× font and storage reload, visible accessibility link, no horizontal overflow, sourced contacts/hours, outbound address search without embedded tracking, keyboard sticky menu, axe-core WCAG2.1 A/AA across four routes. Browser tests do not substitute real museum UAT or screen reader audit.
+
+## TZ-182: безопасная GIF анимация из приватной CMS
+
+Run `MuseumMediaTest` and full `php artisan test`: GIF87a static backward compatibility, 2-frame GIF89a to animated WebP (ANIM/ANMF), SHA256 static publishing without original gif, private ACL and preview; reject oversized/malformed GIF, 61 frames, >30-second animation, trailing script, corrupted trailer. Linux CI installs `webp` and `librsvg2-bin`. No viewer-facing metadata or local server paths. Search TZ120/TZ177 remains benchmarked against accepted published data only; no invented binary fulltext requirements.

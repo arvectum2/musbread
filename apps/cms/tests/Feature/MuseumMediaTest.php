@@ -232,6 +232,95 @@ class MuseumMediaTest extends TestCase
             getimagesizefromstring(Storage::disk('local')->get($media->storage_path))[2]);
     }
 
+    private function animatedGif(int $frames = 2, int $delay = 10): string
+    {
+        // Native GIF89a: two colours, 1x1 pixels; no external fixture libraries.
+        $gif = 'GIF89a'.pack('v2', 1, 1)."\x80\x00\x00"."\x00\x00\x00\xff\xff\xff";
+        $gif .= "\x21\xff\x0bNETSCAPE2.0\x03\x01\x00\x00\x00";
+        for ($index = 0; $index < $frames; ++$index) {
+            $gif .= "\x21\xf9\x04\x00".pack('v',$delay)."\x00\x00";
+            $gif .= "\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00";
+            $gif .= "\x02\x02".($index % 2 ? "\x4c\x01" : "\x44\x01")."\x00";
+        }
+        return $gif."\x3b";
+    }
+
+    public function test_animated_gif_remains_animated_in_safe_public_webp_with_two_frames(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry('published');
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $input = $this->animatedGif();
+        $this->assertSame(IMAGETYPE_GIF, getimagesizefromstring($input)[2]);
+        $this->post('/admin/museum-media', [
+            'museum_entry_id' => $entry->id,
+            'alt' => 'Два сменяющихся кадра музейной схемы',
+            'image' => UploadedFile::fake()->createWithContent('animation.gif', $input),
+        ])->assertRedirect(route('museum.media.index'));
+        $media = MuseumMedia::firstOrFail();
+        $clean = Storage::disk('local')->get($media->storage_path);
+        $this->assertSame('image/webp', $media->mime);
+        $this->assertSame('WEBP', substr($clean,8,4));
+        $this->assertStringContainsString('ANIM', $clean);
+        $this->assertSame(2, substr_count($clean, 'ANMF'));
+        $this->assertSame(IMAGETYPE_WEBP, getimagesizefromstring($clean)[2]);
+        $this->assertSame(hash('sha256',$clean), $media->sha256);
+        $this->assertStringNotContainsString('NETSCAPE2.0', $clean);
+        $this->get(route('museum.media.preview', $media))
+            ->assertOk()->assertHeader('Content-Type','image/webp');
+        // Public release only takes the re-encoded checksum-verified WebP.
+        $dir = storage_path('framework/testing/animated-tz182-'.bin2hex(random_bytes(3)));
+        $out = storage_path('framework/testing/tz182-animated-export.json');
+        $manifest = storage_path('framework/testing/tz182-animated-manifest.json');
+        try {
+            $this->artisan('museum:export',[ '--output'=>$out, '--manifest'=>$manifest, '--media-output-dir'=>$dir])->assertSuccessful();
+            $data = json_decode(file_get_contents($out),true,flags:JSON_THROW_ON_ERROR);
+            $this->assertCount(1,$data['entries'][0]['media']);
+            $this->assertSame('/media/'.$media->sha256.'.webp',$data['entries'][0]['media'][0]['src']);
+            $published = file_get_contents($dir.'/'.$media->sha256.'.webp');
+            $this->assertSame($clean,$published);
+            $this->assertSame(2,substr_count($published,'ANMF'));
+        } finally {
+            @unlink($out);@unlink($manifest);
+            foreach (glob($dir.'/*') ?: [] as $file) @unlink($file);
+            @rmdir($dir);
+        }
+    }
+
+    public function test_large_static_gif_retains_preexisting_allowed_upload_dimensions(): void
+    {
+        Storage::fake('local');
+        $entry=$this->entry();
+        $this->actingAs(MoonshineUser::factory()->create(),'moonshine');
+        $this->post('/admin/museum-media', [
+            'museum_entry_id'=>$entry->id,
+            'alt'=>'Стационарная панорама экспозиционного пространства',
+            'image'=>UploadedFile::fake()->image('large-static.gif', 1300, 100),
+        ])->assertRedirect(route('museum.media.index'));
+        $media=MuseumMedia::firstOrFail();
+        $this->assertSame(1300, $media->width);
+        $this->assertSame(100, $media->height);
+        $this->assertSame(IMAGETYPE_WEBP, getimagesizefromstring(Storage::disk('local')->get($media->storage_path))[2]);
+    }
+
+    public function test_invalid_excessive_and_trailing_gif_animation_fails_closed(): void
+    {
+        Storage::fake('local');
+        $entry=$this->entry();
+        $this->actingAs(MoonshineUser::factory()->create(),'moonshine');
+        foreach ([$this->animatedGif(61), $this->animatedGif(2, 1600),
+                   $this->animatedGif()."<script>malicious</script>",
+                   substr($this->animatedGif(), 0, -1),
+        ] as $index=>$bytes) {
+            $this->post('/admin/museum-media',[
+                'museum_entry_id'=>$entry->id,
+                'alt'=>'Неприемлемый анимированный файл',
+                'image'=>UploadedFile::fake()->createWithContent('invalid'.$index.'.gif',$bytes),
+            ])->assertSessionHasErrors('image');
+        }
+        $this->assertDatabaseCount('museum_media',0);
+    }
+
     public function test_editor_cannot_view_modify_or_remove_media_from_other_section(): void
     {
         Storage::fake('local');

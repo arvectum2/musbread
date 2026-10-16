@@ -148,3 +148,7 @@
 ## P0 public header, contacts and accessibility (TZ115–TZ174)
 
 Verified source before modification. Six-width header and vision toggle, no 320px overflow; four-route axe WCAG2.1 AA sweep, contact/visit page external address map lookup, keyboard sticky dropdown; real customer content/approvals remain blockers, not technical release proof. [Full results](TZ115_TZ174_HEADER_ACCESSIBILITY.md).
+
+## TZ-120 / 177 / 182 — Search & secure SVG/GIF publication (17.10.2026)
+
+Verified precise primary clauses. Search and autocomplete are functional; no requirement to index the full binary PDF/Office content. Animated GIF now re-encodes preserving frames under strict bounded parser, returns WebP, static GIF87a and restrictive SVG unaffected. Server/museum UAT remains blocked; [protocol](TZ120_177_182_SEARCH_AND_ANIMATED_MEDIA.md).

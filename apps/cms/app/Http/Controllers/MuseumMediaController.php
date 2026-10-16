@@ -6,6 +6,7 @@ use App\Models\MuseumEntry;
 use App\Models\MuseumMedia;
 use App\Support\MuseumSectionAccess;
 use App\Support\MuseumSvgRasterizer;
+use App\Support\MuseumGifProcessor;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ final class MuseumMediaController extends Controller
         ]);
     }
 
-    public function store(Request $request, MuseumSvgRasterizer $svgRasterizer): RedirectResponse
+    public function store(Request $request, MuseumSvgRasterizer $svgRasterizer, MuseumGifProcessor $gifProcessor): RedirectResponse
     {
         $validated = $request->validate([
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
@@ -69,23 +70,35 @@ final class MuseumMediaController extends Controller
             throw ValidationException::withMessages(['image' => 'Изображение превышает ограничения.']);
         }
 
-        $source = @imagecreatefromstring($raw);
-        if ($source === false) {
-            throw ValidationException::withMessages(['image' => 'Изображение повреждено.']);
+        $clean = null;
+        if ($extension === 'gif') {
+            [$frameCount] = $gifProcessor->inspect($raw, $width, $height);
+            if ($frameCount > 1) {
+                $clean = $gifProcessor->convertAnimation($raw, $width, $height);
+            }
         }
-        // GIFs are palette-based; flatten to a true-color first frame
-        // because GD WebP refuses indexed images. Animation is NOT preserved.
-        if (imageistruecolor($source) === false && ! imagepalettetotruecolor($source)) {
+        if ($clean === null) {
+            $source = @imagecreatefromstring($raw);
+            if ($source === false) {
+                throw ValidationException::withMessages(['image' => 'Изображение повреждено.']);
+            }
+            // Static indexed sources need palette conversion for GD WebP.
+            // Animated GIFs use the separately validated libwebp animation path.
+            if (imageistruecolor($source) === false && ! imagepalettetotruecolor($source)) {
+                imagedestroy($source);
+                throw ValidationException::withMessages(['image' => 'Не удалось обработать цветовую палитру.']);
+            }
+            // Decode and re-encode: discard EXIF, scripts, metadata and original name.
+            ob_start();
+            $encoded = imagewebp($source, null, 82);
+            $clean = ob_get_clean();
             imagedestroy($source);
-            throw ValidationException::withMessages(['image' => 'Не удалось обработать цветовую палитру.']);
+            if (! $encoded || ! is_string($clean)) {
+                throw ValidationException::withMessages(['image' => 'Не удалось безопасно обработать файл.']);
+            }
         }
-        // Decode and re-encode: discard EXIF, scripts, metadata and original name.
-        ob_start();
-        $encoded = imagewebp($source, null, 82);
-        $clean = ob_get_clean();
-        imagedestroy($source);
 
-        if (! $encoded || ! is_string($clean) || $clean === '' || strlen($clean) > 5242880) {
+        if (! is_string($clean) || $clean === '' || strlen($clean) > 5242880) {
             throw ValidationException::withMessages(['image' => 'Не удалось безопасно обработать файл.']);
         }
         $path = 'museum/media/'.Str::uuid().'.webp';

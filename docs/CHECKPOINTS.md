@@ -431,3 +431,10 @@ CP-28D — внутренний предконтрактный спринт, н�
 - [x] Contact/footer, map-address search and planning links; sticky mega-menu keyboard test (TZ125/138/139/173/174).
 - [ ] Official contact info, accessibility passport, privacy/refund policy, museum document source files and UAT (TZ126/134/142 et al).
 - [ ] Real museum content and deeper binary document search investigation (TZ120, still in local queue). [Protocol](TZ115_TZ174_HEADER_ACCESSIBILITY.md).
+
+## TZ-120 / TZ-177 / TZ-182, P0, первичный ТЗ
+
+- [x] Проверка обязательных формулировок (п. 2.2.3.6.1/2.2.3.6.2/2.2.3.6.3). Поиск + автодополнение ранее готов в прототипе, не дублируем.
+- [x] GIF static и animated из CMS безопасно преобразуются в WebP с сохранением двух кадров и без исходного публичного GIF, опубликован только SHA256-проверенный файл.
+- [x] Отбрасываются небезопасные SVG, GIF с избыточными кадрами/временем и нарушенным трейлером.
+- [ ] Реальные изображения музея, проверка дизайна/лицензий, реальные сценарии поиска и клиентская приёмка (TZ-120/177/182 остаются Частично). [Протокол](TZ120_177_182_SEARCH_AND_ANIMATED_MEDIA.md).
