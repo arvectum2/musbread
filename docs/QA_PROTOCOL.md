@@ -137,3 +137,7 @@ Unit `npm run test:search` покрывает русские нормализа�
 ## CP-41D — список материалов в MoonShine
 
 `MuseumEditorialListFiltersTest` проверяет поиск и сложение фильтров, разницу draft/scheduled/hidden/ready, защиту от URL-forged section ID, приватность связанных материалов, rootless legacy. В изолированном браузерном CMS-E2E проверяются фильтры готовности/наличия связей, поле поиска, действия предпросмотра. Результаты — техдоказательства до музейного UAT.
+
+## CP-42D — предупреждения до экспорта
+
+`MuseumContentPreflightTest`: доступ гостя и Editor, скрытые чужие разделы, критичные/информационные поля, HTML-only/NBSP, отсутствие файлов, локальная дата готовности и закрытые связи, `museum:preflight --json` и `--strict`; `museum:export --preflight-strict` не изменяет sentinel output/manifest при отказе. В изолированном Playwright выполнены переход из списка MoonShine → приватный отчёт → предпросмотр, проверка предупреждения о черновом событии; на выходе по-прежнему аудит реального Next.js.

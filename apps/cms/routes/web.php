@@ -17,6 +17,7 @@ Route::middleware(\MoonShine\Laravel\Http\Middleware\Authenticate::class)->group
     Route::get('/admin/museum-sections/tree', [\App\Http\Controllers\MuseumSectionTreeController::class, 'index'])->name('museum.sections.tree');
     Route::post('/admin/museum-sections/{section}/reorder', [\App\Http\Controllers\MuseumSectionTreeController::class, 'reorder'])->name('museum.sections.reorder');
     Route::get('/admin/museum-events/{event}/preview', [\App\Http\Controllers\MuseumEventPreviewController::class, 'show'])->name('museum.events.preview');
+    Route::get('/admin/museum-content/preflight', [\App\Http\Controllers\MuseumContentPreflightController::class, 'index'])->name('museum.content.preflight');
     Route::get('/admin/museum-entries/{entry}/relations', [\App\Http\Controllers\MuseumContentRelationsController::class, 'edit'])->name('museum.entries.relations.edit');
     Route::put('/admin/museum-entries/{entry}/relations', [\App\Http\Controllers\MuseumContentRelationsController::class, 'update'])->name('museum.entries.relations.update');
     Route::get('/admin/museum-entries/{entry}/preview', [\App\Http\Controllers\MuseumEntryPreviewController::class, 'show'])->name('museum.entries.preview');

@@ -211,3 +211,29 @@ test("CP-41D: штатные фильтры MoonShine, поиск и колич�
   await expect(page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" })).toBeVisible();
   await expect(page.locator("tbody tr").filter({ hasText: "Демонстрационная экскурсия" })).toHaveCount(0);
 });
+
+test("CP-42D: закрытый предпубликационный отчёт и ссылки на исправление в MoonShine", async ({ page }) => {
+  await page.goto("/admin/login");
+  await page.locator('input[name="username"]').fill(process.env.MUSBREAD_E2E_USERNAME!);
+  await page.locator('input[type="password"]').fill(process.env.MUSBREAD_E2E_PASSWORD!);
+  await page.locator('button[type="submit"]').click();
+
+  const index = "/admin/resource/museum-entry-resource/museum-entry-index-page";
+  await page.goto(index);
+  const newsRow = page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" });
+  await expect(newsRow.getByRole("link", { name: "Открыть отчёт" })).toBeVisible();
+  await newsRow.getByRole("link", { name: "Открыть отчёт" }).click();
+  await expect(page).toHaveURL(/\/admin\/museum-content\/preflight#entry-\d+$/);
+  await expect(page.getByRole("heading", { name: "Проверка перед публикацией" })).toBeVisible();
+  await expect(page.getByText("Критических ошибок готовых записей:")).toBeVisible();
+
+  const news = page.locator("article.record").filter({ hasText: "QA: публикация из настоящего браузера" });
+  await expect(news).toBeVisible();
+  await expect(news).toContainText("Готово к следующей выгрузке");
+  await expect(news).toContainText("Часть связанных материалов или событий не попадёт");
+  await expect(news.getByRole("link", { name: "Исправить в CMS" })).toBeVisible();
+  await expect(news.getByRole("link", { name: "Предпросмотр" })).toBeVisible();
+  await expect(news.getByRole("link", { name: "Связи" })).toBeVisible();
+  await news.getByRole("link", { name: "Предпросмотр" }).click();
+  await expect(page.getByText("Демонстрационная публикация из браузерного теста")).toBeVisible();
+});
