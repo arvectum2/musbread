@@ -14,6 +14,9 @@ class DeliveryReadinessTests(unittest.TestCase):
         self.assertFalse(data["exclusive_rights_transferred"])
         self.assertFalse(data["production_ready"])
         self.assertEqual(data["summary"]["missing_drafts"], 0)
+        self.assertGreaterEqual(data["summary"]["prepared_drafts"], 21)
+        self.assertEqual(data["prepared_files"]["design_handover_catalog"]["status"],
+                         "DRAFT_PRESENT_NOT_CUSTOMER_ACCEPTED")
         self.assertGreaterEqual(data["summary"]["independently_unverified_requirements"], 12)
         self.assertEqual(data["prepared_files"]["visitor_guide_draft"]["status"],
                          "DRAFT_PRESENT_NOT_CUSTOMER_ACCEPTED")

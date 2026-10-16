@@ -133,6 +133,8 @@ def payload(commit: str, items: list[Item]) -> dict[str, bytes]:
         "museum_ticket_api": "NOT_CONNECTED",
         "museum_infrastructure": "NOT_DEPLOYED",
         "license_audit": "PENDING",
+        "design_deliverables": "TARGET_CATALOG_ONLY_NO_MUSEUM_APPROVAL",
+        "design_signatures_not_proof_of_editability": True,
     })
     files["README_FIRST.md"] = (
         "# MusBread — ДЕМОНСТРАЦИЯ КОМПЛЕКТА, НЕ ПРИЁМКА\n\n"
