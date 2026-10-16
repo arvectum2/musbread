@@ -73,6 +73,8 @@ class BuiltArtifactTests(unittest.TestCase):
                 {"name":"example/package","version":"v1.0.0","license":["MIT"]}],
                 "packages-dev":[]}))
             report=cms_report(public,vendor,lock)
+            self.assertEqual(report["composer_install_profile"], "all")
+            self.assertEqual(report["production_locked_package_count"],1)
             self.assertEqual(report["public_vendor_count"],4)
             self.assertEqual(report["installed_package_count"],1)
             self.assertEqual(report["installed_vendor_files"],1)
@@ -86,6 +88,55 @@ class BuiltArtifactTests(unittest.TestCase):
                 {"packages":[{"name":"example/package","version":"v1.0.1"}]}))
             with self.assertRaisesRegex(ValueError,"differs"):
                 cms_report(public,vendor,lock)
+
+    def test_production_profile_rejects_dev_even_when_versions_match(self):
+        with tempfile.TemporaryDirectory() as dirname:
+            root=Path(dirname)
+            public=root/"public/vendor"
+            for rel,body in {
+                "moonshine/assets/app.js":"app",
+                "moonshine/assets/main.css":"css",
+                "moonshine-tinymce/license.md":"GNU General Public License Version 2 or later",
+                "moonshine-tinymce/tinymce.min.js":"/** TinyMCE version 7.2.1 */ editor",
+            }.items():
+                f=public/rel;f.parent.mkdir(parents=True,exist_ok=True);f.write_text(body)
+            vendor=root/"vendor"
+            for name in ("example/prod","example/dev"):
+                f=vendor/name/"main.php";f.parent.mkdir(parents=True,exist_ok=True)
+                f.write_text("<?php // fixture")
+            installed=vendor/"composer/installed.json"
+            installed.parent.mkdir(parents=True)
+            lock=root/"composer.lock"
+            lock.write_text(json.dumps({
+                "packages":[{"name":"example/prod","version":"1.0.0","license":["MIT"]}],
+                "packages-dev":[{"name":"example/dev","version":"1.0.0","license":["MIT"]}],
+            }))
+            installed.write_text(json.dumps({"dev":False,"dev-package-names":[],"packages":[
+                {"name":"example/prod","version":"1.0.0"}]}))
+            clean=cms_report(root/"public",vendor,lock,install_profile="production")
+            self.assertTrue(clean["production_profile_verified"])
+            self.assertEqual(clean["installed_package_count"],1)
+            self.assertEqual(clean["development_locked_package_count"],1)
+            installed.write_text(json.dumps({"dev":True,"dev-package-names":["example/dev"],
+                "packages":[{"name":"example/prod","version":"1.0.0"},
+                            {"name":"example/dev","version":"1.0.0"}]}))
+            with self.assertRaisesRegex(ValueError,"dev metadata"):
+                cms_report(root/"public",vendor,lock,install_profile="production")
+            installed.write_text(json.dumps({"dev":False,"dev-package-names":[],
+                "packages":[{"name":"example/prod","version":"1.0.0"},
+                            {"name":"example/dev","version":"1.0.0"}]}))
+            with self.assertRaisesRegex(ValueError,"lockfile|differs"):
+                cms_report(root/"public",vendor,lock,install_profile="production")
+            installed.write_text(json.dumps({"dev":False,"dev-package-names":[],"packages":[]}))
+            with self.assertRaisesRegex(ValueError,"missing"):
+                cms_report(root/"public",vendor,lock,install_profile="production")
+            installed.write_text(json.dumps({"dev":False,"dev-package-names":[],
+                "packages":[{"name":"example/prod","version":"1.0.0"},
+                            {"name":"example/prod","version":"1.0.0"}]}))
+            with self.assertRaisesRegex(ValueError,"Duplicate installed Composer name"):
+                cms_report(root/"public",vendor,lock,install_profile="production")
+            with self.assertRaisesRegex(ValueError,"Unsupported Composer install profile"):
+                cms_report(root/"public",vendor,lock,install_profile="unknown")
 
     def test_source_demo_archive_excludes_vendor_and_compiled_site(self):
         with tempfile.TemporaryDirectory() as dirname:

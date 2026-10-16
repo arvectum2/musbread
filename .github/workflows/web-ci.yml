@@ -220,6 +220,52 @@ jobs:
           php artisan db:seed --class=DemoMuseumContentSeeder --force
           php artisan museum:export
           python3 ../../scripts/publish_snapshot.py --check
+  cms-production:
+    name: Verify production-only PHP dependencies and CMS static assets
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/cms
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3, gd, zip
+          coverage: none
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install EXACT locked production packages (not development)
+        run: composer install --no-dev --prefer-dist --no-interaction --no-progress --optimize-autoloader
+      - name: Exercise production Laravel bootstrap and publish native admin assets
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          php artisan route:list --path=admin >/tmp/musbread-admin-routes.txt
+          grep -q 'admin' /tmp/musbread-admin-routes.txt
+          php artisan vendor:publish --tag=laravel-assets --force
+      - name: Verify installed runtime matches production lock WITHOUT dev packages
+        run: |
+          python3 ../../scripts/audit_built_artifacts.py --mode cms --composer-profile production --out /tmp/musbread-production-cms-evidence.json
+          python3 - <<'PYVERIFY'
+          import json
+          p=json.load(open('/tmp/musbread-production-cms-evidence.json'))['result']
+          assert p['production_profile_verified'] is True, 'production package profile mismatch'
+          assert p['development_packages_installed']==0, 'dev package leaked into production'
+          assert p['installed_package_count']==p['production_locked_package_count']
+          assert p['tiny_mce_removal_status']=='STILL_INSTALLED', 'license disclaimer must remain explicit'
+          print('Production Composer packages:',p['installed_package_count'])
+          print('Dev Composer packages:',p['development_packages_installed'])
+          print('Private CMS public assets:',p['public_vendor_count'])
+          PYVERIFY
+      - name: Preserve actual Linux production-only inventory (not museum acceptance)
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-cp36-linux-production-cms-files
+          path: /tmp/musbread-production-cms-evidence.json
+          retention-days: 7
+
   integration:
     name: CMS editor → build → verified public release
     runs-on: ubuntu-latest

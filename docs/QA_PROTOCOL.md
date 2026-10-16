@@ -113,3 +113,7 @@ PHP MuseumEntryEditorModeTest проверяет режим html-source с ре�
 ## CP-35D — реальные файлы выпуска и MIME allowlist CMS
 
 Аудитор scripts/audit_built_artifacts.py проверяет фактический Next out, опубликованные MoonShine vendor assets, установленный composer/installed.json с версий/хешами каждого пакета и demo ZIP, в отличие от CP-34 lockfile inventory. Различает source-only, публичную и приватную сборки. tests/test_audit_built_artifacts.py проверяет подменённые версии, лицензии, symlink, секреты и запрет включения vendor/out в ZIP. infra/nginx/private-cms.conf теперь разрешает только static MoonShine JS/CSS/WOFF2 на loopback, запрещает PHP/source/sourcemap: curl-тесты 200/404 в CI. Официальные права и безопасность целевого Linux не подтверждены.
+
+## CP-36D — production install verification
+
+Отдельная CI job `cms-production` запускает `composer install --no-dev`, делает Laravel route bootstrap, публикует закрытые статические ассеты и проверяет точное совпадение установленного дерева с Composer `packages` (не `packages-dev`) в `audit_built_artifacts.py --composer-profile production`. JSON с хешами доступен как временный Linux CI artifact. Лицензии TinyMCE/Gilroy и подлинная среда музея этим тестом не подтверждаются.

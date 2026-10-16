@@ -84,7 +84,9 @@ def web_report(root:Path)->dict:
     }
 
 
-def cms_report(public:Path,vendor:Path,composer_lock:Path)->dict:
+def cms_report(public:Path,vendor:Path,composer_lock:Path,*,install_profile:str="all")->dict:
+    if install_profile not in ("all","production"):
+        raise ValueError("Unsupported Composer install profile")
     root=public/"vendor"
     rows,types=collect(root,STATIC_TYPES,source="private CMS public vendor")
     if not rows:raise ValueError("CMS installed public assets missing")
@@ -102,7 +104,8 @@ def cms_report(public:Path,vendor:Path,composer_lock:Path)->dict:
     if TINY_LICENSE not in actual:
         raise ValueError("Installed TinyMCE GPL notice missing/changed")
     tiny_path=root/"moonshine-tinymce/tinymce.min.js"
-    version=re.search(rb"TinyMCE version\s+([0-9.]+)",tiny_path.open("rb").read(350),re.I)
+    with tiny_path.open("rb") as tiny_stream:
+        version=re.search(rb"TinyMCE version\s+([0-9.]+)",tiny_stream.read(350),re.I)
     if not version:raise ValueError("Bundled TinyMCE JS version cannot be identified")
     fonts=[{"path":x["path"],"sha256":x["sha256"],"bytes":x["bytes"],
             "license":"UNVERIFIED_LICENSE_FOR_MUSEUM_REDISTRIBUTION"}
@@ -112,13 +115,24 @@ def cms_report(public:Path,vendor:Path,composer_lock:Path)->dict:
     info=json.loads(installed.read_text(encoding="utf-8"))
     pkgs=info["packages"] if isinstance(info,dict) else info
     locked=json.loads(composer_lock.read_text(encoding="utf-8"))
-    wanted={p["name"]:p for p in locked["packages"]+locked["packages-dev"]}
-    if len(wanted)!=len(locked["packages"])+len(locked["packages-dev"]):
+    prod=locked["packages"]
+    dev=locked["packages-dev"]
+    all_names=[p["name"] for p in prod+dev]
+    if len(all_names)!=len(set(all_names)):
         raise ValueError("Duplicate Composer locked name")
+    chosen=prod if install_profile=="production" else prod+dev
+    wanted={p["name"]:p for p in chosen}
+    dev_names={p["name"] for p in dev}
+    if install_profile=="production" and isinstance(info,dict):
+        if info.get("dev") is True or info.get("dev-package-names"):
+            raise ValueError("Composer production install includes dev metadata")
     packages=[]
     installed_names=set()
     for pkg in sorted(pkgs,key=lambda x:x["name"]):
-        name=pkg["name"];installed_names.add(name)
+        name=pkg["name"]
+        if name in installed_names:
+            raise ValueError("Duplicate installed Composer name: "+name)
+        installed_names.add(name)
         if name not in wanted or pkg["version"]!=wanted[name]["version"]:
             raise ValueError("Installed Composer dependency differs from lockfile: "+name)
         ref=wanted[name]
@@ -138,12 +152,14 @@ def cms_report(public:Path,vendor:Path,composer_lock:Path)->dict:
             files+=1;bytes_total+=size
         packages.append({
             "name":name,"version":pkg["version"],
-            "scope":"development_installed" if name in {p["name"] for p in locked["packages-dev"]} else "production_installed",
+            "scope":"development_installed" if name in dev_names else "production_installed",
             "licenses_declared_by_lock":ref.get("license",[]),
             "files":files,"bytes":bytes_total,"tree_sha256":h.hexdigest(),
         })
     if installed_names!=set(wanted):
-        raise ValueError("Installed Composer package names differ from complete lockfile; report actual mismatch")
+        missing=sorted(set(wanted)-installed_names)
+        extra=sorted(installed_names-set(wanted))
+        raise ValueError(f"Installed Composer names do not match {install_profile} lockfile profile: missing={missing}, extra={extra}")
     return {
         "kind":"ACTUAL_LOCAL_CMS_VENDOR_INSTALL_NOT_CUSTOMER_DEPLOYMENT",
         "visibility":"PRIVATE_CMS_LISTENER_ONLY",
@@ -151,6 +167,11 @@ def cms_report(public:Path,vendor:Path,composer_lock:Path)->dict:
         "public_vendor_count":len(rows),"public_vendor_bytes":sum(x["bytes"] for x in rows),
         "installed_composer_packages":packages,
         "installed_package_count":len(packages),
+        "composer_install_profile":install_profile,
+        "production_locked_package_count":len(prod),
+        "development_locked_package_count":len(dev),
+        "development_packages_installed":len(installed_names&dev_names),
+        "production_profile_verified":install_profile=="production" and not (installed_names&dev_names),
         "installed_vendor_files":sum(x["files"] for x in packages),
         "embedded_tinymce_version":version.group(1).decode(),
         "embedded_tinymce_license":"GPL-2.0-or-later_NOTICE_OBSERVED",
@@ -186,7 +207,7 @@ def run(args:argparse.Namespace)->dict:
     if args.mode=="web":
         data=web_report(args.web)
     elif args.mode=="cms":
-        data=cms_report(args.cms_public,args.cms_vendor,args.composer_lock)
+        data=cms_report(args.cms_public,args.cms_vendor,args.composer_lock,install_profile=args.composer_profile)
     elif args.mode=="source-zip":
         data=zip_report(args.zip)
     else:raise ValueError("Unsupported artifact mode")
@@ -199,6 +220,8 @@ def main()->None:
     p=argparse.ArgumentParser()
     p.add_argument("--mode",required=True,choices=["web","cms","source-zip"])
     p.add_argument("--web",type=Path,default=ROOT/"apps/web/out")
+    p.add_argument("--composer-profile",choices=["all","production"],default="all",
+                   help="Expected installed Composer package profile; production rejects all dev packages")
     p.add_argument("--cms-public",type=Path,default=ROOT/"apps/cms/public")
     p.add_argument("--cms-vendor",type=Path,default=ROOT/"apps/cms/vendor")
     p.add_argument("--composer-lock",type=Path,default=ROOT/"apps/cms/composer.lock")
