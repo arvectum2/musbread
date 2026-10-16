@@ -218,13 +218,13 @@ html[data-vision-mode="on"] .mobile-nav nav{background:#fff;color:#111}
 
 @media(max-width:600px){
   /* Long CTA titles must wrap on 320px devices, not cause document overflow. */
-  .closing-banner h2{font-size:clamp(2rem,8vw,3.5rem);overflow-wrap:anywhere}
+  .closing-banner h2{font-size:2rem;overflow-wrap:anywhere}
   .closing-banner>div{min-width:0}
 }
 
 @media(max-width:600px){
   .section-title-row>div{min-width:0;max-width:100%}
-  .section-title-row h2{font-size:clamp(2rem,8vw,3.2rem);overflow-wrap:anywhere}
+  .section-title-row h2{font-size:2rem;overflow-wrap:anywhere}
 }
 /* Contrast regression discovered by full-page axe WCAG 2.1 AA sweep. */
 html[data-vision-mode="on"] .art-caption{color:#111}
