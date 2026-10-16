@@ -255,6 +255,73 @@ class MuseumPublicationDiffTest extends TestCase
         $this->assertSame(1, count(app(MuseumPublicationDiff::class)->report($editor)['removed_urls']));
     }
 
+    public function test_editorial_review_json_fingerprint_tracks_content_and_never_approves_it(): void
+    {
+        $old = $this->article('old-news');
+        $this->baseline();
+        $old->update(['status' => 'draft']);
+        $new = $this->article('new-news');
+        $admin = MoonshineUser::factory()->create();
+        $this->actingAs($admin, 'moonshine');
+        $response = $this->get(route('museum.content.release-review'))->assertOk()
+            ->assertHeader('X-Robots-Tag', 'noindex, nofollow, noarchive')
+            ->assertHeader('Cache-Control', 'max-age=0, no-store, private')
+            ->assertHeader('Content-Disposition', 'attachment; filename="musbread-release-review.json"');
+        $json = json_decode($response->getContent(), true, flags: JSON_THROW_ON_ERROR);
+        $doc = $json['document'];
+        $this->assertSame('musbread_editorial_review_only', $doc['kind']);
+        $this->assertSame('verified_local_release_and_ephemeral_cms_export', $doc['source']);
+        $this->assertSame(1, $doc['schema_version']);
+        $this->assertSame('all', $doc['scope']);
+        $this->assertEqualsCanonicalizing(['old-news', 'new-news'],
+            array_map(static fn ($change) => substr($change['key'], 5), $doc['changes']['entries']));
+        $this->assertSame('/news/old-news/', $doc['removed_urls'][0]['path']);
+        $this->assertNull($doc['removed_urls'][0]['suggested_redirect']);
+        $this->assertContains('not_a_museum_approval', $doc['limits']);
+        $this->assertSame(hash('sha256', json_encode($doc, \App\Support\MuseumReleaseReviewPack::JSON_FLAGS)), $json['sha256']);
+        $this->assertSame($this->originalDataHash, hash_file('sha256', base_path('../web/src/data/published.json')));
+        $this->assertSame(0, MuseumPublicationRun::count());
+        $this->get(route('museum.content.compare'))->assertOk()
+            ->assertSee('Скачать единый JSON-пакет редакторской проверки');
+        $new->update(['body' => '<p>Изменили содержимое после отчёта</p>']);
+        $updated = json_decode($this->get(route('museum.content.release-review'))->assertOk()->getContent(), true);
+        $this->assertNotSame($json['document']['candidate']['snapshot_sha256'],
+            $updated['document']['candidate']['snapshot_sha256']);
+    }
+
+    public function test_editorial_review_json_handles_missing_baseline_without_false_changes(): void
+    {
+        $this->article('unapproved');
+        $this->get(route('museum.content.release-review'))->assertRedirect('/admin/login');
+        $admin = MoonshineUser::factory()->create();
+        $this->actingAs($admin, 'moonshine')->get(route('museum.content.release-review'))
+            ->assertStatus(409);
+    }
+
+    public function test_editorial_review_does_not_export_foreign_drafts_or_sections(): void
+    {
+        $mine = MuseumSection::create(['slug' => 'mine', 'title' => 'Мой раздел', 'status' => 'published']);
+        $other = MuseumSection::create(['slug' => 'classified', 'title' => 'Чужой раздел', 'status' => 'published']);
+        $ownEntry = $this->article('mine-news', section: $mine->id);
+        $foreignEntry = $this->article('hidden-private', section: $other->id);
+        $this->baseline();
+        $ownEntry->update(['title' => 'Мой материал после изменений']);
+        $foreignEntry->update(['title' => 'Секретные сведения <script>123</script>']);
+        $role = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $mine->editors()->attach($editor->id);
+        $body = $this->actingAs($editor, 'moonshine')->get(route('museum.content.release-review'))
+            ->assertOk()->getContent();
+        $this->assertStringContainsString('mine-news', $body);
+        $this->assertStringNotContainsString('hidden-private', $body);
+        $this->assertStringNotContainsString('classified', $body);
+        $this->assertStringNotContainsString('Секретные сведения', $body);
+        $json = json_decode($body, true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame('assigned', $json['document']['scope']);
+        $this->assertArrayNotHasKey('sections', $json['document']['changes']);
+        $this->assertSame(1, count($json['document']['changes']['entries']));
+    }
+
     public function test_anonymous_user_cannot_access_comparison_or_trigger_export(): void
     {
         $this->article('private-test');

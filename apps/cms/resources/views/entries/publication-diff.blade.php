@@ -29,6 +29,8 @@ article h3{font-size:1.05rem;margin:0 0 .3rem}article p{margin:.3rem 0}.state{fo
 @if($comparison['scope'] === 'assigned')
 <p class="warning">Редактору доступны изменения только в назначенных ему разделах; события отображаются по текущей модели полномочий MoonShine. Полный отчёт, включая структуру, доступен администратору.</p>
 @endif
+<p><a href="{{ route('museum.content.release-review') }}">Скачать единый JSON-пакет редакторской проверки</a></p>
+<p class="context">Он содержит контрольные суммы, результаты проверок, список изменений и старых URL. Не является утверждением заказчика или командой публикации.</p>
 <div class="summary" aria-label="Итоги различий">
 <span>Добавлено: <strong>{{ $comparison['summary']['added'] }}</strong></span>
 <span>Изменено: <strong>{{ $comparison['summary']['changed'] }}</strong></span>

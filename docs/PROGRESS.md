@@ -157,3 +157,7 @@ Generated 13 SVG technical grids, 13 preview PDFs with verified physical dimensi
 ## CP-45D — частный реестр старых URL
 
 Из проверенного локального release diff вычислены исчезающие URL RU/EN материалов и событий, доступные в закрытом MoonShine и в CSV. Перенаправления не применяются без подтверждения музея. Условия доступа редактора, заголовки приватности и инъекции в CSV тестируются. docs/CP45_REMOVED_URLS.md.
+
+## CP-46D — выгрузка частного редакторского пакета
+
+Реализован download `museum.content.release-review`, который агрегирует CP-42D...CP-45D только из подтверждённой локальной базы и текущего временного экспорта; JSON package+SHA256, проверка прав, без очереди, миграций и платных затрат. docs/CP46_RELEASE_REVIEW_PACK.md.
