@@ -18,6 +18,26 @@ select,textarea,button{font:inherit;max-width:100%;padding:.5rem}textarea{width:
 <p class="warning">Показаны только материалы ваших назначенных разделов, которыми вы вправе управлять сейчас. События, дерево разделов и замечания по чужим материалам доступны только администратору.</p>
 @endif
 <p class="muted">Локальный исходный снимок: <code>{{ $comparison['baseline_sha256'] }}</code>. Подготовленный снимок: <code>{{ $comparison['candidate_sha256'] }}</code>.</p>
+<section aria-label="Сводка редакторской проверки" id="review-summary">
+<h2>Сводка редакторской проверки</h2>
+<p class="muted">Учитывается последнее решение для каждого изменённого объекта только в текущем проверяемом снимке и в пределах ваших прав. Это не разрешение на публикацию.</p>
+<ul>
+<li>Требуются исправления: <strong>{{ $summary['counts']['needs_changes'] }}</strong></li>
+<li>Есть замечания: <strong>{{ $summary['counts']['comment'] }}</strong></li>
+<li>Ещё не рассмотрено: <strong>{{ $summary['counts']['unreviewed'] }}</strong></li>
+<li>Проверено внутри команды: <strong>{{ $summary['counts']['checked'] }}</strong></li>
+</ul>
+<h3>Что требует внимания ({{ count($summary['attention']) }})</h3>
+@if($summary['attention'] === [])
+<p>Открытых пунктов в доступных материалах нет. Это не подтверждает согласование музеем.</p>
+@else
+<ol>
+@foreach($summary['attention'] as $item)
+<li><strong>{{ ['needs_changes' => 'Требуются исправления', 'comment' => 'Есть замечания', 'unreviewed' => 'Не рассмотрено'][$item['status']] }}</strong> · <a href="#review-{{ substr(hash('sha256', $item['group'].':'.$item['key']), 0, 16) }}">{{ $item['title'] }}</a> ({{ $item['group'] }})</li>
+@endforeach
+</ol>
+@endif
+</section>
 @if($priorCount > 0)<p class="muted">Исторических замечаний к другим версиям: {{ $priorCount }}. Они не переносятся на текущую версию автоматически.</p>@endif
 @if($errors->any())<p role="alert" class="warning">{{ $errors->first() }}</p>@endif
 @php($decisions = ['comment' => 'Замечание', 'needs_changes' => 'Требуются изменения', 'checked' => 'Проверено внутри команды (не утверждено музеем)'])
@@ -26,7 +46,7 @@ select,textarea,button{font:inherit;max-width:100%;padding:.5rem}textarea{width:
 <section aria-label="{{ $label }}"><h2>{{ $label }}</h2>
 @forelse($comparison['groups'][$group] as $row)
 @if($row['action'] !== 'unchanged')
-<article><h3>{{ $row['title'] }}</h3><p>{{ $row['action'] }} · <code>{{ $row['key'] }}</code></p>
+<article id="review-{{ substr(hash('sha256', $group.':'.$row['key']), 0, 16) }}"><h3>{{ $row['title'] }}</h3><p class="muted">Текущее внутреннее состояние: {{ ['unreviewed'=>'Не рассмотрено','comment'=>'Есть замечания','needs_changes'=>'Требуются исправления','checked'=>'Проверено внутри команды'][$summary['state'][$group.':'.$row['key']] ?? 'unreviewed'] }}</p><p>{{ $row['action'] }} · <code>{{ $row['key'] }}</code></p>
 @if($row['changed_fields'] !== [])<p>Поля: {{ implode(', ', $row['changed_fields']) }}</p>@endif
 @php($itemNotes = $current->get($group.':'.$row['key'], collect()))
 @if($itemNotes->isNotEmpty())<ol class="notes">@foreach($itemNotes as $entry)<li><strong>{{ $decisions[$entry->decision] ?? $entry->decision }}</strong> · {{ $entry->created_at?->format('d.m.Y H:i') }} · сотрудник #{{ $entry->actor_id }}<p>{{ $entry->note }}</p></li>@endforeach</ol>@else<p class="muted">По этой версии замечаний пока нет.</p>@endif

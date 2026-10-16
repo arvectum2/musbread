@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\MuseumEditorialReviewNote;
 use App\Models\MuseumEntry;
 use App\Support\MuseumPublicationDiff;
+use App\Support\MuseumEditorialReviewSummary;
 use App\Support\MuseumSectionAccess;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -81,7 +82,8 @@ final class MuseumEditorialReviewNotesController extends Controller
             ->where(static fn ($query) => $query->where('baseline_sha256', '!=', $comparison['baseline_sha256'])
                 ->orWhere('candidate_sha256', '!=', $comparison['candidate_sha256']))
             ->count();
-        return response()->view('entries.editorial-review', compact('comparison', 'current', 'priorCount'), 200, $this->headers());
+        $summary = app(MuseumEditorialReviewSummary::class)->build($comparison['groups'], $current);
+        return response()->view('entries.editorial-review', compact('comparison', 'current', 'priorCount', 'summary'), 200, $this->headers());
     }
 
     public function store(Request $request, MuseumPublicationDiff $diff): RedirectResponse

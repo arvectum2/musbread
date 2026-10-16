@@ -299,6 +299,9 @@ test("CP-44D: реальная CMS сравнивает новые матери�
   await page.getByRole("link", { name: "Замечания и решения по версии" }).click();
   await expect(page).toHaveURL(/\/admin\/museum-content\/review-notes$/);
   await expect(page.getByRole("heading", { name: "Замечания и решения по версии" })).toBeVisible();
+  const reviewSummary = page.getByRole("region", { name: "Сводка редакторской проверки" });
+  await expect(reviewSummary).toBeVisible();
+  await expect(reviewSummary).toContainText("Ещё не рассмотрено");
   const noteItem = page.locator("article").filter({ hasText: "news:qa-browser-news" });
   await expect(noteItem).toBeVisible();
   await noteItem.locator('select[name="decision"]').selectOption("needs_changes");
@@ -308,6 +311,7 @@ test("CP-44D: реальная CMS сравнивает новые матери�
   const noteResult = page.locator("article").filter({ hasText: "news:qa-browser-news" });
   await expect(noteResult).toContainText("Требуются изменения");
   await expect(noteResult).toContainText("QA: проверить доступность фотографии перед выпуском");
+  await expect(reviewSummary).toContainText("Требуются исправления: 1");
   await page.goto("/admin/museum-content/compare");
   await page.getByRole("link", { name: "Открыть подробный отчёт" }).click();
   await expect(page).toHaveURL(/\/admin\/museum-content\/preflight$/);

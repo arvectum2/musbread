@@ -574,6 +574,8 @@ class MuseumPublicationDiffTest extends TestCase
         $this->get(route('museum.content.compare'))->assertOk()
             ->assertSee('Замечания и решения по версии');
         $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSeeText('Есть замечания: 1')
+            ->assertSeeText('Требуются исправления: 0')
             ->assertSee('Доступный материал')->assertSee('Примечание к своему')
             ->assertDontSee('classified-approval')->assertDontSee('Совершенно секретный материал')
             ->assertDontSee('Скрытая записка')->assertDontSee('Старая секретная записка')
@@ -660,6 +662,51 @@ class MuseumPublicationDiffTest extends TestCase
             ])->assertRedirect(route('museum.content.editorial-review'));
         }
         $this->assertDatabaseCount('museum_editorial_review_notes', 2);
+    }
+
+    public function test_summary_tracks_latest_internal_decision_and_resets_after_new_snapshot(): void
+    {
+        $first = $this->article('first-needs');
+        $second = $this->article('second-awaiting');
+        $this->baseline();
+        $first->update(['title' => 'Первая новая редакция']);
+        $second->update(['title' => 'Вторая новая редакция']);
+        $admin = MoonshineUser::factory()->create();
+        $this->actingAs($admin, 'moonshine');
+        $report = app(MuseumPublicationDiff::class)->report($admin);
+        $request = [
+            'baseline_sha256' => $report['baseline_sha256'],
+            'candidate_sha256' => $report['candidate_sha256'],
+            'item_group' => 'entries', 'item_key' => 'news:first-needs',
+            'decision' => 'needs_changes', 'note' => 'Исправить материал',
+        ];
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSeeText('Ещё не рассмотрено: 2')
+            ->assertSeeText('Требуются исправления: 0');
+        $this->post(route('museum.content.editorial-review.store'), $request)->assertRedirect();
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSeeText('Требуются исправления: 1')
+            ->assertSeeText('Ещё не рассмотрено: 1')
+            ->assertSee('href="#review-', false);
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$request, 'decision' => 'checked', 'note' => 'Перепроверено в команде',
+        ])->assertRedirect();
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSeeText('Требуются исправления: 0')
+            ->assertSeeText('Проверено внутри команды: 1')
+            ->assertSeeText('Ещё не рассмотрено: 1');
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$request, 'note' => 'Найдено новое замечание',
+        ])->assertRedirect();
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSeeText('Требуются исправления: 1')
+            ->assertSeeText('Проверено внутри команды: 0');
+        $second->update(['title' => 'Третья редакция']);
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSeeText('Требуются исправления: 0')
+            ->assertSeeText('Ещё не рассмотрено: 2')
+            ->assertSee('Исторических замечаний к другим версиям: 3');
+        $this->assertSame(0, MuseumPublicationRun::count());
     }
 
     public function test_anonymous_user_cannot_access_comparison_or_trigger_export(): void
