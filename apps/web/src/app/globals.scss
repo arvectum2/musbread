@@ -180,3 +180,12 @@ html[data-vision-mode="on"] .hero-art,html[data-vision-mode="on"] .closing-banne
 .museum-related{margin:2rem 0;border-top:1px solid var(--line);padding-top:1rem}
 .museum-related ul{padding-left:1.5rem}
 .museum-related li{margin:.45rem 0}
+
+/* TZ-072/076: visibly nested CMS navigation without guessing levels. */
+.nav-branch{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.15rem}
+.nav-branch li{margin:0}
+.nav-branch .nav-branch{border-left:2px solid var(--line);padding-left:.95rem;margin:.2rem 0 .35rem .6rem}
+.nav-branch a{display:block;padding:.35rem .55rem;border-radius:.25rem}
+.nav-branch a:hover,.nav-branch a:focus-visible{background:#edf3e8;text-decoration:underline}
+.guide-page>section[aria-label^="Подразделы"]{margin:1.3rem 0}
+.guide-page>section[aria-label^="Подразделы"]>.nav-branch{max-width:46rem}

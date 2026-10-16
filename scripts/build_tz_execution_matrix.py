@@ -43,6 +43,9 @@ GROUPS = [
 
 # A curated list of tasks with an actionable local step that is not blocked by
 # a required museum decision *today*. Approval may still be required at finish.
+# TZ-FIRST: these earlier queue items were audited/completed locally on 16.10;
+# their NEXT meaningful acceptance step requires museum data/access/consent.
+WAITING_ON_CUSTOMER_AFTER_LOCAL_WORK = {111, 228, 230, 234, 236, 72, 76, 77, 85, 87, 88, 91, 95, 96, 97, 101, 102, 104, 105, 107, 110}
 CAN_START_NOW = {
   72,73,74,75,76,77,78,82,83,85,86,87,88,89,90,91,
   94,95,96,97,101,102,104,105,106,107,110,111,113,
@@ -67,6 +70,7 @@ with SOURCE.open(encoding='utf-8', newline='') as fd:
 assert len(source) == 325, f'Expected exactly 325 source clauses, got {len(source)}'
 ids = [int(r['ID'][3:]) for r in source]
 assert ids == list(range(1, 326)), 'Primary TZ IDs must be ordered and complete'
+CAN_START_NOW -= WAITING_ON_CUSTOMER_AFTER_LOCAL_WORK
 assert set(CAN_START_NOW) <= set(ids)
 assert all(r['Фактически готово'] in ('Да','Частично','Нет') for r in source)
 

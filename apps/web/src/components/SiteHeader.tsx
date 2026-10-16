@@ -4,7 +4,8 @@ import type { MouseEvent } from "react";
 import GlobalSearch from "@/components/GlobalSearch";
 import VisionMode from "@/components/VisionMode";
 import { museumReference } from "@/data/museum-reference";
-import { menuGroups } from "@/data/navigation";
+import { menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
+import NavigationBranch from "@/components/NavigationBranch";
 
 function closeAfterNavigation(event: MouseEvent<HTMLElement>) {
   if (!(event.target instanceof Element) || !event.target.closest("a")) return;
@@ -24,7 +25,9 @@ export default function SiteHeader() {
           <summary>{group.title}</summary>
           <div className="mega-panel">
             <Link prefetch={false} href={"/guide/" + group.slug + "/"} className="mega-heading">Все подразделы: {group.title}</Link>
-            {group.children.map((page) => <Link key={page.slug} prefetch={false} href={"/guide/" + page.slug + "/"}>{page.title}</Link>)}
+            {usesCmsNavigation
+              ? <NavigationBranch nodes={navigationTree.find((node) => node.slug === group.slug)?.children ?? []} />
+              : group.children.map((page) => <Link key={page.slug} prefetch={false} href={"/guide/" + page.slug + "/"}>{page.title}</Link>)}
           </div>
         </details>)}
         <Link href="/news/">Новости</Link>
@@ -44,7 +47,9 @@ export default function SiteHeader() {
             <summary>{group.title}</summary>
             <div className="mobile-subnav-links">
               <Link prefetch={false} href={"/guide/" + group.slug + "/"}>Все подразделы</Link>
-              {group.children.map((page) => <Link key={page.slug} prefetch={false} href={"/guide/" + page.slug + "/"}>{page.title}</Link>)}
+              {usesCmsNavigation
+              ? <NavigationBranch nodes={navigationTree.find((node) => node.slug === group.slug)?.children ?? []} />
+              : group.children.map((page) => <Link key={page.slug} prefetch={false} href={"/guide/" + page.slug + "/"}>{page.title}</Link>)}
             </div>
           </details>)}
           <Link href="/news/">Новости</Link>

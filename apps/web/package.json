@@ -14,7 +14,8 @@
     "test:integrations": "node --experimental-strip-types --test src/integrations/*.test.ts",
     "test:reference": "node --experimental-strip-types --test src/data/museum-reference.test.ts",
     "test:search": "node --experimental-strip-types --test src/data/search-core.test.ts",
-    "test:events": "node --experimental-strip-types --test src/data/event-archive.test.ts"
+    "test:events": "node --experimental-strip-types --test src/data/event-archive.test.ts",
+    "test:navigation-tree": "node --experimental-strip-types --test src/data/navigation-tree.test.ts"
   },
   "dependencies": {
     "next": "16.4.1",

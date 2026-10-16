@@ -125,6 +125,8 @@ jobs:
         run: npm run test:search
       - name: TZ-154 published event archive and date classification
         run: npm run test:events
+      - name: TZ-072/TZ-076 nested CMS navigation and safe extensibility
+        run: npm run test:navigation-tree
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'
@@ -147,6 +149,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Browser smoke tests
         run: npm run test:e2e
+      - name: TZ-111 cross-engine smoke baseline (CI Chromium)
+        run: npx playwright test --config=playwright-compat.config.ts --project=chromium
       - name: Save demo screenshots / failure traces
         if: always()
         uses: actions/upload-artifact@v4

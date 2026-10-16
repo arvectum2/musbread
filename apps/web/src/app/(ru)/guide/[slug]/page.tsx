@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { legacyUrl, museumReference, REFERENCE_DATE } from "@/data/museum-reference";
-import { findGuidePage, findMenuGroup, guidePages, menuGroups } from "@/data/navigation";
+import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
+import { findPublicNavigationNode } from "@/data/navigation-tree";
+import NavigationBranch from "@/components/NavigationBranch";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -23,7 +25,8 @@ export default async function GuidePage({ params }: Props) {
   const isVisit = ["museum-contacts", "plan-visit", "tickets-and-benefits"].includes(slug);
   const isAccess = slug === "accessible-museum";
   const isCollection = slug === "science-collection";
-  const groupPages = group ? group.children.map((child) => ({ ...child, href: "/guide/" + child.slug + "/" })) : [];
+  const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: "/guide/" + child.slug + "/" })) : [];
+  const directChildren = usesCmsNavigation ? findPublicNavigationNode(navigationTree, slug)?.children ?? [] : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
 
   return <article className="section inner-page guide-page">
@@ -58,6 +61,10 @@ export default async function GuidePage({ params }: Props) {
       <p>Уточнение условий посещения: <a href={museumReference.phoneHref}>{museumReference.phone}</a>.</p>
     </div>}
     {isCollection && <p className="reference-facts"><a href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</a></p>}
+    {directChildren.length > 0 && <section aria-label={"Подразделы: " + title}>
+      <h2>Подразделы</h2>
+      <NavigationBranch nodes={directChildren}/>
+    </section>}
     {groupPages.length > 0 && <div className="museum-list" aria-label={"Подразделы: " + title}>
       {groupPages.map((child) => <Link className="museum-list-item" prefetch={false} key={child.slug} href={child.href}>
         <h2>{child.title}</h2><p>{child.legacyPath ? "Есть соответствующий раздел действующего сайта" : "Раздел предусмотрен новым ТЗ"}</p>

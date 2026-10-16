@@ -17,6 +17,7 @@ use App\MoonShine\Resources\MuseumRequest\MuseumRequestResource;
 use App\MoonShine\Resources\MuseumRequestTransition\MuseumRequestTransitionResource;
 use App\MoonShine\Resources\MuseumAuditRecord\MuseumAuditRecordResource;
 use App\MoonShine\Resources\MuseumPublicationRun\MuseumPublicationRunResource;
+use MoonShine\Laravel\MoonShineAuth;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -43,6 +44,7 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(MuseumRequestTransitionResource::class, 'История обращений'),
             MenuItem::make('/admin/museum-media', 'Медиатека'),
             MenuItem::make(MuseumAuditRecordResource::class, 'Журнал изменений'),
+            ...(MoonShineAuth::getGuard()->user()?->isSuperUser() ? [MenuItem::make('/admin/museum-activity', 'Статистика действий')] : []),
             MenuItem::make(MuseumPublicationRunResource::class, 'Публикации'),
         ];
     }

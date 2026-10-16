@@ -1,3 +1,4 @@
+import { buildPublicNavigationTree } from "./navigation-tree";
 import { content } from "./content";
 import {
   guidePages as referencePages,
@@ -21,6 +22,7 @@ export type NavPage = GuidePage & {
 };
 type Section = NonNullable<typeof content.sections>[number];
 const cmsSectionsPresent = content.sections !== undefined;
+export const navigationTree = cmsSectionsPresent ? buildPublicNavigationTree(content.sections ?? []) : [];
 const incoming = content.sections ?? [];
 const bySlug = new Map(incoming.map((section) => [section.slug, section]));
 const sort = (a: Section, b: Section) =>
