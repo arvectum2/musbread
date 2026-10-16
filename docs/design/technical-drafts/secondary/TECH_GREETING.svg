@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="154mm" height="111mm" viewBox="0 0 154 111" mb:id="GREETING" mb:tz="TZ-053" mb:trim-width-mm="148" mb:trim-height-mm="105" mb:bleed-mm="3" mb:safe-mm="8" mb:dimensions-source="proposed" mb:status="TECHNICAL_DRAFT_ONLY">
+<title>Технический шаблон: Поздравительная открытка (не согласован с заказчиком)</title>
+<desc>Все размеры кроме типового A4 — предварительные примеры, требуется согласование с музеем и типографией. Никаких персональных данных.</desc>
+<g id="editable-background"><rect width="100%" height="100%" fill="#ffffff"/></g>
+<g id="guides-trim" stroke="#64748b" fill="none" stroke-width=".25"><rect id="trim-guide" x="3" y="3" width="148" height="105"/></g>
+<g id="guides-safe" stroke="#c2410c" stroke-width=".25" stroke-dasharray="2 2" fill="none"><rect id="safe-guide" x="11" y="11" width="132" height="89"/></g>
+<g id="draft-marker" font-family="Arial,sans-serif" fill="#9a3412"><text id="draft-watermark" x="11" y="14" font-size="1.9">ТЕХНИЧЕСКИЙ ШАБЛОН · НЕ УТВЕРЖДЕНО</text></g>
+<g id="editable-content" font-family="Arial,sans-serif" fill="#1e293b">
+<rect id="logo-placeholder" x="11.00" y="20.79" width="26.40" height="8.90" fill="#f8fafc" stroke="#94a3b8" stroke-width=".35"/>
+<text id="field-title" x="11.00" y="45.71" font-size="4.95" font-weight="bold">ПОЗДРАВЛЕНИЕ</text>
+<text id="field-recipient" x="11.00" y="60.84" font-size="2.77">[АДРЕСАТ / ОБРАЩЕНИЕ]</text>
+<text id="field-body" x="11.00" y="75.08" font-size="2.64">[СОГЛАСОВАННЫЙ ТЕКСТ]</text>
+<text id="field-signature" x="11.00" y="88.43" font-size="2.15">[ДАТА / ПОДПИСЬ / МЕСТО]</text>
+</g>
+<g id="crop-marks" fill="none" stroke="#111827" stroke-width=".22"><path d="M3 .5 V2.5 M3 108.5 V110.5"/><path d="M151 .5 V2.5 M151 108.5 V110.5"/><path d="M.5 3 H2.5 M151.5 3 H153.5"/><path d="M.5 108 H2.5 M151.5 108 H153.5"/></g>
+</svg>

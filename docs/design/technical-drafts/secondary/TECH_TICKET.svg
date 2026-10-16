@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="186mm" height="76mm" viewBox="0 0 186 76" mb:id="TICKET" mb:tz="TZ-048" mb:trim-width-mm="180" mb:trim-height-mm="70" mb:bleed-mm="3" mb:safe-mm="7" mb:dimensions-source="proposed" mb:status="TECHNICAL_DRAFT_ONLY">
+<title>Технический шаблон: Билет на экспозицию (не согласован с заказчиком)</title>
+<desc>Все размеры кроме типового A4 — предварительные примеры, требуется согласование с музеем и типографией. Никаких персональных данных.</desc>
+<g id="editable-background"><rect width="100%" height="100%" fill="#ffffff"/></g>
+<g id="guides-trim" stroke="#64748b" fill="none" stroke-width=".25"><rect id="trim-guide" x="3" y="3" width="180" height="70"/></g>
+<g id="guides-safe" stroke="#c2410c" stroke-width=".25" stroke-dasharray="2 2" fill="none"><rect id="safe-guide" x="10" y="10" width="166" height="56"/></g>
+<g id="draft-marker" font-family="Arial,sans-serif" fill="#9a3412"><text id="draft-watermark" x="10" y="13" font-size="1.9">ТЕХНИЧЕСКИЙ ШАБЛОН · НЕ УТВЕРЖДЕНО</text></g>
+<g id="editable-content" font-family="Arial,sans-serif" fill="#1e293b">
+<text id="field-type" x="10.00" y="25.68" font-size="4.77" font-weight="bold">БИЛЕТ НА ЭКСПОЗИЦИЮ</text>
+<text id="field-category" x="10.00" y="39.12" font-size="3.32">[КАТЕГОРИЯ / ДАТА / ВРЕМЯ]</text>
+<text id="field-serial" x="10.00" y="52.56" font-size="2.91">[СЕРИЯ / НОМЕР · ТОЛЬКО ПРИМЕР]</text>
+<rect id="qr-placeholder" x="142.80" y="18.40" width="29.88" height="36.40" fill="#f8fafc" stroke="#94a3b8" stroke-width=".35"/>
+</g>
+<g id="crop-marks" fill="none" stroke="#111827" stroke-width=".22"><path d="M3 .5 V2.5 M3 73.5 V75.5"/><path d="M183 .5 V2.5 M183 73.5 V75.5"/><path d="M.5 3 H2.5 M183.5 3 H185.5"/><path d="M.5 73 H2.5 M183.5 73 H185.5"/></g>
+</svg>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="106mm" height="76mm" viewBox="0 0 106 76" mb:id="LABEL" mb:tz="TZ-045" mb:trim-width-mm="100" mb:trim-height-mm="70" mb:bleed-mm="3" mb:safe-mm="6" mb:dimensions-source="proposed" mb:status="TECHNICAL_DRAFT_ONLY">
+<title>Технический шаблон: Этикетка экспоната (не согласован с заказчиком)</title>
+<desc>Все размеры кроме типового A4 — предварительные примеры, требуется согласование с музеем и типографией. Никаких персональных данных.</desc>
+<g id="editable-background"><rect width="100%" height="100%" fill="#ffffff"/></g>
+<g id="guides-trim" stroke="#64748b" fill="none" stroke-width=".25"><rect id="trim-guide" x="3" y="3" width="100" height="70"/></g>
+<g id="guides-safe" stroke="#c2410c" stroke-width=".25" stroke-dasharray="2 2" fill="none"><rect id="safe-guide" x="9" y="9" width="88" height="58"/></g>
+<g id="draft-marker" font-family="Arial,sans-serif" fill="#9a3412"><text id="draft-watermark" x="9" y="12" font-size="1.9">ТЕХНИЧЕСКИЙ ШАБЛОН · НЕ УТВЕРЖДЕНО</text></g>
+<g id="editable-content" font-family="Arial,sans-serif" fill="#1e293b">
+<text id="field-inventory" x="9.00" y="20.02" font-size="1.87">ИНВ. № [0000]</text>
+<text id="field-title" x="9.00" y="35.10" font-size="2.53" font-weight="bold">[НАИМЕНОВАНИЕ]</text>
+<text id="field-author" x="9.00" y="45.54" font-size="1.69">[АВТОР / МАТЕРИАЛ]</text>
+<text id="field-period" x="9.00" y="55.40" font-size="1.54">[ДАТИРОВКА / КОЛЛЕКЦИЯ]</text>
+</g>
+<g id="crop-marks" fill="none" stroke="#111827" stroke-width=".22"><path d="M3 .5 V2.5 M3 73.5 V75.5"/><path d="M103 .5 V2.5 M103 73.5 V75.5"/><path d="M.5 3 H2.5 M103.5 3 H105.5"/><path d="M.5 73 H2.5 M103.5 73 H105.5"/></g>
+</svg>

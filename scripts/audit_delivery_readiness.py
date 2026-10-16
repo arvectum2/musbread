@@ -34,6 +34,8 @@ REQUIRED_PREAWARD = {
     "museum_input_requests": "docs/handoff/CUSTOMER_INPUTS_AFTER_INTERVIEW.md",
     "design_source_evidence_registry": "docs/handoff/DESIGN_EVIDENCE.csv",
     "museum_interview_design_checklist": "docs/handoff/CUSTOMER_INTERVIEW_DESIGN_CHECKLIST.md",
+    "secondary_carriers_specification": "docs/CP31_SECONDARY_TECHNICAL_CARRIERS.md",
+    "secondary_carriers_readme": "docs/design/technical-drafts/secondary/README.md",
 }
 
 # Explicit, non-inferable real-world requirements: none can be marked

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="306mm" height="156mm" viewBox="0 0 306 156" mb:id="SIGN-OUT" mb:tz="TZ-044" mb:trim-width-mm="300" mb:trim-height-mm="150" mb:bleed-mm="3" mb:safe-mm="12" mb:dimensions-source="proposed" mb:status="TECHNICAL_DRAFT_ONLY">
+<title>Технический шаблон: Выход с экспозиции (не согласован с заказчиком)</title>
+<desc>Все размеры кроме типового A4 — предварительные примеры, требуется согласование с музеем и типографией. Никаких персональных данных.</desc>
+<g id="editable-background"><rect width="100%" height="100%" fill="#ffffff"/></g>
+<g id="guides-trim" stroke="#64748b" fill="none" stroke-width=".25"><rect id="trim-guide" x="3" y="3" width="300" height="150"/></g>
+<g id="guides-safe" stroke="#c2410c" stroke-width=".25" stroke-dasharray="2 2" fill="none"><rect id="safe-guide" x="15" y="15" width="276" height="126"/></g>
+<g id="draft-marker" font-family="Arial,sans-serif" fill="#9a3412"><text id="draft-watermark" x="15" y="18" font-size="2.25">ТЕХНИЧЕСКИЙ ШАБЛОН · НЕ УТВЕРЖДЕНО</text></g>
+<g id="editable-content" font-family="Arial,sans-serif" fill="#1e293b">
+<text id="field-direction" x="34.32" y="85.56" font-size="12.50" font-weight="bold">ВЫХОД</text>
+<path id="editable-direction-arrow" d="M215.04 74.22 H249.04 L240.04 64.22 M249.04 74.22 L240.04 84.22" fill="none" stroke="#1e293b" stroke-width="2.8"/>
+<text id="field-subtitle" x="37.08" y="115.80" font-size="3.50">[УТОЧНИТЬ МАРШРУТ У МУЗЕЯ]</text>
+</g>
+<g id="crop-marks" fill="none" stroke="#111827" stroke-width=".22"><path d="M3 .5 V2.5 M3 153.5 V155.5"/><path d="M303 .5 V2.5 M303 153.5 V155.5"/><path d="M.5 3 H2.5 M303.5 3 H305.5"/><path d="M.5 153 H2.5 M303.5 153 H305.5"/></g>
+</svg>

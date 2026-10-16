@@ -99,3 +99,7 @@
 ## CP-30D — editable neutral print and PPTX templates
 
 Generated 13 SVG technical grids, 13 preview PDFs with verified physical dimensions and 2 editable PPTX decks with 8 layouts each for 4:3 and 16:9. Proposed bleed/safe values are not official; CMYK and actual 300dpi raster originals are not ready. No new TZ requirement is marked complete, real design approval remains 0/113. Native Mac tools, 0 RUB, no Docker.
+
+## CP-31D — техническая музейная и офисная полиграфия
+
+Добавлено 13 отдельно редактируемых SVG (указатели, музейные этикетка и аннотация, бланк, билет, два варианта визиток и бейджей, приглашение, благодарность, открытка) и 13 PDF-превью с проверкой физических размеров. Размеры — только проектные предположения; никакие реальные ПДн, реквизиты или билеты не использовались. Генератор, манифест, негативные тесты, CI. Файлы не подменяют итоговый бренд: 0 из 113 утверждено, 16 внешних блокеров по контракту. Без Docker, 0 ₽.

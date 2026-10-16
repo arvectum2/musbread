@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="61mm" height="91mm" viewBox="0 0 61 91" mb:id="BADGE-2" mb:tz="TZ-050" mb:trim-width-mm="55" mb:trim-height-mm="85" mb:bleed-mm="3" mb:safe-mm="5" mb:dimensions-source="proposed" mb:status="TECHNICAL_DRAFT_ONLY">
+<title>Технический шаблон: Бейдж — вертикальный (не согласован с заказчиком)</title>
+<desc>Все размеры кроме типового A4 — предварительные примеры, требуется согласование с музеем и типографией. Никаких персональных данных.</desc>
+<g id="editable-background"><rect width="100%" height="100%" fill="#ffffff"/></g>
+<g id="guides-trim" stroke="#64748b" fill="none" stroke-width=".25"><rect id="trim-guide" x="3" y="3" width="55" height="85"/></g>
+<g id="guides-safe" stroke="#c2410c" stroke-width=".25" stroke-dasharray="2 2" fill="none"><rect id="safe-guide" x="8" y="8" width="45" height="75"/></g>
+<g id="draft-marker" font-family="Arial,sans-serif" fill="#9a3412"><text id="draft-watermark" x="8" y="11" font-size="1.9">ТЕХНИЧЕСКИЙ ШАБЛОН · НЕ УТВЕРЖДЕНО</text></g>
+<g id="editable-content" font-family="Arial,sans-serif" fill="#1e293b">
+<rect id="logo-placeholder" x="8.00" y="20.00" width="11.70" height="12.75" fill="#f8fafc" stroke="#94a3b8" stroke-width=".35"/>
+<text id="field-person" x="8.00" y="49.25" font-size="1.68" font-weight="bold">[СОТРУДНИК]</text>
+<text id="field-role" x="8.00" y="65.00" font-size="1.68">[ДОЛЖНОСТЬ]</text>
+</g>
+<g id="crop-marks" fill="none" stroke="#111827" stroke-width=".22"><path d="M3 .5 V2.5 M3 88.5 V90.5"/><path d="M58 .5 V2.5 M58 88.5 V90.5"/><path d="M.5 3 H2.5 M58.5 3 H60.5"/><path d="M.5 88 H2.5 M58.5 88 H60.5"/></g>
+</svg>

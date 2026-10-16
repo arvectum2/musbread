@@ -1,0 +1,385 @@
+{
+  "status": "ONLY_PREAWARD_TECHNICAL_DRAFTS_NOT_MUSEUM_APPROVED",
+  "source": "TZ-043..053 obligate types and counts, NOT carrier dimensions",
+  "museum_personal_data_used": false,
+  "actual_customer_approved": 0,
+  "carriers": [
+    {
+      "id": "SIGN-IN",
+      "tz": "TZ-043",
+      "label": "Вход на экспозицию",
+      "trim_mm": [
+        300,
+        150
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 12,
+      "requested_from_museum": "Габариты, схема движения, тексты указателя",
+      "design": "direction",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        306,
+        156
+      ],
+      "safe_box_mm": [
+        15,
+        15,
+        276,
+        126
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        3615,
+        1843
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "SIGN-OUT",
+      "tz": "TZ-044",
+      "label": "Выход с экспозиции",
+      "trim_mm": [
+        300,
+        150
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 12,
+      "requested_from_museum": "Габариты, маршрут выхода и стрелки",
+      "design": "direction",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        306,
+        156
+      ],
+      "safe_box_mm": [
+        15,
+        15,
+        276,
+        126
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        3615,
+        1843
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "LABEL",
+      "tz": "TZ-045",
+      "label": "Этикетка экспоната",
+      "trim_mm": [
+        100,
+        70
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 6,
+      "requested_from_museum": "Реальная этикетка и обязательные поля",
+      "design": "label",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        106,
+        76
+      ],
+      "safe_box_mm": [
+        9,
+        9,
+        88,
+        58
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        1252,
+        898
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "ANNOTATION",
+      "tz": "TZ-046",
+      "label": "Аннотация экспоната",
+      "trim_mm": [
+        210,
+        148
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "requested_from_museum": "Образец аннотации, предел знаков, шрифты",
+      "design": "annotation",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        216,
+        154
+      ],
+      "safe_box_mm": [
+        13,
+        13,
+        190,
+        128
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        2552,
+        1819
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "OFFICE-BLANK",
+      "tz": "TZ-047",
+      "label": "Фирменный бланк",
+      "trim_mm": [
+        210,
+        297
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 12,
+      "requested_from_museum": "Официальное название, реквизиты, исходник логотипа",
+      "design": "letterhead",
+      "dimensions_source": "A4_example",
+      "full_artboard_mm": [
+        216,
+        303
+      ],
+      "safe_box_mm": [
+        15,
+        15,
+        186,
+        273
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        2552,
+        3579
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "TICKET",
+      "tz": "TZ-048",
+      "label": "Билет на экспозицию",
+      "trim_mm": [
+        180,
+        70
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 7,
+      "requested_from_museum": "Размер билета, места для маркировки, цены/категории",
+      "design": "ticket",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        186,
+        76
+      ],
+      "safe_box_mm": [
+        10,
+        10,
+        166,
+        56
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        2197,
+        898
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "CARD-1",
+      "tz": "TZ-049",
+      "label": "Визитка — горизонтальная",
+      "trim_mm": [
+        90,
+        50
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 5,
+      "requested_from_museum": "Официальные контакты; не передавать реальные ПДн до согласования",
+      "design": "card_h",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        96,
+        56
+      ],
+      "safe_box_mm": [
+        8,
+        8,
+        80,
+        40
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        1134,
+        662
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "CARD-2",
+      "tz": "TZ-049",
+      "label": "Визитка — вертикальная",
+      "trim_mm": [
+        50,
+        90
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 5,
+      "requested_from_museum": "Официальные контакты; не передавать реальные ПДн до согласования",
+      "design": "card_v",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        56,
+        96
+      ],
+      "safe_box_mm": [
+        8,
+        8,
+        40,
+        80
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        662,
+        1134
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "BADGE-1",
+      "tz": "TZ-050",
+      "label": "Бейдж — горизонтальный",
+      "trim_mm": [
+        85,
+        55
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 5,
+      "requested_from_museum": "Правила именных бейджей, обезличенный пример",
+      "design": "badge_h",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        91,
+        61
+      ],
+      "safe_box_mm": [
+        8,
+        8,
+        75,
+        45
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        1075,
+        721
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "BADGE-2",
+      "tz": "TZ-050",
+      "label": "Бейдж — вертикальный",
+      "trim_mm": [
+        55,
+        85
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 5,
+      "requested_from_museum": "Правила именных бейджей, обезличенный пример",
+      "design": "badge_v",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        61,
+        91
+      ],
+      "safe_box_mm": [
+        8,
+        8,
+        45,
+        75
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        721,
+        1075
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "INVITATION",
+      "tz": "TZ-051",
+      "label": "Приглашение",
+      "trim_mm": [
+        148,
+        210
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "requested_from_museum": "Сценарий приглашения, официальный текст",
+      "design": "invitation",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        154,
+        216
+      ],
+      "safe_box_mm": [
+        13,
+        13,
+        128,
+        190
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        1819,
+        2552
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "THANKS",
+      "tz": "TZ-052",
+      "label": "Благодарность",
+      "trim_mm": [
+        210,
+        297
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 12,
+      "requested_from_museum": "Утверждённый текст, подпись и должность",
+      "design": "thanks",
+      "dimensions_source": "A4_example",
+      "full_artboard_mm": [
+        216,
+        303
+      ],
+      "safe_box_mm": [
+        15,
+        15,
+        186,
+        273
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        2552,
+        3579
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    },
+    {
+      "id": "GREETING",
+      "tz": "TZ-053",
+      "label": "Поздравительная открытка",
+      "trim_mm": [
+        148,
+        105
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 8,
+      "requested_from_museum": "Повод, цитата, двусторонняя печать?",
+      "design": "greeting",
+      "dimensions_source": "proposed",
+      "full_artboard_mm": [
+        154,
+        111
+      ],
+      "safe_box_mm": [
+        11,
+        11,
+        132,
+        89
+      ],
+      "minimum_raster_pixels_for_future_print_300dpi": [
+        1819,
+        1312
+      ],
+      "status": "TECHNICAL_DRAFT_ONLY"
+    }
+  ]
+}

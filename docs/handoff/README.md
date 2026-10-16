@@ -29,3 +29,7 @@ DESIGN_DELIVERABLES.csv и DESIGN_DELIVERABLES.md — 113 атомарных ц�
 ## CP-30D neutral technical templates
 
 docs/design/technical-drafts contains 13 editable SVG, 13 PDF previews and two real editable PPTX sample decks. They are explicitly TECHNICAL_DRAFT_ONLY; proposed 3mm bleed and 10mm safe guides require confirmation. The delivery evidence checker rejects these drafts as final art. All 113 actual customer design positions remain unapproved.
+
+## CP-31D — указатели, билеты, визитки и документы
+
+Папка docs/design/technical-drafts/secondary содержит 13 нейтральных SVG и 13 PDF-превью с явным статусом НЕ УТВЕРЖДЕНО. Здесь нет персональных данных сотрудников, QR-кодов билетов и официальной айдентики. Размеры и типография предварительные. DESIGN_EVIDENCE.csv не менялся, окончательных принятых фирменных носителей 0/113. Документ CP31_SECONDARY_TECHNICAL_CARRIERS.md.

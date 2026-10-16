@@ -135,3 +135,7 @@
 ## CP-30D: editable technical carrier drafts
 
 The repository contains 13 separate editable SVG grids for A2/A3/A4 print carriers, 13 PDF previews, and 2 genuine PPTX presentations (8 slide types in 4:3 and 16:9). Sizes, proposal-only 3mm bleed/10mm safe area and 300dpi target pixel counts are in docs/design/technical-drafts/PRINT_SPECS.md. These are NOT museum-approved design, CMYK masters, signed delivery or completed TZ carrier obligations. See docs/CP30_EDITABLE_TECHNICAL_TEMPLATES.md.
+
+## CP-31D — нейтральные музейные и деловые шаблоны
+
+13 SVG технических шаблонов и 13 PDF-превью для указателей, этикетки, аннотации, бланка, билета, визиток, бейджей, приглашения, благодарности и открытки находятся в docs/design/technical-drafts/secondary/. Размеры — примерные, согласование необходимо. Это не утверждённые дизайн-носители. Детали docs/CP31_SECONDARY_TECHNICAL_CARRIERS.md.
