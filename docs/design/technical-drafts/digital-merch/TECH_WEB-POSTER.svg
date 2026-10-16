@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="1280px" height="720px" viewBox="0 0 1280 720" mb:id="WEB-POSTER" mb:tz="TZ-034" mb:status="TECHNICAL_DRAFT_ONLY" mb:dimensions-source="PROVISIONAL_NOT_TZ_OR_PLATFORM_APPROVED">
+<title>Технический шаблон: Цифровая афиша сайта</title>
+<desc>Только редактируемая техническая структура. Не фирменная айдентика, не утверждённый макет и не технические требования VK.</desc>
+<rect id="editable-background" x="0.0" y="0.0" width="1280.0" height="720.0" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="3"/>
+<g id="editable-wireframe" font-family="Arial,sans-serif">
+<text id="draft-watermark" x="35.0" y="48.0" font-size="24" fill="#9a3412" font-weight="bold">ВИЗУАЛИЗАЦИЯ / ЧЕРНОВИК — НЕ УТВЕРЖДЕНО</text>
+<text id="field-type" x="35.0" y="101.0" font-size="39" fill="#1e293b" font-weight="bold">Цифровая афиша сайта</text>
+<rect id="poster-photo-placeholder" x="690.0" y="160.0" width="520.0" height="445.0" rx="0" fill="#f1f5f9" stroke="#64748b" stroke-width="3"/>
+<rect id="poster-copy-container" x="45.0" y="155.0" width="580.0" height="465.0" rx="0" fill="none" stroke="#64748b" stroke-width="3"/>
+<text id="field-category" x="80.0" y="255.0" font-size="34" fill="#1e293b" font-weight="normal">[ТИП СОБЫТИЯ]</text>
+<text id="field-headline" x="80.0" y="330.0" font-size="55" fill="#1e293b" font-weight="bold">[НАЗВАНИЕ]</text>
+<text id="field-date" x="80.0" y="420.0" font-size="30" fill="#1e293b" font-weight="normal">[ДАТА / ВРЕМЯ / МЕСТО]</text>
+<text id="field-details" x="80.0" y="500.0" font-size="27" fill="#1e293b" font-weight="normal">[ОПИСАНИЕ / ССЫЛКА]</text>
+</g>
+</svg>

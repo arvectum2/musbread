@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="1280px" height="900px" viewBox="0 0 1280 900" mb:id="MERCH-TSHIRT" mb:tz="TZ-060" mb:status="TECHNICAL_DRAFT_ONLY" mb:dimensions-source="PROVISIONAL_NOT_TZ_OR_PLATFORM_APPROVED">
+<title>Технический шаблон: Футболка</title>
+<desc>Только редактируемая техническая структура. Не фирменная айдентика, не утверждённый макет и не технические требования VK.</desc>
+<rect id="editable-background" x="0.0" y="0.0" width="1280.0" height="900.0" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="3"/>
+<g id="editable-wireframe" font-family="Arial,sans-serif">
+<text id="draft-watermark" x="35.0" y="48.0" font-size="24" fill="#9a3412" font-weight="bold">ВИЗУАЛИЗАЦИЯ / ЧЕРНОВИК — НЕ УТВЕРЖДЕНО</text>
+<text id="field-type" x="35.0" y="101.0" font-size="39" fill="#1e293b" font-weight="bold">Футболка</text>
+<g id="editable-product-outline">
+<path id="mockup-tshirt" d="M510 155 L615 210 L665 170 L760 155 L875 280 L785 350 L770 740 L485 740 L475 350 L380 280 Z" fill="#f8fafc" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+<rect id="imprint-safe" x="540.0" y="360.0" width="180.0" height="190.0" rx="4" fill="#fef3c7" stroke="#ca8a04" stroke-width="3"/>
+</g>
+<text id="product-placeholder" x="497.0" y="805.0" font-size="24" fill="#1e293b" font-weight="normal">[ЗОНА ДЛЯ ФИРМЕННОГО ЗНАКА · СОГЛАСОВАТЬ]</text>
+</g>
+</svg>

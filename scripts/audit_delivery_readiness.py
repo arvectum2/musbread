@@ -36,6 +36,8 @@ REQUIRED_PREAWARD = {
     "museum_interview_design_checklist": "docs/handoff/CUSTOMER_INTERVIEW_DESIGN_CHECKLIST.md",
     "secondary_carriers_specification": "docs/CP31_SECONDARY_TECHNICAL_CARRIERS.md",
     "secondary_carriers_readme": "docs/design/technical-drafts/secondary/README.md",
+    "digital_merch_specification": "docs/CP32_DIGITAL_VK_MERCH_TEMPLATES.md",
+    "digital_merch_readme": "docs/design/technical-drafts/digital-merch/README.md",
 }
 
 # Explicit, non-inferable real-world requirements: none can be marked

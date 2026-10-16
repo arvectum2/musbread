@@ -25,6 +25,8 @@ jobs:
         run: python3 scripts/generate_technical_carriers.py --verify
       - name: Verify museum signage, labels and office carrier SVG/PDF geometry
         run: python3 scripts/generate_secondary_carriers.py --verify
+      - name: Verify VK, website poster and merchandise editable SVG/PNG drafts
+        run: python3 scripts/generate_digital_merch_carriers.py --verify
       - name: Verify required design carrier inventory and format evidence
         run: |
           python3 scripts/audit_design_delivery.py --check --verify-generated             --csv docs/handoff/DESIGN_DELIVERABLES.csv             --markdown docs/handoff/DESIGN_DELIVERABLES.md             --requests docs/handoff/CUSTOMER_INPUTS_AFTER_INTERVIEW.md             --json /tmp/musbread-design-handoff.json

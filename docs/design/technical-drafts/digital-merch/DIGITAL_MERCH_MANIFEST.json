@@ -1,0 +1,251 @@
+{
+  "status": "ONLY_NEUTRAL_TECHNICAL_TEMPLATES_NOT_APPROVED",
+  "museum_approvals": 0,
+  "final_merch_designs_created": 0,
+  "client_personal_data_included": false,
+  "vk_size_platform_validated": false,
+  "products_physical_dimensions_confirmed": false,
+  "required_design_source": "TZ-034..037 and TZ-059..061: type/count only, not sizes",
+  "items": [
+    {
+      "id": "WEB-POSTER",
+      "tz": "TZ-034",
+      "title": "Цифровая афиша сайта",
+      "category": "web",
+      "canvas_px": [
+        1280,
+        720
+      ],
+      "kind": "web",
+      "inputs": "Вид события, визуальная сетка сайта, текст, изображения и права",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "1ae4b3ce393436f0235bef3de8ad951291555138e0a2923d05a6b7d4e4e85520"
+    },
+    {
+      "id": "VK-AVATAR",
+      "tz": "TZ-035",
+      "title": "Аватар сообщества VK",
+      "category": "vk",
+      "canvas_px": [
+        1024,
+        1024
+      ],
+      "kind": "avatar",
+      "inputs": "Ссылка на официальный VK, требования к аватару и безопасному обрезу",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "b3f389453656edb863158339f58c31b4815881760beca771ae41c55dc8469ba8"
+    },
+    {
+      "id": "VK-COVER",
+      "tz": "TZ-036",
+      "title": "Обложка сообщества VK",
+      "category": "vk",
+      "canvas_px": [
+        1920,
+        768
+      ],
+      "kind": "cover",
+      "inputs": "Текущие требования VK к размерам, мобильной обрезке и логотипу",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "8f903e3448a79009e78e5fe462b4a095056ede2b1923b352cae589c976b41423"
+    },
+    {
+      "id": "VK-RUBRIC-1",
+      "tz": "TZ-037",
+      "title": "Публикация: рубрика №1",
+      "category": "vk",
+      "canvas_px": [
+        1080,
+        1080
+      ],
+      "kind": "rubric1",
+      "inputs": "Официальное наименование и материалы первой рубрики",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "e1d34b1367efafda74d2fc625b3fb88efeed5bbc90310115811468e9c0c23a70"
+    },
+    {
+      "id": "VK-RUBRIC-2",
+      "tz": "TZ-037",
+      "title": "Публикация: рубрика №2",
+      "category": "vk",
+      "canvas_px": [
+        1080,
+        1080
+      ],
+      "kind": "rubric2",
+      "inputs": "Официальное наименование и материалы второй рубрики",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "507893867e3d1cf137974fd2af7811aaf30a2a8e72856d54d97d55ad065f1541"
+    },
+    {
+      "id": "VK-RUBRIC-3",
+      "tz": "TZ-037",
+      "title": "Публикация: рубрика №3",
+      "category": "vk",
+      "canvas_px": [
+        1080,
+        1080
+      ],
+      "kind": "rubric3",
+      "inputs": "Официальное наименование и материалы третьей рубрики",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "245ce335f74b73225af50fe218b57b37bfb0ed9d48904b312c42aba917391501"
+    },
+    {
+      "id": "VK-RUBRIC-4",
+      "tz": "TZ-037",
+      "title": "Публикация: рубрика №4",
+      "category": "vk",
+      "canvas_px": [
+        1080,
+        1080
+      ],
+      "kind": "rubric4",
+      "inputs": "Официальное наименование и материалы четвёртой рубрики",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "0ddcddcc386f4ed058ac7542c45feedff41a33ecce60caa6b8f9beca2136ec9b"
+    },
+    {
+      "id": "MERCH-NOTEPAD",
+      "tz": "TZ-059",
+      "title": "Блокнот",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "notepad",
+      "inputs": "Форма, обложка, технология печати",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "297c689913fa72300050aea27ef7ef04fe2a5ad517f5b949cdbb4dbb209937c9"
+    },
+    {
+      "id": "MERCH-VEST",
+      "tz": "TZ-059",
+      "title": "Жилетка",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "vest",
+      "inputs": "Размеры жилетки, зона печати, технология и ткань",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "bc2a54e5e2511e48c57b868c0629f4f336ec6a94d31f03e4e600add854967007"
+    },
+    {
+      "id": "MERCH-TSHIRT",
+      "tz": "TZ-060",
+      "title": "Футболка",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "tshirt",
+      "inputs": "Модель, размеры, зоны печати и ткань",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "882bc643492053fe2aa19375922a043ab0313a5f10ea09b579a708de43661414"
+    },
+    {
+      "id": "MERCH-STAMP",
+      "tz": "TZ-060",
+      "title": "Штамп",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "stamp",
+      "inputs": "Форма клише, производственные допуски, оттиск",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "03f9db1bb81b15da14996a8d69f3d459d40baf0bdb40dc8d8a15346d640b1b6a"
+    },
+    {
+      "id": "MERCH-STICKERS",
+      "tz": "TZ-060",
+      "title": "Стикерпак",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "stickers",
+      "inputs": "Количество стикеров, высечка, материал",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "9097676a4855ded2c2d11af10a1b5f0493ea5ca6ccaa4b8ce5749854dec3f9fa"
+    },
+    {
+      "id": "MERCH-CALENDAR",
+      "tz": "TZ-061",
+      "title": "Календарь",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "calendar",
+      "inputs": "Тип календаря, формат, год и механизм",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "0865efcb367dd8f29d24de5b94694886da704887f1e7dd60788325a5f74fff8d"
+    },
+    {
+      "id": "MERCH-POSTCARD",
+      "tz": "TZ-061",
+      "title": "Открытка (сувенир)",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "postcard",
+      "inputs": "Формат сувенира и двухсторонняя печать",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "dc446bc3afc2ccd12589ae804ba3d0659ae710b6613eaebb4b88416676430519"
+    },
+    {
+      "id": "MERCH-THERMOMUG",
+      "tz": "TZ-061",
+      "title": "Термокружка",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "thermomug",
+      "inputs": "Форма и рабочая зона печати производителя",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "30c04130932e05fe00f1f4da78df8c23bf69e9c9d1209739501c2013ee33e867"
+    },
+    {
+      "id": "MERCH-SHOPPER",
+      "tz": "TZ-061",
+      "title": "Сумка-шоппер",
+      "category": "merch",
+      "canvas_px": [
+        1280,
+        900
+      ],
+      "kind": "shopper",
+      "inputs": "Материал, размер и ограничение зоны печати",
+      "status": "TECHNICAL_DRAFT_ONLY",
+      "dimensions_source": "PROPOSED_NOT_MUSEUM_OR_PLATFORM_CONFIRMED",
+      "preview_png_sha256": "90686399b8a477999b4245799a5398f5b873348e7abeba8571d00e1147d5ddec"
+    }
+  ]
+}

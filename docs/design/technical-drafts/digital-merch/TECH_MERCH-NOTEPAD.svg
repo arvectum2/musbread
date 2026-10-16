@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="1280px" height="900px" viewBox="0 0 1280 900" mb:id="MERCH-NOTEPAD" mb:tz="TZ-059" mb:status="TECHNICAL_DRAFT_ONLY" mb:dimensions-source="PROVISIONAL_NOT_TZ_OR_PLATFORM_APPROVED">
+<title>Технический шаблон: Блокнот</title>
+<desc>Только редактируемая техническая структура. Не фирменная айдентика, не утверждённый макет и не технические требования VK.</desc>
+<rect id="editable-background" x="0.0" y="0.0" width="1280.0" height="900.0" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="3"/>
+<g id="editable-wireframe" font-family="Arial,sans-serif">
+<text id="draft-watermark" x="35.0" y="48.0" font-size="24" fill="#9a3412" font-weight="bold">ВИЗУАЛИЗАЦИЯ / ЧЕРНОВИК — НЕ УТВЕРЖДЕНО</text>
+<text id="field-type" x="35.0" y="101.0" font-size="39" fill="#1e293b" font-weight="bold">Блокнот</text>
+<g id="editable-product-outline">
+<rect id="mockup-notepad" x="430.0" y="170.0" width="420.0" height="520.0" rx="0" fill="#ffffff" stroke="#64748b" stroke-width="3"/>
+<rect id="mockup-spiral" x="418.0" y="170.0" width="25.0" height="520.0" rx="0" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+<rect id="imprint-safe" x="490.0" y="295.0" width="300.0" height="210.0" rx="0" fill="#fef3c7" stroke="#64748b" stroke-width="3"/>
+<path id="spiral-ring-0" d="M425 215 h30" fill="none" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+<path id="spiral-ring-1" d="M425 270 h30" fill="none" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+<path id="spiral-ring-2" d="M425 325 h30" fill="none" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+<path id="spiral-ring-3" d="M425 380 h30" fill="none" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+<path id="spiral-ring-4" d="M425 435 h30" fill="none" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+<path id="spiral-ring-5" d="M425 490 h30" fill="none" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+<path id="spiral-ring-6" d="M425 545 h30" fill="none" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+<path id="spiral-ring-7" d="M425 600 h30" fill="none" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+</g>
+<text id="product-placeholder" x="497.0" y="805.0" font-size="24" fill="#1e293b" font-weight="normal">[ЗОНА ДЛЯ ФИРМЕННОГО ЗНАКА · СОГЛАСОВАТЬ]</text>
+</g>
+</svg>

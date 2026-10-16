@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="1920px" height="768px" viewBox="0 0 1920 768" mb:id="VK-COVER" mb:tz="TZ-036" mb:status="TECHNICAL_DRAFT_ONLY" mb:dimensions-source="PROVISIONAL_NOT_TZ_OR_PLATFORM_APPROVED">
+<title>Технический шаблон: Обложка сообщества VK</title>
+<desc>Только редактируемая техническая структура. Не фирменная айдентика, не утверждённый макет и не технические требования VK.</desc>
+<rect id="editable-background" x="0.0" y="0.0" width="1920.0" height="768.0" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="3"/>
+<g id="editable-wireframe" font-family="Arial,sans-serif">
+<text id="draft-watermark" x="35.0" y="48.0" font-size="24" fill="#9a3412" font-weight="bold">ВИЗУАЛИЗАЦИЯ / ЧЕРНОВИК — НЕ УТВЕРЖДЕНО</text>
+<text id="field-type" x="35.0" y="101.0" font-size="39" fill="#1e293b" font-weight="bold">Обложка сообщества VK</text>
+<rect id="desktop-content-guide" x="100.0" y="150.0" width="1720.0" height="530.0" rx="0" fill="none" stroke="#ca8a04" stroke-width="3"/>
+<rect id="mobile-crop-proposal" x="500.0" y="150.0" width="920.0" height="530.0" rx="0" fill="none" stroke="#ef4444" stroke-width="3"/>
+<rect id="logo-placeholder" x="200.0" y="275.0" width="320.0" height="260.0" rx="0" fill="#fef3c7" stroke="#64748b" stroke-width="3"/>
+<text id="field-title" x="590.0" y="325.0" font-size="54" fill="#1e293b" font-weight="bold">[НАЗВАНИЕ / КОНТАКТЫ]</text>
+<text id="field-subtitle" x="590.0" y="400.0" font-size="33" fill="#1e293b" font-weight="normal">[АДРЕС / АФИША / ССЫЛКА]</text>
+<text id="field-mobile-warning" x="150.0" y="710.0" font-size="25" fill="#1e293b" font-weight="normal">[ОБРЕЗКА МОБИЛЬНОГО VK НЕ ПРОВЕРЕНА]</text>
+</g>
+</svg>
