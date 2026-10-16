@@ -29,6 +29,10 @@ final class MuseumEntryIndexPage extends IndexPage
             Date::make('Публиковать с', 'published_at')->format('d.m.Y H:i')->sortable(),
             Text::make('Связанных материалов', 'editorial_related_entries_count'),
             Text::make('Событий', 'editorial_linked_events_count'),
+            Text::make('Сравнение версий', 'id')->link(
+                static fn ($id): string => route('museum.content.compare'),
+                'Сравнить'
+            ),
             Text::make('Проверка', 'id')->link(
                 static fn ($id): string => route('museum.content.preflight').'#entry-'.(int) $id,
                 'Открыть отчёт'

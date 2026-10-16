@@ -76,6 +76,48 @@ def validate_release(path: Path) -> str:
     return release_id
 
 
+
+def archive_snapshot(snapshot: Path, manifest: Path, dest: Path) -> str:
+    """Store content in a private immutable archive outside static release dirs."""
+    raw = json.loads(manifest.read_text(encoding="utf-8"))
+    metadata = raw["files"]["published.json"]
+    sha = metadata["sha256"]
+    if not re.fullmatch(r"[a-f0-9]{64}", sha) or snapshot.stat().st_size != metadata["bytes"] or digest(snapshot) != sha:
+        raise ValueError("Private baseline differs from release snapshot manifest")
+    folder = dest / "private-snapshots"
+    folder.mkdir(parents=True, exist_ok=True, mode=0o700)
+    if folder.is_symlink():
+        raise ValueError("Private snapshot directory cannot be a symlink")
+    target = folder / (sha + ".json")
+    if target.exists() or target.is_symlink():
+        if not target.is_file() or target.is_symlink() or digest(target) != sha:
+            raise ValueError("Private snapshot archive checksum mismatch")
+        return sha
+    temp = folder / ("." + sha + ".tmp." + str(os.getpid()))
+    try:
+        with temp.open("xb") as handle:
+            os.fchmod(handle.fileno(), 0o600)
+            handle.write(snapshot.read_bytes())
+            handle.flush()
+            os.fsync(handle.fileno())
+        if digest(temp) != sha:
+            raise ValueError("Private snapshot archive copy mismatch")
+        os.replace(temp, target)
+    finally:
+        temp.unlink(missing_ok=True)
+    return sha
+
+
+def archive_current(dest: Path, snapshot: Path) -> str:
+    """Backfill only when local fixture exactly matches the verified current release."""
+    with release_lock(dest):
+        current = dest / "current"
+        if not current.is_symlink() or current.resolve().parent != (dest / "releases").resolve():
+            raise ValueError("No valid current local release")
+        validate_release(current.resolve())
+        return archive_snapshot(snapshot, current.resolve() / "snapshot-manifest.json", dest)
+
+
 def prepare(source: Path, snapshot: Path, manifest: Path, dest: Path) -> str:
     with release_lock(dest):
         return _prepare_unlocked(source, snapshot, manifest, dest)
@@ -130,6 +172,9 @@ def _prepare_unlocked(source: Path, snapshot: Path, manifest: Path, dest: Path) 
             if staging.exists():
                 shutil.rmtree(staging)
 
+    # Archival precedes the pointer swap: a failed archive cannot create an
+    # un-comparable new release. The archive is NOT inside public output.
+    archive_snapshot(snapshot, manifest, dest)
     current = dest / "current"
     if current.is_symlink() and current.resolve() != final.resolve():
         _swap_link(dest / "previous", current.readlink())
@@ -167,7 +212,7 @@ def _rollback_unlocked(dest: Path) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("action", choices=("deploy", "rollback", "verify"))
+    parser.add_argument("action", choices=("deploy", "rollback", "verify", "archive-current"))
     parser.add_argument("--output", type=Path, default=ROOT / "apps/web/out")
     parser.add_argument("--dest", type=Path, default=ROOT / "deploy/local")
     args = parser.parse_args()
@@ -178,6 +223,8 @@ def main() -> None:
             print("DEPLOYED " + version)
         elif args.action == "rollback":
             print("ROLLED BACK " + rollback(args.dest))
+        elif args.action == "archive-current":
+            print("ARCHIVED PRIVATE SNAPSHOT " + archive_current(args.dest, ROOT / "apps/web/src/data/published.json"))
         else:
             with release_lock(args.dest):
                 current = args.dest / "current"

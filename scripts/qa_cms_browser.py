@@ -123,6 +123,34 @@ def main() -> int:
         run([php, "artisan", "migrate", "--force", "--no-ansi"], CMS, env)
         run([php, "artisan", "db:seed", "--class=IsolatedBrowserQaSeeder", "--force", "--no-ansi"], CMS, env)
         run([php, "artisan", "db:seed", "--class=DemoMuseumContentSeeder", "--force", "--no-ansi"], CMS, env)
+        # CP-44D: a PRIVATE immutable baseline from the seeded CMS, not
+        # a live deployment or the developer's normal release/current pointer.
+        baseline = root / "baseline-published.json"
+        baseline_manifest = root / "baseline-manifest.json"
+        run([php, "artisan", "museum:export",
+             "--output=" + str(baseline),
+             "--manifest=" + str(baseline_manifest),
+             "--media-output-dir=" + str(root / "baseline-media"),
+             "--document-output-dir=" + str(root / "baseline-documents")], CMS, env)
+        sha = hashlib.sha256(baseline.read_bytes()).hexdigest()
+        release_root = root / "release-fixture"
+        release_files = {
+            "index.html": hashlib.sha256(b"private QA release fixture").hexdigest(),
+            "snapshot-manifest.json": hashlib.sha256(baseline_manifest.read_bytes()).hexdigest(),
+        }
+        release_id = hashlib.sha256(json.dumps(release_files, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:16]
+        release_dir = release_root / "releases" / release_id
+        release_dir.mkdir(parents=True)
+        private = release_root / "private-snapshots"
+        private.mkdir(mode=0o700)
+        shutil.copyfile(baseline, private / (sha + ".json"))
+        shutil.copyfile(baseline_manifest, release_dir / "snapshot-manifest.json")
+        (release_dir / "index.html").write_bytes(b"private QA release fixture")
+        (release_dir / "release-manifest.json").write_text(json.dumps({
+            "release": release_id, "files": release_files,
+        }), encoding="utf-8")
+        (release_root / "current").symlink_to(Path("releases") / release_id)
+        env["MUSEUM_LOCAL_RELEASE_ROOT"] = str(release_root)
         with (root / "server.log").open("wb") as logfile:
             server = subprocess.Popen(
                 [php, "artisan", "serve", "--host=127.0.0.1", "--port=" + str(port), "--no-reload"],

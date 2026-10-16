@@ -8,4 +8,6 @@ return [
     // workflow; html-source uses a built-in MoonShine textarea with NO TinyMCE
     // JS for this field. This is NOT feature parity with a WYSIWYG editor.
     'entry_body_editor' => env('MUSEUM_ENTRY_BODY_EDITOR', 'tinymce'),
+    // Only local verified pre-award releases; never infer live customer deployment.
+    'local_release_root' => env('MUSEUM_LOCAL_RELEASE_ROOT', base_path('../../deploy/local')),
 ];

@@ -258,3 +258,25 @@ test("CP-43D: отчёт проверяет события афиши и отк�
   await item.getByRole("link", { name: "Исправить событие" }).click();
   await expect(page.locator('input[name="title"]')).toHaveValue('QA: музейное событие из браузера');
 });
+
+
+test("CP-44D: реальная CMS сравнивает новые материалы с архивом локального снимка", async ({ page }) => {
+  await page.goto("/admin/login");
+  await page.locator('input[name="username"]').fill(process.env.MUSBREAD_E2E_USERNAME!);
+  await page.locator('input[type="password"]').fill(process.env.MUSBREAD_E2E_PASSWORD!);
+  await page.locator('button[type="submit"]').click();
+  await page.goto("/admin/resource/museum-entry-resource/museum-entry-index-page");
+  await expect(page.getByRole("link", { name: "Сравнить" }).first()).toBeVisible();
+  await page.getByRole("link", { name: "Сравнить" }).first().click();
+  await expect(page).toHaveURL(/\/admin\/museum-content\/compare$/);
+  await expect(page.getByRole("heading", { name: "Сравнение подготовленной и предыдущей версий" })).toBeVisible();
+  await expect(page.getByText("Подтверждённый локальный базовый снимок недоступен")).toHaveCount(0);
+  await expect(page.getByText("SHA-256 исходного снимка")).toBeVisible();
+  const news = page.locator("article[data-action='added']").filter({ hasText: "news:qa-browser-news" });
+  await expect(news).toBeVisible();
+  await expect(news).toContainText("Добавится");
+  const event = page.locator("article[data-action='added']").filter({ hasText: "qa-browser-event" });
+  await expect(event).toBeVisible();
+  await page.getByRole("link", { name: "Открыть подробный отчёт" }).click();
+  await expect(page).toHaveURL(/\/admin\/museum-content\/preflight$/);
+});

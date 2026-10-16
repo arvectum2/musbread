@@ -149,3 +149,7 @@ Generated 13 SVG technical grids, 13 preview PDFs with verified physical dimensi
 ## CP-43D — афиша и ссылки до публикации
 
 События афиши добавлены в приватный preflight и `--strict`; собственные HTML-ссылки CMS-материалов проверяются по фактически выгружаемым detail-путям RU/EN и файлам. Персональные сведения о закрытых целях в отчёте не выводятся; TinyMCE не менялся. docs/CP43_EVENT_LINK_PREFLIGHT.md.
+
+## CP-44D — приватное сравнение до выпуска
+
+Приватная страница `museum.content.compare`, сводка changed/added/removed/unchanged и полей; базовый снимок — исключительно локальный проверенный релиз. Команда `archive-current` заполнила приватную историческую копию на Mac mini без переключения current/previous. Кандидат создаётся только во временной директории, отчёт не публикует файлы. docs/CP44_PUBLICATION_DIFF.md.

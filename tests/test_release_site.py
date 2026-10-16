@@ -3,9 +3,12 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec, spec_from_file_location
 
-rel = SourceFileLoader("release_site", str(Path(__file__).resolve().parents[1] / "scripts/release_site.py")).load_module()
+spec = spec_from_file_location("release_site", Path(__file__).resolve().parents[1] / "scripts/release_site.py")
+assert spec and spec.loader
+rel = module_from_spec(spec)
+spec.loader.exec_module(rel)
 
 
 class ReleaseTests(unittest.TestCase):
@@ -18,7 +21,10 @@ class ReleaseTests(unittest.TestCase):
         self.site.mkdir()
         (self.site / "index.html").write_text("version one")
         self.snapshot.write_bytes(b'{"events":[]}\n')
-        self.manifest.write_text(json.dumps({"files": {"published.json": {"sha256": hashlib.sha256(self.snapshot.read_bytes()).hexdigest()}}}))
+        self.manifest.write_text(json.dumps({"files": {"published.json": {
+            "sha256": hashlib.sha256(self.snapshot.read_bytes()).hexdigest(),
+            "bytes": self.snapshot.stat().st_size,
+        }}}))
 
     def test_release_and_rollback(self):
         a = rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
@@ -30,6 +36,29 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual((self.dest / "current/index.html").read_text(), "version two")
         self.assertEqual(rel.rollback(self.dest), a)
         self.assertEqual((self.dest / "current/index.html").read_text(), "version one")
+
+    def test_private_archive_matches_release_and_never_enters_public_output(self):
+        (self.site / "snapshot-manifest.json").write_bytes(self.manifest.read_bytes())
+        version = rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        sha = hashlib.sha256(self.snapshot.read_bytes()).hexdigest()
+        archived = self.dest / "private-snapshots" / (sha + ".json")
+        self.assertEqual(archived.read_bytes(), self.snapshot.read_bytes())
+        self.assertEqual(archived.stat().st_mode & 0o777, 0o600)
+        self.assertEqual(rel.archive_current(self.dest, self.snapshot), sha)
+        self.assertFalse((self.dest / "current/private-snapshots").exists())
+        self.assertNotIn("private-snapshots", rel.files_with_hashes(self.dest / "current"))
+        self.assertEqual(rel.validate_release((self.dest / "current").resolve()), version)
+        self.snapshot.write_text('tampered')
+        with self.assertRaisesRegex(ValueError, "differs from release snapshot manifest"):
+            rel.archive_current(self.dest, self.snapshot)
+
+    def test_private_archive_cannot_be_silently_overwritten(self):
+        rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        sha = hashlib.sha256(self.snapshot.read_bytes()).hexdigest()
+        private = self.dest / "private-snapshots" / (sha + ".json")
+        private.write_bytes(b"MALICIOUS")
+        with self.assertRaisesRegex(ValueError, "Private snapshot archive checksum mismatch"):
+            rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
 
     def test_existing_release_manifest_corruption_prevents_redeployment(self):
         rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
