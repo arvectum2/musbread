@@ -21,3 +21,7 @@
 ## CP-29D — статус каждого дизайн-исходника
 
 DESIGN_DELIVERABLES.csv ведёт 113 будущих позиций (в том числе исходники AI/EPS/SVG/PSD/TIFF/PPT/PPTX). По состоянию на предконтрактный прототип утверждённых исходников **нет ни одного**. DESIGN_EVIDENCE.csv пока пуст; совпадение сигнатуры файла не подтверждает исключительных прав, открытой лицензии шрифтов, отсутствия сходства с зарегистрированными знаками или факта передачи. Всё перечисленное требует документально подтверждённой проверки после выбора концепции и перед официальным актом.
+
+## CP-30D and customer rights
+
+The generated neutral SVG/PDF/PPTX geometry is pre-award technical preparation only. It is not an approved museum identity or legally accepted design. The use of open source python-pptx, pypdf and native librsvg requires license verification in the final third-party report before any rights transfer; their code itself is not exclusive Arvectum intellectual property.

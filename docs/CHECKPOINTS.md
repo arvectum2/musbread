@@ -190,3 +190,13 @@ CP-28D — внутренний предконтрактный спринт, н�
 - [ ] **Все 113 пока без утверждённого дизайн-результата**; настоящие исходники AI/EPS/SVG/PSD/TIFF/PPT/PPTX не созданы. Принять после интервью и контракта.
 - [ ] Закрыть юридическое подтверждение прав, PPT editing, минимум 300 dpi, HDD/облако/акты только при реальной сдаче.
 - [x] Стоимость подготовки 0 ₽, без Docker. Документ docs/CP29_DESIGN_HANDOFF_SPEC.md.
+
+## CP-30D — pre-interview technical editable grid and PPTX
+
+- [x] 11 poster SVG geometry variants plus 2 stand layouts, editable guides and text, paper A2/A3/A4.
+- [x] 13 vector PDF previews verified against actual paper sizes including preliminary bleed.
+- [x] Two editable PPTX decks, 4:3 and 16:9, 8 independently editable slide variants each; four/six text blocks tested.
+- [x] 300 dpi future raster pixel requirements, complete print geometry table and tests/CI.
+- [ ] Bleed 3 mm and safe margin 10 mm are assumptions and require printing-house approval.
+- [ ] NO approved final brand material, CMYK master, AI/EPS/PSD/TIFF/.ppt, rights transfer or museum acceptance; 0/113 actual design deliverables.
+- [x] 0 RUB, no Docker. Details docs/CP30_EDITABLE_TECHNICAL_TEMPLATES.md.

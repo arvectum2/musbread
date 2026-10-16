@@ -1,0 +1,348 @@
+{
+  "status": "NOT_APPROVED_NOT_FINAL_DESIGN",
+  "source_reference": "Original TZ-038..042, TZ-054..058 for sizes/type counts; bleed and safe are proposed defaults",
+  "paper_layouts": [
+    {
+      "id": "POSTER-TEMP-A3",
+      "tz": "TZ-038",
+      "title": "Временная выставка",
+      "paper": "A3",
+      "trim_mm": [
+        297,
+        420
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        303,
+        426
+      ],
+      "min_raster_pixels_trim": [
+        3508,
+        4961
+      ],
+      "min_raster_pixels_bleed": [
+        3579,
+        5032
+      ],
+      "source": "TECH_POSTER-TEMP-A3.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-TEMP-A2",
+      "tz": "TZ-038",
+      "title": "Временная выставка",
+      "paper": "A2",
+      "trim_mm": [
+        420,
+        594
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        426,
+        600
+      ],
+      "min_raster_pixels_trim": [
+        4961,
+        7016
+      ],
+      "min_raster_pixels_bleed": [
+        5032,
+        7087
+      ],
+      "source": "TECH_POSTER-TEMP-A2.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-CHILD-A4",
+      "tz": "TZ-039",
+      "title": "Детский мастер-класс",
+      "paper": "A4",
+      "trim_mm": [
+        210,
+        297
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        216,
+        303
+      ],
+      "min_raster_pixels_trim": [
+        2481,
+        3508
+      ],
+      "min_raster_pixels_bleed": [
+        2552,
+        3579
+      ],
+      "source": "TECH_POSTER-CHILD-A4.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-CHILD-A3",
+      "tz": "TZ-039",
+      "title": "Детский мастер-класс",
+      "paper": "A3",
+      "trim_mm": [
+        297,
+        420
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        303,
+        426
+      ],
+      "min_raster_pixels_trim": [
+        3508,
+        4961
+      ],
+      "min_raster_pixels_bleed": [
+        3579,
+        5032
+      ],
+      "source": "TECH_POSTER-CHILD-A3.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-CHILD-A2",
+      "tz": "TZ-039",
+      "title": "Детский мастер-класс",
+      "paper": "A2",
+      "trim_mm": [
+        420,
+        594
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        426,
+        600
+      ],
+      "min_raster_pixels_trim": [
+        4961,
+        7016
+      ],
+      "min_raster_pixels_bleed": [
+        5032,
+        7087
+      ],
+      "source": "TECH_POSTER-CHILD-A2.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-SCIENCE-A4",
+      "tz": "TZ-040",
+      "title": "Научное событие",
+      "paper": "A4",
+      "trim_mm": [
+        210,
+        297
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        216,
+        303
+      ],
+      "min_raster_pixels_trim": [
+        2481,
+        3508
+      ],
+      "min_raster_pixels_bleed": [
+        2552,
+        3579
+      ],
+      "source": "TECH_POSTER-SCIENCE-A4.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-SCIENCE-A3",
+      "tz": "TZ-040",
+      "title": "Научное событие",
+      "paper": "A3",
+      "trim_mm": [
+        297,
+        420
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        303,
+        426
+      ],
+      "min_raster_pixels_trim": [
+        3508,
+        4961
+      ],
+      "min_raster_pixels_bleed": [
+        3579,
+        5032
+      ],
+      "source": "TECH_POSTER-SCIENCE-A3.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-SCIENCE-A2",
+      "tz": "TZ-040",
+      "title": "Научное событие",
+      "paper": "A2",
+      "trim_mm": [
+        420,
+        594
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        426,
+        600
+      ],
+      "min_raster_pixels_trim": [
+        4961,
+        7016
+      ],
+      "min_raster_pixels_bleed": [
+        5032,
+        7087
+      ],
+      "source": "TECH_POSTER-SCIENCE-A2.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-LEISURE-A4",
+      "tz": "TZ-041",
+      "title": "Развлекательное событие",
+      "paper": "A4",
+      "trim_mm": [
+        210,
+        297
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        216,
+        303
+      ],
+      "min_raster_pixels_trim": [
+        2481,
+        3508
+      ],
+      "min_raster_pixels_bleed": [
+        2552,
+        3579
+      ],
+      "source": "TECH_POSTER-LEISURE-A4.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-LEISURE-A3",
+      "tz": "TZ-041",
+      "title": "Развлекательное событие",
+      "paper": "A3",
+      "trim_mm": [
+        297,
+        420
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        303,
+        426
+      ],
+      "min_raster_pixels_trim": [
+        3508,
+        4961
+      ],
+      "min_raster_pixels_bleed": [
+        3579,
+        5032
+      ],
+      "source": "TECH_POSTER-LEISURE-A3.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "POSTER-LEISURE-A2",
+      "tz": "TZ-041",
+      "title": "Развлекательное событие",
+      "paper": "A2",
+      "trim_mm": [
+        420,
+        594
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        426,
+        600
+      ],
+      "min_raster_pixels_trim": [
+        4961,
+        7016
+      ],
+      "min_raster_pixels_bleed": [
+        5032,
+        7087
+      ],
+      "source": "TECH_POSTER-LEISURE-A2.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "PRICE-HOURS-A4",
+      "tz": "TZ-042",
+      "title": "Часы работы и цены",
+      "paper": "A4",
+      "trim_mm": [
+        210,
+        297
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        216,
+        303
+      ],
+      "min_raster_pixels_trim": [
+        2481,
+        3508
+      ],
+      "min_raster_pixels_bleed": [
+        2552,
+        3579
+      ],
+      "source": "TECH_PRICE-HOURS-A4.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    },
+    {
+      "id": "PRICE-HOURS-A3",
+      "tz": "TZ-042",
+      "title": "Часы работы и цены",
+      "paper": "A3",
+      "trim_mm": [
+        297,
+        420
+      ],
+      "bleed_mm": 3,
+      "safe_mm": 10,
+      "artboard_mm": [
+        303,
+        426
+      ],
+      "min_raster_pixels_trim": [
+        3508,
+        4961
+      ],
+      "min_raster_pixels_bleed": [
+        3579,
+        5032
+      ],
+      "source": "TECH_PRICE-HOURS-A3.svg",
+      "status": "PREAWARD_TECHNICAL_NOT_CUSTOMER_APPROVED"
+    }
+  ],
+  "pptx_decks": [
+    "TECH_SLIDES_4x3.pptx",
+    "TECH_SLIDES_16x9.pptx"
+  ]
+}

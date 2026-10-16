@@ -91,6 +91,19 @@ class DesignDeliveryAuditTests(unittest.TestCase):
             self.assertEqual(next(x["status"] for x in rows if x["id"]=="CONCEPT-DEMO"),
                              "FORMAT_PLAUSIBLE_NOT_APPROVED")
 
+    def test_technical_grid_draft_cannot_be_design_delivery_evidence(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            (root/"docs/tz-audit").mkdir(parents=True)
+            (root/"docs/handoff").mkdir()
+            (root/"docs/tz-audit/requirements.psv").write_bytes(
+                (ROOT/"docs/tz-audit/requirements.psv").read_bytes())
+            evidence=(root/"docs/handoff/DESIGN_EVIDENCE.csv")
+            evidence.write_text("id,path,museum_approval,notes\n"
+                                "VIEW-PDF,docs/design/technical-drafts/TECH_POSTER-CHILD-A4.pdf,pending,grid only\n")
+            with self.assertRaisesRegex(ValueError,"cannot be design-delivery evidence"):
+                inventory(root)
+
     def test_false_claimed_approval_is_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)

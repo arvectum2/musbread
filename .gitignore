@@ -15,3 +15,5 @@ playwright-report/
 test-results/
 \n# Generated media assets are private until explicitly approved and exported\n/apps/web/public/media/\n/apps/cms/storage/app/private/museum/\n
 /apps/web/.csp-header.txt
+
+__pycache__/

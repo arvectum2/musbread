@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:mb="https://musbread.local/technical-draft" width="426mm" height="600mm" viewBox="0 0 426 600" mb:paper="A2" mb:tz="TZ-041" mb:trim-width-mm="420" mb:trim-height-mm="594" mb:bleed-mm="3" mb:safe-mm="10" mb:carrier="POSTER-LEISURE-A2" mb:status="TECHNICAL_DRAFT_ONLY">
+<title>MusBread — нейтральная техническая сетка, не утверждённый дизайн</title>
+<desc>Редактируемая SVG-заготовка. ТЗ задаёт A2/A3/A4; вылеты 3 мм и зона 10 мм — только предложение для согласования с типографией.</desc>
+<g id="background-editable"><rect width="100%" height="100%" fill="#ffffff"/></g>
+<g id="guides-trim" fill="none" stroke="#6b7280" stroke-width="0.35"><rect id="trim-guide" x="3" y="3" width="420" height="594"/></g>
+<g id="guides-safe" fill="none" stroke="#b45309" stroke-width="0.35" stroke-dasharray="3 2"><rect id="safe-guide" x="13" y="13" width="400" height="574"/></g>
+<g id="crop-marks" stroke="#111827" stroke-width="0.25" fill="none">
+<path d="M3 0.6 V2.4 M3 597.6 V599.4"/>
+<path d="M423 0.6 V2.4 M423 597.6 V599.4"/>
+<path d="M0.6 3 H2.4 M423.6 3 H425.4"/>
+<path d="M0.6 597 H2.4 M423.6 597 H425.4"/>
+</g>
+<g id="editable-content" font-family="Arial, sans-serif" fill="#111827">
+<text id="type-category" x="13" y="19" font-size="5">РАЗДЕЛ / РУБРИКА — ЗАМЕНИТЬ</text>
+<text id="type-headline" x="13" y="35" font-size="11" font-weight="bold">Развлекательное событие</text>
+<text id="type-datetime" x="13" y="65" font-size="5">ДАТА · ВРЕМЯ · МЕСТО — ПРИМЕР ПОЛЕЙ</text>
+<text id="type-body" x="13" y="353.35" font-size="6">[УТВЕРЖДЁННОЕ ОПИСАНИЕ МЕРОПРИЯТИЯ]</text>
+<text id="type-footer" x="13" y="574" font-size="4.5">[КОНТАКТЫ / БИЛЕТЫ / ОФИЦИАЛЬНЫЕ ДАННЫЕ]</text>
+<text id="draft-watermark" x="13" y="582" font-size="4" fill="#9a3412">ТЕХНИЧЕСКИЙ ШАБЛОН · НЕ УТВЕРЖДЕНО</text>
+</g>
+<g id="editable-placeholders" fill="none" stroke="#94a3b8" stroke-dasharray="3 2" stroke-width=".4"><rect id="image-placeholder" x="13" y="79" width="400" height="262.35" rx="1"/></g>
+<text id="image-label" x="18" y="89" font-family="Arial" font-size="5" fill="#475569">[МЕСТО ДЛЯ ПРАВООЧИЩЕННОГО ИЗОБРАЖЕНИЯ]</text>
+</svg>

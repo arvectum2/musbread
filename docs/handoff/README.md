@@ -25,3 +25,7 @@ VISITOR_GUIDE_DRAFT.md — самостоятельный черновик по�
 ## CP-29D — полная детализация дизайна и носителей
 
 DESIGN_DELIVERABLES.csv и DESIGN_DELIVERABLES.md — 113 атомарных целей по ТЗ. DESIGN_EVIDENCE.csv (пока без строк) привязывает будущие реальные исходники к целям. CUSTOMER_INPUTS_AFTER_INTERVIEW.md — машинная матрица вопросов, CUSTOMER_INTERVIEW_DESIGN_CHECKLIST.md — русский бриф для первого интервью. Проверка scripts/audit_design_delivery.py выявляет потерянные целевые элементы и неподходящие файлы, но принципиально не выдаёт согласованную оригинальную графику за готовую по одной подписи. Полная методология docs/CP29_DESIGN_HANDOFF_SPEC.md.
+
+## CP-30D neutral technical templates
+
+docs/design/technical-drafts contains 13 editable SVG, 13 PDF previews and two real editable PPTX sample decks. They are explicitly TECHNICAL_DRAFT_ONLY; proposed 3mm bleed and 10mm safe guides require confirmation. The delivery evidence checker rejects these drafts as final art. All 113 actual customer design positions remain unapproved.

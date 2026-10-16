@@ -301,6 +301,8 @@ def inventory(root:Path)->tuple[list[dict[str,str]],dict]:
         entry["format_check"]="NOT_CHECKED"
         if source:
             p=Path(source)
+            if "technical-drafts" in p.parts or p.name.startswith("TECH_"):
+                raise ValueError("Neutral technical drafts cannot be design-delivery evidence: "+source)
             if p.is_absolute() or ".." in p.parts or not source.startswith("docs/"):
                 raise ValueError("Unsafe or private evidence path: "+source)
             full=(root/p).resolve()

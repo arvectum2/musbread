@@ -131,3 +131,7 @@
 ## CP-29D — поштучный дизайн/носители
 
 Новый скрипт scripts/audit_design_delivery.py строит 113 проверяемых целей из оригинальной матрицы ТЗ: 3 концепции, 11 размерных постеров, 16 тип×экран PowerPoint, 4 рубрики VK, 9 сувенирных кейсов и обязательные источники/процедуры. Формат проверяется только по сигнатурам; утверждённого бренд-дизайна пока нет. Реестр и список входящих материалов: docs/CP29_DESIGN_HANDOFF_SPEC.md.
+
+## CP-30D: editable technical carrier drafts
+
+The repository contains 13 separate editable SVG grids for A2/A3/A4 print carriers, 13 PDF previews, and 2 genuine PPTX presentations (8 slide types in 4:3 and 16:9). Sizes, proposal-only 3mm bleed/10mm safe area and 300dpi target pixel counts are in docs/design/technical-drafts/PRINT_SPECS.md. These are NOT museum-approved design, CMYK masters, signed delivery or completed TZ carrier obligations. See docs/CP30_EDITABLE_TECHNICAL_TEMPLATES.md.
