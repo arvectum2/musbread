@@ -70,6 +70,13 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
 
     if (out / "events/qa-private-draft/index.html").exists():
         raise RuntimeError("Private browser-created draft was exported into the public website")
+    news = (out / "news/qa-browser-news/index.html").read_text(encoding="utf-8")
+    event = (out / "events/qa-browser-event/index.html").read_text(encoding="utf-8")
+    if ('/excursions/demo-tour/' not in news or '/events/qa-browser-event/' not in news
+            or 'qa-browser-news' not in event or '/news/qa-browser-news/' not in event):
+        raise RuntimeError("Public content relations not rendered in real static HTML")
+    if 'qa-private-draft' in news or 'qa-private-draft' in event:
+        raise RuntimeError("Draft event relation leaked into published static HTML")
     for asset in (item for item in media.glob("*.webp")):
         public_file = out / "media" / asset.name
         if not public_file.is_file() or hashlib.sha256(public_file.read_bytes()).hexdigest() != hashlib.sha256(asset.read_bytes()).hexdigest():
@@ -146,6 +153,16 @@ def main() -> int:
                 event_slugs = {item["slug"] for item in snapshot["events"]}
                 if "qa-browser-event" not in event_slugs or "qa-private-draft" in event_slugs:
                     raise RuntimeError("UI-created event not exported or draft leaked")
+                news = next((item for item in snapshot['entries'] if item['slug'] == 'qa-browser-news'), None)
+                qa_event = next((item for item in snapshot['events'] if item['slug'] == 'qa-browser-event'), None)
+                if not news or not qa_event:
+                    raise RuntimeError("UI-created news or event missing from linked export")
+                if '/excursions/demo-tour/' not in [link['href'] for link in news.get('related_entries', [])]:
+                    raise RuntimeError("Browser-linked excursion missing from public JSON")
+                if [link['href'] for link in news.get('related_events', [])] != ['/events/qa-browser-event/']:
+                    raise RuntimeError("Draft-linked event leaked or public relation missing")
+                if '/news/qa-browser-news/' not in [link['href'] for link in qa_event.get('related_entries', [])]:
+                    raise RuntimeError("Reverse related-news link missing on the event")
                 assets = [item for entry in snapshot["entries"] for item in entry.get("media", [])]
                 if not any(item["alt"] == "QA: экспонат на тестовом изображении" for item in assets):
                     raise RuntimeError("Uploaded QA image missing from CMS export")

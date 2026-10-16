@@ -24,17 +24,9 @@ class ExportMuseumSnapshot extends Command
         $documentFiles = [];
         $inspector = app(MuseumDocumentInspector::class);
 
-        $events = MuseumEvent::query()
-            ->public()
-            ->orderBy('starts_at')
-            ->orderBy('slug')
-            ->get()
-            ->map(fn (MuseumEvent $event) => [
-                'slug' => $event->slug, 'title' => $event->title,
-                'category' => $event->category,
-                'date' => $event->starts_at->format('Y-m-d'),
-                'excerpt' => $event->excerpt, 'body' => $event->body,
-            ])->all();
+        $publicEvents = MuseumEvent::query()
+            ->public()->with('relatedEntries')
+            ->orderBy('starts_at')->orderBy('slug')->get();
 
         // A section is public only when all its ancestors are approved as well.
         // No editing rights, user emails or permission mappings leave the CMS.
@@ -60,16 +52,57 @@ class ExportMuseumSnapshot extends Command
             'legacy_path' => $section->legacy_path,
         ])->values()->all();
 
-        $entries = MuseumEntry::query()
+        $publicEntries = MuseumEntry::query()
             ->public()
             ->orderBy('type')
             ->orderBy('sort_order')
             ->orderBy('slug')
-            ->with(['media', 'documents', 'section'])
+            ->with(['media', 'documents', 'section', 'relatedEntries', 'linkedEvents'])
             ->get()
             ->filter(static fn (MuseumEntry $entry) =>
-                $entry->museum_section_id === null || in_array($entry->museum_section_id, $approvedIds, true))
-            ->map(function (MuseumEntry $entry) use (&$mediaFiles, &$documentFiles, $mediaDir, $documentDir, $inspector): array {
+                $entry->museum_section_id === null || in_array($entry->museum_section_id, $approvedIds, true));
+
+        // Resolve relation links ONLY among approved public records (including
+        // the section ancestor check). IDs and CMS pivot rows stay private.
+        $entryById = $publicEntries->keyBy('id');
+        $eventById = $publicEvents->keyBy('id');
+        $typePaths = [
+            'page' => 'museum', 'news' => 'news', 'excursion' => 'excursions',
+            'exhibition' => 'exhibitions', 'document' => 'documents',
+        ];
+        $entryLink = static function (MuseumEntry $candidate) use ($typePaths): ?array {
+            if (! isset($typePaths[$candidate->type])
+                || ! preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $candidate->slug)) return null;
+            return [
+                'type' => $candidate->type, 'title' => $candidate->title,
+                'href' => '/'.$typePaths[$candidate->type].'/'.$candidate->slug.'/',
+            ];
+        };
+        $publicLinks = static function ($related, $byId, $link): array {
+            return $related->filter(static fn ($candidate) => $byId->has($candidate->id))
+                ->sortBy(static fn ($candidate) => $candidate->title.'|'.$candidate->id)
+                ->map($link)->filter()->values()->all();
+        };
+        $eventLink = static function (MuseumEvent $event): ?array {
+            if (! preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $event->slug)) return null;
+            return ['title' => $event->title, 'href' => '/events/'.$event->slug.'/'];
+        };
+
+        $events = $publicEvents->map(static function (MuseumEvent $event) use ($entryById, $entryLink, $publicLinks): array {
+            $out = [
+                'slug' => $event->slug, 'title' => $event->title,
+                'category' => $event->category,
+                'date' => $event->starts_at->format('Y-m-d'),
+                'excerpt' => $event->excerpt, 'body' => $event->body,
+            ];
+            $related = $publicLinks($event->relatedEntries, $entryById, $entryLink);
+            if ($related !== []) $out['related_entries'] = $related;
+            return $out;
+        })->all();
+
+        $entries = $publicEntries
+            ->map(function (MuseumEntry $entry) use (&$mediaFiles, &$documentFiles, $mediaDir, $documentDir, $inspector,
+                $entryById, $eventById, $entryLink, $eventLink, $publicLinks): array {
                 $images = [];
                 foreach ($entry->media as $image) {
                     $raw = Storage::disk('local')->get($image->storage_path);
@@ -150,6 +183,8 @@ class ExportMuseumSnapshot extends Command
                 'seo_title' => $entry->seo_title,
                 'seo_description' => $entry->seo_description,
                 'sort_order' => $entry->sort_order,
+                'related_entries' => $publicLinks($entry->relatedEntries, $entryById, $entryLink),
+                'related_events' => $publicLinks($entry->linkedEvents, $eventById, $eventLink),
                 'media' => $images,
                 'documents' => $documents,
                 'translations' => trim((string) $entry->title_en) !== ''
@@ -163,7 +198,7 @@ class ExportMuseumSnapshot extends Command
                         ],
                     ] : null,
             ], static function ($value, $key): bool {
-                if ($key === 'media' || $key === 'documents') return count($value) > 0;
+                if (in_array($key, ['media', 'documents', 'related_entries', 'related_events'], true)) return count($value) > 0;
                 if ($key === 'section_slug' || $key === 'translations') return $value !== null;
                 return true;
             }, ARRAY_FILTER_USE_BOTH);

@@ -106,3 +106,36 @@ test("закрытая медиатека поддерживает загруз�
 
 
 });
+
+test("CP-39D: редактор связывает опубликованную новость с экскурсией и событием через закрытую CMS", async ({ page }) => {
+  await page.goto("/admin/login");
+  await page.locator('input[name="username"]').fill(process.env.MUSBREAD_E2E_USERNAME!);
+  await page.locator('input[type="password"]').fill(process.env.MUSBREAD_E2E_PASSWORD!);
+  await page.locator('button[type="submit"]').click();
+  await page.goto("/admin/museum-media");
+  const newsOption = page.locator('select[name="museum_entry_id"] option')
+    .filter({ hasText: "QA: публикация из настоящего браузера" });
+  const newsId = await newsOption.first().getAttribute("value");
+  expect(newsId).not.toBeNull();
+
+  await page.goto(`/admin/museum-entries/${newsId}/relations`);
+  await expect(page.getByRole("heading", { name: "Связанные материалы" })).toBeVisible();
+  const excursion = page.locator('select#related-entries option').filter({ hasText: "Демонстрационная экскурсия" });
+  const event = page.locator('select#related-events option').filter({ hasText: "QA: музейное событие из браузера" });
+  const draft = page.locator('select#related-events option').filter({ hasText: "QA: закрытый черновик" });
+  const excursionId = await excursion.getAttribute("value");
+  const eventId = await event.getAttribute("value");
+  const draftId = await draft.getAttribute("value");
+  expect(excursionId).not.toBeNull();
+  expect(eventId).not.toBeNull();
+  expect(draftId).not.toBeNull();
+
+  await page.locator('select#related-entries').selectOption([excursionId!]);
+  await page.locator('select#related-events').selectOption([eventId!, draftId!]);
+  await page.getByRole("button", { name: "Сохранить связи" }).click();
+  await expect(page.getByRole("status")).toContainText("Связи сохранены");
+  await expect(page.locator('select#related-entries')).toHaveValues([excursionId!]);
+  const selectedEvents = await page.locator('select#related-events').evaluate((element) =>
+    Array.from((element as HTMLSelectElement).selectedOptions).map((option) => option.value).sort());
+  expect(selectedEvents).toEqual([eventId!, draftId!].sort());
+});

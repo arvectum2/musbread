@@ -125,3 +125,7 @@ Laravel feature tests `MuseumEntryPreviewTest` и `MuseumEventPreviewTest` по�
 ## CP-38D — офлайн-полнотекстовый поиск
 
 Unit `npm run test:search` покрывает русские нормализации, извлечение поискового текста из безопасного HTML, ранжирование и многословные запросы. Playwright `e2e/global-search.spec.ts` проверяет поиск по телу статической новости, раскрытие списка, Enter и отсутствие запросов к CMS. Статус пользовательского UAT и индексирования бинарных документов — открытый.
+
+## CP-39D — контролируемые отношения контента
+
+`MuseumContentRelationsTest` и `MuseumContentRelationsExportTest`: foreign keys, ACL/IDOR, запрет собственного ID/дублирования, сохранение/очистка, фильтрация private/draft/future и скрытых разделов, reverse event-links, проверка SHA256. Обновлённый `qa_cms_browser.py` и `cms-e2e/editor.spec.ts` создают связи через закрытый UI, проверяют опубликованную ссылку и отсутствие draft в построенном статическом HTML из изолированной временной базы. Не принимать как согласование таксономии музеем.

@@ -9,6 +9,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\MuseumHtmlSanitizer;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class MuseumEntry extends Model
 {
@@ -83,6 +84,17 @@ class MuseumEntry extends Model
     public function media(): HasMany
     {
         return $this->hasMany(MuseumMedia::class, 'museum_entry_id');
+    }
+
+    /** Editorially curated, directed related-content links. */
+    public function relatedEntries(): BelongsToMany
+    {
+        return $this->belongsToMany(self::class, 'museum_entry_relations', 'source_entry_id', 'target_entry_id');
+    }
+
+    public function linkedEvents(): BelongsToMany
+    {
+        return $this->belongsToMany(MuseumEvent::class, 'museum_entry_events', 'museum_entry_id', 'museum_event_id');
     }
 
     public function scopeEditableBy(Builder $query, \MoonShine\Laravel\Models\MoonshineUser $user): Builder

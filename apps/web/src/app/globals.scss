@@ -168,3 +168,8 @@ html[data-vision-mode="on"] .hero-art,html[data-vision-mode="on"] .closing-banne
 
 .museum-documents{margin:2rem 0;padding:1.25rem;border:1px solid var(--line);border-radius:.35rem}
 .museum-documents li{margin:.7rem 0}
+
+/* CP-39D: related content uses native, keyboard-accessible links in static HTML. */
+.museum-related{margin:2rem 0;border-top:1px solid var(--line);padding-top:1rem}
+.museum-related ul{padding-left:1.5rem}
+.museum-related li{margin:.45rem 0}

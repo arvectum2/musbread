@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class MuseumEvent extends Model
 {
@@ -24,6 +25,12 @@ class MuseumEvent extends Model
                 $event->published_at = now();
             }
         });
+    }
+
+    /** An event can be featured by multiple pages, excursions or exhibitions. */
+    public function relatedEntries(): BelongsToMany
+    {
+        return $this->belongsToMany(MuseumEntry::class, 'museum_entry_events', 'museum_event_id', 'museum_entry_id');
     }
 
     public function scopePublic(Builder $query): Builder

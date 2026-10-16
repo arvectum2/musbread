@@ -1,8 +1,18 @@
+export interface MuseumRelatedEntry {
+  title: string;
+  type: "page" | "news" | "excursion" | "exhibition" | "document";
+  href: string;
+}
+export interface MuseumRelatedEvent {
+  title: string;
+  href: string;
+}
 export interface MuseumEvent {
   slug: string;
   title: string;
   category: string;
   date: string;
+  related_entries?: MuseumRelatedEntry[];
   excerpt: string;
   body: string;
 }
@@ -40,6 +50,8 @@ export interface MuseumEntry {
   seo_title: string | null;
   seo_description: string | null;
   sort_order: number;
+  related_entries?: MuseumRelatedEntry[];
+  related_events?: MuseumRelatedEvent[];
   media?: MuseumPublishedImage[];
   documents?: MuseumPublishedDocument[];
   translations?: { en: MuseumEntryEnglish };

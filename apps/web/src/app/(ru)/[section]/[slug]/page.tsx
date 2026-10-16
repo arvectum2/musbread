@@ -72,6 +72,18 @@ export default async function MuseumEntryPage({ params }: Props) {
       </ul>
       <p>Файлы скачиваются на устройство. Для доступного просмотра используйте описание на этой странице.</p>
     </section>}
+    {entry.related_entries && entry.related_entries.length > 0 && <section className="museum-related" aria-label="Связанные материалы">
+      <h2>Связанные материалы</h2>
+      <ul>{entry.related_entries.map((related) => <li key={related.href}>
+        <Link href={related.href} className="text-link">{related.title}</Link>
+      </li>)}</ul>
+    </section>}
+    {entry.related_events && entry.related_events.length > 0 && <section className="museum-related" aria-label="Связанные события">
+      <h2>Связанные события</h2>
+      <ul>{entry.related_events.map((event) => <li key={event.href}>
+        <Link href={event.href} className="text-link">{event.title}</Link>
+      </li>)}</ul>
+    </section>}
     <Link className="text-link" href={`/${section}/`}>← К списку материалов</Link>
   </article>;
 }
