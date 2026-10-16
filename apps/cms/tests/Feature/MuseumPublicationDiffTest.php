@@ -322,6 +322,131 @@ class MuseumPublicationDiffTest extends TestCase
         $this->assertSame(1, count($json['document']['changes']['entries']));
     }
 
+    /** @return string */
+    private function writeReviewPack(MoonshineUser $admin): string
+    {
+        $pack = app(\App\Support\MuseumReleaseReviewPack::class)->prepare($admin);
+        $this->assertNotNull($pack);
+        $file = $this->root.'/private-review.json';
+        file_put_contents($file, json_encode($pack,
+            \App\Support\MuseumReleaseReviewPack::JSON_FLAGS)."\n");
+        return $file;
+    }
+
+    public function test_complete_review_package_verifies_and_can_gate_strict_export(): void
+    {
+        $this->article('ready-news');
+        $this->event('ready-event');
+        $this->baseline();
+        $admin = MoonshineUser::factory()->create();
+        $file = $this->root.'/downloaded-admin-review.json';
+        $download = $this->actingAs($admin, 'moonshine')
+            ->get(route('museum.content.release-review'))->assertOk();
+        file_put_contents($file, $download->getContent());
+        $verified = app(\App\Support\MuseumReviewPackVerifier::class)->verify($file);
+        $this->assertTrue($verified['ok'], json_encode($verified));
+        $this->assertSame('current', $verified['code']);
+        $this->artisan('museum:verify-review', ['file' => $file])->assertSuccessful();
+        $this->artisan('museum:verify-review', ['file' => $file, '--json' => true])->assertSuccessful();
+        $output = $this->root.'/checked-export.json';
+        $manifest = $this->root.'/checked-manifest.json';
+        $this->artisan('museum:export', [
+            '--review-pack' => $file, '--preflight-strict' => true,
+            '--output' => $output, '--manifest' => $manifest,
+            '--media-output-dir' => $this->root.'/checked-media',
+            '--document-output-dir' => $this->root.'/checked-documents',
+        ])->assertSuccessful();
+        $data = json_decode(file_get_contents($output), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame('ready-news', $data['entries'][0]['slug']);
+        $this->assertSame(0, MuseumPublicationRun::count());
+        $this->assertSame($this->originalDataHash, hash_file('sha256', base_path('../web/src/data/published.json')));
+    }
+
+    public function test_intervening_edits_fail_verification_and_leave_export_files_untouched(): void
+    {
+        $entry = $this->article('earlier-version');
+        $this->baseline();
+        $admin = MoonshineUser::factory()->create();
+        $file = $this->writeReviewPack($admin);
+        $output = $this->root.'/protected-export.json';
+        $manifest = $this->root.'/protected-manifest.json';
+        file_put_contents($output, 'sentinel snapshot');
+        file_put_contents($manifest, 'sentinel manifest');
+        $entry->update(['body' => '<p>Правка внесена после рассмотрения</p>']);
+        $result = app(\App\Support\MuseumReviewPackVerifier::class)->verify($file);
+        $this->assertFalse($result['ok']);
+        $this->assertSame('stale_review', $result['code']);
+        $this->artisan('museum:verify-review', ['file' => $file])->assertFailed();
+        $this->artisan('museum:export', [
+            '--review-pack' => $file, '--output' => $output, '--manifest' => $manifest,
+            '--media-output-dir' => $this->root.'/protected-media',
+            '--document-output-dir' => $this->root.'/protected-documents',
+        ])->assertFailed();
+        $this->assertSame('sentinel snapshot', file_get_contents($output));
+        $this->assertSame('sentinel manifest', file_get_contents($manifest));
+        $this->assertDirectoryDoesNotExist($this->root.'/protected-media');
+        $this->assertDirectoryDoesNotExist($this->root.'/protected-documents');
+    }
+
+    public function test_pack_tampering_and_editor_scope_are_rejected_even_if_checksum_is_recomputed(): void
+    {
+        $mine = MuseumSection::create(['slug' => 'permitted-review', 'title' => 'Свой раздел', 'status' => 'published']);
+        $this->article('authorized', section: $mine->id);
+        $this->baseline();
+        $admin = MoonshineUser::factory()->create();
+        $file = $this->writeReviewPack($admin);
+        $json = json_decode(file_get_contents($file), true, flags: JSON_THROW_ON_ERROR);
+        $json['document']['candidate']['snapshot_sha256'] = str_repeat('a', 64);
+        file_put_contents($file, json_encode($json));
+        $this->assertSame('checksum_mismatch', app(\App\Support\MuseumReviewPackVerifier::class)->verify($file)['code']);
+        $json['sha256'] = hash('sha256', json_encode($json['document'],
+            \App\Support\MuseumReleaseReviewPack::JSON_FLAGS));
+        file_put_contents($file, json_encode($json));
+        $this->assertSame('stale_review', app(\App\Support\MuseumReviewPackVerifier::class)->verify($file)['code']);
+
+        $role = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $mine->editors()->attach($editor->id);
+        $editorPack = app(\App\Support\MuseumReleaseReviewPack::class)->prepare($editor);
+        $this->assertNotNull($editorPack);
+        file_put_contents($file, json_encode($editorPack));
+        $this->assertSame('not_admin_report', app(\App\Support\MuseumReviewPackVerifier::class)->verify($file)['code']);
+    }
+
+    public function test_review_requires_verified_local_baseline_and_safe_file(): void
+    {
+        $this->article('source-item');
+        $this->baseline();
+        $admin = MoonshineUser::factory()->create();
+        $file = $this->writeReviewPack($admin);
+        $baseline = $this->root.'/releases-root/current';
+        unlink($baseline);
+        $this->assertSame('missing_baseline', app(\App\Support\MuseumReviewPackVerifier::class)->verify($file)['code']);
+        $this->assertSame('invalid_file', app(\App\Support\MuseumReviewPackVerifier::class)->verify('https://example.invalid/file.json')['code']);
+        $symlink = $this->root.'/review-link.json';
+        symlink($file, $symlink);
+        $this->assertSame('invalid_file', app(\App\Support\MuseumReviewPackVerifier::class)->verify($symlink)['code']);
+        file_put_contents($file, '{not valid json');
+        $this->assertSame('verification_failed', app(\App\Support\MuseumReviewPackVerifier::class)->verify($file)['code']);
+    }
+
+    public function test_critical_errors_cannot_be_accepted_using_matching_review(): void
+    {
+        $entry = $this->article('incomplete');
+        $this->baseline();
+        $admin = MoonshineUser::factory()->create();
+        $entry->update(['body' => '<p>&nbsp;</p>']);
+        $file = $this->writeReviewPack($admin);
+        $result = app(\App\Support\MuseumReviewPackVerifier::class)->verify($file);
+        $this->assertFalse($result['ok']);
+        $this->assertSame('critical_issues', $result['code']);
+        $this->artisan('museum:export', [
+            '--review-pack' => $file, '--output' => $this->root.'/should-not-exist.json',
+            '--manifest' => $this->root.'/should-not-exist-manifest.json',
+        ])->assertFailed();
+        $this->assertFileDoesNotExist($this->root.'/should-not-exist.json');
+    }
+
     public function test_anonymous_user_cannot_access_comparison_or_trigger_export(): void
     {
         $this->article('private-test');

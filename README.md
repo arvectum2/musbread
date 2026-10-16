@@ -199,3 +199,7 @@ CI без dev: 83 production-пакета, 0 dev, 9217 файлов и 136 ре�
 ## CP-46D — выгрузка отчёта перед согласованием
 
 На закрытой странице сравнения появилась ссылка «Скачать единый JSON-пакет редакторской проверки»: локальный release и SHA-256, данные preflight, дельта изменений и исчезающие URL. Не является подписью, утверждением музеем или деплоем. [docs/CP46_RELEASE_REVIEW_PACK.md](docs/CP46_RELEASE_REVIEW_PACK.md).
+
+## CP-47D — повторная проверка актуальности пакета
+
+Приватный пакет CP-46D можно перепроверить на Mac mini: `php artisan museum:verify-review /path/to/review.json` (`--json`). Ручная выгрузка `museum:export --preflight-strict --review-pack=/path/to/review.json` не запишет файлы, если пакет устарел, повреждён или содержит критичные ошибки; без флага старый экспорт не изменён. Это **не** юридическое согласование клиентом. [docs/CP47_REVIEW_FRESHNESS_GATE.md](docs/CP47_REVIEW_FRESHNESS_GATE.md).

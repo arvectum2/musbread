@@ -11,21 +11,35 @@ use Illuminate\Console\Command;
 
 class ExportMuseumSnapshot extends Command
 {
-    protected $signature = 'museum:export {--output= : Path to generated JSON} {--manifest= : Path to integrity manifest} {--media-output-dir= : Destination for static WebP assets} {--document-output-dir= : Destination for downloadable approved documents} {--preflight-strict : Abort before writing when public-ready entries or events have critical editorial issues}';
+    protected $signature = 'museum:export {--output= : Path to generated JSON} {--manifest= : Path to integrity manifest} {--media-output-dir= : Destination for static WebP assets} {--document-output-dir= : Destination for downloadable approved documents} {--preflight-strict : Abort before writing when public-ready entries or events have critical editorial issues} {--review-pack= : Require an unchanged full admin review JSON before generating output}';
     protected $description = 'Publish approved CMS content into an offline static-site snapshot';
 
     public function handle(): int
     {
-        if ($this->option('preflight-strict')
+        // The verifier performs a nested ephemeral museum:export. Capture the
+        // operator's destinations BEFORE that invocation, otherwise Laravel's
+        // shared command instance may replace this call's bound options.
+        $reviewPack = $this->option('review-pack');
+        $preflightStrict = (bool) $this->option('preflight-strict');
+        $output = $this->option('output') ?: base_path('../web/src/data/published.json');
+        $manifest = $this->option('manifest') ?: base_path('../web/public/snapshot-manifest.json');
+        $mediaDir = $this->option('media-output-dir') ?: base_path('../web/public/media');
+        $documentDir = $this->option('document-output-dir') ?: base_path('../web/public/documents');
+
+        if ($reviewPack !== null) {
+            $result = app(\App\Support\MuseumReviewPackVerifier::class)
+                ->verify((string) $reviewPack);
+            if (! $result['ok']) {
+                $this->error('Экспорт остановлен до записи файлов: '.$result['message'].' ['.$result['code'].']');
+                return self::FAILURE;
+            }
+        }
+        if ($preflightStrict
             && app(\App\Support\MuseumContentPreflight::class)->report()['errors'] > 0) {
             $this->error('Предпубликационная проверка выявила критические ошибки. Экспорт не выполнялся. См. museum:preflight.');
             return self::FAILURE;
         }
-        $output = $this->option('output') ?: base_path('../web/src/data/published.json');
-        $manifest = $this->option('manifest') ?: base_path('../web/public/snapshot-manifest.json');
-        $mediaDir = $this->option('media-output-dir') ?: base_path('../web/public/media');
         $mediaFiles = [];
-        $documentDir = $this->option('document-output-dir') ?: base_path('../web/public/documents');
         $documentFiles = [];
         $inspector = app(MuseumDocumentInspector::class);
 

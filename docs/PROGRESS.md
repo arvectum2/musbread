@@ -161,3 +161,7 @@ Generated 13 SVG technical grids, 13 preview PDFs with verified physical dimensi
 ## CP-46D — выгрузка частного редакторского пакета
 
 Реализован download `museum.content.release-review`, который агрегирует CP-42D...CP-45D только из подтверждённой локальной базы и текущего временного экспорта; JSON package+SHA256, проверка прав, без очереди, миграций и платных затрат. docs/CP46_RELEASE_REVIEW_PACK.md.
+
+## CP-47D — страховка при повторной редакторской правке
+
+На ArvectumSSD добавлен `museum:verify-review` и необязательный гейт `museum:export --review-pack`; сквозная проверка сверяет live CMS с предварительно скачанным полным администраторским JSON, local snapshot, SHA-256, preflight и запрещает старые пакеты до записи результата. Нет подтверждения клиентом, миграций и платных зависимостей. docs/CP47_REVIEW_FRESHNESS_GATE.md.
