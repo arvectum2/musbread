@@ -169,3 +169,7 @@ Unit `npm run test:search` покрывает русские нормализа�
 ## Mac mini — Python 3.15 и xlrd
 
 `python3 --version` = 3.15.0 (Homebrew), локальный `.venv/bin/python -c 'import xlrd'` = 2.0.2. `MUSEUM_XLS_PYTHON` через `config('museum.xls_python')` устраняет зависимость Laravel-тестов от PATH. `MuseumDocumentsTest` проходит при стандартном Homebrew PATH без подмены на `/usr/bin/python3`.
+
+## CP-49D — права редактора в журнале
+
+Feature-тесты: Editor с грантом видит/пишет к своей новости, не видит чужие комментарии или их количество, не может писать к событию/разделу, теряет право после detach и переноса записи в другую рубрику. Superuser продолжает писать к событиям/дереву, сохранены XSS, CSRF, SHA-256 и изолированные браузерные тесты.

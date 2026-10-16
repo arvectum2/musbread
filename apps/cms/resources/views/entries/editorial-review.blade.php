@@ -14,6 +14,9 @@ select,textarea,button{font:inherit;max-width:100%;padding:.5rem}textarea{width:
 <header><strong>MusBread · Внутренняя редакторская проверка</strong><p><a href="{{ route('museum.content.compare') }}">← Вернуться к сравнению версий</a></p></header>
 <main><h1>Замечания и решения по версии</h1>
 <p class="warning">Это журнал <strong>внутреннего рассмотрения прототипа</strong>, а не юридическое утверждение материалов музеем и не разрешение на релиз. Записи сохраняются неизменяемой историей.</p>
+@if($comparison['scope'] === 'assigned')
+<p class="warning">Показаны только материалы ваших назначенных разделов, которыми вы вправе управлять сейчас. События, дерево разделов и замечания по чужим материалам доступны только администратору.</p>
+@endif
 <p class="muted">Локальный исходный снимок: <code>{{ $comparison['baseline_sha256'] }}</code>. Подготовленный снимок: <code>{{ $comparison['candidate_sha256'] }}</code>.</p>
 @if($priorCount > 0)<p class="muted">Исторических замечаний к другим версиям: {{ $priorCount }}. Они не переносятся на текущую версию автоматически.</p>@endif
 @if($errors->any())<p role="alert" class="warning">{{ $errors->first() }}</p>@endif

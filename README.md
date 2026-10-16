@@ -211,3 +211,7 @@ CI без dev: 83 production-пакета, 0 dev, 9217 файлов и 136 ре�
 ## Локальное Python-окружение для XLS
 
 На Mac mini после обновления Homebrew используйте `bash scripts/setup_xls_python.sh`, затем настройте приватный `apps/cms/.env`: `MUSEUM_XLS_PYTHON=/absolute/path/to/musbread/.venv/bin/python`. Зависимость `xlrd==2.0.2` устанавливается только в локальный venv; конверсия XLS в production по-прежнему отключена. [docs/CP48_PYTHON_XLS_ENV.md](docs/CP48_PYTHON_XLS_ENV.md).
+
+## CP-49D — ограниченный редакторский журнал
+
+Сотрудник с назначенным разделом может проверять изменения только своих текущих материалов; чужая история и афиша/структура ему недоступны. Смена секции или отзыв гранта сразу прекращает доступ. [docs/CP49_SECTION_SCOPED_REVIEWS.md](docs/CP49_SECTION_SCOPED_REVIEWS.md).

@@ -29,7 +29,7 @@ article h3{font-size:1.05rem;margin:0 0 .3rem}article p{margin:.3rem 0}.state{fo
 @if($comparison['scope'] === 'assigned')
 <p class="warning">Редактору доступны изменения только в назначенных ему разделах; события отображаются по текущей модели полномочий MoonShine. Полный отчёт, включая структуру, доступен администратору.</p>
 @endif
-@if(\App\Support\MuseumSectionAccess::user()?->isSuperUser())
+@if(\App\Support\MuseumSectionAccess::user()?->isSuperUser() || count(\App\Support\MuseumSectionAccess::allowedIds(\App\Support\MuseumSectionAccess::user())) > 0)
 <p><a href="{{ route('museum.content.editorial-review') }}">Замечания и решения по версии →</a></p>
 @endif
 <p><a href="{{ route('museum.content.release-review') }}">Скачать единый JSON-пакет редакторской проверки</a></p>

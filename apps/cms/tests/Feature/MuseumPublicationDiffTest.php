@@ -448,7 +448,7 @@ class MuseumPublicationDiffTest extends TestCase
         $this->assertFileDoesNotExist($this->root.'/should-not-exist.json');
     }
 
-    public function test_editorial_notes_are_private_admin_only_and_version_bound(): void
+    public function test_editor_without_grants_cannot_access_notes_and_admin_notes_are_version_bound(): void
     {
         $entry = $this->article('internal-review');
         $this->baseline();
@@ -538,6 +538,128 @@ class MuseumPublicationDiffTest extends TestCase
             ->assertSee('Исторических замечаний к другим версиям: 1')
             ->assertDontSee('Проверено по старому макету');
         $this->assertDatabaseCount('museum_editorial_review_notes', 1);
+    }
+
+    public function test_granted_editor_can_review_only_currently_owned_entry_not_events_or_other_sections(): void
+    {
+        $mine = MuseumSection::create(['slug' => 'review-mine', 'title' => 'Своя рубрика', 'status' => 'published']);
+        $foreign = MuseumSection::create(['slug' => 'review-foreign', 'title' => 'Чужая рубрика', 'status' => 'published']);
+        $own = $this->article('mine-approval', section: $mine->id);
+        $hidden = $this->article('classified-approval', section: $foreign->id);
+        $event = $this->event('general-event-review');
+        $this->baseline();
+        $own->update(['title' => 'Доступный материал']);
+        $hidden->update(['title' => 'Совершенно секретный материал']);
+        $event->update(['title' => 'Секретная афиша']);
+        $admin = MoonshineUser::factory()->create();
+        $full = app(MuseumPublicationDiff::class)->report($admin);
+        foreach (['mine-approval' => 'Примечание к своему', 'classified-approval' => 'Скрытая записка'] as $slug => $comment) {
+            MuseumEditorialReviewNote::query()->create([
+                'baseline_sha256' => $full['baseline_sha256'],
+                'candidate_sha256' => $full['candidate_sha256'],
+                'item_group' => 'entries', 'item_key' => 'news:'.$slug,
+                'decision' => 'comment', 'note' => $comment,
+                'actor_id' => $admin->id,
+            ]);
+        }
+        MuseumEditorialReviewNote::query()->create([
+            'baseline_sha256' => str_repeat('1', 64), 'candidate_sha256' => str_repeat('2', 64),
+            'item_group' => 'entries', 'item_key' => 'news:classified-approval',
+            'decision' => 'comment', 'note' => 'Старая секретная записка', 'actor_id' => $admin->id,
+        ]);
+        $role = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $mine->editors()->attach($editor->id);
+        $this->actingAs($editor, 'moonshine');
+        $this->get(route('museum.content.compare'))->assertOk()
+            ->assertSee('Замечания и решения по версии');
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('Доступный материал')->assertSee('Примечание к своему')
+            ->assertDontSee('classified-approval')->assertDontSee('Совершенно секретный материал')
+            ->assertDontSee('Скрытая записка')->assertDontSee('Старая секретная записка')
+            ->assertDontSee('Секретная афиша')->assertDontSee('review-foreign')
+            ->assertDontSee('Исторических замечаний к другим версиям');
+        $payload = [
+            'baseline_sha256' => $full['baseline_sha256'],
+            'candidate_sha256' => $full['candidate_sha256'],
+            'item_group' => 'entries', 'item_key' => 'news:mine-approval',
+            'decision' => 'needs_changes', 'note' => 'Уточнить подпись в своём разделе',
+        ];
+        $this->post(route('museum.content.editorial-review.store'), $payload)
+            ->assertRedirect(route('museum.content.editorial-review'));
+        $this->assertDatabaseHas('museum_editorial_review_notes', [
+            'item_key' => 'news:mine-approval', 'actor_id' => $editor->id,
+            'note' => 'Уточнить подпись в своём разделе',
+        ]);
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$payload, 'item_key' => 'news:classified-approval',
+        ])->assertUnprocessable();
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$payload, 'item_group' => 'events', 'item_key' => 'general-event-review',
+        ])->assertUnprocessable();
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$payload, 'item_group' => 'sections', 'item_key' => 'review-mine',
+        ])->assertUnprocessable();
+        $this->assertDatabaseCount('museum_editorial_review_notes', 4);
+        $this->assertSame(0, MuseumPublicationRun::count());
+    }
+
+    public function test_revocation_and_cross_section_move_prevent_old_editor_reviews(): void
+    {
+        $mine = MuseumSection::create(['slug' => 'revoked-mine', 'title' => 'Разрешено', 'status' => 'published']);
+        $foreign = MuseumSection::create(['slug' => 'revoked-other', 'title' => 'Запрещено', 'status' => 'published']);
+        $moving = $this->article('moving-away', section: $mine->id);
+        $still = $this->article('still-mine', section: $mine->id);
+        $this->baseline();
+        $moving->update(['museum_section_id' => $foreign->id, 'title' => 'Передан другому редактору']);
+        $still->update(['title' => 'Оставшийся материал']);
+        $admin = MoonshineUser::factory()->create();
+        $full = app(MuseumPublicationDiff::class)->report($admin);
+        $role = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $mine->editors()->attach($editor->id);
+        $this->actingAs($editor, 'moonshine');
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('Оставшийся материал')
+            ->assertDontSee('Передан другому редактору')->assertDontSee('moving-away');
+        $payload = [
+            'baseline_sha256' => $full['baseline_sha256'],
+            'candidate_sha256' => $full['candidate_sha256'],
+            'item_group' => 'entries', 'item_key' => 'news:moving-away',
+            'decision' => 'checked', 'note' => 'Попытка отметить чужой материал',
+        ];
+        $this->post(route('museum.content.editorial-review.store'), $payload)
+            ->assertUnprocessable();
+        $mine->editors()->detach($editor->id);
+        $this->get(route('museum.content.editorial-review'))->assertForbidden();
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$payload, 'item_key' => 'news:still-mine',
+        ])->assertForbidden();
+        $this->assertDatabaseCount('museum_editorial_review_notes', 0);
+    }
+
+    public function test_admin_still_reviews_events_and_structure_without_section_grants(): void
+    {
+        $section = MuseumSection::create(['slug' => 'admin-structure', 'title' => 'Музейная структура', 'status' => 'published']);
+        $this->article('admin-review-page', section: $section->id);
+        $event = $this->event('admin-event-review');
+        $this->baseline();
+        $event->update(['title' => 'Обновлённая афиша']);
+        $section->update(['title' => 'Обновлённая структура']);
+        $admin = MoonshineUser::factory()->create();
+        $report = app(MuseumPublicationDiff::class)->report($admin);
+        $this->actingAs($admin, 'moonshine');
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('Обновлённая афиша')->assertSee('Обновлённая структура');
+        foreach ([['events', 'admin-event-review'], ['sections', 'admin-structure']] as [$group, $key]) {
+            $this->post(route('museum.content.editorial-review.store'), [
+                'baseline_sha256' => $report['baseline_sha256'],
+                'candidate_sha256' => $report['candidate_sha256'],
+                'item_group' => $group, 'item_key' => $key,
+                'decision' => 'comment', 'note' => 'Проверка администратором',
+            ])->assertRedirect(route('museum.content.editorial-review'));
+        }
+        $this->assertDatabaseCount('museum_editorial_review_notes', 2);
     }
 
     public function test_anonymous_user_cannot_access_comparison_or_trigger_export(): void
