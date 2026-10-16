@@ -1,16 +1,22 @@
-import { content, events, sections } from "./content";
+import { content } from "./content";
 import { guidePages, menuGroups } from "./navigation";
-import { indexableText, rankSearch, type SearchItem } from "./search-core";
+import { museumReference } from "./museum-reference";
+import { buildPublicSearchIndex, rankSearch, type SearchItem } from "./search-core";
 
-/** Content is from the public SHA256-verified snapshot; never query private CMS. */
-export const searchItems: readonly SearchItem[] = [
-  ...menuGroups.map((g) => ({ title: g.title, href: "/guide/" + g.slug + "/", section: "Раздел", excerpt: g.children.map((x) => x.title).join(", ") })),
-  ...guidePages.map((p) => ({ title: p.title, href: p.href, section: p.group.title, excerpt: p.legacyPath ? "Справочный раздел музея" : "Раздел нового сайта" })),
-  ...events.map((e) => ({ title: e.title, href: "/events/" + e.slug + "/", section: "Афиша", excerpt: e.excerpt, bodyText: indexableText(e.body) })),
-  ...content.entries.flatMap((entry) => Object.entries(sections)
-    .filter(([, section]) => section.type === entry.type)
-    .map(([section]) => ({ title: entry.title, href: "/" + section + "/" + entry.slug + "/", section: sections[section as keyof typeof sections].title, excerpt: entry.excerpt ?? "", bodyText: indexableText(entry.body) }))),
-];
+/** The same immutable public snapshot used for page rendering, never private CMS. */
+// The same factual snippets actually shown on these navigation pages.
+const visitorFacts = [museumReference.address, museumReference.metro, museumReference.phone,
+  museumReference.email, museumReference.openingHours, museumReference.admissionHours,
+  museumReference.closedDay, museumReference.sanitaryDay].join(" ");
+export const searchItems: readonly SearchItem[] = buildPublicSearchIndex(content, {
+  menuGroups, guidePages,
+  guideSearchText: {
+    "/guide/museum-contacts/": visitorFacts,
+    "/guide/plan-visit/": visitorFacts,
+    "/guide/tickets-and-benefits/": visitorFacts,
+    "/guide/accessible-museum/": "В музее имеются пандусы и подъёмник, экспозиции первого и второго этажей. " + museumReference.phone,
+  },
+});
 
 export function museumSearch(query: string, limit = 8): SearchItem[] {
   return rankSearch(searchItems, query, limit);
