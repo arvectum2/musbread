@@ -16,7 +16,7 @@ final class MuseumEventDetailPage extends DetailPage
     {
         return [
             ID::make(), Text::make('Название', 'title'),
-            Text::make('Тип', 'category'), Date::make('Дата', 'starts_at'),
+            Text::make('Тип', 'category'), Date::make('Начало', 'starts_at'), Date::make('Окончание', 'ends_at'),
             Text::make('Статус', 'status'),
             Textarea::make('Описание', 'body'),
         ];

@@ -112,6 +112,7 @@ class ExportMuseumSnapshot extends Command
                 'slug' => $event->slug, 'title' => $event->title,
                 'category' => $event->category,
                 'date' => $event->starts_at->format('Y-m-d'),
+                'ends_on' => $event->ends_at?->format('Y-m-d'),
                 'excerpt' => $event->excerpt, 'body' => $event->body,
             ];
             $related = $publicLinks($event->relatedEntries, $entryById, $entryLink);

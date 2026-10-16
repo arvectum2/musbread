@@ -25,7 +25,8 @@ final class MuseumEventFormPage extends FormPage
                 Text::make('Название', 'title')->required(),
                 Text::make('URL (латиница, через дефис)', 'slug')->required(),
                 Text::make('Категория', 'category')->required(),
-                Date::make('Дата события', 'starts_at')->required(),
+                Date::make('Дата начала', 'starts_at')->required(),
+                Date::make('Дата окончания (если событие многодневное)', 'ends_at')->nullable(),
                 Textarea::make('Анонс', 'excerpt')->required(),
                 Textarea::make('Описание', 'body')->required(),
                 Select::make('Статус', 'status')
@@ -45,6 +46,7 @@ final class MuseumEventFormPage extends FormPage
             'title' => ['required', 'string', 'max:255'],
             'category' => ['required', 'string', 'max:255'],
             'starts_at' => ['required', 'date'],
+            'ends_at' => ['nullable', 'date', 'after_or_equal:starts_at'],
             'excerpt' => ['required', 'string'],
             'body' => ['required', 'string'],
             'status' => ['required', 'in:draft,published'],

@@ -79,6 +79,18 @@ class MuseumEventAndLinkPreflightTest extends TestCase
         $this->assertSame('', $ready->fresh()->title); // no mutation by preflight
     }
 
+    public function test_invalid_event_date_range_is_a_critical_preflight_error(): void
+    {
+        $event = $this->event('invalid-end-range');
+        $event->update(['starts_at' => '2026-11-20', 'ends_at' => '2026-11-18']);
+        $row = $this->eventRow($event);
+        $this->assertContains('event_date_range_invalid', $this->codes($row));
+        $this->artisan('museum:preflight', ['--strict' => true])->assertFailed();
+        $event->update(['ends_at' => '2026-11-25']);
+        $this->assertNotContains('event_date_range_invalid', $this->codes($this->eventRow($event)));
+        $this->artisan('museum:preflight', ['--strict' => true])->assertSuccessful();
+    }
+
     public function test_strict_export_stops_before_writing_for_ready_event_but_not_future_event(): void
     {
         $ready = $this->event('missing-description');

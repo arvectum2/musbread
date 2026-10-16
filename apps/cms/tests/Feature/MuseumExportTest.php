@@ -40,6 +40,33 @@ class MuseumExportTest extends TestCase
         unlink($manifest);
     }
 
+    public function test_multiday_event_is_exported_with_end_date_without_leaking_unpublished_records(): void
+    {
+        MuseumEvent::create([
+            'slug' => 'multiday-exhibition', 'title' => 'Несколько дней', 'category' => 'Выставка',
+            'starts_at' => '2026-11-05', 'ends_at' => '2026-11-19',
+            'status' => 'published', 'published_at' => now()->subDay(),
+            'excerpt' => 'Анонс', 'body' => 'Программа',
+        ]);
+        MuseumEvent::create([
+            'slug' => 'hidden-exhibition', 'title' => 'Скрыто', 'category' => 'Выставка',
+            'starts_at' => '2026-11-05', 'ends_at' => '2026-11-19',
+            'status' => 'draft', 'excerpt' => 'Анонс', 'body' => 'Программа',
+        ]);
+        $out = storage_path('framework/testing/event-range.json');
+        $manifest = storage_path('framework/testing/event-range-manifest.json');
+        try {
+            $this->artisan('museum:export', ['--output' => $out, '--manifest' => $manifest])->assertSuccessful();
+            $data = json_decode(file_get_contents($out), true, flags: JSON_THROW_ON_ERROR);
+            $this->assertCount(1, $data['events']);
+            $this->assertSame('2026-11-05', $data['events'][0]['date']);
+            $this->assertSame('2026-11-19', $data['events'][0]['ends_on']);
+            $this->assertStringNotContainsString('hidden-exhibition', file_get_contents($out));
+        } finally {
+            @unlink($out); @unlink($manifest);
+        }
+    }
+
     public function test_only_approved_records_leave_the_private_cms(): void
     {
         $fixture = [

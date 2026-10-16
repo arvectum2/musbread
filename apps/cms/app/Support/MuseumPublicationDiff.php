@@ -15,7 +15,7 @@ final class MuseumPublicationDiff
     private const LABELS = [
         'title' => 'Название', 'h1' => 'H1', 'slug' => 'URL', 'type' => 'Тип',
         'excerpt' => 'Анонс', 'body' => 'Основной текст', 'category' => 'Категория',
-        'date' => 'Дата события', 'seo_title' => 'SEO-заголовок',
+        'date' => 'Дата начала', 'ends_on' => 'Дата окончания', 'seo_title' => 'SEO-заголовок',
         'seo_description' => 'SEO-описание', 'parent_slug' => 'Родитель',
         'section_slug' => 'Раздел', 'sort_order' => 'Порядок',
         'media' => 'Изображения', 'documents' => 'Документы',

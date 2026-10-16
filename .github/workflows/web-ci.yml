@@ -123,6 +123,8 @@ jobs:
         run: npm run test:integrations
       - name: Static global search index and multi-word relevance
         run: npm run test:search
+      - name: TZ-154 published event archive and date classification
+        run: npm run test:events
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'

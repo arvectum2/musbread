@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class MuseumEvent extends Model
 {
     protected $fillable = [
-        'slug', 'title', 'category', 'starts_at', 'excerpt', 'body',
+        'slug', 'title', 'category', 'starts_at', 'ends_at', 'excerpt', 'body',
         'status', 'published_at', 'seo_title', 'seo_description',
     ];
 
     protected function casts(): array
     {
-        return ['starts_at' => 'date', 'published_at' => 'datetime'];
+        return ['starts_at' => 'date', 'ends_at' => 'date', 'published_at' => 'datetime'];
     }
 
     protected static function booted(): void

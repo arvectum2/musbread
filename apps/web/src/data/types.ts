@@ -12,6 +12,7 @@ export interface MuseumEvent {
   title: string;
   category: string;
   date: string;
+  ends_on?: string | null;
   related_entries?: MuseumRelatedEntry[];
   excerpt: string;
   body: string;

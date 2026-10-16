@@ -110,6 +110,7 @@ final class MuseumContentPreflight
             $events[] = [
                 'id' => $event->id, 'title' => $event->title, 'slug' => $event->slug,
                 'category' => $event->category, 'starts_at' => $event->starts_at?->format('Y-m-d'),
+                'ends_at' => $event->ends_at?->format('Y-m-d'),
                 'state' => $state, 'issues' => $issues,
                 'error_count' => $errorCount, 'warning_count' => $warningCount,
             ];
@@ -146,10 +147,13 @@ final class MuseumContentPreflight
         if (! $this->validSlug($event->slug)) $add('error', 'event_slug_invalid', 'Неверный URL события.');
         if (trim((string) $event->category) === '') $add('error', 'event_category_missing', 'Не задана категория события.');
         if ($event->starts_at === null) $add('error', 'event_date_missing', 'Не задана дата события.');
+        if ($event->ends_at !== null && $event->starts_at !== null && $event->ends_at->isBefore($event->starts_at)) {
+            $add('error', 'event_date_range_invalid', 'Дата окончания раньше даты начала.');
+        }
         if (! $this->hasText($event->excerpt)) $add('error', 'event_excerpt_missing', 'Не заполнен анонс события.');
         if (! $this->hasText($event->body)) $add('error', 'event_body_missing', 'Не заполнено описание события.');
-        if ($event->starts_at !== null && $event->starts_at->isBefore(today())) {
-            $add('warning', 'event_past', 'Дата события уже прошла: проверьте, нужно ли оставлять его в афише.');
+        if (($event->ends_at ?? $event->starts_at)?->isBefore(today())) {
+            $add('warning', 'event_past', 'Событие завершилось: сохраните в публичном архиве, если публикация одобрена.');
         }
         if (trim((string) $event->seo_title) === '') {
             $add('warning', 'event_seo_title_missing', 'Нет SEO-заголовка события: будет применён шаблон сайта.');

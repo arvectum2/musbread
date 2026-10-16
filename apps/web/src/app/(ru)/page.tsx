@@ -1,5 +1,5 @@
 import Link from "next/link";
-import EventCard from "@/components/EventCard";
+import EventAgenda from "@/components/EventAgenda";
 import { content, events } from "@/data/content";
 export default function Home() {
   return <>
@@ -18,7 +18,7 @@ export default function Home() {
     </section>
     <section className="section events-section">
       <div className="section-title-row"><div><span className="eyebrow">02 / СОБЫТИЯ</span><h2>Афиша музея</h2></div><Link className="text-link" href="/events/">Вся афиша <span aria-hidden="true">↗</span></Link></div>
-      <div className="events-grid">{events.map((event,index)=><EventCard event={event} index={index} key={event.slug}/>)}</div>
+      <EventAgenda events={events} buildDay={new Date().toISOString().slice(0, 10)} variant="featured" />
     </section>
     <section className="section visit-info">
       <div className="section-title-row"><div><span className="eyebrow">ПОСЕЩЕНИЕ МУЗЕЯ</span><h2>Спланировать визит</h2></div></div>

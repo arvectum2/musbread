@@ -17,6 +17,44 @@ test("главная и музейные разделы открываются",
   await expect(page.getByRole("heading", { name: "История музея (тест)" })).toBeVisible();
 });
 
+test("TZ-154: прошедшие события доступны в архиве и по исходным URL", async ({ page }) => {
+  await page.clock.setFixedTime(new Date("2026-12-02T12:00:00Z"));
+  await page.goto("/events/", { waitUntil: "networkidle" });
+  const list = page.getByRole("region", { name: "Список мероприятий" });
+  await expect(list).toHaveAttribute("data-ready", "true");
+  await expect(list).toContainText("Предстоящих мероприятий пока нет");
+  await expect(list.locator(".event-card")).toHaveCount(0);
+  await list.getByRole("button", { name: /Архив/ }).press("Enter");
+  await expect(list.getByRole("button", { name: /Архив/ })).toHaveAttribute("aria-pressed", "true");
+  await expect(list.locator(".event-card")).toHaveCount(3);
+  await expect(list.locator(".event-card").first()).toContainText("Выставка о хлебопечении");
+  await list.getByRole("button", { name: /Все/ }).press("Enter");
+  await expect(list.locator(".event-card")).toHaveCount(3);
+  await page.goto("/events/bread-history/");
+  await expect(page.getByRole("heading", { name: "История хлеба" })).toBeVisible();
+  await page.goto("/");
+  const home = page.getByRole("region", { name: "Ближайшие мероприятия" });
+  await expect(home).toHaveAttribute("data-ready", "true");
+  await expect(home.locator(".event-card")).toHaveCount(0);
+});
+
+test("TZ-154: мероприятие сегодняшнего дня ещё актуально, на следующий день архивируется", async ({ page }) => {
+  await page.clock.setFixedTime(new Date("2026-11-05T12:00:00Z"));
+  await page.goto("/events/", { waitUntil: "networkidle" });
+  const list = page.getByRole("region", { name: "Список мероприятий" });
+  await expect(list).toHaveAttribute("data-ready", "true");
+  await expect(list.locator(".event-card")).toHaveCount(3);
+  await list.getByRole("button", { name: /Архив/ }).press("Enter");
+  await expect(list.locator(".event-card")).toHaveCount(0);
+  await page.clock.setFixedTime(new Date("2026-11-06T12:00:00Z"));
+  await page.reload({ waitUntil: "networkidle" });
+  await expect(list).toHaveAttribute("data-ready", "true");
+  await expect(list.locator(".event-card")).toHaveCount(2);
+  await list.getByRole("button", { name: /Архив/ }).press("Enter");
+  await expect(list.locator(".event-card")).toHaveCount(1);
+  await expect(list).toContainText("История хлеба");
+});
+
 test("поиск по афише работает с клавиатуры", async ({ page }) => {
   // Static export loads route chunks asynchronously. Wait for scripts before
   // asserting that client-side search handlers are attached.
