@@ -290,6 +290,25 @@ test("CP-44D: реальная CMS сравнивает новые матери�
   expect(urlCsv.status()).toBe(200);
   expect(urlCsv.headers()["content-type"]).toContain("text/csv");
   expect(await urlCsv.text()).toContain("Старый URL");
+  // CP-48D: continue in the SAME logged-in browser session; the security
+  // middleware intentionally allows no more than 8 login attempts/minute.
+  const csrfDenied = await page.request.post("/admin/museum-content/review-notes", {
+    data: { item_key: "news:qa-browser-news", note: "Без CSRF" },
+  });
+  expect(csrfDenied.status()).toBe(419);
+  await page.getByRole("link", { name: "Замечания и решения по версии" }).click();
+  await expect(page).toHaveURL(/\/admin\/museum-content\/review-notes$/);
+  await expect(page.getByRole("heading", { name: "Замечания и решения по версии" })).toBeVisible();
+  const noteItem = page.locator("article").filter({ hasText: "news:qa-browser-news" });
+  await expect(noteItem).toBeVisible();
+  await noteItem.locator('select[name="decision"]').selectOption("needs_changes");
+  await noteItem.locator('textarea[name="note"]').fill("QA: проверить доступность фотографии перед выпуском");
+  await noteItem.getByRole("button", { name: "Записать замечание" }).click();
+  await expect(page).toHaveURL(/\/admin\/museum-content\/review-notes$/);
+  const noteResult = page.locator("article").filter({ hasText: "news:qa-browser-news" });
+  await expect(noteResult).toContainText("Требуются изменения");
+  await expect(noteResult).toContainText("QA: проверить доступность фотографии перед выпуском");
+  await page.goto("/admin/museum-content/compare");
   await page.getByRole("link", { name: "Открыть подробный отчёт" }).click();
   await expect(page).toHaveURL(/\/admin\/museum-content\/preflight$/);
 });

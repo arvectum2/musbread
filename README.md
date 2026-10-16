@@ -203,3 +203,11 @@ CI без dev: 83 production-пакета, 0 dev, 9217 файлов и 136 ре�
 ## CP-47D — повторная проверка актуальности пакета
 
 Приватный пакет CP-46D можно перепроверить на Mac mini: `php artisan museum:verify-review /path/to/review.json` (`--json`). Ручная выгрузка `museum:export --preflight-strict --review-pack=/path/to/review.json` не запишет файлы, если пакет устарел, повреждён или содержит критичные ошибки; без флага старый экспорт не изменён. Это **не** юридическое согласование клиентом. [docs/CP47_REVIEW_FRESHNESS_GATE.md](docs/CP47_REVIEW_FRESHNESS_GATE.md).
+
+## CP-48D — история редакторских замечаний
+
+В закрытом сравнении версий `/admin/museum-content/compare` администратор может перейти к «Замечания и решения по версии», где комментарии и внутренние проверки привязаны к SHA-256 снимка, добавляются в журнал без редактирования и не переносятся при новых правках. Это не юридическое утверждение музея или команда публикации. [docs/CP48_EDITORIAL_REVIEW_NOTES.md](docs/CP48_EDITORIAL_REVIEW_NOTES.md).
+
+## Локальное Python-окружение для XLS
+
+На Mac mini после обновления Homebrew используйте `bash scripts/setup_xls_python.sh`, затем настройте приватный `apps/cms/.env`: `MUSEUM_XLS_PYTHON=/absolute/path/to/musbread/.venv/bin/python`. Зависимость `xlrd==2.0.2` устанавливается только в локальный venv; конверсия XLS в production по-прежнему отключена. [docs/CP48_PYTHON_XLS_ENV.md](docs/CP48_PYTHON_XLS_ENV.md).

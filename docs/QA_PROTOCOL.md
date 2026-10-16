@@ -161,3 +161,11 @@ Unit `npm run test:search` покрывает русские нормализа�
 ## CP-47D — актуальность JSON отчёта и защита экспорта
 
 Тесты `MuseumPublicationDiffTest`: загрузка отчёта через собственную авторизованную CMS, машинная/CLI проверка, успешный экспорт с нестандартными output/media/document destinations, коррекция текста после отчёта и неизменные sentinel snapshot+manifest, подмена JSON с/без нового SHA-256, отказ Editor scope, отсутствие verified baseline, невалидный путь/симлинк и критичная ошибка. Экспорт без `--review-pack` не изменяется.
+
+## CP-48D — приватные замечания и противодействие устаревшим решениям
+
+`MuseumPublicationDiffTest`: полный admin-only доступ, CSRF в браузере, запись истории, запрет скрытых/неизменённых ключей, подмены actor/status/SHA, XSS и раскрытия старых комментариев в новой версии. `scripts/qa_cms_browser.py` проверяет сохранение замечания в реальном MoonShine; статический экспорт не содержит эти записи.
+
+## Mac mini — Python 3.15 и xlrd
+
+`python3 --version` = 3.15.0 (Homebrew), локальный `.venv/bin/python -c 'import xlrd'` = 2.0.2. `MUSEUM_XLS_PYTHON` через `config('museum.xls_python')` устраняет зависимость Laravel-тестов от PATH. `MuseumDocumentsTest` проходит при стандартном Homebrew PATH без подмены на `/usr/bin/python3`.

@@ -10,4 +10,6 @@ return [
     'entry_body_editor' => env('MUSEUM_ENTRY_BODY_EDITOR', 'tinymce'),
     // Only local verified pre-award releases; never infer live customer deployment.
     'local_release_root' => env('MUSEUM_LOCAL_RELEASE_ROOT', base_path('../../deploy/local')),
+    // Pinned project Python for optional legacy XLS normalization in non-production.
+    'xls_python' => env('MUSEUM_XLS_PYTHON', 'python3'),
 ];

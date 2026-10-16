@@ -1,0 +1,2 @@
+# Pure-Python legacy XLS reader; pinned for reproducible local CMS normalization.
+xlrd==2.0.2

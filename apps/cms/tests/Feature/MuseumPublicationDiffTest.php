@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\MuseumEntry;
+use App\Models\MuseumEditorialReviewNote;
 use App\Models\MuseumEvent;
 use App\Models\MuseumPublicationRun;
 use App\Models\MuseumSection;
@@ -445,6 +446,98 @@ class MuseumPublicationDiffTest extends TestCase
             '--manifest' => $this->root.'/should-not-exist-manifest.json',
         ])->assertFailed();
         $this->assertFileDoesNotExist($this->root.'/should-not-exist.json');
+    }
+
+    public function test_editorial_notes_are_private_admin_only_and_version_bound(): void
+    {
+        $entry = $this->article('internal-review');
+        $this->baseline();
+        $entry->update(['title' => 'Изменённая версия']);
+        $comparison = app(MuseumPublicationDiff::class)->report(MoonshineUser::factory()->create());
+        $request = [
+            'baseline_sha256' => $comparison['baseline_sha256'],
+            'candidate_sha256' => $comparison['candidate_sha256'],
+            'item_group' => 'entries', 'item_key' => 'news:internal-review',
+            'decision' => 'needs_changes', 'note' => '<script>bad()</script> Исправить подпись',
+        ];
+        $this->get(route('museum.content.editorial-review'))->assertRedirect('/admin/login');
+        $this->post(route('museum.content.editorial-review.store'), $request)->assertRedirect('/admin/login');
+        $role = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $this->actingAs($editor, 'moonshine');
+        $this->get(route('museum.content.editorial-review'))->assertForbidden();
+        $this->post(route('museum.content.editorial-review.store'), $request)->assertForbidden();
+        $this->assertDatabaseCount('museum_editorial_review_notes', 0);
+        $admin = MoonshineUser::factory()->create();
+        $this->actingAs($admin, 'moonshine');
+        $this->get(route('museum.content.compare'))->assertOk()->assertSee('Замечания и решения по версии');
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('Изменённая версия')
+            ->assertHeader('X-Robots-Tag', 'noindex, nofollow, noarchive')
+            ->assertHeader('Cache-Control', 'max-age=0, no-store, private');
+        $this->post(route('museum.content.editorial-review.store'), $request)->assertRedirect(route('museum.content.editorial-review'));
+        $saved = MuseumEditorialReviewNote::query()->firstOrFail();
+        $this->assertSame('needs_changes', $saved->decision);
+        $this->assertSame($admin->id, $saved->actor_id);
+        $this->assertSame($request['candidate_sha256'], $saved->candidate_sha256);
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('&lt;script&gt;bad()&lt;/script&gt;', false)
+            ->assertDontSee('<script>bad()</script>', false);
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$request, 'decision' => 'checked', 'note' => 'Проверено, требуется решение музея',
+        ])->assertRedirect(route('museum.content.editorial-review'));
+        $this->assertDatabaseCount('museum_editorial_review_notes', 2);
+        $this->assertSame('needs_changes', $saved->fresh()->decision);
+        $this->assertSame(0, MuseumPublicationRun::count());
+    }
+
+    public function test_editorial_note_rejects_stale_hashes_unknown_keys_and_bad_inputs(): void
+    {
+        $entry = $this->article('review-key');
+        $this->baseline();
+        $entry->update(['title' => 'Новый заголовок']);
+        $admin = MoonshineUser::factory()->create();
+        $this->actingAs($admin, 'moonshine');
+        $report = app(MuseumPublicationDiff::class)->report($admin);
+        $data = [
+            'baseline_sha256' => $report['baseline_sha256'],
+            'candidate_sha256' => $report['candidate_sha256'],
+            'item_group' => 'entries', 'item_key' => 'news:review-key',
+            'decision' => 'comment', 'note' => 'Проверить фотоматериал',
+        ];
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$data, 'item_key' => 'news:unknown',
+        ])->assertUnprocessable();
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$data, 'decision' => 'approved',
+        ])->assertSessionHasErrors('decision');
+        $this->post(route('museum.content.editorial-review.store'), [
+            ...$data, 'note' => str_repeat('a', 1201),
+        ])->assertSessionHasErrors('note');
+        $entry->update(['title' => 'Ещё одна правка']);
+        $this->post(route('museum.content.editorial-review.store'), $data)->assertStatus(409);
+        $this->assertDatabaseCount('museum_editorial_review_notes', 0);
+    }
+
+    public function test_editorial_notes_do_not_carry_over_or_block_changed_snapshot(): void
+    {
+        $entry = $this->article('review-history');
+        $this->baseline();
+        $entry->update(['body' => 'Новая версия']);
+        $admin = MoonshineUser::factory()->create();
+        $this->actingAs($admin, 'moonshine');
+        $report = app(MuseumPublicationDiff::class)->report($admin);
+        $this->post(route('museum.content.editorial-review.store'), [
+            'baseline_sha256' => $report['baseline_sha256'],
+            'candidate_sha256' => $report['candidate_sha256'],
+            'item_group' => 'entries', 'item_key' => 'news:review-history',
+            'decision' => 'checked', 'note' => 'Проверено по старому макету',
+        ])->assertRedirect();
+        $entry->update(['body' => 'Совсем новый вариант']);
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('Исторических замечаний к другим версиям: 1')
+            ->assertDontSee('Проверено по старому макету');
+        $this->assertDatabaseCount('museum_editorial_review_notes', 1);
     }
 
     public function test_anonymous_user_cannot_access_comparison_or_trigger_export(): void

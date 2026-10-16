@@ -17,3 +17,6 @@ test-results/
 /apps/web/.csp-header.txt
 
 __pycache__/
+
+# Local Python environment with pinned XLS converter dependencies
+/.venv/

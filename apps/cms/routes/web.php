@@ -19,6 +19,8 @@ Route::middleware(\MoonShine\Laravel\Http\Middleware\Authenticate::class)->group
     Route::get('/admin/museum-events/{event}/preview', [\App\Http\Controllers\MuseumEventPreviewController::class, 'show'])->name('museum.events.preview');
     Route::get('/admin/museum-content/removed-urls.csv', [\App\Http\Controllers\MuseumRemovedUrlsController::class, 'download'])->name('museum.content.removed-urls');
     Route::get('/admin/museum-content/release-review.json', [\App\Http\Controllers\MuseumReleaseReviewPackController::class, 'download'])->name('museum.content.release-review');
+    Route::get('/admin/museum-content/review-notes', [\App\Http\Controllers\MuseumEditorialReviewNotesController::class, 'index'])->name('museum.content.editorial-review');
+    Route::post('/admin/museum-content/review-notes', [\App\Http\Controllers\MuseumEditorialReviewNotesController::class, 'store'])->name('museum.content.editorial-review.store');
     Route::get('/admin/museum-content/compare', [\App\Http\Controllers\MuseumPublicationDiffController::class, 'index'])->name('museum.content.compare');
     Route::get('/admin/museum-content/preflight', [\App\Http\Controllers\MuseumContentPreflightController::class, 'index'])->name('museum.content.preflight');
     Route::get('/admin/museum-entries/{entry}/relations', [\App\Http\Controllers\MuseumContentRelationsController::class, 'edit'])->name('museum.entries.relations.edit');

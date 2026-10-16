@@ -24,7 +24,7 @@ final class MuseumLegacySpreadsheetNormalizer
         }
         try {
             $process = new Process([
-                'python3', base_path('../../scripts/normalize_xls.py'),
+                (string) config('museum.xls_python', 'python3'), base_path('../../scripts/normalize_xls.py'),
                 '--input', $source, '--output', $output,
             ]);
             $process->setTimeout(9);
