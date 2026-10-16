@@ -261,5 +261,5 @@ CP-28D — внутренний предконтрактный спринт, н�
 - [x] Изолированный профиль аудитора строго сопоставляет фактически установленные Composer packages с `packages` production lock без `packages-dev`.
 - [x] Отрицательные тесты отклоняют dev metadata, лишние dev-пакеты при подмене metadata, недостающие production-пакеты и неизвестный профиль.
 - [x] В GitHub Actions добавлена отдельная job PHP 8.4/Linux: composer --no-dev, Laravel bootstrap, публикация UI-ассетов, SHA-256 каждого пакета и ассета, временный JSON-доказательный артефакт.
-- [ ] Прогон новой CI job должен быть зелёным; проверка в реальной Linux-среде музея отдельно после контракта.
+- [x] Проверено: CI run #38868022621 успешен; Linux: 83 production, 0 dev, 9217 Composer files, 136 CMS assets. Сервер музея проверяется отдельно после контракта.
 - [ ] Не закрыты GPL TinyMCE, Gilroy, compiled JS provenance, юридические права и acceptance; дизайн 0/113. 0 ₽, без Docker. Документ docs/CP36_LINUX_PRODUCTION_COMPOSER.md.

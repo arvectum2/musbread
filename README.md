@@ -155,3 +155,7 @@ The repository contains 13 separate editable SVG grids for A2/A3/A4 print carrie
 ## CP-35D — аудит фактической сборки
 
 Добавлен scripts/audit_built_artifacts.py: SHA-256 по файлам публичного Next, локального CMS vendor/public и source-only handoff ZIP, отдельные CI-артефакты. Найден реальный TinyMCE 7.2.1 GPL и 5 шрифтов Gilroy с неподтверждёнными правами. Исправлен private nginx: static MoonShine assets разрешены только по loopback, PHP и другие vendor-файлы закрыты. Формальный бинарный SBOM итогового Linux-сервера и юридическое approval пока отсутствуют. docs/CP35_BUILT_ARTIFACT_PROVENANCE.md.
+
+## CP-36D — Linux production Composer (предконтрактно)
+
+CI без dev: 83 production-пакета, 0 dev, 9217 файлов и 136 ресурсов закрытой CMS; проверены фактические версии и SHA-256. См. [CP36](docs/CP36_LINUX_PRODUCTION_COMPOSER.md). Договорная приёмка и права на TinyMCE/Gilroy остаются открытыми.
