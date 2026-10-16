@@ -26,6 +26,8 @@ class HandoffBundleTests(unittest.TestCase):
             self.assertIn("source/docs/REQUIREMENTS.md", z.namelist())
             self.assertIn(b"NOT_CREATED", z.read("STATUS.json"))
             self.assertIn(b"TARGET_CATALOG_ONLY_NO_MUSEUM_APPROVAL", z.read("STATUS.json"))
+            self.assertIn(b"NOT_OWNED_NOT_TRANSFERABLE_AS_OWN_WORK", z.read("STATUS.json"))
+            self.assertIn(b"INCOMPLETE_TECHNICAL_EXAMPLES_ONLY", z.read("STATUS.json"))
             self.assertIn(b"exclusive_rights_transferred", z.read("MANIFEST.json"))
 
     def test_reproducible_byte_for_byte(self):

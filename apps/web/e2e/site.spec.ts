@@ -18,7 +18,9 @@ test("главная и музейные разделы открываются",
 });
 
 test("поиск по афише работает с клавиатуры", async ({ page }) => {
-  await page.goto("/events/");
+  // Static export loads route chunks asynchronously. Wait for scripts before
+  // asserting that client-side search handlers are attached.
+  await page.goto("/events/", { waitUntil: "networkidle" });
   const search = page.getByRole("combobox", { name: "Поиск по событиям" });
   await expect(search).toHaveAttribute("data-ready", "true");
   await search.fill("экскурсия");
@@ -30,7 +32,9 @@ test("поиск по афише работает с клавиатуры", asyn
 });
 
 test("поиск: стрелки, Enter и Escape доступны без мыши", async ({ page }) => {
-  await page.goto("/events/");
+  // Static export loads route chunks asynchronously. Wait for scripts before
+  // asserting that client-side search handlers are attached.
+  await page.goto("/events/", { waitUntil: "networkidle" });
   const search = page.getByRole("combobox", { name: "Поиск по событиям" });
   await expect(search).toHaveAttribute("data-ready", "true");
   await search.fill("экскурсия");
@@ -47,7 +51,9 @@ test("поиск: стрелки, Enter и Escape доступны без мыш
 });
 
 test("поиск: отсутствие результатов сообщает статус, варианты скрыты", async ({ page }) => {
-  await page.goto("/events/");
+  // Static export loads route chunks asynchronously. Wait for scripts before
+  // asserting that client-side search handlers are attached.
+  await page.goto("/events/", { waitUntil: "networkidle" });
   const search = page.getByRole("combobox", { name: "Поиск по событиям" });
   await expect(search).toHaveAttribute("data-ready", "true");
   await search.fill("несуществующеесобытие");

@@ -25,3 +25,9 @@ DESIGN_DELIVERABLES.csv ведёт 113 будущих позиций (в том 
 ## CP-30D and customer rights
 
 The generated neutral SVG/PDF/PPTX geometry is pre-award technical preparation only. It is not an approved museum identity or legally accepted design. The use of open source python-pptx, pypdf and native librsvg requires license verification in the final third-party report before any rights transfer; their code itself is not exclusive Arvectum intellectual property.
+
+## CP-33D — нет завершённой юридической цепочки
+
+DEPENDENCY_RIGHTS_REPORT.md перечисляет отдельные заявленные лицензии и версии из Composer/npm, отмечая MIT интеграции MoonShine TinyMCE отдельно от GPL-2.0-or-later редактора, LGPL HTMLPurifier, Python и нативного стека. Нужно заключение юриста о способе распространения и выполнении условий, иначе итоговый акт прав подписывать нельзя.
+
+FINAL_FORMAT_READINESS.md содержит подтверждение структуры только технических 42 SVG/26 PDF/16 PNG/2 PPTX. Окончательные AI/EPS/PSD/TIFF/JPG/PPT и согласованный исходный дизайн отсутствуют. Нельзя включать непроверенные сторонние компоненты или технические черновики в перечень исключительных прав на собственные результаты разработки.

@@ -27,9 +27,25 @@ jobs:
         run: python3 scripts/generate_secondary_carriers.py --verify
       - name: Verify VK, website poster and merchandise editable SVG/PNG drafts
         run: python3 scripts/generate_digital_merch_carriers.py --verify
+      - name: Audit required final formats vs technical pre-award geometry
+        run: |
+          python3 -m scripts.audit_final_formats --verify-generated             --json docs/handoff/FINAL_FORMAT_READINESS.json             --markdown docs/handoff/FINAL_FORMAT_READINESS.md
+      - name: Audit lockfile declared licenses and TinyMCE GPL risk
+        run: |
+          python3 -m scripts.audit_dependency_rights --verify-generated             --json docs/handoff/DEPENDENCY_RIGHTS_REPORT.json             --markdown docs/handoff/DEPENDENCY_RIGHTS_REPORT.md
       - name: Verify required design carrier inventory and format evidence
         run: |
           python3 scripts/audit_design_delivery.py --check --verify-generated             --csv docs/handoff/DESIGN_DELIVERABLES.csv             --markdown docs/handoff/DESIGN_DELIVERABLES.md             --requests docs/handoff/CUSTOMER_INPUTS_AFTER_INTERVIEW.md             --json /tmp/musbread-design-handoff.json
+      - name: Save source format and rights pre-award audits
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-format-and-rights-readiness
+          path: |
+            docs/handoff/FINAL_FORMAT_READINESS.json
+            docs/handoff/FINAL_FORMAT_READINESS.md
+            docs/handoff/DEPENDENCY_RIGHTS_REPORT.json
+            docs/handoff/DEPENDENCY_RIGHTS_REPORT.md
+          retention-days: 7
       - name: Save design inventory (targets, NOT approved results)
         uses: actions/upload-artifact@v4
         with:

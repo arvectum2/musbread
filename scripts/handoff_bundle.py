@@ -133,6 +133,8 @@ def payload(commit: str, items: list[Item]) -> dict[str, bytes]:
         "museum_ticket_api": "NOT_CONNECTED",
         "museum_infrastructure": "NOT_DEPLOYED",
         "license_audit": "PENDING",
+        "third_party_components_exclusive_rights": "NOT_OWNED_NOT_TRANSFERABLE_AS_OWN_WORK",
+        "final_design_formats": "INCOMPLETE_TECHNICAL_EXAMPLES_ONLY",
         "design_deliverables": "TARGET_CATALOG_ONLY_NO_MUSEUM_APPROVAL",
         "design_signatures_not_proof_of_editability": True,
     })

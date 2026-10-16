@@ -1,0 +1,168 @@
+{
+  "mode": "PREAWARD_LOCKFILE_EVIDENCE_NO_LEGAL_CONCLUSION",
+  "contract_ready": false,
+  "third_party_exclusive_rights_transfer": false,
+  "all_licenses_legally_cleared": false,
+  "inventory_scope": "SELECTED_DIRECT_RUNTIME_AND_DESIGN_DEPENDENCIES_ONLY_NOT_FULL_SBOM",
+  "entries": [
+    {
+      "name": "ezyang/htmlpurifier",
+      "ecosystem": "composer",
+      "version": "v4.19.1",
+      "declared_licenses": [
+        "LGPL-2.1-or-later"
+      ],
+      "evidence": "apps/cms/composer.lock",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "REQUIRED"
+    },
+    {
+      "name": "laravel/framework",
+      "ecosystem": "composer",
+      "version": "v13.36.0",
+      "declared_licenses": [
+        "MIT"
+      ],
+      "evidence": "apps/cms/composer.lock",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
+    },
+    {
+      "name": "moonshine/moonshine",
+      "ecosystem": "composer",
+      "version": "4.19.5",
+      "declared_licenses": [
+        "MIT"
+      ],
+      "evidence": "apps/cms/composer.lock",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
+    },
+    {
+      "name": "moonshine/tinymce",
+      "ecosystem": "composer",
+      "version": "2.0.0",
+      "declared_licenses": [
+        "MIT"
+      ],
+      "evidence": "apps/cms/composer.lock",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
+    },
+    {
+      "name": "next",
+      "ecosystem": "npm",
+      "version": "16.4.1",
+      "declared_licenses": [
+        "MIT"
+      ],
+      "evidence": "apps/web/package-lock.json",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
+    },
+    {
+      "name": "react",
+      "ecosystem": "npm",
+      "version": "19.3.0",
+      "declared_licenses": [
+        "MIT"
+      ],
+      "evidence": "apps/web/package-lock.json",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
+    },
+    {
+      "name": "react-dom",
+      "ecosystem": "npm",
+      "version": "19.3.0",
+      "declared_licenses": [
+        "MIT"
+      ],
+      "evidence": "apps/web/package-lock.json",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
+    },
+    {
+      "name": "sanitize-html",
+      "ecosystem": "npm",
+      "version": "2.18.1",
+      "declared_licenses": [
+        "MIT"
+      ],
+      "evidence": "apps/web/package-lock.json",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
+    },
+    {
+      "name": "python-pptx",
+      "ecosystem": "python-design-only",
+      "version": "1.0.2",
+      "declared_licenses": [
+        "MIT"
+      ],
+      "evidence": "Installed python-pptx dist metadata on Mac mini; version pinned in requirements",
+      "direct_runtime": false,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "VERIFY_EXACT_LICENSE_AND_NOTICES"
+    },
+    {
+      "name": "pypdf",
+      "ecosystem": "python-design-only",
+      "version": "5.6.1",
+      "declared_licenses": [
+        "BSD family (classifier, exact version needs manual legal confirmation)"
+      ],
+      "evidence": "Installed pypdf dist metadata on Mac mini; version pinned in requirements",
+      "direct_runtime": false,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "VERIFY_EXACT_LICENSE_AND_NOTICES"
+    },
+    {
+      "name": "tinymce/embedded-runtime",
+      "ecosystem": "bundled-javascript",
+      "version": "UNVERIFIED_ASSET_VERSION",
+      "declared_licenses": [
+        "GPL-2.0-or-later"
+      ],
+      "evidence": "apps/cms/vendor/moonshine/tinymce/public/license.md (vendored, not tracked), independently listed in docs/THIRD_PARTY.md",
+      "direct_runtime": true,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "BLOCKS_EXCLUSIVE_IP_CLAIM_UNTIL_LEGAL_REVIEW_OR_REPLACEMENT"
+    },
+    {
+      "name": "librsvg/native-rsvg-convert",
+      "ecosystem": "native-build-tool",
+      "version": "SYSTEM_VERSION_NOT_PINNED",
+      "declared_licenses": [
+        "REQUIRES_NATIVE_PACKAGE_LICENSE_INVENTORY"
+      ],
+      "evidence": "Native Mac / Linux package outside locked application dependency tree",
+      "direct_runtime": false,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "CONFIRM_NATIVE_TOOL_LICENSES_AND_DISTRIBUTION_BEFORE_DELIVERY"
+    }
+  ],
+  "mandatory_reviews": [
+    "TinyMCE runtime GPL-2.0-or-later vs MIT integration: must assess distribution and replacement/obligations",
+    "HTMLPurifier LGPL-2.1-or-later: comply with notice, attribution and replacement rights",
+    "Original source copyright ownership/contractor IP chain and third-party content is NOT audited",
+    "Fonts and photos for customer-specific brand do not exist: actual licenses require documentation",
+    "Native libre renderer build tools and transitive npm/composer dependencies need a full SBOM before delivery",
+    "No library is transferred under exclusive Arvectum ownership; rights act must carve out all third party parts"
+  ],
+  "summary": {
+    "direct_php": 4,
+    "direct_web": 4,
+    "design_python": 2,
+    "embedded_gpl_bundles": 1,
+    "license_review_blockers": 6
+  }
+}

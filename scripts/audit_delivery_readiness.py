@@ -38,6 +38,9 @@ REQUIRED_PREAWARD = {
     "secondary_carriers_readme": "docs/design/technical-drafts/secondary/README.md",
     "digital_merch_specification": "docs/CP32_DIGITAL_VK_MERCH_TEMPLATES.md",
     "digital_merch_readme": "docs/design/technical-drafts/digital-merch/README.md",
+    "final_format_readiness": "docs/handoff/FINAL_FORMAT_READINESS.md",
+    "dependency_rights_readiness": "docs/handoff/DEPENDENCY_RIGHTS_REPORT.md",
+    "format_and_rights_protocol": "docs/CP33_FORMATS_RIGHTS_AUDIT.md",
 }
 
 # Explicit, non-inferable real-world requirements: none can be marked

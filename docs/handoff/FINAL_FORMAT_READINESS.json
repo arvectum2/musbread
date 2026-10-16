@@ -1,0 +1,131 @@
+{
+  "classification": "PREAWARD_TECHNICAL_DRAFT_COMPATIBILITY_ONLY",
+  "approved_design_items": 0,
+  "final_source_files_accepted": 0,
+  "production_print_ready": false,
+  "real_museum_brand_available": false,
+  "target_design_items": 113,
+  "technical_file_counts": {
+    "svg": 42,
+    "pdf": 26,
+    "png": 16,
+    "pptx": 2
+  },
+  "family_structural_verification": "PASS_NOT_LEGAL_ACCEPTANCE",
+  "family_checks": {
+    "print": {
+      "editable_svg_grids": 13,
+      "pptx_editable_slide_layouts": 16
+    },
+    "museum_office": {
+      "editable_svgs": 13,
+      "physical_pdf_previews": 13
+    },
+    "digital_merch": {
+      "editable_svgs": 16,
+      "png_preview_sha256_verified": 16
+    }
+  },
+  "formats": [
+    {
+      "required_extension": ".ai",
+      "tz_reference": "TZ-066,TZ-071",
+      "final_artifact_description": "Editable Adobe Illustrator native source",
+      "neutral_technical_sample": "NONE",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Native open/edit/re-save in Illustrator and font/license check"
+    },
+    {
+      "required_extension": ".eps",
+      "tz_reference": "TZ-066,TZ-071",
+      "final_artifact_description": "Editable EPS vector",
+      "neutral_technical_sample": "NONE",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Open/edit/re-save, separated shapes, true vector scaling"
+    },
+    {
+      "required_extension": ".svg",
+      "tz_reference": "TZ-066,TZ-071",
+      "final_artifact_description": "Editable SVG vector",
+      "neutral_technical_sample": "42 editable geometric drafts (not approved design)",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Original, approved logo/design, live text/path editing and safety"
+    },
+    {
+      "required_extension": ".psd",
+      "tz_reference": "TZ-067",
+      "final_artifact_description": "Layered PSD master",
+      "neutral_technical_sample": "NONE",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Photoshop native layer editing"
+    },
+    {
+      "required_extension": ".tiff",
+      "tz_reference": "TZ-067,TZ-068",
+      "final_artifact_description": "Raster TIFF final",
+      "neutral_technical_sample": "NONE",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "True 300dpi at print size, color profile and visual content"
+    },
+    {
+      "required_extension": ".pdf",
+      "tz_reference": "TZ-069",
+      "final_artifact_description": "Final viewing/print PDF",
+      "neutral_technical_sample": "26 vector technical PDF previews (not print masters)",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Pages, fonts, embedded media and color/print profile by print shop"
+    },
+    {
+      "required_extension": ".jpg",
+      "tz_reference": "TZ-069,TZ-071",
+      "final_artifact_description": "Final JPG",
+      "neutral_technical_sample": "NONE",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Decode, output dimensions and licensed source"
+    },
+    {
+      "required_extension": ".png",
+      "tz_reference": "TZ-069,TZ-071",
+      "final_artifact_description": "Final PNG",
+      "neutral_technical_sample": "16 technical previews (not print-resolution masters)",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Decode, output dimensions and content quality"
+    },
+    {
+      "required_extension": ".ppt",
+      "tz_reference": "TZ-070",
+      "final_artifact_description": "Legacy editable PPT",
+      "neutral_technical_sample": "NONE",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Open-edit-resave in native PowerPoint (OOXML PPTX does not cover .ppt)"
+    },
+    {
+      "required_extension": ".pptx",
+      "tz_reference": "TZ-070",
+      "final_artifact_description": "OpenXML editable PPTX",
+      "neutral_technical_sample": "2 editable decks / 16 layout types (not final style)",
+      "final_customer_approved_format": "NOT_PROVIDED",
+      "native_edit_test": "REQUIRES_REAL_APPROVED_SOURCE_AND_TARGET_SOFTWARE",
+      "manual_acceptance": "Open-edit-resave text & shapes in PowerPoint, approved fonts"
+    }
+  ],
+  "open_hard_gates": [
+    "True editable AI/EPS/PSD/TIFF and legacy PPT files NOT created",
+    "Actual approved SVG/PNG/PDF/PPTX not created despite technical examples",
+    "Native Adobe and PowerPoint read-edit-save verification with customer's licensed software",
+    "300dpi print raster at accepted physical dimensions; CMYK/Pantone, fonts, bleed, proof",
+    "Customer-approved brand, media rights and real content; no placeholders",
+    "Proof of originality and IP ownership chain; third-party notices",
+    "Confirmed VK crop and actual product printing/die-cut specs",
+    "Formal customer acceptance, signed rights act and real transfer to agreed media"
+  ]
+}

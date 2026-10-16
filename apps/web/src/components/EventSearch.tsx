@@ -13,8 +13,10 @@ export default function EventSearch({ events }: { events: MuseumEvent[] }) {
   useEffect(() => {
     // SSR markup is visible before client search handlers have been attached.
     // Expose readiness for assistive/automated verification of interactivity.
-    const ready = window.requestAnimationFrame(() => setHydrated(true));
-    return () => window.cancelAnimationFrame(ready);
+    // requestAnimationFrame can be deferred for a background/headless tab.
+    // Readiness reflects mounted React handlers, not the browser's paint tick.
+    const ready = window.setTimeout(() => setHydrated(true), 0);
+    return () => window.clearTimeout(ready);
   }, []);
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
