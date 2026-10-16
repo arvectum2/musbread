@@ -121,6 +121,8 @@ jobs:
         run: npm run test:reference
       - name: Offline integrations contract tests
         run: npm run test:integrations
+      - name: Static global search index and multi-word relevance
+        run: npm run test:search
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'

@@ -12,7 +12,8 @@
     "test:webkit": "python3 ../../scripts/build_csp.py out --output .csp-header.txt && playwright test --config playwright.webkit.config.ts",
     "test:chrome": "python3 ../../scripts/build_csp.py out --output .csp-header.txt && playwright test --config playwright.chrome.config.ts",
     "test:integrations": "node --experimental-strip-types --test src/integrations/*.test.ts",
-    "test:reference": "node --experimental-strip-types --test src/data/museum-reference.test.ts"
+    "test:reference": "node --experimental-strip-types --test src/data/museum-reference.test.ts",
+    "test:search": "node --experimental-strip-types --test src/data/search-core.test.ts"
   },
   "dependencies": {
     "next": "16.4.1",

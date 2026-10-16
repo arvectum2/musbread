@@ -9,6 +9,6 @@ export default function SearchPage() {
     </nav>
     <h1>Поиск по сайту</h1>
     <p className="lead">Поиск по предварительной структуре музея и опубликованным тестовым материалам. Полный музейный архив будет подключён после согласования.</p>
-    <GlobalSearch />
+    <GlobalSearch fullPage />
   </section>;
 }
