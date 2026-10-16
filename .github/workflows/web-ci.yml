@@ -84,6 +84,14 @@ jobs:
           mkdir -p /tmp/musbread-delivery-extract
           unzip -q /tmp/musbread-preaward.zip -d /tmp/musbread-delivery-extract
           python3 /tmp/musbread-delivery-extract/source/scripts/handoff_bundle.py verify /tmp/musbread-preaward.zip
+      - name: Audit actual ZIP has no installed vendor or build payload
+        run: python3 scripts/audit_built_artifacts.py --mode source-zip --zip /tmp/musbread-preaward.zip --out /tmp/musbread-source-zip-evidence.json
+      - name: Preserve source-only ZIP content/license evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-cp35-source-zip-inventory
+          path: /tmp/musbread-source-zip-evidence.json
+          retention-days: 7
       - name: Upload pre-award demo bundle (no credentials)
         uses: actions/upload-artifact@v4
         with:
@@ -146,6 +154,14 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
       - run: python3 ../../scripts/release_site.py deploy && python3 ../../scripts/release_site.py verify
+      - name: Actual static export SBOM evidence (compiled bundle provenance pending)
+        run: python3 ../../scripts/audit_built_artifacts.py --mode web --web out --out /tmp/musbread-build-web-files.json
+      - name: Preserve actual static export file hashes
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-cp35-public-build-files
+          path: /tmp/musbread-build-web-files.json
+          retention-days: 7
       - name: Reject private files and secrets in static export
         run: python3 ../../scripts/audit_public_artifacts.py out
       - name: Verify all internal routes and anchors
@@ -189,6 +205,16 @@ jobs:
       - run: php artisan key:generate
       - run: mkdir -p database && touch database/database.sqlite && php artisan migrate --force
       - run: php artisan test
+      - name: Publish native MoonShine assets for installed-binary license/integrity inspection
+        run: php artisan vendor:publish --tag=laravel-assets --force
+      - name: Verify installed Composer runtime and private CMS assets
+        run: python3 ../../scripts/audit_built_artifacts.py --mode cms --out /tmp/musbread-build-cms-files.json
+      - name: Preserve actual private CMS vendor asset and PHP tree hashes
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-cp35-cms-installed-files
+          path: /tmp/musbread-build-cms-files.json
+          retention-days: 7
       - name: Check Laravel to Next.js publication parity
         run: |
           php artisan db:seed --class=DemoMuseumContentSeeder --force
@@ -273,3 +299,18 @@ jobs:
           curl -fsSI http://127.0.0.1:18080/ | grep -qi 'x-content-type-options: nosniff'
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/admin/login)" = 404
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/test.php)" = 404
+          # Even private MoonShine depends on static /vendor CSS/JS/font paths.
+          # Only allow the two known namespaces and static extensions.
+          sudo mkdir -p /srv/musbread/cms/public/vendor/moonshine/assets
+          sudo mkdir -p /srv/musbread/cms/public/vendor/moonshine-tinymce
+          sudo mkdir -p /srv/musbread/cms/public/vendor/evil
+          printf 'window.__moonshine=true;' | sudo tee /srv/musbread/cms/public/vendor/moonshine/assets/app.js >/dev/null
+          printf 'window.__tiny=true;' | sudo tee /srv/musbread/cms/public/vendor/moonshine-tinymce/tinymce.min.js >/dev/null
+          printf 'never serve this' | sudo tee /srv/musbread/cms/public/vendor/moonshine-tinymce/license.md >/dev/null
+          printf 'never serve this' | sudo tee /srv/musbread/cms/public/vendor/evil/executable.js >/dev/null
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine/assets/app.js)" = 200
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine-tinymce/tinymce.min.js)" = 200
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine-tinymce/license.md)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/evil/executable.js)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine/.env)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine/unsafe.php)" = 404

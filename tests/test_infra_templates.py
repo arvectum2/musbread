@@ -28,6 +28,14 @@ class InfraTemplateTests(unittest.TestCase):
         self.assertIn("limit_req zone=musbread_auth burst=5 nodelay;", config)
         self.assertIn("limit_req zone=musbread_upload burst=15 nodelay;", config)
         self.assertIn("frame-ancestors 'none'", config)
+        # Private MoonShine uses public/vendor for its runtime assets, but
+        # Composer code/docs and any other vendor trees must be 404.
+        self.assertIn("location ~ ^/vendor/(moonshine|moonshine-tinymce)/",config)
+        self.assertIn("location ~ ^/(storage|database|bootstrap|vendor)/ { return 404; }",config)
+        self.assertLess(config.index("location ~ \\.php$"),
+                        config.index("location ~ ^/vendor/(moonshine"))
+        self.assertLess(config.index("location ~ /\\."),
+                        config.index("location ~ ^/vendor/(moonshine"))
         rates = (ROOT / "infra/nginx/http-rates.conf").read_text()
         self.assertIn("map $request_method $musbread_write_ip", rates)
         self.assertIn("POST $binary_remote_addr;", rates)

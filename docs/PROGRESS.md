@@ -117,3 +117,7 @@ Generated 13 SVG technical grids, 13 preview PDFs with verified physical dimensi
 ## CP-34D — CycloneDX SBOM и резервный редактор HTML
 
 Составлена полная опись 560 lockfile/отдельных компонентов (Composer 83 production +33 dev; npm 440 включая optional и dev; 2 Python + TinyMCE + librsvg). CycloneDX 1.6 граф, 560 строк CSV, лицензии и риск-бакеты без притворного юридического approval. Исправлено сопоставление Composer virtual illuminate/* через laravel/framework; четыре optional peer остаются отсутствующими, но не обязательными. Реализована резервная форма html-source, не загружающая TinyMCE JS, при default tinymce без изменений; серверная HTML-очистка протестирована. Полноценный WYSIWYG replacement и права требуют отдельного review/UX после контракта. См. docs/CP34_SBOM_EDITOR_REPLACEMENT.md.
+
+## CP-35D — реальные файловые артефакты сборки
+
+На Mac mini проверены 490 реальных файлов Next export, 136 static CMS public/vendor, 116 installed Composer packages и 11 598 файлов внутри них. Реальный TinyMCE JS 7.2.1 GPL v2+ и пять Gilroy WOFF2 требуют legal/license review. Закрытый Nginx исправлен: MoonShine static assets по 127.0.0.1:18082 разрешаются, PHP/другой vendor закрыт. Защищён demo ZIP от случайной выдачи node_modules/vendor/out; SHA256 отчёты CI создаются по фактическим сборкам, без фиктивного сравнения бинарников Mac/Linux. Развёртывание/права заказчика не подтверждены. docs/CP35_BUILT_ARTIFACT_PROVENANCE.md.

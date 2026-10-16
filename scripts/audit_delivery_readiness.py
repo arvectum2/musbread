@@ -46,6 +46,8 @@ REQUIRED_PREAWARD = {
     "full_locked_sbom_summary": "docs/handoff/SBOM_SUMMARY.md",
     "editor_replacement_decision": "docs/handoff/EDITOR_REPLACEMENT_DECISION.md",
     "sbom_editor_exit_protocol": "docs/CP34_SBOM_EDITOR_REPLACEMENT.md",
+    "built_artifact_provenance": "docs/CP35_BUILT_ARTIFACT_PROVENANCE.md",
+    "actual_build_delivery_gates": "docs/handoff/ACTUAL_DELIVERY_BUILD_GATES.md",
 }
 
 # Explicit, non-inferable real-world requirements: none can be marked

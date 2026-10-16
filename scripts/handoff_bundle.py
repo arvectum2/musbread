@@ -53,6 +53,13 @@ def source_allowed(name: str) -> bool:
         return False
     if p.parts[0] == ".github" and p.parts[1] != "workflows":
         return False
+    # Even if a future commit accidentally tracks production/dev binaries,
+    # NEVER ship the vendor, node_modules, or Next export in a source-only demo.
+    if p.parts[0] == "apps" and (
+        any(part in ("vendor", "node_modules", ".next") for part in p.parts)
+        or (len(p.parts)>2 and p.parts[1]=="web" and p.parts[2]=="out")
+    ):
+        return False
     if any(x in OMIT_NAMES or x.startswith(".env") and x != ".env.example" for x in p.parts):
         return False
     return p.suffix.lower() not in OMIT_EXT

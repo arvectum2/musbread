@@ -109,3 +109,7 @@ scripts/audit_final_formats.py сверяет действительную ст�
 scripts/build_dependency_sbom.py перечисляет все Composer production/dev, все npm locked packages (включая OS/optional), pinned Python tools, nested TinyMCE и нативный build renderer в CycloneDX 1.6. CI вызывает --verify-generated; tests/test_build_dependency_sbom.py проверяет полноту, граф реальных lock dependencies, отсутствие потерянных пакетов, tampering license, связь Laravel replace и идентичность отчёта.
 
 PHP MuseumEntryEditorModeTest проверяет режим html-source с реальным HTTP-рендером MoonShine, отсутствие TinyMCE asset, default TinyMCE без регрессии, запрет неизвестного режима и серверную очистку HTML. Это не visual WYSIWYG parity, не решение по GPL и не юридический sign-off.
+
+## CP-35D — реальные файлы выпуска и MIME allowlist CMS
+
+Аудитор scripts/audit_built_artifacts.py проверяет фактический Next out, опубликованные MoonShine vendor assets, установленный composer/installed.json с версий/хешами каждого пакета и demo ZIP, в отличие от CP-34 lockfile inventory. Различает source-only, публичную и приватную сборки. tests/test_audit_built_artifacts.py проверяет подменённые версии, лицензии, symlink, секреты и запрет включения vendor/out в ZIP. infra/nginx/private-cms.conf теперь разрешает только static MoonShine JS/CSS/WOFF2 на loopback, запрещает PHP/source/sourcemap: curl-тесты 200/404 в CI. Официальные права и безопасность целевого Linux не подтверждены.

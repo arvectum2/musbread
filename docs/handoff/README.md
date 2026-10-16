@@ -45,3 +45,7 @@ FINAL_FORMAT_READINESS.json/md проверяет реальные технич�
 ## CP-34D — CycloneDX SBOM полного lockfile и решение по редактору
 
 SBOM_CYCLONEDX.json (560 записей и зависимости), SBOM_LICENSES.csv, SBOM_SUMMARY.md/json проверяются в CI на соответствие composer.lock/package-lock.json; в сводку включены GPL TinyMCE, LGPL платформенных libvips и прочие лицензии, но юридическое approval отсутствует. EDITOR_REPLACEMENT_DECISION.md содержит пустое поле решения по настоящей визуальной замене. В CMS уже есть опциональное поле html-source без TinyMCE JS на форме, но сам GPL runtime пока не удалён. Реальный документ передачи прав не подписан. Методика docs/CP34_SBOM_EDITOR_REPLACEMENT.md.
+
+## CP-35D — SHA-256 по реальным файлам сборки
+
+ACTUAL_DELIVERY_BUILD_GATES.md содержит три контура фактической инвентаризации, блокеры TinyMCE 7.2.1 GPL и пять Gilroy WOFF2, непроверенные производственные серверные бинарники. GitHub Actions создаёт три 7-дневных артефакта с SHA256 конкретно собранного public Next, установленного CMS public/vendor+Composer и source-only ZIP. Результаты не утверждают юридическую чистоту или фактическую передачу прав. Протокол docs/CP35_BUILT_ARTIFACT_PROVENANCE.md.
