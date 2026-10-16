@@ -153,3 +153,7 @@ Generated 13 SVG technical grids, 13 preview PDFs with verified physical dimensi
 ## CP-44D — приватное сравнение до выпуска
 
 Приватная страница `museum.content.compare`, сводка changed/added/removed/unchanged и полей; базовый снимок — исключительно локальный проверенный релиз. Команда `archive-current` заполнила приватную историческую копию на Mac mini без переключения current/previous. Кандидат создаётся только во временной директории, отчёт не публикует файлы. docs/CP44_PUBLICATION_DIFF.md.
+
+## CP-45D — частный реестр старых URL
+
+Из проверенного локального release diff вычислены исчезающие URL RU/EN материалов и событий, доступные в закрытом MoonShine и в CSV. Перенаправления не применяются без подтверждения музея. Условия доступа редактора, заголовки приватности и инъекции в CSV тестируются. docs/CP45_REMOVED_URLS.md.

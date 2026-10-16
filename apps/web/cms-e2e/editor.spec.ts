@@ -277,6 +277,10 @@ test("CP-44D: реальная CMS сравнивает новые матери�
   await expect(news).toContainText("Добавится");
   const event = page.locator("article[data-action='added']").filter({ hasText: "qa-browser-event" });
   await expect(event).toBeVisible();
+  const urlCsv = await page.request.get("/admin/museum-content/removed-urls.csv");
+  expect(urlCsv.status()).toBe(200);
+  expect(urlCsv.headers()["content-type"]).toContain("text/csv");
+  expect(await urlCsv.text()).toContain("Старый URL");
   await page.getByRole("link", { name: "Открыть подробный отчёт" }).click();
   await expect(page).toHaveURL(/\/admin\/museum-content\/preflight$/);
 });

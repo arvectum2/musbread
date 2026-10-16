@@ -193,6 +193,68 @@ class MuseumPublicationDiffTest extends TestCase
         $this->assertSame($this->originalDataHash, hash_file('sha256', base_path('../web/src/data/published.json')));
     }
 
+    public function test_retiring_url_inventory_includes_ru_en_and_events_without_guessing_redirects(): void
+    {
+        $old = $this->article('museum-history');
+        $old->update(['title_en' => 'History', 'body_en' => '<p>English text</p>']);
+        $event = $this->event('retired-festival');
+        $this->baseline();
+        $old->update(['status' => 'draft']);
+        $event->update(['status' => 'draft']);
+
+        $admin = MoonshineUser::factory()->create();
+        $comparison = app(MuseumPublicationDiff::class)->report($admin);
+        $paths = array_column($comparison['removed_urls'], 'path');
+        $this->assertSame(['/en/news/museum-history/', '/events/retired-festival/',
+            '/news/museum-history/'], $paths);
+        $this->assertSame('en', $comparison['removed_urls'][0]['locale']);
+        $this->assertSame('removed', $this->findDiffRow($comparison, 'entries', 'news:museum-history')['action']);
+        $response = $this->actingAs($admin, 'moonshine')->get(route('museum.content.removed-urls'));
+        $response->assertOk()->assertHeader('X-Robots-Tag', 'noindex, nofollow, noarchive')
+            ->assertHeader('Cache-Control', 'max-age=0, no-store, private')
+            ->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
+        $csv = $response->getContent();
+        $this->assertStringStartsWith("\xEF\xBB\xBF", $csv);
+        foreach ($paths as $path) $this->assertStringContainsString($path, $csv);
+        $this->assertStringContainsString('Новый URL (согласовать)', $csv);
+        $this->actingAs($admin, 'moonshine')->get(route('museum.content.compare'))->assertOk()
+            ->assertSee('Адреса, которые требуют решения')
+            ->assertSee('Скачать CSV для проверки перенаправлений');
+        $this->assertSame(0, MuseumPublicationRun::count());
+    }
+
+    public function test_removed_url_csv_refuses_missing_baseline_and_guest(): void
+    {
+        $this->article('unpublished');
+        $this->get(route('museum.content.removed-urls'))->assertRedirect('/admin/login');
+        $admin = MoonshineUser::factory()->create();
+        $this->actingAs($admin, 'moonshine')->get(route('museum.content.removed-urls'))
+            ->assertStatus(409);
+    }
+
+    public function test_editor_csv_excludes_foreign_sections_and_sanitizes_spreadsheet_formulas(): void
+    {
+        $my = MuseumSection::create(['slug' => 'permitted-section', 'title' => 'Мой раздел', 'status' => 'published']);
+        $foreign = MuseumSection::create(['slug' => 'private-section', 'title' => 'Скрытый раздел', 'status' => 'published']);
+        $mine = $this->article('my-retiring', section: $my->id);
+        $mine->update(['title' => '=HYPERLINK("https://malicious.invalid")']);
+        $hidden = $this->article('hidden-retiring', section: $foreign->id);
+        $this->baseline();
+        $mine->update(['status' => 'draft']);
+        $hidden->update(['status' => 'draft']);
+
+        $role = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $my->editors()->attach($editor->id);
+        $this->actingAs($editor, 'moonshine');
+        $csv = $this->get(route('museum.content.removed-urls'))->assertOk()->getContent();
+        $this->assertStringContainsString('/news/my-retiring/', $csv);
+        $this->assertStringNotContainsString('hidden-retiring', $csv);
+        $this->assertStringNotContainsString('Скрытый раздел', $csv);
+        $this->assertStringContainsString("'=HYPERLINK", $csv);
+        $this->assertSame(1, count(app(MuseumPublicationDiff::class)->report($editor)['removed_urls']));
+    }
+
     public function test_anonymous_user_cannot_access_comparison_or_trigger_export(): void
     {
         $this->article('private-test');

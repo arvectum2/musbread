@@ -36,6 +36,18 @@ article h3{font-size:1.05rem;margin:0 0 .3rem}article p{margin:.3rem 0}.state{fo
 <span>Без изменений: <strong>{{ $comparison['summary']['unchanged'] }}</strong></span>
 </div>
 <p class="context">Удаление из следующей версии означает исчезновение материала из нового снимка (например, перевод в черновик), а не удаление записи в CMS. Изменённые поля перечислены без вывода приватного HTML.</p>
+@if($comparison['removed_urls'] !== [])
+<section aria-label="Адреса, которые исчезнут из следующей публикации">
+<h2>Адреса, которые требуют решения</h2>
+<p class="warning">Ниже перечислены URL, которые есть в последнем локальном релизе, но отсутствуют в подготовленной версии. Это ещё не настроенные перенаправления: новый адрес нужно определить и согласовать отдельно.</p>
+<p><a href="{{ route('museum.content.removed-urls') }}">Скачать CSV для проверки перенаправлений</a></p>
+<ul>
+@foreach($comparison['removed_urls'] as $item)
+<li><code>{{ $item['path'] }}</code> · {{ $item['locale'] }} · {{ $item['title'] }}</li>
+@endforeach
+</ul>
+</section>
+@endif
 @foreach(['entries'=>'Материалы сайта','events'=>'События афиши','sections'=>'Структура разделов'] as $key=>$label)
 @if(array_key_exists($key, $comparison['groups']))
 <section aria-label="{{ $label }}"><h2>{{ $label }}</h2>

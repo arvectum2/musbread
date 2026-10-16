@@ -41,6 +41,7 @@ final class MuseumPublicationDiff
             'scope' => $actor->isSuperUser() ? 'all' : 'assigned',
             'summary' => ['added' => 0, 'changed' => 0, 'removed' => 0, 'unchanged' => 0],
             'groups' => [],
+            'removed_urls' => [],
             'preflight' => app(MuseumContentPreflight::class)->report($actor),
         ];
         if ($baseline === null) return $result;
@@ -53,8 +54,19 @@ final class MuseumPublicationDiff
             $new = $this->scope($candidate['data'][$group] ?? [], $group, $sectionSlugs);
             $diff = $this->compare($old, $new, $group);
             $result['groups'][$group] = $diff;
-            foreach ($diff as $row) $result['summary'][$row['action']]++;
+            foreach ($diff as $row) {
+                $result['summary'][$row['action']]++;
+                if ($row['action'] === 'removed') {
+                    foreach ($row['old_urls'] as $url) {
+                        $result['removed_urls'][] = [
+                            'path' => $url['path'], 'locale' => $url['locale'],
+                            'kind' => $group, 'title' => $row['title'],
+                        ];
+                    }
+                }
+            }
         }
+        usort($result['removed_urls'], static fn ($a, $b) => strcmp($a['path'], $b['path']));
         return $result;
     }
 
@@ -191,10 +203,35 @@ final class MuseumPublicationDiff
                 'changed_fields' => $changes, 'kind' => $group,
                 'type' => ($after ?? $before)['type'] ?? null,
                 'slug' => ($after ?? $before)['slug'] ?? '',
+                'old_urls' => $action === 'removed' ? $this->retiringPaths($group, $before) : [],
             ];
         }
         usort($rows, static fn ($a, $b) => strcmp($a['key'], $b['key']));
         return $rows;
+    }
+
+    /**
+     * Public paths only. No redirect target is inferred, even for a slug
+     * rename: editorial owners must decide whether a redirect is justified.
+     * @param array<string,mixed> $before
+     * @return list<array{path:string,locale:string}>
+     */
+    private function retiringPaths(string $group, array $before): array
+    {
+        $prefixes = [
+            'page' => 'museum', 'news' => 'news', 'excursion' => 'excursions',
+            'exhibition' => 'exhibitions', 'document' => 'documents',
+        ];
+        if ($group !== 'entries' && $group !== 'events') return [];
+        $prefix = $group === 'events' ? 'events' : ($prefixes[$before['type'] ?? ''] ?? null);
+        $slug = (string) ($before['slug'] ?? '');
+        if ($prefix === null || preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $slug) !== 1) return [];
+        $path = '/'.$prefix.'/'.$slug.'/';
+        $urls = [['path' => $path, 'locale' => 'ru']];
+        if ($group === 'entries' && isset($before['translations']['en'])) {
+            $urls[] = ['path' => '/en'.$path, 'locale' => 'en'];
+        }
+        return $urls;
     }
 
     private function canonical(mixed $value): string
