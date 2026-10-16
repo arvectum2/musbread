@@ -14,6 +14,8 @@ Route::middleware(\MoonShine\Laravel\Http\Middleware\Authenticate::class)->group
     Route::get('/admin/museum-documents/{document}/download', [\App\Http\Controllers\MuseumDocumentController::class, 'download'])->name('museum.documents.download');
     Route::patch('/admin/museum-documents/{document}/accessibility', [\App\Http\Controllers\MuseumDocumentController::class, 'accessibility'])->name('museum.documents.accessibility');
     Route::delete('/admin/museum-documents/{document}', [\App\Http\Controllers\MuseumDocumentController::class, 'destroy'])->name('museum.documents.destroy');
+    Route::get('/admin/museum-sections/tree', [\App\Http\Controllers\MuseumSectionTreeController::class, 'index'])->name('museum.sections.tree');
+    Route::post('/admin/museum-sections/{section}/reorder', [\App\Http\Controllers\MuseumSectionTreeController::class, 'reorder'])->name('museum.sections.reorder');
     Route::get('/admin/museum-events/{event}/preview', [\App\Http\Controllers\MuseumEventPreviewController::class, 'show'])->name('museum.events.preview');
     Route::get('/admin/museum-entries/{entry}/relations', [\App\Http\Controllers\MuseumContentRelationsController::class, 'edit'])->name('museum.entries.relations.edit');
     Route::put('/admin/museum-entries/{entry}/relations', [\App\Http\Controllers\MuseumContentRelationsController::class, 'update'])->name('museum.entries.relations.update');

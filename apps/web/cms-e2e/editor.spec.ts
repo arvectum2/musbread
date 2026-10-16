@@ -139,3 +139,44 @@ test("CP-39D: редактор связывает опубликованную �
     Array.from((element as HTMLSelectElement).selectedOptions).map((option) => option.value).sort());
   expect(selectedEvents).toEqual([eventId!, draftId!].sort());
 });
+
+test("CP-40D: администратор создаёт дерево и меняет порядок соседей через интерфейс", async ({ page }) => {
+  await page.goto("/admin/login");
+  await page.locator('input[name="username"]').fill(process.env.MUSBREAD_E2E_USERNAME!);
+  await page.locator('input[type="password"]').fill(process.env.MUSBREAD_E2E_PASSWORD!);
+  await page.locator('button[type="submit"]').click();
+  await expect(page).toHaveURL(/\/admin/);
+
+  const create = async (slug: string, parentId?: string) => {
+    await page.goto("/admin/resource/museum-section-resource/museum-section-form-page");
+    await page.locator('input[name="title"]').fill("QA: " + slug);
+    await page.locator('input[name="slug"]').fill(slug);
+    if (parentId) await page.locator('select[name="parent_id"]').selectOption(parentId);
+    await page.locator('select[name="status"]').selectOption("published");
+    await page.locator('button[type="submit"]').filter({ hasText: "Save" }).click();
+    await expect(page).toHaveURL(/museum-section-form-page\/\d+/, { timeout: 10_000 });
+    return page.url().split("/").at(-1)!;
+  };
+
+  const root = await create("qa-tree-root");
+  await create("qa-tree-child-a", root);
+  await create("qa-tree-child-b", root);
+  await page.goto("/admin/museum-sections/tree");
+  await expect(page.getByRole("heading", { name: "Карта структуры сайта" })).toBeVisible();
+  await expect(page.locator('.tree>li[data-section="qa-tree-root"]')).toHaveAttribute("data-depth", "0");
+  await expect(page.locator('.tree>li[data-section="qa-tree-child-a"]')).toHaveAttribute("data-depth", "1");
+  await expect(page.locator('.tree>li[data-section="qa-tree-child-b"]')).toHaveAttribute("data-depth", "1");
+  const initial = await page.locator(".tree>li").evaluateAll((items) => items.map((item) => item.getAttribute("data-section")));
+  expect(initial.indexOf("qa-tree-child-a")).toBeLessThan(initial.indexOf("qa-tree-child-b"));
+  await page.getByRole("button", { name: "Опустить раздел QA: qa-tree-child-a среди соседних" }).click();
+  await expect(page.getByRole("status")).toContainText("Порядок соседних разделов обновлён");
+  const after = await page.locator(".tree>li").evaluateAll((items) => items.map((item) => item.getAttribute("data-section")));
+  expect(after.indexOf("qa-tree-child-b")).toBeLessThan(after.indexOf("qa-tree-child-a"));
+
+  await page.goto(`/admin/resource/museum-section-resource/museum-section-form-page/${root}`);
+  const possibleParentIds = await page.locator('select[name="parent_id"] option').evaluateAll(
+    (options) => options.map((option) => (option as HTMLOptionElement).value));
+  expect(possibleParentIds).not.toContain(root);
+  await expect(page.locator('select[name="parent_id"]')).not.toContainText("qa-tree-child-a");
+  await expect(page.locator('select[name="parent_id"]')).not.toContainText("qa-tree-child-b");
+});

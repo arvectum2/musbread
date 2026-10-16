@@ -21,14 +21,38 @@ final class MuseumSectionFormPage extends FormPage
 {
     protected function fields(): iterable
     {
-        $sections = MuseumSection::query()->orderBy('sort_order')->orderBy('title')->pluck('title', 'id')->all();
+        $sections = MuseumSection::query()->orderBy('sort_order')->orderBy('title')->get();
+        $byId = $sections->keyBy('id');
+        $editing = $this->getResource()->getItemID();
+        $editingId = $editing === null ? null : (int) $editing;
+        $choices = [];
+        foreach ($sections as $candidate) {
+            $parent = $candidate;
+            $depth = 0;
+            $seen = [];
+            $excluded = false;
+            while ($parent !== null) {
+                if ($parent->id === $editingId || isset($seen[$parent->id])) {
+                    $excluded = true;
+                    break;
+                }
+                $seen[$parent->id] = true;
+                $depth++;
+                $parent = $parent->parent_id === null ? null : $byId->get($parent->parent_id);
+            }
+            // A parent may not be the edited item or any of its descendants.
+            // Model-level cycle validation remains the final server-side gate.
+            if (! $excluded) {
+                $choices[$candidate->id] = str_repeat('· ', max(0, $depth - 1)).$candidate->title;
+            }
+        }
 
         return [Box::make([
             ID::make(),
             Text::make('Название раздела', 'title')->required(),
             Text::make('Slug (латиница)', 'slug')->required(),
             Select::make('Родительский раздел', 'parent_id')
-                ->options($sections)->nullable(),
+                ->options($choices)->nullable(),
             Number::make('Порядок', 'sort_order')->default(0),
             Select::make('Статус', 'status')
                 ->options(['draft' => 'Черновик', 'published' => 'Опубликован'])

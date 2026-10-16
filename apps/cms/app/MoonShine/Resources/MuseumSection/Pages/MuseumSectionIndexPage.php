@@ -19,6 +19,9 @@ final class MuseumSectionIndexPage extends IndexPage
             Text::make('Slug', 'slug'),
             Text::make('Статус', 'status'),
             Number::make('Порядок', 'sort_order')->sortable(),
+            Text::make('Дерево разделов', 'id')->link(
+                static fn ($id): string => route('museum.sections.tree'), 'Открыть карту'
+            ),
         ];
     }
 }
