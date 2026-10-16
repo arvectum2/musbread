@@ -201,3 +201,7 @@ Playwright suites `header-a11y-tz.spec.ts`, `visitor-info-tz.spec.ts`, `a11y-cov
 ## TZ-182: безопасная GIF анимация из приватной CMS
 
 Run `MuseumMediaTest` and full `php artisan test`: GIF87a static backward compatibility, 2-frame GIF89a to animated WebP (ANIM/ANMF), SHA256 static publishing without original gif, private ACL and preview; reject oversized/malformed GIF, 61 frames, >30-second animation, trailing script, corrupted trailer. Linux CI installs `webp` and `librsvg2-bin`. No viewer-facing metadata or local server paths. Search TZ120/TZ177 remains benchmarked against accepted published data only; no invented binary fulltext requirements.
+
+## TZ-184/188/191/192/193
+
+PHP: `MuseumAltDraftTest` (ACL, no public auto-save, rejects generic), `MuseumDocumentsTest` (secure signatures/AV gating for XLS), `MuseumMediaTest` (required alt/content-hashed media); Next.js: `test:seo`, `check_preaward_seo.py`, static accessibility audit and Playwright. До приёмки `MUSBREAD_SITE_APPROVED` остаётся выключенным. Зелёного статуса по клиентским критериям не объявлять.

@@ -65,6 +65,8 @@
             <input id="alt" name="alt" required minlength="3" maxlength="255" value="{{ old('alt') }}" placeholder="Например: историческая печь в экспозиции музея">
             <label for="caption">Подпись под изображением</label>
             <input id="caption" name="caption" maxlength="255" value="{{ old('caption') }}">
+            <button id="suggest-alt" type="button">Предложить alt по подписи</button>
+            <p id="alt-hint" role="status" class="small">Подпись должна описывать то, что действительно видно. Предложение не распознаёт картинку и требует вашей проверки.</p>
             <label for="image">Изображение *</label>
             <div class="drop" id="drop">
                 <p>Перетащите изображение сюда или выберите файл</p>
@@ -116,6 +118,36 @@
 </main>
 <script>
 (() => {
+    const suggest = document.getElementById('suggest-alt');
+    suggest.addEventListener('click', async () => {
+        const hint = document.getElementById('alt-hint');
+        const entry = document.getElementById('entry').value;
+        const caption = document.getElementById('caption').value;
+        if (!entry || !caption.trim()) {
+            hint.textContent = 'Сначала выберите материал и заполните содержательную подпись.';
+            return;
+        }
+        suggest.disabled = true;
+        try {
+            const form = new FormData();
+            form.set('museum_entry_id', entry);
+            form.set('caption', caption);
+            const response = await fetch(@json(route('museum.media.alt-suggest')), {
+                method: 'POST', body: form, credentials: 'same-origin',
+                headers: {'X-CSRF-TOKEN': @json(csrf_token()), 'Accept': 'application/json'}
+            });
+            const data = await response.json();
+            if (!response.ok || !data.suggestion || data.review_required !== true) {
+                hint.textContent = data.message || 'Слишком общая подпись. Опишите видимые объекты, действие и контекст.';
+                return;
+            }
+            document.getElementById('alt').value = data.suggestion;
+            hint.textContent = 'Черновик готов. Сравните с изображением и исправьте, если нужно. Сохранение — только после вашей отправки формы.';
+            document.getElementById('alt').focus();
+        } catch {
+            hint.textContent = 'Сервис подсказки временно недоступен. Заполните alt вручную.';
+        } finally { suggest.disabled = false; }
+    });
     const drop = document.getElementById('drop');
     const input = document.getElementById('image');
     for (const name of ['dragenter','dragover']) drop.addEventListener(name, event => {

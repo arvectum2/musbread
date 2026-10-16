@@ -3,9 +3,13 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec, spec_from_file_location
 
-pub = SourceFileLoader("publish_snapshot", str(Path(__file__).resolve().parents[1] / "scripts/publish_snapshot.py")).load_module()
+_script = Path(__file__).resolve().parents[1] / "scripts/publish_snapshot.py"
+_spec = spec_from_file_location("publish_snapshot", _script)
+assert _spec is not None and _spec.loader is not None
+pub = module_from_spec(_spec)
+_spec.loader.exec_module(pub)
 
 
 class SnapshotTests(unittest.TestCase):

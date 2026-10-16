@@ -30,6 +30,7 @@ Route::middleware(\MoonShine\Laravel\Http\Middleware\Authenticate::class)->group
     Route::get('/admin/museum-entries/{entry}/preview', [\App\Http\Controllers\MuseumEntryPreviewController::class, 'show'])->name('museum.entries.preview');
     Route::get('/admin/museum-media', [\App\Http\Controllers\MuseumMediaController::class, 'index'])->name('museum.media.index');
     Route::post('/admin/museum-media', [\App\Http\Controllers\MuseumMediaController::class, 'store'])->name('museum.media.store');
+    Route::post('/admin/museum-media/suggest-alt', [\App\Http\Controllers\MuseumMediaController::class, 'suggestAlt'])->name('museum.media.alt-suggest');
     Route::patch('/admin/museum-media/{media}', [\App\Http\Controllers\MuseumMediaController::class, 'update'])->name('museum.media.update');
     Route::delete('/admin/museum-media/{media}', [\App\Http\Controllers\MuseumMediaController::class, 'destroy'])->name('museum.media.destroy');
     Route::get('/admin/museum-media/{media}/preview', [\App\Http\Controllers\MuseumMediaController::class, 'preview'])->name('museum.media.preview');

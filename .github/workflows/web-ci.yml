@@ -127,6 +127,8 @@ jobs:
         run: npm run test:events
       - name: TZ-072/TZ-076 nested CMS navigation and safe extensibility
         run: npm run test:navigation-tree
+      - name: TZ-191/TZ-192 published sitemap and draft robots gates
+        run: npm run test:seo
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'

@@ -152,3 +152,7 @@ Verified source before modification. Six-width header and vision toggle, no 320p
 ## TZ-120 / 177 / 182 — Search & secure SVG/GIF publication (17.10.2026)
 
 Verified precise primary clauses. Search and autocomplete are functional; no requirement to index the full binary PDF/Office content. Animated GIF now re-encodes preserving frames under strict bounded parser, returns WebP, static GIF87a and restrictive SVG unaffected. Server/museum UAT remains blocked; [protocol](TZ120_177_182_SEARCH_AND_ANIMATED_MEDIA.md).
+
+## TZ-184/188/191/192/193 — следующий пакет P0
+
+Сверка по исходному ТЗ 2.2.3.6.3, строки 238–245; защищённая PDF/DOCX/XLS/XLSX библиотека с блокировкой production OLE2 до AV/CDR; caption-based alt *draft* с авторизацией и редакторским подтверждением; sitemap/robots генераторы и SEO unit-test. Все статусы Частично, клиентские блокеры зафиксированы. [Протокол](TZ184_188_191_192_193_DELIVERY.md).

@@ -45,7 +45,7 @@ GROUPS = [
 # a required museum decision *today*. Approval may still be required at finish.
 # TZ-FIRST: these earlier queue items were audited/completed locally on 16.10;
 # their NEXT meaningful acceptance step requires museum data/access/consent.
-WAITING_ON_CUSTOMER_AFTER_LOCAL_WORK = {120, 177, 182, 115, 117, 118, 125, 126, 134, 138, 139, 142, 173, 174, 111, 228, 230, 234, 236, 72, 76, 77, 85, 87, 88, 91, 95, 96, 97, 101, 102, 104, 105, 107, 110}
+WAITING_ON_CUSTOMER_AFTER_LOCAL_WORK = {184, 188, 191, 192, 193, 120, 177, 182, 115, 117, 118, 125, 126, 134, 138, 139, 142, 173, 174, 111, 228, 230, 234, 236, 72, 76, 77, 85, 87, 88, 91, 95, 96, 97, 101, 102, 104, 105, 107, 110}
 CAN_START_NOW = {
   72,73,74,75,76,77,78,82,83,85,86,87,88,89,90,91,
   94,95,96,97,101,102,104,105,106,107,110,111,113,

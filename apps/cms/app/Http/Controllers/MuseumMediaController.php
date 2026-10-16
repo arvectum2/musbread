@@ -7,6 +7,8 @@ use App\Models\MuseumMedia;
 use App\Support\MuseumSectionAccess;
 use App\Support\MuseumSvgRasterizer;
 use App\Support\MuseumGifProcessor;
+use App\Support\MuseumAltDraft;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,6 +38,22 @@ final class MuseumMediaController extends Controller
             'media' => MuseumMedia::query()->with('entry:id,title,status')
                 ->whereIn('museum_entry_id', $entries->pluck('id'))->latest()->paginate(30),
         ]);
+    }
+
+    /** Suggest text from a human caption. Nothing is saved or published here. */
+    public function suggestAlt(Request $request, MuseumAltDraft $draft): JsonResponse
+    {
+        $validated = $request->validate([
+            'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
+            'caption' => ['required', 'string', 'min:12', 'max:255'],
+        ]);
+        $entry = MuseumEntry::findOrFail($validated['museum_entry_id']);
+        $this->requireEntry($entry);
+        return response()->json([
+            'suggestion' => $draft->suggest($validated['caption']),
+            'review_required' => true,
+            'disclaimer' => 'Предложение основано только на подписи; проверьте соответствие изображению.',
+        ])->header('Cache-Control', 'private, no-store')->header('X-Content-Type-Options', 'nosniff');
     }
 
     public function store(Request $request, MuseumSvgRasterizer $svgRasterizer, MuseumGifProcessor $gifProcessor): RedirectResponse
