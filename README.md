@@ -159,3 +159,7 @@ The repository contains 13 separate editable SVG grids for A2/A3/A4 print carrie
 ## CP-36D — Linux production Composer (предконтрактно)
 
 CI без dev: 83 production-пакета, 0 dev, 9217 файлов и 136 ресурсов закрытой CMS; проверены фактические версии и SHA-256. См. [CP36](docs/CP36_LINUX_PRODUCTION_COMPOSER.md). Договорная приёмка и права на TinyMCE/Gilroy остаются открытыми.
+
+## CP-37D — приватный предпросмотр сохранённых материалов и событий
+
+В закрытой MoonShine CMS появились ссылки «Предпросмотр» для сохранённых черновиков/отложенных записей. Материалы защищены ACL разделов, оба маршрута — авторизацией, повторной очисткой HTML и заголовками noindex/no-store/CSP. В публичном экспорте черновики по-прежнему отсутствуют. Подробности: [docs/CP37_SAVED_CONTENT_PREVIEW.md](docs/CP37_SAVED_CONTENT_PREVIEW.md). TinyMCE не изменялся.

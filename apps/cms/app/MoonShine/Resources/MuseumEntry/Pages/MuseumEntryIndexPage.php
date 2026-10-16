@@ -19,6 +19,10 @@ final class MuseumEntryIndexPage extends IndexPage
             Text::make('Адрес', 'slug'),
             Text::make('Статус', 'status'),
             Text::make('Раздел ID', 'museum_section_id'),
+            Text::make('Предпросмотр', 'id')->link(
+                static fn ($id): string => route('museum.entries.preview', ['entry' => $id]),
+                'Открыть', blank: true
+            ),
         ];
     }
 }

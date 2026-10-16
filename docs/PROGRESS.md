@@ -121,3 +121,7 @@ Generated 13 SVG technical grids, 13 preview PDFs with verified physical dimensi
 ## CP-35D — реальные файловые артефакты сборки
 
 На Mac mini проверены 490 реальных файлов Next export, 136 static CMS public/vendor, 116 installed Composer packages и 11 598 файлов внутри них. Реальный TinyMCE JS 7.2.1 GPL v2+ и пять Gilroy WOFF2 требуют legal/license review. Закрытый Nginx исправлен: MoonShine static assets по 127.0.0.1:18082 разрешаются, PHP/другой vendor закрыт. Защищён demo ZIP от случайной выдачи node_modules/vendor/out; SHA256 отчёты CI создаются по фактическим сборкам, без фиктивного сравнения бинарников Mac/Linux. Развёртывание/права заказчика не подтверждены. docs/CP35_BUILT_ARTIFACT_PROVENANCE.md.
+
+## CP-37D — сохранённый контент: закрытый предпросмотр
+
+Добавлены приватные HTML-просмотры материалов и событий из MoonShine. Статус и дата не меняются. ACL материалов, защита контента и безопасности URL проверяются Laravel feature tests. Не редактор несохранённых правок и не показ финального утверждённого дизайна. TinyMCE оставлен как установленный редактор. Документ docs/CP37_SAVED_CONTENT_PREVIEW.md.

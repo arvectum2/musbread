@@ -117,3 +117,7 @@ PHP MuseumEntryEditorModeTest проверяет режим html-source с ре�
 ## CP-36D — production install verification
 
 Отдельная CI job `cms-production` запускает `composer install --no-dev`, делает Laravel route bootstrap, публикует закрытые статические ассеты и проверяет точное совпадение установленного дерева с Composer `packages` (не `packages-dev`) в `audit_built_artifacts.py --composer-profile production`. JSON с хешами доступен как временный Linux CI artifact. Лицензии TinyMCE/Gilroy и подлинная среда музея этим тестом не подтверждаются.
+
+## CP-37D — закрытый HTML preview сохранённого контента
+
+Laravel feature tests `MuseumEntryPreviewTest` и `MuseumEventPreviewTest` подтверждают доступность предпросмотра для авторизованных редакторов, недоступность гостям, ACL по разделу материала, отсутствие изменения статуса публикации, XSS-санитайзер на этапе вывода и приватные noindex/no-store/CSP-заголовки. Предпросмотр не заменяет будущую визуальную UAT, реальный Next.js дизайн или TinyMCE.
