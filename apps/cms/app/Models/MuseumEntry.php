@@ -23,14 +23,14 @@ class MuseumEntry extends Model
 
     protected $fillable = [
         'type', 'slug', 'title', 'h1', 'parent_slug', 'museum_section_id', 'excerpt', 'body',
-        'status', 'published_at', 'seo_title', 'seo_description', 'sort_order',
+        'status', 'published_at', 'unpublish_at', 'seo_title', 'seo_description', 'sort_order',
         'title_en', 'excerpt_en', 'body_en', 'seo_title_en', 'seo_description_en',
     ];
 
     protected function casts(): array
     {
         return [
-            'published_at' => 'datetime',
+            'published_at' => 'datetime', 'unpublish_at' => 'datetime',
             'sort_order' => 'integer',
             'museum_section_id' => 'integer',
         ];
@@ -107,7 +107,9 @@ class MuseumEntry extends Model
     {
         return $query->where('status', 'published')
             ->whereNotNull('published_at')
-            ->where('published_at', '<=', now());
+            ->where('published_at', '<=', now())
+            ->where(static fn (Builder $query) => $query
+                ->whereNull('unpublish_at')->orWhere('unpublish_at', '>', now()));
     }
 
     public function scopeOfType(Builder $query, string $type): Builder

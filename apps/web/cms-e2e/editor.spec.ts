@@ -19,6 +19,8 @@ test("реальный вход и редактор материалов в Moon
   await page.goto("/admin/resource/museum-entry-resource/museum-entry-form-page");
   await expect(page.getByText("Основной текст")).toBeVisible();
   await expect(page.locator("iframe.tox-edit-area__iframe")).toBeVisible();
+  // TZ-234: scheduled unpublication must be present in the REAL CMS editor.
+  await expect(page.locator('input[name="unpublish_at"]')).toBeVisible();
   await page.locator('select[name="type"]').selectOption('news');
   await page.locator('input[name="title"]').fill('QA: публикация из настоящего браузера');
   await page.locator('input[name="slug"]').fill('qa-browser-news');
@@ -32,6 +34,7 @@ test("реальный вход и редактор материалов в Moon
   // CP-12 acceptance: create an actual event through the MoonShine browser UI.
   await page.goto("/admin/resource/museum-event-resource/museum-event-form-page");
   await expect(page.locator('input[name="title"]')).toBeVisible();
+  await expect(page.locator('input[name="unpublish_at"]')).toBeVisible();
   await page.locator('input[name="title"]').fill('QA: музейное событие из браузера');
   await page.locator('input[name="slug"]').fill('qa-browser-event');
   await page.locator('input[name="category"]').fill('Тестовая экскурсия');

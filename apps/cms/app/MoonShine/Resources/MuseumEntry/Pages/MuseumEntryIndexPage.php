@@ -27,6 +27,7 @@ final class MuseumEntryIndexPage extends IndexPage
             Text::make('Статус', 'status'),
             Text::make('Раздел', 'section.title'),
             Date::make('Публиковать с', 'published_at')->format('d.m.Y H:i')->sortable(),
+            Date::make('Снять с публикации', 'unpublish_at')->format('d.m.Y H:i')->sortable(),
             Text::make('Связанных материалов', 'editorial_related_entries_count'),
             Text::make('Событий', 'editorial_linked_events_count'),
             Text::make('Сравнение версий', 'id')->link(

@@ -42,6 +42,7 @@ final class MuseumEntryFormPage extends FormPage
                     ->options(['draft' => 'Черновик', 'published' => 'Опубликовано'])
                     ->default('draft')->required(),
                 Date::make('Публиковать с (дата и время)', 'published_at')->withTime()->nullable(),
+                Date::make('Снять с публикации (дата и время)', 'unpublish_at')->withTime()->nullable(),
                 Text::make('SEO-заголовок', 'seo_title'),
                 Textarea::make('SEO-описание', 'seo_description'),
                 Text::make('English title (publish only with English body)', 'title_en'),
@@ -87,6 +88,7 @@ final class MuseumEntryFormPage extends FormPage
             'museum_section_id' => ['nullable', 'integer', Rule::exists('museum_sections', 'id')],
             'status' => ['required', 'in:draft,published'],
             'published_at' => ['nullable', 'date'],
+            'unpublish_at' => ['nullable', 'date', 'after:published_at'],
             'title_en' => ['nullable', 'string', 'max:255'],
             'excerpt_en' => ['nullable', 'string'],
             'body_en' => ['nullable', 'string'],

@@ -10,12 +10,12 @@ class MuseumEvent extends Model
 {
     protected $fillable = [
         'slug', 'title', 'category', 'starts_at', 'ends_at', 'excerpt', 'body',
-        'status', 'published_at', 'seo_title', 'seo_description',
+        'status', 'published_at', 'unpublish_at', 'seo_title', 'seo_description',
     ];
 
     protected function casts(): array
     {
-        return ['starts_at' => 'date', 'ends_at' => 'date', 'published_at' => 'datetime'];
+        return ['starts_at' => 'date', 'ends_at' => 'date', 'published_at' => 'datetime', 'unpublish_at' => 'datetime'];
     }
 
     protected static function booted(): void
@@ -37,6 +37,8 @@ class MuseumEvent extends Model
     {
         return $query->where('status', 'published')
             ->whereNotNull('published_at')
-            ->where('published_at', '<=', now());
+            ->where('published_at', '<=', now())
+            ->where(static fn (Builder $query) => $query
+                ->whereNull('unpublish_at')->orWhere('unpublish_at', '>', now()));
     }
 }

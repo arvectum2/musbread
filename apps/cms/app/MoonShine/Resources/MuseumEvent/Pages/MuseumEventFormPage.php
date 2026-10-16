@@ -33,6 +33,7 @@ final class MuseumEventFormPage extends FormPage
                     ->options(['draft' => 'Черновик', 'published' => 'Опубликовано'])
                     ->default('draft')->required(),
                 Date::make('Публиковать с (дата и время)', 'published_at')->withTime()->nullable(),
+                Date::make('Снять с публикации (дата и время)', 'unpublish_at')->withTime()->nullable(),
                 Text::make('SEO-заголовок', 'seo_title'),
                 Textarea::make('SEO-описание', 'seo_description'),
             ]),
@@ -51,6 +52,7 @@ final class MuseumEventFormPage extends FormPage
             'body' => ['required', 'string'],
             'status' => ['required', 'in:draft,published'],
             'published_at' => ['nullable', 'date'],
+            'unpublish_at' => ['nullable', 'date', 'after:published_at'],
         ];
     }
 }

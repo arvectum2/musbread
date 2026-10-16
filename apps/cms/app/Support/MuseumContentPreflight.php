@@ -132,6 +132,7 @@ final class MuseumContentPreflight
     private function eventState(MuseumEvent $event): string
     {
         if ($event->status !== 'published') return 'draft';
+        if ($event->unpublish_at !== null && $event->unpublish_at <= now()) return 'expired';
         if ($event->published_at === null || $event->published_at->isFuture()) return 'scheduled';
         return 'ready';
     }
@@ -147,6 +148,9 @@ final class MuseumContentPreflight
         if (! $this->validSlug($event->slug)) $add('error', 'event_slug_invalid', 'Неверный URL события.');
         if (trim((string) $event->category) === '') $add('error', 'event_category_missing', 'Не задана категория события.');
         if ($event->starts_at === null) $add('error', 'event_date_missing', 'Не задана дата события.');
+        if ($event->published_at !== null && $event->unpublish_at !== null && $event->unpublish_at <= $event->published_at) {
+            $add('error', 'event_publication_window_invalid', 'Время снятия с публикации должно быть позже времени начала.');
+        }
         if ($event->ends_at !== null && $event->starts_at !== null && $event->ends_at->isBefore($event->starts_at)) {
             $add('error', 'event_date_range_invalid', 'Дата окончания раньше даты начала.');
         }
@@ -177,6 +181,7 @@ final class MuseumContentPreflight
     private function state(MuseumEntry $entry, array $approvedIds): string
     {
         if ($entry->status !== 'published') return 'draft';
+        if ($entry->unpublish_at !== null && $entry->unpublish_at <= now()) return 'expired';
         if ($entry->published_at === null || $entry->published_at->isFuture()) return 'scheduled';
         if ($entry->museum_section_id !== null
             && ! in_array($entry->museum_section_id, $approvedIds, true)) return 'blocked';
@@ -192,6 +197,9 @@ final class MuseumContentPreflight
         $add = static function (string $level, string $code, string $message) use (&$issues): void {
             $issues[] = compact('level', 'code', 'message');
         };
+        if ($entry->published_at !== null && $entry->unpublish_at !== null && $entry->unpublish_at <= $entry->published_at) {
+            $add('error', 'publication_window_invalid', 'Время снятия с публикации должно быть позже времени начала.');
+        }
         if (trim((string) $entry->title) === '') {
             $add('error', 'title_missing', 'Не заполнено название.');
         }

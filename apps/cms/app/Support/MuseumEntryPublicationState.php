@@ -13,6 +13,7 @@ final class MuseumEntryPublicationState
     public const OPTIONS = [
         'draft' => 'Черновик',
         'scheduled' => 'Ожидает даты публикации',
+        'expired' => 'Снято по установленному сроку',
         'blocked' => 'Скрыто разделом или родителем',
         'ready' => 'Готово к следующей выгрузке',
     ];
@@ -42,12 +43,18 @@ final class MuseumEntryPublicationState
         if ($state === 'draft') return $query->where('status', 'draft');
 
         $query->where('status', 'published');
+        if ($state === 'expired') return $query->whereNotNull('unpublish_at')
+            ->where('unpublish_at', '<=', now());
         if ($state === 'scheduled') {
             return $query->where(static fn (Builder $q) => $q
-                ->whereNull('published_at')->orWhere('published_at', '>', now()));
+                ->whereNull('published_at')->orWhere('published_at', '>', now()))
+                ->where(static fn (Builder $q) => $q
+                    ->whereNull('unpublish_at')->orWhere('unpublish_at', '>', now()));
         }
 
-        $query->whereNotNull('published_at')->where('published_at', '<=', now());
+        $query->whereNotNull('published_at')->where('published_at', '<=', now())
+            ->where(static fn (Builder $q) => $q
+                ->whereNull('unpublish_at')->orWhere('unpublish_at', '>', now()));
         $ids = self::publishedSectionIds();
         if ($state === 'ready') {
             return $query->where(static fn (Builder $q) => $q
