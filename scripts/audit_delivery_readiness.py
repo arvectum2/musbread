@@ -41,6 +41,11 @@ REQUIRED_PREAWARD = {
     "final_format_readiness": "docs/handoff/FINAL_FORMAT_READINESS.md",
     "dependency_rights_readiness": "docs/handoff/DEPENDENCY_RIGHTS_REPORT.md",
     "format_and_rights_protocol": "docs/CP33_FORMATS_RIGHTS_AUDIT.md",
+    "full_locked_sbom": "docs/handoff/SBOM_CYCLONEDX.json",
+    "full_locked_license_inventory": "docs/handoff/SBOM_LICENSES.csv",
+    "full_locked_sbom_summary": "docs/handoff/SBOM_SUMMARY.md",
+    "editor_replacement_decision": "docs/handoff/EDITOR_REPLACEMENT_DECISION.md",
+    "sbom_editor_exit_protocol": "docs/CP34_SBOM_EDITOR_REPLACEMENT.md",
 }
 
 # Explicit, non-inferable real-world requirements: none can be marked

@@ -1,0 +1,65 @@
+{
+  "status": "LOCKFILE_SBOM_NOT_COMPLIANCE_APPROVAL",
+  "total_components": 560,
+  "composer_production": 83,
+  "composer_development": 33,
+  "npm_all_locked": 440,
+  "python_design": 2,
+  "bundled_assets": 1,
+  "native_build_tools": 1,
+  "risk_classification_counts": {
+    "FILE_LEVEL_COPYLEFT_REVIEW": 3,
+    "NON_STANDARD_OR_MANUAL_REVIEW": 2,
+    "PERMISSIVE_NOTICE_CHECK": 536,
+    "STRONG_COPYLEFT_OR_DUAL_REVIEW": 3,
+    "UNKNOWN_REQUIRES_VERIFICATION": 1,
+    "WEAK_COPYLEFT_LGPL": 15
+  },
+  "unresolved_lockfile_edges": 4,
+  "unresolved_edge_examples": [
+    {
+      "from": "npm:node_modules/eslint",
+      "target": "jiti",
+      "kind": "peerDependencies",
+      "class": "optional_or_peer"
+    },
+    {
+      "from": "npm:node_modules/eslint-import-resolver-typescript",
+      "target": "eslint-plugin-import-x",
+      "kind": "peerDependencies",
+      "class": "optional_or_peer"
+    },
+    {
+      "from": "npm:node_modules/next",
+      "target": "@opentelemetry/api",
+      "kind": "peerDependencies",
+      "class": "optional_or_peer"
+    },
+    {
+      "from": "npm:node_modules/next",
+      "target": "babel-plugin-react-compiler",
+      "kind": "peerDependencies",
+      "class": "optional_or_peer"
+    }
+  ],
+  "embedded_editor": {
+    "name": "TinyMCE JavaScript",
+    "license_notice": "GPL-2.0-or-later",
+    "wrapper": "moonshine/tinymce MIT in composer.lock",
+    "open": {
+      "legal_review": true,
+      "replacement_evaluation": true
+    }
+  },
+  "legal_clearance": false,
+  "transferred_exclusive_third_party_rights": false,
+  "limitations": [
+    "Lockfile components are not necessarily installed or shipped on target OS",
+    "Unknown licenses and mixed expressions require verification against original texts",
+    "CycloneDX graph includes resolved peer and optional dependency relationships",
+    "Source packages do not prove provenance of built/minified vendored bundles",
+    "Manual TinyMCE embedded runtime license is explicitly separate from MIT PHP wrapper",
+    "Native renderer version/license and some transitive binary assets outside locks are unknown",
+    "No museum artwork, employee/contractor rights or customer approvals have been audited"
+  ]
+}

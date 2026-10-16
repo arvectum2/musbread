@@ -147,3 +147,7 @@ The repository contains 13 separate editable SVG grids for A2/A3/A4 print carrie
 ## CP-33D — несовпадение технических и итоговых форматов, сторонние права
 
 Автоматизировано сравнение 42 SVG/26 PDF/16 PNG/2 PPTX технических файлов с десятью обязательными расширениями финальной сдачи; отсутствие AI/EPS/PSD/TIFF/JPG/PPT не скрывается. Отдельный audit_dependency_rights.py проверяет данные lock-файлов и показывает риск GPL-2.0-or-later для встроенного TinyMCE (при MIT-обёртке). Полного SBOM и права на все сторонние компоненты пока нет. См. docs/CP33_FORMATS_RIGHTS_AUDIT.md.
+
+## CP-34D — полный locked SBOM + безопасный HTML fallback для редактора
+
+В docs/handoff/SBOM_CYCLONEDX.json содержатся 560 зафиксированных компонентных записей Composer/npm/dev/optional, Python инструментов и явно выделенных TinyMCE/librsvg. Таблица лицензий: SBOM_LICENSES.csv, summary: SBOM_SUMMARY.md. CI сверяет отчёт с текущими lock-файлами. PHP CMS имеет опциональный MUSEUM_ENTRY_BODY_EDITOR=html-source, который не загружает JS TinyMCE на странице редактирования, оставляя нормализацию HTML на сервере. По умолчанию по-прежнему работает TinyMCE, юридический вопрос GPL остаётся открытым. Полный план docs/CP34_SBOM_EDITOR_REPLACEMENT.md.

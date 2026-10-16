@@ -113,3 +113,7 @@ Generated 13 SVG technical grids, 13 preview PDFs with verified physical dimensi
 Созданы реальные машинные отчёты 42 SVG/26 PDF/16 PNG/2 PPTX с отдельными позициями отсутствующих финальных AI/EPS/PSD/TIFF/JPG/PPT. По lock-файлам сверены выбранные прямые библиотеки; разделены MIT у PHP-обёртки TinyMCE и GPL-2.0-or-later у embedded редактора, а также LGPL HTMLPurifier. Полный SBOM и правовая экспертиза не выполнены, 0/113 фирменных носителей приняты. Подробнее docs/CP33_FORMATS_RIGHTS_AUDIT.md.
 
 В ходе CP-33D дополнительно устранена нестабильность проверки EventSearch: готовность интерактивного поля больше не зависит от requestAnimationFrame, а Playwright ждёт загрузки клиентских JS модулей. Пройдено 12 повторов поиска, 25 Chromium и 25 WebKit.
+
+## CP-34D — CycloneDX SBOM и резервный редактор HTML
+
+Составлена полная опись 560 lockfile/отдельных компонентов (Composer 83 production +33 dev; npm 440 включая optional и dev; 2 Python + TinyMCE + librsvg). CycloneDX 1.6 граф, 560 строк CSV, лицензии и риск-бакеты без притворного юридического approval. Исправлено сопоставление Composer virtual illuminate/* через laravel/framework; четыре optional peer остаются отсутствующими, но не обязательными. Реализована резервная форма html-source, не загружающая TinyMCE JS, при default tinymce без изменений; серверная HTML-очистка протестирована. Полноценный WYSIWYG replacement и права требуют отдельного review/UX после контракта. См. docs/CP34_SBOM_EDITOR_REPLACEMENT.md.

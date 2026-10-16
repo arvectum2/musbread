@@ -28,3 +28,11 @@
 ezyang/htmlpurifier v4.19.1 — LGPL-2.1-or-later по composer.lock. php laravel/framework v13.36.0, moonshine/moonshine 4.19.5 — MIT. По package-lock.json Next.js 16.4.1, React/React DOM 19.3.0 и sanitize-html 2.18.1 — MIT. Два pinned Python инструмента: python-pptx 1.0.2 (MIT metadata), pypdf 5.6.1 (BSD family classifier, exact license text needs confirmation). Native librsvg вне этих application lock-файлов.
 
 Это ограниченная проверка выбранных прямых компонентов, **не полный SBOM**. Декларация лицензии не равна успешному исполнению условий или юридическому разрешению передать сторонний код как собственный. См. docs/handoff/DEPENDENCY_RIGHTS_REPORT.md и docs/CP33_FORMATS_RIGHTS_AUDIT.md.
+
+## CP-34D — 560 записей CycloneDX из всего lock-графа
+
+Автоматический scripts/build_dependency_sbom.py выгружает все 83 production/33 dev composer.lock и 440 npm package-lock.json, включая optional/platform packages, отдельно два pinned Python генератора, вложенный TinyMCE GPL и нативный librsvg. Данные docs/handoff/SBOM_CYCLONEDX.json, SBOM_LICENSES.csv, SBOM_SUMMARY.md/json.
+
+Новый список показывает: composer nette/schema и nette/utils с BSD-3-Clause **ИЛИ** GPL alternative (не объявлять их только GPL), HTMLPurifier LGPL, optional platform binaries sharp/libvips LGPL/compound, test axe-core MPL, отдельный embedded TinyMCE GPL при MIT-обёртке. Полный SBOM **lock-дерева** не подтверждает наличие всех бинарников на конкретной ОС и не очищает лицензионные уведомления/юридические права.
+
+Опционально MUSEUM_ENTRY_BODY_EDITOR=html-source даёт безопасную форму для ввода HTML без TinyMCE JS **для этого поля**, но GPL-обёртка с исходным редактором всё ещё установлена в vendor. Это не юридическое решение по распространению и не полноценный WYSIWYG. До поставки юридически и технически согласовать судьбу TinyMCE, перепроверить все реально поставляемые assets, печатные материалы и лицензии конечного релиза. Подробности docs/CP34_SBOM_EDITOR_REPLACEMENT.md.

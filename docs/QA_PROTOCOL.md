@@ -103,3 +103,9 @@ scripts/audit_final_formats.py сверяет действительную ст�
 ## CP-33D — устранение флейка поиска по афише
 
 В статическом Next.js export переход к интерактивному поиску мог дожидаться requestAnimationFrame, который иногда откладывается в headless Chromium, а Playwright начинал проверку до получения клиентских JS chunks. Компонент EventSearch устанавливает data-ready после эффекта React через setTimeout без ожидания кадра; три браузерных сценария поиска дожидаются networkidle перед проверкой. Отдельный стресс-прогон 12/12, общий Chromium 25/25 и WebKit 25/25. Это техническая стабилизация тестовой демоверсии, а не клиентское UAT.
+
+## CP-34D — SBOM всех lock-зависимостей и безопасный fallback редактора
+
+scripts/build_dependency_sbom.py перечисляет все Composer production/dev, все npm locked packages (включая OS/optional), pinned Python tools, nested TinyMCE и нативный build renderer в CycloneDX 1.6. CI вызывает --verify-generated; tests/test_build_dependency_sbom.py проверяет полноту, граф реальных lock dependencies, отсутствие потерянных пакетов, tampering license, связь Laravel replace и идентичность отчёта.
+
+PHP MuseumEntryEditorModeTest проверяет режим html-source с реальным HTTP-рендером MoonShine, отсутствие TinyMCE asset, default TinyMCE без регрессии, запрет неизвестного режима и серверную очистку HTML. Это не visual WYSIWYG parity, не решение по GPL и не юридический sign-off.

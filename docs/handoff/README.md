@@ -41,3 +41,7 @@ docs/design/technical-drafts contains 13 editable SVG, 13 PDF previews and two r
 ## CP-33D — аудит форматов и лицензий
 
 FINAL_FORMAT_READINESS.json/md проверяет реальные технические SVG/PDF/PNG/PPTX и поштучно оставляет отсутствующими финальные AI/EPS/PSD/TIFF/JPG/PPT. DEPENDENCY_RIGHTS_REPORT.json/md — выборочная сверка лицензий/версий прямых компонентов из lock-файлов, критический отдельный GPL TinyMCE. Ни один отчёт не подтверждает юридическую приёмку, права на чужой код или полный SBOM. Документ docs/CP33_FORMATS_RIGHTS_AUDIT.md.
+
+## CP-34D — CycloneDX SBOM полного lockfile и решение по редактору
+
+SBOM_CYCLONEDX.json (560 записей и зависимости), SBOM_LICENSES.csv, SBOM_SUMMARY.md/json проверяются в CI на соответствие composer.lock/package-lock.json; в сводку включены GPL TinyMCE, LGPL платформенных libvips и прочие лицензии, но юридическое approval отсутствует. EDITOR_REPLACEMENT_DECISION.md содержит пустое поле решения по настоящей визуальной замене. В CMS уже есть опциональное поле html-source без TinyMCE JS на форме, но сам GPL runtime пока не удалён. Реальный документ передачи прав не подписан. Методика docs/CP34_SBOM_EDITOR_REPLACEMENT.md.

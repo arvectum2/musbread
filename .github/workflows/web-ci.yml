@@ -33,6 +33,18 @@ jobs:
       - name: Audit lockfile declared licenses and TinyMCE GPL risk
         run: |
           python3 -m scripts.audit_dependency_rights --verify-generated             --json docs/handoff/DEPENDENCY_RIGHTS_REPORT.json             --markdown docs/handoff/DEPENDENCY_RIGHTS_REPORT.md
+      - name: Verify complete CycloneDX SBOM for every locked dependency
+        run: python3 scripts/build_dependency_sbom.py --verify-generated
+      - name: Save all locked dependencies and license triage
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-preaward-full-locked-sbom
+          path: |
+            docs/handoff/SBOM_CYCLONEDX.json
+            docs/handoff/SBOM_LICENSES.csv
+            docs/handoff/SBOM_SUMMARY.json
+            docs/handoff/SBOM_SUMMARY.md
+          retention-days: 7
       - name: Verify required design carrier inventory and format evidence
         run: |
           python3 scripts/audit_design_delivery.py --check --verify-generated             --csv docs/handoff/DESIGN_DELIVERABLES.csv             --markdown docs/handoff/DESIGN_DELIVERABLES.md             --requests docs/handoff/CUSTOMER_INPUTS_AFTER_INTERVIEW.md             --json /tmp/musbread-design-handoff.json

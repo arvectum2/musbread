@@ -37,13 +37,7 @@ final class MuseumEntryFormPage extends FormPage
                         ->orderBy('sort_order')->pluck('title', 'id')->all())
                     ->nullable(),
                 Textarea::make('Анонс', 'excerpt'),
-                TinyMce::make('Основной текст', 'body')
-                    ->locale('ru')
-                    ->plugins(['autolink', 'link', 'lists', 'wordcount', 'autoresize'])
-                    ->menubar(false)
-                    ->toolbar('undo redo | blocks | bold italic | bullist numlist | link | removeformat')
-                    ->addOption('license_key', 'gpl')
-                    ->required(),
+                self::bodyEditorField(),
                 Select::make('Статус', 'status')
                     ->options(['draft' => 'Черновик', 'published' => 'Опубликовано'])
                     ->default('draft')->required(),
@@ -57,6 +51,30 @@ final class MuseumEntryFormPage extends FormPage
                 Textarea::make('English SEO description', 'seo_description_en'),
             ]),
         ];
+    }
+
+    /**
+     * This is an emergency *source HTML* editor alternative, not WYSIWYG parity.
+     * Existing sanitation/publishing rules remain independent of the chosen UI.
+     */
+    private static function bodyEditorField(): Textarea
+    {
+        $mode = config('museum.entry_body_editor', 'tinymce');
+
+        return match ($mode) {
+            'html-source' => Textarea::make('Основной текст (HTML-код; h2, p, ul, li, a)', 'body')
+                ->required(),
+            'tinymce' => TinyMce::make('Основной текст', 'body')
+                ->locale('ru')
+                ->plugins(['autolink', 'link', 'lists', 'wordcount', 'autoresize'])
+                ->menubar(false)
+                ->toolbar('undo redo | blocks | bold italic | bullist numlist | link | removeformat')
+                ->addOption('license_key', 'gpl')
+                ->required(),
+            default => throw new \InvalidArgumentException(
+                'Unsupported museum.entry_body_editor mode; allowed: tinymce, html-source'
+            ),
+        };
     }
 
     protected function rules(DataWrapperContract $item): array
