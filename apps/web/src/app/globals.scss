@@ -228,3 +228,10 @@ html[data-vision-mode="on"] .mobile-nav nav{background:#fff;color:#111}
 }
 /* Contrast regression discovered by full-page axe WCAG 2.1 AA sweep. */
 html[data-vision-mode="on"] .art-caption{color:#111}
+
+/* TZ-197: CMS pages are discoverable inside their actual chosen section. */
+.section-entries{margin:2rem 0 2.5rem;min-width:0}
+.section-entries h2{font-size:2rem}
+.section-entries .museum-list-item h3{font-size:1.35rem;line-height:1.3;margin:0 0 .75rem}
+.section-entries .museum-list-item{overflow-wrap:anywhere}
+.cms-entry-section{margin:.5rem 0 1.25rem}

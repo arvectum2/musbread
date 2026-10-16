@@ -90,6 +90,32 @@ class MuseumSectionExportTest extends TestCase
         $this->assertSame(1, $audit['section_count']);
     }
 
+    public function test_new_pages_added_to_existing_section_are_exported_with_assignment_and_hidden_with_draft_ancestor(): void
+    {
+        $root = MuseumSection::create(['slug'=>'exhibitions-root','title'=>'Выставки','status'=>'published']);
+        $child = MuseumSection::create(['slug'=>'exhibitions-child','title'=>'Тематические выставки','status'=>'published','parent_id'=>$root->id]);
+        $live = MuseumEntry::create([
+            'type'=>'page','slug'=>'new-exhibit-page','title'=>'Новая страница раздела',
+            'body'=>'Содержимое страницы','status'=>'published','museum_section_id'=>$child->id,
+        ]);
+        MuseumEntry::create([
+            'type'=>'page','slug'=>'draft-exhibit-page','title'=>'Черновик',
+            'body'=>'Не публиковать','status'=>'draft','museum_section_id'=>$child->id,
+        ]);
+        [$snapshot] = $this->export('new-page-in-section');
+        $this->assertSame(['new-exhibit-page'],array_column($snapshot['entries'],'slug'));
+        $this->assertSame('exhibitions-child',$snapshot['entries'][0]['section_slug']);
+        $this->assertSame('exhibitions-root',$snapshot['sections'][1]['parent_slug']);
+        $child->update(['status'=>'draft']);
+        [$hidden] = $this->export('hidden-page-in-section');
+        $this->assertSame([], $hidden['entries']);
+        $this->assertSame(['exhibitions-root'],array_column($hidden['sections'],'slug'));
+        $child->update(['status'=>'published']);
+        $live->update(['museum_section_id'=>$root->id]);
+        [$moved] = $this->export('moved-page-between-sections');
+        $this->assertSame('exhibitions-root',$moved['entries'][0]['section_slug']);
+    }
+
     public function test_reorder_and_rename_are_reflected_in_next_snapshot(): void
     {
         $root = MuseumSection::create([

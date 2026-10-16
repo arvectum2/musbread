@@ -11,5 +11,5 @@ export const metadata: Metadata = {
   robots: { index: siteApproved, follow: siteApproved },
 };
 export default function EnglishLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><EnglishHeader/><main id="main">{children}</main><EnglishFooter/></body></html>;
+  return <html lang="en"><body><EnglishHeader/><main id="main" tabIndex={-1}>{children}</main><EnglishFooter/></body></html>;
 }

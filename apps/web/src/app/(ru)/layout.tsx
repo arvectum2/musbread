@@ -10,5 +10,5 @@ export const metadata: Metadata = {
   robots: { index: siteApproved, follow: siteApproved },
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="ru"><body><SiteHeader/><main id="main">{children}</main><SiteFooter/></body></html>;
+  return <html lang="ru"><body><SiteHeader/><main id="main" tabIndex={-1}>{children}</main><SiteFooter/></body></html>;
 }

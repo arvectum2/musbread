@@ -41,6 +41,10 @@ export default async function MuseumEntryPage({ params }: Props) {
       <Link href={`/${section}/`}>{sections[section].title}</Link>
       <span aria-hidden="true">/</span><span aria-current="page">{entry.title}</span>
     </nav>
+    {entry.section_slug && content.sections?.some((s) => s.slug === entry.section_slug) &&
+      <p className="cms-entry-section">Раздел каталога: <Link className="text-link" href={`/guide/${entry.section_slug}/`}>
+        {content.sections.find((s) => s.slug === entry.section_slug)?.title}
+      </Link></p>}
     <span className="eyebrow">{sections[section].title} · ТЕСТОВЫЙ МАТЕРИАЛ</span>
     <h1>{entry.h1 || entry.title}</h1>
     {entry.translations?.en && <p><Link href={"/en/" + section + "/" + slug + "/"} lang="en"

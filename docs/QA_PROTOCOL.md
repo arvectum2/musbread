@@ -205,3 +205,11 @@ Run `MuseumMediaTest` and full `php artisan test`: GIF87a static backward compat
 ## TZ-184/188/191/192/193
 
 PHP: `MuseumAltDraftTest` (ACL, no public auto-save, rejects generic), `MuseumDocumentsTest` (secure signatures/AV gating for XLS), `MuseumMediaTest` (required alt/content-hashed media); Next.js: `test:seo`, `check_preaward_seo.py`, static accessibility audit and Playwright. До приёмки `MUSBREAD_SITE_APPROVED` остаётся выключенным. Зелёного статуса по клиентским критериям не объявлять.
+
+## TZ-197/206/207/238/240: CMS section assignment, keyboard and zoom-equivalent reflow
+
+`MuseumEntryEditorTest`, `MuseumSectionExportTest` assert editor creates new page in granted section and publish gate respects ancestor status. `scripts/qa_dynamic_navigation.py` generates synthetic 4-level tree and section-linked public page then RESTORES original golden snapshot. `apps/web/e2e/tz197-240-accessibility.spec.ts` verifies keyboard focus skip to main (RU/EN main has tabindex=-1), desktop/mobile menus, autocomplete, Space toggle, and 6 page types × 3 initial screens × 5 zoom-equivalent effective CSS widths (90 cases) plus high-contrast 320px. This does not certify native Page Zoom or full WCAG/GOST.
+
+## TZ-241/TZ-250: conservative evidence
+
+After static build `node apps/web/scripts/qa-performance.mjs <private-SSD-json>` (cwd apps/web) measures four routes × three cold contexts with Chromium 4× CPU, RTT150ms, 1.6Mbps; DO NOT equate LCP to full page load or localhost to field SLA. `apps/web/e2e/tz250-layout.spec.ts` tests main content shell >=80% across 1100–3840 CSSpx, three routes, and horizontal overflow.

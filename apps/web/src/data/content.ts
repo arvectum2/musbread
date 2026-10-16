@@ -36,3 +36,15 @@ export const entriesInSection = (section: MuseumSection) =>
   content.entries.filter((entry) => entry.type === sections[section].type);
 export const findEntry = (section: MuseumSection, slug: string) =>
   entriesInSection(section).find((entry) => entry.slug === slug);
+
+/** TZ-197: new published CMS page appears in its assigned section,
+ * not merely at a globally generated but undiscoverable URL. */
+export const entriesInCmsSection = (sectionSlug: string) => content.entries
+  .filter((entry) => entry.section_slug === sectionSlug)
+  .sort((a, b) => a.sort_order - b.sort_order || a.title.localeCompare(b.title, "ru"));
+export const entryPublicHref = (entry: MuseumEntry): string => {
+  const section = Object.entries(sections).find(([, value]) => value.type === entry.type)?.[0];
+  if (!section || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.slug))
+    throw new Error("Invalid published entry route");
+  return `/${section}/${entry.slug}/`;
+};

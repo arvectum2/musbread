@@ -5,6 +5,7 @@ import { legacyUrl, museumReference, museumAddressMapSearchUrl, REFERENCE_DATE }
 import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
 import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
+import { entriesInCmsSection, entryPublicHref } from "@/data/content";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -29,6 +30,7 @@ export default async function GuidePage({ params }: Props) {
   const isCollection = slug === "science-collection";
   const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: "/guide/" + child.slug + "/" })) : [];
   const directChildren = usesCmsNavigation ? findPublicNavigationNode(navigationTree, slug)?.children ?? [] : [];
+  const sectionEntries = usesCmsNavigation ? entriesInCmsSection(slug) : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
 
   return <article className="section inner-page guide-page">
@@ -73,6 +75,16 @@ export default async function GuidePage({ params }: Props) {
     {directChildren.length > 0 && <section aria-label={"Подразделы: " + title}>
       <h2>Подразделы</h2>
       <NavigationBranch nodes={directChildren}/>
+    </section>}
+    {sectionEntries.length > 0 && <section className="section-entries" aria-label={"Материалы раздела: " + title}>
+      <h2>Материалы раздела</h2>
+      <div className="museum-list">{sectionEntries.map((entry) =>
+        <Link key={`${entry.type}:${entry.slug}`} className="museum-list-item" prefetch={false} href={entryPublicHref(entry)}>
+          <h3>{entry.title}</h3>
+          {entry.excerpt && <p>{entry.excerpt}</p>}
+          <span className="text-link">Читать →</span>
+        </Link>)}
+      </div>
     </section>}
     {groupPages.length > 0 && <div className="museum-list" aria-label={"Подразделы: " + title}>
       {groupPages.map((child) => <Link className="museum-list-item" prefetch={false} key={child.slug} href={child.href}>
