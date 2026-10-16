@@ -112,9 +112,10 @@ class ExportMuseumSnapshot extends Command
                 'slug' => $event->slug, 'title' => $event->title,
                 'category' => $event->category,
                 'date' => $event->starts_at->format('Y-m-d'),
-                'ends_on' => $event->ends_at?->format('Y-m-d'),
                 'excerpt' => $event->excerpt, 'body' => $event->body,
             ];
+            // Preserve stable snapshot hashes and old contracts for one-day events.
+            if ($event->ends_at !== null) $out['ends_on'] = $event->ends_at->format('Y-m-d');
             $related = $publicLinks($event->relatedEntries, $entryById, $entryLink);
             if ($related !== []) $out['related_entries'] = $related;
             return $out;

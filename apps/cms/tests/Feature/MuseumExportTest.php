@@ -91,6 +91,7 @@ class MuseumExportTest extends TestCase
         $data = json_decode(file_get_contents($out), true, flags: JSON_THROW_ON_ERROR);
         $this->assertCount(1, $data['events']);
         $this->assertSame('public-event', $data['events'][0]['slug']);
+        $this->assertArrayNotHasKey('ends_on', $data['events'][0]); // keep one-day golden snapshots unchanged
         $this->assertStringNotContainsString('private-draft', file_get_contents($out));
         $this->assertStringNotContainsString('future-private', file_get_contents($out));
         $audit = json_decode(file_get_contents($manifest), true, flags: JSON_THROW_ON_ERROR);
