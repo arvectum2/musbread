@@ -14,8 +14,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install XLS and editable technical carrier verification packages
+      - name: Install native vector PDF rasterizer and design verification packages
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq librsvg2-bin
           python3 -m pip install "xlrd==2.0.2"
           python3 -m pip install -r scripts/requirements-design-tools.txt
       - run: python3 -m unittest discover -s tests -v
