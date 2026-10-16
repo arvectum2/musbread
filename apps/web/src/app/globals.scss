@@ -189,3 +189,42 @@ html[data-vision-mode="on"] .hero-art,html[data-vision-mode="on"] .closing-banne
 .nav-branch a:hover,.nav-branch a:focus-visible{background:#edf3e8;text-decoration:underline}
 .guide-page>section[aria-label^="Подразделы"]{margin:1.3rem 0}
 .guide-page>section[aria-label^="Подразделы"]>.nav-branch{max-width:46rem}
+
+/* TZ-115/TZ-117/TZ-118: keep accessibility actions visible on ALL widths.
+   On small viewports, controls get their own row instead of disappearing. */
+.header-controls .access-link{display:inline-flex;align-items:center;min-height:2.5rem;border:1px solid currentColor;border-radius:.25rem;padding:.35rem .65rem;white-space:normal;text-align:center;font-size:.87rem;font-weight:650}
+.header-controls .access-link:hover,.header-controls .access-link:focus-visible{background:var(--green);color:white;text-decoration:none}
+@media(max-width:1250px){.header-controls .access-link{display:inline-flex}}
+@media(max-width:1000px){
+  .header-inner{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand menu" "controls controls";row-gap:.65rem;padding-bottom:.75rem}
+  .header-controls{justify-content:flex-start;gap:.65rem;min-width:0}
+  .header-controls .access-link{display:inline-flex}
+}
+@media(max-width:630px){
+  .header-inner{gap:.45rem;row-gap:.55rem}
+  .header-controls .access-link{font-size:.79rem;min-height:2.5rem}
+  .header-controls .vision-toggle{max-width:none;min-height:2.5rem;font-size:.79rem}
+}
+/* Large-text mode: never suppress essential controls or truncate their labels. */
+html[data-vision-mode="on"] .header-inner{min-height:0}
+html[data-vision-mode="on"] .header-controls{flex-wrap:wrap}
+html[data-vision-mode="on"] .vision-toggle,
+html[data-vision-mode="on"] .header-controls .access-link{font-size:.9rem;min-height:2.7rem;max-width:none}
+html[data-vision-mode="on"] .global-search input{font-size:1rem}
+html[data-vision-mode="on"] .nav-branch a,
+html[data-vision-mode="on"] .mega-panel a{color:#111}
+html[data-vision-mode="on"] .mega-panel,
+html[data-vision-mode="on"] .mobile-nav nav{background:#fff;color:#111}
+
+@media(max-width:600px){
+  /* Long CTA titles must wrap on 320px devices, not cause document overflow. */
+  .closing-banner h2{font-size:clamp(2rem,8vw,3.5rem);overflow-wrap:anywhere}
+  .closing-banner>div{min-width:0}
+}
+
+@media(max-width:600px){
+  .section-title-row>div{min-width:0;max-width:100%}
+  .section-title-row h2{font-size:clamp(2rem,8vw,3.2rem);overflow-wrap:anywhere}
+}
+/* Contrast regression discovered by full-page axe WCAG 2.1 AA sweep. */
+html[data-vision-mode="on"] .art-caption{color:#111}

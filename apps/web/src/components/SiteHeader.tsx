@@ -35,7 +35,7 @@ export default function SiteHeader() {
       <div className="header-controls">
         <GlobalSearch compact />
         <VisionMode />
-        <Link className="access-link" href="/guide/accessible-museum/">Доступная среда</Link>
+        <Link className="access-link" href="/guide/accessible-museum/" aria-label="Доступная среда: условия посещения">Доступная среда</Link>
         <a className="header-action" href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer" aria-label="Купить билет на официальной площадке ВМузей (откроется новая вкладка)">Купить билет ↗</a>
       </div>
       <details className="mobile-nav">

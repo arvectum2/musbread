@@ -144,3 +144,7 @@
 ## Последовательный проход оперативной матрицы TZ-072 → TZ-236 (16.10.2026)
 
 Сверены пункты TZ-072/076/077/085/087/088/111/228/230/234/236 с оригиналом до изменений. Созданы глубокая CMS-навигация (десктоп/мобильный/вложенные страницы, 4-уровневая статическая сборка), консистентные приватные SQLite backup/restore и суперпользовательская статистика действий/логинов. Физическая сеть, утверждённое дерево, workflow ПДн, браузерная поддержка всех брендов и продакшен-СУБД по-прежнему внешние зависимости; ни один из них ложно не закрыт. [Полный протокол](TZ072_076_077_085_087_088_PROGRESS.md), [матрица](tz-audit/TZ_EXECUTION_MATRIX.html).
+
+## P0 public header, contacts and accessibility (TZ115–TZ174)
+
+Verified source before modification. Six-width header and vision toggle, no 320px overflow; four-route axe WCAG2.1 AA sweep, contact/visit page external address map lookup, keyboard sticky dropdown; real customer content/approvals remain blockers, not technical release proof. [Full results](TZ115_TZ174_HEADER_ACCESSIBILITY.md).

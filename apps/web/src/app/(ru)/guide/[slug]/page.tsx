@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { legacyUrl, museumReference, REFERENCE_DATE } from "@/data/museum-reference";
+import { legacyUrl, museumReference, museumAddressMapSearchUrl, REFERENCE_DATE } from "@/data/museum-reference";
 import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
 import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
@@ -23,6 +23,8 @@ export default async function GuidePage({ params }: Props) {
   const title = group?.title || page!.title;
   const parent = group || page!.group;
   const isVisit = ["museum-contacts", "plan-visit", "tickets-and-benefits"].includes(slug);
+  const isContact = slug === "museum-contacts";
+  const isPlanVisit = slug === "plan-visit";
   const isAccess = slug === "accessible-museum";
   const isCollection = slug === "science-collection";
   const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: "/guide/" + child.slug + "/" })) : [];
@@ -53,12 +55,19 @@ export default async function GuidePage({ params }: Props) {
       <p>{museumReference.closedDay}. {museumReference.sanitaryDay}.</p>
       <p><strong>Телефон:</strong> <a href={museumReference.phoneHref}>{museumReference.phone}</a></p>
       <p><strong>Почта:</strong> <a href={museumReference.emailHref}>{museumReference.email}</a></p>
+      {(isContact || isPlanVisit) && <section aria-label="Как добраться">
+        <h3>Как добраться</h3>
+        <p>Ближайшая станция метро: {museumReference.metro}. Адрес для навигатора: {museumReference.address}.</p>
+        <p><a href={museumAddressMapSearchUrl} target="_blank" rel="noopener noreferrer" className="text-link">Найти адрес на карте ↗</a> <small>(внешний поиск адреса, без передачи данных посещения этой страницей)</small></p>
+        <p><Link href="/guide/accessible-museum/" className="text-link">Условия доступности музея</Link> · <a href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Официальная информация на действующем сайте ↗</a></p>
+      </section>}
       {slug === "tickets-and-benefits" && <p><a href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer" className="primary-button">Купить билет на действующей площадке ↗</a></p>}
     </div>}
     {isAccess && <div className="reference-facts">
       <h2>Справка о доступности по действующему сайту</h2>
       <p>В музее имеются пандусы и подъёмник; на действующем сайте указана доступность экспозиций первого и второго этажей.</p>
       <p>Уточнение условий посещения: <a href={museumReference.phoneHref}>{museumReference.phone}</a>.</p>
+      <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <a href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</a>.</p>
     </div>}
     {isCollection && <p className="reference-facts"><a href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</a></p>}
     {directChildren.length > 0 && <section aria-label={"Подразделы: " + title}>

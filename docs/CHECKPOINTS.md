@@ -422,3 +422,12 @@ CP-28D — внутренний предконтрактный спринт, н�
 - [x] TZ-111: локально Google Chrome/Chromium/WebKit прошли 6 browser smoke; Firefox запуск неуспешен по ошибке профиля, Edge/Yandex/Safari и последние 2 версии остаются на UAT.
 - [x] TZ-236: суперпользовательский отчёт действий редакторов и истории входов/выходов без записей приватного контента. Retention и полнота реальных событий остаются открытыми.
 - [ ] Согласовать внешние зависимости и закрыть эти пункты после победы/предоставления исходных данных. [TZ072_076_077_085_087_088_PROGRESS.md](TZ072_076_077_085_087_088_PROGRESS.md).
+
+## TZ-first queue: header/accessibility/contacts/sticky navigation
+
+- [x] Seven contract categories verified desktop/mobile; CMS nested navigation retained (TZ115).
+- [x] Vision-mode 1.25× font/contrast/keyboard and persistence, axe WCAG2.1 A/AA 4-page technical sweep; corrected art-caption contrast and 320px overflow (TZ117).
+- [x] Accessibility control **visible at 320–1440 px** and guide source link (TZ118).
+- [x] Contact/footer, map-address search and planning links; sticky mega-menu keyboard test (TZ125/138/139/173/174).
+- [ ] Official contact info, accessibility passport, privacy/refund policy, museum document source files and UAT (TZ126/134/142 et al).
+- [ ] Real museum content and deeper binary document search investigation (TZ120, still in local queue). [Protocol](TZ115_TZ174_HEADER_ACCESSIBILITY.md).

@@ -27,6 +27,9 @@ export const museumReference = {
   refundsUrl: "https://muzei-xleb.ru/ceny-i-usloviya-predostavleniya-uslug",
 } as const;
 
+/** External address lookup rather than unverified geo-coordinates or a third-party embed. */
+export const museumAddressMapSearchUrl = "https://yandex.ru/maps/?text=" + encodeURIComponent(museumReference.address);
+
 export type SitePage = { slug: string; title: string; legacyPath?: string; tenderOnly?: boolean };
 export type MenuGroup = { slug: string; title: string; children: readonly SitePage[] };
 const legacy = (slug: string, title: string, legacyPath: string): SitePage =>
