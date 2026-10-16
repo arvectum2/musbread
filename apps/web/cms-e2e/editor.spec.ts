@@ -180,3 +180,34 @@ test("CP-40D: администратор создаёт дерево и меня
   await expect(page.locator('select[name="parent_id"]')).not.toContainText("qa-tree-child-a");
   await expect(page.locator('select[name="parent_id"]')).not.toContainText("qa-tree-child-b");
 });
+
+test("CP-41D: штатные фильтры MoonShine, поиск и количество связанных объектов", async ({ page }) => {
+  await page.goto("/admin/login");
+  await page.locator('input[name="username"]').fill(process.env.MUSBREAD_E2E_USERNAME!);
+  await page.locator('input[type="password"]').fill(process.env.MUSBREAD_E2E_PASSWORD!);
+  await page.locator('button[type="submit"]').click();
+  const index = "/admin/resource/museum-entry-resource/museum-entry-index-page";
+  await page.goto(index);
+  await expect(page.locator("body")).toContainText("Готовность к экспорту");
+  await expect(page.locator("body")).toContainText("Связанных материалов");
+  await expect(page.locator("body")).toContainText("Раздел сайта");
+  const newsRow = page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" });
+  await expect(newsRow).toBeVisible();
+  await expect(newsRow).toContainText("Настроить");
+  await expect(newsRow).toContainText("Открыть");
+  await expect(newsRow).toContainText("1"); // one related excursion, two linked events
+  await expect(newsRow).toContainText("2");
+  await page.goto(index + "?" + new URLSearchParams({ "filter[publication_state]": "ready" }));
+  await expect(page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" })).toBeVisible();
+  await page.goto(index + "?" + new URLSearchParams({ "filter[publication_state]": "draft" }));
+  await expect(page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" })).toHaveCount(0);
+  await page.goto(index + "?" + new URLSearchParams({ "filter[link_state]": "linked" }));
+  await expect(page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" })).toBeVisible();
+  await page.goto(index + "?" + new URLSearchParams({ "filter[link_state]": "unlinked" }));
+  await expect(page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" })).toHaveCount(0);
+  await page.goto(index + "?" + new URLSearchParams({ "filter[museum_section_id]": "unassigned" }));
+  await expect(page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" })).toBeVisible();
+  await page.goto(index + "?" + new URLSearchParams({ search: "qa-browser-news" }));
+  await expect(page.locator("tbody tr").filter({ hasText: "QA: публикация из настоящего браузера" })).toBeVisible();
+  await expect(page.locator("tbody tr").filter({ hasText: "Демонстрационная экскурсия" })).toHaveCount(0);
+});

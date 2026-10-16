@@ -25,7 +25,13 @@ class MuseumEntryResource extends ModelResource
     protected function modifyQueryBuilder(\Illuminate\Contracts\Database\Eloquent\Builder $builder): \Illuminate\Contracts\Database\Eloquent\Builder
     {
         $user = MuseumSectionAccess::user();
-        return $user === null ? $builder->whereRaw('1=0') : $builder->editableBy($user);
+        if ($user === null) return $builder->whereRaw('1=0');
+        return $builder->editableBy($user)
+            ->with('section:id,title')
+            ->withCount([
+                'relatedEntries as editorial_related_entries_count' => static fn ($q) => $q->editableBy($user),
+                'linkedEvents as editorial_linked_events_count',
+            ]);
     }
 
     protected function modifyItemQueryBuilder(\Illuminate\Contracts\Database\Eloquent\Builder $builder): \Illuminate\Contracts\Database\Eloquent\Builder
@@ -46,6 +52,11 @@ class MuseumEntryResource extends ModelResource
             }
         }
         return parent::isCan($ability);
+    }
+
+    protected function search(): array
+    {
+        return ['title', 'slug', 'h1'];
     }
 
     protected string $model = MuseumEntry::class;
