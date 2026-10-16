@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\MuseumEntry;
 use App\Models\MuseumEditorialReviewNote;
+use App\Models\MuseumEditorialTaskUpdate;
 use App\Models\MuseumEvent;
 use App\Models\MuseumPublicationRun;
 use App\Models\MuseumSection;
@@ -707,6 +708,174 @@ class MuseumPublicationDiffTest extends TestCase
             ->assertSeeText('Ещё не рассмотрено: 2')
             ->assertSee('Исторических замечаний к другим версиям: 3');
         $this->assertSame(0, MuseumPublicationRun::count());
+    }
+
+    public function test_admin_assigns_task_to_granted_editor_and_every_update_is_audited(): void
+    {
+        $section = MuseumSection::create(['slug'=>'task-news','title'=>'Редакционные задачи','status'=>'published']);
+        $entry = $this->article('queue-news',section:$section->id);
+        $this->baseline();
+        $entry->update(['title'=>'Исправить новость']);
+        $admin = MoonshineUser::factory()->create();
+        $role = MoonshineUserRole::query()->where('name','Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id'=>$role->id]);
+        $section->editors()->attach($editor->id);
+        $report = app(MuseumPublicationDiff::class)->report($admin);
+        $payload = [
+            'baseline_sha256'=>$report['baseline_sha256'],
+            'candidate_sha256'=>$report['candidate_sha256'],
+            'item_group'=>'entries','item_key'=>'news:queue-news',
+            'task_status'=>'open','priority'=>'high','assignee_id'=>$editor->id,
+            'note'=>'Сверить факты в новости',
+        ];
+        $this->actingAs($admin,'moonshine')->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('Очередь редакторских задач')->assertSee('Создать задачу можно');
+        $this->post(route('museum.content.editorial-task.store'),$payload)->assertRedirect(route('museum.content.editorial-review'));
+        $first = MuseumEditorialTaskUpdate::query()->firstOrFail();
+        $this->assertSame('high',$first->priority);
+        $this->assertSame($editor->id,$first->assignee_id);
+        $this->assertSame($admin->id,$first->actor_id);
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('В работе: 0')->assertSee('Открыто: 1')
+            ->assertSee('История задачи (1)');
+        $this->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'task_status'=>'in_progress','priority'=>'normal',
+            'note'=>'Редактор проверяет хронологию',
+        ])->assertRedirect();
+        $this->assertDatabaseCount('museum_editorial_task_updates',2);
+        $this->assertSame('open',$first->fresh()->task_status);
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('В работе: 1')->assertSee('История задачи (2)')
+            ->assertSee('Сверить факты в новости')->assertSee('Редактор проверяет хронологию');
+        $this->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'task_status'=>'done','note'=>'Исправлено, ожидает отдельной проверки выпуска',
+        ])->assertRedirect();
+        $this->get(route('museum.content.editorial-review'))->assertOk()->assertSee('Выполнено внутри команды: 1');
+        $this->assertSame(0,MuseumPublicationRun::count());
+        $this->assertSame($this->originalDataHash,hash_file('sha256',base_path('../web/src/data/published.json')));
+    }
+
+    public function test_editor_can_only_take_own_current_section_task_and_admin_assignee_is_validated(): void
+    {
+        $mine = MuseumSection::create(['slug'=>'task-mine','title'=>'Мой раздел','status'=>'published']);
+        $other = MuseumSection::create(['slug'=>'task-other','title'=>'Чужая рубрика','status'=>'published']);
+        $own = $this->article('task-own',section:$mine->id);
+        $foreign = $this->article('task-private',section:$other->id);
+        $event = $this->event('task-event');
+        $this->baseline();
+        $own->update(['title'=>'Мой материал изменён']);
+        $foreign->update(['title'=>'Чужой материал изменён']);
+        $event->update(['title'=>'Событие для администратора']);
+        $role = MoonshineUserRole::query()->where('name','Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id'=>$role->id]);
+        $noGrant = MoonshineUser::factory()->create(['moonshine_user_role_id'=>$role->id]);
+        $mine->editors()->attach($editor->id);
+        $admin = MoonshineUser::factory()->create();
+        $report = app(MuseumPublicationDiff::class)->report($admin);
+        $payload = [
+            'baseline_sha256'=>$report['baseline_sha256'],
+            'candidate_sha256'=>$report['candidate_sha256'],
+            'item_group'=>'entries','item_key'=>'news:task-own',
+            'task_status'=>'open','priority'=>'high','assignee_id'=>$editor->id,
+            'note'=>'Проверить мой материал',
+        ];
+        $this->actingAs($admin,'moonshine')->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'assignee_id'=>$noGrant->id,
+        ])->assertUnprocessable();
+        $this->actingAs($editor,'moonshine');
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('Очередь редакторских задач')->assertDontSee('task-private')->assertDontSee('task-event');
+        $this->post(route('museum.content.editorial-task.store'),$payload)->assertRedirect();
+        $this->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'assignee_id'=>$noGrant->id,
+        ])->assertUnprocessable();
+        $this->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'item_key'=>'news:task-private',
+        ])->assertUnprocessable();
+        $this->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'item_group'=>'events','item_key'=>'task-event',
+        ])->assertUnprocessable();
+        $mine->editors()->detach($editor->id);
+        $this->post(route('museum.content.editorial-task.store'),$payload)->assertForbidden();
+        $this->get(route('museum.content.editorial-review'))->assertForbidden();
+        $this->assertDatabaseCount('museum_editorial_task_updates',1);
+    }
+
+    public function test_task_reassignment_is_admin_only_and_stale_tasks_do_not_carry_forward(): void
+    {
+        $section = MuseumSection::create(['slug'=>'task-shift','title'=>'Проверка','status'=>'published']);
+        $entry = $this->article('task-shift-story',section:$section->id);
+        $this->baseline();
+        $entry->update(['title'=>'Версия для проверки']);
+        $role = MoonshineUserRole::query()->where('name','Editor')->firstOrFail();
+        $first = MoonshineUser::factory()->create(['moonshine_user_role_id'=>$role->id]);
+        $second = MoonshineUser::factory()->create(['moonshine_user_role_id'=>$role->id]);
+        $section->editors()->attach([$first->id,$second->id]);
+        $admin = MoonshineUser::factory()->create();
+        $report=app(MuseumPublicationDiff::class)->report($admin);
+        $payload=[
+            'baseline_sha256'=>$report['baseline_sha256'],
+            'candidate_sha256'=>$report['candidate_sha256'],
+            'item_group'=>'entries','item_key'=>'news:task-shift-story',
+            'task_status'=>'open','priority'=>'normal', 'assignee_id'=>$first->id,
+            'note'=>'Первоначальная задача',
+        ];
+        $this->actingAs($admin,'moonshine')->post(route('museum.content.editorial-task.store'),$payload)->assertRedirect();
+        $this->actingAs($second,'moonshine')->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'assignee_id'=>$second->id,'note'=>'Попытка чужой задачи',
+        ])->assertForbidden();
+        $this->actingAs($admin,'moonshine')->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'assignee_id'=>$second->id,'note'=>'Администратор переназначил',
+        ])->assertRedirect();
+        $this->assertDatabaseCount('museum_editorial_task_updates',2);
+        $entry->update(['title'=>'Версия после следующей правки']);
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('Назначенных задач пока нет')
+            ->assertDontSee('Администратор переназначил');
+        $this->post(route('museum.content.editorial-task.store'),$payload)->assertStatus(409);
+        $this->assertDatabaseCount('museum_editorial_task_updates',2);
+    }
+
+    public function test_task_requires_current_snapshot_validated_values_and_protected_admin_only_event_owner(): void
+    {
+        $news = $this->article('task-defence');
+        $event = $this->event('task-defence-event');
+        $this->baseline();
+        $news->update(['title'=>'Обновлённая новость']);
+        $event->update(['title'=>'Обновлённое событие']);
+        $admin=MoonshineUser::factory()->create();
+        $editor=MoonshineUser::factory()->create(['moonshine_user_role_id'=>
+            MoonshineUserRole::query()->where('name','Editor')->firstOrFail()->id]);
+        $report=app(MuseumPublicationDiff::class)->report($admin);
+        $payload=[
+            'baseline_sha256'=>$report['baseline_sha256'],
+            'candidate_sha256'=>$report['candidate_sha256'],
+            'item_group'=>'events','item_key'=>'task-defence-event',
+            'task_status'=>'open','priority'=>'normal','assignee_id'=>$admin->id,
+            'note'=>'Подготовить афишу к просмотру',
+        ];
+        $this->post(route('museum.content.editorial-task.store'),$payload)
+            ->assertRedirect('/admin/login');
+        $this->actingAs($admin,'moonshine')->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'assignee_id'=>$editor->id,
+        ])->assertUnprocessable();
+        $this->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'priority'=>'urgent',
+        ])->assertSessionHasErrors('priority');
+        $this->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'task_status'=>'approved',
+        ])->assertSessionHasErrors('task_status');
+        $this->post(route('museum.content.editorial-task.store'),[
+            ...$payload,'note'=>'=HYPERLINK("https://unsafe.invalid")<script>alert(1)</script>',
+        ])->assertRedirect();
+        $this->get(route('museum.content.editorial-review'))->assertOk()
+            ->assertSee('&lt;script&gt;alert(1)&lt;/script&gt;', false)
+            ->assertDontSee('<script>alert(1)</script>', false)
+            ->assertSee('Очередь редакторских задач');
+        $news->update(['title'=>'Ещё более новая новость']);
+        $this->post(route('museum.content.editorial-task.store'),$payload)->assertStatus(409);
+        $this->assertDatabaseCount('museum_editorial_task_updates',1);
+        $this->assertSame(0,MuseumPublicationRun::count());
     }
 
     public function test_anonymous_user_cannot_access_comparison_or_trigger_export(): void

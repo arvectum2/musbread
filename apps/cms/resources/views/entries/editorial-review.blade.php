@@ -38,6 +38,21 @@ select,textarea,button{font:inherit;max-width:100%;padding:.5rem}textarea{width:
 </ol>
 @endif
 </section>
+<section aria-label="Очередь редакторских задач" id="review-tasks">
+<h2>Очередь редакторских задач</h2>
+<p class="muted">В работе: {{ $taskStats['in_progress'] }} · Открыто: {{ $taskStats['open'] }} · Выполнено внутри команды: {{ $taskStats['done'] }}. Порядок: незавершённые выше выполненных, затем по приоритету. Задачи действуют только для текущей версии и не утверждают выпуск.</p>
+@if($taskList === [])<p>Назначенных задач пока нет. Создать задачу можно в карточке изменённого материала ниже.</p>
+@else
+<ol>
+@foreach($taskList as $task)
+<li><strong>{{ ['open'=>'Открыта','in_progress'=>'В работе','done'=>'Выполнена внутри команды'][$task['status']] }}</strong>
+ · {{ ['high'=>'Высокий','normal'=>'Обычный','low'=>'Низкий'][$task['priority']] }} приоритет
+ · сотрудник #{{ $task['assignee_id'] }}
+ · <a href="#review-{{ substr(hash('sha256', $task['group'].':'.$task['key']),0,16) }}">{{ $task['title'] }}</a></li>
+@endforeach
+</ol>
+@endif
+</section>
 @if($priorCount > 0)<p class="muted">Исторических замечаний к другим версиям: {{ $priorCount }}. Они не переносятся на текущую версию автоматически.</p>@endif
 @if($errors->any())<p role="alert" class="warning">{{ $errors->first() }}</p>@endif
 @php($decisions = ['comment' => 'Замечание', 'needs_changes' => 'Требуются изменения', 'checked' => 'Проверено внутри команды (не утверждено музеем)'])
@@ -50,6 +65,45 @@ select,textarea,button{font:inherit;max-width:100%;padding:.5rem}textarea{width:
 @if($row['changed_fields'] !== [])<p>Поля: {{ implode(', ', $row['changed_fields']) }}</p>@endif
 @php($itemNotes = $current->get($group.':'.$row['key'], collect()))
 @if($itemNotes->isNotEmpty())<ol class="notes">@foreach($itemNotes as $entry)<li><strong>{{ $decisions[$entry->decision] ?? $entry->decision }}</strong> · {{ $entry->created_at?->format('d.m.Y H:i') }} · сотрудник #{{ $entry->actor_id }}<p>{{ $entry->note }}</p></li>@endforeach</ol>@else<p class="muted">По этой версии замечаний пока нет.</p>@endif
+@php($taskKey = $group.':'.$row['key'])
+@php($taskEvents = $taskHistory->get($taskKey, collect()))
+@php($lastTask = $taskEvents->last())
+<section aria-label="Задача по материалу">
+<h4>Задача по материалу</h4>
+@if($lastTask)
+<p>Текущая задача: <strong>{{ ['open'=>'Открыта','in_progress'=>'В работе','done'=>'Выполнена внутри команды'][$lastTask->task_status] }}</strong>
+ · приоритет {{ ['high'=>'высокий','normal'=>'обычный','low'=>'низкий'][$lastTask->priority] }}
+ · ответственный #{{ $lastTask->assignee_id }}.</p>
+<details><summary>История задачи ({{ $taskEvents->count() }})</summary>
+<ol>@foreach($taskEvents as $update)<li>{{ $update->created_at?->format('d.m.Y H:i') }} · сотрудник #{{ $update->actor_id }}
+ → ответственный #{{ $update->assignee_id }}, {{ ['open'=>'открыта','in_progress'=>'в работе','done'=>'сделано внутри команды'][$update->task_status] }},
+ {{ ['high'=>'высокий','normal'=>'обычный','low'=>'низкий'][$update->priority] }} приоритет · {{ $update->note }}</li>@endforeach</ol>
+</details>
+@else<p class="muted">Задача ещё не назначена.</p>@endif
+@if($user->isSuperUser() || !$lastTask || (int)$lastTask->assignee_id === (int)$user->getKey())
+<form method="post" action="{{ route('museum.content.editorial-task.store') }}">
+@csrf
+<input type="hidden" name="baseline_sha256" value="{{ $comparison['baseline_sha256'] }}">
+<input type="hidden" name="candidate_sha256" value="{{ $comparison['candidate_sha256'] }}">
+<input type="hidden" name="item_group" value="{{ $group }}"><input type="hidden" name="item_key" value="{{ $row['key'] }}">
+<fieldset><legend>Назначить или обновить задачу</legend>
+<label>Ответственный <select name="assignee_id" required>
+@foreach($taskOwners[$taskKey] as $assigneeId=>$assigneeName)
+<option value="{{ $assigneeId }}" @selected((int)($lastTask?->assignee_id ?? $user->getKey())===(int)$assigneeId)>{{ $assigneeName }}</option>
+@endforeach
+</select></label>
+<label>Приоритет <select name="priority" required>
+@foreach(['high'=>'Высокий','normal'=>'Обычный','low'=>'Низкий'] as $priority=>$label)
+<option value="{{ $priority }}" @selected(($lastTask?->priority ?? 'normal')===$priority)>{{ $label }}</option>
+@endforeach</select></label>
+<label>Состояние <select name="task_status" required>
+@foreach(['open'=>'Открыта','in_progress'=>'В работе','done'=>'Выполнена внутри команды'] as $status=>$label)
+<option value="{{ $status }}" @selected(($lastTask?->task_status ?? 'open')===$status)>{{ $label }}</option>
+@endforeach</select></label>
+<label>Отчёт о работе (3–1200 символов)<textarea name="note" required minlength="3" maxlength="1200" placeholder="Что сделать или что исправлено?"></textarea></label>
+<button type="submit">Сохранить состояние задачи</button></fieldset></form>
+@else<p class="muted">Задача назначена другому сотруднику. Передачу задачи выполняет администратор.</p>@endif
+</section>
 <form method="post" action="{{ route('museum.content.editorial-review.store') }}">
 @csrf
 <input type="hidden" name="baseline_sha256" value="{{ $comparison['baseline_sha256'] }}">
