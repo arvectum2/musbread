@@ -237,3 +237,24 @@ test("CP-42D: закрытый предпубликационный отчёт �
   await news.getByRole("link", { name: "Предпросмотр" }).click();
   await expect(page.getByText("Демонстрационная публикация из браузерного теста")).toBeVisible();
 });
+
+
+test("CP-43D: отчёт проверяет события афиши и открывает редактор события", async ({ page }) => {
+  await page.goto("/admin/login");
+  await page.locator('input[name="username"]').fill(process.env.MUSBREAD_E2E_USERNAME!);
+  await page.locator('input[type="password"]').fill(process.env.MUSBREAD_E2E_PASSWORD!);
+  await page.locator('button[type="submit"]').click();
+
+  await page.goto("/admin/resource/museum-event-resource/museum-event-index-page");
+  const row = page.locator("tbody tr").filter({ hasText: "QA: музейное событие из браузера" });
+  await expect(row.getByRole("link", { name: "Открыть отчёт" })).toBeVisible();
+  await row.getByRole("link", { name: "Открыть отчёт" }).click();
+  await expect(page).toHaveURL(/\/admin\/museum-content\/preflight#event-\d+$/);
+  await expect(page.getByRole("heading", { name: "События афиши" })).toBeVisible();
+  await expect(page.getByText("Критических ошибок готовых событий:")).toBeVisible();
+  const item = page.locator("article.record").filter({ hasText: "QA: музейное событие из браузера" });
+  await expect(item).toContainText("Готово к следующей выгрузке");
+  await expect(item).toContainText("SEO-заголовка события");
+  await item.getByRole("link", { name: "Исправить событие" }).click();
+  await expect(page.locator('input[name="title"]')).toHaveValue('QA: музейное событие из браузера');
+});

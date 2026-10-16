@@ -20,6 +20,10 @@ final class MuseumEventIndexPage extends IndexPage
             Text::make('Тип', 'category'),
             Text::make('Статус', 'status'),
             Date::make('Дата', 'starts_at')->format('d.m.Y')->sortable(),
+            Text::make('Проверка', 'id')->link(
+                static fn ($id): string => route('museum.content.preflight').'#event-'.(int) $id,
+                'Открыть отчёт'
+            ),
             Text::make('Предпросмотр', 'id')->link(
                 static fn ($id): string => route('museum.events.preview', ['event' => $id]),
                 'Открыть', blank: true

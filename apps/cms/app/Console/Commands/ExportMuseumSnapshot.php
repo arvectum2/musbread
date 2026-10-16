@@ -11,7 +11,7 @@ use Illuminate\Console\Command;
 
 class ExportMuseumSnapshot extends Command
 {
-    protected $signature = 'museum:export {--output= : Path to generated JSON} {--manifest= : Path to integrity manifest} {--media-output-dir= : Destination for static WebP assets} {--document-output-dir= : Destination for downloadable approved documents} {--preflight-strict : Abort before writing when public-ready entries have critical editorial issues}';
+    protected $signature = 'museum:export {--output= : Path to generated JSON} {--manifest= : Path to integrity manifest} {--media-output-dir= : Destination for static WebP assets} {--document-output-dir= : Destination for downloadable approved documents} {--preflight-strict : Abort before writing when public-ready entries or events have critical editorial issues}';
     protected $description = 'Publish approved CMS content into an offline static-site snapshot';
 
     public function handle(): int

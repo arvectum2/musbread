@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Models\MuseumEntry;
+use App\Models\MuseumEvent;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use MoonShine\Laravel\Models\MoonshineUser;
 
@@ -24,7 +26,38 @@ final class MuseumContentPreflight
             ->where(static fn ($q) => $q->whereNull('museum_section_id')
                 ->when($approvedIds !== [], static fn ($q) => $q->orWhereIn('museum_section_id', $approvedIds)))
             ->pluck('id')->flip();
-        $publishedEventIds = \App\Models\MuseumEvent::query()->public()->pluck('id')->flip();
+        $publishedEventIds = MuseumEvent::query()->public()->pluck('id')->flip();
+        $availablePaths = collect();
+        $prefixes = array_flip(MuseumInternalLinkInspector::entryPrefixes());
+        foreach (MuseumEntry::query()->public()->where(static fn ($q) =>
+            $q->whereNull('museum_section_id')->when($approvedIds !== [],
+                static fn ($q) => $q->orWhereIn('museum_section_id', $approvedIds)))
+            ->with(['documents:id,museum_entry_id,sha256,file_type', 'media:id,museum_entry_id,sha256'])
+            ->get(['id', 'type', 'slug', 'title_en', 'body_en']) as $published) {
+            $prefix = $prefixes[$published->type] ?? null;
+            if ($prefix === null || ! $this->validSlug($published->slug)) continue;
+            $availablePaths->put('/'.$prefix.'/'.$published->slug.'/', true);
+            if (trim((string) $published->title_en) !== '' && trim((string) $published->body_en) !== '') {
+                $availablePaths->put('/en/'.$prefix.'/'.$published->slug.'/', true);
+            }
+            foreach ($published->documents as $document) {
+                if (preg_match('/^[a-f0-9]{64}$/D', (string) $document->sha256)
+                    && in_array($document->file_type, ['pdf', 'docx', 'xlsx'], true)) {
+                    $availablePaths->put('/documents/'.$document->sha256.'.'.$document->file_type.'/', true);
+                }
+            }
+            foreach ($published->media as $image) {
+                if (preg_match('/^[a-f0-9]{64}$/D', (string) $image->sha256)) {
+                    $availablePaths->put('/media/'.$image->sha256.'.webp/', true);
+                }
+            }
+        }
+        foreach (MuseumEvent::query()->public()->get(['slug']) as $published) {
+            if ($this->validSlug($published->slug)) {
+                $availablePaths->put('/events/'.$published->slug.'/', true);
+            }
+        }
+        $linkInspector = new MuseumInternalLinkInspector($availablePaths);
 
         $records = [];
         $errors = 0;
@@ -34,6 +67,16 @@ final class MuseumContentPreflight
             $state = $this->state($entry, $approvedIds);
             if ($state === 'ready') $ready++;
             $issues = $this->issues($entry, $publicIds, $publishedEventIds);
+            $prefix = $prefixes[$entry->type] ?? 'museum';
+            // A partial English draft is not exported. It must not block a
+            // valid Russian publication (translation_incomplete is a warning).
+            $englishLinks = trim((string) $entry->title_en) !== ''
+                && trim((string) $entry->body_en) !== ''
+                    ? $linkInspector->check((string) $entry->body_en, '/en/'.$prefix.'/'.$entry->slug.'/')
+                    : [];
+            $issues = array_merge($issues,
+                $linkInspector->check((string) $entry->body, '/'.$prefix.'/'.$entry->slug.'/'),
+                $englishLinks);
             $counts = [
                 'error' => count(array_filter($issues, static fn ($issue) => $issue['level'] === 'error')),
                 'warning' => count(array_filter($issues, static fn ($issue) => $issue['level'] === 'warning')),
@@ -48,10 +91,82 @@ final class MuseumContentPreflight
             ];
         }
 
+        $events = [];
+        $eventsReady = 0;
+        $eventErrors = 0;
+        foreach (MuseumEvent::query()->with('relatedEntries:id')->orderBy('starts_at')->orderBy('slug')->get() as $event) {
+            $state = $this->eventState($event);
+            if ($state === 'ready') $eventsReady++;
+            $issues = $this->eventIssues($event, $publicIds);
+            $issues = array_merge($issues,
+                $linkInspector->check((string) $event->body, '/events/'.$event->slug.'/'));
+            $errorCount = count(array_filter($issues, static fn ($issue) => $issue['level'] === 'error'));
+            $warningCount = count(array_filter($issues, static fn ($issue) => $issue['level'] === 'warning'));
+            if ($state === 'ready') {
+                $errors += $errorCount;
+                $eventErrors += $errorCount;
+            }
+            $warnings += $warningCount;
+            $events[] = [
+                'id' => $event->id, 'title' => $event->title, 'slug' => $event->slug,
+                'category' => $event->category, 'starts_at' => $event->starts_at?->format('Y-m-d'),
+                'state' => $state, 'issues' => $issues,
+                'error_count' => $errorCount, 'warning_count' => $warningCount,
+            ];
+        }
+
         return [
             'total' => count($records), 'ready' => $ready,
+            'events_total' => count($events), 'events_ready' => $eventsReady,
+            'event_errors' => $eventErrors, 'events' => $events,
             'errors' => $errors, 'warnings' => $warnings, 'records' => $records,
         ];
+    }
+
+    private function validSlug(?string $slug): bool
+    {
+        return preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', (string) $slug) === 1;
+    }
+
+    private function eventState(MuseumEvent $event): string
+    {
+        if ($event->status !== 'published') return 'draft';
+        if ($event->published_at === null || $event->published_at->isFuture()) return 'scheduled';
+        return 'ready';
+    }
+
+    /** @return list<array{level:string,code:string,message:string}> */
+    private function eventIssues(MuseumEvent $event, Collection $publicIds): array
+    {
+        $issues = [];
+        $add = static function (string $level, string $code, string $message) use (&$issues): void {
+            $issues[] = compact('level', 'code', 'message');
+        };
+        if (trim((string) $event->title) === '') $add('error', 'event_title_missing', 'У события нет названия.');
+        if (! $this->validSlug($event->slug)) $add('error', 'event_slug_invalid', 'Неверный URL события.');
+        if (trim((string) $event->category) === '') $add('error', 'event_category_missing', 'Не задана категория события.');
+        if ($event->starts_at === null) $add('error', 'event_date_missing', 'Не задана дата события.');
+        if (! $this->hasText($event->excerpt)) $add('error', 'event_excerpt_missing', 'Не заполнен анонс события.');
+        if (! $this->hasText($event->body)) $add('error', 'event_body_missing', 'Не заполнено описание события.');
+        if ($event->starts_at !== null && $event->starts_at->isBefore(today())) {
+            $add('warning', 'event_past', 'Дата события уже прошла: проверьте, нужно ли оставлять его в афише.');
+        }
+        if (trim((string) $event->seo_title) === '') {
+            $add('warning', 'event_seo_title_missing', 'Нет SEO-заголовка события: будет применён шаблон сайта.');
+        }
+        if (trim((string) $event->seo_description) === '') {
+            $add('warning', 'event_seo_description_missing', 'Нет SEO-описания события.');
+        }
+        if ($event->relatedEntries->contains(static fn ($entry) => ! $publicIds->has($entry->id))) {
+            $add('warning', 'event_relation_unpublished', 'Некоторые связанные с событием страницы не попадут в выгрузку.');
+        }
+        return $issues;
+    }
+
+    private function hasText(?string $html): bool
+    {
+        $text = html_entity_decode(strip_tags((string) $html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        return preg_match('/[^\s\p{Z}]/u', $text) === 1;
     }
 
     /** @param list<int> $approvedIds */
@@ -83,9 +198,7 @@ final class MuseumContentPreflight
             $add('error', 'type_invalid', 'Неизвестный тип материала.');
         }
         // An HTML fragment with only tags/whitespace is not meaningful content.
-        $plainBody = html_entity_decode(strip_tags((string) $entry->body), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-        // Unicode NBSP, narrow NBSP and ideographic whitespace are also blank.
-        if (preg_match('/[^\s\p{Z}]/u', $plainBody) !== 1) {
+        if (! $this->hasText($entry->body)) {
             $add('error', 'body_missing', 'Основной текст пуст или состоит только из HTML-тегов.');
         }
         if (trim((string) $entry->h1) === '') {
