@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Cache;
 final class CheckMuseumCache extends Command
 {
     protected $signature = 'museum:cache-check
-        {--require-shared : Fail if the configured store is not suitable for multiple workers}';
+        {--require-shared : Fail if the configured store is not suitable for multiple workers}
+        {--require-queue-worker : Also verify queued publication is enabled with a safe retry window}';
 
     protected $description = 'Verify configured Laravel cache put/get and exclusive locks, without publishing';
 
@@ -23,9 +24,19 @@ final class CheckMuseumCache extends Command
         $store = (string) config('cache.default');
         // A file store may be sufficient on one server but cannot be assumed
         // shared by workers on different museum servers.
-        if ($this->option('require-shared')
+        if (($this->option('require-shared') || $this->option('require-queue-worker'))
             && ! in_array($store, ['database', 'redis', 'memcached'], true)) {
             $this->error('Cache store is not an approved multi-worker shared type.');
+            return self::FAILURE;
+        }
+
+        // Before enabling systemd, fail closed for disabled queued mode,
+        // unsafe worker backend or a retry window that can overlap the job.
+        if ($this->option('require-queue-worker')
+            && (! config('museum.queue_publication')
+                || config('queue.default') !== 'database'
+                || (int) config('queue.connections.database.retry_after') < 900)) {
+            $this->error('Museum queued publication is not safely configured.');
             return self::FAILURE;
         }
 

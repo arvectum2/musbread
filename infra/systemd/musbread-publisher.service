@@ -1,18 +1,25 @@
-# Pre-award Linux template. Do NOT enable until Musem deployment is approved.
+# Pre-award Linux template. Do NOT enable until Museum deployment is approved.
 [Unit]
 Description=MusBread CMS queued publication worker
-After=network.target
+After=network-online.target
+Wants=network-online.target
 ConditionPathExists=/srv/musbread/cms/artisan
+StartLimitIntervalSec=300
+StartLimitBurst=5
 
 [Service]
 Type=simple
 User=musbread
 Group=musbread
+UMask=0027
 WorkingDirectory=/srv/musbread/cms
 EnvironmentFile=/etc/musbread/cms.env
+# Do not run publication until approved queue + shared cache locks are ready.
+ExecStartPre=/usr/bin/php8.4 artisan museum:cache-check --require-shared --require-queue-worker
 ExecStart=/usr/bin/php8.4 artisan queue:work database --queue=museum-publish --sleep=3 --tries=3 --timeout=600 --backoff=30
-Restart=on-failure
-RestartSec=5
+# Even after graceful exit 0, bring the worker back unless stopped by systemd.
+Restart=always
+RestartSec=15
 TimeoutStopSec=660
 NoNewPrivileges=true
 PrivateTmp=true

@@ -42,3 +42,13 @@ PHP 8.4 FPM, Nginx, Linux systemd, приватная БД и защищённа
 Конфигурацию infra/nginx/http-rates.conf включать на уровне http Nginx: лимиты считаются только для POST. Laravel отдельно ограничивает MoonShine login до 8 POST/мин с IP, upload до 30 POST/мин с IP; бюджет надо проверить для реальной NAT/сетевой схемы. Rate-limit не заменяет изоляцию CMS.
 
 CI проверяет nginx -t и localhost HTTP smoke (CSP/nosniff, отсутствие /admin и .php). Реального TLS и независимого пентеста пока нет.
+
+## Контроль технологических пунктов TZ-223/224/225 (17.10.2026)
+
+- Публичный Nginx обязан отказывать в выдаче /database, /bootstrap, /config, /private, /storage, /vendor, /admin, /api и исполняемого PHP. Существующий шаблон и Linux CI проверяют эти ограничения. На Mac mini одноразовый Linux Alpine контейнер прошёл nginx -t и вернул 404 для тестового /database/private.txt, хотя файл реально лежал внутри временного публичного root.
+- Для Linux PHP-FPM 8.4+ предусмотрен read-only аудит scripts/check_php_fpm.py. Вызвать его на целевом сервере с фактическим бинарём FPM, ожидаемым Unix socket и infra/nginx/private-cms.conf. Локальный macOS FPM 8.4.26 успешно проверен, но его pool использует TCP, поэтому НЕ подтверждает сокет /run/php/php8.4-fpm.sock на Linux.
+- Системный publisher worker теперь перед запуском требует безопасный database queue, включённый MUSEUM_USE_PUBLISH_QUEUE, DB_QUEUE_RETRY_AFTER >=900 и рабочие общие блокировки Laravel. Сервис возобновляет работу после штатного выхода; повторные быстрые отказы ограничены. Systemd service/timer прошли systemd-analyze verify внутри одноразового Linux-контейнера.
+- Важный блокер: Laravel museum:export по умолчанию пишет в соседний ../web, а ProtectSystem=strict разрешает запись только в storage и bootstrap/cache закрытого CMS. Без согласованного ПРИВАТНОГО каталога staging и транспорта экспорта на public Nginx запускать production worker/таймер нельзя. НЕ выдавать CMS запись в публичный webroot для устранения этого расхождения. Решение зависит от сетевой схемы и файловой системы заказчика.
+- Любая проверка контейнера/локальных конфигов — не испытание боевой инфраструктуры. Требуются назначенные Linux-хосты, утверждение сетевой изоляции и TLS, реальный пул FPM, systemd enable/restart/stop/UAT, журнал ошибок, восстановление и разрешённое тестирование безопасности.
+
+Подробная схема: docs/TZ223_225_SERVER_INFRA_GATES.md.

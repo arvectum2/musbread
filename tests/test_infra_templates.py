@@ -51,6 +51,40 @@ class InfraTemplateTests(unittest.TestCase):
         self.assertIn("NoNewPrivileges=true", queue)
         self.assertIn("ProtectSystem=strict", queue)
 
+    def test_publisher_fails_closed_on_bad_queue_and_recovers_from_clean_exit(self):
+        unit = (ROOT / "infra/systemd/musbread-publisher.service").read_text()
+        self.assertIn(
+            "ExecStartPre=/usr/bin/php8.4 artisan museum:cache-check --require-shared --require-queue-worker",
+            unit,
+        )
+        self.assertIn("Restart=always", unit)
+        self.assertIn("StartLimitBurst=5", unit)
+        self.assertIn("UMask=0027", unit)
+        self.assertIn("ProtectSystem=strict", unit)
+        self.assertIn("--timeout=600", unit)
+        self.assertNotIn("--timeout=900", unit)
+        queue_docs = (ROOT / "docs/PUBLICATION_QUEUE.md").read_text()
+        self.assertIn("timeout=600", queue_docs)
+        self.assertIn("DB_QUEUE_RETRY_AFTER=900", queue_docs)
+        self.assertIn("systemd/musbread-scheduler.timer", queue_docs)
+
+    def test_php_fpm_gate_is_not_a_cli_version_check(self):
+        script = (ROOT / "scripts/check_php_fpm.py").read_text()
+        self.assertIn("fpm-fcgi", script)
+        self.assertIn("nginx_template", script)
+        self.assertIn("expected_listen", script)
+        nginx = (ROOT / "infra/nginx/private-cms.conf").read_text()
+        self.assertIn("fastcgi_pass unix:/run/php/php8.4-fpm.sock", nginx)
+        self.assertNotIn("proxy_pass", nginx)
+        self.assertIn("UMask=0027",
+            (ROOT / "infra/systemd/musbread-scheduler.service").read_text())
+
+    def test_public_nginx_rejects_nonpublic_folders_even_if_copied_accidentally(self):
+        text = (ROOT / "infra/nginx/public-static.conf").read_text()
+        for blocked in ("admin", "api", "vendor", "storage", "database", "bootstrap", "config", "private"):
+            self.assertIn(blocked, text.split("location ~* ^/(")[1].split(")(/|$)")[0])
+        self.assertIn("location ~* \\.(php|phtml|phar|cgi|env|sql|sqlite|bak|log)", text)
+
     def test_scheduler_uses_systemd_timer(self):
         timer = (ROOT / "infra/systemd/musbread-scheduler.timer").read_text()
         self.assertIn("OnCalendar=*-*-* *:*:00", timer)

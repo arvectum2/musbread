@@ -7,6 +7,7 @@ ConditionPathExists=/srv/musbread/cms/artisan
 Type=oneshot
 User=musbread
 Group=musbread
+UMask=0027
 WorkingDirectory=/srv/musbread/cms
 EnvironmentFile=/etc/musbread/cms.env
 ExecStart=/usr/bin/php8.4 artisan schedule:run

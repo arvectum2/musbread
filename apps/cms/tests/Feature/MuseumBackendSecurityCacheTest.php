@@ -53,6 +53,41 @@ final class MuseumBackendSecurityCacheTest extends TestCase
         $this->assertDatabaseCount('museum_publication_runs', 0);
     }
 
+    public function test_systemd_preflight_requires_explicit_queue_and_safe_retry_window(): void
+    {
+        $old = [
+            'cache.default'=>config('cache.default'),
+            'museum.queue_publication'=>config('museum.queue_publication'),
+            'queue.default'=>config('queue.default'),
+            'queue.connections.database.retry_after'=>config('queue.connections.database.retry_after'),
+        ];
+        try {
+            config(['cache.default'=>'database', 'queue.default'=>'database',
+                'queue.connections.database.retry_after'=>900,
+                'museum.queue_publication'=>false]);
+            Cache::purge('database');
+            $this->artisan('museum:cache-check', ['--require-queue-worker'=>true])
+                ->expectsOutputToContain('not safely configured')->assertFailed();
+
+            config(['museum.queue_publication'=>true]);
+            $this->artisan('museum:cache-check', ['--require-queue-worker'=>true])
+                ->expectsOutputToContain('CACHE OK')->assertSuccessful();
+
+            config(['queue.connections.database.retry_after'=>600]);
+            $this->artisan('museum:cache-check', ['--require-queue-worker'=>true])
+                ->assertFailed();
+            config(['queue.connections.database.retry_after'=>900,'queue.default'=>'sync']);
+            $this->artisan('museum:cache-check', ['--require-queue-worker'=>true])
+                ->assertFailed();
+            $this->assertDatabaseCount('cache', 0);
+            $this->assertDatabaseCount('cache_locks', 0);
+            $this->assertDatabaseCount('museum_publication_runs', 0);
+        } finally {
+            config($old);
+            Cache::purge('database');
+        }
+    }
+
     public function test_orm_filter_resists_forged_section_ids_and_sql_like_search_queries(): void
     {
         $my = MuseumSection::create(['slug'=>'my-sec','title'=>'Мои материалы','status'=>'published']);

@@ -368,6 +368,13 @@ jobs:
           curl -fsSI http://127.0.0.1:18080/ | grep -qi 'x-content-type-options: nosniff'
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/admin/login)" = 404
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/test.php)" = 404
+          # TZ-223: even if a backup folder is accidentally copied into
+          # public/current, Nginx must refuse all nonpublic namespaces.
+          sudo mkdir -p /srv/musbread/public/current/database
+          printf 'never expose this' | sudo tee /srv/musbread/public/current/database/private.txt >/dev/null
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/database/private.txt)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/bootstrap/cache/config.php)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18080/private/)" = 404
           # Even private MoonShine depends on static /vendor CSS/JS/font paths.
           # Only allow the two known namespaces and static extensions.
           sudo mkdir -p /srv/musbread/cms/public/vendor/moonshine/assets
