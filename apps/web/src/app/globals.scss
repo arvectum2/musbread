@@ -489,3 +489,24 @@ main :is(.hero,.section,.guide-primary,.museum-list,.events-grid,.museum-gallery
 @media(max-width:630px){
   .header-controls .header-action{font-size:.79rem}
 }
+
+/* TZ-120: direct search action in mobile header, not buried in menu. */
+.header-controls .mobile-search-action{display:none}
+@media(max-width:1000px){
+  .header-controls .mobile-search-action{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:2.5rem;padding:.3rem .5rem;border:1px solid currentColor;
+    border-radius:.25rem;font-size:.8rem;font-weight:700;text-decoration:underline;
+    text-underline-offset:.18rem;
+  }
+  .header-controls .mobile-search-action:focus-visible{
+    outline:3px solid #a65926;outline-offset:2px;
+  }
+}
+@media(max-width:630px){
+  .header-inner{
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"brand brand" "controls menu";
+  }
+  .header-controls{justify-content:flex-start;min-width:0}
+}

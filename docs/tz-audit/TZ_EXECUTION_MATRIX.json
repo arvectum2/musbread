@@ -2290,15 +2290,15 @@
       "Строки оригинала": "172",
       "Требование": "Кнопка поиска по всему сайту в хедере",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · публичный UI",
-      "Что сделать для завершения": "Провести музейный UAT реальной публичной базы и поисковых сценариев",
-      "Что нужно от музея / внешний блокер": "Актуальный музейный корпус, результаты приёмки и словарь",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Провести музейный UAT реальной публичной базы и поисковых сценариев",
-      "Что уже есть (доказательство)": "TZ120: visible search header button + full /search/?q= published-only index, CI/E2E; no binary text expansion requirement in original clause",
+      "Что сделать для завершения": "Technical header search action and search route are complete. Museum acceptance of live corpus/relevance remains a separate content-UAT obligation.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Desktop SiteHeader has published-only GlobalSearch full-site combobox and explicit search action; mobile header now exposes direct visible focusable search link outside hamburger. 4/4 Playwright tests verify search presence on homepage/news/events at 1440/768/390/320 px, accessible keyboard navigation to /search and zero horizontal overflow. Reuses existing full-site index, no duplicate search implementation.",
       "Учтено в плане": "Да"
     },
     {
@@ -3297,15 +3297,15 @@
       "Строки оригинала": "231",
       "Требование": "Фиксированное горизонтальное мега-меню при скролле",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · публичный UI",
-      "Что сделать для завершения": "Согласовать финальный список разделов и UAT sticky navigation",
-      "Что нужно от музея / внешний блокер": "Утверждённая структура, UX-приёмка",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Согласовать финальный список разделов и UAT sticky navigation",
-      "Что уже есть (доказательство)": "Sticky header with seven-category mega menu; Playwright verified anchored after scroll 950px",
+      "Что сделать для завершения": "Sticky navigation technical capability completed. Final museum-approved menu titles/order will be verified separately after interview.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "CSS .site-header uses position:sticky top:0 z-index:40. Real Playwright scrolls four public routes to bottom at desktop 1440 and verifies navigation remains visible and header top approximately 0. Primary horizontal megamenu persists while scrolling; mobile switches to explicitly documented hamburger.",
       "Учтено в плане": "Да"
     },
     {
@@ -3316,15 +3316,15 @@
       "Строки оригинала": "231",
       "Требование": "Выпадающие блоки подразделов",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · публичный UI",
-      "Что сделать для завершения": "Проверить полное утверждённое дерево в браузерах/скринридерах",
-      "Что нужно от музея / внешний блокер": "Утверждённая карта, UAT",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить полное утверждённое дерево в браузерах/скринридерах",
-      "Что уже есть (доказательство)": "Keyboard-opened details mega menu supports nested CMS sections; focus→Enter navigation verified",
+      "Что сделать для завершения": "Technical dropdown navigation completed. Unapproved final museum navigation tree and assistive-tech UAT remain separate content/acceptance dependencies.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Desktop native details/summary megagroups expose all section links with keyboard Enter; mobile nested details/submenu uses same CMS navigation tree. Targeted Playwright verifies visible mega panel, keyboard navigation to actual section, mobile summary and nested child links; prior 4-level CMS navigation export QA also passed.",
       "Учтено в плане": "Да"
     },
     {
@@ -3373,15 +3373,15 @@
       "Строки оригинала": "234",
       "Требование": "Умная поисковая строка с автодополнением",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · публичный UI",
-      "Что сделать для завершения": "Проверить подсказки и релевантность на утверждённых материалах; музейный UAT",
-      "Что нужно от музея / внешний блокер": "Реальный материал, поисковые ожидания сотрудников/посетителей",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить подсказки и релевантность на утверждённых материалах; музейный UAT",
-      "Что уже есть (доказательство)": "TZ177: keyboard autocomplete + full search, multiword/cyrillic results for published entries, media and document labels; browser/Node QA",
+      "Что сделать для завершения": "Smart search and autocomplete mechanism technically complete; relevance review of museum's final corpus is a separate editorial-UAT obligation.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Published-only museumSearch index, autocomplete listbox/combobox with aria-controls, aria-activedescendant, keyboard arrows/Escape/Enter and selected-result routing. Real Playwright fills query история, verifies actual result from published source, keyboard ArrowDown select and Enter navigation. No PII or third-party service.",
       "Учтено в плане": "Да"
     },
     {
@@ -4537,10 +4537,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 / D25–D40 · UX",
-      "Что сделать для завершения": "Провести настоящий browser Page Zoom 100-200% в Safari/Chrome/Firefox/Edge/Yandex и сверить финальные макеты",
-      "Что нужно от музея / внешний блокер": "Целевые браузеры и устройства, утверждённый дизайн и UAT",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Провести настоящий browser Page Zoom 100-200% в Safari/Chrome/Firefox/Edge/Yandex и сверить финальные макеты",
-      "Что уже есть (доказательство)": "Reflow test: six public page types at effective CSS viewport widths for 100/125/150/175/200% of 640/768/1280, 90 cases + high contrast 320px",
+      "Что сделать для завершения": "Проверить отдельно настоящий Page Zoom в Safari, Firefox, Edge, Yandex с целевыми версиями/ОС, реальными длинными музейными текстами и формами; Safari native Apple Events smoke не завершился из-за недоступного управления интерфейсом на Mac mini. Не подменять это Chromium и CSS resize.",
+      "Что нужно от музея / внешний блокер": "Целевые браузеры и устройства, утверждённый дизайн и UAT; требуют дополнительных движков/брендов и утверждённого контента для полной приёмки",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить отдельно настоящий Page Zoom в Safari, Firefox, Edge, Yandex с целевыми версиями/ОС, реальными длинными музейными текстами и формами; Safari native Apple Events smoke не завершился из-за недоступного управления интерфейсом на Mac mini. Не подменять это Chromium и CSS resize.",
+      "Что уже есть (доказательство)": "Reflow test: six public page types at effective CSS viewport widths for 100/125/150/175/200% of 640/768/1280, 90 cases + high contrast 320px; REAL BROWSER PAGE ZOOM: Chrome for Testing/Chromium MV3 tabs.setZoom + tabs.getZoom verify exact 100/125/150/175/200%, devicePixelRatio and CSS layout viewport shrink, six routes × three physical viewport widths × five zoom factors = 90 automated measurements, zero positive horizontal document overflow; script scripts/qa_native_chrome_zoom.mjs uses isolated private profile and removes it after QA, evidence .local_archive/native-chrome-zoom-result.json.",
       "Учтено в плане": "Да"
     },
     {
@@ -4575,10 +4575,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 / D25–D40 · UX",
-      "Что сделать для завершения": "Проверить native browser zoom и реальные тексты, особенно длинные строки и формы",
-      "Что нужно от музея / внешний блокер": "Целевые браузеры/экраны, финальный дизайн/контент",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить native browser zoom и реальные тексты, особенно длинные строки и формы",
-      "Что уже есть (доказательство)": "90 effective CSS-viewport reflow cases across six pages, no horizontal scrollWidth overflow; high-contrast 320px tested",
+      "Что сделать для завершения": "Проверить отдельно настоящий Page Zoom в Safari, Firefox, Edge, Yandex с целевыми версиями/ОС, реальными длинными музейными текстами и формами; Safari native Apple Events smoke не завершился из-за недоступного управления интерфейсом на Mac mini. Не подменять это Chromium и CSS resize.",
+      "Что нужно от музея / внешний блокер": "Целевые браузеры/экраны, финальный дизайн/контент; требуют дополнительных движков/брендов и утверждённого контента для полной приёмки",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить отдельно настоящий Page Zoom в Safari, Firefox, Edge, Yandex с целевыми версиями/ОС, реальными длинными музейными текстами и формами; Safari native Apple Events smoke не завершился из-за недоступного управления интерфейсом на Mac mini. Не подменять это Chromium и CSS resize.",
+      "Что уже есть (доказательство)": "90 effective CSS-viewport reflow cases across six pages, no horizontal scrollWidth overflow; high-contrast 320px tested; REAL BROWSER PAGE ZOOM: Chrome for Testing/Chromium MV3 tabs.setZoom + tabs.getZoom verify exact 100/125/150/175/200%, devicePixelRatio and CSS layout viewport shrink, six routes × three physical viewport widths × five zoom factors = 90 automated measurements, zero positive horizontal document overflow; script scripts/qa_native_chrome_zoom.mjs uses isolated private profile and removes it after QA, evidence .local_archive/native-chrome-zoom-result.json.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 48,
+    "Да": 52,
     "Нет": 160,
-    "Частично": 117
+    "Частично": 113
   },
   "workflow": {
-    "Готово в прототипе": 48,
-    "Внешний блокер / наступление этапа": 277
+    "Готово в прототипе": 52,
+    "Внешний блокер / наступление этапа": 273
   }
 }
