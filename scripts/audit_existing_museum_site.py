@@ -83,7 +83,14 @@ def main() -> int:
     section_urls = {row["legacy_path"] for row in data["sections"] if row["legacy_path"]}
     docs_ts = (ROOT / "apps/web/src/data/museum-official-documents.ts").read_text()
     doc_urls = set(re.findall(r'official\("(/sites/default/files/[^"]+)"\)', docs_ts))
-    all_urls = sorted(section_urls | doc_urls)
+    # A public news link is shown separately from the CMS menu; verify that
+    # exact museum-reference URL too, without inventing a second news catalog.
+    reference_source = (ROOT / "apps/web/src/data/museum-reference.ts").read_text()
+    news_match = re.search(r'newsUrl:\s*"https://muzei-xleb\.ru(/[^"]+)"', reference_source)
+    if news_match is None:
+        raise RuntimeError("Missing or non-official source URL for museum news")
+    additional_source_urls = {news_match.group(1)}
+    all_urls = sorted(section_urls | doc_urls | additional_source_urls)
     with ThreadPoolExecutor(max_workers=5) as pool:
         checks = list(pool.map(check_url, all_urls))
     stale_references = []
@@ -107,6 +114,7 @@ def main() -> int:
     report = {
         "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": BASE, "sections_with_source": len(section_urls),
+        "additional_reference_pages": sorted(additional_source_urls),
         "curated_document_links": len(doc_urls),
         "document_groups_checked": list(DOC_PAGES),
         "administration_roles_checked": len(names),

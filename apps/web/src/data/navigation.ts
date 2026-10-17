@@ -3,6 +3,7 @@ import { content } from "./content";
 import {
   guidePages as referencePages,
   menuGroups as referenceGroups,
+  guideHref,
   type GuidePage,
   type MenuGroup,
   type SitePage,
@@ -77,7 +78,7 @@ const dynamicPages: readonly NavPage[] = incoming
       legacyPath: section.legacy_path || undefined,
       tenderOnly: !section.legacy_path,
       group,
-      href: "/guide/" + section.slug + "/",
+      href: guideHref(section.slug),
       ancestors: ancestry(section),
     }];
   });

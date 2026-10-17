@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { guidePages, LEGACY_BASE, legacyUrl, menuGroups, museumReference } from "./museum-reference.ts";
+import { guidePages, guideHref, LEGACY_BASE, legacyUrl, menuGroups, museumReference } from "./museum-reference.ts";
 
 test("семь верхних категорий обязательны, slug всех страниц уникальны", () => {
   assert.equal(menuGroups.length, 7);
@@ -35,4 +35,11 @@ test("Пушкинская карта: существующий материал
     assert.equal(page.tenderOnly, undefined);
     assert.equal(legacyUrl(page.legacyPath), "https://muzei-xleb.ru/pushkinskaya-karta");
   }
+});
+
+test("TZ-075: известная афиша — единый маршрут; источник новостей не заменяется демо", () => {
+  assert.equal(guideHref("agenda-events"), "/events/");
+  assert.equal(guideHref("museum-contacts"), "/guide/museum-contacts/");
+  assert.equal(guidePages.find((p) => p.slug === "agenda-events")?.href, "/events/");
+  assert.equal(museumReference.newsUrl, "https://muzei-xleb.ru/novosty");
 });

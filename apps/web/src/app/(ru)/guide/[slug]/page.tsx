@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { legacyUrl, museumReference, museumAddressMapSearchUrl, REFERENCE_DATE } from "@/data/museum-reference";
+import { guideHref, legacyUrl, museumReference, museumAddressMapSearchUrl, REFERENCE_DATE } from "@/data/museum-reference";
 import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
 import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
@@ -32,7 +32,7 @@ export default async function GuidePage({ params }: Props) {
   const isAccess = slug === "accessible-museum";
   const isCollection = slug === "science-collection";
   const isTeam = slug === "museum-team";
-  const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: "/guide/" + child.slug + "/" })) : [];
+  const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: guideHref(child.slug) })) : [];
   const directChildren = usesCmsNavigation ? findPublicNavigationNode(navigationTree, slug)?.children ?? [] : [];
   const sectionEntries = usesCmsNavigation ? entriesInCmsSection(slug) : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
@@ -47,13 +47,17 @@ export default async function GuidePage({ params }: Props) {
         </span>) : null}
       <span aria-current="page">{title}</span>
     </nav>
-    <span className="eyebrow">ПРЕДВАРИТЕЛЬНАЯ СТРУКТУРА · {REFERENCE_DATE}</span>
+    <span className="eyebrow">{page?.legacyPath
+      ? "РАЗДЕЛ НА ДЕЙСТВУЮЩЕМ САЙТЕ"
+      : page ? "НОВЫЙ РАЗДЕЛ ПО ТЗ — ЧЕРНОВИК" : "НАВИГАЦИЯ ПО ТЗ — ПРОЕКТ"} · {REFERENCE_DATE}</span>
     <h1>{title}</h1>
     <p className="lead">{group
       ? "Раздел будущего сайта составлен по техническому заданию и действующей структуре музея. Наполнение уточним после интервью."
       : isTeam
         ? "Список должностных лиц и служебные телефоны перенесены с действующего сайта музея; публикация обновлённого списка требует подтверждения заказчика."
-        : "Эта страница пока является навигационным каркасом. Фотографии и полные музейные тексты не перенесены без согласования прав."}
+        : page?.legacyPath
+          ? "Такой раздел уже есть на действующем сайте музея. Здесь пока справочный маршрут к первоисточнику, а не копия полного текста или подтверждение его актуальности."
+          : "Этот раздел требуется ТЗ, но музей ещё не предоставил утверждённые сведения. Придумывать их не будем."}
     </p>
     {isVisit && <div className="reference-facts">
       <h2>Сведения с действующего сайта музея</h2>
@@ -78,6 +82,10 @@ export default async function GuidePage({ params }: Props) {
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <a href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</a>.</p>
     </div>}
     {isTeam && <MuseumTeam />}
+    {(slug === "agenda" || slug === "agenda-events") && <p className="reference-source">
+      <Link href="/events/" className="text-link">Открыть афишу и архив мероприятий →</Link>
+      <span> · Пока там тестовые записи; программа публикуется на <a href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</a>.</span>
+    </p>}
     <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
     {isCollection && <p className="reference-facts"><a href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</a></p>}
     {directChildren.length > 0 && <section aria-label={"Подразделы: " + title}>
@@ -101,7 +109,7 @@ export default async function GuidePage({ params }: Props) {
       </Link>)}
     </div>}
     {sourceUrl && <p className="reference-source">
-      <a href={sourceUrl} target="_blank" rel="noopener noreferrer">Посмотреть актуальные сведения на действующем сайте музея ↗</a>
+      <a href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</a>
     </p>}
     {page?.tenderOnly && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
     {page && <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>}

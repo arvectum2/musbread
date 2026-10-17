@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { MouseEvent } from "react";
 import GlobalSearch from "@/components/GlobalSearch";
 import VisionMode from "@/components/VisionMode";
-import { museumReference } from "@/data/museum-reference";
+import { guideHref, museumReference } from "@/data/museum-reference";
 import { menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
 import NavigationBranch from "@/components/NavigationBranch";
 
@@ -27,10 +27,11 @@ export default function SiteHeader() {
             <Link prefetch={false} href={"/guide/" + group.slug + "/"} className="mega-heading">Все подразделы: {group.title}</Link>
             {usesCmsNavigation
               ? <NavigationBranch nodes={navigationTree.find((node) => node.slug === group.slug)?.children ?? []} />
-              : group.children.map((page) => <Link key={page.slug} prefetch={false} href={"/guide/" + page.slug + "/"}>{page.title}</Link>)}
+              : group.children.map((page) => <Link key={page.slug} prefetch={false} href={guideHref(page.slug)}>{page.title}</Link>)}
           </div>
         </details>)}
         <Link href="/news/">Новости</Link>
+        <Link href="/guide/museum-contacts/">Контакты</Link>
       </nav>
       <div className="header-controls">
         <GlobalSearch compact />
@@ -49,10 +50,11 @@ export default function SiteHeader() {
               <Link prefetch={false} href={"/guide/" + group.slug + "/"}>Все подразделы</Link>
               {usesCmsNavigation
               ? <NavigationBranch nodes={navigationTree.find((node) => node.slug === group.slug)?.children ?? []} />
-              : group.children.map((page) => <Link key={page.slug} prefetch={false} href={"/guide/" + page.slug + "/"}>{page.title}</Link>)}
+              : group.children.map((page) => <Link key={page.slug} prefetch={false} href={guideHref(page.slug)}>{page.title}</Link>)}
             </div>
           </details>)}
           <Link href="/news/">Новости</Link>
+          <Link href="/guide/museum-contacts/">Контакты</Link>
           <Link href="/guide/accessible-museum/">Доступная среда</Link>
           <a href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer">Купить билет ↗</a>
         </nav>

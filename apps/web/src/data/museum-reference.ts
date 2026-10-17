@@ -1,8 +1,8 @@
 /**
- * Short factual metadata and URLs from muzei-xleb.ru, checked 2026-10-15.
+ * Short factual metadata and URLs from muzei-xleb.ru, rechecked 2026-10-17.
  * NOT an approved identity, content license, or guarantee of ongoing accuracy.
  */
-export const REFERENCE_DATE = "15.10.2026";
+export const REFERENCE_DATE = "17.10.2026";
 export const LEGACY_BASE = "https://muzei-xleb.ru";
 export const museumReference = {
   legalName: "СПб ГБУК «Санкт-Петербургский музей Хлеба»",
@@ -22,6 +22,7 @@ export const museumReference = {
   vkUrl: "https://vk.com/club37126776",
   maxUrl: "https://max.ru/id7808018523_gos",
   privacyPolicyUrl: "https://muzei-xleb.ru/politika-konfidencialnosti-i-obrabotki-personalnyh-dannyh",
+  newsUrl: "https://muzei-xleb.ru/novosty",
   accessibilityUrl: "https://muzei-xleb.ru/informaciya-dlya-mgn",
   visitorPricesUrl: "https://muzei-xleb.ru/stoimost",
   refundsUrl: "https://muzei-xleb.ru/ceny-i-usloviya-predostavleniya-uslug",
@@ -29,6 +30,10 @@ export const museumReference = {
 
 /** External address lookup rather than unverified geo-coordinates or a third-party embed. */
 export const museumAddressMapSearchUrl = "https://yandex.ru/maps/?text=" + encodeURIComponent(museumReference.address);
+
+/** Map a declared subpage to an ALREADY existing live prototype route; no duplicate catalog. */
+export const guideHref = (slug: string): string =>
+  slug === "agenda-events" ? "/events/" : "/guide/" + slug + "/";
 
 export type SitePage = { slug: string; title: string; legacyPath?: string; tenderOnly?: boolean };
 export type MenuGroup = { slug: string; title: string; children: readonly SitePage[] };
@@ -112,7 +117,7 @@ export const menuGroups: readonly MenuGroup[] = [
 
 export type GuidePage = SitePage & { group: MenuGroup; href: string };
 export const guidePages: readonly GuidePage[] = menuGroups.flatMap((group) =>
-  group.children.map((page) => ({ ...page, group, href: "/guide/" + page.slug + "/" }))
+  group.children.map((page) => ({ ...page, group, href: guideHref(page.slug) }))
 );
 export const findGuidePage = (slug: string) => guidePages.find((page) => page.slug === slug);
 export const findMenuGroup = (slug: string) => menuGroups.find((group) => group.slug === slug);

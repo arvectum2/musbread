@@ -17,12 +17,13 @@ export default function SiteFooter() {
       <h2>Разделы</h2>
       {menuGroups.map((g) => <Link key={g.slug} prefetch={false} href={"/guide/" + g.slug + "/"}>{g.title}</Link>)}
       <Link href="/news/">Новости</Link>
+      <Link href="/guide/plan-visit/">Спланировать визит</Link>
+      <Link href="/guide/museum-contacts/">Контакты</Link>
     </div>
     <div className="footer-legal">
       <h2>Ссылки и документы</h2>
       <Link href="/guide/museum-documents/">Документы музея — каталог</Link>
-      <a href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">Оригиналы документов по обработке персональных данных ↗</a>
-      <a href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">Политика конфиденциальности (действующий сайт)</a>
+      <a href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">Политика конфиденциальности (действующий сайт) ↗</a>
       <Link href="/guide/accessible-museum/">Доступная среда</Link>
       <a href={museumReference.visitorPricesUrl} target="_blank" rel="noopener noreferrer">Цены и льготы</a>
       <Link href="/guide/ticket-refunds/">Правила посещения и возврата — документы музея</Link>

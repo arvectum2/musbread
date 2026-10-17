@@ -1,7 +1,10 @@
 {
-  "checked_at": "2026-10-17T05:08:43+00:00",
+  "checked_at": "2026-10-17T06:01:58+00:00",
   "source": "https://muzei-xleb.ru",
-  "sections_with_source": 31,
+  "sections_with_source": 32,
+  "additional_reference_pages": [
+    "/novosty"
+  ],
   "curated_document_links": 15,
   "document_groups_checked": [
     "founding",
@@ -11,7 +14,7 @@
   "administration_roles_checked": 5,
   "ok": true,
   "http_results": {
-    "OK": 46
+    "OK": 48
   },
   "unreachable_or_wrong_type": [],
   "orphan_document_links": [],
