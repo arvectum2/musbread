@@ -115,6 +115,42 @@ class MuseumPublicationQueueTest extends TestCase
         }
     }
 
+    public function test_background_worker_refuses_unapproved_entry_in_strict_opt_in_mode(): void
+    {
+        config([
+            'museum.editorial_approval_queue' => true,
+            'museum.queue_publication' => true,
+            'queue.default' => 'database',
+            'cache.default' => 'database',
+        ]);
+        MuseumEntry::create([
+            'type' => 'news', 'slug' => 'not-explicitly-approved',
+            'title' => 'Черновик публикации с флагом', 'body' => '<p>Тест</p>',
+            'status' => 'published',
+        ]);
+        $run = MuseumPublicationRun::create(['status' => 'queued']);
+        $base = storage_path('framework/testing/job-explicit-approval');
+        if (! is_dir($base)) mkdir($base, 0700, true);
+        $output = $base.'/published.json';
+        $manifest = $base.'/manifest.json';
+        file_put_contents($output, 'LAST_VALID_RELEASE');
+        try {
+            try {
+                (new PublishMuseumSnapshot($run->id, $output, $manifest, $base.'/media'))->handle();
+                $this->fail('Worker ignored strict editorial approval gate');
+            } catch (\RuntimeException $e) {
+                $this->assertStringContainsString('nonzero status', $e->getMessage());
+            }
+            $this->assertSame('LAST_VALID_RELEASE', file_get_contents($output));
+            $this->assertFileDoesNotExist($manifest);
+            $this->assertSame('failed', $run->fresh()->status);
+            $this->assertNull($run->fresh()->snapshot_sha256);
+        } finally {
+            @unlink($output);
+            @unlink($manifest);
+        }
+    }
+
     public function test_publication_journal_is_admin_only_and_immutable_from_ui(): void
     {
         $role = \MoonShine\Laravel\Models\MoonshineUserRole::where('name', 'Editor')->firstOrFail();

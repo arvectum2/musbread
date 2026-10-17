@@ -15,10 +15,21 @@ final class MuseumApprovalRevision
         // The associations can change without touching entry.updated_at.
         $attributes = $entry->getAttributes();
         ksort($attributes);
-        $media = $entry->media()->get(['id', 'sha256', 'alt', 'caption'])
-            ->map(static fn ($row) => [$row->id, $row->sha256, $row->alt, $row->caption])->all();
-        $documents = $entry->documents()->get(['id', 'sha256', 'file_type'])
-            ->map(static fn ($row) => [$row->id, $row->sha256, $row->file_type])->all();
+        // Include ALL persisted asset metadata affecting public delivery, not
+        // only the binary checksum. Captions, detailed alt, document labels,
+        // accessibility notes, file paths and timestamps also need re-approval.
+        $media = $entry->media()->orderBy('id')->get()
+            ->map(static function ($row): array {
+                $attrs = $row->getAttributes();
+                ksort($attrs);
+                return $attrs;
+            })->all();
+        $documents = $entry->documents()->orderBy('id')->get()
+            ->map(static function ($row): array {
+                $attrs = $row->getAttributes();
+                ksort($attrs);
+                return $attrs;
+            })->all();
         $relations = $entry->relatedEntries()->pluck('museum_entries.id')->all();
         $events = $entry->linkedEvents()->pluck('museum_events.id')->all();
         sort($media);
@@ -26,7 +37,7 @@ final class MuseumApprovalRevision
         sort($relations);
         sort($events);
         return hash('sha256', json_encode([
-            'version' => 1,
+            'version' => 2,
             'model' => $attributes,
             'media' => $media,
             'documents' => $documents,

@@ -42,6 +42,14 @@ class ExportMuseumSnapshot extends Command
             $this->error('Предпубликационная проверка выявила критические ошибки. Экспорт не выполнялся. См. museum:preflight.');
             return self::FAILURE;
         }
+        // Fail before ANY generated files are touched, including media/documents.
+        // Opt-in only: existing pre-contract fixture export is unchanged.
+        try {
+            app(\App\Support\MuseumExplicitApprovalGate::class)->assertApproved();
+        } catch (\RuntimeException $exception) {
+            $this->error('Approval gate denied export: '.$exception->getMessage());
+            return self::FAILURE;
+        }
         $mediaFiles = [];
         $documentFiles = [];
         $inspector = app(MuseumDocumentInspector::class);
@@ -353,6 +361,14 @@ class ExportMuseumSnapshot extends Command
         }
         $manifestData = json_encode($normalize($audit), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n";
 
+        // Detect edits/attachment changes occurring during snapshot construction.
+        // This is a second safety check, not a substitute for an immutable DB snapshot.
+        try {
+            app(\App\Support\MuseumExplicitApprovalGate::class)->assertApproved();
+        } catch (\RuntimeException $exception) {
+            $this->error('Approval gate denied export after snapshot build: '.$exception->getMessage());
+            return self::FAILURE;
+        }
         foreach ([[$output, $payload], [$manifest, $manifestData]] as [$target, $contents]) {
             if (! is_dir(dirname($target))) {
                 mkdir(dirname($target), 0755, true);

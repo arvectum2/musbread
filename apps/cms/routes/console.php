@@ -11,7 +11,13 @@ Artisan::command('inspire', function () {
 
 // Prepare a read-only content export every hour. The actual transport to the
 // customer's isolated public server must be configured after network approval.
-if (config('museum.queue_publication', false)) {
+if (config('museum.editorial_approval_queue', false)) {
+    // Approval-triggered jobs only. Never manufacture an approval clock from
+    // an hourly scheduler or accidentally fall back to unattended direct export.
+    if (config('museum.queue_publication', false)) {
+        Schedule::command('museum:recover-stale-publications')->everyTenMinutes()->withoutOverlapping();
+    }
+} elseif (config('museum.queue_publication', false)) {
     Schedule::command('museum:queue-export')->hourly()->withoutOverlapping();
     Schedule::command('museum:recover-stale-publications')->everyTenMinutes()->withoutOverlapping();
 } else {

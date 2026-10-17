@@ -184,6 +184,120 @@ class MuseumEditorialApprovalQueueTest extends TestCase
         $this->assertNull($record->publication_run_id);
     }
 
+    public function test_opt_in_export_fails_closed_before_writing_any_output_and_rechecks_revisions(): void
+    {
+        $this->allowOptIn();
+        $entry = $this->entry('gate-entry');
+        $dir = storage_path('framework/testing/approval-gate');
+        if (! is_dir($dir)) mkdir($dir, 0755, true);
+        $out = $dir.'/data.json';
+        $manifest = $dir.'/manifest.json';
+        file_put_contents($out, 'previous-approved-release');
+        file_put_contents($manifest, 'previous-approved-manifest');
+        $args = ['--output' => $out, '--manifest' => $manifest,
+            '--media-output-dir' => $dir.'/media', '--document-output-dir' => $dir.'/documents'];
+        try {
+            $this->assertSame(1, Artisan::call('museum:export', $args));
+            $this->assertSame('previous-approved-release', file_get_contents($out));
+            $this->assertSame('previous-approved-manifest', file_get_contents($manifest));
+            $this->assertDirectoryDoesNotExist($dir.'/media');
+
+            $hash = MuseumApprovalRevision::fingerprint($entry->fresh());
+            MuseumContentApproval::create(['museum_entry_id' => $entry->id,
+                'actor_id' => 1, 'revision_sha256' => $hash,
+                'approved_at' => now('UTC'), 'dispatch_status' => 'queued']);
+            $this->assertSame(0, Artisan::call('museum:export', $args));
+            $this->assertSame(['gate-entry'],
+                array_column(json_decode(file_get_contents($out), true)['entries'], 'slug'));
+
+            $approvedOutput = file_get_contents($out);
+            $approvedManifest = file_get_contents($manifest);
+            $entry->update(['body' => '<p>Содержимое изменилось после одобрения.</p>']);
+            $this->assertSame(1, Artisan::call('museum:export', $args));
+            $this->assertSame($approvedOutput, file_get_contents($out));
+            $this->assertSame($approvedManifest, file_get_contents($manifest));
+            $this->assertDatabaseCount('museum_content_approvals', 1);
+
+            $entry->update(['status' => 'draft']);
+            // Withdrawing material without publishing new content cannot leak
+            // the now-draft entry; an empty export is permissible in isolation.
+            $this->assertSame(0, Artisan::call('museum:export', $args));
+            $this->assertSame([], json_decode(file_get_contents($out), true)['entries']);
+        } finally {
+            @unlink($out);
+            @unlink($manifest);
+        }
+    }
+
+    public function test_opt_in_export_refuses_uncovered_content_types_instead_of_bypassing_approval(): void
+    {
+        $this->allowOptIn();
+        $dir = storage_path('framework/testing/approval-uncovered');
+        if (! is_dir($dir)) mkdir($dir, 0755, true);
+        $out = $dir.'/data.json';
+        $manifest = $dir.'/manifest.json';
+        file_put_contents($out, 'previous-release');
+        $section = \App\Models\MuseumSection::create([
+            'slug' => 'published-section', 'title' => 'Тестовый раздел', 'status' => 'published',
+        ]);
+        try {
+            $this->assertSame(1, Artisan::call('museum:export', [
+                '--output' => $out, '--manifest' => $manifest,
+                '--media-output-dir' => $dir.'/media',
+                '--document-output-dir' => $dir.'/documents',
+            ]));
+            $this->assertSame('previous-release', file_get_contents($out));
+            $this->assertFileDoesNotExist($manifest);
+            $section->update(['status' => 'draft']);
+            config(['museum.queue_publication' => false]);
+            $this->assertSame(1, Artisan::call('museum:export', [
+                '--output' => $out, '--manifest' => $manifest,
+                '--media-output-dir' => $dir.'/media',
+                '--document-output-dir' => $dir.'/documents',
+            ]));
+            $this->assertSame('previous-release', file_get_contents($out));
+        } finally {
+            @unlink($out);
+            @unlink($manifest);
+        }
+    }
+
+    public function test_attachment_description_and_document_label_invalidate_prior_approval(): void
+    {
+        $this->allowOptIn();
+        $entry = $this->entry('asset-fingerprint');
+        $media = \App\Models\MuseumMedia::create([
+            'museum_entry_id' => $entry->id,
+            'storage_path' => 'museum/media/test-fingerprint.webp',
+            'sha256' => str_repeat('a', 64),
+            'alt' => 'Тестовый макет страницы музея с текстовой подписью',
+            'caption' => 'Подпись перед одобрением',
+            'long_description' => 'Подробное описание до одобрения',
+            'width' => 100, 'height' => 100, 'size_bytes' => 100,
+        ]);
+        $document = \App\Models\MuseumDocument::create([
+            'museum_entry_id' => $entry->id,
+            'label' => 'Правила тестового посещения',
+            'file_type' => 'pdf', 'storage_path' => 'museum/documents/test-fingerprint.pdf',
+            'sha256' => str_repeat('b', 64), 'size_bytes' => 100,
+        ]);
+        $approvedHash = MuseumApprovalRevision::fingerprint($entry->fresh());
+        MuseumContentApproval::create([
+            'museum_entry_id' => $entry->id, 'actor_id' => 1,
+            'revision_sha256' => $approvedHash,
+            'approved_at' => now('UTC'), 'dispatch_status' => 'queued',
+        ]);
+        app(\App\Support\MuseumExplicitApprovalGate::class)->assertApproved();
+        $media->update(['long_description' => 'Новый текст с другими фактами о предмете']);
+        $mediaHash = MuseumApprovalRevision::fingerprint($entry->fresh());
+        $this->assertNotSame($approvedHash, $mediaHash);
+        $document->update(['label' => 'Пересмотренные правила тестового посещения']);
+        $this->assertNotSame($mediaHash, MuseumApprovalRevision::fingerprint($entry->fresh()));
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Unapproved public entry');
+        app(\App\Support\MuseumExplicitApprovalGate::class)->assertApproved();
+    }
+
     public function test_published_status_by_itself_is_not_an_approval_event(): void
     {
         $this->allowOptIn();
