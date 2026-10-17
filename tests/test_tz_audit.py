@@ -25,7 +25,7 @@ class OriginalTenderTraceTests(unittest.TestCase):
         # A prior omission may be genuinely closed during later development.
         self.assertEqual(rows['TZ-222']['Фактически готово'], 'Да')
         # Visitor manual is now a standalone draft, not an accepted final guide.
-        self.assertEqual(rows['TZ-316']['Учли в плане'], 'Частично')
+        self.assertEqual(rows['TZ-316']['Учли в плане'], 'Да')
         self.assertEqual(rows['TZ-316']['Фактически готово'], 'Частично')
 
         # Former omission now has a private demo-only workflow, not a live form.

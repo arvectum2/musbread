@@ -461,3 +461,31 @@ main :is(.hero,.section,.guide-primary,.museum-list,.events-grid,.museum-gallery
   overflow-wrap:anywhere;
   word-break:normal;
 }
+
+/* TZ-116 / TZ-178: buying tickets is a page-level primary action.
+   The old 960/1000px media rules hid it in hamburger navigation; keep the
+   existing official ticket link visibly accessible in the same header row
+   without changing the booking provider or introducing any PII form. */
+@media(max-width:1000px){
+  .header-controls .header-action{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:2.5rem;
+    padding:.35rem .7rem;
+    border:1px solid var(--green);
+    border-radius:.25rem;
+    background:var(--green);
+    color:#fff;
+    white-space:normal;
+    text-align:center;
+    font-size:.87rem;
+  }
+  .header-controls .header-action:hover,.header-controls .header-action:focus-visible{
+    outline-offset:2px;
+    text-decoration:underline;
+  }
+}
+@media(max-width:630px){
+  .header-controls .header-action{font-size:.79rem}
+}

@@ -21,9 +21,9 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
   by_id={x["ID"]:x for x in src}
   expected={x["ID"] for x in src if x["Фактически готово"]!="Да"}
   self.assertEqual(len(src),325)
-  self.assertEqual(len(q),282)
+  self.assertEqual(len(q),279)
   self.assertEqual({x["ID"] for x in q},expected)
-  self.assertEqual(len(set(x["Вопрос заказчику"] for x in q)),282)
+  self.assertEqual(len(set(x["Вопрос заказчику"] for x in q)),279)
   for item in q:
    self.assertEqual(item["Строки оригинала"],by_id[item["ID"]]["Строки tz.txt"])
    self.assertEqual(item["Учли в плане"],by_id[item["ID"]]["Учли в плане"])
@@ -32,8 +32,8 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
    self.assertLessEqual(len(item["Вопрос заказчику"]),165)
    self.assertTrue(item["Что не выполнено"])
    self.assertTrue(item["Блокер/данные музея"])
-  self.assertEqual(Counter(x["Учли в плане"] for x in q),Counter({"Да":190,"Частично":92}))
-  self.assertEqual(sum(x["Приоритет"]=="P0" for x in q),160)
+  self.assertEqual(Counter(x["Учли в плане"] for x in q),Counter({"Да":279}))
+  self.assertEqual(sum(x["Приоритет"]=="P0" for x in q),157)
 
  def test_contract_map_and_discrepancies_are_complete_and_grounded(self):
   c=rows("CONTRACT_CLAUSE_MAP.csv")
@@ -49,13 +49,13 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
   md=(OUT/"TZ_CONTRACT_ROADMAP_DEEP_AUDIT.md").read_text()
   for r in risks:self.assertIn(r["ID"],md)
   self.assertIn("317",md)
-  self.assertIn("282",md)
+  self.assertIn("279",md)
   self.assertIn("MISSING_27_REMEDIATION.md",md)
 
- def test_ready_count_changes_only_after_verified_cta_and_partial_sources(self):
+ def test_ready_and_planning_count_match_verified_ui_and_92_item_audit(self):
   r=rows("requirements.psv","^")
-  self.assertEqual(Counter(x["Фактически готово"] for x in r),Counter({"Да":43,"Частично":110,"Нет":172}))
-  self.assertEqual(Counter(x["Учли в плане"] for x in r),Counter({"Да":233,"Частично":92}))
+  self.assertEqual(Counter(x["Фактически готово"] for x in r),Counter({"Да":46,"Частично":118,"Нет":161}))
+  self.assertEqual(Counter(x["Учли в плане"] for x in r),Counter({"Да":325}))
   roadmap=(ROOT/"docs/ROADMAP.md").read_text()
   self.assertIn("Аудит дорожной карты против ПОЛНОГО ТЗ и проекта контракта",roadmap)
   self.assertIn("OPEN_CUSTOMER_QUESTIONS.md",roadmap)
@@ -79,6 +79,28 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
   self.assertEqual(source["TZ-170"]["Фактически готово"],"Частично")
   self.assertIn("403",source["TZ-170"]["Чекпоинт/доказательство"])
   self.assertIn("TZ-324",(OUT/"MISSING_27_REMEDIATION.md").read_text())
+
+ def test_historical_92_partial_planning_ids_now_have_specific_acceptance(self):
+  spec=importlib.util.spec_from_file_location("partial92",ROOT/"scripts/build_partial_92_remediation.py")
+  module=importlib.util.module_from_spec(spec)
+  assert spec.loader is not None
+  spec.loader.exec_module(module)
+  source={r["ID"]:r for r in rows("requirements.psv","^")}
+  planned=rows("PARTIAL_92_REMEDIATION.csv")
+  self.assertEqual(len(module.HISTORICAL_IDS),92)
+  self.assertEqual(len(planned),92)
+  self.assertEqual({r["ID"] for r in planned},{f"TZ-{n:03d}" for n in module.HISTORICAL_IDS})
+  for r in planned:
+   self.assertEqual(r["Учитывается в плане"],"Да")
+   self.assertEqual(r["Состояние выполнения"],source[r["ID"]]["Фактически готово"])
+   self.assertIn(r["Этап"],("NOW","AWARD","INTERVIEW","CUSTOMER"))
+   for key in ("Ответственный","Конкретное действие из ТЗ","Доказательство для закрытия","Внешний блокер","Исходные строки"):
+    self.assertTrue(r[key],(r["ID"],key))
+  self.assertEqual(source["TZ-116"]["Фактически готово"],"Да")
+  self.assertEqual(source["TZ-118"]["Фактически готово"],"Да")
+  self.assertEqual(source["TZ-178"]["Фактически готово"],"Да")
+  self.assertEqual(source["TZ-151"]["Фактически готово"],"Частично")
+  self.assertEqual(source["TZ-152"]["Фактически готово"],"Частично")
 
  def test_question_generator_and_summary_are_idempotent(self):
   names=("OPEN_CUSTOMER_QUESTIONS.csv","OPEN_CUSTOMER_QUESTIONS.md",

@@ -8,15 +8,16 @@ import type { MuseumEvent } from "@/data/types";
 
 /** Archive visibility changes by the visitor's calendar date, without a rebuild. */
 export default function EventAgenda({
-  events, buildDay, variant = "index",
+  events, buildDay, variant = "index", initialPeriod = "upcoming",
 }: {
   events: MuseumEvent[];
   buildDay: string;
   variant?: "index" | "featured";
+  initialPeriod?: EventPeriod;
 }) {
   // Same initial day on server and client avoids a midnight hydration mismatch.
   const [today, setToday] = useState(buildDay);
-  const [period, setPeriod] = useState<EventPeriod>("upcoming");
+  const [period, setPeriod] = useState<EventPeriod>(initialPeriod);
   const [category, setCategory] = useState("");
   const [ready, setReady] = useState(false);
   useEffect(() => {

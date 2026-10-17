@@ -11,6 +11,8 @@ import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
 import CurrentExhibitions from "@/components/CurrentExhibitions";
+import EventAgenda from "@/components/EventAgenda";
+import {isAgendaSection,publishedEventsForAgendaSection} from "@/data/agenda-sections";
 import {events} from "@/data/content";
 import { officialMuseumGroupsForPage } from "@/data/museum-official-documents";
 import { content, entriesInCmsSection, entryPublicHref } from "@/data/content";
@@ -110,6 +112,16 @@ export default async function GuidePage({ params }: Props) {
       <Link href="/events/" className="text-link">Открыть афишу и архив мероприятий →</Link>
       <span> · Пока там тестовые записи; программа публикуется на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</MuseumAnchor>.</span>
     </p>}
+    {isAgendaSection(slug) && <section className="guide-agenda-category" aria-label={"Мероприятия раздела: " + title}>
+      <h2>{slug === "agenda-archive" ? "Прошедшие мероприятия" : "События и программа"}</h2>
+      <p>Ниже показаны только записи, опубликованные редактором CMS. Демонстрационные записи не являются официальным расписанием музея.</p>
+      <EventAgenda
+        events={publishedEventsForAgendaSection(events,slug)}
+        buildDay={new Date().toISOString().slice(0,10)}
+        initialPeriod={slug === "agenda-archive" ? "archive" : "upcoming"}
+      />
+      <p className="reference-source">Проверенная афиша музея доступна на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">официальном действующем сайте ↗</MuseumAnchor>.</p>
+    </section>}
     <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
     {["children", "children-pushkin-card", "exhibitions-guide", "exhibitions-pushkin-card"].includes(slug) && <section className="reference-facts" aria-label="Переход к Пушкинской карте">
       <h2>«Пушкинская карта»</h2>
