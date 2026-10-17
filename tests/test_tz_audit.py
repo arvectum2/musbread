@@ -14,9 +14,11 @@ class OriginalTenderTraceTests(unittest.TestCase):
         rows = {r['ID']: r for r in read_rows()}
         # 27 historical omissions now have explicit tasks and owners. Their
         # planning status improved, NOT their code-readiness status.
-        for requirement in ('TZ-018', 'TZ-124', 'TZ-127'):
+        for requirement in ('TZ-018', 'TZ-127'):
             self.assertEqual(rows[requirement]['Учли в плане'], 'Да')
             self.assertEqual(rows[requirement]['Фактически готово'], 'Нет')
+        self.assertEqual(rows['TZ-124']['Фактически готово'], 'Да')
+        self.assertIn('sigmapro',rows['TZ-124']['Чекпоинт/доказательство'])
         # TZ-189 was once a high-risk omission but has a real full-site link
         # title audit (incl. MoonShine-generated pages) and CI evidence.
         self.assertEqual(rows['TZ-189']['Учли в плане'], 'Да')

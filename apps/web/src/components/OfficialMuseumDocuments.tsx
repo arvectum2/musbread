@@ -7,8 +7,8 @@ export default function OfficialMuseumDocuments({groups}:{groups:readonly Museum
   return <section className="official-documents" aria-label="Официальные документы музея">
     <h2>Официальные документы музея</h2>
     <p className="official-documents-notice">Ниже ссылки на документы и страницы <strong>действующего сайта Музея хлеба</strong>.
-      Это справочная копия структуры: перед запуском нового сайта музей должен подтвердить актуальность редакций.
-      Мы не изменяем содержание утверждённых документов.</p>
+      Используются размещённые музеем действующие редакции на дату переноса. При изменениях музей сможет обновить документы в CMS.
+      Тексты правовых документов не переписывались.</p>
     {groups.map(group=><section key={group.title} className="official-documents-group" aria-label={group.title}>
       <h3>{group.title}</h3>
       <ul className="official-documents-list">{group.items.map(doc=><li key={doc.url}>

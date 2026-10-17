@@ -10,7 +10,7 @@ test("museum document hub follows Russian and St Petersburg museums' grouped-sou
  await expect(hub).toContainText('Документы и сведения о доступности');
  await expect(hub).toContainText('Устав музея');
  await expect(hub).toContainText('Положение о порядке приобретения и возврата');
- await expect(hub).toContainText('перед запуском нового сайта музей должен подтвердить актуальность редакций');
+ await expect(hub).toContainText('действующие редакции на дату переноса');
  await expect(hub.locator('a[href^="https://muzei-xleb.ru/"]')).toHaveCount(24);
  for(const anchor of await hub.locator('a[href^="https://muzei-xleb.ru/"]').all()){
    await expect(anchor).toHaveAttribute('target','_blank');

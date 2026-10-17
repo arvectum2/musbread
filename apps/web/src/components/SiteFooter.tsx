@@ -18,7 +18,7 @@ export default function SiteFooter() {
         <MuseumAnchor href={visitorContacts.emailHref}>{visitorContacts.email}</MuseumAnchor></p>
       <p>{visitorContacts.openingHours}<br />{visitorContacts.admissionHours}<br />
         {visitorContacts.closedDay}<br />{visitorContacts.sanitaryDay}</p>
-      <p className="footer-source">{content.visitor_contacts ? "Сведения утверждены в CMS музея для статической выгрузки." : <>Предварительная справка с действующего сайта на {REFERENCE_DATE}. Перед запуском уточнить у музея.</>}</p>
+      <p className="footer-source">{content.visitor_contacts ? "Сведения опубликованы из CMS музея." : <>Действующие сведения с официального сайта музея на {REFERENCE_DATE}; сотрудники могут обновить их в CMS.</>}</p>
     </div>
     <div className="footer-navigation">
       <h2>Разделы</h2>
@@ -37,7 +37,9 @@ export default function SiteFooter() {
       <MuseumAnchor href={museumReference.refundsUrl} target="_blank" rel="noopener noreferrer">Возврат билетов</MuseumAnchor>
       <MuseumAnchor href={museumReference.vkUrl} target="_blank" rel="noopener noreferrer">ВКонтакте ↗</MuseumAnchor>
       <MuseumAnchor href={museumReference.maxUrl} target="_blank" rel="noopener noreferrer">MAX ↗</MuseumAnchor>
-      <p className="footer-source">Опрос оценки музея и рассылка ожидают утверждения заказчика. Формы сбора данных здесь не работают.</p>
+      <MuseumAnchor href={museumReference.surveyUrl} target="_blank" rel="noopener noreferrer">Оценить работу музея — официальная анкета ↗</MuseumAnchor>
+      <Link href="/guide/museum-cookie/">Информация об использовании cookie на действующем сайте</Link>
+      <p className="footer-source">Анкета открывается на внешнем сервисе по ссылке действующего музея. Собственные формы обработки персональных данных и рассылка на прототипе не работают.</p>
     </div>
   </footer>;
 }

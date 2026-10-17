@@ -70,7 +70,14 @@ with SOURCE.open(encoding='utf-8', newline='') as fd:
 assert len(source) == 325, f'Expected exactly 325 source clauses, got {len(source)}'
 ids = [int(r['ID'][3:]) for r in source]
 assert ids == list(range(1, 326)), 'Primary TZ IDs must be ordered and complete'
+# The owner now authorizes the CURRENT official museum site as the baseline
+# content edition. This unblocks *further local import/metadata QA*, NOT rights
+# clearance, interview, final editor approval, or a production release.
+# Next work can bring source pages and original documents into editable CMS
+# entries, preserving source URLs and original metadata.
+OFFICIAL_SOURCE_BASELINE_NOW = {129, 130, 131, 134, 137, 141, 142}
 CAN_START_NOW -= WAITING_ON_CUSTOMER_AFTER_LOCAL_WORK
+CAN_START_NOW |= OFFICIAL_SOURCE_BASELINE_NOW
 assert set(CAN_START_NOW) <= set(ids)
 assert all(r['Фактически готово'] in ('Да','Частично','Нет') for r in source)
 

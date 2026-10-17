@@ -43,3 +43,12 @@ test("TZ-075: известная афиша — единый маршрут; и�
   assert.equal(guidePages.find((p) => p.slug === "agenda-events")?.href, "/events/");
   assert.equal(museumReference.newsUrl, "https://muzei-xleb.ru/novosty");
 });
+
+
+test("official header socials and existing museum evaluation survey use discovered source URLs", () => {
+  assert.equal(museumReference.vkUrl, "https://vk.com/club37126776");
+  assert.equal(museumReference.maxUrl, "https://max.ru/id7808018523_gos");
+  assert.equal(new URL(museumReference.surveyUrl).hostname, "sigmapro.givc.ru");
+  assert.equal(new URL(museumReference.surveyUrl).searchParams.get("sid"), "256238");
+  assert.equal(new URL(museumReference.cookieSourceUrl).pathname, "/my-ispolzuem-cookie");
+});

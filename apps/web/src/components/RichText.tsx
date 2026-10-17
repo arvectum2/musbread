@@ -10,6 +10,7 @@ export default function RichText({ html }: { html: string }) {
     allowedTags: [
       "p", "br", "strong", "em", "b", "i", "u",
       "ul", "ol", "li", "blockquote", "h2", "h3", "h4", "a",
+      "table", "thead", "tbody", "tr", "th", "td",
     ],
     allowedAttributes: { a: ["href", "title", "rel"] },
     allowedSchemes: ["http", "https", "mailto"],

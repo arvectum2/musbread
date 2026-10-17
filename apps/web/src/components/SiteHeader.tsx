@@ -34,6 +34,8 @@ export default function SiteHeader() {
         </details>)}
         <Link href="/news/">Новости</Link>
         <Link href="/guide/museum-contacts/">Контакты</Link>
+        <MuseumAnchor href={museumReference.vkUrl} className="header-social" target="_blank" rel="noopener noreferrer" aria-label="Музей во ВКонтакте — откроется новая вкладка">ВКонтакте ↗</MuseumAnchor>
+        <MuseumAnchor href={museumReference.maxUrl} className="header-social" target="_blank" rel="noopener noreferrer" aria-label="Музей в MAX — откроется новая вкладка">MAX ↗</MuseumAnchor>
       </nav>
       <div className="header-controls">
         <GlobalSearch compact />
@@ -59,6 +61,8 @@ export default function SiteHeader() {
           <Link href="/news/">Новости</Link>
           <Link href="/guide/museum-contacts/">Контакты</Link>
           <Link href="/guide/accessible-museum/">Доступная среда</Link>
+          <MuseumAnchor href={museumReference.vkUrl} target="_blank" rel="noopener noreferrer">Музей во ВКонтакте ↗</MuseumAnchor>
+          <MuseumAnchor href={museumReference.maxUrl} target="_blank" rel="noopener noreferrer">Музей в MAX ↗</MuseumAnchor>
           <MuseumAnchor href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer">Купить билет ↗</MuseumAnchor>
         </nav>
       </details>

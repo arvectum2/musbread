@@ -13,13 +13,13 @@ class MuseumSectionExportTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_opt_in_reference_seed_populates_seven_roots_and_fifty_five_children_idempotently(): void
+    public function test_opt_in_reference_seed_populates_seven_roots_and_fifty_six_children_idempotently(): void
     {
         $this->seed(ReferenceMuseumSectionsSeeder::class);
-        $this->assertSame(62, MuseumSection::count());
+        $this->assertSame(63, MuseumSection::count());
         $this->assertSame(7, MuseumSection::whereNull('parent_id')->count());
         $this->assertSame(21, MuseumSection::where('status', 'draft')->count());
-        $this->assertSame(41, MuseumSection::where('status', 'published')->count());
+        $this->assertSame(42, MuseumSection::where('status', 'published')->count());
         $this->assertSame('draft', MuseumSection::where('slug', 'friends')->value('status'));
         $this->assertSame('published', MuseumSection::where('slug', 'museum-documents')->value('status'));
         $this->assertSame('/pushkinskaya-karta', MuseumSection::where('slug', 'pushkin-card')->value('legacy_path'));
@@ -27,7 +27,7 @@ class MuseumSectionExportTest extends TestCase
         $museum = MuseumSection::findOrFail($firstId);
         $museum->update(['title' => 'Редактор переименовал раздел']);
         $this->seed(ReferenceMuseumSectionsSeeder::class);
-        $this->assertSame(62, MuseumSection::count());
+        $this->assertSame(63, MuseumSection::count());
         $this->assertSame($firstId, MuseumSection::where('slug', 'museum')->value('id'));
         $this->assertSame('Редактор переименовал раздел', $museum->fresh()->title);
     }
@@ -58,8 +58,8 @@ class MuseumSectionExportTest extends TestCase
         $editor = MoonshineUser::factory()->create();
         $section->editors()->attach($editor->id);
         [$snapshot, $audit] = $this->export('reference');
-        $this->assertCount(41, $snapshot['sections']);
-        $this->assertSame(41, $audit['section_count']);
+        $this->assertCount(42, $snapshot['sections']);
+        $this->assertSame(42, $audit['section_count']);
         $this->assertNotContains('friends', array_column($snapshot['sections'], 'slug'));
         $this->assertSame('museum', $snapshot['sections'][0]['slug']);
         $text = json_encode($snapshot, JSON_UNESCAPED_UNICODE);

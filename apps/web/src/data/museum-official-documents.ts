@@ -1,7 +1,8 @@
 /**
  * Existing museum-owned documents, not generated legal policies.
  * Titles and file URLs were checked against https://muzei-xleb.ru on 17.10.2026.
- * They are PRE-AWARD references; final editions must be confirmed by the museum.
+ * Source versions are accepted as the current museum editions for migration;
+ * any later correction or replacement is handled by museum editors.
  * UI patterns inspired by rusmuseum.ru and spbmuseum.ru; NO copied legal text.
  */
 export type MuseumOfficialDocument = {

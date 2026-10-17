@@ -510,3 +510,16 @@ main :is(.hero,.section,.guide-primary,.museum-list,.events-grid,.museum-gallery
   }
   .header-controls{justify-content:flex-start;min-width:0}
 }
+
+
+/* Source-site content: preserve original pricing tables at 320px without
+   overflowing the document or changing the official price/wording. */
+.official-source-content{max-width:100%;min-width:0;overflow-wrap:anywhere}
+.official-source-content .rich-text{max-width:100%;min-width:0}
+.official-source-content .rich-text table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1rem 0}
+.official-source-content .rich-text th,.official-source-content .rich-text td{
+  padding:.5rem .65rem;border:1px solid var(--line);vertical-align:top;min-width:8rem
+}
+.official-source-content .rich-text h2,.official-source-content .rich-text h3{margin:1.15rem 0 .65rem}
+.header-social{font-size:.87rem;text-decoration:underline;white-space:nowrap}
+@media(max-width:600px){.official-source-content{padding:.85rem}.header-social{white-space:normal}}

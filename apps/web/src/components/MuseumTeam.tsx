@@ -6,7 +6,7 @@ export default function MuseumTeam() {
  return <section className="museum-team" aria-label="Руководство и администрация музея">
   <h2>Руководство и администрация</h2>
   <p className="museum-team-note">Сведения сверены с действующим сайтом музея {museumAdministrationCheckedAt}.
-   <strong> Перед публикацией новой версии заказчик подтверждает актуальность должностей, ФИО и контактов.</strong></p>
+   <strong> Используется опубликованная редакция музея; изменения сотрудники могут внести при обновлении данных.</strong></p>
   <ul className="museum-team-list">{museumAdministration.map(p=><li key={p.role}>
    <h3>{p.role}</h3><p>{p.name}</p><MuseumAnchor href={p.phoneHref}>Телефон: {p.phone}</MuseumAnchor>
   </li>)}</ul>

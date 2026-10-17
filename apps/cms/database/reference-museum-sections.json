@@ -115,6 +115,13 @@
       "legacy_path": "/politika-konfidencialnosti-i-obrabotki-personalnyh-dannyh"
     },
     {
+      "slug": "museum-cookie",
+      "title": "Использование cookie на действующем сайте",
+      "parent_slug": "museum",
+      "sort_order": 15,
+      "legacy_path": "/my-ispolzuem-cookie"
+    },
+    {
       "slug": "museum-media",
       "title": "Медиа",
       "parent_slug": "museum",

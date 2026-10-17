@@ -1,7 +1,7 @@
 import { content } from "./content";
 import { guidePages, menuGroups } from "./navigation";
-import { museumReference } from "./museum-reference";
 import {visitorContacts} from "./visitor-contacts";
+import {officialSnapshotByPath} from "./official-page-snapshots";
 import { buildPublicSearchIndex, rankSearch, type SearchItem } from "./search-core";
 
 /** The same immutable public snapshot used for page rendering, never private CMS. */
@@ -12,6 +12,12 @@ const visitorFacts = [visitorContacts.address, visitorContacts.metro, visitorCon
 export const searchItems: readonly SearchItem[] = buildPublicSearchIndex(content, {
   menuGroups, guidePages,
   guideSearchText: {
+    // Full indexed body is the exact retained source-site copy, never a
+    // speculative summary. CMS items remain indexed by buildPublicSearchIndex.
+    ...Object.fromEntries(guidePages.flatMap(page => {
+      const official = officialSnapshotByPath(page.legacyPath);
+      return official ? [[page.href, official.html.replace(/<[^>]*>/g," ").slice(0,20_000)]] : [];
+    })),
     "/guide/museum-contacts/": visitorFacts,
     "/guide/plan-visit/": visitorFacts,
     "/guide/tickets-and-benefits/": visitorFacts,

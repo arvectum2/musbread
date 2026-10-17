@@ -9,6 +9,8 @@ import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
 import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
+import RichText from "@/components/RichText";
+import {officialSnapshotByPath} from "@/data/official-page-snapshots";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
 import CurrentExhibitions from "@/components/CurrentExhibitions";
 import EventAgenda from "@/components/EventAgenda";
@@ -27,12 +29,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const title = findMenuGroup(slug)?.title ?? findGuidePage(slug)?.title;
   const section = content.sections?.find((item) => item.slug === slug);
+  const guide = findGuidePage(slug);
+  const sourceTitle = officialSnapshotByPath(guide?.legacyPath)?.title;
+  const cmsPage = content.entries.find((entry) => entry.type === "page" && entry.slug === slug);
   const fallback = fixedPageSeo("/guide/" + slug + "/");
   // Fallback/reference guide pages are unapproved prototypes. Only an
   // explicit site-approval gate permits indexing approved CMS section routes.
   const approved = siteSeoApproved(process.env.MUSBREAD_SITE_APPROVED) && !!section;
   return {
-    title: section?.seo_title?.trim() || fallback?.seo_title?.trim() || title || "Раздел не найден",
+    title: cmsPage?.seo_title?.trim() || section?.seo_title?.trim() || fallback?.seo_title?.trim() || sourceTitle || title || "Раздел не найден",
     description: section?.seo_description?.trim() || fallback?.seo_description?.trim() || undefined,
     robots: { index: approved, follow: approved },
   };
@@ -55,6 +60,13 @@ export default async function GuidePage({ params }: Props) {
   const directChildren = usesCmsNavigation ? findPublicNavigationNode(navigationTree, slug)?.children ?? [] : [];
   const sectionEntries = usesCmsNavigation ? entriesInCmsSection(slug) : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
+  const officialSnapshot = officialSnapshotByPath(page?.legacyPath);
+  // Museum-owned CMS content takes precedence; an operator can replace the
+  // official-site reference by publishing a page with this exact guide slug.
+  const cmsPage = content.entries.find((entry) => entry.type === "page" && entry.slug === slug);
+  const referenceBody = cmsPage?.body?.trim() || officialSnapshot?.html;
+  const showReferenceBody = !!referenceBody && !["museum-contacts", "museum-team", "museum-cookie"].includes(slug);
+  const sourceDate = officialSnapshot?.captured_utc.slice(0, 10);
 
   return <article className="section inner-page guide-page">
     <nav aria-label="Хлебные крошки" className="breadcrumbs">
@@ -76,9 +88,11 @@ export default async function GuidePage({ params }: Props) {
         ? "Список должностных лиц и служебные телефоны перенесены с действующего сайта музея; публикация обновлённого списка требует подтверждения заказчика."
         : page?.legacyPath
           ? (isVisit && content.visitor_contacts
-              ? "Справочный раздел действующего сайта сохранён, но контактные сведения ниже утверждены музеем в CMS для этой версии."
-              : "Такой раздел уже есть на действующем сайте музея. Здесь пока справочный маршрут к первоисточнику, а не копия полного текста или подтверждение его актуальности.")
-          : "Этот раздел требуется ТЗ, но музей ещё не предоставил утверждённые сведения. Придумывать их не будем."}
+              ? "Сведения о посещении перенесены с официального сайта и могут обновляться из CMS."
+              : showReferenceBody
+                ? "Содержание перенесено с действующего официального сайта музея как исходная редакция. Заказчик сможет изменить его в CMS."
+                : "Этот раздел существует на официальном сайте музея; пока сохранена ссылка на первоисточник.")
+          : "Этот раздел требуется ТЗ, но сведения на действующем сайте не найдены."}
     </p>
     <div className={directChildren.length > 0 ? "guide-content-layout" : "guide-content-layout guide-content-single"}>
       <div className="guide-primary">
@@ -122,6 +136,17 @@ export default async function GuidePage({ params }: Props) {
       />
       <p className="reference-source">Проверенная афиша музея доступна на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">официальном действующем сайте ↗</MuseumAnchor>.</p>
     </section>}
+    {showReferenceBody && <section aria-label="Содержание действующего сайта музея" className="reference-facts official-source-content">
+      <h2>{cmsPage ? "Редакция из CMS" : "Содержание с официального сайта музея"}</h2>
+      {officialSnapshot && !cmsPage && <p className="meta">Источник: {officialSnapshot.source_url} · проверено {sourceDate}.
+        Текст перенесён без самостоятельной юридической редакции; заказчик может обновить страницу в CMS.</p>}
+      <RichText html={referenceBody!} />
+    </section>}
+    {slug === "museum-cookie" && <p className="reference-facts">
+      Документ описывает использование cookie на прежнем сайте музея. Мы сохраняем ссылку на действующую редакцию,
+      но не переносим утверждения о целях и согласиях на новую техническую платформу без проверки используемых сервисов.
+      На этом прототипе собственные формы получения согласия и аналитические cookie не добавлялись.
+    </p>}
     <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
     {["children", "children-pushkin-card", "exhibitions-guide", "exhibitions-pushkin-card"].includes(slug) && <section className="reference-facts" aria-label="Переход к Пушкинской карте">
       <h2>«Пушкинская карта»</h2>

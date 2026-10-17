@@ -5,7 +5,7 @@ test("only official old-site team roles, with attribution and approval warning",
  await expect(team).toBeVisible();await expect(team.locator("li")).toHaveCount(5);
  await expect(team).toContainText("Елизавета Вилорьевна Тапакова-Боярская");
  await expect(team).toContainText("Оксана Владимировна Кутовая");
- await expect(team).toContainText("заказчик подтверждает актуальность");
+ await expect(team).toContainText("Используется опубликованная редакция");
  await expect(team.getByRole("link",{name:/Первоисточник/})).toHaveAttribute("href","https://muzei-xleb.ru/administraciya");
  await expect(team.locator("a[href^='tel:']")).toHaveCount(5);
 });

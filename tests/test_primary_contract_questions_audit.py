@@ -21,9 +21,9 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
   by_id={x["ID"]:x for x in src}
   expected={x["ID"] for x in src if x["Фактически готово"]!="Да"}
   self.assertEqual(len(src),325)
-  self.assertEqual(len(q),273)
+  self.assertEqual(len(q),len(expected))
   self.assertEqual({x["ID"] for x in q},expected)
-  self.assertEqual(len(set(x["Вопрос заказчику"] for x in q)),273)
+  self.assertEqual(len(set(x["Вопрос заказчику"] for x in q)),len(expected))
   for item in q:
    self.assertEqual(item["Строки оригинала"],by_id[item["ID"]]["Строки tz.txt"])
    self.assertEqual(item["Учли в плане"],by_id[item["ID"]]["Учли в плане"])
@@ -32,8 +32,8 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
    self.assertLessEqual(len(item["Вопрос заказчику"]),165)
    self.assertTrue(item["Что не выполнено"])
    self.assertTrue(item["Блокер/данные музея"])
-  self.assertEqual(Counter(x["Учли в плане"] for x in q),Counter({"Да":273}))
-  self.assertEqual(sum(x["Приоритет"]=="P0" for x in q),151)
+  self.assertEqual(Counter(x["Учли в плане"] for x in q),Counter({"Да":len(expected)}))
+  self.assertEqual(sum(x["Приоритет"]=="P0" for x in q),sum(x["Приоритет"]=="P0" for x in src if x["Фактически готово"]!="Да"))
 
  def test_contract_map_and_discrepancies_are_complete_and_grounded(self):
   c=rows("CONTRACT_CLAUSE_MAP.csv")
@@ -49,12 +49,12 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
   md=(OUT/"TZ_CONTRACT_ROADMAP_DEEP_AUDIT.md").read_text()
   for r in risks:self.assertIn(r["ID"],md)
   self.assertIn("317",md)
-  self.assertIn("273",md)
+  self.assertIn(str(sum(r["Фактически готово"]!="Да" for r in rows("requirements.psv","^"))),md)
   self.assertIn("MISSING_27_REMEDIATION.md",md)
 
  def test_ready_and_planning_count_match_verified_ui_and_92_item_audit(self):
   r=rows("requirements.psv","^")
-  self.assertEqual(Counter(x["Фактически готово"] for x in r),Counter({"Да":52,"Частично":113,"Нет":160}))
+  self.assertEqual(Counter(x["Фактически готово"] for x in r),Counter({"Да":56,"Частично":111,"Нет":158}))
   self.assertEqual(Counter(x["Учли в плане"] for x in r),Counter({"Да":325}))
   roadmap=(ROOT/"docs/ROADMAP.md").read_text()
   self.assertIn("Аудит дорожной карты против ПОЛНОГО ТЗ и проекта контракта",roadmap)
