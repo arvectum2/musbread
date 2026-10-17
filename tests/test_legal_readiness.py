@@ -51,6 +51,27 @@ class LegalReadinessTest(unittest.TestCase):
         for row in audit['disclosure_register']:
             self.assertFalse(row['official_signed_document_verified'])
 
+    def test_tz295_function_gating_is_explicit_and_fail_closed(self):
+        audit=mod.inspect(ROOT)
+        by_feature={r["feature"]:r for r in audit["functional_scope"]}
+        self.assertEqual(len(by_feature),8)
+        self.assertTrue(by_feature["published_content"]["observed_in_prototype"])
+        for key in ("feedback","booking","analytics","advertising"):
+            self.assertEqual(by_feature[key]["screening"],"DISABLED_IN_PROTOTYPE")
+        for key in ("registered_network_media","federal_state_information_system",
+                    "public_telecommunications_operator"):
+            self.assertEqual(by_feature[key]["screening"],"CUSTOMER_MUST_CONFIRM")
+        self.assertFalse(audit["feature_scope_approved"])
+        self.assertTrue(all(not row["applicability_approved"] for row in by_feature.values()))
+        self.assertIn("TZ-295",mod.markdown(audit))
+        tampered=mod.functional_scope(
+            "feedbackEnabled: true, bookingEnabled: true, analyticsEnabled: true",
+            {"entries":[{"type":"news"}]})
+        activated={r["feature"]:r for r in tampered}
+        for key in ("feedback","booking","analytics"):
+            self.assertEqual(activated[key]["screening"],"ENABLED_IN_PROTOTYPE")
+            self.assertFalse(activated[key]["applicability_approved"])
+
     def test_invalid_requirement_registry_is_rejected(self):
         with tempfile.TemporaryDirectory() as folder:
             base=Path(folder)

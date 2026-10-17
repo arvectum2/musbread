@@ -29,6 +29,10 @@ class MuseumEntryEditorModeTest extends TestCase
             ->get('/admin/resource/museum-entry-resource/museum-entry-form-page');
         $response->assertOk();
         $response->assertSee('vendor/moonshine-tinymce/tinymce.min.js', false);
+        // TZ-308/309: in the visual WYSIWYG toolbar editors can switch to
+        // sanctioned source HTML without changing server configuration.
+        $response->assertSee('&quot;plugins&quot;:&quot;autolink link lists code wordcount autoresize&quot;',false)
+            ->assertSee('link | code | removeformat',false);
     }
 
     public function test_unsupported_editor_mode_fails_closed(): void
@@ -37,6 +41,27 @@ class MuseumEntryEditorModeTest extends TestCase
         $this->actingAs(MoonshineUser::factory()->create(), 'moonshine')
             ->get('/admin/resource/museum-entry-resource/museum-entry-form-page')
             ->assertStatus(500);
+    }
+
+    public function test_tinymce_source_code_mode_never_bypasses_server_html_policy():void
+    {
+        config()->set('museum.entry_body_editor','tinymce');
+        $this->actingAs(MoonshineUser::factory()->create(),'moonshine')
+            ->post('/admin/resource/museum-entry-resource/crud',[
+                'type'=>'news','slug'=>'html-modal-malicious','title'=>'HTML modal XSS test',
+                'body'=>'<p><strong>Безопасный текст</strong>'
+                    .'<a href="javascript:alert(2)" onclick="alert(3)">Опасная ссылка</a></p>'
+                    .'<h2>Подзаголовок</h2><ol><li>Элемент списка</li></ol>'
+                    .'<iframe src="https://malicious.invalid/"></iframe>'
+                    .'<script>alert(1)</script>',
+                'status'=>'draft',
+            ])->assertRedirect();
+        $html=MuseumEntry::where('slug','html-modal-malicious')->firstOrFail()->body;
+        foreach(['<script','<iframe','javascript:','onclick='] as $forbidden)
+            $this->assertStringNotContainsString($forbidden,$html);
+        foreach(['<strong>Безопасный текст</strong>','<h2>Подзаголовок</h2>',
+                 '<ol>','<li>Элемент списка</li>'] as $expected)
+            $this->assertStringContainsString($expected,$html);
     }
 
     public function test_plain_html_mode_preserves_server_side_sanitization(): void

@@ -68,9 +68,9 @@ final class MuseumEntryFormPage extends FormPage
                 ->required(),
             'tinymce' => TinyMce::make('Основной текст', 'body')
                 ->locale('ru')
-                ->plugins(['autolink', 'link', 'lists', 'wordcount', 'autoresize'])
+                ->plugins(['autolink', 'link', 'lists', 'code', 'wordcount', 'autoresize'])
                 ->menubar(false)
-                ->toolbar('undo redo | blocks | bold italic | bullist numlist | link | removeformat')
+                ->toolbar('undo redo | blocks | bold italic | bullist numlist | link | code | removeformat')
                 ->addOption('license_key', 'gpl')
                 ->required(),
             default => throw new \InvalidArgumentException(

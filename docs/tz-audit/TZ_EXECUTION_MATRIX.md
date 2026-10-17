@@ -4,7 +4,7 @@
 
 **Легенда:** 🟢 готово в техническом прототипе, 🟡 частично, 🔴 не готово. «Готово» **не означает приёмку заказчиком**. Номер очереди означает *можно начать следующий внутренний этап уже сейчас*, но не отсутствие будущих согласований. Нет номера = явный внешний блокер, обязательная стадия или решение музея.
 
-**Всего 325:** 🟢 35 · 🟡 112 · 🔴 178. **В очереди внутренних работ: 8**, внешняя зависимость/этап: 282.
+**Всего 325:** 🟢 37 · 🟡 111 · 🔴 177. **В очереди внутренних работ: 5**, внешняя зависимость/этап: 283.
 
 ## Сводка по группам
 
@@ -26,9 +26,9 @@
 | 14 | Технологии и администрирование | 23 | 8 | 13 | 2 | 0 | 15 |
 | 15 | Адаптивность, UX/UI и производительность | 26 | 10 | 11 | 5 | 3 | 13 |
 | 16 | Прототипы, согласования и этапы сдачи | 15 | 0 | 3 | 12 | 1 | 14 |
-| 17 | Нормативные требования и правовая проверка | 18 | 0 | 7 | 11 | 1 | 17 |
+| 17 | Нормативные требования и правовая проверка | 18 | 0 | 8 | 10 | 0 | 18 |
 | 18 | Гарантия и сопровождение | 7 | 0 | 0 | 7 | 0 | 7 |
-| 19 | Передача файлов, исходников, прав и документов | 23 | 1 | 8 | 14 | 2 | 20 |
+| 19 | Передача файлов, исходников, прав и документов | 23 | 3 | 6 | 14 | 0 | 20 |
 
 ## Пункты ТЗ — полная матрица
 
@@ -411,7 +411,7 @@
 | TZ-264 · Разработать и согласовать UX-прототип (п. 2.2.3.9.1) | P0 | 🔴 Не готово | — | **Блокер:** Представители музея. **После:** Создать интерактивный прототип и получить approval. | CP-21 методика |
 | TZ-265 · Разработать основную UI-тему на презентационной странице для трёх типов устройств (п. 2.2.3.9.1) | P0 | 🔴 Не готово | — | **Блокер:** Бренд/ЛПР. **После:** Три отдельно зафиксированных вида и письменное согласование. | CP-14 responsive prototype |
 | TZ-266 · Показать все типы страниц в 3 размерах, согласовать визуальные шаблоны (п. 2.2.3.9.1) | P0 | 🔴 Не готово | — | **Блокер:** Полная карта типов и ЛПР. **После:** Матрица тип × device с подписью заказчика. | CP-14 generic pages |
-| TZ-267 · Программирование ядра сайта (п. 2.2.3.9.1) | P1 | 🟡 Частично | №008 | **Следующий шаг:** Закрыть оставшиеся CMS функции/контент. **Для окончательного закрытия:** Зависимость для полного закрытия (не блокирует подготовительную разработку): Полные данные. | CP-03–16 |
+| TZ-267 · Программирование ядра сайта (п. 2.2.3.9.1) | P1 | 🟡 Частично | №005 | **Следующий шаг:** Закрыть оставшиеся CMS функции/контент. **Для окончательного закрытия:** Зависимость для полного закрытия (не блокирует подготовительную разработку): Полные данные. | CP-03–16 |
 | TZ-268 · Первичное наполнение сайта исполнителем и письменное согласование (п. 2.2.3.9.1) | P0 | 🔴 Не готово | — | **Блокер:** Контент и ответственный редактор. **После:** Перенести реальные материалы, вычитать, согласовать. | CP-37, demo placeholders only |
 | TZ-269 · Общая приёмка, предрелизные испытания, исправления и запуск (п. 2.2.3.9.1) | P0 | 🔴 Не готово | — | **Блокер:** Доступы и участники. **После:** Тесты на production и подписи. | #13 UAT |
 | TZ-270 · Обучение сотрудников музея (п. 2.2.3.9.1) | P0 | 🔴 Не готово | — | **Блокер:** Сотрудники/время. **После:** Реальное обучение и протокол. | CP-39, guide templates |
@@ -446,7 +446,7 @@
 | TZ-292 · ФЗ 38-ФЗ о рекламе (п. 2.2.3.10) | P1 | 🟡 Частично | — | **Блокер:** Политика рекламных размещений и решение о применимости, договоры и рекламные материалы. **После:** Заказчик определяет наличие рекламы, рекламодателей и договоров; если реклама будет, согласовать маркировку, идентификатор, отчётность и внедрить контролируемый модуль.. | 38-FZ art.18.1 scope and advertising marking/ID requirements reviewed; prototype contains museum exhibition announcements and no configured advertising/ERIR system; no false assumption that event notices are ads. Conditional obligations and need for advertiser identity/approval documented in 17-law evidence register; no ads enabled. |
 | TZ-293 · Закон 2124-1 о СМИ (п. 2.2.3.10) | P1 | 🟡 Частично | — | **Блокер:** Юридическое заключение музея и подтверждение реестра сетевых изданий. **После:** Музей проверяет, зарегистрирован ли конкретный ресурс сетевым изданием; если да — реквизиты регистрации и применимые выходные данные; если нет — юридическая фиксация отсутствия специальных обязанностей.. | Law 2124-1 art.8 verified: unregistered web site is not automatically mass-media just because it contains news. Public CMS media/news modules reviewed without invented mass-media registry or editorial certification; audit has explicit museum network edition registration verification and legal gate. |
 | TZ-294 · ФЗ 436-ФЗ о защите детей от вредной информации (п. 2.2.3.10) | P0 | 🔴 Не готово | — | **Блокер:** Museum editorial approval and final content. **После:** Museum supplies approved editorial criteria if any, and actual materials. | Children content remains demonstrational; no guessed age classifications or legal obligations |
-| TZ-295 · Применимость нормативных требований ограничена функциями сайта из ТЗ (п. 2.2.3.10.3) | P1 | 🔴 Не готово | №005 | **Следующий шаг:** Museum confirms relevant scope and acceptance criteria. **Для окончательного закрытия:** Зависимость для полного закрытия (не блокирует подготовительную разработку): Customer legal/operational signoff. | Scope-based evidence and original museum documents; no additional legal duties invented |
+| TZ-295 · Применимость нормативных требований ограничена функциями сайта из ТЗ (п. 2.2.3.10.3) | P1 | 🟡 Частично | — | **Блокер:** Конечный согласованный функционал, юридическое заключение о применимости и реальные регламенты инфраструктуры. **После:** Подтвердить у музея перечень реально вводимых функций, факт регистрации сетевого издания/ГИС/оператора связи и применимость каждой нормы; согласовать матрицу с юристом и ответственным ИБ.. | Actual TZ-295 functional/legal scope gate now enumerates 8 technical capabilities in audit_legal_readiness.py: published content ACTIVE, feedback/booking/analytics/ads DISABLED, network media registration/federal GIS/telecom-operator UNKNOWN; report JSON/Markdown preserves customer signoff=false and negative tests activate flags without falsely inferring approval. Review of 17 legal clauses and 12 disclosures remains external. |
 
 ### 18. Гарантия и сопровождение — TZ-296…TZ-302
 
@@ -473,8 +473,8 @@
 | TZ-305 · Исходники дизайна на съёмном носителе (п. Раздел 4) | P0 | 🔴 Не готово | — | **Блокер:** Носитель/получатель. **После:** Реально созданные исходники на HDD. | CP-41 |
 | TZ-306 · Программное обеспечение: исходный код страниц сайта (п. Раздел 4) | P0 | 🟡 Частично | — | **Блокер:** Порядок сдачи. **После:** Версионный финальный комплект и лицензии. | Git repository and preaward ZIP |
 | TZ-307 · Сайт должен быть развёрнут в глобальной сети Интернет (п. Раздел 4) | P0 | 🔴 Не готово | — | **Блокер:** Сервер, DNS и сертификаты. **После:** Разместить на musbread.ru. | Local static prototype only |
-| TZ-308 · Управление контентом без знания программирования (п. Раздел 4) | P1 | 🟡 Частично | №006 | **Следующий шаг:** Редакторская UAT с реальными сотрудниками. **Для окончательного закрытия:** Зависимость для полного закрытия (не блокирует подготовительную разработку): Редакторы. | MoonShine CRUD |
-| TZ-309 · Редактирование страницы как гипертекста HTML (п. Раздел 4) | P1 | 🟡 Частично | №007 | **Следующий шаг:** Проверить разрешённый HTML-режим и ограничения. **Для окончательного закрытия:** Зависимость для полного закрытия (не блокирует подготовительную разработку): Редакционная политика. | WYSIWYG whitelist |
+| TZ-308 · Управление контентом без знания программирования (п. Раздел 4) | P1 | 🟢 Готово | — | Реализовано и проверено в прототипе; приёмка заказчика отдельно. | Original MoonShine PHP resource has visual Russian TinyMCE WYSIWYG title, content, lists, links, dates, media, statuses and role restrictions; newly wired built-in Source Code modal accessible from same toolbar with no manual server configuration. Real browser MoonShine editor demonstrates no-code entry creation, editing and source-switch roundtrip into SQLite/static HTML; safe HTMLPurifier and frontend preserved, 8/8 isolated E2E. |
+| TZ-309 · Редактирование страницы как гипертекста HTML (п. Раздел 4) | P1 | 🟢 Готово | — | Реализовано и проверено в прототипе; приёмка заказчика отдельно. | Built-in TinyMCE 7.2.1 locally installed code plugin added to existing WYSIWYG toolbar (no external CDN); real MoonShine browser opens Russian Исходный код dialog, edits H2/OL/LI/semantic a href, returns to WYSIWYG, saves to DB and exports actual Next published HTML with same semantic nodes. PHP tests confirm html-source emergency fallback and default editor code plugin; HTMLPurifier server-side sanitization/XSS denial unchanged. |
 | TZ-310 · Добавление/редактирование разделов и подразделов непосредственно в CMS (п. Раздел 4) | P0 | 🟡 Частично | — | **Блокер:** Final section tree and administrator UAT. **После:** Approve final tree and test all operations with museum administrators. | MoonShine section CRUD, nested parent tree, reorder/status, source-backed draft import and protection from deleting sections with events; PHP tests |
 | TZ-311 · Удаление ранее созданных разделов (п. Раздел 4) | P0 | 🟢 Готово | — | Реализовано и проверено в прототипе; приёмка заказчика отдельно. | Model and MoonShine allow deletion of empty leaf; protected with children/entries |
 | TZ-312 · Разграничение доступа к отдельным разделам/подразделам (п. Раздел 4) | P0 | 🟡 Частично | — | **Блокер:** Museum roles, approved section tree and live UAT. **После:** Approve staff rights matrix and verify all sections on final closed CMS. | Scoped MoonShine section grants for entries/events: editor CRUD, preview, relations, preflight, diff, export ancestor checks and negative tests |

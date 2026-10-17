@@ -53,6 +53,46 @@ SOURCES = {
 }
 # Screening matrix for the *museum* (subject to applicability/wording review).
 # A URL to the OLD site's brochure never substitutes for signed official files.
+# TZ-295: align the legal review with observable public features from the
+# procurement scope. These are SCREENING states, not judicial conclusions.
+# Never infer a licensed operator, registered media outlet, advertising or
+# customer approval from an incidental link to a provider.
+def functional_scope(integration: str, snapshot: dict) -> list[dict]:
+    disabled = {
+        "feedback": "feedbackEnabled: false" in integration,
+        "booking": "bookingEnabled: false" in integration,
+        "analytics": "analyticsEnabled: false" in integration,
+    }
+    evidence = {
+        "published_content": bool(snapshot.get("entries") or snapshot.get("events")),
+        "feedback": not disabled["feedback"],
+        "booking": not disabled["booking"],
+        "analytics": not disabled["analytics"],
+        "advertising": False,  # no ad-network/server function enabled in integration boundary
+        "registered_network_media": None,  # cannot derive from a newsroom page
+        "federal_state_information_system": None,  # cannot derive from CMS technology
+        "public_telecommunications_operator": None,  # cannot derive from HTTPS provider
+    }
+    descriptions = {
+        "published_content": ("TZ-284","Статические материалы учреждения, новости и афиша"),
+        "feedback": ("TZ-283","Приём обращений посетителей через сайт"),
+        "booking": ("TZ-282","Прямая запись или билетная транзакция на сайте"),
+        "analytics": ("TZ-282","Внешняя аналитика поведения посетителей"),
+        "advertising": ("TZ-292","Собственная рекламная интеграция сайта"),
+        "registered_network_media": ("TZ-293","Регистрация сайта как сетевого издания"),
+        "federal_state_information_system": ("TZ-288","Принадлежность информационной системы к сфере приказа №104"),
+        "public_telecommunications_operator": ("TZ-279","Статус оператора связи учреждения"),
+    }
+    return [{
+        "feature":feature,"law":descriptions[feature][0],
+        "description":descriptions[feature][1],
+        "observed_in_prototype":evidence[feature],
+        "screening":("CUSTOMER_MUST_CONFIRM" if evidence[feature] is None else
+                     "ENABLED_IN_PROTOTYPE" if evidence[feature] else "DISABLED_IN_PROTOTYPE"),
+        "applicability_approved":False,
+    } for feature in descriptions]
+
+
 DISCLOSURES = [
  ("identification", "Полное/краткое наименование, адрес и схема проезда", "museum-contacts"),
  ("foundation", "Дата создания, учредитель/ведомственная принадлежность", "museum-documents"),
@@ -147,6 +187,8 @@ def inspect(root: Path) -> dict:
                        "telecom_operator_status_confirmed":False,
                        "state_security_law_applicability_approved":False},
             "legal_controls":controls,"disclosure_register":disclosures,
+            "functional_scope":functional_scope(integration,snapshot),
+            "feature_scope_approved":False,
             "client_pending_total":len(controls)+len(disclosures),
             "warning":"Reference navigation is not verified publication. Legal approval is never inferred from filenames, links or passing tests."}
 
@@ -158,7 +200,18 @@ def markdown(report: dict) -> str:
            "| ID | Нормативный блок | Нужно от музея | Юридическая приёмка |", "|---|---|---|---|"]
     for c in report["legal_controls"]:
         lines.append(f"| {c['id']} | {c['law']} | {c['external_evidence_needed']} | ❌ Нет |")
-    lines += ["","## Ссылки на источники сведений (проверка актуальности музеем)","",
+    lines += ["","## TZ-295 — матрица применимости только по функциям проекта","",
+              "Это инвентаризация функций из действующего прототипа, а НЕ юридическое решение о сфере действия нормативных актов.",
+              "",
+              "| Функция из ТЗ | Норма для проверки | Статус функции в коде | Решение музея |",
+              "|---|---|---|---|"]
+    for row in report["functional_scope"]:
+        state={"ENABLED_IN_PROTOTYPE":"Есть в прототипе",
+               "DISABLED_IN_PROTOTYPE":"Отключено в прототипе",
+               "CUSTOMER_MUST_CONFIRM":"Нельзя определить из кода"}[row["screening"]]
+        lines.append(f"| {row['description']} | {row['law']} | {state} | ❌ Не утверждено |")
+    lines += ["", "Например, новостной раздел не подтверждает статус СМИ, а внешний билетный URL не включает собственную оплату или сбор ПДн. Отсутствие функции не доказывает неприменимость закона к учреждению.", "",
+              "## Ссылки на источники сведений (проверка актуальности музеем)","",
               "| Категория | Что запросить | Навигационная страница-ориентир | Подтверждено |", "|---|---|---|---|"]
     for row in report["disclosure_register"]:
         lines.append(f"| {row['key']} | {row['requested_evidence']} | `{row['candidate_internal_route']}` | ❌ Нет |")

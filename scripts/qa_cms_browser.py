@@ -106,6 +106,14 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
     # TZ-195: the extended description must be visible in a separate HTML
     # paragraph without becoming a tooltip, alt text, or private file path.
     news_html = (out / "news/qa-browser-news/index.html").read_text(encoding="utf-8")
+    # TZ-308/309 editor→HTML-source→TinyMCE→SQLite→snapshot→Next.
+    # The source pane must not merely show code; it must round-trip
+    # semantic HTML after leaving that pane and after a full release build.
+    for fragment in ("QA: заголовок из HTML-источника",
+                     "<h2", "QA: первый пункт редакторского списка",
+                     "<ol", "/events/qa-browser-event/"):
+        if fragment not in news_html:
+            raise RuntimeError("TZ-309 HTML source edit missing in published HTML: "+fragment)
     if ('museum-media-long-description' not in news_html
             or 'QA: длинный текст о зерне, структуре колоса' not in news_html):
         raise RuntimeError("Extended media description missing from published HTML")

@@ -298,6 +298,73 @@
       "status": "SOURCE_OR_APPROVAL_REQUIRED"
     }
   ],
+  "functional_scope": [
+    {
+      "feature": "published_content",
+      "law": "TZ-284",
+      "description": "Статические материалы учреждения, новости и афиша",
+      "observed_in_prototype": true,
+      "screening": "ENABLED_IN_PROTOTYPE",
+      "applicability_approved": false
+    },
+    {
+      "feature": "feedback",
+      "law": "TZ-283",
+      "description": "Приём обращений посетителей через сайт",
+      "observed_in_prototype": false,
+      "screening": "DISABLED_IN_PROTOTYPE",
+      "applicability_approved": false
+    },
+    {
+      "feature": "booking",
+      "law": "TZ-282",
+      "description": "Прямая запись или билетная транзакция на сайте",
+      "observed_in_prototype": false,
+      "screening": "DISABLED_IN_PROTOTYPE",
+      "applicability_approved": false
+    },
+    {
+      "feature": "analytics",
+      "law": "TZ-282",
+      "description": "Внешняя аналитика поведения посетителей",
+      "observed_in_prototype": false,
+      "screening": "DISABLED_IN_PROTOTYPE",
+      "applicability_approved": false
+    },
+    {
+      "feature": "advertising",
+      "law": "TZ-292",
+      "description": "Собственная рекламная интеграция сайта",
+      "observed_in_prototype": false,
+      "screening": "DISABLED_IN_PROTOTYPE",
+      "applicability_approved": false
+    },
+    {
+      "feature": "registered_network_media",
+      "law": "TZ-293",
+      "description": "Регистрация сайта как сетевого издания",
+      "observed_in_prototype": null,
+      "screening": "CUSTOMER_MUST_CONFIRM",
+      "applicability_approved": false
+    },
+    {
+      "feature": "federal_state_information_system",
+      "law": "TZ-288",
+      "description": "Принадлежность информационной системы к сфере приказа №104",
+      "observed_in_prototype": null,
+      "screening": "CUSTOMER_MUST_CONFIRM",
+      "applicability_approved": false
+    },
+    {
+      "feature": "public_telecommunications_operator",
+      "law": "TZ-279",
+      "description": "Статус оператора связи учреждения",
+      "observed_in_prototype": null,
+      "screening": "CUSTOMER_MUST_CONFIRM",
+      "applicability_approved": false
+    }
+  ],
+  "feature_scope_approved": false,
   "client_pending_total": 29,
   "warning": "Reference navigation is not verified publication. Legal approval is never inferred from filenames, links or passing tests."
 }

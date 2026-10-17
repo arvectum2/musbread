@@ -83,6 +83,26 @@ test("реальный вход и редактор материалов в Moon
   await page.locator('button[type="submit"]').filter({ hasText: 'Save' }).click();
   await expect(page).toHaveURL(/museum-entry-form-page\/\d+/, { timeout: 10_000 });
 
+  // TZ-308/309: on the SAME ordinary non-programmer WYSIWYG form, switch
+  // to built-in TinyMCE source code. Preserve semantic headings, ordered
+  // lists and contextual links through real Save → SQLite → static HTML.
+  await expect(page.frameLocator("iframe.tox-edit-area__iframe").locator("body")).toContainText(
+    "Демонстрационная публикация из браузерного теста");
+  await page.getByRole("button",{name:"Исходный код"}).click();
+  const sourceDialog=page.getByRole("dialog",{name:"Исходный код"});
+  await expect(sourceDialog).toBeVisible();
+  await sourceDialog.locator("textarea").fill(
+    '<p><strong>Демонстрационная публикация из браузерного теста</strong></p>'
+    +'<h2>QA: заголовок из HTML-источника</h2>'
+    +'<ol><li>QA: первый пункт редакторского списка</li></ol>'
+    +'<p>Посмотрите <a href="/events/qa-browser-event/">программу тестового события</a>.</p>');
+  await sourceDialog.getByRole("button",{name:/Сохранить|Save/}).click();
+  await expect(sourceDialog).toBeHidden();
+  await expect(page.frameLocator("iframe.tox-edit-area__iframe").locator("h2")).toHaveText(
+    "QA: заголовок из HTML-источника");
+  await page.locator('button[type="submit"]').filter({hasText:"Save"}).click();
+  await expect(page).toHaveURL(/museum-entry-form-page\/\d+/,{timeout:10_000});
+
   // CP-12 acceptance: create an actual event through the MoonShine browser UI.
   await page.goto("/admin/resource/museum-event-resource/museum-event-form-page");
   await expect(page.locator('input[name="title"]')).toBeVisible();
