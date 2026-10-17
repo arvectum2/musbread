@@ -2461,15 +2461,15 @@
       "Строки оригинала": "181-191",
       "Требование": "Музей: раздел «История музея»",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 4,
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
+      "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Тексты и фото; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #004. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/o-muzee (200); Next route /guide/museum-history/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
+      "Что сделать для завершения": "Technical prototype section fulfilled using current museum source; new museum edits can be made in MoonShine. Contractual approval and changed official editions checked at customer release.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/o-muzee (200); Next route /guide/museum-history/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 follow-up: published MuseumEntry matching guide slug now controls static page H1, SEO title/description, sanitized HTML and PDF links from MuseumDocument; no stale reference-doc widget is overlaid. Physical Laravel export to isolated Next build with 2 source-backed pages, 1 hash-verified PDF, price table and draft fallback passed. Real original CMS content remains private draft. See docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 source-baseline acceptance: Official /o-muzee historical narrative captured in full and rendered as /guide/museum-history. Same source version imported into editable draft MuseumEntry, CMS publication/H1 and SEO verified in isolated release pipeline. No museum-owned media copied without rights. Scope of this atomic requirement is information/page rather than final museum UAT. Existing official edition explicitly authorized as working baseline by user.",
       "Учтено в плане": "Да"
     },
     {
@@ -2480,15 +2480,15 @@
       "Строки оригинала": "183",
       "Требование": "Музей: история здания",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 5,
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
+      "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Исторические материалы; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #005. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/istoriya-zdaniya (200); Next route /guide/building-history/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
+      "Что сделать для завершения": "Technical prototype section fulfilled using current museum source; new museum edits can be made in MoonShine. Contractual approval and changed official editions checked at customer release.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/istoriya-zdaniya (200); Next route /guide/building-history/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 follow-up: published MuseumEntry matching guide slug now controls static page H1, SEO title/description, sanitized HTML and PDF links from MuseumDocument; no stale reference-doc widget is overlaid. Physical Laravel export to isolated Next build with 2 source-backed pages, 1 hash-verified PDF, price table and draft fallback passed. Real original CMS content remains private draft. See docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 source-baseline acceptance: Official /istoriya-zdaniya source narrative captured and rendered on /guide/building-history with preservation of heading and official source link; draft CMS entry editable and whole CMS→Next publication path verified on actual source pages. Scope of this atomic requirement is information/page rather than final museum UAT. Existing official edition explicitly authorized as working baseline by user.",
       "Учтено в плане": "Да"
     },
     {
@@ -2502,12 +2502,12 @@
       "Светофор": "🟡 Частично",
       "Готовность": "Частично",
       "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 6,
+      "№ очереди": 3,
       "Этап дорожной карты": "S2 · структура/контент",
       "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): План и фотографии; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #006. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/ekspozicii (200); Next route /guide/museum-exposition/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
+      "Следующее действие / комментарий": "Задача в очереди #003. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/ekspozicii (200); Next route /guide/museum-exposition/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 follow-up: published MuseumEntry matching guide slug now controls static page H1, SEO title/description, sanitized HTML and PDF links from MuseumDocument; no stale reference-doc widget is overlaid. Physical Laravel export to isolated Next build with 2 source-backed pages, 1 hash-verified PDF, price table and draft fallback passed. Real original CMS content remains private draft. See docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2564,7 +2564,7 @@
       "Что сделать для завершения": "Museum selects definitive files/editions, files to mirror to CMS and document accessibility verification Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Official file revisions, reuse permission and CMS signoff",
       "Следующее действие / комментарий": "Задача в очереди #001. Museum selects definitive files/editions, files to mirror to CMS and document accessibility verification Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что уже есть (доказательство)": "Grouped original museum files in new /guide/museum-documents, direct verified HTTPS PDF/DOCX links and source pages 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
+      "Что уже есть (доказательство)": "Grouped original museum files in new /guide/museum-documents, direct verified HTTPS PDF/DOCX links and source pages 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 follow-up: published MuseumEntry matching guide slug now controls static page H1, SEO title/description, sanitized HTML and PDF links from MuseumDocument; no stale reference-doc widget is overlaid. Physical Laravel export to isolated Next build with 2 source-backed pages, 1 hash-verified PDF, price table and draft fallback passed. Real original CMS content remains private draft. See docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2613,15 +2613,15 @@
       "Строки оригинала": "190",
       "Требование": "Музей: вакансии",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 7,
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
+      "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "После получения актуальных вакансий, контактного адреса и расписания обновлений заполнить CMS и пройти редакторскую UAT. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Вакансии/HR контакты; справочная ссылка/URL без подтверждения музея не эквивалентна договорной приёмке",
-      "Следующее действие / комментарий": "Задача в очереди #007. После получения актуальных вакансий, контактного адреса и расписания обновлений заполнить CMS и пройти редакторскую UAT. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что уже есть (доказательство)": "Официальная /vakansii HTTP 200 через Mac mini; существующий /guide/museum-vacancies/ содержит прямую ссылку; реальный HR-контент не утверждён. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
+      "Что сделать для завершения": "Technical prototype section fulfilled using current museum source; new museum edits can be made in MoonShine. Contractual approval and changed official editions checked at customer release.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Официальная /vakansii HTTP 200 через Mac mini; существующий /guide/museum-vacancies/ содержит прямую ссылку; реальный HR-контент не утверждён. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 follow-up: published MuseumEntry matching guide slug now controls static page H1, SEO title/description, sanitized HTML and PDF links from MuseumDocument; no stale reference-doc widget is overlaid. Physical Laravel export to isolated Next build with 2 source-backed pages, 1 hash-verified PDF, price table and draft fallback passed. Real original CMS content remains private draft. See docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 source-baseline acceptance: Current published /vakansii source contains complete job information, presented on /guide/museum-vacancies. Editable CMS page seeded from exact source, no invented HR contacts; removal of closed positions remains museum editorial responsibility. Scope of this atomic requirement is information/page rather than final museum UAT. Existing official edition explicitly authorized as working baseline by user.",
       "Учтено в плане": "Да"
     },
     {
@@ -2689,15 +2689,15 @@
       "Строки оригинала": "194",
       "Требование": "Посетителям: билеты и льготы",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 2,
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
+      "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Прейскурант; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #002. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/stoimost (200); Next route /guide/tickets-and-benefits/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
+      "Что сделать для завершения": "Technical prototype section fulfilled using current museum source; new museum edits can be made in MoonShine. Contractual approval and changed official editions checked at customer release.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/stoimost (200); Next route /guide/tickets-and-benefits/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 follow-up: published MuseumEntry matching guide slug now controls static page H1, SEO title/description, sanitized HTML and PDF links from MuseumDocument; no stale reference-doc widget is overlaid. Physical Laravel export to isolated Next build with 2 source-backed pages, 1 hash-verified PDF, price table and draft fallback passed. Real original CMS content remains private draft. See docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 source-baseline acceptance: Current 01.09.2026 official price table from /stoimost contains ordinary, reduced and special admission prices and is displayed as responsive table on /guide/tickets-and-benefits with buy-ticket link; entered editable CMS and tested through real static release HTML. Scope of this atomic requirement is information/page rather than final museum UAT. Existing official edition explicitly authorized as working baseline by user.",
       "Учтено в плане": "Да"
     },
     {
@@ -2711,12 +2711,12 @@
       "Светофор": "🟡 Частично",
       "Готовность": "Частично",
       "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 3,
+      "№ очереди": 2,
       "Этап дорожной карты": "S2 · структура/контент",
       "Что сделать для завершения": "Confirm current returns/visiting rules and whether old-source links should be replaced by CMS originals Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Museum-approved ticket documents and operator workflow",
-      "Следующее действие / комментарий": "Задача в очереди #003. Confirm current returns/visiting rules and whether old-source links should be replaced by CMS originals Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
-      "Что уже есть (доказательство)": "Original museum visits/paid services/returns documents grouped on ticket-refunds and tickets-and-benefits, original PDF/DOCX; октябрьский аудит повторно подтвердил официальный раздел правил возврата HTTP 200 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
+      "Следующее действие / комментарий": "Задача в очереди #002. Confirm current returns/visiting rules and whether old-source links should be replaced by CMS originals Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Original museum visits/paid services/returns documents grouped on ticket-refunds and tickets-and-benefits, original PDF/DOCX; октябрьский аудит повторно подтвердил официальный раздел правил возврата HTTP 200 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md. 17.10.2026 follow-up: published MuseumEntry matching guide slug now controls static page H1, SEO title/description, sanitized HTML and PDF links from MuseumDocument; no stale reference-doc widget is overlaid. Physical Laravel export to isolated Next build with 2 source-backed pages, 1 hash-verified PDF, price table and draft fallback passed. Real original CMS content remains private draft. See docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,13 +6198,13 @@
     }
   ],
   "counts": {
-    "Да": 56,
+    "Да": 60,
     "Нет": 158,
-    "Частично": 111
+    "Частично": 107
   },
   "workflow": {
-    "Готово в прототипе": 56,
+    "Готово в прототипе": 60,
     "Внешний блокер / наступление этапа": 262,
-    "В очереди (можно начать сейчас)": 7
+    "В очереди (можно начать сейчас)": 3
   }
 }

@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const approved = siteSeoApproved(process.env.MUSBREAD_SITE_APPROVED) && !!section;
   return {
     title: cmsPage?.seo_title?.trim() || section?.seo_title?.trim() || fallback?.seo_title?.trim() || sourceTitle || title || "Раздел не найден",
-    description: section?.seo_description?.trim() || fallback?.seo_description?.trim() || undefined,
+    description: cmsPage?.seo_description?.trim() || section?.seo_description?.trim() || fallback?.seo_description?.trim() || undefined,
     robots: { index: approved, follow: approved },
   };
 }
@@ -58,7 +58,11 @@ export default async function GuidePage({ params }: Props) {
   const isTeam = slug === "museum-team";
   const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: guideHref(child.slug) })) : [];
   const directChildren = usesCmsNavigation ? findPublicNavigationNode(navigationTree, slug)?.children ?? [] : [];
-  const sectionEntries = usesCmsNavigation ? entriesInCmsSection(slug) : [];
+  // A page published for this exact guide slug is the body of the
+  // current route, not a second entry in its own "Материалы раздела" list.
+  const sectionEntries = usesCmsNavigation
+    ? entriesInCmsSection(slug).filter((entry) => !(entry.type === "page" && entry.slug === slug))
+    : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
   const officialSnapshot = officialSnapshotByPath(page?.legacyPath);
   // Museum-owned CMS content takes precedence; an operator can replace the
@@ -81,7 +85,7 @@ export default async function GuidePage({ params }: Props) {
     <span className="eyebrow">{page?.legacyPath
       ? "РАЗДЕЛ НА ДЕЙСТВУЮЩЕМ САЙТЕ"
       : page ? "НОВЫЙ РАЗДЕЛ ПО ТЗ — ЧЕРНОВИК" : "НАВИГАЦИЯ ПО ТЗ — ПРОЕКТ"} · {REFERENCE_DATE}</span>
-    <h1>{publishedSection?.h1?.trim() || fixedPageH1("/guide/" + slug + "/",title)}</h1>
+    <h1>{cmsPage?.h1?.trim() || cmsPage?.title?.trim() || publishedSection?.h1?.trim() || fixedPageH1("/guide/" + slug + "/",title)}</h1>
     <p className="lead">{group
       ? "Раздел будущего сайта составлен по техническому заданию и действующей структуре музея. Наполнение уточним после интервью."
       : isTeam
@@ -137,7 +141,7 @@ export default async function GuidePage({ params }: Props) {
       <p className="reference-source">Проверенная афиша музея доступна на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">официальном действующем сайте ↗</MuseumAnchor>.</p>
     </section>}
     {showReferenceBody && <section aria-label="Содержание действующего сайта музея" className="reference-facts official-source-content">
-      <h2>{cmsPage ? "Редакция из CMS" : "Содержание с официального сайта музея"}</h2>
+      <h2>{cmsPage ? "Содержание, опубликованное редактором музея" : "Содержание с официального сайта музея"}</h2>
       {officialSnapshot && !cmsPage && <p className="meta">Источник: {officialSnapshot.source_url} · проверено {sourceDate}.
         Текст перенесён без самостоятельной юридической редакции; заказчик может обновить страницу в CMS.</p>}
       <RichText html={referenceBody!} />
@@ -147,7 +151,20 @@ export default async function GuidePage({ params }: Props) {
       но не переносим утверждения о целях и согласиях на новую техническую платформу без проверки используемых сервисов.
       На этом прототипе собственные формы получения согласия и аналитические cookie не добавлялись.
     </p>}
-    <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
+    {cmsPage?.documents && cmsPage.documents.length > 0 && <section className="official-documents" aria-label="Документы опубликованной редакции CMS">
+      <h2>Документы музея для скачивания</h2>
+      <p className="official-documents-notice">Оригинальные файлы опубликованы из редакционной системы музея.
+        Если документ ещё не прошёл проверку доступности, используйте описание на странице или обратитесь в музей.</p>
+      <ul className="official-documents-list">{cmsPage.documents.map((document) => <li key={document.href}>
+        <MuseumAnchor href={document.href} download className="text-link">
+          {document.label} ({document.format.toUpperCase()}, {Math.ceil(document.size_bytes / 1024)} КБ)
+        </MuseumAnchor>
+        {document.accessibility_reviewed && document.accessibility_note
+          ? <p className="museum-document-accessibility">{document.accessibility_note}</p>
+          : <p className="museum-document-accessibility">Доступность документа ещё не проверена редактором.</p>}
+      </li>)}</ul>
+    </section>}
+    {!cmsPage && <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />}
     {["children", "children-pushkin-card", "exhibitions-guide", "exhibitions-pushkin-card"].includes(slug) && <section className="reference-facts" aria-label="Переход к Пушкинской карте">
       <h2>«Пушкинская карта»</h2>
       <p>Условия участия и актуальная информация размещены на действующем официальном сайте музея. Участие конкретного мероприятия в программе необходимо уточнять перед посещением.</p>

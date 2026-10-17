@@ -36,7 +36,7 @@ test("TZ-073: существующие разделы и новые страни
     .toHaveAttribute("href", "https://muzei-xleb.ru/o-muzee");
   await page.goto("/guide/friends/");
   await expect(page.locator("main .eyebrow")).toContainText("НОВЫЙ РАЗДЕЛ ПО ТЗ");
-  await expect(page.locator("main")).toContainText("не предоставил утверждённые сведения");
+  await expect(page.locator("main")).toContainText("сведения на действующем сайте не найдены");
   await expect(page.locator("main").getByRole("link", {name:/Открыть исходную страницу/})).toHaveCount(0);
 });
 
