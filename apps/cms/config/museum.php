@@ -4,6 +4,8 @@ return [
     // Opt-in ONLY after a persistent queue worker is configured and monitored.
     // Off by default: keep the existing safe hourly direct export.
     'queue_publication' => (bool) env('MUSEUM_USE_PUBLISH_QUEUE', false),
+    // Explicit private approval action and dispatch; OFF until museum-approved workflow.
+    'editorial_approval_queue' => (bool) env('MUSEUM_ENABLE_APPROVAL_QUEUE', false),
     // Pre-award license-risk fallback. Default keeps the current TinyMCE CMS
     // workflow; html-source uses a built-in MoonShine textarea with NO TinyMCE
     // JS for this field. This is NOT feature parity with a WYSIWYG editor.

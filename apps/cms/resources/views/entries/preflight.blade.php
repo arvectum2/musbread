@@ -30,6 +30,9 @@
 <main>
     <h1>Проверка перед публикацией</h1>
     <p><a href="{{ route('museum.content.compare') }}">Сравнить версии перед выпуском →</a> · <a href="#events-check">К проверке событий афиши ↓</a></p>
+    @if($mayRequestExport)
+    <p><a href="{{ route('museum.content.approval-journal') }}">Журнал фактических редакторских одобрений (UTC) →</a></p>
+    @endif
     <p class="intro">Это предварительная проверка сохранённых записей и файлов. Она ничего не публикует и не изменяет. «Готово к экспорту» означает доступность записи для следующей выгрузки, а не подтверждение её размещения на сайте музея.</p>
     @if(session('museum_export_queue_result'))
     <p role="status" class="notice">{{ session('museum_export_queue_result') }}</p>
@@ -70,6 +73,14 @@
                 <a href="{{ route('museum.entries.preview', ['entry' => $record['id']]) }}">Предпросмотр</a>
                 <a href="{{ route('museum.entries.relations.edit', ['entry' => $record['id']]) }}">Связи</a>
             </nav>
+            @if($mayApprove && isset($revisionChecksums[$record['id']]))
+            <form method="post" action="{{ route('museum.entries.approve-and-queue', ['entry' => $record['id']]) }}">
+                @csrf
+                <input type="hidden" name="revision_sha256" value="{{ $revisionChecksums[$record['id']] }}">
+                <button type="submit">Одобрить эту редакцию и запросить закрытую выгрузку</button>
+                <p class="meta">Время одобрения будет записано отдельно. Это не подтверждение появления страницы на сайте.</p>
+            </form>
+            @endif
             @if($record['issues'] === [])
                 <p>Автоматическая проверка замечаний не обнаружила.</p>
             @else
