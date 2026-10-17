@@ -10,6 +10,8 @@ import NavigationBranch from "@/components/NavigationBranch";
 import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
 import RichText from "@/components/RichText";
+import OfficialExpositionRooms from "@/components/OfficialExpositionRooms";
+import {officialExpositionSlugs} from "@/data/official-exposition-rooms";
 import {officialSnapshotByPath} from "@/data/official-page-snapshots";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
 import CurrentExhibitions from "@/components/CurrentExhibitions";
@@ -61,7 +63,10 @@ export default async function GuidePage({ params }: Props) {
   // A page published for this exact guide slug is the body of the
   // current route, not a second entry in its own "Материалы раздела" list.
   const sectionEntries = usesCmsNavigation
-    ? entriesInCmsSection(slug).filter((entry) => !(entry.type === "page" && entry.slug === slug))
+    ? entriesInCmsSection(slug).filter((entry) =>
+      !(entry.type === "page" && entry.slug === slug)
+      // Room catalogue already displays source-backed CMS room revisions.
+      && !(slug === "museum-exposition" && officialExpositionSlugs.has(entry.slug)))
     : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
   const officialSnapshot = officialSnapshotByPath(page?.legacyPath);
@@ -69,7 +74,11 @@ export default async function GuidePage({ params }: Props) {
   // official-site reference by publishing a page with this exact guide slug.
   const cmsPage = content.entries.find((entry) => entry.type === "page" && entry.slug === slug);
   const referenceBody = cmsPage?.body?.trim() || officialSnapshot?.html;
-  const showReferenceBody = !!referenceBody && !["museum-contacts", "museum-team", "museum-cookie"].includes(slug);
+  // The source-backed catalogue replaces the old 11-link index; still
+  // show a museum-authored CMS introduction after its own publication.
+  const showReferenceBody = !!referenceBody
+    && !["museum-contacts", "museum-team", "museum-cookie"].includes(slug)
+    && (slug !== "museum-exposition" || !!cmsPage);
   const sourceDate = officialSnapshot?.captured_utc.slice(0, 10);
 
   return <article className="section inner-page guide-page">
@@ -91,7 +100,9 @@ export default async function GuidePage({ params }: Props) {
       : isTeam
         ? "Список должностных лиц и служебные телефоны перенесены с действующего сайта музея; публикация обновлённого списка требует подтверждения заказчика."
         : page?.legacyPath
-          ? (isVisit && content.visitor_contacts
+          ? (slug === "museum-exposition"
+              ? "Все 11 залов постоянной экспозиции перенесены с действующего сайта музея. Их описания можно раскрыть ниже и впоследствии изменить через CMS."
+              : isVisit && content.visitor_contacts
               ? "Сведения о посещении перенесены с официального сайта и могут обновляться из CMS."
               : showReferenceBody
                 ? "Содержание перенесено с действующего официального сайта музея как исходная редакция. Заказчик сможет изменить его в CMS."
@@ -122,6 +133,7 @@ export default async function GuidePage({ params }: Props) {
       <p>Уточнение условий посещения: <MuseumAnchor href={visitorContacts.phoneHref}>{visitorContacts.phone}</MuseumAnchor>.</p>
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</MuseumAnchor>.</p>
     </div>}
+    {slug === "museum-exposition" && <OfficialExpositionRooms />}
     {isTeam && <MuseumTeam />}
     {slug === "museum-media" && <MuseumMediaHub />}
     {slug === "exhibitions-current" && <CurrentExhibitions

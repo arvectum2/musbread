@@ -287,6 +287,67 @@ trailer
         }
     }
 
+    public function test_room_capture_import_creates_eleven_private_ordered_entries_and_is_idempotent(): void
+    {
+        $this->seed(ReferenceMuseumSectionsSeeder::class);
+        Storage::fake('local');
+        $this->assertSame(0, Artisan::call('museum:import-official-pages',
+            $this->importOptions(['--rooms' => true])));
+        $this->assertDatabaseCount('museum_entries', 0);
+
+        $this->assertSame(0, Artisan::call('museum:import-official-pages',
+            $this->importOptions(['--apply' => true, '--rooms' => true])), Artisan::output());
+        $this->assertDatabaseCount('museum_entries', 22);
+        $section = MuseumSection::where('slug', 'museum-exposition')->firstOrFail();
+        $rooms = MuseumEntry::where('museum_section_id', $section->id)
+            ->where('slug', 'like', 'zal-%')->orderBy('sort_order')->get();
+        $this->assertCount(11, $rooms);
+        $this->assertSame(range(1,11), $rooms->pluck('sort_order')->all());
+        foreach ($rooms as $room) {
+            $this->assertSame('draft', $room->status);
+            $this->assertNull($room->published_at);
+            $this->assertSame('page', $room->type);
+            $this->assertNotEmpty($room->excerpt);
+            $this->assertStringContainsString('Официальный первоисточник экспозиции', $room->body);
+            $this->assertSame(0, $room->media()->count());
+        }
+        $this->assertSame('Зал «Хлеб в мировой истории»', $rooms[0]->title);
+        $this->assertStringContainsString('История цивилизаций', $rooms[0]->body);
+        $rooms[0]->update(['body' => '<p>Редактор изменил описание зала.</p>']);
+        $this->assertSame(0, Artisan::call('museum:import-official-pages',
+            $this->importOptions(['--apply' => true, '--rooms' => true])));
+        $this->assertDatabaseCount('museum_entries', 22);
+        $this->assertSame('<p>Редактор изменил описание зала.</p>', trim($rooms[0]->fresh()->body));
+    }
+
+    public function test_bad_room_content_signature_or_nonmuseum_slug_collision_blocks_apply(): void
+    {
+        $this->seed(ReferenceMuseumSectionsSeeder::class);
+        Storage::fake('local');
+        $rooms = json_decode(file_get_contents(base_path('../web/src/data/official-exposition-rooms.json')),true);
+        $rooms['rooms'][0]['html'] = '<p>Фальшивое описание</p>';
+        $path = storage_path('framework/testing/tampered-exposition.json');
+        file_put_contents($path, json_encode($rooms, JSON_UNESCAPED_UNICODE));
+        try {
+            $this->assertSame(1, Artisan::call('museum:import-official-pages',
+                $this->importOptions([
+                    '--rooms' => true, '--apply' => true, '--rooms-source' => $path,
+                ])));
+            $this->assertDatabaseCount('museum_entries', 0);
+        } finally {
+            @unlink($path);
+        }
+        MuseumEntry::create([
+            'slug' => 'zal-hleb-v-mirovoy-istorii', 'type' => 'news',
+            'title' => 'Existing unrelated news', 'status' => 'draft',
+            'body' => '<p>Не перезаписывать.</p>',
+        ]);
+        $this->assertSame(1, Artisan::call('museum:import-official-pages',
+            $this->importOptions(['--rooms' => true, '--apply' => true])));
+        $this->assertDatabaseCount('museum_entries', 1);
+        $this->assertSame('Existing unrelated news', MuseumEntry::firstOrFail()->title);
+    }
+
     public function test_production_mode_does_not_allow_bulk_reference_import(): void
     {
         $this->seed(ReferenceMuseumSectionsSeeder::class);

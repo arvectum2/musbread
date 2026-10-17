@@ -523,3 +523,25 @@ main :is(.hero,.section,.guide-primary,.museum-list,.events-grid,.museum-gallery
 .official-source-content .rich-text h2,.official-source-content .rich-text h3{margin:1.15rem 0 .65rem}
 .header-social{font-size:.87rem;text-decoration:underline;white-space:nowrap}
 @media(max-width:600px){.official-source-content{padding:.85rem}.header-social{white-space:normal}}
+
+
+/* TZ-131. Official source-backed gallery rooms, without unlicensed photos. */
+.exposition-catalog{margin:2rem 0 2.5rem;max-width:100%;min-width:0}
+.exposition-catalog h2{font-size:clamp(1.65rem,2.5vw,2.1rem);margin-bottom:.75rem}
+.exposition-catalog-intro{color:var(--mute);max-width:72ch;overflow-wrap:anywhere}
+.exposition-catalog-intro a{text-decoration:underline}
+.exposition-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.5rem}
+.exposition-card{background:#fff;border:1px solid var(--line);padding:1.3rem;min-width:0;overflow-wrap:anywhere}
+.exposition-card-index{font-size:.78rem;letter-spacing:.055em;text-transform:uppercase;color:var(--mute);margin:0 0 .55rem}
+.exposition-card h3{font-size:1.35rem;line-height:1.27;margin:0 0 .9rem}
+.exposition-card>p:not(.exposition-card-index){line-height:1.5}
+.exposition-card details{margin-top:.9rem;border-top:1px solid var(--line);padding-top:.8rem}
+.exposition-card summary{cursor:pointer;font-weight:650;text-decoration:underline;text-underline-offset:.2em}
+.exposition-card summary:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.exposition-card-body{padding:.6rem 0 .1rem;max-height:24rem;overflow-y:auto}
+.exposition-card-body .article-content{font-size:1rem;overflow-wrap:anywhere}
+.exposition-card-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;font-size:.9rem}
+@media(max-width:760px){.exposition-cards{grid-template-columns:1fr}.exposition-card{padding:1rem}}
+html[data-vision-mode="on"] .exposition-card{border-color:#111;color:#111}
+html[data-vision-mode="on"] .exposition-card-index,
+html[data-vision-mode="on"] .exposition-catalog-intro{color:#111}

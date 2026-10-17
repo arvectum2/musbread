@@ -25,6 +25,8 @@ final class ImportOfficialMuseumPages extends Command
         {--apply : Write missing draft pages to the existing MoonShine database}
         {--documents : Attach validated local original documents (requires --apply)}
         {--append-documents : Explicitly append missing checked originals to existing source-origin drafts}
+        {--rooms : Preview or import eleven official exposition rooms as existing CMS page drafts}
+        {--rooms-source= : Override the room snapshot JSON only for local testing}
         {--archive= : Optional private original document manifest; default is .local_archive}
         {--source= : Optional snapshot JSON; default is the captured museum-source file}';
 
@@ -93,6 +95,7 @@ final class ImportOfficialMuseumPages extends Command
                 }
                 $plan[$slug] = $page;
             }
+            $rooms = $this->option('rooms') ? $this->loadRooms($byPath) : [];
             $archive = $this->option('documents') ? $this->loadArchive($byPath) : [];
         } catch (Throwable $e) {
             $this->error('Reference import stopped: '.$e->getMessage());
@@ -110,6 +113,22 @@ final class ImportOfficialMuseumPages extends Command
             }
         }
 
+        if ($rooms) {
+            if (! MuseumSection::where('slug', 'museum-exposition')->exists()) {
+                $this->error('CMS exposition parent section missing');
+                return self::FAILURE;
+            }
+            foreach ($rooms as $room) {
+                $exists = MuseumEntry::where('slug', $room['slug'])->first();
+                if ($exists && ($exists->type !== 'page'
+                    || $exists->section?->slug !== 'museum-exposition')) {
+                    $this->error('CMS room slug already belongs to another section: '.$room['slug']);
+                    return self::FAILURE;
+                }
+                $this->line(($exists ? 'KEEP EDITOR' : 'NEW DRAFT ROOM').' '.$room['title']
+                    .' ← '.$room['source_url']);
+            }
+        }
         if (! $this->option('apply')) {
             $this->info('Dry run: no DB, files, publication state, or CMS versions changed.');
             return self::SUCCESS;
@@ -119,7 +138,7 @@ final class ImportOfficialMuseumPages extends Command
         $attached = 0;
         $skippedFiles = 0;
         try {
-            DB::transaction(function () use ($plan, $archive, $inspector, &$createdFiles,
+            DB::transaction(function () use ($plan, $archive, $rooms, $inspector, &$createdFiles,
                 &$created, &$attached, &$skippedFiles): void {
                 foreach ($plan as $slug => $page) {
                     // firstOrCreate is intentionally non-destructive for all editor-owned fields.
@@ -200,6 +219,26 @@ final class ImportOfficialMuseumPages extends Command
                         }
                     }
                 }
+                if ($rooms) {
+                    $sectionId = MuseumSection::where('slug', 'museum-exposition')->value('id');
+                    foreach ($rooms as $index => $room) {
+                        // Exact CMS type/section, no image publication and no
+                        // overwriting an editor's room text or publishing it.
+                        $entry = MuseumEntry::firstOrCreate(['slug' => $room['slug']], [
+                            'type' => 'page',
+                            'title' => $room['title'],
+                            'h1' => $room['title'],
+                            'museum_section_id' => $sectionId,
+                            'sort_order' => $index + 1,
+                            'excerpt' => $room['excerpt'],
+                            'body' => $room['html'].'<p><a href="'.$room['source_url'].'">'
+                                .'Официальный первоисточник экспозиции</a> '
+                                .'(снимок '.substr($room['captured_utc'], 0, 10).').</p>',
+                            'status' => 'draft',
+                        ]);
+                        if ($entry->wasRecentlyCreated) $created++;
+                    }
+                }
             });
         } catch (Throwable $error) {
             Storage::disk('local')->delete($createdFiles);
@@ -209,6 +248,47 @@ final class ImportOfficialMuseumPages extends Command
         $this->info("Imported $created draft pages, $attached private document attachments; "
             ."$skippedFiles documents remain as source-site links. No publication triggered.");
         return self::SUCCESS;
+    }
+
+    /**
+     * @param array<string,array<string,mixed>> $pages
+     * @return list<array<string,mixed>>
+     */
+    private function loadRooms(array $pages): array
+    {
+        $path = $this->option('rooms-source')
+            ?: base_path('../web/src/data/official-exposition-rooms.json');
+        $data = json_decode((string) file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+        $listing = $pages['/ekspozicii']['html'] ?? '';
+        if (($data['source'] ?? null) !== 'https://muzei-xleb.ru'
+            || ($data['listing_source_url'] ?? null) !== 'https://muzei-xleb.ru/ekspozicii'
+            || ! is_array($data['rooms'] ?? null) || count($data['rooms']) !== 11
+            || ! is_string($listing) || $listing === '') {
+            throw new RuntimeException('Expected eleven exposition rooms from existing official listing');
+        }
+        $slugs = [];
+        foreach ($data['rooms'] as $room) {
+            $slug = $room['slug'] ?? null;
+            $url = $room['source_url'] ?? null;
+            $title = $room['title'] ?? null;
+            if (! is_string($slug) || ! preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $slug)
+                || isset($slugs[$slug]) || ! is_string($url)
+                || ! preg_match('#^https://muzei-xleb\\.ru/ekspozicii/20\\d\\d-\\d\\d-\\d\\d/[a-z0-9-]+$#D', $url)
+                || ! str_ends_with($url, '/'.$slug)
+                || ! str_contains($listing, 'href="'.$url.'"')
+                || ! is_string($title) || ! str_contains($listing, $title)
+                || ! is_string($room['html'] ?? null) || mb_strlen($room['html']) < 90
+                || ! is_string($room['excerpt'] ?? null) || trim($room['excerpt']) === ''
+                || ! is_string($room['captured_utc'] ?? null)
+                || ! preg_match('/^\\d{4}-\\d\\d-\\d\\dT/', $room['captured_utc'])
+                || ! is_string($room['html_sha256'] ?? null)
+                || hash('sha256', $room['html']) !== $room['html_sha256']
+                || ($room['media_rights_confirmed'] ?? null) !== false) {
+                throw new RuntimeException('Exposition room source/signature mismatch: '.(string) $slug);
+            }
+            $slugs[$slug] = true;
+        }
+        return $data['rooms'];
     }
 
     /** @return array<string,list<array<string,mixed>>> */

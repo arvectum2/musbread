@@ -51,8 +51,9 @@ test("legacy cookie consent is cited, not presented as new site's own cookie pol
 
 test("museum exposition catalog retains real gallery names and official room links", async({page})=>{
  await page.goto("/guide/museum-exposition/");
- const source=page.getByRole("region",{name:"Содержание действующего сайта музея"});
- await expect(source).toBeVisible();
- await expect(source).toContainText("Зал «Хлеб в мировой истории»");
- await expect(source.locator('a[href^="https://muzei-xleb.ru/ekspozicii/"]')).not.toHaveCount(0);
+ const catalog=page.getByRole("region",{name:"Залы постоянной экспозиции"});
+ await expect(catalog).toBeVisible();
+ await expect(catalog.locator(".exposition-card")).toHaveCount(11);
+ await expect(catalog).toContainText("Зал «Хлеб в мировой истории»");
+ await expect(catalog.locator('a[href^="https://muzei-xleb.ru/ekspozicii/"]')).toHaveCount(11);
 });

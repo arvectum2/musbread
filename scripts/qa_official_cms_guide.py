@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CMS = ROOT / "apps/cms"
 WEB = ROOT / "apps/web"
 PRIVATE = ROOT / ".local_archive"
-REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history", "museum-documents"}
+REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history", "museum-documents", "zal-hleb-v-mirovoy-istorii"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -50,6 +50,11 @@ def main() -> None:
                            "museum-documents": 19, "tickets-and-benefits": 1}
         if any(len(expected_docs[slug]) != count for slug,count in expected_counts.items()):
             raise RuntimeError("Missing imported official documents or compressed copies in CMS")
+        with sqlite3.connect(f"file:{source_db}?mode=ro", uri=True) as db:
+            n = db.execute("select count(*) from museum_entries where status='draft'"
+                           " and slug like 'zal-%'").fetchone()[0]
+            if n != 11:
+                raise RuntimeError("Eleven imported official exposition rooms must all be draft")
 
     with tempfile.TemporaryDirectory(prefix="museum-guide-qa-", dir=PRIVATE) as name:
         work = Path(name)
@@ -67,6 +72,12 @@ def main() -> None:
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes') "
                        "where slug in ('tickets-and-benefits','ticket-refunds','museum-documents')")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: редакция зала утверждена музеем',"
+                       "excerpt='QA: краткая новая аннотация к залу.',"
+                       "body='<p>QA: новое редакционное описание мирового хлеба.</p>' "
+                       "where slug='zal-hleb-v-mirovoy-istorii'")
             db.commit()
 
         environment = dict(os.environ)
@@ -97,6 +108,13 @@ def main() -> None:
         slugs = {entry["slug"] for entry in data["entries"]}
         if not {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-documents"} <= slugs or "museum-history" in slugs:
             raise RuntimeError("Public/private source CMS entries wrongly filtered: " + repr(slugs))
+        published_room = next((e for e in data["entries"]
+                               if e["slug"] == "zal-hleb-v-mirovoy-istorii"), None)
+        if not published_room or published_room["title"] != "QA: редакция зала утверждена музеем":
+            raise RuntimeError("Edited museum exposition room was not exported")
+        if any(e["slug"].startswith("zal-") and
+               e["slug"] != "zal-hleb-v-mirovoy-istorii" for e in data["entries"]):
+            raise RuntimeError("Private museum exposition room draft was exported")
         attachment_hrefs = {}
         for slug, recorded in expected_docs.items():
             item = next(entry for entry in data["entries"] if entry["slug"] == slug)
@@ -140,6 +158,23 @@ def main() -> None:
         refunds = html.fromstring((out / "guide/ticket-refunds/index.html").read_bytes())
         hub = html.fromstring((out / "guide/museum-documents/index.html").read_bytes())
         fallback = html.fromstring((out / "guide/museum-history/index.html").read_bytes())
+        exhibit = html.fromstring((out / "guide/museum-exposition/index.html").read_bytes())
+        edited_room = html.fromstring(
+            (out / "museum/zal-hleb-v-mirovoy-istorii/index.html").read_bytes())
+        if len(exhibit.xpath("//main//article[contains(@class,'exposition-card')]")) != 11:
+            raise RuntimeError("New exposition source-backed catalogue lost a room")
+        if "QA: редакция зала утверждена музеем" not in exhibit.text_content():
+            raise RuntimeError("Published CMS room did not replace its source-backed title")
+        if "QA: новое редакционное описание мирового хлеба" not in exhibit.text_content():
+            raise RuntimeError("Published CMS room did not replace its original body")
+        if "История цивилизаций – это история хлеба" in exhibit.text_content():
+            raise RuntimeError("Stale official content overlaid an approved changed CMS room")
+        if "QA: редакция зала утверждена музеем" not in edited_room.text_content():
+            raise RuntimeError("Published room detail URL did not build")
+        if len(exhibit.xpath("//main//article[contains(@class,'exposition-card')]//a"
+                             "[starts-with(@href,'/museum/')]")) != 1:
+            raise RuntimeError("Unpublished source rooms got a private CMS link")
+
         h1 = [str(x).strip() for x in privacy.xpath("//main//h1/text()")]
         if h1 != ["QA: заголовок из редактируемой CMS"]:
             raise RuntimeError("CMS H1 not authoritative on guide route: " + repr(h1))
@@ -191,10 +226,10 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 4 disposable published CMS pages, 24 SHA256-verified static files "
-          "(including two compressed 42/45-page scanned originals, refund PDF and DOCX), "
-          "editorial H1/SEO, prices, draft fallback, no PII forms, noindex; "
-          "original 11 draft entries/41 documents and tracked web snapshot unchanged.")
+    print("PASS: 5 disposable CMS pages including one museum exposition room, "
+          "11 source-backed gallery cards with published room override and no draft leak; "
+          "24 SHA256-verified official files, H1/SEO, prices, no PII forms, noindex; "
+          "real working CMS 22 drafts/41 docs and tracked snapshot unchanged.")
 
 
 if __name__ == "__main__":
