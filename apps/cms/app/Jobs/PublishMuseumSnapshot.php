@@ -45,7 +45,12 @@ final class PublishMuseumSnapshot implements ShouldQueue
                 'started_at' => now(),
                 'error_type' => null,
             ]);
-            $parameters = [];
+            // Background publication must never bypass the same strict
+            // content/link preflight that protects an operator-triggered
+            // final export. The exporter checks BEFORE writing any files.
+            // Warnings remain advisory; critical published-content errors
+            // fail this run with only the safe exception class in the log.
+            $parameters = ['--preflight-strict' => true];
             if ($this->outputPath !== null) $parameters['--output'] = $this->outputPath;
             if ($this->manifestPath !== null) $parameters['--manifest'] = $this->manifestPath;
             if ($this->mediaOutputDir !== null) $parameters['--media-output-dir'] = $this->mediaOutputDir;

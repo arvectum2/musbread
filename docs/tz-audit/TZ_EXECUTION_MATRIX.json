@@ -5083,15 +5083,15 @@
       "Строки оригинала": "320",
       "Требование": "Программирование ядра сайта",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 5,
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
+      "№ очереди": "",
       "Этап дорожной карты": "D0–D40 · приёмка",
-      "Что сделать для завершения": "Закрыть оставшиеся CMS функции/контент",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Полные данные",
-      "Следующее действие / комментарий": "Задача в очереди #005. Закрыть оставшиеся CMS функции/контент",
-      "Что уже есть (доказательство)": "CP-03–16",
+      "Что сделать для завершения": "Ядро предконтрактного прототипа программно реализовано и проверено. Оставшиеся реальные интеграции, контент, сеть и итоговые комплексные испытания не входят в техническую отметку этого пункта и учитываются отдельно в TZ-223–225/268/269/273/307.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Technical core of preaward prototype complete: Laravel 13/MoonShine 4 CMS, models for entries/sections/events/approved contact facts, scoped admin ACL, private media/documents, strict HTML sanitization, scheduled lifecycle, SEO, static JSON snapshot Next 16, SHA-256 manifests, integrity-checked immutable local release/rollback, review/preflight/audits, detached external integration ports. Newly closed production-path bug: BOTH default hourly direct schedule and optional queue enforce --preflight-strict before touching snapshot and assets; negative queue regression proves broken public internal link blocks export leaving previous published JSON/manifest unchanged and records only safe exception type; correcting article permits verified retry. Genuine MoonShine UI→DB→export→isolated Next HTML 8/8, source/release QA and PHP full suite. No claim of completed real museum API, hosting, customer UAT, contracts or legal clearance (separately tracked requirements).",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,13 +6198,13 @@
     }
   ],
   "counts": {
-    "Да": 37,
+    "Да": 38,
     "Нет": 177,
-    "Частично": 111
+    "Частично": 110
   },
   "workflow": {
-    "Готово в прототипе": 37,
+    "Готово в прототипе": 38,
     "Внешний блокер / наступление этапа": 283,
-    "В очереди (можно начать сейчас)": 5
+    "В очереди (можно начать сейчас)": 4
   }
 }

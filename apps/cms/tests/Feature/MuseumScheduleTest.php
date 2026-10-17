@@ -15,6 +15,9 @@ class MuseumScheduleTest extends TestCase
         $this->assertCount(1, $tasks);
         $event = $tasks->first();
         $this->assertSame('0 * * * *', $event->expression);
+        // This hourly direct scheduler is normally enabled while the
+        // private queue-worker has not been approved for production.
+        $this->assertStringContainsString('--preflight-strict', $event->command);
         $this->assertTrue($event->withoutOverlapping);
     }
 }

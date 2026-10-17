@@ -15,5 +15,8 @@ if (config('museum.queue_publication', false)) {
     Schedule::command('museum:queue-export')->hourly()->withoutOverlapping();
     Schedule::command('museum:recover-stale-publications')->everyTenMinutes()->withoutOverlapping();
 } else {
-    Schedule::command('museum:export')->hourly()->withoutOverlapping();
+    // The direct hourly mode is the DEFAULT in the pre-contract stage.
+    // It must be at least as strict as the queued worker: never publish
+    // material with a critical link/editorial error unattended.
+    Schedule::command('museum:export --preflight-strict')->hourly()->withoutOverlapping();
 }

@@ -60,6 +60,61 @@ class MuseumPublicationQueueTest extends TestCase
         }
     }
 
+    public function test_background_queue_refuses_invalid_published_links_without_changing_release_files(): void
+    {
+        // This content is editorially approved but references a missing
+        // public page: a high-risk core publishing condition. A scheduled
+        // queue must apply the SAME strict preflight as manual release.
+        $entry = MuseumEntry::create([
+            'type' => 'news', 'slug' => 'queued-invalid-link',
+            'title' => 'Новость со сломанной ссылкой',
+            'body' => '<p>Текст <a href="/news/not-a-public-page/">несуществующая новость</a></p>',
+            'status' => 'published',
+        ]);
+        $run = MuseumPublicationRun::create(['status' => 'queued']);
+        $base = storage_path('framework/testing/strict-'.bin2hex(random_bytes(6)));
+        mkdir($base, 0700, true);
+        $output = $base.'/published.json';
+        $manifest = $base.'/manifest.json';
+        $media = $base.'/media';
+        // Existing release must remain bit-identical on failed preflight.
+        file_put_contents($output, "UNCHANGED_PUBLIC_SNAPSHOT\n");
+        file_put_contents($manifest, "UNCHANGED_PUBLIC_MANIFEST\n");
+        try {
+            try {
+                (new PublishMuseumSnapshot($run->id, $output, $manifest, $media))->handle();
+                $this->fail('Queue accepted a critical broken link in published content');
+            } catch (\RuntimeException $e) {
+                $this->assertStringContainsString('nonzero status', $e->getMessage());
+            }
+            $this->assertSame("UNCHANGED_PUBLIC_SNAPSHOT\n", file_get_contents($output));
+            $this->assertSame("UNCHANGED_PUBLIC_MANIFEST\n", file_get_contents($manifest));
+            $this->assertDirectoryDoesNotExist($media);
+            $this->assertSame('failed', $run->fresh()->status);
+            $this->assertSame(1, $run->fresh()->attempts);
+            $this->assertSame('RuntimeException', $run->fresh()->error_type);
+            $this->assertNull($run->fresh()->snapshot_sha256);
+
+            // After an editor corrects the source content, a fresh queued
+            // attempt must be able to publish normally.
+            $entry->update(['body' => '<p>Проверенная новость без битых внутренних ссылок.</p>']);
+            $retry = new PublishMuseumSnapshot($run->id, $output, $manifest, $media);
+            $retry->handle();
+            $this->assertSame('succeeded', $run->fresh()->status);
+            $this->assertSame(2, $run->fresh()->attempts);
+            $this->assertNotSame("UNCHANGED_PUBLIC_SNAPSHOT\n", file_get_contents($output));
+            $this->assertSame(
+                hash_file('sha256',$output),
+                json_decode(file_get_contents($manifest),true)['files']['published.json']['sha256']
+            );
+        } finally {
+            foreach (glob($base.'/*') ?: [] as $path) {
+                if (is_dir($path)) @rmdir($path); else @unlink($path);
+            }
+            @rmdir($base);
+        }
+    }
+
     public function test_publication_journal_is_admin_only_and_immutable_from_ui(): void
     {
         $role = \MoonShine\Laravel\Models\MoonshineUserRole::where('name', 'Editor')->firstOrFail();
