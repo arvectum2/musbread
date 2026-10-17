@@ -1,4 +1,5 @@
 import sanitizeHtml from "sanitize-html";
+import {museumLinkTitle} from "@/data/link-titles";
 
 /**
  * Defense in depth: PHP sanitizes content before storage, and the static site
@@ -13,6 +14,16 @@ export default function RichText({ html }: { html: string }) {
     allowedAttributes: { a: ["href", "title", "rel"] },
     allowedSchemes: ["http", "https", "mailto"],
     allowedSchemesByTag: { a: ["http", "https", "mailto"] },
+    transformTags: {
+      a: (_tag, attributes) => ({
+        tagName: "a",
+        attribs: {
+          ...attributes,
+          ...(attributes.title?.trim() || !attributes.href
+            ? {} : {title: museumLinkTitle(attributes.href) ?? ""}),
+        },
+      }),
+    },
     disallowedTagsMode: "discard",
     enforceHtmlBoundary: true,
   });

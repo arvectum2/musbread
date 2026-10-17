@@ -1,5 +1,6 @@
 "use client";
-import Link from "next/link";
+import MuseumAnchor from "@/components/MuseumAnchor";
+import Link from "@/components/MuseumLink";
 import type { MouseEvent } from "react";
 import GlobalSearch from "@/components/GlobalSearch";
 import VisionMode from "@/components/VisionMode";
@@ -16,7 +17,7 @@ function closeAfterNavigation(event: MouseEvent<HTMLElement>) {
 }
 export default function SiteHeader() {
   return <header className="site-header">
-    <a href="#main" className="skip-link">Перейти к содержимому</a>
+    <MuseumAnchor href="#main" className="skip-link">Перейти к содержимому</MuseumAnchor>
     <div className="header-inner">
       <Link href="/" className="wordmark" aria-label="Санкт-Петербургский музей Хлеба — главная">
         <MuseumIdentity />
@@ -38,7 +39,7 @@ export default function SiteHeader() {
         <GlobalSearch compact />
         <VisionMode />
         <Link className="access-link" href="/guide/accessible-museum/" aria-label="Доступная среда: условия посещения">Доступная среда</Link>
-        <a className="header-action" href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer" aria-label="Купить билет на официальной площадке ВМузей (откроется новая вкладка)">Купить билет ↗</a>
+        <MuseumAnchor className="header-action" href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer" aria-label="Купить билет на официальной площадке ВМузей (откроется новая вкладка)">Купить билет ↗</MuseumAnchor>
       </div>
       <details className="mobile-nav">
         <summary aria-label="Открыть меню">Меню ☰</summary>
@@ -57,7 +58,7 @@ export default function SiteHeader() {
           <Link href="/news/">Новости</Link>
           <Link href="/guide/museum-contacts/">Контакты</Link>
           <Link href="/guide/accessible-museum/">Доступная среда</Link>
-          <a href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer">Купить билет ↗</a>
+          <MuseumAnchor href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer">Купить билет ↗</MuseumAnchor>
         </nav>
       </details>
     </div>

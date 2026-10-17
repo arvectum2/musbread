@@ -1,5 +1,6 @@
+import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { content, findEntry, isMuseumSection } from "@/data/content";
@@ -69,7 +70,7 @@ export default async function EnglishEntryPage({ params }: Props) {
     {entry.documents && entry.documents.length > 0 && <section className="museum-documents" aria-label="Downloads">
       <h2>Downloads</h2>
       <ul>{entry.documents.map((doc) => <li key={doc.href}>
-        <a href={doc.href} download>{doc.label} ({doc.format.toUpperCase()})</a>
+        <MuseumAnchor href={doc.href} download>{doc.label} ({doc.format.toUpperCase()})</MuseumAnchor>
       </li>)}</ul>
     </section>}
     <p><Link className="text-link" href={"/" + section + "/" + slug + "/"} lang="ru">Русская версия →</Link></p>

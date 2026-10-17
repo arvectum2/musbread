@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import type { MuseumEvent } from "@/data/types";
 export default function EventCard({ event, index = 0 }: { event: MuseumEvent; index?: number }) {
   return <article className="event-card">

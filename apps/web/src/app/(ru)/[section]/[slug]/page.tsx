@@ -1,5 +1,6 @@
+import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import { notFound } from "next/navigation";
 import { content, findEntry, isMuseumSection, sections } from "@/data/content";
 import RichText from "@/components/RichText";
@@ -68,9 +69,9 @@ export default async function MuseumEntryPage({ params }: Props) {
       <h2>Документы</h2>
       <ul>
         {entry.documents.map((document) => <li key={document.href}>
-          <a href={document.href} download className="text-link">
+          <MuseumAnchor href={document.href} download className="text-link">
             {document.label} ({document.format.toUpperCase()}, {Math.ceil(document.size_bytes / 1024)} КБ)
-          </a>
+          </MuseumAnchor>
           {document.accessibility_reviewed && document.accessibility_note
             ? <p className="museum-document-accessibility">{document.accessibility_note}</p>
             : <p className="museum-document-accessibility">Доступность документа ещё проверяется редактором;

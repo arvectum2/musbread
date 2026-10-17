@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 
 /** English snapshot may have no approved translations. This is a real 404,
  * not a misleading stand-in for translated museum material. */

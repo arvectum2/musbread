@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import Image from "next/image";
 import { content, entryPublicHref } from "@/data/content";
 

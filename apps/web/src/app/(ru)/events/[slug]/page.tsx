@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import { notFound } from "next/navigation";
 import { events, findEvent } from "@/data/content";
 import type { Metadata } from "next";

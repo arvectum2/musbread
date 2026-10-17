@@ -1,3 +1,4 @@
+import MuseumAnchor from "@/components/MuseumAnchor";
 import {museumAdministration, museumAdministrationCheckedAt, museumAdministrationSource} from "@/data/museum-team";
 
 /** Public facts from existing museum website; customer must approve names before release. */
@@ -7,9 +8,9 @@ export default function MuseumTeam() {
   <p className="museum-team-note">Сведения сверены с действующим сайтом музея {museumAdministrationCheckedAt}.
    <strong> Перед публикацией новой версии заказчик подтверждает актуальность должностей, ФИО и контактов.</strong></p>
   <ul className="museum-team-list">{museumAdministration.map(p=><li key={p.role}>
-   <h3>{p.role}</h3><p>{p.name}</p><a href={p.phoneHref}>Телефон: {p.phone}</a>
+   <h3>{p.role}</h3><p>{p.name}</p><MuseumAnchor href={p.phoneHref}>Телефон: {p.phone}</MuseumAnchor>
   </li>)}</ul>
-  <p className="museum-team-source"><a href={museumAdministrationSource} target="_blank" rel="noopener noreferrer">
-   Первоисточник: администрация на действующем сайте музея ↗</a></p>
+  <p className="museum-team-source"><MuseumAnchor href={museumAdministrationSource} target="_blank" rel="noopener noreferrer">
+   Первоисточник: администрация на действующем сайте музея ↗</MuseumAnchor></p>
  </section>;
 }

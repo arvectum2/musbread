@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import type { PublicNavigationNode } from "@/data/navigation-tree";
 import { guideHref } from "@/data/museum-reference";
 

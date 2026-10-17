@@ -1,5 +1,6 @@
 "use client";
-import Link from "next/link";
+import MuseumAnchor from "@/components/MuseumAnchor";
+import Link from "@/components/MuseumLink";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { museumSearch } from "@/data/global-search-index";
@@ -84,7 +85,7 @@ export default function GlobalSearch({ compact = false, fullPage = false }: { co
           onClick: () => { setOpen(false); setActive(-1); activeRef.current = -1; },
         };
         return item.download
-          ? <a {...attributes} href={item.href} download key={item.href}><strong>{item.title}</strong><span>{item.section}</span></a>
+          ? <MuseumAnchor {...attributes} href={item.href} download key={item.href}><strong>{item.title}</strong><span>{item.section}</span></MuseumAnchor>
           : <Link {...attributes} href={item.href} key={item.href}><strong>{item.title}</strong><span>{item.section}</span></Link>;
       })}
     </div>
@@ -96,7 +97,7 @@ export default function GlobalSearch({ compact = false, fullPage = false }: { co
     {fullPage && showAll && <section className="search-all-results" aria-label="Все результаты поиска">
       <p role="status">Найдено: {allResults.length}. Результаты сформированы по опубликованным материалам.</p>
       <ul>{allResults.map((item) => <li key={item.href}>
-        {item.download ? <a href={item.href} download><strong>{item.title}</strong> · скачать</a>
+        {item.download ? <MuseumAnchor href={item.href} download><strong>{item.title}</strong> · скачать</MuseumAnchor>
           : <Link href={item.href}><strong>{item.title}</strong></Link>}
         <span className="search-result-section">{item.section}</span>
         {item.excerpt && <p>{item.excerpt}</p>}

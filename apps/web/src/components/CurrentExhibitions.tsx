@@ -1,7 +1,7 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import EventCard from "@/components/EventCard";
 import {currentlyRunningExhibitions, futureExhibitions} from "@/data/current-exhibitions";
 import {localCalendarDay} from "@/data/event-archive";

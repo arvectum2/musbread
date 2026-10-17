@@ -1,5 +1,6 @@
+import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import { notFound } from "next/navigation";
 import { guideHref, legacyUrl, museumReference, museumAddressMapSearchUrl, REFERENCE_DATE } from "@/data/museum-reference";
 import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
@@ -80,21 +81,21 @@ export default async function GuidePage({ params }: Props) {
       <p><strong>Метро:</strong> {museumReference.metro}</p>
       <p><strong>Рабочие часы:</strong> {museumReference.openingHours}. {museumReference.admissionHours}.</p>
       <p>{museumReference.closedDay}. {museumReference.sanitaryDay}.</p>
-      <p><strong>Телефон:</strong> <a href={museumReference.phoneHref}>{museumReference.phone}</a></p>
-      <p><strong>Почта:</strong> <a href={museumReference.emailHref}>{museumReference.email}</a></p>
+      <p><strong>Телефон:</strong> <MuseumAnchor href={museumReference.phoneHref}>{museumReference.phone}</MuseumAnchor></p>
+      <p><strong>Почта:</strong> <MuseumAnchor href={museumReference.emailHref}>{museumReference.email}</MuseumAnchor></p>
       {(isContact || isPlanVisit) && <section aria-label="Как добраться">
         <h3>Как добраться</h3>
         <p>Ближайшая станция метро: {museumReference.metro}. Адрес для навигатора: {museumReference.address}.</p>
-        <p><a href={museumAddressMapSearchUrl} target="_blank" rel="noopener noreferrer" className="text-link">Найти адрес на карте ↗</a> <small>(внешний поиск адреса, без передачи данных посещения этой страницей)</small></p>
-        <p><Link href="/guide/accessible-museum/" className="text-link">Условия доступности музея</Link> · <a href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Официальная информация на действующем сайте ↗</a></p>
+        <p><MuseumAnchor href={museumAddressMapSearchUrl} target="_blank" rel="noopener noreferrer" className="text-link">Найти адрес на карте ↗</MuseumAnchor> <small>(внешний поиск адреса, без передачи данных посещения этой страницей)</small></p>
+        <p><Link href="/guide/accessible-museum/" className="text-link">Условия доступности музея</Link> · <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Официальная информация на действующем сайте ↗</MuseumAnchor></p>
       </section>}
-      {slug === "tickets-and-benefits" && <p><a href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer" className="primary-button">Купить билет на действующей площадке ↗</a></p>}
+      {slug === "tickets-and-benefits" && <p><MuseumAnchor href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer" className="primary-button">Купить билет на действующей площадке ↗</MuseumAnchor></p>}
     </div>}
     {isAccess && <div className="reference-facts">
       <h2>Справка о доступности по действующему сайту</h2>
       <p>В музее имеются пандусы и подъёмник; на действующем сайте указана доступность экспозиций первого и второго этажей.</p>
-      <p>Уточнение условий посещения: <a href={museumReference.phoneHref}>{museumReference.phone}</a>.</p>
-      <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <a href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</a>.</p>
+      <p>Уточнение условий посещения: <MuseumAnchor href={museumReference.phoneHref}>{museumReference.phone}</MuseumAnchor>.</p>
+      <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</MuseumAnchor>.</p>
     </div>}
     {isTeam && <MuseumTeam />}
     {slug === "museum-media" && <MuseumMediaHub />}
@@ -102,10 +103,10 @@ export default async function GuidePage({ params }: Props) {
       events={events} buildDay={new Date().toISOString().slice(0,10)} />}
     {(slug === "agenda" || slug === "agenda-events") && <p className="reference-source">
       <Link href="/events/" className="text-link">Открыть афишу и архив мероприятий →</Link>
-      <span> · Пока там тестовые записи; программа публикуется на <a href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</a>.</span>
+      <span> · Пока там тестовые записи; программа публикуется на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</MuseumAnchor>.</span>
     </p>}
     <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
-    {isCollection && <p className="reference-facts"><a href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</a></p>}
+    {isCollection && <p className="reference-facts"><MuseumAnchor href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</MuseumAnchor></p>}
     {directChildren.length > 0 && <section aria-label={"Подразделы: " + title}>
       <h2>Подразделы</h2>
       <NavigationBranch nodes={directChildren}/>
@@ -127,7 +128,7 @@ export default async function GuidePage({ params }: Props) {
       </Link>)}
     </div>}
     {sourceUrl && <p className="reference-source">
-      <a href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</a>
+      <MuseumAnchor href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</MuseumAnchor>
     </p>}
     {page?.tenderOnly && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
     {page && <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>}

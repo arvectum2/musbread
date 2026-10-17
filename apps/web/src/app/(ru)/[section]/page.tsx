@@ -1,5 +1,6 @@
+import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import { notFound } from "next/navigation";
 import { entriesInSection, isMuseumSection, sections } from "@/data/content";
 import { museumReference } from "@/data/museum-reference";
@@ -32,7 +33,7 @@ export default async function MuseumSectionPage({ params }: Props) {
     <p className="lead">Тестовые материалы для проверки редакторской системы. Неофициальная информация музея.</p>
     {section === "news" && <p className="reference-source">
       Новости уже опубликованы на действующем сайте музея.{" "}
-      <a href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">Читать новости музея ↗</a>
+      <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">Читать новости музея ↗</MuseumAnchor>
       <span> · Актуальность отдельных публикаций перед переносом подтвердит заказчик.</span>
     </p>}
     {entries.length ? <div className="museum-list">{entries.map((item) =>

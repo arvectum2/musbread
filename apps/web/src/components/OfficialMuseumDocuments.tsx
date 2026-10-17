@@ -1,3 +1,4 @@
+import MuseumAnchor from "@/components/MuseumAnchor";
 import type {MuseumOfficialDocumentGroup} from "@/data/museum-official-documents";
 
 /** Catalogue of original museum-owned files; no new legal wording. */
@@ -11,10 +12,10 @@ export default function OfficialMuseumDocuments({groups}:{groups:readonly Museum
     {groups.map(group=><section key={group.title} className="official-documents-group" aria-label={group.title}>
       <h3>{group.title}</h3>
       <ul className="official-documents-list">{group.items.map(doc=><li key={doc.url}>
-        <a href={doc.url} target="_blank" rel="noopener noreferrer">{doc.label} <span aria-label="Открыть на действующем сайте музея">↗</span></a>
+        <MuseumAnchor href={doc.url} target="_blank" rel="noopener noreferrer">{doc.label} <span aria-label="Открыть на действующем сайте музея">↗</span></MuseumAnchor>
         <span className="official-document-format">{doc.format}</span>
       </li>)}</ul>
-      <p className="official-documents-source">Все документы раздела на <a href={group.source} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</a></p>
+      <p className="official-documents-source">Все документы раздела на <MuseumAnchor href={group.source} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</MuseumAnchor></p>
     </section>)}
   </section>;
 }

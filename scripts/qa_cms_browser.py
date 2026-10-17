@@ -139,6 +139,9 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
         if not public_file.is_file() or hashlib.sha256(public_file.read_bytes()).hexdigest() != hashlib.sha256(asset.read_bytes()).hexdigest():
             raise RuntimeError("Browser-uploaded media missing or modified by static release")
 
+    # TZ-189: the same all-pages link-title release audit also runs against
+    # a dynamic, genuine CMS publication (not only the tracked demo fixture).
+    run([sys.executable, str(ROOT / "scripts/audit_link_titles.py"), str(out)], ROOT, env)
     print("Verified UI-created news/event/section with SEO title, description and H1 in static HTML; draft excluded", flush=True)
 
 

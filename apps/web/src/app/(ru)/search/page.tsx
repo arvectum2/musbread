@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import GlobalSearch from "@/components/GlobalSearch";
 import {fixedPageH1,fixedPageMetadata} from "@/data/fixed-page-seo";
 export function generateMetadata():Metadata{return fixedPageMetadata("/search/", "Поиск по сайту");}

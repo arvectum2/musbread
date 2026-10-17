@@ -1,4 +1,5 @@
-import Link from "next/link";
+import MuseumAnchor from "@/components/MuseumAnchor";
+import Link from "@/components/MuseumLink";
 import VisionMode from "@/components/VisionMode";
 import { content, sections } from "@/data/content";
 import { museumReference } from "@/data/museum-reference";
@@ -11,7 +12,7 @@ const englishPages = content.entries.filter((entry) => entry.translations?.en).m
 
 export default function EnglishHeader() {
   return <header className="site-header" lang="en">
-    <a href="#main" className="skip-link">Skip to content</a>
+    <MuseumAnchor href="#main" className="skip-link">Skip to content</MuseumAnchor>
     <div className="header-inner">
       <Link href="/" className="wordmark" aria-label="Museum of Bread — Russian home page">
         <MuseumIdentity locale="en" />
@@ -22,10 +23,10 @@ export default function EnglishHeader() {
       </nav>
       <div className="header-controls">
         <VisionMode locale="en"/>
-        <a href={museumReference.ticketUrl} className="header-action" target="_blank"
+        <MuseumAnchor href={museumReference.ticketUrl} className="header-action" target="_blank"
            rel="noopener noreferrer" aria-label="Tickets on external Russian-language booking site, opens a new tab">
           Tickets (Russian) ↗
-        </a>
+        </MuseumAnchor>
       </div>
       <details className="mobile-nav">
         <summary aria-label="Open menu">Menu ☰</summary>

@@ -295,3 +295,33 @@ html[data-vision-mode="on"] .museum-team-list li{background:#fff;color:#111;bord
 
 /* TZ-195: extended image descriptions are visible selectable text, not overloaded alt. */
 .museum-media-long-description{margin:.55rem 0 .9rem;padding:.8rem 1rem;border-left:.2rem solid #236e68;background:#f5f8f5;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;font-size:.92rem}
+
+/* TZ-208/210: keyboard focus is a first-class control state, not hover.
+   White outer halo + saturated blue center remains apparent on white
+   surfaces, photo/colored cards and the graphite footer. */
+:where(a,button,summary,input,select,textarea,[role="button"],[tabindex]):focus-visible{
+  outline:3px solid #0757cf;
+  outline-offset:3px;
+  box-shadow:0 0 0 6px #fff;
+}
+.site-footer :where(a,button,summary,input,select,textarea):focus-visible{
+  outline-color:#ffcf66;
+  box-shadow:0 0 0 6px #101712;
+}
+:where(.mega-panel,.mobile-nav nav) :where(a,button,summary):focus-visible{
+  outline-color:#0757cf;
+  box-shadow:0 0 0 6px #fff;
+}
+html[data-vision-mode="on"] :where(a,button,summary,input,select,textarea,[role="button"],[tabindex]):focus-visible{
+  outline:4px solid #0757cf;
+  outline-offset:3px;
+  box-shadow:0 0 0 6px #fff;
+}
+@media(forced-colors:active){
+  :where(a,button,summary,input,select,textarea,[role="button"],[tabindex]):focus-visible,
+  .site-footer :where(a,button,summary,input,select,textarea):focus-visible{
+    outline:3px solid Highlight;
+    outline-offset:3px;
+    box-shadow:none;
+  }
+}

@@ -1,5 +1,6 @@
+import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/MuseumLink";
 import EventAgenda from "@/components/EventAgenda";
 import EventSearch from "@/components/EventSearch";
 import { events } from "@/data/content";
@@ -12,7 +13,7 @@ export default function EventsPage() {
     <span className="eyebrow">СОБЫТИЯ МУЗЕЯ</span><h1>{fixedPageH1("/events/","Афиша")}</h1>
     <p className="lead">Тестовые данные для проверки работы статической публикации. Это не официальное расписание музея.</p>
     <p className="reference-source">Программы мероприятий опубликованы на{" "}
-      <a href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте Музея хлеба ↗</a>.
+      <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте Музея хлеба ↗</MuseumAnchor>.
     </p>
     <EventSearch events={events} />
     <EventAgenda events={events} buildDay={new Date().toISOString().slice(0, 10)} />

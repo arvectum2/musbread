@@ -1,4 +1,5 @@
-import Link from "next/link";
+import MuseumAnchor from "@/components/MuseumAnchor";
+import Link from "@/components/MuseumLink";
 import { museumReference, REFERENCE_DATE } from "@/data/museum-reference";
 import { content, sections } from "@/data/content";
 import MuseumIdentity from "@/components/MuseumIdentity";
@@ -15,8 +16,8 @@ export default function EnglishFooter() {
       </Link>
       <strong>Museum of Bread — information preview</strong>
       <p>Address (official text in Russian): {museumReference.address}</p>
-      <p><a href={museumReference.phoneHref}>{museumReference.phone}</a></p>
-      <p><a href={museumReference.emailHref}>{museumReference.email}</a></p>
+      <p><MuseumAnchor href={museumReference.phoneHref}>{museumReference.phone}</MuseumAnchor></p>
+      <p><MuseumAnchor href={museumReference.emailHref}>{museumReference.email}</MuseumAnchor></p>
       <p className="footer-source">Reference contact details from the existing museum website,
         checked {REFERENCE_DATE}. Confirmation by the museum is pending.</p>
     </div>
@@ -29,10 +30,10 @@ export default function EnglishFooter() {
     <div className="footer-legal">
       <h2>Links</h2>
       <Link href="/" lang="ru">Russian-language museum website preview</Link>
-      <a href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">
-        Privacy notice on the official Russian-language site ↗</a>
-      <a href={museumReference.vkUrl} target="_blank" rel="noopener noreferrer">Museum on VK ↗</a>
-      <a href={museumReference.maxUrl} target="_blank" rel="noopener noreferrer">Museum on MAX ↗</a>
+      <MuseumAnchor href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">
+        Privacy notice on the official Russian-language site ↗</MuseumAnchor>
+      <MuseumAnchor href={museumReference.vkUrl} target="_blank" rel="noopener noreferrer">Museum on VK ↗</MuseumAnchor>
+      <MuseumAnchor href={museumReference.maxUrl} target="_blank" rel="noopener noreferrer">Museum on MAX ↗</MuseumAnchor>
       <p className="footer-source">Prototype only. No visitor details are collected here.</p>
     </div>
   </footer>;
