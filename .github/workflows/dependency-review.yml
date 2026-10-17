@@ -1,0 +1,55 @@
+name: MusBread weekly dependency review
+on:
+  schedule:
+    - cron: '21 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: musbread-dependency-review
+  cancel-in-progress: false
+
+jobs:
+  node:
+    name: Node production dependencies — read-only security audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify locked production dependency advisories
+        run: npm audit --omit=dev --audit-level=high
+      - name: Verify Node lockfile is consistent with package.json
+        run: npm ci --ignore-scripts --no-audit --prefer-offline
+      - name: Verify project security and source inventory are not disabled
+        run: |
+          test -f ../../docs/SECURITY.md
+          test -f ../../docs/handoff/SBOM_CYCLONEDX.json
+
+  composer:
+    name: Composer locked packages — read-only security audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: apps/cms
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
+          coverage: none
+      - name: Audit package versions already pinned in composer.lock
+        run: composer audit --locked --no-interaction
+
+# These jobs DO NOT automatically update dependency versions, commit changes,
+# deploy to the museum, or change the approved application stack. Failures must
+# be triaged with targeted compatible patches plus full regression tests.

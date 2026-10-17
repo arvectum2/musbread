@@ -210,9 +210,64 @@ def _rollback_unlocked(dest: Path) -> str:
     return release.name
 
 
+
+def history(dest: Path) -> dict:
+    """Validate the *existing* immutable local history, no deploy or cleanup.
+
+    Only IDs, checksum/status and aggregate file sizes are exposed. A tampered
+    archived release fails the whole report instead of being called available.
+    """
+    with release_lock(dest):
+        releases = dest / "releases"
+        if not releases.is_dir() or releases.is_symlink():
+            raise ValueError("No safe local release inventory")
+        records = {}
+        for release in sorted(releases.iterdir()):
+            if release.is_symlink() or not release.is_dir():
+                raise ValueError("Unexpected entry in local release inventory")
+            if not re.fullmatch(r"[0-9a-f]{16}", release.name):
+                raise ValueError("Unexpected release ID in inventory")
+            release_id = validate_release(release)
+            manifest = json.loads((release / "release-manifest.json").read_text())
+            records[release_id] = {
+                "id": release_id, "file_count": len(manifest["files"]),
+                "total_bytes": sum((release / name).stat().st_size for name in manifest["files"]),
+            }
+
+        if not records:
+            raise ValueError("Local release inventory is empty")
+        active = {}
+        for role in ("current", "previous"):
+            ptr = dest / role
+            if not ptr.exists() and not ptr.is_symlink():
+                if role == "current":
+                    raise ValueError("No active release")
+                continue
+            if not ptr.is_symlink():
+                raise ValueError("Release pointer is not a symlink")
+            target = ptr.readlink()
+            if target != Path("releases") / target.name or target.name not in records:
+                raise ValueError("Invalid or unverified release pointer")
+            active[role] = target.name
+
+        return {
+            "scope": "LOCAL_PREAWARD_NOT_MUSEUM_PRODUCTION",
+            "verified_release_count": len(records),
+            "current": active.get("current"),
+            "previous": active.get("previous"),
+            "releases": [
+                {**r, "role": "current" if rid == active.get("current")
+                 else "previous" if rid == active.get("previous")
+                 else "archived"}
+                for rid, r in records.items()
+            ],
+            "note": "Read-only local test release inventory. Release history is not approval or production deployment.",
+        }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("action", choices=("deploy", "rollback", "verify", "archive-current"))
+    parser.add_argument("action", choices=("deploy", "rollback", "verify", "archive-current", "history"))
     parser.add_argument("--output", type=Path, default=ROOT / "apps/web/out")
     parser.add_argument("--dest", type=Path, default=ROOT / "deploy/local")
     args = parser.parse_args()
@@ -225,6 +280,8 @@ def main() -> None:
             print("ROLLED BACK " + rollback(args.dest))
         elif args.action == "archive-current":
             print("ARCHIVED PRIVATE SNAPSHOT " + archive_current(args.dest, ROOT / "apps/web/src/data/published.json"))
+        elif args.action == "history":
+            print(json.dumps(history(args.dest), ensure_ascii=False, indent=2))
         else:
             with release_lock(args.dest):
                 current = args.dest / "current"

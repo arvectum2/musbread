@@ -37,6 +37,45 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(rel.rollback(self.dest), a)
         self.assertEqual((self.dest / "current/index.html").read_text(), "version one")
 
+    def test_history_reports_only_validated_local_releases_and_roles(self):
+        first = rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        (self.site / "index.html").write_text("version two")
+        second = rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        state = rel.history(self.dest)
+        self.assertEqual(state["scope"], "LOCAL_PREAWARD_NOT_MUSEUM_PRODUCTION")
+        self.assertEqual(state["current"], second)
+        self.assertEqual(state["previous"], first)
+        self.assertEqual(state["verified_release_count"], 2)
+        self.assertEqual({r["role"] for r in state["releases"]}, {"current", "previous"})
+        self.assertEqual(sum(r["file_count"] for r in state["releases"]), 2)
+        self.assertTrue(all(r["total_bytes"] > 0 for r in state["releases"]))
+        self.assertNotIn("private-snapshots", json.dumps(state))
+
+    def test_history_rejects_corrupt_archived_version_and_invalid_pointer(self):
+        first = rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        (self.site / "index.html").write_text("version two")
+        rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        (self.site / "index.html").write_text("version three")
+        latest = rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        before = (self.dest / "current").readlink()
+        # Release one is archived (not current/previous) and still validated.
+        (self.dest / "releases" / first / "index.html").write_text("modified")
+        with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+            rel.history(self.dest)
+        self.assertEqual((self.dest / "current").readlink(), before)
+        (self.dest / "releases" / first / "index.html").write_text("version one")
+        self.assertEqual(rel.history(self.dest)["current"], latest)
+        (self.dest / "previous").unlink()
+        (self.dest / "previous").symlink_to(Path("releases") / ("f"*16))
+        with self.assertRaisesRegex(ValueError, "Invalid or unverified release pointer"):
+            rel.history(self.dest)
+
+    def test_history_fails_closed_on_unexpected_symlink_in_release_inventory(self):
+        rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
+        (self.dest / "releases" / ("e"*16)).symlink_to(self.site, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, "Unexpected entry"):
+            rel.history(self.dest)
+
     def test_private_archive_matches_release_and_never_enters_public_output(self):
         (self.site / "snapshot-manifest.json").write_bytes(self.manifest.read_bytes())
         version = rel.prepare(self.site, self.snapshot, self.manifest, self.dest)
