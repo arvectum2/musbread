@@ -261,6 +261,11 @@ def main() -> int:
                     raise RuntimeError("Draft-linked event leaked or public relation missing")
                 if '/news/qa-browser-news/' not in [link['href'] for link in qa_event.get('related_entries', [])]:
                     raise RuntimeError("Reverse related-news link missing on the event")
+                visitor = snapshot.get("visitor_contacts",{})
+                if (visitor.get("address")!="QA: Музейная улица, 17 (не настоящий адрес)"
+                    or visitor.get("email")!="qa-visitor@museum.invalid"
+                    or visitor.get("phone_href")!="tel:+78120000001"):
+                    raise RuntimeError("Approved CMS visitor-contact fields not exported correctly")
                 pages = snapshot.get("fixed_page_seo", {})
                 if not (pages.get("/", {}).get("seo_title") == "QA: META TITLE HOME"
                         and pages.get("/events/", {}).get("h1") == "QA: H1 EVENT INDEX"

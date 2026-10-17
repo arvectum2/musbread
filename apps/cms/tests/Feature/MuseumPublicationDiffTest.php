@@ -9,6 +9,7 @@ use App\Models\MuseumEvent;
 use App\Models\MuseumPublicationRun;
 use App\Models\MuseumSection;
 use App\Models\MuseumFixedPageSeo;
+use App\Models\MuseumVisitorContacts;
 use App\Support\MuseumPublicationDiff;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -184,6 +185,32 @@ class MuseumPublicationDiffTest extends TestCase
         $editor = MoonshineUser::factory()->create(['moonshine_user_role_id'=>$editorRole->id]);
         $scoped = app(MuseumPublicationDiff::class)->report($editor);
         $this->assertArrayNotHasKey('fixed_page_seo',$scoped['groups']);
+    }
+
+    public function test_published_visitor_contact_changes_are_private_release_diffs_without_removed_urls():void
+    {
+        $contacts=MuseumVisitorContacts::create([
+            'scope'=>'primary','status'=>'published',
+            'address'=>'Тестовый адрес, д. 1','metro'=>'Тестовая',
+            'phone'=>'+7 812 000-00-00','phone_href'=>'tel:+78120000000',
+            'email'=>'qa@museum.invalid','opening_hours'=>'10–18',
+            'admission_hours'=>'Вход до 17','closed_day'=>'Вторник',
+            'sanitary_day'=>'Первый понедельник',
+        ]);
+        $this->baseline();
+        $contacts->update(['address'=>'Тестовый адрес, д. 2','phone'=>'+7 812 000-00-01']);
+        $admin=MoonshineUser::factory()->create();
+        $report=app(MuseumPublicationDiff::class)->report($admin);
+        $row=$this->findDiffRow($report,'visitor_contacts','primary');
+        $this->assertSame('changed',$row['action']);
+        $this->assertEqualsCanonicalizing(['Адрес музея','Номер телефона'],$row['changed_fields']);
+        $this->assertSame([],$row['old_urls']);
+        $this->actingAs($admin,'moonshine')->get(route('museum.content.compare'))->assertOk()
+            ->assertSee('Контакты и часы работы');
+        $editorRole=MoonshineUserRole::query()->where('name','Editor')->firstOrFail();
+        $editor=MoonshineUser::factory()->create(['moonshine_user_role_id'=>$editorRole->id]);
+        $report=app(MuseumPublicationDiff::class)->report($editor);
+        $this->assertArrayNotHasKey('visitor_contacts',$report['groups']);
     }
 
     public function test_editor_scope_hides_other_sections_and_baseline_content(): void

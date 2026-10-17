@@ -5,6 +5,7 @@ import VisitorTaskLinks from "@/components/VisitorTaskLinks";
 import { content, events } from "@/data/content";
 import { museumReference } from "@/data/museum-reference";
 import {fixedPageSeo,fixedPageMetadata} from "@/data/fixed-page-seo";
+import {visitorContacts} from "@/data/visitor-contacts";
 export function generateMetadata(){return fixedPageMetadata("/", "Музей Хлеба — предконтрактный прототип");}
 export default function Home() {
   return <>
@@ -34,9 +35,9 @@ export default function Home() {
     </section>
     <section className="section visit-info">
       <div className="section-title-row"><div><span className="eyebrow">ПОСЕЩЕНИЕ МУЗЕЯ</span><h2>Спланировать визит</h2></div></div>
-      <p><strong>Адрес:</strong> Санкт-Петербург, ул. Михайлова, д. 2, лит. А · метро «Площадь Ленина».</p>
-      <p><strong>Режим:</strong> среда — понедельник 10:00–18:00, вход и касса до 17:00; вторник — выходной. Последний четверг месяца — санитарный день.</p>
-      <p>Предварительные данные с действующего сайта музея; актуальность необходимо подтвердить перед публикацией.</p>
+      <p><strong>Адрес:</strong> {visitorContacts.address} · метро «{visitorContacts.metro}».</p>
+      <p><strong>Режим:</strong> {visitorContacts.openingHours}; {visitorContacts.admissionHours}; {visitorContacts.closedDay}; {visitorContacts.sanitaryDay}.</p>
+      <p>{content.visitor_contacts ? "Сведения из утверждённой карточки CMS музея." : "Предварительные данные с действующего сайта музея; актуальность необходимо подтвердить перед публикацией."}</p>
       <div className="hero-actions"><Link className="primary-button" href="/guide/plan-visit/">Как посетить музей →</Link><Link className="secondary-button" href="/guide/tickets-and-benefits/">Билеты и льготы</Link></div>
     </section>
     <section className="closing-banner"><div><span className="eyebrow">ТЕХНИЧЕСКАЯ ДЕМОНСТРАЦИЯ</span><h2>Сайт, доступный каждому.</h2><p>Адаптивный интерфейс, клавиатурная навигация и страницы, собираемые исключительно из проверенных данных.</p></div><span className="closing-icon" aria-hidden="true">✳</span></section>

@@ -2,7 +2,8 @@ import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
 import Link from "@/components/MuseumLink";
 import { notFound } from "next/navigation";
-import { guideHref, legacyUrl, museumReference, museumAddressMapSearchUrl, REFERENCE_DATE } from "@/data/museum-reference";
+import { guideHref, legacyUrl, museumReference, REFERENCE_DATE } from "@/data/museum-reference";
+import {visitorContacts,visitorAddressMapSearchUrl} from "@/data/visitor-contacts";
 import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
 import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
@@ -72,21 +73,25 @@ export default async function GuidePage({ params }: Props) {
       : isTeam
         ? "Список должностных лиц и служебные телефоны перенесены с действующего сайта музея; публикация обновлённого списка требует подтверждения заказчика."
         : page?.legacyPath
-          ? "Такой раздел уже есть на действующем сайте музея. Здесь пока справочный маршрут к первоисточнику, а не копия полного текста или подтверждение его актуальности."
+          ? (isVisit && content.visitor_contacts
+              ? "Справочный раздел действующего сайта сохранён, но контактные сведения ниже утверждены музеем в CMS для этой версии."
+              : "Такой раздел уже есть на действующем сайте музея. Здесь пока справочный маршрут к первоисточнику, а не копия полного текста или подтверждение его актуальности.")
           : "Этот раздел требуется ТЗ, но музей ещё не предоставил утверждённые сведения. Придумывать их не будем."}
     </p>
+    <div className={directChildren.length > 0 ? "guide-content-layout" : "guide-content-layout guide-content-single"}>
+      <div className="guide-primary">
     {isVisit && <div className="reference-facts">
-      <h2>Сведения с действующего сайта музея</h2>
-      <p><strong>Адрес:</strong> {museumReference.address}</p>
-      <p><strong>Метро:</strong> {museumReference.metro}</p>
-      <p><strong>Рабочие часы:</strong> {museumReference.openingHours}. {museumReference.admissionHours}.</p>
-      <p>{museumReference.closedDay}. {museumReference.sanitaryDay}.</p>
-      <p><strong>Телефон:</strong> <MuseumAnchor href={museumReference.phoneHref}>{museumReference.phone}</MuseumAnchor></p>
-      <p><strong>Почта:</strong> <MuseumAnchor href={museumReference.emailHref}>{museumReference.email}</MuseumAnchor></p>
+      <h2>{content.visitor_contacts ? "Сведения, утверждённые музеем" : "Сведения с действующего сайта музея"}</h2>
+      <p><strong>Адрес:</strong> {visitorContacts.address}</p>
+      <p><strong>Метро:</strong> {visitorContacts.metro}</p>
+      <p><strong>Рабочие часы:</strong> {visitorContacts.openingHours}. {visitorContacts.admissionHours}.</p>
+      <p>{visitorContacts.closedDay}. {visitorContacts.sanitaryDay}.</p>
+      <p><strong>Телефон:</strong> <MuseumAnchor href={visitorContacts.phoneHref}>{visitorContacts.phone}</MuseumAnchor></p>
+      <p><strong>Почта:</strong> <MuseumAnchor href={visitorContacts.emailHref}>{visitorContacts.email}</MuseumAnchor></p>
       {(isContact || isPlanVisit) && <section aria-label="Как добраться">
         <h3>Как добраться</h3>
-        <p>Ближайшая станция метро: {museumReference.metro}. Адрес для навигатора: {museumReference.address}.</p>
-        <p><MuseumAnchor href={museumAddressMapSearchUrl} target="_blank" rel="noopener noreferrer" className="text-link">Найти адрес на карте ↗</MuseumAnchor> <small>(внешний поиск адреса, без передачи данных посещения этой страницей)</small></p>
+        <p>Ближайшая станция метро: {visitorContacts.metro}. Адрес для навигатора: {visitorContacts.address}.</p>
+        <p><MuseumAnchor href={visitorAddressMapSearchUrl} target="_blank" rel="noopener noreferrer" className="text-link">Найти адрес на карте ↗</MuseumAnchor> <small>(внешний поиск адреса, без передачи данных посещения этой страницей)</small></p>
         <p><Link href="/guide/accessible-museum/" className="text-link">Условия доступности музея</Link> · <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Официальная информация на действующем сайте ↗</MuseumAnchor></p>
       </section>}
       {slug === "tickets-and-benefits" && <p><MuseumAnchor href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer" className="primary-button">Купить билет на действующей площадке ↗</MuseumAnchor></p>}
@@ -94,7 +99,7 @@ export default async function GuidePage({ params }: Props) {
     {isAccess && <div className="reference-facts">
       <h2>Справка о доступности по действующему сайту</h2>
       <p>В музее имеются пандусы и подъёмник; на действующем сайте указана доступность экспозиций первого и второго этажей.</p>
-      <p>Уточнение условий посещения: <MuseumAnchor href={museumReference.phoneHref}>{museumReference.phone}</MuseumAnchor>.</p>
+      <p>Уточнение условий посещения: <MuseumAnchor href={visitorContacts.phoneHref}>{visitorContacts.phone}</MuseumAnchor>.</p>
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</MuseumAnchor>.</p>
     </div>}
     {isTeam && <MuseumTeam />}
@@ -107,10 +112,9 @@ export default async function GuidePage({ params }: Props) {
     </p>}
     <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
     {isCollection && <p className="reference-facts"><MuseumAnchor href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</MuseumAnchor></p>}
-    {directChildren.length > 0 && <section aria-label={"Подразделы: " + title}>
-      <h2>Подразделы</h2>
-      <NavigationBranch nodes={directChildren}/>
-    </section>}
+    {directChildren.length > 0 && <p className="guide-subnav-hint">
+      Подразделы этого раздела доступны в боковой навигации; на мобильном экране — ниже основного текста.
+    </p>}
     {sectionEntries.length > 0 && <section className="section-entries" aria-label={"Материалы раздела: " + title}>
       <h2>Материалы раздела</h2>
       <div className="museum-list">{sectionEntries.map((entry) =>
@@ -134,5 +138,11 @@ export default async function GuidePage({ params }: Props) {
     {page && (page.ancestors.length > 0 || findMenuGroup(parent.slug)
       ? <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>
       : <p><Link href="/" className="text-link">← На главную</Link></p>)}
+      </div>
+      {directChildren.length > 0 && <aside className="guide-sidebar" aria-label={"Навигация по подразделам: "+title}>
+        <h2>Подразделы</h2>
+        <NavigationBranch nodes={directChildren}/>
+      </aside>}
+    </div>
   </article>;
 }

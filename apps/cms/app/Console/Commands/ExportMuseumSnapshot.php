@@ -7,6 +7,7 @@ use App\Models\MuseumEvent;
 use App\Models\MuseumEntry;
 use App\Models\MuseumSection;
 use App\Models\MuseumFixedPageSeo;
+use App\Models\MuseumVisitorContacts;
 use App\Support\MuseumDocumentInspector;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Console\Command;
@@ -282,6 +283,22 @@ class ExportMuseumSnapshot extends Command
             'events' => $events,
             'entries' => $entries,
         ];
+        // Official visitor contact facts are a single complete, approved
+        // CMS-owned card. Never export draft details or split-brain mixed
+        // reference/CMS values. Legacy fixture export remains unchanged.
+        $visitorContacts = MuseumVisitorContacts::query()
+            ->where('scope','primary')->where('status','published')->first();
+        if ($visitorContacts !== null) {
+            // Reapply server-side validation to records imported before the
+            // current form rules, so no partial contact card is published.
+            foreach (MuseumVisitorContacts::FACTS as $field) {
+                if (trim((string)$visitorContacts->$field)==='') {
+                    throw new \RuntimeException('Incomplete approved visitor contacts: '.$field);
+                }
+            }
+            $data['visitor_contacts'] = collect(MuseumVisitorContacts::FACTS)
+                ->mapWithKeys(static fn(string $field):array=>[$field=>$visitorContacts->$field])->all();
+        }
         // Preserve the original schema for fixture parity when the seed is absent.
         // CMS-controlled navigation becomes authoritative once sections are created.
         if ($allSections->isNotEmpty()) {

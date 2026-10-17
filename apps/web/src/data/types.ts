@@ -79,6 +79,11 @@ export interface MuseumSnapshot {
   events: MuseumEvent[];
   entries: MuseumEntry[];
   sections?: PublishedSection[];
+  visitor_contacts?: {
+    address: string; metro: string; phone: string; phone_href: string;
+    email: string; opening_hours: string; admission_hours: string;
+    closed_day: string; sanitary_day: string;
+  };
   fixed_page_seo?: Record<string, {
     seo_title?: string | null;
     seo_description?: string | null;

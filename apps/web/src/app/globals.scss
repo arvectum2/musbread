@@ -371,3 +371,18 @@ html[data-vision-mode="on"] :where(a,button,summary,input,select,textarea,[role=
  background:#eaf2e8;
  border-color:#254a37;
 }
+
+/* TZ-260/261: consistent content/optional-navigation grid; only CMS nodes
+   that actually exist can generate sidebar items. No duplicate navigation. */
+.guide-content-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,27%);
+  column-gap:clamp(1.25rem,3vw,3rem);align-items:start;min-width:0}
+.guide-content-layout.guide-content-single{display:block}
+.guide-primary{min-width:0}
+.guide-sidebar{border-left:3px solid #5b7462;background:#fff;padding:1rem 1.2rem;
+  min-width:0;overflow-wrap:anywhere}
+.guide-sidebar h2{font-size:1.35rem;letter-spacing:-.015em}
+.guide-sidebar .nav-branch{list-style:disc;padding-left:1.1rem;overflow-wrap:anywhere}
+.guide-sidebar .nav-branch a{text-decoration:underline;text-underline-offset:.2rem}
+.guide-subnav-hint{font-size:.88rem;color:var(--mute)}
+@media(max-width:900px){.guide-content-layout{grid-template-columns:minmax(0,1fr)}
+  .guide-sidebar{border-left:0;border-top:3px solid #5b7462;margin-top:1.5rem}}

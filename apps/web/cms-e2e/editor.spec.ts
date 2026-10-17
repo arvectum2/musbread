@@ -45,6 +45,28 @@ test("реальный вход и редактор материалов в Moon
     "QA: META DESCRIPTION EVENT INDEX", "QA: H1 EVENT INDEX", "published");
   await createFixedSeo("/search/", "QA: DRAFT META SEARCH",
     "QA: DRAFT DESCRIPTION SEARCH", "QA: DRAFT H1 SEARCH", "draft");
+  // TZ-257: create and approve the real museum-owned visitor-contact card
+  // through MoonShine, not a hand-edited JSON fixture.
+  await page.goto("/admin/resource/museum-visitor-contacts-resource/visitor-contacts-form-page");
+  await expect(page.locator('input[name="address"]')).toBeVisible();
+  for(const [field,value] of Object.entries({
+    scope:"primary",
+    address:"QA: Музейная улица, 17 (не настоящий адрес)",
+    metro:"QA: станция для проверки",
+    phone:"+7 (812) 000-00-01",
+    phone_href:"tel:+78120000001",
+    email:"qa-visitor@museum.invalid",
+    opening_hours:"QA: среда–воскресенье 10:00–17:00",
+    admission_hours:"QA: вход до 16:30",
+    closed_day:"QA: понедельник закрыто",
+    sanitary_day:"QA: санитарный день по понедельникам",
+  })){
+    await page.locator('input[name="'+field+'"]').fill(value);
+  }
+  await page.locator('select[name="status"]').selectOption("published");
+  await page.locator('button[type="submit"]').filter({hasText:"Save"}).click();
+  await expect(page).toHaveURL(/visitor-contacts-form-page\/\d+/,{timeout:10_000});
+
 
   await page.goto("/admin/resource/museum-entry-resource/museum-entry-form-page");
   await expect(page.getByText("Основной текст")).toBeVisible();

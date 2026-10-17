@@ -1,8 +1,10 @@
 import MuseumAnchor from "@/components/MuseumAnchor";
 import Link from "@/components/MuseumLink";
 import { museumReference, REFERENCE_DATE } from "@/data/museum-reference";
+import {visitorContacts} from "@/data/visitor-contacts";
 import { menuGroups } from "@/data/navigation";
 import MuseumIdentity from "@/components/MuseumIdentity";
+import {content} from "@/data/content";
 
 export default function SiteFooter() {
   return <footer id="contacts" className="site-footer">
@@ -11,12 +13,12 @@ export default function SiteFooter() {
         <MuseumIdentity />
       </Link>
       <strong>{museumReference.legalName}</strong>
-      <p>{museumReference.address}<br />Метро: {museumReference.metro}</p>
-      <p><MuseumAnchor href={museumReference.phoneHref}>{museumReference.phone}</MuseumAnchor><br />
-        <MuseumAnchor href={museumReference.emailHref}>{museumReference.email}</MuseumAnchor></p>
-      <p>{museumReference.openingHours}<br />{museumReference.admissionHours}<br />
-        {museumReference.closedDay}<br />{museumReference.sanitaryDay}</p>
-      <p className="footer-source">Предварительная справка с действующего сайта на {REFERENCE_DATE}. Перед запуском уточнить у музея.</p>
+      <p>{visitorContacts.address}<br />Метро: {visitorContacts.metro}</p>
+      <p><MuseumAnchor href={visitorContacts.phoneHref}>{visitorContacts.phone}</MuseumAnchor><br />
+        <MuseumAnchor href={visitorContacts.emailHref}>{visitorContacts.email}</MuseumAnchor></p>
+      <p>{visitorContacts.openingHours}<br />{visitorContacts.admissionHours}<br />
+        {visitorContacts.closedDay}<br />{visitorContacts.sanitaryDay}</p>
+      <p className="footer-source">{content.visitor_contacts ? "Сведения утверждены в CMS музея для статической выгрузки." : <>Предварительная справка с действующего сайта на {REFERENCE_DATE}. Перед запуском уточнить у музея.</>}</p>
     </div>
     <div className="footer-navigation">
       <h2>Разделы</h2>

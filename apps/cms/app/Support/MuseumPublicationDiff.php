@@ -21,6 +21,10 @@ final class MuseumPublicationDiff
         'media' => 'Изображения', 'documents' => 'Документы',
         'translations' => 'Переводы', 'related_entries' => 'Связанные материалы',
         'related_events' => 'Связанные события', 'legacy_path' => 'Исходный URL',
+        'address' => 'Адрес музея', 'metro' => 'Метро', 'phone' => 'Номер телефона',
+        'phone_href' => 'Ссылка для звонка', 'email' => 'Почта',
+        'opening_hours' => 'Режим работы', 'admission_hours' => 'Время окончания входа',
+        'closed_day' => 'Выходной день', 'sanitary_day' => 'Санитарный день',
     ];
 
     /** @return array<string,mixed> */
@@ -46,13 +50,21 @@ final class MuseumPublicationDiff
         ];
         if ($baseline === null) return $result;
 
-        foreach (['entries', 'events', 'sections', 'fixed_page_seo'] as $group) {
+        foreach (['entries', 'events', 'sections', 'fixed_page_seo', 'visitor_contacts'] as $group) {
             // Section structure and fixed-route SEO are admin-only. Never
             // leak another editor's SEO changes in a scoped preview.
-            if (in_array($group, ['sections', 'fixed_page_seo'], true)
+            if (in_array($group, ['sections', 'fixed_page_seo', 'visitor_contacts'], true)
                 && ! $actor->isSuperUser()) continue;
             $oldData = $baseline['data'][$group] ?? [];
             $newData = $candidate['data'][$group] ?? [];
+            if ($group === 'visitor_contacts') {
+                // Singleton contacts are a dictionary in the public JSON,
+                // not a list of materials. They have no retiring page URL.
+                $convert = static fn (array $fields):array =>
+                    $fields === [] ? [] : [['slug'=>'primary','title'=>'Контакты и часы работы'] + $fields];
+                $oldData=$convert($oldData);
+                $newData=$convert($newData);
+            }
             if ($group === 'fixed_page_seo') {
                 // Export intentionally keys these entries by public route.
                 // Reuse the same semantic comparer with a stable slug.

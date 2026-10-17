@@ -53,7 +53,7 @@ article h3{font-size:1.05rem;margin:0 0 .3rem}article p{margin:.3rem 0}.state{fo
 </ul>
 </section>
 @endif
-@foreach(['entries'=>'Материалы сайта','events'=>'События афиши','sections'=>'Структура разделов','fixed_page_seo'=>'SEO фиксированных страниц'] as $key=>$label)
+@foreach(['entries'=>'Материалы сайта','events'=>'События афиши','sections'=>'Структура разделов','fixed_page_seo'=>'SEO фиксированных страниц','visitor_contacts'=>'Контакты и часы работы'] as $key=>$label)
 @if(array_key_exists($key, $comparison['groups']))
 <section aria-label="{{ $label }}"><h2>{{ $label }}</h2>
 @forelse($comparison['groups'][$key] as $row)

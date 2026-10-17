@@ -8,6 +8,7 @@ use App\Models\MuseumEvent;
 use App\Models\MuseumMedia;
 use App\Models\MuseumSection;
 use App\Models\MuseumFixedPageSeo;
+use App\Models\MuseumVisitorContacts;
 use App\Models\MuseumRequest;
 use App\Models\MuseumDocument;
 use App\Observers\MuseumContentAuditObserver;
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         MuseumMedia::observe(MuseumContentAuditObserver::class);
         MuseumSection::observe(MuseumContentAuditObserver::class);
         MuseumFixedPageSeo::observe(MuseumContentAuditObserver::class);
+        MuseumVisitorContacts::observe(MuseumContentAuditObserver::class);
         MuseumRequest::observe(MuseumContentAuditObserver::class);
         MuseumDocument::observe(MuseumContentAuditObserver::class);
         // No credentials or IP addresses are retained. Events from any other

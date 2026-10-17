@@ -1,3 +1,4 @@
+import {visitorContacts} from "@/data/visitor-contacts";
 import MuseumAnchor from "@/components/MuseumAnchor";
 import Link from "@/components/MuseumLink";
 import { museumReference, REFERENCE_DATE } from "@/data/museum-reference";
@@ -15,11 +16,13 @@ export default function EnglishFooter() {
         <MuseumIdentity locale="en" />
       </Link>
       <strong>Museum of Bread — information preview</strong>
-      <p>Address (official text in Russian): {museumReference.address}</p>
-      <p><MuseumAnchor href={museumReference.phoneHref}>{museumReference.phone}</MuseumAnchor></p>
-      <p><MuseumAnchor href={museumReference.emailHref}>{museumReference.email}</MuseumAnchor></p>
-      <p className="footer-source">Reference contact details from the existing museum website,
-        checked {REFERENCE_DATE}. Confirmation by the museum is pending.</p>
+      <p>Address (official text in Russian): {visitorContacts.address}</p>
+      <p><MuseumAnchor href={visitorContacts.phoneHref}>{visitorContacts.phone}</MuseumAnchor></p>
+      <p><MuseumAnchor href={visitorContacts.emailHref}>{visitorContacts.email}</MuseumAnchor></p>
+      <p className="footer-source">{content.visitor_contacts
+        ? "Visitor contacts approved in the museum CMS for this static publication."
+        : <>Reference contact details from the existing museum website,
+          checked {REFERENCE_DATE}. Confirmation by the museum is pending.</>}</p>
     </div>
     <div className="footer-navigation">
       <h2>English pages</h2>
