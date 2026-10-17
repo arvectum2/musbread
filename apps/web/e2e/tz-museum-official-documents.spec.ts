@@ -9,9 +9,9 @@ test("museum document hub follows Russian and St Petersburg museums' grouped-sou
  await expect(hub).toContainText('Правила посещения и билеты');
  await expect(hub).toContainText('Документы и сведения о доступности');
  await expect(hub).toContainText('Устав музея');
- await expect(hub).toContainText('Положение о порядке приобретения и возврата билетов');
+ await expect(hub).toContainText('Положение о порядке приобретения и возврата');
  await expect(hub).toContainText('перед запуском нового сайта музей должен подтвердить актуальность редакций');
- await expect(hub.locator('a[href^="https://muzei-xleb.ru/"]')).toHaveCount(21);
+ await expect(hub.locator('a[href^="https://muzei-xleb.ru/"]')).toHaveCount(24);
  for(const anchor of await hub.locator('a[href^="https://muzei-xleb.ru/"]').all()){
    await expect(anchor).toHaveAttribute('target','_blank');
    await expect(anchor).toHaveAttribute('rel',/noopener noreferrer/);
@@ -28,8 +28,8 @@ test('privacy and refund pages show the proper museum documents without copying 
  await expect(privacy).not.toContainText('Положение о порядке приобретения и возврата');
  await page.goto('/guide/ticket-refunds/');
  const ticket=page.getByRole('region',{name:'Официальные документы музея'});
- await expect(ticket).toContainText('Правила посещения музея');
- await expect(ticket).toContainText('Положение о порядке приобретения и возврата билетов');
+ await expect(ticket).toContainText('Сведения о видах предоставляемых услуг');
+ await expect(ticket).toContainText('Положение о порядке приобретения и возврата');
  await expect(ticket).not.toContainText('Устав музея');
 });
 

@@ -22,7 +22,7 @@ test("museum-owned file sources are HTTPS and correspond to verified old-site pa
      assert.ok(!ids.has(item.url));ids.add(item.url);count++;
    }
  }
- assert.ok(count>=16);
+ assert.ok(count>=19);
 });
 
 test("privacy, returns and accessibility show only actual museum sources, never invented legal copy",()=>{

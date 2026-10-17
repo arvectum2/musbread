@@ -35,7 +35,10 @@ class ReferenceMuseumSectionsSeeder extends Seeder
                     'parent_id' => $parentId,
                     'sort_order' => $row['sort_order'],
                     'legacy_path' => $row['legacy_path'],
-                    'status' => 'published',
+                    // Old-site leaves and seven TZ-required roots may be visible in the demo.
+                    // Unsupported leaf placeholders remain private draft until approved.
+                    'status' => ($row['legacy_path'] !== null || $row['parent_slug'] === null)
+                        ? 'published' : 'draft',
                 ]);
             }
         }

@@ -252,3 +252,14 @@ html[data-vision-mode="on"] .official-documents,
 html[data-vision-mode="on"] .official-documents-list li{background:#fff;color:#111;border-color:#111}
 /* Long museum document headings must reflow at 320px (not clip the page). */
 .guide-page>h1{overflow-wrap:anywhere}
+
+
+/* Administration from the official museum site, no inferred bios or portraits. */
+.museum-team{margin:2rem 0;max-width:100%}
+.museum-team-note{max-width:70ch}
+.museum-team-list{list-style:none;padding:0;margin:1.2rem 0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr))}
+.museum-team-list li{padding:1.2rem;border:1px solid var(--line);border-radius:.65rem;background:#fff;overflow-wrap:anywhere}
+.museum-team-list h3{font-size:1.2rem;margin:0 0 .6rem;line-height:1.35}
+.museum-team-list p{margin:.3rem 0 .8rem}
+.museum-team-list a,.museum-team-source a{text-decoration:underline;text-underline-offset:.18em}
+html[data-vision-mode="on"] .museum-team-list li{background:#fff;color:#111;border-color:#111}

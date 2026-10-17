@@ -6,6 +6,7 @@ import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, u
 import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
 import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
+import MuseumTeam from "@/components/MuseumTeam";
 import { officialMuseumGroupsForPage } from "@/data/museum-official-documents";
 import { entriesInCmsSection, entryPublicHref } from "@/data/content";
 
@@ -30,6 +31,7 @@ export default async function GuidePage({ params }: Props) {
   const isPlanVisit = slug === "plan-visit";
   const isAccess = slug === "accessible-museum";
   const isCollection = slug === "science-collection";
+  const isTeam = slug === "museum-team";
   const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: "/guide/" + child.slug + "/" })) : [];
   const directChildren = usesCmsNavigation ? findPublicNavigationNode(navigationTree, slug)?.children ?? [] : [];
   const sectionEntries = usesCmsNavigation ? entriesInCmsSection(slug) : [];
@@ -49,7 +51,9 @@ export default async function GuidePage({ params }: Props) {
     <h1>{title}</h1>
     <p className="lead">{group
       ? "Раздел будущего сайта составлен по техническому заданию и действующей структуре музея. Наполнение уточним после интервью."
-      : "Эта страница пока является навигационным каркасом. Фотографии и полные музейные тексты не перенесены без согласования прав."}
+      : isTeam
+        ? "Список должностных лиц и служебные телефоны перенесены с действующего сайта музея; публикация обновлённого списка требует подтверждения заказчика."
+        : "Эта страница пока является навигационным каркасом. Фотографии и полные музейные тексты не перенесены без согласования прав."}
     </p>
     {isVisit && <div className="reference-facts">
       <h2>Сведения с действующего сайта музея</h2>
@@ -73,6 +77,7 @@ export default async function GuidePage({ params }: Props) {
       <p>Уточнение условий посещения: <a href={museumReference.phoneHref}>{museumReference.phone}</a>.</p>
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <a href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</a>.</p>
     </div>}
+    {isTeam && <MuseumTeam />}
     <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
     {isCollection && <p className="reference-facts"><a href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</a></p>}
     {directChildren.length > 0 && <section aria-label={"Подразделы: " + title}>

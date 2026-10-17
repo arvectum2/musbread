@@ -34,7 +34,7 @@ const founding: MuseumOfficialDocumentGroup = {
     {label:"Устав музея",url:official("/sites/default/files/page/20260203114639-ustav_2011.docx"),format:"DOCX"},
     {label:"Изменения в Устав 2022",url:official("/sites/default/files/page/20260203114727-izmeneniya_v_ustav_2022.pdf"),format:"PDF"},
     {label:"Реквизиты учреждения",url:official("/sites/default/files/page/20260203114846-rekvizity_uchrezhdeniya.pdf"),format:"PDF"},
-    {label:"Сведения об учредителе музея",url:official("/sites/default/files/page/20260203115202-uchreditel_muzeya.pdf"),format:"PDF"},
+    {label:"Учредитель музея",url:official("/sites/default/files/page/20260203115202-uchreditel_muzeya.pdf"),format:"PDF"},
     {label:"Приказ о назначении директора музея",url:official("/sites/default/files/page/20260203115235-prikaz_o_naznachenii_direktora_muzeya.pdf"),format:"PDF"},
     {label:"Структура музея",url:official("/sites/default/files/page/20260203115739-struktura_muzeya.pdf"),format:"PDF"},
   ],
@@ -51,10 +51,13 @@ const visiting: MuseumOfficialDocumentGroup = {
   title: "Правила посещения и билеты",
   source: pages.visits,
   items: [
-    {label:"Правила посещения музея",url:official("/sites/default/files/page/20260203112014-pravila_poseshcheniya_muzeya.pdf"),format:"PDF"},
+    {label:"Сведения о видах предоставляемых услуг",url:official("/sites/default/files/page/20260203112119-svedeniya_o_vidah_predostavlyaemyh_uslug.pdf"),format:"PDF"},
     {label:"Положение о платных услугах",url:official("/sites/default/files/page/20260203112237-polozhenie_o_platnyh_uslugah.pdf"),format:"PDF"},
-    {label:"Положение о порядке приобретения и возврата билетов и экскурсионных путёвок",url:official("/sites/default/files/page/20260203113223-1.pdf"),format:"PDF"},
-    {label:"Приложение к положению о возврате",url:official("/sites/default/files/page/20260203113346-prilozhenie_1_k_polozheniyu_o_vozvrate.docx"),format:"DOCX"},
+    {label:"Положение о порядке и условиях доступа граждан к музейным предметам и музейным коллекциям",url:official("/sites/default/files/page/20260203112347-poryadok_dostupa.pdf"),format:"PDF"},
+    {label:"Положение о порядке приобретения и возврата кассовых чеков, билетов, экскурсионных путевок в СПб ГБУК «Санкт-Петербургский музей Хлеба»",url:official("/sites/default/files/page/20260203113223-1.pdf"),format:"PDF"},
+    {label:"Приложение № 1 к Положению о порядке приобретения и возврата кассовых чеков, экскурсионных путевок, билетов",url:official("/sites/default/files/page/20260203113346-prilozhenie_1_k_polozheniyu_o_vozvrate.docx"),format:"DOCX"},
+    {label:"Приказ о применении сервиса Цифрового ID",url:official("/sites/default/files/page/20260203113458-prikaz_o_primenenii_servisa_cifrovogo_id.pdf"),format:"PDF"},
+    {label:"Приказ о создании информационного канала Учреждения в национальном мессенджере МАХ",url:official("/sites/default/files/page/20251127220642.pdf"),format:"PDF"},
   ],
 };
 const accessibility: MuseumOfficialDocumentGroup = {

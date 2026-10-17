@@ -18,6 +18,10 @@ class MuseumSectionExportTest extends TestCase
         $this->seed(ReferenceMuseumSectionsSeeder::class);
         $this->assertSame(62, MuseumSection::count());
         $this->assertSame(7, MuseumSection::whereNull('parent_id')->count());
+        $this->assertSame(24, MuseumSection::where('status', 'draft')->count());
+        $this->assertSame(38, MuseumSection::where('status', 'published')->count());
+        $this->assertSame('draft', MuseumSection::where('slug', 'friends')->value('status'));
+        $this->assertSame('published', MuseumSection::where('slug', 'museum-documents')->value('status'));
         $firstId = MuseumSection::where('slug', 'museum')->value('id');
         $museum = MuseumSection::findOrFail($firstId);
         $museum->update(['title' => 'Редактор переименовал раздел']);
@@ -53,8 +57,9 @@ class MuseumSectionExportTest extends TestCase
         $editor = MoonshineUser::factory()->create();
         $section->editors()->attach($editor->id);
         [$snapshot, $audit] = $this->export('reference');
-        $this->assertCount(62, $snapshot['sections']);
-        $this->assertSame(62, $audit['section_count']);
+        $this->assertCount(38, $snapshot['sections']);
+        $this->assertSame(38, $audit['section_count']);
+        $this->assertNotContains('friends', array_column($snapshot['sections'], 'slug'));
         $this->assertSame('museum', $snapshot['sections'][0]['slug']);
         $text = json_encode($snapshot, JSON_UNESCAPED_UNICODE);
         $this->assertStringNotContainsString('moonshine_user_id', $text);

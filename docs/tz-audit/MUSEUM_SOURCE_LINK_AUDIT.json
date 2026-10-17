@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-17T05:08:43+00:00",
+  "source": "https://muzei-xleb.ru",
+  "sections_with_source": 31,
+  "curated_document_links": 15,
+  "document_groups_checked": [
+    "founding",
+    "privacy",
+    "visiting"
+  ],
+  "administration_roles_checked": 5,
+  "ok": true,
+  "http_results": {
+    "OK": 46
+  },
+  "unreachable_or_wrong_type": [],
+  "orphan_document_links": [],
+  "names_not_on_official_page": [],
+  "disclaimer": "HTTP and HTML match, not legal currency or permission to publish"
+}
