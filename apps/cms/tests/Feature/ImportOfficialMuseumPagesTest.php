@@ -35,12 +35,12 @@ final class ImportOfficialMuseumPagesTest extends TestCase
         $this->assertFalse(Storage::disk('local')->exists('museum/documents/official-source/dummy.pdf'));
     }
 
-    public function test_apply_imports_eight_private_pages_with_source_prices_links_and_keeps_editor_edits(): void
+    public function test_apply_imports_eleven_private_pages_with_source_prices_links_and_keeps_editor_edits(): void
     {
         $this->seed(ReferenceMuseumSectionsSeeder::class);
         Storage::fake('local');
         $this->assertSame(0, Artisan::call('museum:import-official-pages', $this->importOptions(['--apply' => true])));
-        $this->assertDatabaseCount('museum_entries', 8);
+        $this->assertDatabaseCount('museum_entries', 11);
         foreach (MuseumEntry::all() as $entry) {
             $this->assertSame('draft', $entry->status);
             $this->assertNull($entry->published_at);
@@ -49,6 +49,9 @@ final class ImportOfficialMuseumPagesTest extends TestCase
             $this->assertStringContainsString('https://muzei-xleb.ru/', $entry->excerpt);
             $this->assertNotEmpty(strip_tags($entry->body));
         }
+        $refund = MuseumEntry::where('slug', 'ticket-refunds')->firstOrFail();
+        $this->assertSame('Возврат билетов', $refund->h1);
+        $this->assertSame('Порядок возврата билетов', $refund->title);
         $prices = MuseumEntry::where('slug', 'tickets-and-benefits')->firstOrFail();
         $this->assertStringContainsString('<table', $prices->body);
         $this->assertStringContainsString('400 рублей', $prices->body);
@@ -61,7 +64,7 @@ final class ImportOfficialMuseumPagesTest extends TestCase
         $history = MuseumEntry::where('slug', 'museum-history')->firstOrFail();
         $history->update(['body' => '<p>Редактор заменил текст!</p>', 'title' => 'Версия музея']);
         $this->assertSame(0, Artisan::call('museum:import-official-pages', $this->importOptions(['--apply' => true])));
-        $this->assertSame(8, MuseumEntry::count());
+        $this->assertSame(11, MuseumEntry::count());
         $this->assertSame('Версия музея', $history->fresh()->title);
         $this->assertSame('<p>Редактор заменил текст!</p>', trim($history->fresh()->body));
         $this->assertDatabaseCount('museum_documents', 0);
@@ -134,7 +137,7 @@ final class ImportOfficialMuseumPagesTest extends TestCase
                 '--apply' => true, '--documents' => true, '--archive' => $dir.'/manifest.json',
             ])));
             $this->assertDatabaseCount('museum_documents', 1);
-            $this->assertDatabaseCount('museum_entries', 8);
+            $this->assertDatabaseCount('museum_entries', 11);
         } finally {
             @unlink($dir.'/'.$sha.'.pdf');
             @unlink($dir.'/manifest.json');
@@ -142,7 +145,85 @@ final class ImportOfficialMuseumPagesTest extends TestCase
         }
     }
 
-    public function test_eight_imported_drafts_do_not_leak_into_public_snapshot_until_editor_publishes(): void
+    public function test_original_refund_rule_and_application_are_kept_separate_from_general_documents(): void
+    {
+        $this->seed(ReferenceMuseumSectionsSeeder::class);
+        Storage::fake('local');
+        $source = json_decode(file_get_contents(base_path('../web/src/data/official-page-snapshots.json')), true);
+        $page = collect($source['pages'])->firstWhere('path', '/ceny-i-usloviya-predostavleniya-uslug');
+        $links = $page['document_links'];
+        $selected = array_values(array_filter($links, static fn ($link) =>
+            str_contains($link['url'], '20260203113223-1.pdf')
+            || str_contains($link['url'], '20260203113346-prilozhenie_1_')
+            || str_contains($link['url'], '20260203112237-polozhenie_o_platnyh_uslugah.pdf')));
+        $this->assertCount(3, $selected);
+        $dir = storage_path('framework/testing/official-refund-classification');
+        if (! is_dir($dir)) mkdir($dir, 0700, true);
+        $files = [];
+        try {
+            foreach ($selected as $link) {
+                $ext = str_ends_with($link['url'], '.docx') ? 'docx' : 'pdf';
+                $temp = tempnam($dir, 'item');
+                if ($ext === 'pdf') {
+                    file_put_contents($temp, "%PDF-1.4
+1 0 obj
+<< /Type /Catalog >>
+endobj
+trailer
+<<>>
+%%EOF
+");
+                    // Each official PDF is different; the synthetic test
+                    // must not accidentally reuse one globally-unique storage_path.
+                    file_put_contents($temp, "% source: ".$link['url']."\n", FILE_APPEND);
+                } else {
+                    $zip = new \ZipArchive();
+                    $this->assertTrue($zip->open($temp, \ZipArchive::OVERWRITE) === true);
+                    $zip->addFromString('[Content_Types].xml',
+                        '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="xml" ContentType="application/xml"/></Types>');
+                    $zip->addFromString('word/document.xml', '<document/>');
+                    $zip->close();
+                }
+                $bytes = file_get_contents($temp);
+                $sha = hash('sha256', $bytes);
+                $local = $sha.'.'.$ext;
+                rename($temp, $dir.'/'.$local);
+                $files[] = [
+                    'source' => '/ceny-i-usloviya-predostavleniya-uslug',
+                    'url' => $link['url'], 'local_name' => $local,
+                    'sha256' => $sha, 'size_bytes' => strlen($bytes),
+                    'label' => $link['label'],
+                ];
+            }
+            file_put_contents($dir.'/manifest.json', json_encode([
+                'source' => 'https://muzei-xleb.ru', 'files' => $files,
+            ]));
+            // First create the actual source pages as drafts, then append
+            // source-backed files to existing drafts via the separate opt-in.
+            $this->assertSame(0, Artisan::call('museum:import-official-pages', $this->importOptions([
+                '--apply' => true,
+            ])), Artisan::output());
+            $this->assertDatabaseCount('museum_documents', 0);
+            $this->assertSame(0, Artisan::call('museum:import-official-pages', $this->importOptions([
+                '--apply' => true, '--documents' => true, '--append-documents' => true,
+                '--archive' => $dir.'/manifest.json',
+            ])), Artisan::output());
+            $this->assertSame(2, MuseumEntry::where('slug', 'ticket-refunds')->firstOrFail()->documents()->count());
+            $this->assertSame(1, MuseumEntry::where('slug', 'museum-documents')->firstOrFail()->documents()->count());
+            $this->assertDatabaseCount('museum_documents', 3);
+            $this->assertSame(11, MuseumEntry::where('status', 'draft')->count());
+            $this->assertSame(0, Artisan::call('museum:import-official-pages', $this->importOptions([
+                '--apply' => true, '--documents' => true, '--append-documents' => true,
+                '--archive' => $dir.'/manifest.json',
+            ])));
+            $this->assertDatabaseCount('museum_documents', 3);
+        } finally {
+            foreach (glob($dir.'/*') ?: [] as $file) @unlink($file);
+            @rmdir($dir);
+        }
+    }
+
+    public function test_eleven_imported_drafts_do_not_leak_into_public_snapshot_until_editor_publishes(): void
     {
         $this->seed(ReferenceMuseumSectionsSeeder::class);
         Storage::fake('local');
@@ -169,10 +250,40 @@ final class ImportOfficialMuseumPagesTest extends TestCase
             $this->assertSame('tickets-and-benefits', $after['entries'][0]['slug']);
             $this->assertStringContainsString('400 рублей', $after['entries'][0]['body']);
             $this->assertStringContainsString('<table', $after['entries'][0]['body']);
-            $this->assertSame(7, MuseumEntry::query()->where('status', 'draft')->count());
+            $this->assertSame(10, MuseumEntry::query()->where('status', 'draft')->count());
         } finally {
             @unlink($output);
             @unlink($manifest);
+        }
+    }
+
+    public function test_adding_missing_documents_needs_all_flags_and_private_source_draft(): void
+    {
+        $this->seed(ReferenceMuseumSectionsSeeder::class);
+        Storage::fake('local');
+        $this->assertSame(1, Artisan::call('museum:import-official-pages',
+            $this->importOptions(['--apply'=>true,'--append-documents'=>true])));
+        $this->assertDatabaseCount('museum_entries',0);
+        $this->assertSame(0, Artisan::call('museum:import-official-pages',
+            $this->importOptions(['--apply'=>true])));
+        $this->assertDatabaseCount('museum_entries',11);
+        $draft = MuseumEntry::where('slug','museum-documents')->firstOrFail();
+        $draft->update(['status'=>'published','published_at'=>now()->subMinute()]);
+        $dir = storage_path('framework/testing/official-append-guard');
+        if (! is_dir($dir)) mkdir($dir,0700,true);
+        file_put_contents($dir.'/manifest.json',json_encode([
+            'source'=>'https://muzei-xleb.ru','files'=>[],
+        ]));
+        try {
+            $this->assertSame(1, Artisan::call('museum:import-official-pages',$this->importOptions([
+                '--apply'=>true,'--documents'=>true,'--append-documents'=>true,
+                '--archive'=>$dir.'/manifest.json',
+            ])));
+            $this->assertDatabaseCount('museum_documents',0);
+            $this->assertSame('published',$draft->fresh()->status);
+        } finally {
+            @unlink($dir.'/manifest.json');
+            @rmdir($dir);
         }
     }
 

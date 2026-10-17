@@ -24,6 +24,7 @@ final class ImportOfficialMuseumPages extends Command
     protected $signature = 'museum:import-official-pages
         {--apply : Write missing draft pages to the existing MoonShine database}
         {--documents : Attach validated local original documents (requires --apply)}
+        {--append-documents : Explicitly append missing checked originals to existing source-origin drafts}
         {--archive= : Optional private original document manifest; default is .local_archive}
         {--source= : Optional snapshot JSON; default is the captured museum-source file}';
 
@@ -39,6 +40,15 @@ final class ImportOfficialMuseumPages extends Command
         '/istoriya-zdaniya' => 'building-history',
         '/ekspozicii' => 'museum-exposition',
         '/vakansii' => 'museum-vacancies',
+        '/finansovo-hozyaystvennaya-deyatelnost' => 'museum-finance',
+        '/protivodeystvie-korrupcii' => 'museum-anti-corruption',
+        '/politika-obespecheniya-usloviy-dostupnosti-dlya-invalidov-i-drugih-mobilnyh-grazhdan' => 'museum-accessibility-policy',
+    ];
+
+    /** Exact source URL allowlist, not text matching of a changing title. */
+    private const REFUND_DOCUMENT_URLS = [
+        'https://muzei-xleb.ru/sites/default/files/page/20260203113223-1.pdf',
+        'https://muzei-xleb.ru/sites/default/files/page/20260203113346-prilozhenie_1_k_polozheniyu_o_vozvrate.docx',
     ];
 
     public function handle(MuseumDocumentInspector $inspector): int
@@ -49,6 +59,10 @@ final class ImportOfficialMuseumPages extends Command
         }
         if ($this->option('documents') && ! $this->option('apply')) {
             $this->error('Document attachment needs explicit --apply.');
+            return self::FAILURE;
+        }
+        if ($this->option('append-documents') && (! $this->option('documents') || ! $this->option('apply'))) {
+            $this->error('Append mode requires explicit --apply --documents --append-documents.');
             return self::FAILURE;
         }
         $path = $this->option('source') ?: base_path('../web/src/data/official-page-snapshots.json');
@@ -109,21 +123,33 @@ final class ImportOfficialMuseumPages extends Command
                 &$created, &$attached, &$skippedFiles): void {
                 foreach ($plan as $slug => $page) {
                     // firstOrCreate is intentionally non-destructive for all editor-owned fields.
+                    $displayTitle = $slug === 'ticket-refunds'
+                        ? 'Порядок возврата билетов' : (string) $page['title'];
+                    $displayH1 = $slug === 'ticket-refunds'
+                        ? 'Возврат билетов' : (string) $page['title'];
                     $entry = MuseumEntry::query()->firstOrCreate(['slug' => $slug], [
                         'type' => 'page',
-                        'title' => mb_substr((string) $page['title'], 0, 255),
-                        'h1' => mb_substr((string) $page['title'], 0, 255),
+                        'title' => mb_substr($displayTitle, 0, 255),
+                        'h1' => mb_substr($displayH1, 0, 255),
                         'museum_section_id' => MuseumSection::query()->where('slug', $slug)->value('id'),
                         'excerpt' => 'Источник: '.$page['source_url'].'; снимок: '.$page['captured_utc'],
                         'body' => $page['html'],
                         'status' => 'draft',
                     ]);
                     if (! $entry->wasRecentlyCreated) {
-                        $this->comment('Already exists, preserving editorial data and all attached files: '.$slug);
-                        continue;
+                        $this->comment('Already exists, preserving all editorial fields and files: '.$slug);
+                        if (! $this->option('append-documents')) continue;
+                        if ($entry->status !== 'draft'
+                            || ! str_starts_with((string) $entry->excerpt, 'Источник: '.$page['source_url'].';')) {
+                            throw new RuntimeException('Cannot append museum originals to an edited/published/non-source entry: '.$slug);
+                        }
+                    } else {
+                        $created++;
                     }
-                    $created++;
                     foreach ($archive[$page['path']] ?? [] as $file) {
+                        // No duplicate or relink of existing editor-owned documents;
+                        // one local digest represents one immutable source file.
+                        if (MuseumDocument::query()->where('sha256', $file['sha256'])->exists()) continue;
                         $extension = pathinfo($file['local_name'], PATHINFO_EXTENSION);
                         $sourceFile = dirname($file['_manifest']).'/'.$file['local_name'];
                         try {
@@ -146,8 +172,17 @@ final class ImportOfficialMuseumPages extends Command
                                 }
                                 $createdFiles[] = $destination;
                             }
+                            // This legacy landing page contains many unrelated files.
+                            // Only the original refund regulation and its application form
+                            // belong to TZ-142; other service/orders files belong in the
+                            // official document hub, without inventing a new content model.
+                            $fileOwner = $entry;
+                            if ($page['path'] === '/ceny-i-usloviya-predostavleniya-uslug'
+                                && ! in_array($file['url'], self::REFUND_DOCUMENT_URLS, true)) {
+                                $fileOwner = MuseumEntry::where('slug', 'museum-documents')->firstOrFail();
+                            }
                             MuseumDocument::create([
-                                'museum_entry_id' => $entry->id,
+                                'museum_entry_id' => $fileOwner->id,
                                 'label' => mb_substr((string) $file['label'], 0, 180),
                                 'file_type' => $extension,
                                 'storage_path' => $destination,
