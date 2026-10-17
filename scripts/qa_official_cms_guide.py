@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CMS = ROOT / "apps/cms"
 WEB = ROOT / "apps/web"
 PRIVATE = ROOT / ".local_archive"
-REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history", "museum-documents", "zal-hleb-v-mirovoy-istorii"}
+REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history",  "museum-documents", "museum-finance", "museum-anti-corruption", "zal-hleb-v-mirovoy-istorii"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -44,10 +44,12 @@ def main() -> None:
                 "from museum_documents d join museum_entries e on d.museum_entry_id=e.id "
                 "where e.slug=? order by d.id", (slug,)
             ))
-            for slug in ("museum-privacy", "ticket-refunds", "museum-documents", "tickets-and-benefits")
+            for slug in ("museum-privacy", "ticket-refunds", "museum-documents",
+                         "tickets-and-benefits", "museum-finance", "museum-anti-corruption")
         }
         expected_counts = {"museum-privacy": 2, "ticket-refunds": 2,
-                           "museum-documents": 19, "tickets-and-benefits": 1}
+                            "museum-documents": 19, "tickets-and-benefits": 1,
+                           "museum-finance": 4, "museum-anti-corruption": 15}
         if any(len(expected_docs[slug]) != count for slug,count in expected_counts.items()):
             raise RuntimeError("Missing imported official documents or compressed copies in CMS")
         with sqlite3.connect(f"file:{source_db}?mode=ro", uri=True) as db:
@@ -71,7 +73,7 @@ def main() -> None:
                        "where slug='museum-privacy'")
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes') "
-                       "where slug in ('tickets-and-benefits','ticket-refunds','museum-documents')")
+                       "where slug in ('tickets-and-benefits','ticket-refunds','museum-documents','museum-finance','museum-anti-corruption')")
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes'),"
                        "title='QA: редакция зала утверждена музеем',"
@@ -106,7 +108,8 @@ def main() -> None:
              "--preflight-strict"], CMS, environment, log)
         data = json.loads(snapshot.read_text())
         slugs = {entry["slug"] for entry in data["entries"]}
-        if not {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-documents"} <= slugs or "museum-history" in slugs:
+        if not {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-documents",
+                "museum-finance", "museum-anti-corruption"} <= slugs or "museum-history" in slugs:
             raise RuntimeError("Public/private source CMS entries wrongly filtered: " + repr(slugs))
         published_room = next((e for e in data["entries"]
                                if e["slug"] == "zal-hleb-v-mirovoy-istorii"), None)
@@ -143,6 +146,23 @@ def main() -> None:
         if "/documents/"+labor[0]+".pdf" not in attachment_hrefs["museum-documents"]:
             raise RuntimeError("Verified compressed 45-page work rules PDF not in CMS export")
 
+        expected_safe = {
+            "museum-finance": {
+                "49d9a017dd17d60cda02105d7b28c5faf09e1dbb0f423f1e8efccf98aab73d3b",
+                "3758e315468d441eb1f1868f625e04c8e178b7220edd0ebaeaea56462357a7bb",
+            },
+            "museum-anti-corruption": {
+                "d60ddc0f9e105303ce0a358462ba7cbd0e078982dff8a645fdf14753fda8bfcb",
+            },
+        }
+        for slug, checksums in expected_safe.items():
+            recorded = {entry[0] for entry in expected_docs[slug]}
+            if not checksums <= recorded:
+                raise RuntimeError("One or more of three safety-validated derived PDFs missing in " + slug)
+            for sha in checksums:
+                if "/documents/" + sha + ".pdf" not in attachment_hrefs[slug]:
+                    raise RuntimeError("Reconstructed museum file not served by PHP exporter")
+
         isolated = work / "web"
         shutil.copytree(WEB, isolated, ignore=shutil.ignore_patterns(
             "node_modules", ".next", "out", "test-results", "playwright-report", ".git"))
@@ -157,6 +177,8 @@ def main() -> None:
         prices = html.fromstring((out / "guide/tickets-and-benefits/index.html").read_bytes())
         refunds = html.fromstring((out / "guide/ticket-refunds/index.html").read_bytes())
         hub = html.fromstring((out / "guide/museum-documents/index.html").read_bytes())
+        finance = html.fromstring((out / "guide/museum-finance/index.html").read_bytes())
+        anticorruption = html.fromstring((out / "guide/museum-anti-corruption/index.html").read_bytes())
         fallback = html.fromstring((out / "guide/museum-history/index.html").read_bytes())
         exhibit = html.fromstring((out / "guide/museum-exposition/index.html").read_bytes())
         edited_room = html.fromstring(
@@ -190,6 +212,8 @@ def main() -> None:
             ("refund", attachment_hrefs["ticket-refunds"], refunds),
             ("museum-documents", attachment_hrefs["museum-documents"], hub),
             ("tickets-and-benefits", attachment_hrefs["tickets-and-benefits"], prices),
+            ("museum-finance", attachment_hrefs["museum-finance"], finance),
+            ("museum-anti-corruption", attachment_hrefs["museum-anti-corruption"], anticorruption),
         ):
             if not hrefs.issubset(set(doc.xpath("//main//section[@aria-label='Документы опубликованной редакции CMS']//a/@href"))):
                 raise RuntimeError("CMS attachments missing from dedicated " + name + " document panel")
@@ -226,10 +250,11 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 5 disposable CMS pages including one museum exposition room, "
-          "11 source-backed gallery cards with published room override and no draft leak; "
-          "24 SHA256-verified official files, H1/SEO, prices, no PII forms, noindex; "
-          "real working CMS 22 drafts/41 docs and tracked snapshot unchanged.")
+    print("PASS: 7 disposable CMS pages including one museum exposition room, "
+          "11 genuine gallery cards with CMS override and no draft leak; "
+          "44 SHA256-verified CMS binary documents, 5 specially marked safe derivatives, "
+          "H1/SEO, prices, no PII form or premature a11y approval; "
+          "real working CMS remains 22 drafts/44 docs with unchanged web fixture.")
 
 
 if __name__ == "__main__":

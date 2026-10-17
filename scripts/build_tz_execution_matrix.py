@@ -73,9 +73,11 @@ assert ids == list(range(1, 326)), 'Primary TZ IDs must be ordered and complete'
 # The owner now authorizes the CURRENT official museum site as the baseline
 # content edition. This unblocks *further local import/metadata QA*, NOT rights
 # clearance, interview, final editor approval, or a production release.
-# Next work can bring source pages and original documents into editable CMS
-# entries, preserving source URLs and original metadata.
-OFFICIAL_SOURCE_BASELINE_NOW = {129, 130, 131, 134, 137, 141, 142}
+# The local TZ-134 original/PDF/OCR work is now exhausted: all 44 originals
+# are preserved, 44 private CMS attachments are validated, and five OCR
+# transcripts exist only as unreviewed drafts. The next meaningful step is
+# human/contractual approval, so TZ-134 must NOT remain in the unblocked queue.
+OFFICIAL_SOURCE_BASELINE_NOW = {129, 130, 131, 137, 141, 142}
 CAN_START_NOW -= WAITING_ON_CUSTOMER_AFTER_LOCAL_WORK
 CAN_START_NOW |= OFFICIAL_SOURCE_BASELINE_NOW
 assert set(CAN_START_NOW) <= set(ids)
