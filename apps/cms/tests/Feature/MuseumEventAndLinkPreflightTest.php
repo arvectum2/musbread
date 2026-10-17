@@ -151,6 +151,30 @@ class MuseumEventAndLinkPreflightTest extends TestCase
         $this->assertSame(5, app(MuseumContentPreflight::class)->report()['errors']);
     }
 
+    public function test_inline_context_links_require_meaningful_labels_without_editorial_autowriting():void
+    {
+        $target=$this->entry('verified-bread');
+        $source=$this->entry('bread-context');
+        $source->update(['body'=>'<p>Технический текст '
+            .'<a href="/news/verified-bread/">Здесь</a> '
+            .'<a href="/news/bread-context/">Сама эта статья</a> '
+            .'<a href="/news/verified-bread/"><strong>История хлеба в музее</strong></a>'
+            .'</p>']);
+        $codes=$this->codes($this->entryRow($source));
+        $this->assertContains('context_link_generic_text',$codes);
+        $this->assertContains('context_link_to_same_page',$codes);
+        $this->assertNotContains('internal_link_unavailable',$codes);
+        $this->assertSame(0,app(MuseumContentPreflight::class)->report()['errors']);
+        $this->artisan('museum:preflight',['--strict'=>true])->assertSuccessful();
+        // An empty anchor can be created by paste or imported legacy HTML;
+        // directly test the fail-closed inspector without relying on the
+        // HTMLPurifier auto-removing malformed markup on new edits.
+        $available=collect(['/news/verified-bread/'=>true]);
+        $issues=(new \App\Support\MuseumInternalLinkInspector($available))
+            ->check('<a href="/news/verified-bread/"></a>','/news/bread-context/');
+        $this->assertContains('context_link_empty_text',array_column($issues,'code'));
+    }
+
     public function test_relative_and_english_routes_and_type_mismatch_are_checked(): void
     {
         $other = $this->entry('other', 'excursion');

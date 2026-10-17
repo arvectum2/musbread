@@ -48,6 +48,7 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make('/admin/museum-media', 'Изображения'),
             MenuItem::make('/admin/museum-documents', 'Документы'),
             MenuItem::make('/admin/museum-content/preflight', 'Проверить перед публикацией'),
+            MenuItem::make('/admin/museum-content/links', 'Подобрать ссылку в текст'),
             ...($admin ? [
                 MenuItem::make(MuseumSectionResource::class, 'Структура сайта'),
                 MenuItem::make(MuseumFixedPageSeoResource::class, 'SEO фиксированных страниц'),

@@ -1,0 +1,263 @@
+{
+  "report_type": "PREAWARD_NONLEGAL_NONCERTIFYING",
+  "requirements_total": 325,
+  "legal_ids_checked": 13,
+  "legal_ready": false,
+  "may_activate_appeals": false,
+  "may_activate_real_pii_intake": false,
+  "may_claim_pdf_ua_conformity": false,
+  "signals": {
+    "feedback_and_booking_disabled": true,
+    "analytics_disabled": true,
+    "no_expected_pii_in_snapshot": true,
+    "published_document_records": 0,
+    "default_public_pii_intake_disabled": true,
+    "nginx_deployment_templates_present": false,
+    "telecom_operator_status_confirmed": false,
+    "state_security_law_applicability_approved": false
+  },
+  "legal_controls": [
+    {
+      "id": "TZ-278",
+      "source_clause": "332-348",
+      "law": "Общая применимость правовых актов",
+      "verified_technical_scope": "legal/document applicability requires customer verification",
+      "external_evidence_needed": "Юрист музея утверждает список действующих обязательств",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_179390/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-279",
+      "source_clause": "333",
+      "law": "126-ФЗ «О связи»",
+      "verified_technical_scope": "static museum pages do not themselves prove the museum is a licensed telecom operator; review hosted telecommunications and provider contracts; applicability UNDECIDED",
+      "external_evidence_needed": "Сведения об операторе связи, провайдере хостинга и используемых услугах связи; юрист музея фиксирует применимость",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_43224/b819c620a8c698de35861ad4c9d9696ee0c3ee7a/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-280",
+      "source_clause": "334",
+      "law": "149-ФЗ «Об информации, информационных технологиях и о защите информации»",
+      "verified_technical_scope": "verified local evidence: public static export, authenticated CMS separate from public, disabled PII/analytics by default, build CSP and private document access checks; server deployment, backup/recovery and threat model NOT accepted",
+      "external_evidence_needed": "Владелец ИС и классификация информации, договор хостинга, журналы доступа, резервное копирование, ответственность и документированный план защиты",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_61798/0e9ec16b786dcbdaaa7f44abfc4a15e601d5be22/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-281",
+      "source_clause": "335",
+      "law": "390-ФЗ «О безопасности»",
+      "verified_technical_scope": "390-FZ covers the national/state/public security policy framework; no specific website-only technical compliance assertion follows from the title of the law; scope and accountable state institution must be confirmed",
+      "external_evidence_needed": "Заключение ответственного лица о сфере применения; не приравнивать сайт к субъекту полномочий государственных органов по умолчанию",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_108546/27f9ddea0cccf9a6b90bb2cb8b545d436f18157b/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-282",
+      "source_clause": "336",
+      "law": "152-ФЗ, персональные данные",
+      "verified_technical_scope": "feedback/booking currently disabled; no analytics by default; published static snapshot excludes expected PII keys",
+      "external_evidence_needed": "Подтвердить актуальность уже опубликованных документов музея и нужны ли новые формы",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_61801/eeeebe22bf738fd65bb66b95cc278911ae2525ee/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-283",
+      "source_clause": "337",
+      "law": "59-ФЗ, обращения граждан",
+      "verified_technical_scope": "feedback/booking currently disabled; legal/document applicability requires customer verification",
+      "external_evidence_needed": "Подтвердить официальный канал и порядок обработки обращений, если он входит в проект",
+      "reference_url": "https://rostransnadzor.gov.ru/news/16472",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-284",
+      "source_clause": "338",
+      "law": "Закон 3612-1 о культуре",
+      "verified_technical_scope": "legal/document applicability requires customer verification",
+      "external_evidence_needed": "Подтвердить список и редакции уже опубликованных документов",
+      "reference_url": "https://mintrud.gov.ru/docs/mintrud/analytics/65",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-285",
+      "source_clause": "339",
+      "law": "Приказ Минкультуры 277",
+      "verified_technical_scope": "legal/document applicability requires customer verification",
+      "external_evidence_needed": "Согласовать список исходных файлов, способ переноса и ответственного за обновления",
+      "reference_url": "https://minjust.consultant.ru/documents/14578?items=1&page=1",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-286",
+      "source_clause": "340",
+      "law": "181-ФЗ, доступная среда",
+      "verified_technical_scope": "existing accessibility audit and CMS templates require real evidence",
+      "external_evidence_needed": "Паспорт доступности, услуги сопровождения, достоверные входы/маршруты, UAT",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_8559/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-287",
+      "source_clause": "341",
+      "law": "ПП РФ 102 от 07.02.2026",
+      "verified_technical_scope": "existing accessibility audit and CMS templates require real evidence",
+      "external_evidence_needed": "Подведомственность и сфера применения, скринридеры, клавиатура, экспертная приёмка",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_526205/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-289",
+      "source_clause": "343",
+      "law": "ГОСТ Р 52872-2019",
+      "verified_technical_scope": "existing accessibility audit and CMS templates require real evidence",
+      "external_evidence_needed": "Полный аудит применимых критериев на рабочем сайте и с assistive tech",
+      "reference_url": "https://protect.gost.ru/gost/details/2d10ff38-d609-4dcc-899f-c18b77ac0b75",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-290",
+      "source_clause": "344",
+      "law": "ГОСТ Р 70176-2022",
+      "verified_technical_scope": "existing accessibility audit and CMS templates require real evidence",
+      "external_evidence_needed": "Оригиналы PDF, структурные теги, текст, язык, alt или проверенная доступная альтернатива",
+      "reference_url": "https://protect.gost.ru/gost/details/083ccfc7-6861-42d0-9861-011a7958fc71",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-294",
+      "source_clause": "348",
+      "law": "436-ФЗ, информация для детей",
+      "verified_technical_scope": "legal/document applicability requires customer verification",
+      "external_evidence_needed": "Получить от музея правила редакционной проверки детских материалов, если нужны",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_108808/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    }
+  ],
+  "disclosure_register": [
+    {
+      "key": "identification",
+      "requested_evidence": "Полное/краткое наименование, адрес и схема проезда",
+      "candidate_internal_route": "/guide/museum-contacts/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "foundation",
+      "requested_evidence": "Дата создания, учредитель/ведомственная принадлежность",
+      "candidate_internal_route": "/guide/museum-documents/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "statute",
+      "requested_evidence": "Устав и другие учредительные документы в проверенной версии",
+      "candidate_internal_route": "/guide/museum-documents/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "leadership",
+      "requested_evidence": "Руководство, персонал и структура (применимый объём)",
+      "candidate_internal_route": "/guide/museum-team/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "services",
+      "requested_evidence": "Сведения об услугах, графике, записи и условиях посещения",
+      "candidate_internal_route": "/guide/plan-visit/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "fees",
+      "requested_evidence": "Стоимость платных услуг, льготы и правила возврата",
+      "candidate_internal_route": "/guide/tickets-and-benefits/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "finances",
+      "requested_evidence": "Финансово-хозяйственные сведения/официальная отчётность",
+      "candidate_internal_route": "/guide/museum-finance/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "quality",
+      "requested_evidence": "Независимая оценка качества услуг и результаты (при применимости)",
+      "candidate_internal_route": "/guide/museum-documents/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "accessibility",
+      "requested_evidence": "Официальные сведения для маломобильных посетителей",
+      "candidate_internal_route": "/guide/accessible-museum/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "privacy",
+      "requested_evidence": "Актуальная утверждённая политика обработки ПДн",
+      "candidate_internal_route": "/guide/museum-privacy/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "appeals",
+      "requested_evidence": "Подтверждённый официальный канал обращений (при применимости)",
+      "candidate_internal_route": "/guide/museum-feedback/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    },
+    {
+      "key": "children",
+      "requested_evidence": "Возрастная классификация и процесс модерации информации для детей",
+      "candidate_internal_route": "/guide/children/",
+      "reference_navigation_exists": true,
+      "official_signed_document_verified": false,
+      "accepted_by_museum": false,
+      "status": "SOURCE_OR_APPROVAL_REQUIRED"
+    }
+  ],
+  "client_pending_total": 25,
+  "warning": "Reference navigation is not verified publication. Legal approval is never inferred from filenames, links or passing tests."
+}

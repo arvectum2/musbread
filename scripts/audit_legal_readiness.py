@@ -15,6 +15,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REFERENCE = {
  "TZ-278": ("Общая применимость правовых актов", "Юрист музея утверждает список действующих обязательств"),
+ "TZ-279": ("126-ФЗ «О связи»", "Сведения об операторе связи, провайдере хостинга и используемых услугах связи; юрист музея фиксирует применимость"),
+ "TZ-280": ("149-ФЗ «Об информации, информационных технологиях и о защите информации»", "Владелец ИС и классификация информации, договор хостинга, журналы доступа, резервное копирование, ответственность и документированный план защиты"),
+ "TZ-281": ("390-ФЗ «О безопасности»", "Заключение ответственного лица о сфере применения; не приравнивать сайт к субъекту полномочий государственных органов по умолчанию"),
  "TZ-282": ("152-ФЗ, персональные данные", "Подтвердить актуальность уже опубликованных документов музея и нужны ли новые формы"),
  "TZ-283": ("59-ФЗ, обращения граждан", "Подтвердить официальный канал и порядок обработки обращений, если он входит в проект"),
  "TZ-284": ("Закон 3612-1 о культуре", "Подтвердить список и редакции уже опубликованных документов"),
@@ -27,6 +30,9 @@ REFERENCE = {
 }
 SOURCES = {
  "TZ-278": "https://www.consultant.ru/document/cons_doc_LAW_179390/",
+ "TZ-279": "https://www.consultant.ru/document/cons_doc_LAW_43224/b819c620a8c698de35861ad4c9d9696ee0c3ee7a/",
+ "TZ-280": "https://www.consultant.ru/document/cons_doc_LAW_61798/0e9ec16b786dcbdaaa7f44abfc4a15e601d5be22/",
+ "TZ-281": "https://www.consultant.ru/document/cons_doc_LAW_108546/27f9ddea0cccf9a6b90bb2cb8b545d436f18157b/",
  "TZ-282": "https://www.consultant.ru/document/cons_doc_LAW_61801/eeeebe22bf738fd65bb66b95cc278911ae2525ee/",
  "TZ-283": "https://rostransnadzor.gov.ru/news/16472",
  "TZ-284": "https://mintrud.gov.ru/docs/mintrud/analytics/65",
@@ -71,14 +77,33 @@ def inspect(root: Path) -> dict:
     child_docs = [e for e in snapshot.get("entries", []) if e.get("type") == "document"]
     no_pii = all(all(k not in e for k in ("applicant_name", "email", "phone", "ip_address", "consent"))
                  for e in snapshot.get("entries", []))
+    deploy_nginx = (root / "deploy/nginx").is_dir()
+    no_pii_forms_enabled = feedback_disabled and analytics_disabled
+    scope_by_law = {
+        "TZ-279": (
+            "static museum pages do not themselves prove the museum is a licensed telecom operator; "
+            "review hosted telecommunications and provider contracts; applicability UNDECIDED"
+        ),
+        "TZ-280": (
+            "verified local evidence: public static export, authenticated CMS separate from public, "
+            "disabled PII/analytics by default, build CSP and private document access checks; "
+            "server deployment, backup/recovery and threat model NOT accepted"
+        ),
+        "TZ-281": (
+            "390-FZ covers the national/state/public security policy framework; no specific "
+            "website-only technical compliance assertion follows from the title of the law; "
+            "scope and accountable state institution must be confirmed"
+        ),
+    }
     controls = [
         {"id": key,"source_clause":by_id[key]["Строки tz.txt"],
          "law": title,"verified_technical_scope":
+         (scope_by_law[key] if key in scope_by_law else
          ("feedback/booking currently disabled; " if key in {"TZ-282","TZ-283"} and feedback_disabled else "")+
          ("no analytics by default; " if key == "TZ-282" and analytics_disabled else "")+
          ("published static snapshot excludes expected PII keys" if key == "TZ-282" and no_pii else
           "existing accessibility audit and CMS templates require real evidence" if key in {"TZ-286","TZ-287","TZ-289","TZ-290"} else
-          "legal/document applicability requires customer verification"),
+          "legal/document applicability requires customer verification")),
          "external_evidence_needed":pending,"reference_url":SOURCES[key],
          "compliance_approved":False,"approval_status":"AWAITING_MUSEUM_LEGAL_AND_UAT"}
         for key,(title,pending) in REFERENCE.items()
@@ -98,7 +123,11 @@ def inspect(root: Path) -> dict:
             "signals":{"feedback_and_booking_disabled":feedback_disabled,
                        "analytics_disabled":analytics_disabled,
                        "no_expected_pii_in_snapshot":no_pii,
-                       "published_document_records":len(child_docs)},
+                       "published_document_records":len(child_docs),
+                       "default_public_pii_intake_disabled":no_pii_forms_enabled,
+                       "nginx_deployment_templates_present":deploy_nginx,
+                       "telecom_operator_status_confirmed":False,
+                       "state_security_law_applicability_approved":False},
             "legal_controls":controls,"disclosure_register":disclosures,
             "client_pending_total":len(controls)+len(disclosures),
             "warning":"Reference navigation is not verified publication. Legal approval is never inferred from filenames, links or passing tests."}

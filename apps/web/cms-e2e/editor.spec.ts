@@ -111,6 +111,16 @@ test("реальный вход и редактор материалов в Moon
   await page.locator('select[name="status"]').selectOption('draft');
   await page.locator('button[type="submit"]').filter({ hasText: 'Save' }).click();
   await expect(page).toHaveURL(/museum-event-form-page\/\d+/, { timeout: 10_000 });
+
+  // TZ-176: the source-aware inline-link catalog is reachable from the
+  // real authenticated CMS, without leaking unpublished draft names.
+  await page.goto("/admin/museum-content/links");
+  await expect(page.getByRole("heading", {name:"Контекстные ссылки на опубликованные материалы"})).toBeVisible();
+  await expect(page.locator('input[readonly][value="/news/qa-browser-news/"]')).toBeVisible();
+  await expect(page.locator('input[readonly][value="/events/qa-browser-event/"]')).toBeVisible();
+  await expect(page.locator("body")).not.toContainText("qa-private-draft");
+  await expect(page.locator("form")).toHaveCount(0);
+  await expect(page.getByRole("link",{name:"проверку ссылок и готовности материалов"})).toHaveAttribute("href",/preflight/);
 });
 
 test("закрытая медиатека поддерживает загрузку и alt-текст", async ({ page }) => {

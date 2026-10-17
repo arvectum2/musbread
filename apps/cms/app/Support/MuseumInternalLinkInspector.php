@@ -70,6 +70,28 @@ final class MuseumInternalLinkInspector
                 $normalized = '/'.implode('/', $parts).'/';
                 if (isset($seen[$normalized])) continue;
                 $seen[$normalized] = true;
+                // A URL that resolves does NOT make "here"/an empty anchor
+                // accessible or useful as editorial contextual linking.
+                // External references and link text to non-CMS routes are
+                // reviewed during author approval, not fabricated here.
+                $anchorText=trim(preg_replace('/\\s+/u',' ',(string)$node->textContent) ?? '');
+                if ($anchorText==='') {
+                    $issues[]=[
+                        'level'=>'error','code'=>'context_link_empty_text',
+                        'message'=>'В тексте есть ссылка без видимого названия. Укажите смысловой текст ссылки.',
+                    ];
+                } elseif (preg_match('/^(?:здесь|тут|читать|читать далее|подробнее|ссылка|click here|read more)$/iuD',$anchorText)) {
+                    $issues[]=[
+                        'level'=>'warning','code'=>'context_link_generic_text',
+                        'message'=>'Замените общее название ссылки смысловым названием материала или события.',
+                    ];
+                }
+                if ($normalized===rtrim($sourcePath,'/').'/') {
+                    $issues[]=[
+                        'level'=>'warning','code'=>'context_link_to_same_page',
+                        'message'=>'Ссылка ведёт на эту же страницу: проверьте, нужна ли она в тексте.',
+                    ];
+                }
                 $validTarget = $asset
                     ? count($segments) === 2 && ! $english
                         && preg_match($section === 'media'

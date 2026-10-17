@@ -25,6 +25,7 @@ Route::middleware(\MoonShine\Laravel\Http\Middleware\Authenticate::class)->group
     Route::post('/admin/museum-content/review-notes', [\App\Http\Controllers\MuseumEditorialReviewNotesController::class, 'store'])->name('museum.content.editorial-review.store');
     Route::get('/admin/museum-content/compare', [\App\Http\Controllers\MuseumPublicationDiffController::class, 'index'])->name('museum.content.compare');
     Route::get('/admin/museum-content/preflight', [\App\Http\Controllers\MuseumContentPreflightController::class, 'index'])->name('museum.content.preflight');
+    Route::get('/admin/museum-content/links', [\App\Http\Controllers\MuseumContextLinksController::class, 'index'])->name('museum.content.links');
     Route::get('/admin/museum-entries/{entry}/relations', [\App\Http\Controllers\MuseumContentRelationsController::class, 'edit'])->name('museum.entries.relations.edit');
     Route::put('/admin/museum-entries/{entry}/relations', [\App\Http\Controllers\MuseumContentRelationsController::class, 'update'])->name('museum.entries.relations.update');
     Route::get('/admin/museum-entries/{entry}/preview', [\App\Http\Controllers\MuseumEntryPreviewController::class, 'show'])->name('museum.entries.preview');
