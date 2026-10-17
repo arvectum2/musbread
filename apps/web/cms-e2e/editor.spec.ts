@@ -15,6 +15,16 @@ test("реальный вход и редактор материалов в Moon
     data: { alt: "No CSRF token", museum_entry_id: "1" },
   });
   expect(csrfDenied.status(), "Private media POST requires a CSRF token").toBe(419);
+  // TZ-215: another independent CMS write endpoint also rejects a
+  // cross-site request even from an authenticated browser session.
+  const reorderDenied = await page.request.post("/admin/museum-sections/1/reorder", {
+    data: { direction: "up" },
+  });
+  expect(reorderDenied.status(), "Section changes require CSRF protection").toBe(419);
+  const forgedId = await page.request.get(
+    "/admin/museum-events/1%20OR%201%3D1--/preview",
+  );
+  expect(forgedId.status(), "SQL-like event IDs must not reach an Eloquent query").toBe(404);
 
   await page.goto("/admin/resource/museum-entry-resource/museum-entry-form-page");
   await expect(page.getByText("Основной текст")).toBeVisible();

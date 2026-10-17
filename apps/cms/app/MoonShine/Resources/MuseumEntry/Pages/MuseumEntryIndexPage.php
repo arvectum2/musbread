@@ -80,7 +80,7 @@ final class MuseumEntryIndexPage extends IndexPage
                     }
                     $hasAccessibleRelation = static fn (Builder $builder): Builder => $builder
                         ->whereHas('relatedEntries', static fn (Builder $q) => $q->editableBy($user))
-                        ->orWhereHas('linkedEvents');
+                        ->orWhereHas('linkedEvents', static fn (Builder $q) => $q->editableBy($user));
                     return $value === 'linked'
                         ? $query->where($hasAccessibleRelation)
                         : $query->whereNot($hasAccessibleRelation);

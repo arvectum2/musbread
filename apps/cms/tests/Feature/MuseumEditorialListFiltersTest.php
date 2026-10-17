@@ -103,9 +103,14 @@ class MuseumEditorialListFiltersTest extends TestCase
         $event = MuseumEvent::create([
             'slug' => 'editor-event', 'title' => 'Рубрика-афиша',
             'category' => 'Событие', 'starts_at' => '2026-11-20', 'excerpt' => 'Анонс',
-            'body' => 'Программа', 'status' => 'draft',
+            'body' => 'Программа', 'status' => 'draft', 'museum_section_id'=>$mine->id,
         ]);
-        $own->linkedEvents()->attach($event->id);
+        $foreignEvent = MuseumEvent::create([
+            'slug' => 'foreign-hidden-event', 'title' => 'Чужое закрытое событие',
+            'category' => 'Событие', 'starts_at' => '2026-11-20', 'excerpt' => 'Анонс',
+            'body' => 'Секретная программа', 'status' => 'draft', 'museum_section_id'=>$foreign->id,
+        ]);
+        $own->linkedEvents()->attach([$event->id, $foreignEvent->id]);
         $role = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
         $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
         $mine->editors()->attach($editor->id);
@@ -126,7 +131,7 @@ class MuseumEditorialListFiltersTest extends TestCase
         $visible = $own->newQuery()->editableBy($editor)
             ->withCount(['relatedEntries as editorial_related_entries_count'
                 => static fn ($q) => $q->editableBy($editor),
-                'linkedEvents as editorial_linked_events_count'])
+                'linkedEvents as editorial_linked_events_count' => static fn ($q) => $q->editableBy($editor)])
             ->findOrFail($own->id);
         $this->assertSame(1, $visible->editorial_related_entries_count);
         $this->assertSame(1, $visible->editorial_linked_events_count);
@@ -142,6 +147,13 @@ class MuseumEditorialListFiltersTest extends TestCase
         $foreignTarget = $this->item('foreign-target', 'Чужая цель', sectionId: $other->id);
         $linkedOnlyToForeign->relatedEntries()->attach($foreignTarget->id);
         $linkedToOwn->relatedEntries()->attach($target->id);
+        $foreignEvent = MuseumEvent::create([
+            'slug'=>'unavailable-event', 'title'=>'Чужое закрытое событие',
+            'category'=>'Выставка', 'starts_at'=>'2026-11-21',
+            'body'=>'Частная программа', 'excerpt'=>'Анонс', 'status'=>'draft',
+            'museum_section_id'=>$other->id,
+        ]);
+        $linkedOnlyToForeign->linkedEvents()->attach($foreignEvent->id);
         $editorRole = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();
         $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $editorRole->id]);
         $mine->editors()->attach($editor->id);

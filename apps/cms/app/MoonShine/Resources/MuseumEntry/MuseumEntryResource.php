@@ -30,7 +30,7 @@ class MuseumEntryResource extends ModelResource
             ->with('section:id,title')
             ->withCount([
                 'relatedEntries as editorial_related_entries_count' => static fn ($q) => $q->editableBy($user),
-                'linkedEvents as editorial_linked_events_count',
+                'linkedEvents as editorial_linked_events_count' => static fn ($q) => $q->editableBy($user),
             ]);
     }
 
