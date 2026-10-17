@@ -35,3 +35,18 @@ export function eventsForPeriod(
     return delta || left.slug.localeCompare(right.slug);
   });
 }
+
+/** Categories come ONLY from the approved CMS snapshot. We do not infer a
+ * museum's programmes, group by substring, or manufacture unseen categories. */
+export function eventCategories(events: readonly MuseumEvent[]): string[] {
+  return Array.from(new Set(events.map((event) => event.category.trim())
+    .filter((category) => category.length > 0)))
+    .sort((a, b) => a.localeCompare(b, "ru"));
+}
+
+export function eventsForCategory(
+  events: readonly MuseumEvent[], category: string,
+): MuseumEvent[] {
+  if (category === "") return [...events];
+  return events.filter((event) => event.category.trim() === category);
+}

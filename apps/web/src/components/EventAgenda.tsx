@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import EventCard from "@/components/EventCard";
-import { eventsForPeriod, localCalendarDay } from "@/data/event-archive";
+import { eventCategories, eventsForCategory, eventsForPeriod, localCalendarDay } from "@/data/event-archive";
 import type { EventPeriod } from "@/data/event-archive";
 import type { MuseumEvent } from "@/data/types";
 
@@ -17,6 +17,7 @@ export default function EventAgenda({
   // Same initial day on server and client avoids a midnight hydration mismatch.
   const [today, setToday] = useState(buildDay);
   const [period, setPeriod] = useState<EventPeriod>("upcoming");
+  const [category, setCategory] = useState("");
   const [ready, setReady] = useState(false);
   useEffect(() => {
     const refresh = () => setToday(localCalendarDay(new Date()));
@@ -31,17 +32,29 @@ export default function EventAgenda({
       window.clearInterval(tick);
     };
   }, []);
-  const upcoming = useMemo(() => eventsForPeriod(events, today, "upcoming"), [events, today]);
-  const archived = useMemo(() => eventsForPeriod(events, today, "archive"), [events, today]);
-  const filtered = useMemo(() => eventsForPeriod(events, today, period), [events, today, period]);
+  const categories = useMemo(() => eventCategories(events), [events]);
+  const categorized = useMemo(() => eventsForCategory(events, category), [events, category]);
+  const upcoming = useMemo(() => eventsForPeriod(categorized, today, "upcoming"), [categorized, today]);
+  const archived = useMemo(() => eventsForPeriod(categorized, today, "archive"), [categorized, today]);
+  const filtered = useMemo(() => eventsForPeriod(categorized, today, period), [categorized, today, period]);
   const visible = variant === "featured" ? upcoming.slice(0, 3) : filtered;
 
   return <section className="event-agenda" aria-label={variant === "featured" ? "Ближайшие мероприятия" : "Список мероприятий"} data-ready={ready ? "true" : "false"}>
     {variant === "index" && <>
+      <div className="event-categories">
+        <label htmlFor="event-category">Категория мероприятий</label>
+        <select id="event-category" value={category} onChange={(event) => setCategory(event.target.value)}>
+          <option value="">Все категории ({events.length})</option>
+          {categories.map((value) => <option key={value} value={value}>
+            {value} ({eventsForCategory(events, value).length})
+          </option>)}
+        </select>
+        <p className="event-period-explain">Категории определяются редактором CMS; выбор применяется к ближайшим и архивным событиям.</p>
+      </div>
       <div className="event-periods" role="group" aria-label="Период мероприятий">
         <button type="button" aria-pressed={period === "upcoming"} onClick={() => setPeriod("upcoming")}>Предстоящие <span>({upcoming.length})</span></button>
         <button type="button" aria-pressed={period === "archive"} onClick={() => setPeriod("archive")}>Архив <span>({archived.length})</span></button>
-        <button type="button" aria-pressed={period === "all"} onClick={() => setPeriod("all")}>Все <span>({events.length})</span></button>
+        <button type="button" aria-pressed={period === "all"} onClick={() => setPeriod("all")}>Все <span>({categorized.length})</span></button>
       </div>
       <p className="event-period-explain">{period === "archive" ? "Прошедшие мероприятия — от новых к старым." : period === "upcoming" ? "Ближайшие мероприятия, включая сегодняшние." : "Все опубликованные мероприятия."}</p>
     </>}

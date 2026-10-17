@@ -189,6 +189,8 @@ jobs:
         run: python3 ../../scripts/audit_public_artifacts.py out
       - name: Verify all internal routes and anchors
         run: python3 ../../scripts/audit_static_navigation.py out
+      - name: TZ-175/252/262: complete structural coverage for published static pages
+        run: python3 ../../scripts/audit_structural_tz.py out
       - name: Check public export
         run: |
           test -f out/index.html

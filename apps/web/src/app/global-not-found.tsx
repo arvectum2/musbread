@@ -1,4 +1,7 @@
 import Link from "next/link";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import "./globals.scss";
 
 export default function NotFound() {
   return <html lang="ru">
@@ -8,12 +11,19 @@ export default function NotFound() {
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
     </head>
     <body>
-      <a href="#main" className="skip-link">К основному содержимому</a>
-      <main id="main" style={{ maxWidth: "56rem", margin: "3rem auto", padding: "1rem", fontFamily: "system-ui" }}>
-        <h1>Страница не найдена</h1>
-        <p>Проверьте адрес или вернитесь на главную страницу музея.</p>
-        <p><Link href="/">Перейти на главную</Link></p>
+      <SiteHeader />
+      <main id="main" tabIndex={-1}>
+        <section className="section inner-page">
+          <nav className="breadcrumbs" aria-label="Хлебные крошки">
+            <Link href="/">Главная</Link><span aria-hidden="true">/</span>
+            <span aria-current="page">Страница не найдена</span>
+          </nav>
+          <h1>Страница не найдена</h1>
+          <p>Проверьте адрес или вернитесь на главную страницу музея.</p>
+          <p><Link href="/" className="text-link">Перейти на главную</Link></p>
+        </section>
       </main>
+      <SiteFooter />
     </body>
   </html>;
 }

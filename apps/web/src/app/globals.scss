@@ -274,3 +274,21 @@ html[data-vision-mode="on"] .museum-team-list li{background:#fff;color:#111;bord
 .footer-identity{display:inline-flex;color:inherit;font-size:1.05rem;font-weight:750;line-height:1.4}
 .event-demo-notice{border-left:.25rem solid var(--green);padding:.8rem 1rem;background:#edf2e9;color:var(--ink);margin:0 0 1.3rem;max-width:58rem}
 @media(max-width:650px){.wordmark{font-size:.84rem;line-height:1.2}.museum-identity-logo{width:2.15rem;height:2.15rem}}
+
+/* TZ-147/148/150: editor-assigned categories, accessible native select. */
+.event-categories{display:flex;flex-direction:column;align-items:flex-start;gap:.45rem;margin:1.4rem 0 .55rem}
+.event-categories label{font-weight:700}
+.event-categories select{min-width:min(100%,20rem);max-width:100%;padding:.65rem .8rem;font:inherit;border:1px solid #596b60;border-radius:.3rem;background:#fff;color:var(--ink)}
+.event-categories select:focus-visible{outline:3px solid #155fef;outline-offset:3px}
+
+/* Published media is linked from approved CMS records, never publicizing
+   unpublished files or embedding unlicensed third-party video. */
+.museum-gallery-index{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin:1.2rem 0}
+.museum-gallery-preview{border:1px solid var(--line);padding:1rem;background:#fff;min-width:0}
+.museum-gallery-preview img{width:100%;height:180px;object-fit:contain}
+.museum-gallery-preview h3{margin:1rem 0 .35rem;font-size:1.15rem;letter-spacing:0}
+.museum-gallery-preview p{font-size:.88rem;color:var(--mute)}
+
+
+/* TZ-252: long headings such as "Документы" must wrap/scale on 320px. */
+.inner-page h1{font-size:clamp(2.25rem,8vw,4.2rem);overflow-wrap:anywhere}

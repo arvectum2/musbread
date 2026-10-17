@@ -7,6 +7,7 @@ import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
 import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
+import MuseumMediaHub from "@/components/MuseumMediaHub";
 import { officialMuseumGroupsForPage } from "@/data/museum-official-documents";
 import { content, entriesInCmsSection, entryPublicHref } from "@/data/content";
 import { siteSeoApproved } from "@/data/seo-routes";
@@ -92,6 +93,7 @@ export default async function GuidePage({ params }: Props) {
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <a href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</a>.</p>
     </div>}
     {isTeam && <MuseumTeam />}
+    {slug === "museum-media" && <MuseumMediaHub />}
     {(slug === "agenda" || slug === "agenda-events") && <p className="reference-source">
       <Link href="/events/" className="text-link">Открыть афишу и архив мероприятий →</Link>
       <span> · Пока там тестовые записи; программа публикуется на <a href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</a>.</span>

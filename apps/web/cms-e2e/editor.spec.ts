@@ -216,6 +216,9 @@ test("CP-40D: администратор создаёт дерево и меня
   const root = await create("qa-tree-root");
   await create("qa-tree-child-a", root);
   await create("qa-tree-child-b", root);
+  // CMS sections are authoritative in exports. A public media hub exists
+  // only when the museum explicitly publishes its own media section.
+  await create("museum-media", root);
   await page.goto("/admin/museum-sections/tree");
   await expect(page.getByRole("heading", { name: "Карта структуры сайта" })).toBeVisible();
   await expect(page.locator('.tree>li[data-section="qa-tree-root"]')).toHaveAttribute("data-depth", "0");

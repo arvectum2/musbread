@@ -95,6 +95,18 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
         raise RuntimeError("Public content relations not rendered in real static HTML")
     if 'qa-private-draft' in news or 'qa-private-draft' in event:
         raise RuntimeError("Draft event relation leaked into published static HTML")
+    # TZ-136: media hub must link ONLY already-published images and entries,
+    # never raw private CMS paths or unpublished/draft files.
+    media_hub_path = out / "guide/museum-media/index.html"
+    if not media_hub_path.is_file():
+        raise RuntimeError("Museum media route was not built")
+    media_hub = media_hub_path.read_text(encoding="utf-8")
+    if ('QA: экспонат на тестовом изображении' not in media_hub
+            or '/news/qa-browser-news/' not in media_hub
+            or 'qa-private-draft' in media_hub
+            or 'museum/media/' in media_hub):
+        raise RuntimeError("Published-only media hub is missing the QA image or leaks private paths")
+
     for asset in (item for item in media.glob("*.webp")):
         public_file = out / "media" / asset.name
         if not public_file.is_file() or hashlib.sha256(public_file.read_bytes()).hexdigest() != hashlib.sha256(asset.read_bytes()).hexdigest():

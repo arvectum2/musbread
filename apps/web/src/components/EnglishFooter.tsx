@@ -31,6 +31,8 @@ export default function EnglishFooter() {
       <Link href="/" lang="ru">Russian-language museum website preview</Link>
       <a href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">
         Privacy notice on the official Russian-language site ↗</a>
+      <a href={museumReference.vkUrl} target="_blank" rel="noopener noreferrer">Museum on VK ↗</a>
+      <a href={museumReference.maxUrl} target="_blank" rel="noopener noreferrer">Museum on MAX ↗</a>
       <p className="footer-source">Prototype only. No visitor details are collected here.</p>
     </div>
   </footer>;
