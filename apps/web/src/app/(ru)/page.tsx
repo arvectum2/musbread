@@ -1,6 +1,7 @@
 import MuseumAnchor from "@/components/MuseumAnchor";
 import Link from "@/components/MuseumLink";
 import EventAgenda from "@/components/EventAgenda";
+import VisitorTaskLinks from "@/components/VisitorTaskLinks";
 import { content, events } from "@/data/content";
 import { museumReference } from "@/data/museum-reference";
 import {fixedPageSeo,fixedPageMetadata} from "@/data/fixed-page-seo";
@@ -16,6 +17,7 @@ export default function Home() {
       </div>
       <div className="hero-art" aria-hidden="true"><div className="hero-orbit orbit-1"/><div className="hero-orbit orbit-2"/><div className="hero-symbol">✳</div><span className="art-caption">ХЛЕБ · КУЛЬТУРА · ГОРОД</span></div>
     </section>
+    <div className="section"><VisitorTaskLinks /></div>
     <section className="section introduction" id="museum">
       <div className="section-heading"><span className="eyebrow">01 / О ПРОЕКТЕ</span><h2>В центре истории —<br/>человек и хлеб.</h2></div>
       <p>{content.site.description} Тексты, фотографии, айдентика, мероприятия и цвета здесь временные: официальные материалы появятся после интервью с заказчиком.</p>

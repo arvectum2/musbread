@@ -325,3 +325,49 @@ html[data-vision-mode="on"] :where(a,button,summary,input,select,textarea,[role=
     box-shadow:none;
   }
 }
+
+/* TZ-245/246/249: low-friction, deliberately unbranded task shortcuts.
+   Large targets are distinct from descriptive links and remain visible
+   on tablet/phone, while all text wraps without horizontal overflow. */
+.visitor-tasks{padding:1.5rem 0;margin:0 0 1.5rem}
+.visitor-tasks h2{font-size:1.65rem;margin:0 0 .7rem;letter-spacing:-.025em}
+.visitor-tasks-note{max-width:55rem;color:var(--mute);margin:0 0 1.2rem}
+.visitor-task-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85rem}
+.visitor-task-link{display:flex;flex-direction:column;justify-content:center;min-height:5.5rem;min-width:0;gap:.2rem;
+ padding:.85rem 1.05rem;border:2px solid #62776a;border-radius:.35rem;background:#fff;
+ text-decoration:none;overflow-wrap:anywhere}
+.visitor-task-link strong{font-weight:750;text-decoration:underline;text-underline-offset:.2rem;line-height:1.4}
+.visitor-task-link>span{font-size:.85rem;color:#454c45;line-height:1.4}
+.visitor-task-link:hover,.visitor-task-link:focus-visible{background:#e8f0e5;border-color:#254a37;text-decoration:none}
+.visitor-tasks-compact{max-width:70rem}
+.search-instruction,.search-recovery{max-width:48rem;color:#424a42;line-height:1.55}
+.search-recovery a{font-weight:750;text-decoration:underline;text-underline-offset:.2rem}
+.primary-button,.secondary-button{min-height:2.75rem;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.secondary-button{padding:.65rem .5rem;border-bottom:2px solid var(--green);text-decoration:underline;text-underline-offset:.25rem}
+@media(max-width:850px){.visitor-task-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.visitor-task-grid{grid-template-columns:1fr}.visitor-task-link{min-height:4.5rem}}
+
+/* TZ-249: navigation and article links must look actionable BEFORE hover.
+   Brand wordmarks and whole clickable cards retain their existing layout. */
+.main-nav>a,
+.mega-panel a,
+.mobile-nav nav a,
+.site-footer a,
+.event-card h3 a,
+.reference-source a,
+.reference-facts a{
+ text-decoration:underline;
+ text-decoration-thickness:max(1px,.07em);
+ text-underline-offset:.22em;
+}
+.main-nav>a:hover,
+.mega-panel a:hover,
+.mobile-nav nav a:hover,
+.site-footer a:hover,
+.event-card h3 a:hover{
+ text-decoration-thickness:max(2px,.12em);
+}
+.museum-list-item:hover,.museum-list-item:focus-visible{
+ background:#eaf2e8;
+ border-color:#254a37;
+}

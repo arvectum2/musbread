@@ -90,6 +90,12 @@ export default function GlobalSearch({ compact = false, fullPage = false }: { co
       })}
     </div>
     {open && query.trim().length > 1 && !results.length && <p role="status" className="global-search-empty">Материалы не найдены.</p>}
+    {fullPage && query.trim().length > 1 && results.length === 0 && <p className="search-recovery">
+      Попробуйте другое слово или перейдите к <MuseumAnchor href="#visitor-tasks">основным задачам посетителя</MuseumAnchor>.
+    </p>}
+    {fullPage && query.trim().length < 2 && <p className="search-instruction">
+      Введите не менее двух символов. Поиск охватывает только опубликованные материалы и справочные страницы прототипа.
+    </p>}
     <button type="button" className="global-search-submit" onClick={navigateToAll} aria-label={compact ? "Искать по всему сайту" : "Показать результаты поиска"}>
       {compact ? "Найти" : "Искать"}
     </button>
