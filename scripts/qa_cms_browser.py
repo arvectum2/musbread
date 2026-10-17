@@ -35,7 +35,7 @@ def run(command: list[str], cwd: Path, env: dict[str, str]) -> None:
 
 
 def verify_browser_created_static_site(workspace: Path, published: Path,
-                                       manifest: Path, media: Path,
+                                       manifest: Path, media: Path, documents: Path,
                                        env: dict[str, str]) -> None:
     """Build Next.js from the *actual browser-created* CMS snapshot in a disposable tree.
 
@@ -54,6 +54,8 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
     shutil.copyfile(manifest, isolated_web / "public/snapshot-manifest.json")
     if media.exists():
         shutil.copytree(media, isolated_web / "public/media", dirs_exist_ok=True)
+    if documents.exists():
+        shutil.copytree(documents, isolated_web / "public/documents", dirs_exist_ok=True)
     build_env = dict(env)
     build_env["NEXT_TELEMETRY_DISABLED"] = "1"
     print("Building isolated Next.js from browser-created CMS content", flush=True)
@@ -177,6 +179,11 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
             raise RuntimeError("Known official reference fallback missing or indexable: " + fallback)
     if (out / "guide/museum-finance/index.html").exists():
         raise RuntimeError("Unapproved reference pages must not be resurrected by fallback")
+    # TZ-104–107: exercise the ACTUAL browser-created CMS snapshot -> Next
+    # output -> SHA256-verified local release. This is not a customer network
+    # transport. The test uses only the disposable workspace.
+    from qa_publication_release_cycle import verify_local_publication_cycle
+    verify_local_publication_cycle(out, published, manifest, workspace / "verified-release")
     print("Verified UI-created news/event/section with SEO title, description and H1 in static HTML; draft excluded", flush=True)
 
 
@@ -189,7 +196,13 @@ def main() -> int:
         php = "php"  # CI Linux
 
     port = free_port()
-    with tempfile.TemporaryDirectory(prefix="musbread-qa-") as workspace:
+    # Keep all QA artifacts on ArvectumSSD, never the Mac mini system disk.
+    temporary_root = ROOT / ".local_archive"
+    if temporary_root.is_symlink():
+        raise RuntimeError("Private QA workspace must not be a symlink")
+    temporary_root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="musbread-qa-",
+                                      dir=temporary_root) as workspace:
         root = Path(workspace)
         db = root / "qa.sqlite"
         db.touch()
@@ -269,9 +282,11 @@ def main() -> int:
                 output = root / "published.json"
                 manifest = root / "manifest.json"
                 media_folder = root / "media"
+                documents_folder = root / "documents"
                 run([php, "artisan", "museum:export",
                      "--output=" + str(output), "--manifest=" + str(manifest),
-                     "--media-output-dir=" + str(media_folder)], CMS, env)
+                     "--media-output-dir=" + str(media_folder),
+                     "--document-output-dir=" + str(documents_folder)], CMS, env)
                 snapshot = json.loads(output.read_text(encoding="utf-8"))
                 event_slugs = {item["slug"] for item in snapshot["events"]}
                 if "qa-browser-event" not in event_slugs or "qa-private-draft" in event_slugs:
@@ -307,7 +322,7 @@ def main() -> int:
                     digest = hashlib.sha256(path.read_bytes()).hexdigest()
                     if audit["files"]["media/" + path.name]["sha256"] != digest:
                         raise RuntimeError("QA exported media checksum mismatch")
-                verify_browser_created_static_site(root, output, manifest, media_folder, env)
+                verify_browser_created_static_site(root, output, manifest, media_folder, documents_folder, env)
                 print("Verified browser-created event, article, image; draft excluded from public export", flush=True)
             except Exception:
                 print("QA server output tail (without login credentials):", flush=True)

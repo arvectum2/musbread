@@ -31,6 +31,23 @@
     <h1>Проверка перед публикацией</h1>
     <p><a href="{{ route('museum.content.compare') }}">Сравнить версии перед выпуском →</a> · <a href="#events-check">К проверке событий афиши ↓</a></p>
     <p class="intro">Это предварительная проверка сохранённых записей и файлов. Она ничего не публикует и не изменяет. «Готово к экспорту» означает доступность записи для следующей выгрузки, а не подтверждение её размещения на сайте музея.</p>
+    @if(session('museum_export_queue_result'))
+    <p role="status" class="notice">{{ session('museum_export_queue_result') }}</p>
+    @endif
+    @if($mayRequestExport)
+    <section aria-label="Подготовка выгрузки по кнопке">
+        <h2>Публикация по событию</h2>
+        <p class="intro">Кнопка запускает <strong>только подготовку закрытой выгрузки CMS</strong>. Она не отправляет пакет на публичные серверы музея и не заменяет формального согласования.</p>
+        @if($exportQueueConfigured && $report['errors'] === 0)
+        <form method="post" action="{{ route('museum.content.queue-publication') }}">
+            @csrf
+            <button type="submit">Опубликовать — подготовить пакет в очереди</button>
+        </form>
+        @else
+        <p role="status" class="notice">Запуск выгрузки недоступен: {{ !$exportQueueConfigured ? 'постоянная очередь не настроена.' : 'есть критические ошибки в готовых материалах.' }}</p>
+        @endif
+    </section>
+    @endif
     <div class="stats" aria-label="Итог проверки">
         <span>Доступных записей: <strong>{{ $report['total'] }}</strong></span>
         <span>Готовы к выгрузке: <strong>{{ $report['ready'] }}</strong></span>

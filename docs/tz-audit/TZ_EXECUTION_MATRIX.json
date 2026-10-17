@@ -1991,10 +1991,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S0–S1 · инфраструктура",
-      "Что сделать для завершения": "Смонтировать hourly scheduler на сервере и снять замеры",
-      "Что нужно от музея / внешний блокер": "Две серверные зоны музея",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Смонтировать hourly scheduler на сервере и снять замеры",
-      "Что уже есть (доказательство)": "Laravel schedule hourly and snapshot export tests",
+      "Что сделать для завершения": "Enable and observe exactly one approved hourly scheduler on museum's closed backend, provide private staging and signed trusted transfer between isolated zones, measure full approval-to-publication latency <=60 min.",
+      "Что нужно от музея / внешний блокер": "Customer closed-network server topology, production staging under ProtectSystem=strict, museum execution approval and monitoring",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Enable and observe exactly one approved hourly scheduler on museum's closed backend, provide private staging and signed trusted transfer between isolated zones, measure full approval-to-publication latency <=60 min.",
+      "Что уже есть (доказательство)": "Hourly Laravel Schedule::command(museum:export --preflight-strict)->hourly()->withoutOverlapping; separate queued mode museum:queue-export + stale-run recovery; safe local demo_publish.sh now also enforces strict preflight. 17.10.2026 isolated MoonShine test with real approved editor records exports JSON+media+documents, builds 30 Next HTML pages and performs checksum-verified local release/rollback in 210-file package. No public transport/scheduler on museum servers.",
       "Учтено в плане": "Да"
     },
     {
@@ -2010,10 +2010,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S0–S1 · инфраструктура",
-      "Что сделать для завершения": "Проверить реальный по-событию release на канале",
-      "Что нужно от музея / внешний блокер": "Доступ к production-пайплайну музея",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить реальный по-событию release на канале",
-      "Что уже есть (доказательство)": "Queued on-demand release logic with ACL, local tests",
+      "Что сделать для завершения": "After customer approval configure durable monitored worker and channel, connect successful private export to verified signed transport/build/atomic public switch, prove actual on-demand UI request results in public release.",
+      "Что нужно от музея / внешний блокер": "Customer protected network, monitored durable queue, approved public server and real operator",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. After customer approval configure durable monitored worker and channel, connect successful private export to verified signed transport/build/atomic public switch, prove actual on-demand UI request results in public release.",
+      "Что уже есть (доказательство)": "New CSRF-protected POST /admin/museum-content/queue-publication and conditional button in CMS preflight only for MoonShine superuser, opt-in durable database/redis queue and zero critical errors. Reuses museum:queue-export with cache lock/idempotent active runs; UI explicitly states PRIVATE export not public deployment. MuseumPublishRequestButtonTest 3/3 (32 assertions) verifies guest/editor 403/login, queue-off or sync 409, admin one job despite repeat, strict-preflight 422. Full isolated browser-created CMS -> local public build -> versioned release passes, not a real event-driven cross-contour transfer.",
       "Учтено в плане": "Да"
     },
     {
@@ -2029,10 +2029,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S0–S1 · инфраструктура",
-      "Что сделать для завершения": "Approve backup/archive retention and demonstrate remote production history and rollback",
-      "Что нужно от музея / внешний блокер": "Museum archive space, retention policy, production deploy",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Approve backup/archive retention and demonstrate remote production history and rollback",
-      "Что уже есть (доказательство)": "Existing immutable release SHA256 + private snapshots + rollback; new read-only history validates 10/10 local releases and links, corruption denied",
+      "Что сделать для завершения": "Approve retention and execute version history/rollback in both actual museum zones with real publication audit timestamps and customer acceptance.",
+      "Что нужно от музея / внешний блокер": "Production hosts, archival retention, verified private channel and signed museum acceptance",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Approve retention and execute version history/rollback in both actual museum zones with real publication audit timestamps and customer acceptance.",
+      "Что уже есть (доказательство)": "scripts/release_site.py immutable content-addressed SHA256 release IDs, private archived CMS JSON (0600), release-manifest history, atomic current/previous symlinks and validated rollback. New scripts/qa_publication_release_cycle.py runs against actual browser-authored CMS snapshots + isolated Next build (210 files), proves repeat export idempotent, two local immutable artifacts with history and rollback to original static HTML; all temporary content and local QA profile deleted.",
       "Учтено в плане": "Да"
     },
     {
@@ -2048,10 +2048,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S0–S1 · инфраструктура",
-      "Что сделать для завершения": "Проверить SHA256 через реальный выделенный канал",
-      "Что нужно от музея / внешний блокер": "Сетевой канал и серверы музея",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить SHA256 через реальный выделенный канал",
-      "Что уже есть (доказательство)": "Checksum signed manifest and local packet tests",
+      "Что сделать для завершения": "Obtain mutually authenticated segregated transport + signed or independently trusted SHA256 sidecar, test corruption/replay/TOCTOU across physical museum servers, ensure no CMS or admin path reaches public zone.",
+      "Что нужно от музея / внешний блокер": "Actual dedicated internal network, mutual identity/trust/keys approved by museum security owner, release channel acceptance",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Obtain mutually authenticated segregated transport + signed or independently trusted SHA256 sidecar, test corruption/replay/TOCTOU across physical museum servers, ensure no CMS or admin path reaches public zone.",
+      "Что уже есть (доказательство)": "New scripts/verify_static_transfer.py creates external SHA256 inventory for all STATIC HTML/CSS/JS/assets, compares whole receiver directory independently (not just published.json) and rejects mutated/missing/extra/symlink assets and wrong schema. Four Python tests cover tampering. Isolated end-to-end authenticated CMS content transfer to second staging folder checks independent sender inventory prior to atomic release; 210 real Next build assets passed. HMAC/signature is NOT implemented and SHA256 sidecar must be authenticated via independently approved trust mechanism.",
       "Учтено в плане": "Да"
     },
     {

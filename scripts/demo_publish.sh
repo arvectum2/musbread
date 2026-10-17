@@ -5,7 +5,7 @@ set -eu
 
 root="$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)"
 cd "$root"
-if [ -f apps/cms/.env ] && grep -Eq '^APP_ENV=production([[:space:]]|$)' apps/cms/.env; then
+if [ "${APP_ENV:-}" = production ] || { [ -f apps/cms/.env ] && grep -Eq '^APP_ENV=production([[:space:]]|$)' apps/cms/.env; }; then
   echo "Refusing demo publisher on APP_ENV=production" >&2
   exit 1
 fi
@@ -25,7 +25,7 @@ else
 fi
 
 echo "[1/5] Export approved CMS content (private)"
-(cd apps/cms && "$php_binary" artisan museum:export)
+(cd apps/cms && "$php_binary" artisan museum:export --preflight-strict)
 echo "[2/5] Build static HTML"
 (cd apps/web && NEXT_TELEMETRY_DISABLED=1 npm run build)
 echo "[3/5] Generate strict, build-specific CSP for a future approved Nginx deployment"

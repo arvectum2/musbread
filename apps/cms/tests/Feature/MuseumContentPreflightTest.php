@@ -58,7 +58,7 @@ class MuseumContentPreflightTest extends TestCase
             ->assertSee('Исправить в CMS')
             ->assertHeader('X-Robots-Tag', 'noindex, nofollow, noarchive')
             ->assertHeader('Cache-Control', 'max-age=0, no-store, private')
-            ->assertHeader('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'");
+            ->assertHeader('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
         $this->get('/admin/resource/museum-entry-resource/museum-entry-index-page')
             ->assertOk()->assertSee(route('museum.content.preflight').'#entry-'.$private->id, false);
         $original = $private->fresh()->toArray();

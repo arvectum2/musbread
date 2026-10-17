@@ -18,6 +18,10 @@ final class MuseumContentPreflightController extends Controller
 
         return response()->view('entries.preflight', [
             'report' => $service->report($actor),
+            'mayRequestExport' => $actor->isSuperUser(),
+            'exportQueueConfigured' => (bool) config('museum.queue_publication', false)
+                && in_array(config('queue.default'), ['database', 'redis'], true)
+                && in_array(config('cache.default'), ['database', 'redis'], true),
         ], 200, [
             'Cache-Control' => 'private, no-store, max-age=0',
             'Pragma' => 'no-cache',
@@ -25,7 +29,7 @@ final class MuseumContentPreflightController extends Controller
             'X-Content-Type-Options' => 'nosniff',
             'X-Frame-Options' => 'DENY',
             'Referrer-Policy' => 'no-referrer',
-            'Content-Security-Policy' => "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+            'Content-Security-Policy' => "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
         ]);
     }
 }
