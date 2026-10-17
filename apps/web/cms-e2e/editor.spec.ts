@@ -88,16 +88,17 @@ test("закрытая медиатека поддерживает загруз�
   const entryId = await option.first().getAttribute("value");
   expect(entryId).not.toBeNull();
   await page.locator('select[name="museum_entry_id"]').first().selectOption(entryId!);
-  await page.locator('input[name="alt"]').first().fill('QA: экспонат на тестовом изображении');
+  await page.locator('input[name="alt"]').first().fill('QA: зерно на поверхности стола');
   await page.locator('input[name="caption"]').first().fill('Изолированный E2E');
+  await page.locator('textarea[name="long_description"]').first().fill('QA: длинный текст о зерне, структуре колоса и расположении элементов на столе.');
   await page.locator('input[type="file"]').setInputFiles(process.env.MUSBREAD_E2E_IMAGE_PATH!);
   await page.getByRole("button", { name: "Загрузить изображение" }).click();
   await expect(page.getByText("Изображение добавлено.")).toBeVisible();
-  await expect(page.getByRole("img", { name: "QA: экспонат на тестовом изображении" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "QA: зерно на поверхности стола" })).toBeVisible();
 
   // Editor updates alt/caption without exposing a direct public file URL.
   const initialCard = page.locator("article.item").filter({
-    has: page.getByRole("img", { name: "QA: экспонат на тестовом изображении" }),
+    has: page.getByRole("img", { name: "QA: зерно на поверхности стола" }),
   });
   await initialCard.locator('input[name="caption"]').fill("Проверенная подпись");
   await initialCard.getByRole("button", { name: "Сохранить" }).click();
@@ -107,18 +108,18 @@ test("закрытая медиатека поддерживает загруз�
   // A separate disposable image exercises deletion; keep the approved QA
   // image available for the subsequent export/integrity verification.
   await page.locator('select[name="museum_entry_id"]').first().selectOption(entryId!);
-  await page.locator('input[name="alt"]').first().fill("QA: временное изображение для удаления");
+  await page.locator('input[name="alt"]').first().fill("QA: временный экспонат для удаления");
   await page.locator('input[type="file"]').setInputFiles(process.env.MUSBREAD_E2E_IMAGE_PATH!);
   await page.getByRole("button", { name: "Загрузить изображение" }).click();
   await expect(page.getByText("Изображение добавлено.")).toBeVisible();
   const disposable = page.locator("article.item").filter({
-    has: page.getByRole("img", { name: "QA: временное изображение для удаления" }),
+    has: page.getByRole("img", { name: "QA: временный экспонат для удаления" }),
   });
   page.once("dialog", dialog => dialog.accept());
   await disposable.getByRole("button", { name: "Удалить" }).click();
   await expect(page.getByText("Изображение удалено.")).toBeVisible();
-  await expect(page.getByRole("img", { name: "QA: временное изображение для удаления" })).toHaveCount(0);
-  await expect(page.getByRole("img", { name: "QA: экспонат на тестовом изображении" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "QA: временный экспонат для удаления" })).toHaveCount(0);
+  await expect(page.getByRole("img", { name: "QA: зерно на поверхности стола" })).toBeVisible();
 
 
   // TZ-235 DnD regression inside the existing authenticated media test:

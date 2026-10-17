@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Support\MuseumAltPolicy;
 use App\Models\MuseumEvent;
 use App\Models\MuseumEntry;
 use App\Models\MuseumSection;
@@ -140,6 +141,11 @@ class ExportMuseumSnapshot extends Command
                 $entryById, $eventById, $entryLink, $eventLink, $publicLinks): array {
                 $images = [];
                 foreach ($entry->media as $image) {
+                    // Also protect older records inserted before the new
+                    // upload policy. Never export a non-compliant public alt.
+                    if ($issue = MuseumAltPolicy::issue($image->alt)) {
+                        throw new \RuntimeException('Public media alt policy failed; fix in private CMS: '.$image->id);
+                    }
                     $raw = Storage::disk('local')->get($image->storage_path);
                     if (! is_string($raw) || hash('sha256', $raw) !== $image->sha256
                         || strlen($raw) !== $image->size_bytes
@@ -165,6 +171,8 @@ class ExportMuseumSnapshot extends Command
                     $images[] = [
                         'src' => '/media/'.$image->sha256.'.webp',
                         'alt' => $image->alt, 'caption' => $image->caption,
+                        ...($image->long_description !== null && trim($image->long_description) !== ''
+                            ? ['long_description' => $image->long_description] : []),
                         'width' => $image->width, 'height' => $image->height,
                     ];
                 }

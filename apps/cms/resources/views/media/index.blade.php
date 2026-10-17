@@ -15,7 +15,7 @@
         h1 { margin-top:0; }
         .panel { background:#fff; border:1px solid #d8e0e4; border-radius:14px; padding:1.4rem; margin-bottom:1.5rem; }
         label { display:block; font-weight:600; margin:.75rem 0 .25rem; }
-        input:not([type=hidden]), select { font:inherit; width:100%; padding:.65rem; border:1px solid #8c9ba6; border-radius:8px; background:#fff; }
+        input:not([type=hidden]), select, textarea { font:inherit; width:100%; padding:.65rem; border:1px solid #8c9ba6; border-radius:8px; background:#fff; }
         input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible { outline:3px solid #168d97; outline-offset:3px; }
         .drop { border:2px dashed #738d99; border-radius:10px; padding:1.4rem; background:#f5fafa; text-align:center; }
         .drop.drag { border-color:#007d83; background:#e1f5f4; }
@@ -62,9 +62,13 @@
                 @endforeach
             </select>
             <label for="alt">Описание изображения (alt) *</label>
-            <input id="alt" name="alt" required minlength="3" maxlength="255" value="{{ old('alt') }}" placeholder="Например: историческая печь в экспозиции музея">
+            <input id="alt" name="alt" required minlength="3" maxlength="125" value="{{ old('alt') }}" aria-describedby="alt-guidance" placeholder="Например: кирпичная печь в экспозиции музея">
+            <p id="alt-guidance" class="small">До 125 символов. Не начинайте со слов «фото», «картинка», «изображение»; описывайте содержимое. Точность проверяет редактор.</p>
             <label for="caption">Подпись под изображением</label>
             <input id="caption" name="caption" maxlength="255" value="{{ old('caption') }}">
+            <label for="long-description">Развёрнутое описание сложного изображения (необязательно)</label>
+            <textarea id="long-description" name="long_description" maxlength="3000" rows="4" placeholder="Например, опишите схему, последовательность, подписи и взаимное положение элементов.">{{ old('long_description') }}</textarea>
+            <p class="small">Этот текст появится отдельным блоком под опубликованным изображением. Он не заменяет краткий alt.</p>
             <button id="suggest-alt" type="button">Предложить alt по подписи</button>
             <p id="alt-hint" role="status" class="small">Подпись должна описывать то, что действительно видно. Предложение не распознаёт картинку и требует вашей проверки.</p>
             <label for="image">Изображение *</label>
@@ -90,15 +94,18 @@
                     <div class="item-body">
                         <strong>{{ $item->alt }}</strong>
                         @if($item->caption)<p class="small">{{ $item->caption }}</p>@endif
+                        @if($item->long_description)<p class="small"><strong>Развёрнутое описание:</strong> {{ $item->long_description }}</p>@endif
                         <p class="meta">Материал: {{ $item->entry?->title ?? 'Удалён' }}
                             ({{ $item->entry?->status ?? 'нет' }})</p>
                         <p class="meta">{{ $item->width }}×{{ $item->height }} · {{ round($item->size_bytes/1024) }} КБ</p>
                         <form method="post" action="{{ route('museum.media.update', $item) }}">
                             @csrf @method('PATCH')
                             <label for="edit-alt-{{ $item->id }}">Alt-текст</label>
-                            <input id="edit-alt-{{ $item->id }}" name="alt" required minlength="3" maxlength="255" value="{{ $item->alt }}">
+                            <input id="edit-alt-{{ $item->id }}" name="alt" required minlength="3" maxlength="125" value="{{ $item->alt }}">
                             <label for="edit-caption-{{ $item->id }}">Подпись</label>
                             <input id="edit-caption-{{ $item->id }}" name="caption" maxlength="255" value="{{ $item->caption }}">
+                            <label for="edit-long-{{ $item->id }}">Развёрнутое описание</label>
+                            <textarea id="edit-long-{{ $item->id }}" name="long_description" maxlength="3000" rows="3">{{ $item->long_description }}</textarea>
                             <label for="edit-entry-{{ $item->id }}">Привязать к материалу</label>
                             <select id="edit-entry-{{ $item->id }}" name="museum_entry_id" required>
                                 @foreach($entries as $entry)

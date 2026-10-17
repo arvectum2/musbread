@@ -102,6 +102,26 @@ class StaticContentAuditTests(unittest.TestCase):
         self.assertIn("CMS_IMAGE_ALT", codes)
         self.assertIn("EN_TRANSLATION_INCOMPLETE", codes)
 
+    def test_cms_media_alt_and_extended_description_policy_fail_closed(self):
+        import json
+        snapshot = self.root / "snapshot.json"
+        for value in ["Фотография экспоната", "Рисунок фото в музее", "А" * 126]:
+            snapshot.write_text(json.dumps({"entries": [{"slug": "test", "media": [{
+                "src": "/media/dummy.webp", "alt": value
+            }]}]}, ensure_ascii=False))
+            result = audit(self.root, snapshot)
+            self.assertIn("CMS_IMAGE_ALT_POLICY", {x["code"] for x in result["errors"]})
+        snapshot.write_text(json.dumps({"entries": [{"slug": "test", "media": [{
+            "src": "/media/dummy.webp", "alt": "Кирпичная печь на стенде",
+            "long_description": "Схема печи с тремя отверстиями и дверцей."
+        }]}]}, ensure_ascii=False))
+        result = audit(self.root, snapshot)
+        self.assertNotIn("CMS_IMAGE_ALT_POLICY", {x["code"] for x in result["errors"]})
+        self.assertNotIn("CMS_IMAGE_LONG_DESC", {x["code"] for x in result["errors"]})
+        bad = HTML.replace("<h1>Документы</h1>", '<h1>Документы</h1><img alt="Фото зала" src="/media/test.webp">')
+        (self.root / "index.html").write_text(bad)
+        self.assertIn("ALT_POLICY", {x["code"] for x in audit(self.root)["errors"]})
+
     def test_sentinel_must_be_noindex(self):
         folder = self.root / "en/museum/not-translated"
         folder.mkdir(parents=True)

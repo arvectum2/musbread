@@ -8,6 +8,7 @@ use App\Support\MuseumSectionAccess;
 use App\Support\MuseumSvgRasterizer;
 use App\Support\MuseumGifProcessor;
 use App\Support\MuseumAltDraft;
+use App\Support\MuseumAltPolicy;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
@@ -60,7 +61,11 @@ final class MuseumMediaController extends Controller
     {
         $validated = $request->validate([
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
-            'alt' => ['required', 'string', 'min:3', 'max:255'],
+            'alt' => ['required', 'string', 'min:3', 'max:'.MuseumAltPolicy::MAX_LENGTH,
+                static function (string $field, mixed $value, \Closure $fail): void {
+                    if ($issue = MuseumAltPolicy::issue(is_string($value) ? $value : null)) $fail($issue);
+                }],
+            'long_description' => ['nullable', 'string', 'max:3000'],
             'caption' => ['nullable', 'string', 'max:255'],
             'image' => ['required', 'file', 'max:5120'],
         ]);
@@ -131,6 +136,7 @@ final class MuseumMediaController extends Controller
                 'sha256' => hash('sha256', $clean),
                 'alt' => $validated['alt'],
                 'caption' => $validated['caption'] ?? null,
+                'long_description' => $validated['long_description'] ?? null,
                 'mime' => 'image/webp',
                 'width' => $width,
                 'height' => $height,
@@ -149,7 +155,11 @@ final class MuseumMediaController extends Controller
     {
         $validated = $request->validate([
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
-            'alt' => ['required', 'string', 'min:3', 'max:255'],
+            'alt' => ['required', 'string', 'min:3', 'max:'.MuseumAltPolicy::MAX_LENGTH,
+                static function (string $field, mixed $value, \Closure $fail): void {
+                    if ($issue = MuseumAltPolicy::issue(is_string($value) ? $value : null)) $fail($issue);
+                }],
+            'long_description' => ['nullable', 'string', 'max:3000'],
             'caption' => ['nullable', 'string', 'max:255'],
         ]);
 

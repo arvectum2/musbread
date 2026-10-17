@@ -87,7 +87,7 @@ class MuseumMediaTest extends TestCase
         ])->assertSessionHasErrors('alt');
 
         $this->post('/admin/museum-media', [
-            'museum_entry_id' => $entry->id, 'alt' => 'Большое изображение',
+            'museum_entry_id' => $entry->id, 'alt' => 'Кирпичная печь на плане музейного зала',
             'image' => UploadedFile::fake()->image('oversized.png', 4097, 20),
         ])->assertSessionHasErrors('image');
 
@@ -106,7 +106,7 @@ class MuseumMediaTest extends TestCase
 
         foreach ([$published, $hidden] as $entry) {
             $this->post('/admin/museum-media', [
-                'museum_entry_id' => $entry->id, 'alt' => 'Надёжное описание изображения',
+                'museum_entry_id' => $entry->id, 'alt' => 'Деревянные лопаты возле печи',
                 'image' => UploadedFile::fake()->image('photo-'.$entry->id.'.png', 25, 25),
             ])->assertRedirect();
         }
@@ -124,7 +124,7 @@ class MuseumMediaTest extends TestCase
             $this->assertSame(['image-news'], array_column($snapshot['entries'], 'slug'));
             $this->assertCount(1, $snapshot['entries'][0]['media']);
             $record = $snapshot['entries'][0]['media'][0];
-            $this->assertSame('Надёжное описание изображения', $record['alt']);
+            $this->assertSame('Деревянные лопаты возле печи', $record['alt']);
             $this->assertStringStartsWith('/media/', $record['src']);
             $this->assertStringNotContainsString('hidden-entry', file_get_contents($out));
             $this->assertStringNotContainsString('uploaded_by', file_get_contents($out));
@@ -169,12 +169,12 @@ class MuseumMediaTest extends TestCase
         $media = MuseumMedia::firstOrFail();
         $this->patch(route('museum.media.update', $media), [
             'museum_entry_id' => $next->id,
-            'alt' => 'Исправленное описание изображения',
+            'alt' => 'Старинная печь в выставочном зале',
             'caption' => 'Новая подпись',
         ])->assertRedirect();
         $this->assertDatabaseHas('museum_media', [
             'id' => $media->id, 'museum_entry_id' => $next->id,
-            'alt' => 'Исправленное описание изображения',
+            'alt' => 'Старинная печь в выставочном зале',
             'caption' => 'Новая подпись',
         ]);
         $this->assertDatabaseHas('museum_audit_records', [
@@ -212,6 +212,87 @@ class MuseumMediaTest extends TestCase
         } finally {
             @unlink($out);
             @unlink($manifest);
+        }
+    }
+
+    public function test_short_alt_rules_reject_generic_words_and_overlong_text_in_create_and_edit(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry();
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        foreach (['Картинка с печью', 'Фотография в зале', 'Графика выставки',
+            str_repeat('Н', 126)] as $invalid) {
+            $this->post('/admin/museum-media', [
+                'museum_entry_id' => $entry->id,
+                'alt' => $invalid,
+                'image' => UploadedFile::fake()->image('safe.png', 20, 20),
+            ])->assertSessionHasErrors('alt');
+        }
+        $this->assertSame(0, MuseumMedia::count());
+        $this->post('/admin/museum-media', [
+            'museum_entry_id' => $entry->id,
+            'alt' => 'Кирпичная печь с деревянной лопатой',
+            'long_description' => str_repeat('Описание ', 55),
+            'image' => UploadedFile::fake()->image('safe.png', 20, 20),
+        ])->assertRedirect();
+        $media = MuseumMedia::firstOrFail();
+        $this->assertSame(trim(str_repeat('Описание ', 55)), $media->long_description);
+        $this->patch(route('museum.media.update', $media), [
+            'museum_entry_id' => $entry->id,
+            'alt' => 'Фото в музее',
+            'long_description' => 'новый текст',
+        ])->assertSessionHasErrors('alt');
+        $this->assertSame('Кирпичная печь с деревянной лопатой', $media->fresh()->alt);
+        $this->patch(route('museum.media.update', $media), [
+            'museum_entry_id' => $entry->id,
+            'alt' => 'Кирпичная печь с деревянной лопатой',
+            'long_description' => 'У печи три арочных отверстия; снизу хранится деревянная лопата.',
+        ])->assertRedirect();
+        $this->assertStringContainsString('три арочных', $media->fresh()->long_description);
+    }
+
+    public function test_extended_description_is_optional_in_public_export_but_long_text_is_independent(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry('published');
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $this->post('/admin/museum-media', [
+            'museum_entry_id' => $entry->id,
+            'alt' => 'Колосья на деревянном столе',
+            'long_description' => 'Три колоса направлены вверх, рядом лежат два зерна.',
+            'image' => UploadedFile::fake()->image('safe.png', 20, 20),
+        ])->assertRedirect();
+        $path = storage_path('framework/testing/media-long-desc.json');
+        $manifest = storage_path('framework/testing/media-long-desc-manifest.json');
+        $directory = storage_path('framework/testing/media-long-desc-assets');
+        try {
+            $this->artisan('museum:export', [
+                '--output' => $path, '--manifest' => $manifest,
+                '--media-output-dir' => $directory,
+            ])->assertSuccessful();
+            $file = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+            $this->assertSame('Три колоса направлены вверх, рядом лежат два зерна.',
+                $file['entries'][0]['media'][0]['long_description']);
+            $this->assertSame('Колосья на деревянном столе', $file['entries'][0]['media'][0]['alt']);
+            $media = MuseumMedia::firstOrFail();
+            $media->update(['long_description' => null]);
+            $this->artisan('museum:export', [
+                '--output' => $path, '--manifest' => $manifest,
+                '--media-output-dir' => $directory,
+            ])->assertSuccessful();
+            $file = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+            $this->assertArrayNotHasKey('long_description', $file['entries'][0]['media'][0]);
+            // Historical imported media must not bypass the policy.
+            $media->update(['alt' => 'Фотография с объектом']);
+            $this->expectException(\RuntimeException::class);
+            $this->artisan('museum:export', [
+                '--output' => $path, '--manifest' => $manifest,
+                '--media-output-dir' => $directory,
+            ]);
+        } finally {
+            @unlink($path); @unlink($manifest);
+            foreach (glob($directory.'/*') ?: [] as $file) @unlink($file);
+            @rmdir($directory);
         }
     }
 

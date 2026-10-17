@@ -8,6 +8,8 @@ import NavigationBranch from "@/components/NavigationBranch";
 import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
+import CurrentExhibitions from "@/components/CurrentExhibitions";
+import {events} from "@/data/content";
 import { officialMuseumGroupsForPage } from "@/data/museum-official-documents";
 import { content, entriesInCmsSection, entryPublicHref } from "@/data/content";
 import { siteSeoApproved } from "@/data/seo-routes";
@@ -94,6 +96,8 @@ export default async function GuidePage({ params }: Props) {
     </div>}
     {isTeam && <MuseumTeam />}
     {slug === "museum-media" && <MuseumMediaHub />}
+    {slug === "exhibitions-current" && <CurrentExhibitions
+      events={events} buildDay={new Date().toISOString().slice(0,10)} />}
     {(slug === "agenda" || slug === "agenda-events") && <p className="reference-source">
       <Link href="/events/" className="text-link">Открыть афишу и архив мероприятий →</Link>
       <span> · Пока там тестовые записи; программа публикуется на <a href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</a>.</span>

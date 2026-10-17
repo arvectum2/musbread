@@ -21,6 +21,10 @@ IMAGE_FILES = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 DOC_NAME = re.compile(r"^/documents/([a-f0-9]{64})\.(pdf|docx|xlsx)$")
 LANGUAGES = {"ru", "en"}
 
+# TZ-194: mechanical guard; a human still verifies truthfulness of the text.
+ALT_GENERIC = re.compile(r"(?<![\w])(?:картинк[а-яё]*|изображени[а-яё]*|фотографи[а-яё]*|фото|график[а-яё]*|picture|image|photo|graphic|graph)(?![\w])", re.I)
+
+
 
 class Page(HTMLParser):
     def __init__(self) -> None:
@@ -106,8 +110,8 @@ def scan_page(html_path: Path, relative: str) -> tuple[list[dict], list[dict], P
     for img in parser.elements("img"):
         if "alt" not in img:
             errors.append(issue("IMG_MISSING_ALT", relative, img.get("src", "unknown image")[:140]))
-        elif len(img["alt"]) > 250:
-            warnings.append(issue("LONG_ALT", relative, img.get("src", "unknown image")[:140]))
+        elif img["alt"] and (len(img["alt"]) > 125 or ALT_GENERIC.search(img["alt"])):
+            errors.append(issue("ALT_POLICY", relative, img.get("src", "unknown image")[:140]))
     for link in parser.elements("a"):
         href = link.get("href", "")
         if href.startswith("javascript:"):
@@ -162,6 +166,13 @@ def audit(root: Path, snapshot: Path | None = None,
                 src = image.get("src")
                 if not isinstance(image.get("alt"), str) or not image["alt"].strip():
                     errors.append(issue("CMS_IMAGE_ALT", slug, f"Missing alt for {src}"))
+                elif len(image["alt"]) > 125 or ALT_GENERIC.search(image["alt"]):
+                    errors.append(issue("CMS_IMAGE_ALT_POLICY", slug, f"Noncompliant media alt for {src}"))
+                if "long_description" in image and (
+                    not isinstance(image["long_description"], str)
+                    or len(image["long_description"]) > 3000
+                ):
+                    errors.append(issue("CMS_IMAGE_LONG_DESC", slug, f"Invalid extended description for {src}"))
                 if not isinstance(src, str) or not src.startswith("/media/") or ".." in src:
                     errors.append(issue("CMS_IMAGE_PATH", slug, str(src)))
             translations = entry.get("translations", {})

@@ -58,6 +58,9 @@ export default async function MuseumEntryPage({ params }: Props) {
           <Image src={media.src} width={media.width} height={media.height}
             unoptimized alt={media.alt} loading="lazy" />
           {media.caption && <figcaption>{media.caption}</figcaption>}
+          {media.long_description && <p className="museum-media-long-description" >
+            <strong>Подробное описание:</strong> {media.long_description}
+          </p>}
         </figure>)}
       </div>
     </section>}

@@ -86,6 +86,16 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
         if "<meta name=\"robots\" content=\"noindex" not in html:
             raise RuntimeError("Pre-award HTML must remain non-indexable even with SEO fields")
 
+    # TZ-195: the extended description must be visible in a separate HTML
+    # paragraph without becoming a tooltip, alt text, or private file path.
+    news_html = (out / "news/qa-browser-news/index.html").read_text(encoding="utf-8")
+    if ('museum-media-long-description' not in news_html
+            or 'QA: длинный текст о зерне, структуре колоса' not in news_html):
+        raise RuntimeError("Extended media description missing from published HTML")
+    if 'QA: длинный текст о зерне, структуре колоса' in (
+            out / "events/qa-browser-event/index.html").read_text(encoding="utf-8"):
+        raise RuntimeError("Media long description leaked into unrelated event")
+
     if (out / "events/qa-private-draft/index.html").exists():
         raise RuntimeError("Private browser-created draft was exported into the public website")
     news = (out / "news/qa-browser-news/index.html").read_text(encoding="utf-8")
@@ -101,7 +111,7 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
     if not media_hub_path.is_file():
         raise RuntimeError("Museum media route was not built")
     media_hub = media_hub_path.read_text(encoding="utf-8")
-    if ('QA: экспонат на тестовом изображении' not in media_hub
+    if ('QA: зерно на поверхности стола' not in media_hub
             or '/news/qa-browser-news/' not in media_hub
             or 'qa-private-draft' in media_hub
             or 'museum/media/' in media_hub):
@@ -222,7 +232,7 @@ def main() -> int:
                 if '/news/qa-browser-news/' not in [link['href'] for link in qa_event.get('related_entries', [])]:
                     raise RuntimeError("Reverse related-news link missing on the event")
                 assets = [item for entry in snapshot["entries"] for item in entry.get("media", [])]
-                if not any(item["alt"] == "QA: экспонат на тестовом изображении" for item in assets):
+                if not any(item["alt"] == "QA: зерно на поверхности стола" for item in assets):
                     raise RuntimeError("Uploaded QA image missing from CMS export")
                 audit = json.loads(manifest.read_text(encoding="utf-8"))
                 for asset in assets:

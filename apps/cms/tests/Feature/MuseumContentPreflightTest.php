@@ -164,7 +164,7 @@ class MuseumContentPreflightTest extends TestCase
             'created_at' => now(), 'updated_at' => now(),
         ]);
         $codes = $this->codes($this->reportRow($linked));
-        $this->assertContains('media_alt_missing', $codes);
+        $this->assertContains('media_alt_policy', $codes);
         $this->assertContains('media_file_missing', $codes);
         $this->assertSame(1, app(MuseumContentPreflight::class)->report()['errors']);
     }

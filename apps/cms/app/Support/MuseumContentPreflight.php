@@ -6,6 +6,7 @@ namespace App\Support;
 
 use App\Models\MuseumEntry;
 use App\Models\MuseumEvent;
+use App\Support\MuseumAltPolicy;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use MoonShine\Laravel\Models\MoonshineUser;
@@ -247,8 +248,8 @@ final class MuseumContentPreflight
             }
         }
         foreach ($entry->media as $media) {
-            if (trim((string) $media->alt) === '') {
-                $add('warning', 'media_alt_missing', 'У изображения отсутствует alt-описание.');
+            if ($issue = MuseumAltPolicy::issue($media->alt)) {
+                $add('warning', 'media_alt_policy', $issue);
                 break;
             }
         }

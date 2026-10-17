@@ -25,6 +25,7 @@ export interface MuseumPublishedImage {
   src: string;
   alt: string;
   caption: string | null;
+  long_description?: string | null;
   width: number;
   height: number;
 }

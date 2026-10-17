@@ -10,7 +10,7 @@ class MuseumMedia extends Model
     protected $table = 'museum_media';
 
     protected $fillable = [
-        'museum_entry_id', 'storage_path', 'sha256', 'alt', 'caption',
+        'museum_entry_id', 'storage_path', 'sha256', 'alt', 'caption', 'long_description',
         'mime', 'width', 'height', 'size_bytes', 'uploaded_by',
     ];
 

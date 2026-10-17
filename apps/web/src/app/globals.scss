@@ -292,3 +292,6 @@ html[data-vision-mode="on"] .museum-team-list li{background:#fff;color:#111;bord
 
 /* TZ-252: long headings such as "Документы" must wrap/scale on 320px. */
 .inner-page h1{font-size:clamp(2.25rem,8vw,4.2rem);overflow-wrap:anywhere}
+
+/* TZ-195: extended image descriptions are visible selectable text, not overloaded alt. */
+.museum-media-long-description{margin:.55rem 0 .9rem;padding:.8rem 1rem;border-left:.2rem solid #236e68;background:#f5f8f5;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;font-size:.92rem}

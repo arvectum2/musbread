@@ -49,3 +49,23 @@ test("TZ-175/252/262: representative pages preserve semantic layout, crumbs and 
     await expect(footer.getByRole("link",{name:/MAX/})).toHaveAttribute("href","https://max.ru/id7808018523_gos");
   }
 });
+
+test("TZ-163: current exhibition status uses actual dates, and does not call future displays current",async ({page})=>{
+  await page.clock.setFixedTime(new Date("2026-11-17T12:00:00Z"));
+  await page.goto("/guide/exhibitions-current/",{waitUntil:"networkidle"});
+  const section=page.getByRole("region",{name:"Актуальные выставки из опубликованной афиши"});
+  await expect(section.getByRole("heading",{name:"Идут сейчас"})).toBeVisible();
+  await expect(section).toContainText("нет подтверждённых действующих выставок");
+  await expect(section.getByRole("heading",{name:"Скоро откроются"})).toBeVisible();
+  await expect(section.locator(".event-card")).toHaveCount(1);
+  await expect(section.locator(".event-card")).toContainText("Выставка о хлебопечении");
+  await page.clock.setFixedTime(new Date("2026-11-19T12:00:00Z"));
+  await page.reload({waitUntil:"networkidle"});
+  await expect(section.locator(".event-card")).toHaveCount(1);
+  await expect(section.locator("h2 + .events-grid .event-card")).toHaveCount(1);
+  await expect(section.locator("h2 + .events-grid .event-card")).toContainText("Выставка о хлебопечении");
+  await page.clock.setFixedTime(new Date("2026-11-20T12:00:00Z"));
+  await page.reload({waitUntil:"networkidle"});
+  await expect(section.locator(".event-card")).toHaveCount(0);
+  await expect(section).toContainText("Будущие выставки пока не опубликованы");
+});

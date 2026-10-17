@@ -60,6 +60,9 @@ export default async function EnglishEntryPage({ params }: Props) {
           <Image src={media.src} width={media.width} height={media.height}
             unoptimized alt={media.alt} loading="lazy"/>
           {media.caption && <figcaption>{media.caption}</figcaption>}
+          {media.long_description && <p className="museum-media-long-description" lang="ru">
+            <strong>Подробное описание (на русском):</strong> {media.long_description}
+          </p>}
         </figure>)}
       </div>
     </section>}
