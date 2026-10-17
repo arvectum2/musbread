@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class MuseumEvent extends Model
 {
     protected $fillable = [
-        'slug', 'title', 'category', 'starts_at', 'ends_at', 'excerpt', 'body',
+        'slug', 'title', 'h1', 'category', 'starts_at', 'ends_at', 'excerpt', 'body',
         'status', 'published_at', 'unpublish_at', 'seo_title', 'seo_description',
         'museum_section_id',
     ];

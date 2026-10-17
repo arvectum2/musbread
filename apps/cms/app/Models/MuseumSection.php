@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 /** Editable, hierarchical navigation. Only approved branches leave the private CMS. */
 class MuseumSection extends Model
 {
-    protected $fillable = ['parent_id', 'slug', 'title', 'sort_order', 'status', 'legacy_path'];
+    protected $fillable = ['parent_id', 'slug', 'title', 'h1', 'seo_title', 'seo_description', 'sort_order', 'status', 'legacy_path'];
 
     protected function casts(): array
     {

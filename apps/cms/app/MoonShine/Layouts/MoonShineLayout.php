@@ -35,17 +35,29 @@ final class MoonShineLayout extends AppLayout
 
     protected function menu(): array
     {
+        $admin = MoonShineAuth::getGuard()->user()?->isSuperUser() ?? false;
+        // The daily editorial task comes first. Technical resources and
+        // demo-only workflows are still registered, but never clutter the
+        // standard editor navigation or advertise inaccessible resources.
         return [
             ...parent::menu(),
-            MenuItem::make(MuseumEventResource::class, 'События'),
-            MenuItem::make(MuseumEntryResource::class, 'Материалы музея'),
-            MenuItem::make(MuseumSectionResource::class, 'Структура сайта'),
-            MenuItem::make(MuseumRequestResource::class, 'Обращения (демо)'),
-            MenuItem::make(MuseumRequestTransitionResource::class, 'История обращений'),
-            MenuItem::make('/admin/museum-media', 'Медиатека'),
-            MenuItem::make(MuseumAuditRecordResource::class, 'Журнал изменений'),
-            ...(MoonShineAuth::getGuard()->user()?->isSuperUser() ? [MenuItem::make('/admin/museum-activity', 'Статистика действий')] : []),
-            MenuItem::make(MuseumPublicationRunResource::class, 'Публикации'),
+            MenuItem::make(MuseumEntryResource::class, 'Материалы и новости'),
+            MenuItem::make(MuseumEventResource::class, 'Афиша и мероприятия'),
+            MenuItem::make('/admin/museum-media', 'Изображения'),
+            MenuItem::make('/admin/museum-documents', 'Документы'),
+            MenuItem::make('/admin/museum-content/preflight', 'Проверить перед публикацией'),
+            ...($admin ? [
+                MenuItem::make(MuseumSectionResource::class, 'Структура сайта'),
+                MenuItem::make('/admin/museum-sections/tree', 'Карта разделов'),
+                MenuItem::make('/admin/museum-content/compare', 'Сравнить версии'),
+                MenuItem::make('/admin/museum-content/review-notes', 'Согласование материалов'),
+                // Demonstration requests are not a live museum inbox.
+                MenuItem::make(MuseumRequestResource::class, 'Обращения (демо)'),
+                MenuItem::make(MuseumRequestTransitionResource::class, 'История обращений'),
+                MenuItem::make(MuseumAuditRecordResource::class, 'Журнал изменений'),
+                MenuItem::make('/admin/museum-activity', 'Статистика действий'),
+                MenuItem::make(MuseumPublicationRunResource::class, 'Запуски публикации'),
+            ] : []),
         ];
     }
 

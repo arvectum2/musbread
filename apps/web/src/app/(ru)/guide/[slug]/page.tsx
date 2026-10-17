@@ -8,7 +8,8 @@ import NavigationBranch from "@/components/NavigationBranch";
 import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
 import { officialMuseumGroupsForPage } from "@/data/museum-official-documents";
-import { entriesInCmsSection, entryPublicHref } from "@/data/content";
+import { content, entriesInCmsSection, entryPublicHref } from "@/data/content";
+import { siteSeoApproved } from "@/data/seo-routes";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -17,7 +18,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const title = findMenuGroup(slug)?.title ?? findGuidePage(slug)?.title;
-  return { title: title || "Раздел не найден", robots: { index: false, follow: false } };
+  const section = content.sections?.find((item) => item.slug === slug);
+  // Fallback/reference guide pages are unapproved prototypes. Only an
+  // explicit site-approval gate permits indexing approved CMS section routes.
+  const approved = siteSeoApproved(process.env.MUSBREAD_SITE_APPROVED) && !!section;
+  return {
+    title: section?.seo_title?.trim() || title || "Раздел не найден",
+    description: section?.seo_description?.trim() || undefined,
+    robots: { index: approved, follow: approved },
+  };
 }
 export default async function GuidePage({ params }: Props) {
   const { slug } = await params;
@@ -25,6 +34,7 @@ export default async function GuidePage({ params }: Props) {
   const page = findGuidePage(slug);
   if (!group && !page) notFound();
   const title = group?.title || page!.title;
+  const publishedSection = content.sections?.find((item) => item.slug === slug);
   const parent = group || page!.group;
   const isVisit = ["museum-contacts", "plan-visit", "tickets-and-benefits"].includes(slug);
   const isContact = slug === "museum-contacts";
@@ -50,7 +60,7 @@ export default async function GuidePage({ params }: Props) {
     <span className="eyebrow">{page?.legacyPath
       ? "РАЗДЕЛ НА ДЕЙСТВУЮЩЕМ САЙТЕ"
       : page ? "НОВЫЙ РАЗДЕЛ ПО ТЗ — ЧЕРНОВИК" : "НАВИГАЦИЯ ПО ТЗ — ПРОЕКТ"} · {REFERENCE_DATE}</span>
-    <h1>{title}</h1>
+    <h1>{publishedSection?.h1?.trim() || title}</h1>
     <p className="lead">{group
       ? "Раздел будущего сайта составлен по техническому заданию и действующей структуре музея. Наполнение уточним после интервью."
       : isTeam

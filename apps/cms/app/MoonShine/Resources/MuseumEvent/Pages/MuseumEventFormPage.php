@@ -24,6 +24,7 @@ final class MuseumEventFormPage extends FormPage
             Box::make([
                 ID::make(),
                 Text::make('Название', 'title')->required(),
+                Text::make('H1 страницы события (если отличается от названия)', 'h1'),
                 Text::make('URL (латиница, через дефис)', 'slug')->required(),
                 Text::make('Категория', 'category')->required(),
                 Select::make('Раздел сайта (права редактора)', 'museum_section_id')
@@ -52,6 +53,9 @@ final class MuseumEventFormPage extends FormPage
         return [
             'slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('museum_events', 'slug')->ignore($item->getKey())],
             'title' => ['required', 'string', 'max:255'],
+            'h1' => ['nullable', 'string', 'max:255'],
+            'seo_title' => ['nullable', 'string', 'max:255'],
+            'seo_description' => ['nullable', 'string', 'max:500'],
             'category' => ['required', 'string', 'max:255'],
             'museum_section_id' => ['nullable', 'integer', Rule::exists('museum_sections', 'id')],
             'starts_at' => ['required', 'date'],

@@ -46,6 +46,9 @@ test("реальный вход и редактор материалов в Moon
   await expect(page.locator('input[name="title"]')).toBeVisible();
   await expect(page.locator('input[name="unpublish_at"]')).toBeVisible();
   await page.locator('input[name="title"]').fill('QA: музейное событие из браузера');
+  await page.locator('input[name="h1"]').fill('QA: H1 посетителю — музейное событие');
+  await page.locator('input[name="seo_title"]').fill('QA: META TITLE СОБЫТИЯ');
+  await page.locator('textarea[name="seo_description"]').fill('QA: META DESCRIPTION СОБЫТИЯ');
   await page.locator('input[name="slug"]').fill('qa-browser-event');
   await page.locator('input[name="category"]').fill('Тестовая экскурсия');
   await page.locator('input[name="starts_at"]').fill('2026-11-20');
@@ -163,6 +166,11 @@ test("CP-40D: администратор создаёт дерево и меня
   const create = async (slug: string, parentId?: string) => {
     await page.goto("/admin/resource/museum-section-resource/museum-section-form-page");
     await page.locator('input[name="title"]').fill("QA: " + slug);
+    if (slug === "qa-tree-root") {
+      await page.locator('input[name="h1"]').fill("QA: H1 раздела из CMS");
+      await page.locator('input[name="seo_title"]').fill("QA: META TITLE РАЗДЕЛА");
+      await page.locator('textarea[name="seo_description"]').fill("QA: META DESCRIPTION РАЗДЕЛА");
+    }
     await page.locator('input[name="slug"]').fill(slug);
     if (parentId) await page.locator('select[name="parent_id"]').selectOption(parentId);
     await page.locator('select[name="status"]').selectOption("published");
@@ -267,7 +275,7 @@ test("CP-43D: отчёт проверяет события афиши и отк�
   await expect(page.getByText("Критических ошибок готовых событий:")).toBeVisible();
   const item = page.locator("article.record").filter({ hasText: "QA: музейное событие из браузера" });
   await expect(item).toContainText("Готово к следующей выгрузке");
-  await expect(item).toContainText("SEO-заголовка события");
+  await expect(item).not.toContainText("SEO-заголовка события");
   await item.getByRole("link", { name: "Исправить событие" }).click();
   await expect(page.locator('input[name="title"]')).toHaveValue('QA: музейное событие из браузера');
 });

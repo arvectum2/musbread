@@ -69,6 +69,13 @@ class ExportMuseumSnapshot extends Command
             'parent_slug' => $section->parent_id === null ? null : $byId->get($section->parent_id)?->slug,
             'sort_order' => $section->sort_order,
             'legacy_path' => $section->legacy_path,
+            // Add only filled optional fields: old seed JSON remains stable
+            // and empty placeholders cannot override the page's fallback.
+            ...array_filter([
+                'h1' => $section->h1,
+                'seo_title' => $section->seo_title,
+                'seo_description' => $section->seo_description,
+            ], static fn ($value): bool => trim((string) $value) !== ''),
         ])->values()->all();
 
         $publicEntries = MuseumEntry::query()
@@ -110,6 +117,11 @@ class ExportMuseumSnapshot extends Command
         $events = $publicEvents->map(static function (MuseumEvent $event) use ($entryById, $entryLink, $publicLinks): array {
             $out = [
                 'slug' => $event->slug, 'title' => $event->title,
+                ...array_filter([
+                    'h1' => $event->h1,
+                    'seo_title' => $event->seo_title,
+                    'seo_description' => $event->seo_description,
+                ], static fn ($value): bool => trim((string) $value) !== ''),
                 'category' => $event->category,
                 'date' => $event->starts_at->format('Y-m-d'),
                 'excerpt' => $event->excerpt, 'body' => $event->body,

@@ -10,6 +10,9 @@ export interface MuseumRelatedEvent {
 export interface MuseumEvent {
   slug: string;
   title: string;
+  h1?: string | null;
+  seo_title?: string | null;
+  seo_description?: string | null;
   category: string;
   section_slug?: string;
   date: string;
@@ -61,6 +64,9 @@ export interface MuseumEntry {
 export interface PublishedSection {
   slug: string;
   title: string;
+  h1?: string | null;
+  seo_title?: string | null;
+  seo_description?: string | null;
   parent_slug: string | null;
   sort_order: number;
   legacy_path: string | null;

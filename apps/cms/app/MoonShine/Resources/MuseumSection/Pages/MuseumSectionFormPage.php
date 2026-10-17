@@ -16,6 +16,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Textarea;
 
 final class MuseumSectionFormPage extends FormPage
 {
@@ -50,6 +51,9 @@ final class MuseumSectionFormPage extends FormPage
         return [Box::make([
             ID::make(),
             Text::make('Название раздела', 'title')->required(),
+            Text::make('H1 страницы раздела (если отличается от названия)', 'h1'),
+            Text::make('SEO-заголовок страницы раздела', 'seo_title'),
+            Textarea::make('SEO-описание страницы раздела', 'seo_description'),
             Text::make('Slug (латиница)', 'slug')->required(),
             Select::make('Родительский раздел', 'parent_id')
                 ->options($choices)->nullable(),
@@ -71,6 +75,9 @@ final class MuseumSectionFormPage extends FormPage
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'h1' => ['nullable', 'string', 'max:255'],
+            'seo_title' => ['nullable', 'string', 'max:255'],
+            'seo_description' => ['nullable', 'string', 'max:500'],
             'slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('museum_sections', 'slug')->ignore($item->getKey())],
             'parent_id' => ['nullable', 'integer', Rule::exists('museum_sections', 'id')],
             'sort_order' => ['required', 'integer', 'min:0', 'max:1000000'],

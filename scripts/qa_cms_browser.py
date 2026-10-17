@@ -68,6 +68,24 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
         if not path.is_file() or expected not in path.read_text(encoding="utf-8"):
             raise RuntimeError("Browser-created CMS record missing from static HTML: " + str(path))
 
+    # TZ-233: metadata, visible H1 and description MUST survive the genuine
+    # MoonShine form -> SQLite -> exporter -> Next static HTML journey.
+    event_html = (out / "events/qa-browser-event/index.html").read_text(encoding="utf-8")
+    section_page = out / "guide/qa-tree-root/index.html"
+    if not section_page.exists():
+        raise RuntimeError("CMS section route absent from generated static build")
+    section_html = section_page.read_text(encoding="utf-8")
+    for html, values in (
+        (event_html, ("QA: META TITLE СОБЫТИЯ", "QA: META DESCRIPTION СОБЫТИЯ",
+                      "QA: H1 посетителю — музейное событие")),
+        (section_html, ("QA: META TITLE РАЗДЕЛА", "QA: META DESCRIPTION РАЗДЕЛА",
+                        "QA: H1 раздела из CMS")),
+    ):
+        if not all(value in html for value in values):
+            raise RuntimeError("TZ-233 approved CMS SEO fields missing from generated HTML")
+        if "<meta name=\"robots\" content=\"noindex" not in html:
+            raise RuntimeError("Pre-award HTML must remain non-indexable even with SEO fields")
+
     if (out / "events/qa-private-draft/index.html").exists():
         raise RuntimeError("Private browser-created draft was exported into the public website")
     news = (out / "news/qa-browser-news/index.html").read_text(encoding="utf-8")
@@ -82,7 +100,7 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
         if not public_file.is_file() or hashlib.sha256(public_file.read_bytes()).hexdigest() != hashlib.sha256(asset.read_bytes()).hexdigest():
             raise RuntimeError("Browser-uploaded media missing or modified by static release")
 
-    print("Verified UI-created news/event and images in Next.js HTML; draft excluded", flush=True)
+    print("Verified UI-created news/event/section with SEO title, description and H1 in static HTML; draft excluded", flush=True)
 
 
 def main() -> int:
