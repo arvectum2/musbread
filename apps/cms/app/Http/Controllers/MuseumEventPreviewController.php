@@ -14,10 +14,9 @@ final class MuseumEventPreviewController extends Controller
 {
     public function show(string $event, MuseumHtmlSanitizer $sanitizer): Response
     {
-        // Event CRUD is available to authenticated MoonShine editors; its
-        // current model has no per-section access grants, unlike MuseumEntry.
-        if (MuseumSectionAccess::user() === null || ! ctype_digit($event)) abort(404);
-        $record = MuseumEvent::query()->findOrFail($event);
+        $user = MuseumSectionAccess::user();
+        if ($user === null || ! ctype_digit($event)) abort(404);
+        $record = MuseumEvent::query()->editableBy($user)->findOrFail($event);
 
         return response()->view('events.preview', [
             'event' => $record,

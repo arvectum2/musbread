@@ -18,6 +18,7 @@ final class MuseumEventIndexPage extends IndexPage
             ID::make()->sortable(),
             Text::make('Название', 'title'),
             Text::make('Тип', 'category'),
+            Text::make('Раздел', 'section.title'),
             Text::make('Статус', 'status'),
             Date::make('Дата', 'starts_at')->format('d.m.Y')->sortable(),
             Text::make('Проверка', 'id')->link(

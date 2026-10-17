@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\MuseumEvent;
+use App\Models\MuseumSection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use MoonShine\Laravel\Models\MoonshineUser;
 use MoonShine\Laravel\Models\MoonshineUserRole;
@@ -20,8 +21,14 @@ class MuseumRoleAccessTest extends TestCase
 
     public function test_editor_can_create_a_museum_draft(): void
     {
-        $this->actingAs($this->editor(), 'moonshine')
+        $section = MuseumSection::create([
+            'slug'=>'event-news', 'title'=>'Новости музея', 'status'=>'published',
+        ]);
+        $editor = $this->editor();
+        $section->editors()->attach($editor->id);
+        $this->actingAs($editor, 'moonshine')
             ->post('/admin/resource/museum-event-resource/crud', [
+                'museum_section_id' => $section->id,
                 'slug' => 'editor-event',
                 'title' => 'Редакторский черновик',
                 'category' => 'Новость',

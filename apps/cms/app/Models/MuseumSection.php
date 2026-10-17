@@ -35,6 +35,11 @@ class MuseumSection extends Model
         return $this->hasMany(MuseumEntry::class, 'museum_section_id');
     }
 
+    public function events(): HasMany
+    {
+        return $this->hasMany(MuseumEvent::class, 'museum_section_id');
+    }
+
     public function requests(): HasMany
     {
         return $this->hasMany(MuseumRequest::class, 'museum_section_id');
@@ -85,9 +90,10 @@ class MuseumSection extends Model
         });
         static::deleting(static function (self $section): void {
             if ($section->children()->exists() || $section->entries()->exists()
+                || $section->events()->exists()
                 || $section->requests()->exists()) {
                 throw ValidationException::withMessages([
-                    'section' => 'Нельзя удалить раздел с дочерними страницами, материалами или обращениями.',
+                    'section' => 'Нельзя удалить раздел с дочерними страницами, материалами, событиями или обращениями.',
                 ]);
             }
         });

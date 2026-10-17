@@ -43,10 +43,6 @@ class ExportMuseumSnapshot extends Command
         $documentFiles = [];
         $inspector = app(MuseumDocumentInspector::class);
 
-        $publicEvents = MuseumEvent::query()
-            ->public()->with('relatedEntries')
-            ->orderBy('starts_at')->orderBy('slug')->get();
-
         // A section is public only when all its ancestors are approved as well.
         // No editing rights, user emails or permission mappings leave the CMS.
         $allSections = MuseumSection::query()->orderByRaw('CASE WHEN parent_id IS NULL THEN 0 ELSE 1 END')->orderBy('sort_order')->orderBy('slug')->get();
@@ -63,6 +59,10 @@ class ExportMuseumSnapshot extends Command
             return true;
         });
         $approvedIds = $publishedSections->modelKeys();
+        $publicEvents = MuseumEvent::query()->public()->with(['relatedEntries', 'section'])
+            ->orderBy('starts_at')->orderBy('slug')->get()
+            ->filter(static fn (MuseumEvent $event) =>
+                $event->museum_section_id === null || in_array($event->museum_section_id, $approvedIds, true));
         $sections = $publishedSections->map(static fn (MuseumSection $section) => [
             'slug' => $section->slug,
             'title' => $section->title,
@@ -114,6 +114,8 @@ class ExportMuseumSnapshot extends Command
                 'date' => $event->starts_at->format('Y-m-d'),
                 'excerpt' => $event->excerpt, 'body' => $event->body,
             ];
+            // Section assignment exists only when specified; legacy JSON remains compatible.
+            if ($event->section !== null) $out['section_slug'] = $event->section->slug;
             // Preserve stable snapshot hashes and old contracts for one-day events.
             if ($event->ends_at !== null) $out['ends_on'] = $event->ends_at->format('Y-m-d');
             $related = $publicLinks($event->relatedEntries, $entryById, $entryLink);

@@ -34,10 +34,12 @@ final class MuseumContentRelationsController extends Controller
             'entry' => $record,
             'editable' => MuseumEntry::query()->editableBy($actor)
                 ->whereKeyNot($record->getKey())->orderBy('title')->get(['id', 'title', 'type']),
-            // Events currently have CMS-wide Editor access (no section ACL).
-            'events' => MuseumEvent::query()->orderBy('title')->get(['id', 'title', 'category']),
+            'events' => MuseumEvent::query()->editableBy($actor)
+                ->orderBy('title')->get(['id', 'title', 'category']),
             'selectedEntries' => $record->relatedEntries()->pluck('museum_entries.id')->all(),
-            'selectedEvents' => $record->linkedEvents()->pluck('museum_events.id')->all(),
+            'selectedEvents' => $record->linkedEvents()
+                ->whereIn('museum_events.id', MuseumEvent::query()->editableBy($actor)->select('id'))
+                ->pluck('museum_events.id')->all(),
         ], 200, [
             'Cache-Control' => 'private, no-store, max-age=0',
             'X-Robots-Tag' => 'noindex, nofollow, noarchive',
@@ -65,6 +67,11 @@ final class MuseumContentRelationsController extends Controller
             || MuseumEntry::query()->editableBy($actor)->whereKey($entryIds)->count() !== count($entryIds)) {
             throw ValidationException::withMessages([
                 'related_entry_ids' => 'Нельзя связать материал с собой или с чужим разделом.',
+            ]);
+        }
+        if (MuseumEvent::query()->editableBy($actor)->whereKey($eventIds)->count() !== count($eventIds)) {
+            throw ValidationException::withMessages([
+                'related_event_ids' => 'Нельзя связать материал с событием чужого раздела.',
             ]);
         }
         DB::transaction(static function () use ($record, $entryIds, $eventIds): void {

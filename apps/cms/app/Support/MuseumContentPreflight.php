@@ -26,7 +26,10 @@ final class MuseumContentPreflight
             ->where(static fn ($q) => $q->whereNull('museum_section_id')
                 ->when($approvedIds !== [], static fn ($q) => $q->orWhereIn('museum_section_id', $approvedIds)))
             ->pluck('id')->flip();
-        $publishedEventIds = MuseumEvent::query()->public()->pluck('id')->flip();
+        $publicEventQuery = MuseumEvent::query()->public()->where(static fn ($query) =>
+            $query->whereNull('museum_section_id')->when($approvedIds !== [],
+                static fn ($q) => $q->orWhereIn('museum_section_id', $approvedIds)));
+        $publishedEventIds = (clone $publicEventQuery)->pluck('id')->flip();
         $availablePaths = collect();
         $prefixes = array_flip(MuseumInternalLinkInspector::entryPrefixes());
         foreach (MuseumEntry::query()->public()->where(static fn ($q) =>
@@ -52,7 +55,7 @@ final class MuseumContentPreflight
                 }
             }
         }
-        foreach (MuseumEvent::query()->public()->get(['slug']) as $published) {
+        foreach ((clone $publicEventQuery)->get(['slug']) as $published) {
             if ($this->validSlug($published->slug)) {
                 $availablePaths->put('/events/'.$published->slug.'/', true);
             }
@@ -94,8 +97,10 @@ final class MuseumContentPreflight
         $events = [];
         $eventsReady = 0;
         $eventErrors = 0;
-        foreach (MuseumEvent::query()->with('relatedEntries:id')->orderBy('starts_at')->orderBy('slug')->get() as $event) {
-            $state = $this->eventState($event);
+        $eventQuery = MuseumEvent::query()->with('relatedEntries:id')->orderBy('starts_at')->orderBy('slug');
+        if ($actor !== null) $eventQuery->editableBy($actor);
+        foreach ($eventQuery->get() as $event) {
+            $state = $this->eventState($event, $approvedIds);
             if ($state === 'ready') $eventsReady++;
             $issues = $this->eventIssues($event, $publicIds);
             $issues = array_merge($issues,
@@ -129,11 +134,13 @@ final class MuseumContentPreflight
         return preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', (string) $slug) === 1;
     }
 
-    private function eventState(MuseumEvent $event): string
+    private function eventState(MuseumEvent $event, array $approvedIds): string
     {
         if ($event->status !== 'published') return 'draft';
         if ($event->unpublish_at !== null && $event->unpublish_at <= now()) return 'expired';
         if ($event->published_at === null || $event->published_at->isFuture()) return 'scheduled';
+        if ($event->museum_section_id !== null
+            && ! in_array($event->museum_section_id, $approvedIds, true)) return 'blocked';
         return 'ready';
     }
 

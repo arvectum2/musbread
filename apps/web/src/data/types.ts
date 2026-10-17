@@ -11,6 +11,7 @@ export interface MuseumEvent {
   slug: string;
   title: string;
   category: string;
+  section_slug?: string;
   date: string;
   ends_on?: string | null;
   related_entries?: MuseumRelatedEntry[];

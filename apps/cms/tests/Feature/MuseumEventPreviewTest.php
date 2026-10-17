@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\MuseumEvent;
+use App\Models\MuseumSection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use MoonShine\Laravel\Models\MoonshineUser;
@@ -37,6 +38,9 @@ class MuseumEventPreviewTest extends TestCase
         $event = $this->event();
         $role = MoonshineUserRole::query()->firstOrCreate(['name' => 'Editor']);
         $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $section = MuseumSection::create(['slug'=>'event-owner','title'=>'Мероприятия','status'=>'published']);
+        $section->editors()->attach($editor->id);
+        $event->update(['museum_section_id'=>$section->id]);
         $this->actingAs($editor, 'moonshine');
         $url = route('museum.events.preview', $event->id);
         $this->get($url)->assertOk()->assertSee('Пример закрытого события')

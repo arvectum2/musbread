@@ -177,6 +177,7 @@ class MuseumEventAndLinkPreflightTest extends TestCase
         $source = $this->entry('owned-page', 'news', 'draft', $ownSection->id);
         $secret = $this->entry('unreleased-secret', 'news', 'draft', $secretSection->id);
         $event = $this->event('exhibition-link');
+        $event->update(['museum_section_id' => $ownSection->id]);
         $event->relatedEntries()->attach($secret->id);
         $event->update(['body' => '<p>Открытые даты</p><a href="/news/unreleased-secret/">Ссылка</a>']);
         $role = MoonshineUserRole::query()->where('name', 'Editor')->firstOrFail();

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\MuseumEvent\Pages;
 
-use App\MoonShine\Resources\MuseumEvent\MuseumEventResource;
+use App\Models\MuseumSection;
+use App\Support\MuseumSectionAccess;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
@@ -25,6 +26,12 @@ final class MuseumEventFormPage extends FormPage
                 Text::make('Название', 'title')->required(),
                 Text::make('URL (латиница, через дефис)', 'slug')->required(),
                 Text::make('Категория', 'category')->required(),
+                Select::make('Раздел сайта (права редактора)', 'museum_section_id')
+                    ->options(MuseumSection::query()
+                        ->whereIn('id', MuseumSectionAccess::user()
+                            ? MuseumSectionAccess::allowedIds(MuseumSectionAccess::user()) : [])
+                        ->orderBy('sort_order')->pluck('title', 'id')->all())
+                    ->nullable(),
                 Date::make('Дата начала', 'starts_at')->required(),
                 Date::make('Дата окончания (если событие многодневное)', 'ends_at')->nullable(),
                 Textarea::make('Анонс', 'excerpt')->required(),
@@ -46,6 +53,7 @@ final class MuseumEventFormPage extends FormPage
             'slug' => ['required', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('museum_events', 'slug')->ignore($item->getKey())],
             'title' => ['required', 'string', 'max:255'],
             'category' => ['required', 'string', 'max:255'],
+            'museum_section_id' => ['nullable', 'integer', Rule::exists('museum_sections', 'id')],
             'starts_at' => ['required', 'date'],
             'ends_at' => ['nullable', 'date', 'after_or_equal:starts_at'],
             'excerpt' => ['required', 'string'],

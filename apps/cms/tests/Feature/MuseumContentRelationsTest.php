@@ -74,13 +74,16 @@ class MuseumContentRelationsTest extends TestCase
         $allowed = $this->entry('allowed', $own->id);
         $denied = $this->entry('super-private', $foreign->id);
         $event = $this->event('visible-event');
+        $event->update(['museum_section_id' => $own->id]);
+        $foreignEvent = $this->event('classified-event');
+        $foreignEvent->update(['museum_section_id' => $foreign->id]);
         $role = MoonshineUserRole::query()->firstOrCreate(['name' => 'Editor']);
         $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
         $own->editors()->attach($editor->id);
         $this->actingAs($editor, 'moonshine');
         $this->get(route('museum.entries.relations.edit', $source->id))
             ->assertOk()->assertSee('allowed')->assertSee('visible-event')
-            ->assertDontSee('super-private');
+            ->assertDontSee('super-private')->assertDontSee('classified-event');
         $this->get(route('museum.entries.relations.edit', $denied->id))->assertNotFound();
         $this->put(route('museum.entries.relations.update', $denied->id), [
             'related_entry_ids' => [$allowed->id],
@@ -94,6 +97,10 @@ class MuseumContentRelationsTest extends TestCase
         ])->assertRedirect();
         $this->assertSame(1, $source->relatedEntries()->count());
         $this->assertSame(1, $source->linkedEvents()->count());
+        $this->put(route('museum.entries.relations.update', $source->id), [
+            'related_entry_ids' => [$allowed->id], 'related_event_ids' => [$foreignEvent->id],
+        ])->assertSessionHasErrors('related_event_ids');
+        $this->assertSame([$event->id], $source->linkedEvents()->pluck('museum_events.id')->all());
     }
 
     public function test_self_link_duplicate_bad_types_and_unknown_targets_are_rejected(): void

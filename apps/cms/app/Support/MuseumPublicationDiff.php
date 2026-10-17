@@ -47,8 +47,7 @@ final class MuseumPublicationDiff
         if ($baseline === null) return $result;
 
         foreach (['entries', 'events', 'sections'] as $group) {
-            // Event ACL does not yet have section ownership; it follows the
-            // existing global event resource. Sections are admin-only in diff.
+            // Both entries and events have section ownership; sections are admin-only.
             if ($group === 'sections' && ! $actor->isSuperUser()) continue;
             $old = $this->scope($baseline['data'][$group] ?? [], $group, $sectionSlugs);
             $new = $this->scope($candidate['data'][$group] ?? [], $group, $sectionSlugs);
@@ -165,7 +164,7 @@ final class MuseumPublicationDiff
     {
         $result = [];
         foreach ($items as $item) {
-            if ($sections !== null && $group === 'entries'
+            if ($sections !== null && in_array($group, ['entries', 'events'], true)
                 && ! in_array($item['section_slug'] ?? null, $sections, true)) continue;
             $id = match ($group) {
                 'entries' => ($item['type'] ?? '').':'.($item['slug'] ?? ''),
