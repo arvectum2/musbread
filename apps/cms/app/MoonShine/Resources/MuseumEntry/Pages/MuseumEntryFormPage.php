@@ -48,6 +48,7 @@ final class MuseumEntryFormPage extends FormPage
                 Text::make('English title (publish only with English body)', 'title_en'),
                 Textarea::make('English excerpt', 'excerpt_en'),
                 Textarea::make('English body (safe HTML)', 'body_en'),
+                Text::make('English H1', 'h1_en'),
                 Text::make('English SEO title', 'seo_title_en'),
                 Textarea::make('English SEO description', 'seo_description_en'),
             ]),
@@ -95,6 +96,7 @@ final class MuseumEntryFormPage extends FormPage
             'title_en' => ['nullable', 'string', 'max:255'],
             'excerpt_en' => ['nullable', 'string'],
             'body_en' => ['nullable', 'string'],
+            'h1_en' => ['nullable', 'string', 'max:255'],
             'seo_title_en' => ['nullable', 'string', 'max:255'],
             'seo_description_en' => ['nullable', 'string'],
         ];

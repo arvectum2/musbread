@@ -26,6 +26,26 @@ test("реальный вход и редактор материалов в Moon
   );
   expect(forgedId.status(), "SQL-like event IDs must not reach an Eloquent query").toBe(404);
 
+  // TZ-185/186/187: edit fixed routes through the REAL admin CMS,
+  // not hand-written test JSON. Draft SEO never enters the public build.
+  const createFixedSeo = async (path:string,title:string,description:string,h1:string,status:"draft"|"published") => {
+    await page.goto("/admin/resource/museum-fixed-page-seo-resource/fixed-page-seo-form-page");
+    await expect(page.locator('input[name="path"]')).toBeVisible();
+    await page.locator('input[name="path"]').fill(path);
+    await page.locator('input[name="seo_title"]').fill(title);
+    await page.locator('textarea[name="seo_description"]').fill(description);
+    await page.locator('input[name="h1"]').fill(h1);
+    await page.locator('select[name="status"]').selectOption(status);
+    await page.locator('button[type="submit"]').filter({hasText:"Save"}).click();
+    await expect(page).toHaveURL(/fixed-page-seo-form-page\/\d+/, {timeout:10_000});
+  };
+  await createFixedSeo("/", "QA: META TITLE HOME", "QA: META DESCRIPTION HOME",
+    "QA: H1 HOME", "published");
+  await createFixedSeo("/events/", "QA: META TITLE EVENT INDEX",
+    "QA: META DESCRIPTION EVENT INDEX", "QA: H1 EVENT INDEX", "published");
+  await createFixedSeo("/search/", "QA: DRAFT META SEARCH",
+    "QA: DRAFT DESCRIPTION SEARCH", "QA: DRAFT H1 SEARCH", "draft");
+
   await page.goto("/admin/resource/museum-entry-resource/museum-entry-form-page");
   await expect(page.getByText("Основной текст")).toBeVisible();
   await expect(page.locator("iframe.tox-edit-area__iframe")).toBeVisible();

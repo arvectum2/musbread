@@ -8,6 +8,7 @@ use App\Models\MuseumEditorialTaskUpdate;
 use App\Models\MuseumEvent;
 use App\Models\MuseumPublicationRun;
 use App\Models\MuseumSection;
+use App\Models\MuseumFixedPageSeo;
 use App\Support\MuseumPublicationDiff;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -157,6 +158,32 @@ class MuseumPublicationDiffTest extends TestCase
             ->assertHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
         $this->assertSame($this->originalDataHash, hash_file('sha256', base_path('../web/src/data/published.json')));
         $this->assertSame(0, MuseumPublicationRun::count());
+    }
+
+    public function test_private_release_preview_shows_fixed_route_seo_to_admin_only(): void
+    {
+        $seo = MuseumFixedPageSeo::create([
+            'path'=>'/events/','status'=>'published',
+            'seo_title'=>'Прежняя афиша','h1'=>'Афиша',
+        ]);
+        $this->baseline();
+        $seo->update(['seo_title'=>'Обновлённая афиша','seo_description'=>'Новый анонс']);
+
+        $admin = MoonshineUser::factory()->create();
+        $report = app(MuseumPublicationDiff::class)->report($admin);
+        $this->assertSame('all', $report['scope']);
+        $row = $this->findDiffRow($report,'fixed_page_seo','/events/');
+        $this->assertSame('changed',$row['action']);
+        $this->assertEqualsCanonicalizing(['SEO-заголовок','SEO-описание'],$row['changed_fields']);
+        $this->assertSame([], $row['old_urls']); // SEO changed; page URL still exists.
+        $this->actingAs($admin,'moonshine')->get(route('museum.content.compare'))->assertOk()
+            ->assertSee('SEO фиксированных страниц')
+            ->assertSee('SEO-заголовок')->assertSee('/events/');
+
+        $editorRole = MoonshineUserRole::query()->where('name','Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id'=>$editorRole->id]);
+        $scoped = app(MuseumPublicationDiff::class)->report($editor);
+        $this->assertArrayNotHasKey('fixed_page_seo',$scoped['groups']);
     }
 
     public function test_editor_scope_hides_other_sections_and_baseline_content(): void

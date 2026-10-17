@@ -2,12 +2,14 @@ import Link from "next/link";
 import EventAgenda from "@/components/EventAgenda";
 import { content, events } from "@/data/content";
 import { museumReference } from "@/data/museum-reference";
+import {fixedPageSeo,fixedPageMetadata} from "@/data/fixed-page-seo";
+export function generateMetadata(){return fixedPageMetadata("/", "Музей Хлеба — предконтрактный прототип");}
 export default function Home() {
   return <>
     <section className="hero">
       <div className="hero-text">
         <div className="eyebrow">САНКТ-ПЕТЕРБУРГ · КУЛЬТУРА И ИСТОРИЯ</div>
-        <h1>Хлеб — больше,<br/>чем <em>еда.</em></h1>
+        {fixedPageSeo("/")?.h1?.trim() ? <h1>{fixedPageSeo("/")!.h1}</h1> : <h1>Хлеб — больше,<br/>чем <em>еда.</em></h1>}
         <p className="lead">Демонстрационный интерфейс будущего музея. Здесь мы проверяем архитектуру, доступность и публикацию без доступа к CMS.</p>
         <div className="hero-actions"><Link href="/events/" className="primary-button">Смотреть афишу <span aria-hidden="true">↗</span></Link><a className="secondary-button" href="#museum">Узнать о проекте</a></div>
       </div>

@@ -51,7 +51,7 @@ export default async function EnglishEntryPage({ params }: Props) {
       <Link href={"/" + section + "/"}>{names[section]}</Link>
       <span aria-hidden="true">/</span><span aria-current="page">{en.title}</span>
     </nav>
-    <h1>{en.title}</h1>
+    <h1>{en.h1?.trim() || en.title}</h1>
     {en.excerpt && <p className="lead">{en.excerpt}</p>}
     <RichText html={en.body}/>
     {entry.media && entry.media.length > 0 && <section className="museum-gallery" aria-label="Image gallery">

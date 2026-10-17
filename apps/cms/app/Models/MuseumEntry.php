@@ -24,7 +24,7 @@ class MuseumEntry extends Model
     protected $fillable = [
         'type', 'slug', 'title', 'h1', 'parent_slug', 'museum_section_id', 'excerpt', 'body',
         'status', 'published_at', 'unpublish_at', 'seo_title', 'seo_description', 'sort_order',
-        'title_en', 'excerpt_en', 'body_en', 'seo_title_en', 'seo_description_en',
+        'title_en', 'h1_en', 'excerpt_en', 'body_en', 'seo_title_en', 'seo_description_en',
     ];
 
     protected function casts(): array

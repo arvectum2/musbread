@@ -46,11 +46,24 @@ final class MuseumPublicationDiff
         ];
         if ($baseline === null) return $result;
 
-        foreach (['entries', 'events', 'sections'] as $group) {
-            // Both entries and events have section ownership; sections are admin-only.
-            if ($group === 'sections' && ! $actor->isSuperUser()) continue;
-            $old = $this->scope($baseline['data'][$group] ?? [], $group, $sectionSlugs);
-            $new = $this->scope($candidate['data'][$group] ?? [], $group, $sectionSlugs);
+        foreach (['entries', 'events', 'sections', 'fixed_page_seo'] as $group) {
+            // Section structure and fixed-route SEO are admin-only. Never
+            // leak another editor's SEO changes in a scoped preview.
+            if (in_array($group, ['sections', 'fixed_page_seo'], true)
+                && ! $actor->isSuperUser()) continue;
+            $oldData = $baseline['data'][$group] ?? [];
+            $newData = $candidate['data'][$group] ?? [];
+            if ($group === 'fixed_page_seo') {
+                // Export intentionally keys these entries by public route.
+                // Reuse the same semantic comparer with a stable slug.
+                $convert = static fn (array $pages): array => collect($pages)
+                    ->map(static fn (array $seo, string $path): array =>
+                        ['slug' => $path, 'title' => $path] + $seo)->values()->all();
+                $oldData = $convert($oldData);
+                $newData = $convert($newData);
+            }
+            $old = $this->scope($oldData, $group, $sectionSlugs);
+            $new = $this->scope($newData, $group, $sectionSlugs);
             $diff = $this->compare($old, $new, $group);
             $result['groups'][$group] = $diff;
             foreach ($diff as $row) {

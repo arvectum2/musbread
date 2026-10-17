@@ -13,6 +13,7 @@ import {events} from "@/data/content";
 import { officialMuseumGroupsForPage } from "@/data/museum-official-documents";
 import { content, entriesInCmsSection, entryPublicHref } from "@/data/content";
 import { siteSeoApproved } from "@/data/seo-routes";
+import {fixedPageSeo, fixedPageH1} from "@/data/fixed-page-seo";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -22,12 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const title = findMenuGroup(slug)?.title ?? findGuidePage(slug)?.title;
   const section = content.sections?.find((item) => item.slug === slug);
+  const fallback = fixedPageSeo("/guide/" + slug + "/");
   // Fallback/reference guide pages are unapproved prototypes. Only an
   // explicit site-approval gate permits indexing approved CMS section routes.
   const approved = siteSeoApproved(process.env.MUSBREAD_SITE_APPROVED) && !!section;
   return {
-    title: section?.seo_title?.trim() || title || "Раздел не найден",
-    description: section?.seo_description?.trim() || undefined,
+    title: section?.seo_title?.trim() || fallback?.seo_title?.trim() || title || "Раздел не найден",
+    description: section?.seo_description?.trim() || fallback?.seo_description?.trim() || undefined,
     robots: { index: approved, follow: approved },
   };
 }
@@ -63,7 +65,7 @@ export default async function GuidePage({ params }: Props) {
     <span className="eyebrow">{page?.legacyPath
       ? "РАЗДЕЛ НА ДЕЙСТВУЮЩЕМ САЙТЕ"
       : page ? "НОВЫЙ РАЗДЕЛ ПО ТЗ — ЧЕРНОВИК" : "НАВИГАЦИЯ ПО ТЗ — ПРОЕКТ"} · {REFERENCE_DATE}</span>
-    <h1>{publishedSection?.h1?.trim() || title}</h1>
+    <h1>{publishedSection?.h1?.trim() || fixedPageH1("/guide/" + slug + "/",title)}</h1>
     <p className="lead">{group
       ? "Раздел будущего сайта составлен по техническому заданию и действующей структуре музея. Наполнение уточним после интервью."
       : isTeam

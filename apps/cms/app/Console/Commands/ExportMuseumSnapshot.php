@@ -6,6 +6,7 @@ use App\Support\MuseumAltPolicy;
 use App\Models\MuseumEvent;
 use App\Models\MuseumEntry;
 use App\Models\MuseumSection;
+use App\Models\MuseumFixedPageSeo;
 use App\Support\MuseumDocumentInspector;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Console\Command;
@@ -236,6 +237,7 @@ class ExportMuseumSnapshot extends Command
                             'title' => $entry->title_en,
                             'excerpt' => $entry->excerpt_en,
                             'body' => $entry->body_en,
+                            ...($entry->h1_en !== null && trim($entry->h1_en) !== '' ? ['h1' => $entry->h1_en] : []),
                             'seo_title' => $entry->seo_title_en,
                             'seo_description' => $entry->seo_description_en,
                         ],
@@ -285,6 +287,18 @@ class ExportMuseumSnapshot extends Command
         if ($allSections->isNotEmpty()) {
             $data['sections'] = $sections;
         }
+        // Fixed page metadata is optional. Do not duplicate content entry
+        // SEO: entries and event pages have their own editorial owners.
+        $fixedSeo = MuseumFixedPageSeo::query()->where('status', 'published')
+            ->orderBy('path')->get()->mapWithKeys(static fn (MuseumFixedPageSeo $page) => [
+                $page->path => array_filter([
+                    'h1' => $page->h1,
+                    'seo_title' => $page->seo_title,
+                    'seo_description' => $page->seo_description,
+                ], static fn ($value): bool => trim((string) $value) !== ''),
+            ])->filter(static fn (array $values): bool => $values !== [])->all();
+        if ($fixedSeo !== []) $data['fixed_page_seo'] = $fixedSeo;
+
         // Match the Python fixture publisher canonical JSON serializer.
         $normalize = function ($obj) use (&$normalize) {
             if (! is_array($obj)) return $obj;

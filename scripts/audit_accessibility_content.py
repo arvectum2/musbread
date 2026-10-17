@@ -159,6 +159,44 @@ def audit(root: Path, snapshot: Path | None = None,
         obj = json.loads(snapshot.read_text(encoding="utf-8"))
         if not isinstance(obj.get("entries"), list):
             raise ValueError("Snapshot must contain an entries array")
+        # TZ-185/186/187: all approved SEO overrides must target a real
+        # generated HTML route, with the actual emitted title/description/H1.
+        # Empty/draft overrides are not exported. Existing CMS section fields
+        # take precedence on a matching /guide/{slug}/ route.
+        fixed = obj.get("fixed_page_seo", {})
+        if not isinstance(fixed, dict):
+            errors.append(issue("FIXED_SEO_SCHEMA", "(snapshot)", "Expected a route-to-metadata object"))
+        else:
+            published_sections = {x.get("slug"): x for x in obj.get("sections", [])
+                                  if isinstance(x, dict)}
+            for route, fields in fixed.items():
+                if not isinstance(route, str) or not re.fullmatch(
+                    r"/|/(?:museum|news|excursions|exhibitions|documents|search|events)/|/guide/[a-z0-9]+(?:-[a-z0-9]+)*/",
+                    route,
+                ) or not isinstance(fields, dict):
+                    errors.append(issue("FIXED_SEO_ROUTE_INVALID", str(route), "Invalid fixed-page SEO record"))
+                    continue
+                page_path = root / route.lstrip("/") / "index.html"
+                if not page_path.is_file():
+                    errors.append(issue("FIXED_SEO_ROUTE_MISSING", route, "Route absent in actual static build"))
+                    continue
+                page = Page()
+                page.feed(page_path.read_text(encoding="utf-8"))
+                slug = route.removeprefix("/guide/").removesuffix("/") if route.startswith("/guide/") else None
+                section = published_sections.get(slug, {})
+                for field in ("seo_title", "seo_description", "h1"):
+                    value = section.get(field) or fields.get(field)
+                    if value is None or not isinstance(value, str) or not value.strip():
+                        continue
+                    if field == "seo_title" and value not in page.title:
+                        errors.append(issue("FIXED_SEO_TITLE_NOT_RENDERED", route, value[:80]))
+                    if field == "seo_description" and not any(
+                        value == m.get("content") for m in page.elements("meta")
+                        if m.get("name") == "description"
+                    ):
+                        errors.append(issue("FIXED_SEO_DESCRIPTION_NOT_RENDERED", route, value[:80]))
+                    if field == "h1" and not any(value == h for h in page.h1_texts):
+                        errors.append(issue("FIXED_SEO_H1_NOT_RENDERED", route, value[:80]))
         for entry in obj["entries"]:
             checked_entries += 1
             slug = str(entry.get("slug", "(missing)"))

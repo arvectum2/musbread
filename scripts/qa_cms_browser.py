@@ -86,6 +86,23 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
         if "<meta name=\"robots\" content=\"noindex" not in html:
             raise RuntimeError("Pre-award HTML must remain non-indexable even with SEO fields")
 
+    # TZ-185/186/187: SEO values for previously hardcoded fixed routes
+    # must survive the genuine CMS form → SQLite → export → Next HTML path.
+    home_html = (out / "index.html").read_text(encoding="utf-8")
+    event_index_html = (out / "events/index.html").read_text(encoding="utf-8")
+    search_html = (out / "search/index.html").read_text(encoding="utf-8")
+    for html_text, wanted in (
+        (home_html, ("QA: META TITLE HOME", "QA: META DESCRIPTION HOME", "QA: H1 HOME")),
+        (event_index_html, ("QA: META TITLE EVENT INDEX",
+                            "QA: META DESCRIPTION EVENT INDEX", "QA: H1 EVENT INDEX")),
+    ):
+        if not all(text in html_text for text in wanted):
+            raise RuntimeError("Published fixed-route SEO/H1 missing from built HTML")
+        if 'noindex' not in html_text:
+            raise RuntimeError("Pre-award page unexpectedly indexable with SEO override")
+    if 'QA: DRAFT' in search_html:
+        raise RuntimeError("Draft SEO override leaked to public search page")
+
     # TZ-195: the extended description must be visible in a separate HTML
     # paragraph without becoming a tooltip, alt text, or private file path.
     news_html = (out / "news/qa-browser-news/index.html").read_text(encoding="utf-8")
@@ -231,6 +248,11 @@ def main() -> int:
                     raise RuntimeError("Draft-linked event leaked or public relation missing")
                 if '/news/qa-browser-news/' not in [link['href'] for link in qa_event.get('related_entries', [])]:
                     raise RuntimeError("Reverse related-news link missing on the event")
+                pages = snapshot.get("fixed_page_seo", {})
+                if not (pages.get("/", {}).get("seo_title") == "QA: META TITLE HOME"
+                        and pages.get("/events/", {}).get("h1") == "QA: H1 EVENT INDEX"
+                        and "/search/" not in pages):
+                    raise RuntimeError("Approved/draft fixed-route SEO export mismatch")
                 assets = [item for entry in snapshot["entries"] for item in entry.get("media", [])]
                 if not any(item["alt"] == "QA: зерно на поверхности стола" for item in assets):
                     raise RuntimeError("Uploaded QA image missing from CMS export")

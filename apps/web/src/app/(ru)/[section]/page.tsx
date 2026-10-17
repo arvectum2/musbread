@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { entriesInSection, isMuseumSection, sections } from "@/data/content";
 import { museumReference } from "@/data/museum-reference";
+import {fixedPageH1,fixedPageMetadata} from "@/data/fixed-page-seo";
 
 type Props = { params: Promise<{ section: string }> };
 
@@ -13,7 +14,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { section } = await params;
   if (!isMuseumSection(section)) return { title: "Раздел не найден" };
-  return { title: sections[section].title };
+  return fixedPageMetadata("/"+section+"/",sections[section].title);
 }
 
 export default async function MuseumSectionPage({ params }: Props) {
@@ -27,7 +28,7 @@ export default async function MuseumSectionPage({ params }: Props) {
       <Link href="/">Главная</Link><span aria-hidden="true">/</span><span aria-current="page">{heading}</span>
     </nav>
     <span className="eyebrow">ДЕМОНСТРАЦИОННЫЙ РАЗДЕЛ</span>
-    <h1>{heading}</h1>
+    <h1>{fixedPageH1("/"+section+"/",heading)}</h1>
     <p className="lead">Тестовые материалы для проверки редакторской системы. Неофициальная информация музея.</p>
     {section === "news" && <p className="reference-source">
       Новости уже опубликованы на действующем сайте музея.{" "}

@@ -122,6 +122,31 @@ class StaticContentAuditTests(unittest.TestCase):
         (self.root / "index.html").write_text(bad)
         self.assertIn("ALT_POLICY", {x["code"] for x in audit(self.root)["errors"]})
 
+    def test_fixed_page_seo_must_render_in_real_static_route_and_drafts_must_not_leak(self):
+        import json
+        out=self.root / "events/index.html"
+        out.parent.mkdir(parents=True)
+        out.write_text(HTML.replace(
+            "<title>Контроль качества музея</title>",
+            '<title>Музейная афиша | Музей хлеба</title><meta name="description" content="Актуальные события">'
+        ).replace("<h1>Документы</h1>","<h1>Афиша на этой неделе</h1>"))
+        snapshot=self.root / "snapshot.json"
+        snapshot.write_text(json.dumps({"entries": [], "fixed_page_seo": {
+            "/events/": {"seo_title":"Музейная афиша",
+                         "seo_description":"Актуальные события",
+                         "h1":"Афиша на этой неделе"}
+        }},ensure_ascii=False))
+        self.assertEqual(audit(self.root,snapshot)["summary"]["errors"],0)
+        out.write_text(HTML)  # SEO not physically served despite correct export JSON.
+        codes={row["code"] for row in audit(self.root,snapshot)["errors"]}
+        self.assertTrue({"FIXED_SEO_TITLE_NOT_RENDERED", "FIXED_SEO_DESCRIPTION_NOT_RENDERED",
+                         "FIXED_SEO_H1_NOT_RENDERED"}.issubset(codes))
+        snapshot.write_text(json.dumps({"entries": [], "fixed_page_seo": {
+            "/guide/not-a-page/":{"h1":"Ghost"}
+        }}))
+        codes={row["code"] for row in audit(self.root,snapshot)["errors"]}
+        self.assertIn("FIXED_SEO_ROUTE_MISSING",codes)
+
     def test_sentinel_must_be_noindex(self):
         folder = self.root / "en/museum/not-translated"
         folder.mkdir(parents=True)

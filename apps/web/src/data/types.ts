@@ -43,6 +43,7 @@ export interface MuseumEntryEnglish {
   body: string;
   seo_title: string | null;
   seo_description: string | null;
+  h1?: string | null;
 }
 export interface MuseumEntry {
   type: "page" | "news" | "excursion" | "exhibition" | "document";
@@ -78,4 +79,9 @@ export interface MuseumSnapshot {
   events: MuseumEvent[];
   entries: MuseumEntry[];
   sections?: PublishedSection[];
+  fixed_page_seo?: Record<string, {
+    seo_title?: string | null;
+    seo_description?: string | null;
+    h1?: string | null;
+  }>;
 }
