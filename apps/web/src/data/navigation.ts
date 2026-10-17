@@ -85,8 +85,33 @@ const dynamicPages: readonly NavPage[] = incoming
 
 export const menuGroups: readonly MenuGroup[] = cmsSectionsPresent
   ? dynamicGroups : referenceGroups;
+/**
+ * Some global visitor links are REQUIRED even before the museum has created
+ * their CMS sections. Keep only already documented legacy reference routes
+ * available as noindex informational fallbacks. They are NEVER merged into
+ * the CMS menu, never treated as approved CMS records, and never override a
+ * published section with the same slug. The old reference text remains
+ * explicitly marked as pending museum verification on each page.
+ */
+export const ALWAYS_REFERENCED_GUIDE_SLUGS = [
+  "museum-contacts", "accessible-museum", "plan-visit",
+  "museum-documents", "ticket-refunds", "tickets-and-benefits",
+] as const;
+
+const referenceFallbacks: readonly NavPage[] = referencePages
+  .filter(page => ALWAYS_REFERENCED_GUIDE_SLUGS.some(slug => slug === page.slug)
+    && !bySlug.has(page.slug))
+  .map(page => ({
+    ...page,
+    // An unpublished/absent parent MUST NOT become a false breadcrumb URL.
+    ancestors: bySlug.has(page.group.slug)
+      ? [{slug: page.group.slug, title: bySlug.get(page.group.slug)!.title}]
+      : [],
+  }));
+
 export const guidePages: readonly NavPage[] = cmsSectionsPresent
-  ? dynamicPages : referencePages.map((page) => ({
+  ? [...dynamicPages, ...referenceFallbacks]
+  : referencePages.map((page) => ({
       ...page,
       ancestors: [{ slug: page.group.slug, title: page.group.title }],
     }));

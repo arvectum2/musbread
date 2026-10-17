@@ -131,6 +131,8 @@ export default async function GuidePage({ params }: Props) {
       <MuseumAnchor href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</MuseumAnchor>
     </p>}
     {page?.tenderOnly && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
-    {page && <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>}
+    {page && (page.ancestors.length > 0 || findMenuGroup(parent.slug)
+      ? <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>
+      : <p><Link href="/" className="text-link">← На главную</Link></p>)}
   </article>;
 }

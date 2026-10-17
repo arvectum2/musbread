@@ -12,10 +12,16 @@ class OriginalTenderTraceTests(unittest.TestCase):
 
     def test_high_risk_omissions_not_misrepresented_as_ready(self):
         rows = {r['ID']: r for r in read_rows()}
-        for requirement in ('TZ-018', 'TZ-124', 'TZ-127',
-                            'TZ-189'):
+        # Historical audit omissions still unaddressed must not be quietly
+        # marked complete just because another, nearby feature shipped.
+        for requirement in ('TZ-018', 'TZ-124', 'TZ-127'):
             self.assertEqual(rows[requirement]['Учли в плане'], 'Нет')
             self.assertEqual(rows[requirement]['Фактически готово'], 'Нет')
+        # TZ-189 was once a high-risk omission but has a real full-site link
+        # title audit (incl. MoonShine-generated pages) and CI evidence.
+        self.assertEqual(rows['TZ-189']['Учли в плане'], 'Да')
+        self.assertEqual(rows['TZ-189']['Фактически готово'], 'Да')
+        self.assertIn('MuseumLink/MuseumAnchor', rows['TZ-189']['Чекпоинт/доказательство'])
         # A prior omission may be genuinely closed during later development.
         self.assertEqual(rows['TZ-222']['Фактически готово'], 'Да')
         # Visitor manual is now a standalone draft, not an accepted final guide.

@@ -142,6 +142,16 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
     # TZ-189: the same all-pages link-title release audit also runs against
     # a dynamic, genuine CMS publication (not only the tracked demo fixture).
     run([sys.executable, str(ROOT / "scripts/audit_link_titles.py"), str(out)], ROOT, env)
+    run([sys.executable, str(ROOT / "scripts/audit_static_navigation.py"), str(out)], ROOT, env)
+    # Neither unpublished CMS sections nor unrelated museum reference pages
+    # may be silently introduced into the menu to "fix" static links.
+    for fallback in ("museum-contacts", "accessible-museum", "plan-visit",
+                     "museum-documents", "ticket-refunds", "tickets-and-benefits"):
+        file = out / "guide" / fallback / "index.html"
+        if not file.is_file() or 'noindex' not in file.read_text(encoding="utf-8"):
+            raise RuntimeError("Known official reference fallback missing or indexable: " + fallback)
+    if (out / "guide/museum-finance/index.html").exists():
+        raise RuntimeError("Unapproved reference pages must not be resurrected by fallback")
     print("Verified UI-created news/event/section with SEO title, description and H1 in static HTML; draft excluded", flush=True)
 
 
