@@ -400,3 +400,64 @@ html[data-vision-mode="on"] :where(a,button,summary,input,select,textarea,[role=
 .event-detail-cover img{display:block;width:100%;height:auto;max-height:550px;object-fit:contain}
 .event-detail-cover figcaption{color:var(--mute);font-size:.93rem;margin:.65rem 0}
 .event-detail-cover .museum-media-long-description{line-height:1.55;max-width:70ch}
+
+/* TZ-251 / TZ-260: a single neutral responsive shell geometry for every
+   published route. Deliberately tokenized instead of freezing a museum
+   brand grid before design sign-off. The full-width footer background stays
+   full-bleed while its text begins on exactly the content-grid baseline. */
+:root{
+  --museum-shell-width:90%;
+  --museum-gutter:clamp(1rem,3vw,3.5rem);
+  --museum-section-gap:clamp(2.25rem,4.4vw,5rem);
+  --museum-layout-gap:clamp(1rem,2vw,2rem);
+}
+.header-inner,
+main > .hero,
+main > .section,
+main > article.section,
+.closing-banner{
+  width:var(--museum-shell-width);
+  max-width:none;
+  margin-inline:auto;
+  padding-inline:var(--museum-gutter);
+  min-width:0;
+}
+.header-inner{padding-block:.8rem .7rem}
+main > .hero,
+main > .section,
+main > article.section{padding-block:var(--museum-section-gap)}
+main > .hero{gap:var(--museum-layout-gap)}
+main > .section.inner-page,
+main > article.section.inner-page{padding-top:clamp(2rem,3vw,3.5rem)}
+.closing-banner{
+  margin-block:var(--museum-section-gap) 0;
+  padding-block:var(--museum-section-gap);
+}
+.site-footer{
+  padding-inline:calc(5% + var(--museum-gutter));
+  padding-block:var(--museum-section-gap);
+  column-gap:var(--museum-layout-gap);
+}
+/* Protect meaningful content columns from long approved translated text.
+   This is layout safety, not a substitute for the museum's final font kit. */
+main :is(.hero,.section,.guide-primary,.museum-list,.events-grid,.museum-gallery-index)>*{
+  min-width:0;
+}
+@media(prefers-reduced-motion:reduce){
+  html,html:focus-within{scroll-behavior:auto!important}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+
+/* A single long word in an approved museum heading must not punch through
+   the 320px content shell. This was found by full header/main/footer alignment
+   checks on the real "Музей" CMS/reference index; no text is truncated. */
+.museum-list-item :is(h2,h3,p,a),
+.museum-gallery-preview :is(h2,h3,p),
+.guide-primary :is(h2,h3){
+  overflow-wrap:anywhere;
+  word-break:normal;
+}

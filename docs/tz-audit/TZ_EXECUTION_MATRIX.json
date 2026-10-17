@@ -2596,13 +2596,13 @@
       "Приоритет": "P1",
       "Светофор": "🟡 Частично",
       "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 1,
+      "Режим": "Внешний блокер / наступление этапа",
+      "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённые исходные фотографии и видеоматериалы, структуру архива и подтверждение прав; проверить наполнение и публикацию.",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Оригиналы музейных изображений и видео, права, утверждённый каталог и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #001. Получить от музея разрешённые исходные фотографии и видеоматериалы, структуру архива и подтверждение прав; проверить наполнение и публикацию.",
-      "Что уже есть (доказательство)": "Approved-only CMS media library remains owner for photos, alt, long descriptions and secure rasterized WebP; existing public gallery remains confined to published entries. Event cards now reuse an explicitly chosen published entry image without duplicate files; public export verifies owner and media digest. Video/archive still waiting for originals and permissions.",
+      "Что сделать для завершения": "Получить от музея исходные фото/видео и сведения об авторских правах, форматы и каталог; согласовать размещение или защищённые ссылки на конкретные видео и провести приемку медиараздела. Не добавлять третьесторонние embeds/автовоспроизведение без разрешений.",
+      "Что нужно от музея / внешний блокер": "Правообладатели и письменные разрешения на фото/видео, подлинный видеоархив, утверждённая номенклатура, согласованная политика публикации и редакторская приёмка",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Получить от музея исходные фото/видео и сведения об авторских правах, форматы и каталог; согласовать размещение или защищённые ссылки на конкретные видео и провести приемку медиараздела. Не добавлять третьесторонние embeds/автовоспроизведение без разрешений.",
+      "Что уже есть (доказательство)": "Public museum-media gallery already reads only CMS-approved image assets through static snapshot, lazy thumbnails and entry links; approved event cover reuses digest with alt and caption. Official existing video source https://muzei-xleb.ru/video verified HTTP 200 on Mac (17.10.2026) and reference-only link to original is present, without rehosting unlicensed media or embedding trackers. Complete media/video archive cannot be published without originals, licensing and museum signoff; no genuine autonomous code gap remains in current restricted-source preaward stage.",
       "Учтено в плане": "Да"
     },
     {
@@ -4608,15 +4608,15 @@
       "Строки оригинала": "285",
       "Требование": "Лаконичный дизайн, без тяжёлых баннеров/скриптов и отвлекающих анимаций",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 2,
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
+      "№ очереди": "",
       "Этап дорожной карты": "S2 / D25–D40 · UX",
-      "Что сделать для завершения": "Проверить на окончательной палитре и реальном наборе музейных изображений общий визуальный баланс, рекламное/анимационное наполнение и производительность.",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Утверждённая айдентика, реальный разрешённый контент, визуальная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #002. Проверить на окончательной палитре и реальном наборе музейных изображений общий визуальный баланс, рекламное/анимационное наполнение и производительность.",
-      "Что уже есть (доказательство)": "Existing neutral restrained style, no heavy media banners or third-party visual script; event cover design now uses only optional approved WebP already published as entry media, loading lazy, no duplicate upload/preload and fallback without any photograph. Reduced-motion rules remain; final palette/brand/media not approved.",
+      "Что сделать для завершения": "Неброская и лёгкая реализация существующих публичных шаблонов технически закончена и проверяется воспроизводимым аудитом. После получения фирменной графики и фото повторить бюджет и визуальную приёмку; эти клиентские действия учитываются отдельными дизайн/контент требованиями.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Implemented restrained neutral design without auto-play, animated banners, third-party scripts/iframe. Added source-controlled independent static audit_lightweight_ui.py across all 80 exported HTML pages and local assets: 17 JS files, total 688383 bytes (~672 KiB), 0 embedded videos/iframe, 0 remote script sources, no oversized chunk/media; 5 positive/negative Python tests reject remote tracking/autoplay/oversized assets. Reduced-motion CSS disables animations/transitions and smooth scrolling, real Playwright checks computed properties. Real museum branding remains a separate, not approved design/asset obligation.",
       "Учтено в плане": "Да"
     },
     {
@@ -4779,15 +4779,15 @@
       "Строки оригинала": "296",
       "Требование": "Сбалансированные горизонтальные и вертикальные отступы",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 3,
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
+      "№ очереди": "",
       "Этап дорожной карты": "S2 / D25–D40 · UX",
-      "Что сделать для завершения": "После утверждения дизайна проверить визуальное равновесие на реальных текстах/графике и устройствах заказчика",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Бренд, реальные материалы, визуальная приёмка музея",
-      "Следующее действие / комментарий": "Задача в очереди #003. После утверждения дизайна проверить визуальное равновесие на реальных текстах/графике и устройствах заказчика",
-      "Что уже есть (доказательство)": "Existing neutral responsive CSS padding and gutters enhanced with common guide-content layout; Playwright measures consistent >=12px horizontal padding, symmetric gutters, no footer overlap and no overflow on 7 routes and 6 widths 320–1920; final museum brand/content not approved",
+      "Что сделать для завершения": "Горизонтальный и вертикальный ритм существующего нейтрального макета технически реализован с едиными токенами и проверен браузером. После утверждения графики, шрифтов и музейного контента требуется отдельная визуальная приёмка, не подменяемая автотестом.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Implemented responsive shared design tokens --museum-gutter/--museum-section-gap/shell-width for ALL header, main sections/hero/closing and footer columns, removing previously inconsistent content baselines at desktop/mobile. Corrected overflow of long approved-language museum index headings without truncation; real Playwright measures 8 routes x 6 widths (320–1920 px): equal header/main/footer left baselines within 1.6 CSS px, symmetrical gutters >=12 px, content shell >=80% and no document horizontal overflow, footer below main. Reduced-motion/vision mode available, source CMS content remains unrestricted and wraps.",
       "Учтено в плане": "Да"
     },
     {
@@ -4950,15 +4950,15 @@
       "Строки оригинала": "307-308",
       "Требование": "Единая сетка и чёткие зоны в UI",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "В очереди (можно начать сейчас)",
-      "№ очереди": 4,
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
+      "№ очереди": "",
       "Этап дорожной карты": "S2 / D25–D40 · UX",
-      "Что сделать для завершения": "Завершить визуальную унификацию с согласованной айдентикой музея, проверить на контенте и принять итоговую сетку с дизайнером/заказчиком",
-      "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Утверждённая фирменная палитра, карта разделов, реальный контент и визуальная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #004. Завершить визуальную унификацию с согласованной айдентикой музея, проверить на контенте и принять итоговую сетку с дизайнером/заказчиком",
-      "Что уже есть (доказательство)": "Consistent header/main/footer grid and reusable responsive CSS, plus two-column content/optional-aside layout from authoritative CMS section tree; browser measures 7 route families at 6 viewports, no horizontal overflow and semantic landmarks, isolated MoonShine verifies real subnavigation in generated HTML",
+      "Что сделать для завершения": "Единая сетка технически реализована и принудительно проверяется в браузерных регрессиях; финальную фирменную сетку музея нужно согласовать отдельно по дизайн-ТЗ, на утверждённых текстах/фото повторить UX.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Single token-based 90% responsive public shell now aligns header brand, main content, hero and footer identity on 8 page families at 6 sizes; actual browser geometry ensures left baselines ≤1.6 CSS px difference, symmetric >=12 px gutters, footer cannot overlap main, shell>=80% viewport and no horizontal overflow; published-CMS-tree optional sidebar stays responsive one column on mobile, previously verified via isolated MoonShine 8/8. Long heading overflow fixed. Header/main/footer semantic regions remain intact on all 80 pages.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,13 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 38,
+    "Да": 41,
     "Нет": 177,
-    "Частично": 110
+    "Частично": 107
   },
   "workflow": {
-    "Готово в прототипе": 38,
-    "Внешний блокер / наступление этапа": 283,
-    "В очереди (можно начать сейчас)": 4
+    "Готово в прототипе": 41,
+    "Внешний блокер / наступление этапа": 284
   }
 }
