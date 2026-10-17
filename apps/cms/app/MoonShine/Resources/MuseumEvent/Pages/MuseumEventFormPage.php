@@ -37,6 +37,21 @@ final class MuseumEventFormPage extends FormPage
                 Date::make('Дата окончания (если событие многодневное)', 'ends_at')->nullable(),
                 Textarea::make('Анонс', 'excerpt')->required(),
                 Textarea::make('Описание', 'body')->required(),
+                // Only use already published media; images are uploaded with
+                // provenance, alt text and server-side re-encoding in the
+                // existing closed MuseumMedia library.
+                Select::make('Обложка (выбирайте изображение из опубликованного материала того же раздела)', 'cover_media_id')
+                    ->options(\App\Models\MuseumMedia::query()->with('entry')
+                        ->whereHas('entry', static function($query):void {
+                            $query->public();
+                            $actor=MuseumSectionAccess::user();
+                            if ($actor!==null && !$actor->isSuperUser())
+                                $query->whereIn('museum_section_id',MuseumSectionAccess::allowedIds($actor));
+                        })
+                        ->orderBy('id')->get()
+                        ->mapWithKeys(static fn($image) =>
+                            [$image->id=>$image->entry->title.' — '.$image->alt])->all())
+                    ->nullable(),
                 Select::make('Статус', 'status')
                     ->options(['draft' => 'Черновик', 'published' => 'Опубликовано'])
                     ->default('draft')->required(),
@@ -58,6 +73,7 @@ final class MuseumEventFormPage extends FormPage
             'seo_description' => ['nullable', 'string', 'max:500'],
             'category' => ['required', 'string', 'max:255'],
             'museum_section_id' => ['nullable', 'integer', Rule::exists('museum_sections', 'id')],
+            'cover_media_id' => ['nullable', 'integer', Rule::exists('museum_media', 'id')],
             'starts_at' => ['required', 'date'],
             'ends_at' => ['nullable', 'date', 'after_or_equal:starts_at'],
             'excerpt' => ['required', 'string'],

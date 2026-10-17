@@ -386,3 +386,17 @@ html[data-vision-mode="on"] :where(a,button,summary,input,select,textarea,[role=
 .guide-subnav-hint{font-size:.88rem;color:var(--mute)}
 @media(max-width:900px){.guide-content-layout{grid-template-columns:minmax(0,1fr)}
   .guide-sidebar{border-left:0;border-top:3px solid #5b7462;margin-top:1.5rem}}
+
+
+/* TZ-147: approved event cover images reuse private CMS media.
+   Never fetch/preload heavy photos when no approved cover was selected. */
+.event-cover{background:#e4eee3}
+.event-cover-link{display:flex;width:100%;height:100%;min-height:250px;
+ align-items:center;justify-content:center;overflow:hidden}
+.event-cover-link img{width:100%;height:250px;object-fit:cover;display:block}
+.event-cover-link:focus-visible{outline-offset:-5px}
+.event-detail-cover{max-width:min(100%,850px);margin:1.5rem 0 2rem;
+ border:1px solid var(--line);background:#fff;padding:.75rem}
+.event-detail-cover img{display:block;width:100%;height:auto;max-height:550px;object-fit:contain}
+.event-detail-cover figcaption{color:var(--mute);font-size:.93rem;margin:.65rem 0}
+.event-detail-cover .museum-media-long-description{line-height:1.55;max-width:70ch}

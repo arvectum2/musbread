@@ -18,6 +18,7 @@ export interface MuseumEvent {
   date: string;
   ends_on?: string | null;
   related_entries?: MuseumRelatedEntry[];
+  cover_image?: MuseumPublishedImage;
   excerpt: string;
   body: string;
 }

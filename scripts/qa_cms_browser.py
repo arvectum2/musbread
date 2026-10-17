@@ -109,9 +109,26 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
     if ('museum-media-long-description' not in news_html
             or 'QA: длинный текст о зерне, структуре колоса' not in news_html):
         raise RuntimeError("Extended media description missing from published HTML")
-    if 'QA: длинный текст о зерне, структуре колоса' in (
-            out / "events/qa-browser-event/index.html").read_text(encoding="utf-8"):
+    # The event is now explicitly linked to this SAME approved media asset
+    # by the editor. Its long description must be present there, but not on
+    # a different event that did not select any cover.
+    unrelated=(out / "events/workshop/index.html").read_text(encoding="utf-8")
+    if 'QA: длинный текст о зерне, структуре колоса' in unrelated:
         raise RuntimeError("Media long description leaked into unrelated event")
+
+    # TZ-147: visible event-cover image was chosen through the actual
+    # editor and exported from the attached published entry's safe WebP.
+    # The gallery and event reuse ONE digest; no new unreviewed upload.
+    if ('class="event-detail-cover"' not in event_html
+            or 'QA: зерно на поверхности стола' not in event_html
+            or 'Проверенная подпись' not in event_html
+            or 'QA: длинный текст о зерне, структуре колоса' not in event_html):
+        raise RuntimeError("Approved event cover not rendered in its public detail")
+    if ('class="event-cover-link"' not in event_index_html
+            or 'QA: зерно на поверхности стола' not in event_index_html):
+        raise RuntimeError("Approved event cover absent from public event cards")
+    if event_html.count('/media/')<1:
+        raise RuntimeError("Approved event cover WebP path missing")
 
     if (out / "events/qa-private-draft/index.html").exists():
         raise RuntimeError("Private browser-created draft was exported into the public website")

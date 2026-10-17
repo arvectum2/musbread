@@ -62,7 +62,7 @@ class ExportMuseumSnapshot extends Command
             return true;
         });
         $approvedIds = $publishedSections->modelKeys();
-        $publicEvents = MuseumEvent::query()->public()->with(['relatedEntries', 'section'])
+        $publicEvents = MuseumEvent::query()->public()->with(['relatedEntries', 'section', 'coverMedia.entry'])
             ->orderBy('starts_at')->orderBy('slug')->get()
             ->filter(static fn (MuseumEvent $event) =>
                 $event->museum_section_id === null || in_array($event->museum_section_id, $approvedIds, true));
@@ -129,6 +129,24 @@ class ExportMuseumSnapshot extends Command
                 'date' => $event->starts_at->format('Y-m-d'),
                 'excerpt' => $event->excerpt, 'body' => $event->body,
             ];
+            // A manually selected cover may be exported ONLY if the owner
+            // entry is in the SAME approved public snapshot and same
+            // editorial section. A withdrawn/draft entry cannot leak an
+            // image into the event page, however stale the foreign key.
+            $cover=$event->coverMedia;
+            if ($cover!==null && $cover->entry!==null
+                && $entryById->has($cover->museum_entry_id)
+                && $cover->entry->museum_section_id===$event->museum_section_id
+                && preg_match('/^[a-f0-9]{64}$/D',$cover->sha256)) {
+                $out['cover_image'] = [
+                    'src'=>'/media/'.$cover->sha256.'.webp',
+                    'alt'=>$cover->alt,
+                    'width'=>$cover->width,'height'=>$cover->height,
+                    'caption'=>$cover->caption,
+                    ...($cover->long_description!==null && trim($cover->long_description)!==''
+                        ? ['long_description'=>$cover->long_description] : []),
+                ];
+            }
             // Section assignment exists only when specified; legacy JSON remains compatible.
             if ($event->section !== null) $out['section_slug'] = $event->section->slug;
             // Preserve stable snapshot hashes and old contracts for one-day events.

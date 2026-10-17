@@ -147,6 +147,28 @@ test("закрытая медиатека поддерживает загруз�
   await expect(page.getByText("Подпись и привязка обновлены.")).toBeVisible();
   await expect(page.getByText("Проверенная подпись")).toBeVisible();
 
+  // TZ-147: select the existing, already uploaded and approved entry image
+  // as a COVER through the real event MoonShine edit form. No extra login,
+  // no synthetic image fields and no second file upload.
+  await page.goto("/admin/resource/museum-event-resource/museum-event-index-page");
+  const eventRow=page.locator("tbody tr").filter({hasText:"QA: музейное событие из браузера"});
+  await expect(eventRow).toBeVisible();
+  const editLink=eventRow.locator('a[href*="museum-event-form-page"]').first();
+  await expect(editLink).toHaveCount(1);
+  await editLink.click();
+  const covers=page.locator('select[name="cover_media_id"]');
+  await expect(covers).toBeVisible();
+  const choice=covers.locator("option").filter({hasText:"QA: зерно на поверхности стола"});
+  const coverId=await choice.getAttribute("value");
+  expect(coverId).toBeTruthy();
+  await covers.selectOption(coverId!);
+  await page.locator('button[type="submit"]').filter({hasText:"Save"}).click();
+  await expect(page).toHaveURL(/museum-event-form-page\/\d+/,{timeout:10_000});
+  await expect(page.locator('select[name="cover_media_id"]')).toHaveValue(coverId!);
+
+  // Return to media after editing the event in MoonShine. Do not look for
+  // upload controls on an event form or silently swallow a timeout.
+  await page.goto("/admin/museum-media");
   // A separate disposable image exercises deletion; keep the approved QA
   // image available for the subsequent export/integrity verification.
   await page.locator('select[name="museum_entry_id"]').first().selectOption(entryId!);
