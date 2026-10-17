@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { museumReference, REFERENCE_DATE } from "@/data/museum-reference";
 import { menuGroups } from "@/data/navigation";
+import MuseumIdentity from "@/components/MuseumIdentity";
 
 export default function SiteFooter() {
   return <footer id="contacts" className="site-footer">
     <div className="footer-info">
+      <Link href="/" className="footer-identity" aria-label="Санкт-Петербургский музей Хлеба — главная">
+        <MuseumIdentity />
+      </Link>
       <strong>{museumReference.legalName}</strong>
       <p>{museumReference.address}<br />Метро: {museumReference.metro}</p>
       <p><a href={museumReference.phoneHref}>{museumReference.phone}</a><br />

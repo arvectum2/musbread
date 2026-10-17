@@ -13,6 +13,10 @@ input,select{max-width:100%}
 table{border-collapse:collapse;width:100%}td,th{padding:.65rem;border-bottom:1px solid #d7dcdf;text-align:left}
 button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:.2rem solid #1679be}
 .warning{border-left:.35rem solid #c47411;padding:.8rem;background:#fff4dc}
+.drop{border:.15rem dashed #687f8b;padding:1rem;background:#f2f9f9;border-radius:.55rem;margin:.5rem 0}
+.drop.drag{border-color:#007e83;background:#d9f2ef}
+.drop input{max-width:100%}
+.drop p{margin:.35rem 0}
 </style></head>
 <body><main>
 <a href="/admin">← MoonShine</a>
@@ -29,7 +33,14 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,s
 @foreach($entries as $entry)<option value="{{ $entry->id }}" @selected(old('museum_entry_id') == $entry->id)>{{ $entry->title }} ({{ $entry->slug }})</option>@endforeach
 </select>
 <label for="label">Короткое доступное название файла</label><input name="label" id="label" maxlength="180" minlength="3" value="{{ old('label') }}" required>
-<label for="document">Файл PDF / DOCX / XLSX</label><input type="file" name="document" id="document" accept=".pdf,.docx,.xlsx,.xls" required>
+<label for="document">Файл PDF / DOCX / XLSX (на локальном стенде также XLS)</label>
+<div class="drop" id="document-drop" data-museum-file-drop data-max-bytes="15728640"
+     data-extensions="pdf,docx,xlsx,xls">
+  <p>Перетащите один документ сюда или выберите файл</p>
+  <input type="file" name="document" id="document" accept=".pdf,.docx,.xlsx,.xls" required
+    aria-describedby="document-feedback">
+  <p id="document-feedback" data-museum-file-feedback role="status" aria-live="polite">Файл не выбран.</p>
+</div>
 <button type="submit">Сохранить в закрытой медиатеке</button>
 </form></section>
 <section><h2>Загружено: {{ $documents->total() }}</h2>
@@ -53,4 +64,5 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,s
 <button type="submit">Удалить</button></form></td>
 </tr>@endforeach
 </tbody></table>{{ $documents->links() }}</section>
-</main></body></html>
+</main><script src="{{ asset('js/museum-file-drop.js') }}" defer></script>
+</body></html>

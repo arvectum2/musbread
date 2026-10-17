@@ -263,3 +263,14 @@ html[data-vision-mode="on"] .official-documents-list li{background:#fff;color:#1
 .museum-team-list p{margin:.3rem 0 .8rem}
 .museum-team-list a,.museum-team-source a{text-decoration:underline;text-underline-offset:.18em}
 html[data-vision-mode="on"] .museum-team-list li{background:#fff;color:#111;border-color:#111}
+
+
+/* TZ-114/TZ-123: verified text identity; never pass the demo asterisk off
+   as an official logo. Actual master artwork is gated in museum-identity.ts. */
+.wordmark{white-space:normal;min-width:0;max-width:min(100%,34rem);line-height:1.3}
+.museum-identity{display:inline-flex;align-items:center;gap:.65rem;min-width:0}
+.museum-identity-name{display:inline-block;overflow-wrap:normal}
+.museum-identity-logo{width:2.8rem;height:2.8rem;object-fit:contain;flex:0 0 auto}
+.footer-identity{display:inline-flex;color:inherit;font-size:1.05rem;font-weight:750;line-height:1.4}
+.event-demo-notice{border-left:.25rem solid var(--green);padding:.8rem 1rem;background:#edf2e9;color:var(--ink);margin:0 0 1.3rem;max-width:58rem}
+@media(max-width:650px){.wordmark{font-size:.84rem;line-height:1.2}.museum-identity-logo{width:2.15rem;height:2.15rem}}

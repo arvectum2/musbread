@@ -121,6 +121,40 @@ test("закрытая медиатека поддерживает загруз�
   await expect(page.getByRole("img", { name: "QA: экспонат на тестовом изображении" })).toBeVisible();
 
 
+  // TZ-235 DnD regression inside the existing authenticated media test:
+  // no ninth login that would breach the real 8-post/minute login limit.
+  await page.goto("/admin/museum-media");
+  const send=(id:string,name:string,size:number,count=1)=>page.locator(id).evaluate(
+    (element,args)=>{
+      const data=new DataTransfer();
+      for(let i=0;i<args.count;i++)
+        data.items.add(new File([new Uint8Array(args.size)], args.name,{type:"application/octet-stream"}));
+      element.dispatchEvent(new DragEvent("drop",{bubbles:true,cancelable:true,dataTransfer:data}));
+    }, {name,size,count});
+  await send("#drop","picture.exe",128);
+  await expect(page.locator("#image-feedback")).toContainText("Недопустимый формат");
+  await send("#drop","picture.png",128,2);
+  await expect(page.locator("#image-feedback")).toContainText("по одному файлу");
+  await send("#drop","picture.png",5242881);
+  await expect(page.locator("#image-feedback")).toContainText("не превышать 5 МБ");
+  await send("#drop","picture.png",128);
+  await expect(page.locator("#image-feedback")).toContainText("Выбран файл «picture.png»");
+  expect(await page.locator("#image").evaluate((e)=> (e as HTMLInputElement).files?.length)).toBe(1);
+
+  await page.goto("/admin/museum-documents");
+  await expect(page.getByRole("heading",{name:/Документы материалов/})).toBeVisible();
+  await send("#document-drop","unknown.exe",128);
+  await expect(page.locator("#document-feedback")).toContainText("Недопустимый формат");
+  await send("#document-drop","test.pdf",128,2);
+  await expect(page.locator("#document-feedback")).toContainText("по одному файлу");
+  await send("#document-drop","test.pdf",15728641);
+  await expect(page.locator("#document-feedback")).toContainText("не превышать 15 МБ");
+  await send("#document-drop","test.pdf",128);
+  await expect(page.locator("#document-feedback")).toContainText("Выбран файл «test.pdf»");
+  expect(await page.locator("#document").evaluate((e)=> (e as HTMLInputElement).files?.length)).toBe(1);
+  // Nothing was submitted: client-side selection is NOT a publication action.
+  await expect(page.getByText("Документ загружен.")).toHaveCount(0);
+
 });
 
 test("CP-39D: редактор связывает опубликованную новость с экскурсией и событием через закрытую CMS", async ({ page }) => {

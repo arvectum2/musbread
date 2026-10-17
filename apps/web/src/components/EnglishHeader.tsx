@@ -2,6 +2,7 @@ import Link from "next/link";
 import VisionMode from "@/components/VisionMode";
 import { content, sections } from "@/data/content";
 import { museumReference } from "@/data/museum-reference";
+import MuseumIdentity from "@/components/MuseumIdentity";
 
 const englishPages = content.entries.filter((entry) => entry.translations?.en).map((entry) => {
   const section = Object.entries(sections).find(([, item]) => item.type === entry.type)?.[0];
@@ -13,8 +14,7 @@ export default function EnglishHeader() {
     <a href="#main" className="skip-link">Skip to content</a>
     <div className="header-inner">
       <Link href="/" className="wordmark" aria-label="Museum of Bread — Russian home page">
-        <span className="brand-mark" aria-hidden="true">✳</span>
-        <span>MUSEUM OF BREAD</span>
+        <MuseumIdentity locale="en" />
       </Link>
       <nav className="main-nav" aria-label="English navigation">
         {englishPages.map((entry) => <Link key={entry.url} href={entry.url}>{entry.title}</Link>)}

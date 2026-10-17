@@ -68,9 +68,12 @@
             <button id="suggest-alt" type="button">Предложить alt по подписи</button>
             <p id="alt-hint" role="status" class="small">Подпись должна описывать то, что действительно видно. Предложение не распознаёт картинку и требует вашей проверки.</p>
             <label for="image">Изображение *</label>
-            <div class="drop" id="drop">
-                <p>Перетащите изображение сюда или выберите файл</p>
-                <input id="image" name="image" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg" required>
+            <div class="drop" id="drop" data-museum-file-drop data-max-bytes="5242880"
+                 data-extensions="png,jpg,jpeg,webp,gif,svg">
+                <p>Перетащите одно изображение сюда или выберите файл</p>
+                <input id="image" name="image" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg" required
+                    aria-describedby="image-feedback">
+                <p id="image-feedback" data-museum-file-feedback role="status" aria-live="polite">Файл не выбран.</p>
             </div>
             <button type="submit">Загрузить изображение</button>
         </form>
@@ -148,19 +151,8 @@
             hint.textContent = 'Сервис подсказки временно недоступен. Заполните alt вручную.';
         } finally { suggest.disabled = false; }
     });
-    const drop = document.getElementById('drop');
-    const input = document.getElementById('image');
-    for (const name of ['dragenter','dragover']) drop.addEventListener(name, event => {
-        event.preventDefault(); drop.classList.add('drag');
-    });
-    for (const name of ['dragleave','drop']) drop.addEventListener(name, event => {
-        event.preventDefault(); drop.classList.remove('drag');
-    });
-    drop.addEventListener('drop', event => {
-        const files = event.dataTransfer?.files;
-        if (files?.length) input.files = files;
-    });
 })();
 </script>
+<script src="{{ asset('js/museum-file-drop.js') }}" defer></script>
 </body>
 </html>

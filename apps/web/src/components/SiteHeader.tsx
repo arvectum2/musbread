@@ -6,6 +6,7 @@ import VisionMode from "@/components/VisionMode";
 import { guideHref, museumReference } from "@/data/museum-reference";
 import { menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
 import NavigationBranch from "@/components/NavigationBranch";
+import MuseumIdentity from "@/components/MuseumIdentity";
 
 function closeAfterNavigation(event: MouseEvent<HTMLElement>) {
   if (!(event.target instanceof Element) || !event.target.closest("a")) return;
@@ -17,8 +18,8 @@ export default function SiteHeader() {
   return <header className="site-header">
     <a href="#main" className="skip-link">Перейти к содержимому</a>
     <div className="header-inner">
-      <Link href="/" className="wordmark" aria-label="Музей Хлеба — главная">
-        <span className="brand-mark" aria-hidden="true">✳</span><span>МУЗЕЙ ХЛЕБА</span>
+      <Link href="/" className="wordmark" aria-label="Санкт-Петербургский музей Хлеба — главная">
+        <MuseumIdentity />
       </Link>
       <nav aria-label="Основное меню" className="main-nav" onClick={closeAfterNavigation}>
         {menuGroups.map((group) => <details className="mega-group" key={group.slug}>

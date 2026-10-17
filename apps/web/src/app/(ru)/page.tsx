@@ -1,6 +1,7 @@
 import Link from "next/link";
 import EventAgenda from "@/components/EventAgenda";
 import { content, events } from "@/data/content";
+import { museumReference } from "@/data/museum-reference";
 export default function Home() {
   return <>
     <section className="hero">
@@ -18,6 +19,12 @@ export default function Home() {
     </section>
     <section className="section events-section">
       <div className="section-title-row"><div><span className="eyebrow">02 / СОБЫТИЯ</span><h2>Афиша музея</h2></div><Link className="text-link" href="/events/">Вся афиша <span aria-hidden="true">↗</span></Link></div>
+      {process.env.MUSBREAD_SITE_APPROVED !== "true" && <p className="event-demo-notice">
+        Афиша в этом прототипе содержит демонстрационные события, а не официальное расписание музея.
+        Актуальные анонсы можно проверить в{" "}
+        <a href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer"
+           className="text-link">новостях действующего сайта музея ↗</a>.
+      </p>}
       <EventAgenda events={events} buildDay={new Date().toISOString().slice(0, 10)} variant="featured" />
     </section>
     <section className="section visit-info">

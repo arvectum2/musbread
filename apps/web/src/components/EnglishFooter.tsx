@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { museumReference, REFERENCE_DATE } from "@/data/museum-reference";
 import { content, sections } from "@/data/content";
+import MuseumIdentity from "@/components/MuseumIdentity";
 
 const englishPages = content.entries.filter((entry) => entry.translations?.en).map((entry) => {
   const section = Object.entries(sections).find(([, item]) => item.type === entry.type)?.[0];
@@ -9,6 +10,9 @@ const englishPages = content.entries.filter((entry) => entry.translations?.en).m
 export default function EnglishFooter() {
   return <footer className="site-footer" lang="en">
     <div className="footer-info">
+      <Link href="/" className="footer-identity" aria-label="Museum of Bread — Russian homepage">
+        <MuseumIdentity locale="en" />
+      </Link>
       <strong>Museum of Bread — information preview</strong>
       <p>Address (official text in Russian): {museumReference.address}</p>
       <p><a href={museumReference.phoneHref}>{museumReference.phone}</a></p>
