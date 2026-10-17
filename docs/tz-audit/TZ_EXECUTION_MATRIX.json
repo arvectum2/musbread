@@ -4236,8 +4236,8 @@
       "Что сделать для завершения": "Внедрить SCSS и проверить сборку или получить письменное согласование эквивалентности",
       "Что нужно от музея / внешний блокер": "",
       "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
-      "Что уже есть (доказательство)": "globally compiled globals.scss, sass added to package lock",
-      "Учтено в плане": "Нет"
+      "Что уже есть (доказательство)": "globally compiled globals.scss, sass added to package lock; Oct17 audit reconfirmed sass@1.105.1 and existing compiled SCSS.",
+      "Учтено в плане": "Да"
     },
     {
       "Группа": "Технологии и администрирование",
@@ -4768,8 +4768,8 @@
       "Что сделать для завершения": "Проверить 80% охват и читаемость на утверждённой графике/реальном контенте и устройствах",
       "Что нужно от музея / внешний блокер": "Утверждённые страницы, дизайн, пользователи/устройства музея",
       "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить 80% охват и читаемость на утверждённой графике/реальном контенте и устройствах",
-      "Что уже есть (доказательство)": "Existing 90% desktop section containers checked at widths 1100/1440/1920/2560/3840 px on 3 routes (15 browser cases), readable text max widths and no overflow",
-      "Учтено в плане": "Нет"
+      "Что уже есть (доказательство)": "Existing 90% desktop section containers checked at widths 1100/1440/1920/2560/3840 px on 3 routes (15 browser cases), readable text max widths and no overflow; Oct17 audit confirmed real Playwright width-ratio tests and shared 90% shell; final customer typography review remains pending.",
+      "Учтено в плане": "Да"
     },
     {
       "Группа": "Адаптивность, UX/UI и производительность",
@@ -4996,8 +4996,8 @@
       "Что сделать для завершения": "Контакты и соцсети в футере реализованы и покрыты сборкой/тестами. Актуальность в договорной приёмке перепроверить.",
       "Что нужно от музея / внешний блокер": "",
       "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
-      "Что уже есть (доказательство)": "Shared RU SiteFooter and EN EnglishFooter include museum primary official phone, email, site-derived VK and MAX; all 78 static HTML routes verified by audit and Playwright",
-      "Учтено в плане": "Частично"
+      "Что уже есть (доказательство)": "Shared RU SiteFooter and EN EnglishFooter include museum primary official phone, email, site-derived VK and MAX; all 78 static HTML routes verified by audit and Playwright; Oct17 audit confirmed both Footer components and static source-backed VK/MAX links.",
+      "Учтено в плане": "Да"
     },
     {
       "Группа": "Прототипы, согласования и этапы сдачи",
@@ -5927,8 +5927,8 @@
       "Что сделать для завершения": "Удаление с контролем дочерних страниц и ссылок",
       "Что нужно от музея / внешний блокер": "",
       "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
-      "Что уже есть (доказательство)": "Model and MoonShine allow deletion of empty leaf; protected with children/entries",
-      "Учтено в плане": "Нет"
+      "Что уже есть (доказательство)": "Model and MoonShine allow deletion of empty leaf; protected with children/entries; Oct17 audit confirmed deletion guard on MuseumSection model lines 91+ for nonempty children/entries.",
+      "Учтено в плане": "Да"
     },
     {
       "Группа": "Передача файлов, исходников, прав и документов",
