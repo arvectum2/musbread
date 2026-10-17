@@ -298,6 +298,168 @@ class MuseumEditorialApprovalQueueTest extends TestCase
         app(\App\Support\MuseumExplicitApprovalGate::class)->assertApproved();
     }
 
+    public function test_admin_can_approve_section_and_event_and_export_one_consistent_set(): void
+    {
+        $this->allowOptIn();
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $section = \App\Models\MuseumSection::create([
+            'slug' => 'bakery', 'title' => 'Тестовый раздел', 'status' => 'published',
+        ]);
+        $event = \App\Models\MuseumEvent::create([
+            'slug' => 'bread-week', 'title' => 'Тестовое событие',
+            'category' => 'Афиша', 'starts_at' => '2026-12-15',
+            'body' => '<p>Встреча с сотрудниками музея</p>',
+            'excerpt' => 'Программа тестового события',
+            'status' => 'published', 'museum_section_id' => $section->id,
+        ]);
+        $entry = $this->entry('section-news');
+        $entry->update(['museum_section_id' => $section->id]);
+
+        $before = $this->get(route('museum.content.preflight'))->assertOk();
+        $before->assertSee('Одобрить структуру раздела')
+            ->assertSee('Одобрить редакцию события')
+            ->assertSee('Одобрить эту редакцию');
+        $this->post(route('museum.sections.approve-and-queue', $section), [
+            'revision_sha256' => MuseumApprovalRevision::forSubject($section->fresh()),
+        ])->assertRedirect(route('museum.content.preflight'));
+        $this->post(route('museum.events.approve-and-queue', $event), [
+            'revision_sha256' => MuseumApprovalRevision::forSubject($event->fresh()),
+        ])->assertRedirect(route('museum.content.preflight'));
+        $this->post(route('museum.entries.approve-and-queue', $entry), [
+            'revision_sha256' => MuseumApprovalRevision::fingerprint($entry->fresh()),
+        ])->assertRedirect(route('museum.content.preflight'));
+
+        $this->assertDatabaseCount('museum_content_approvals', 3);
+        $this->assertSame(['museum_entry_id', 'museum_event_id', 'museum_section_id'],
+            collect(MuseumContentApproval::all())->flatMap(
+                fn ($row) => collect(['museum_event_id','museum_entry_id','museum_section_id'])
+                    ->filter(fn ($key) => $row->$key !== null)
+            )->values()->sort()->values()->all());
+        // The same active release request coalesces all three approvals.
+        $this->assertSame(1, MuseumPublicationRun::count());
+        Queue::assertPushed(PublishMuseumSnapshot::class, 1);
+
+        $dir = storage_path('framework/testing/multi-subject-export');
+        if (! is_dir($dir)) mkdir($dir, 0700, true);
+        $json = $dir.'/data.json';
+        $manifest = $dir.'/manifest.json';
+        try {
+            $this->assertSame(0, Artisan::call('museum:export', [
+                '--output' => $json, '--manifest' => $manifest,
+                '--media-output-dir' => $dir.'/media',
+                '--document-output-dir' => $dir.'/documents',
+                '--preflight-strict' => true,
+            ]));
+            $payload = json_decode(file_get_contents($json), true);
+            $this->assertSame(['bakery'], array_column($payload['sections'], 'slug'));
+            $this->assertSame(['bread-week'], array_column($payload['events'], 'slug'));
+            $this->assertSame(['section-news'], array_column($payload['entries'], 'slug'));
+            $this->get(route('museum.content.approval-journal'))->assertOk()
+                ->assertSee('Событие #'.$event->id)
+                ->assertSee('Раздел #'.$section->id);
+            // The same multi-subject approval gate must also work inside the
+            // queued worker, not only when invoking the exporter manually.
+            (new PublishMuseumSnapshot(MuseumPublicationRun::sole()->id,
+                $dir.'/worker.json', $dir.'/worker-manifest.json', $dir.'/worker-media'))->handle();
+            $this->assertSame('succeeded', MuseumPublicationRun::sole()->status);
+            $workerPayload = json_decode(file_get_contents($dir.'/worker.json'), true);
+            $this->assertSame(['bread-week'], array_column($workerPayload['events'], 'slug'));
+            $this->assertSame(['bakery'], array_column($workerPayload['sections'], 'slug'));
+            $this->assertSame(['section-news'], array_column($workerPayload['entries'], 'slug'));
+            $oldContent = file_get_contents($json);
+            $oldManifest = file_get_contents($manifest);
+            $event->update(['excerpt' => 'Изменённый анонс события']);
+            $this->assertSame(1, Artisan::call('museum:export', [
+                '--output' => $json, '--manifest' => $manifest,
+                '--media-output-dir' => $dir.'/media',
+                '--document-output-dir' => $dir.'/documents',
+            ]));
+            $this->assertSame($oldContent, file_get_contents($json));
+            $this->assertSame($oldManifest, file_get_contents($manifest));
+            $event->update(['excerpt' => 'Программа тестового события']);
+            $section->update(['title' => 'Изменённый заголовок раздела']);
+            $this->assertSame(1, Artisan::call('museum:export', [
+                '--output' => $json, '--manifest' => $manifest,
+                '--media-output-dir' => $dir.'/media',
+                '--document-output-dir' => $dir.'/documents',
+            ]));
+            $this->assertSame($oldContent, file_get_contents($json));
+        } finally {
+            @unlink($json);
+            @unlink($manifest);
+            @unlink($dir.'/worker.json');
+            @unlink($dir.'/worker-manifest.json');
+        }
+    }
+
+    public function test_unapproved_event_section_drafts_and_stale_signatures_are_rejected(): void
+    {
+        $this->allowOptIn();
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $section = \App\Models\MuseumSection::create([
+            'slug' => 'draft-parent', 'title' => 'Закрытый родитель', 'status' => 'draft',
+        ]);
+        $child = \App\Models\MuseumSection::create([
+            'slug' => 'hidden-child', 'title' => 'Вложенный раздел',
+            'status' => 'published', 'parent_id' => $section->id,
+        ]);
+        $event = \App\Models\MuseumEvent::create([
+            'slug' => 'private-event', 'title' => 'Тестовое событие', 'category' => 'Афиша',
+            'starts_at' => '2026-12-15', 'excerpt' => 'Анонс',
+            'body' => '<p>Описание</p>', 'status' => 'draft',
+        ]);
+
+        $this->post(route('museum.sections.approve-and-queue', $child), [
+            'revision_sha256' => MuseumApprovalRevision::forSubject($child->fresh()),
+        ])->assertStatus(422);
+        $this->post(route('museum.events.approve-and-queue', $event), [
+            'revision_sha256' => MuseumApprovalRevision::forSubject($event->fresh()),
+        ])->assertStatus(422);
+        $event->update(['status' => 'published']);
+        $oldHash = MuseumApprovalRevision::forSubject($event->fresh());
+        $event->update(['seo_title' => 'Правка после предпросмотра']);
+        $this->post(route('museum.events.approve-and-queue', $event), [
+            'revision_sha256' => $oldHash,
+        ])->assertStatus(409);
+        $this->assertDatabaseCount('museum_content_approvals', 0);
+        Queue::assertNothingPushed();
+
+        $editorRole = MoonshineUserRole::where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $editorRole->id]);
+        $this->actingAs($editor, 'moonshine');
+        $this->post(route('museum.events.approve-and-queue', $event), [
+            'revision_sha256' => MuseumApprovalRevision::forSubject($event->fresh()),
+        ])->assertForbidden();
+        $this->post(route('museum.sections.approve-and-queue', $child), [
+            'revision_sha256' => MuseumApprovalRevision::forSubject($child->fresh()),
+        ])->assertForbidden();
+    }
+
+    public function test_changing_between_two_approved_versions_invalidates_in_flight_capture(): void
+    {
+        $this->allowOptIn();
+        $entry = $this->entry('snapshot-version');
+        $first = MuseumApprovalRevision::fingerprint($entry->fresh());
+        MuseumContentApproval::create([
+            'museum_entry_id' => $entry->id, 'actor_id' => 1,
+            'revision_sha256' => $first, 'approved_at' => now('UTC'),
+            'dispatch_status' => 'queued',
+        ]);
+        $gate = app(\App\Support\MuseumExplicitApprovalGate::class);
+        $captured = $gate->capture();
+        $entry->update(['body' => '<p>Следующая подтверждённая редакция</p>']);
+        $newHash = MuseumApprovalRevision::fingerprint($entry->fresh());
+        MuseumContentApproval::create([
+            'museum_entry_id' => $entry->id, 'actor_id' => 1,
+            'revision_sha256' => $newHash, 'approved_at' => now('UTC'),
+            'dispatch_status' => 'queued',
+        ]);
+        $this->assertNotSame($captured, $gate->capture());
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Approved publication set changed');
+        $gate->assertUnchanged($captured);
+    }
+
     public function test_published_status_by_itself_is_not_an_approval_event(): void
     {
         $this->allowOptIn();

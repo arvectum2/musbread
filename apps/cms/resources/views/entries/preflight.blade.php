@@ -41,13 +41,13 @@
     <section aria-label="Подготовка выгрузки по кнопке">
         <h2>Публикация по событию</h2>
         <p class="intro">Кнопка запускает <strong>только подготовку закрытой выгрузки CMS</strong>. Она не отправляет пакет на публичные серверы музея и не заменяет формального согласования.</p>
-        @if($exportQueueConfigured && $report['errors'] === 0)
+        @if($exportQueueConfigured && $report['errors'] === 0 && !config('museum.editorial_approval_queue', false))
         <form method="post" action="{{ route('museum.content.queue-publication') }}">
             @csrf
             <button type="submit">Опубликовать — подготовить пакет в очереди</button>
         </form>
         @else
-        <p role="status" class="notice">Запуск выгрузки недоступен: {{ !$exportQueueConfigured ? 'постоянная очередь не настроена.' : 'есть критические ошибки в готовых материалах.' }}</p>
+        <p role="status" class="notice">Запуск выгрузки недоступен: {{ !$exportQueueConfigured ? 'постоянная очередь не настроена.' : (config('museum.editorial_approval_queue', false) ? 'используйте одобрение конкретной редакции ниже.' : 'есть критические ошибки в готовых материалах.') }}</p>
         @endif
     </section>
     @endif
@@ -106,6 +106,13 @@
                 <a href="/admin/resource/museum-event-resource/museum-event-form-page/{{ $record['id'] }}">Исправить событие</a>
                 <a href="{{ route('museum.events.preview', ['event' => $record['id']]) }}">Предпросмотр события</a>
             </nav>
+            @if($mayApprove && isset($eventChecksums[$record['id']]))
+            <form method="post" action="{{ route('museum.events.approve-and-queue', ['event' => $record['id']]) }}">
+                @csrf
+                <input type="hidden" name="revision_sha256" value="{{ $eventChecksums[$record['id']] }}">
+                <button type="submit">Одобрить редакцию события и запросить закрытую выгрузку</button>
+            </form>
+            @endif
             @if($record['issues'] === [])
                 <p>Автоматическая проверка замечаний не обнаружила.</p>
             @else
@@ -119,6 +126,23 @@
     @empty
         <p>События афиши пока не созданы.</p>
     @endforelse
+    @if($sections->isNotEmpty())
+    <h2 id="sections-check">Разделы навигации</h2>
+    <p class="intro">Раздел утверждается отдельно от входящих в него материалов. Черновики и разделы со скрытыми родителями не допускаются к одобрению.</p>
+    @foreach($sections as $section)
+        <article class="record">
+            <h3>{{ $section->title ?: 'Без названия' }}</h3>
+            <p class="meta"><code>{{ $section->slug }}</code> · {{ $section->status }}</p>
+            @if($mayApprove && isset($sectionChecksums[$section->id]))
+            <form method="post" action="{{ route('museum.sections.approve-and-queue', ['section' => $section->id]) }}">
+                @csrf
+                <input type="hidden" name="revision_sha256" value="{{ $sectionChecksums[$section->id] }}">
+                <button type="submit">Одобрить структуру раздела и запросить закрытую выгрузку</button>
+            </form>
+            @endif
+        </article>
+    @endforeach
+    @endif
 </main>
 </body>
 </html>

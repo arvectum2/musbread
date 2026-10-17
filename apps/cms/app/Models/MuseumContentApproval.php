@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 final class MuseumContentApproval extends Model
 {
     protected $fillable = [
-        'museum_entry_id', 'actor_id', 'revision_sha256', 'approved_at',
+        'museum_entry_id', 'museum_event_id', 'museum_section_id', 'actor_id', 'revision_sha256', 'approved_at',
         'dispatch_status', 'publication_run_id',
     ];
 

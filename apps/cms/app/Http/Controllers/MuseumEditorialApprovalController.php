@@ -6,6 +6,10 @@ namespace App\Http\Controllers;
 
 use App\Models\MuseumContentApproval;
 use App\Models\MuseumEntry;
+use App\Models\MuseumEvent;
+use App\Models\MuseumSection;
+use App\Support\MuseumEntryPublicationState;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\MuseumPublicationRun;
 use App\Support\MuseumApprovalRevision;
 use App\Support\MuseumContentPreflight;
@@ -24,6 +28,21 @@ final class MuseumEditorialApprovalController extends Controller
 {
     public function store(Request $request, MuseumEntry $entry, MuseumContentPreflight $preflight): RedirectResponse
     {
+        return $this->approve($request, $entry, 'entry', $preflight);
+    }
+
+    public function storeEvent(Request $request, MuseumEvent $event, MuseumContentPreflight $preflight): RedirectResponse
+    {
+        return $this->approve($request, $event, 'event', $preflight);
+    }
+
+    public function storeSection(Request $request, MuseumSection $section, MuseumContentPreflight $preflight): RedirectResponse
+    {
+        return $this->approve($request, $section, 'section', $preflight);
+    }
+
+    private function approve(Request $request, Model $subject, string $kind, MuseumContentPreflight $preflight): RedirectResponse
+    {
         $actor = MuseumSectionAccess::user();
         if ($actor === null || ! $actor->isSuperUser()) abort(403);
 
@@ -35,35 +54,45 @@ final class MuseumEditorialApprovalController extends Controller
         }
         $input = $request->validate(['revision_sha256' => ['required', 'regex:/^[0-9a-f]{64}$/D']]);
 
-        $lock = Cache::lock('museum:editorial-approval:entry:'.$entry->id, 45);
+        $lock = Cache::lock('museum:editorial-approval:'.$kind.':'.$subject->id, 45);
         if (! $lock->get()) abort(409, 'Другая операция одобрения уже выполняется.');
 
         try {
-            $approval = DB::transaction(function () use ($entry, $preflight, $input, $actor) {
-                $fresh = MuseumEntry::query()->lockForUpdate()->findOrFail($entry->id);
-                $fingerprint = MuseumApprovalRevision::fingerprint($fresh);
+            $approval = DB::transaction(function () use ($subject, $kind, $preflight, $input, $actor) {
+                $fresh = $subject->newQuery()->lockForUpdate()->findOrFail($subject->id);
+                $fingerprint = MuseumApprovalRevision::forSubject($fresh);
                 if (! hash_equals($fingerprint, $input['revision_sha256'])) {
                     abort(409, 'Материал изменился после предпросмотра; требуется повторная проверка.');
                 }
 
                 // This is an independent explicit action, not a model::saving event.
                 $report = $preflight->report();
-                $row = collect($report['records'])
-                    ->firstWhere('id', $fresh->id);
-                if ($row === null || $row['state'] !== 'ready'
-                    || $row['error_count'] !== 0 || $report['errors'] !== 0) {
-                    abort(422, 'Материал или другая публикация не прошли строгую проверку.');
+                $eligible = match ($kind) {
+                    'entry', 'event' => collect($report[$kind === 'entry' ? 'records' : 'events'])
+                        ->contains(static fn ($row) => $row['id'] === $fresh->id
+                            && $row['state'] === 'ready' && $row['error_count'] === 0),
+                    'section' => trim((string) $fresh->title) !== ''
+                        && in_array($fresh->id, MuseumEntryPublicationState::publishedSectionIds(), true),
+                    default => false,
+                };
+                if (! $eligible || $report['errors'] !== 0) {
+                    abort(422, 'Материал, событие или раздел не прошли строгую проверку.');
                 }
 
+                $key = match ($kind) {
+                    'entry' => 'museum_entry_id',
+                    'event' => 'museum_event_id',
+                    'section' => 'museum_section_id',
+                };
                 $existing = MuseumContentApproval::query()
-                    ->where('museum_entry_id', $fresh->id)
+                    ->where($key, $fresh->id)
                     ->where('revision_sha256', $fingerprint)->first();
                 if ($existing !== null) {
                     // Original approval timestamp cannot be refreshed by clicking twice.
                     return $existing;
                 }
                 return MuseumContentApproval::create([
-                    'museum_entry_id' => $fresh->id,
+                    $key => $fresh->id,
                     'revision_sha256' => $fingerprint,
                     'actor_id' => $actor->id,
                     'approved_at' => now('UTC'),

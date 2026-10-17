@@ -25,12 +25,12 @@
     <p>Последние 100 событий. Записи этого журнала не редактируются через интерфейс.</p>
     <div class="scroll">
         <table>
-            <thead><tr><th>Событие</th><th>ID материала</th><th>UTC одобрения</th><th>SHA-256 редакции</th><th>Запрос выгрузки</th><th>ID запуска</th></tr></thead>
+            <thead><tr><th>Событие</th><th>Тип / ID</th><th>UTC одобрения</th><th>SHA-256 редакции</th><th>Запрос выгрузки</th><th>ID запуска</th></tr></thead>
             <tbody>
             @forelse($approvals as $approval)
                 <tr>
                     <td>{{ $approval->id }}</td>
-                    <td>{{ $approval->museum_entry_id }}</td>
+                    <td>@if($approval->museum_entry_id !== null)Материал #{{ $approval->museum_entry_id }}@elseif($approval->museum_event_id !== null)Событие #{{ $approval->museum_event_id }}@else Раздел #{{ $approval->museum_section_id }}@endif</td>
                     <td><time datetime="{{ $approval->approved_at->utc()->toIso8601String() }}">{{ $approval->approved_at->utc()->format('Y-m-d H:i:s') }}</time></td>
                     <td><code>{{ $approval->revision_sha256 }}</code></td>
                     <td>{{ $approval->dispatch_status }}</td>

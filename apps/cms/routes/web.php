@@ -27,6 +27,8 @@ Route::middleware(\MoonShine\Laravel\Http\Middleware\Authenticate::class)->group
     Route::get('/admin/museum-content/preflight', [\App\Http\Controllers\MuseumContentPreflightController::class, 'index'])->name('museum.content.preflight');
     Route::post('/admin/museum-content/queue-publication', [\App\Http\Controllers\MuseumPublishRequestController::class, 'store'])->name('museum.content.queue-publication');
     Route::post('/admin/museum-entries/{entry}/approve-and-queue', [\App\Http\Controllers\MuseumEditorialApprovalController::class, 'store'])->name('museum.entries.approve-and-queue');
+    Route::post('/admin/museum-events/{event}/approve-and-queue', [\App\Http\Controllers\MuseumEditorialApprovalController::class, 'storeEvent'])->name('museum.events.approve-and-queue');
+    Route::post('/admin/museum-sections/{section}/approve-and-queue', [\App\Http\Controllers\MuseumEditorialApprovalController::class, 'storeSection'])->name('museum.sections.approve-and-queue');
     Route::get('/admin/museum-content/approval-journal', [\App\Http\Controllers\MuseumEditorialApprovalJournalController::class, 'index'])->name('museum.content.approval-journal');
     Route::get('/admin/museum-content/links', [\App\Http\Controllers\MuseumContextLinksController::class, 'index'])->name('museum.content.links');
     Route::get('/admin/museum-entries/{entry}/relations', [\App\Http\Controllers\MuseumContentRelationsController::class, 'edit'])->name('museum.entries.relations.edit');

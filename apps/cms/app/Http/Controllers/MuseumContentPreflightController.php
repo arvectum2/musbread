@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\MuseumEntry;
+use App\Models\MuseumEvent;
+use App\Models\MuseumSection;
+use App\Support\MuseumEntryPublicationState;
 use App\Support\MuseumApprovalRevision;
 use App\Support\MuseumContentPreflight;
 use App\Support\MuseumSectionAccess;
@@ -26,6 +29,8 @@ final class MuseumContentPreflightController extends Controller
             && (bool) config('museum.editorial_approval_queue', false)
             && $report['errors'] === 0;
         $revisionChecksums = [];
+        $eventChecksums = [];
+        $sectionChecksums = [];
         if ($mayApprove) {
             $eligible = collect($report['records'])
                 ->filter(static fn ($row) => $row['state'] === 'ready' && $row['error_count'] === 0)
@@ -33,12 +38,31 @@ final class MuseumContentPreflightController extends Controller
             foreach (MuseumEntry::query()->whereIn('id', $eligible)->get() as $entry) {
                 $revisionChecksums[$entry->id] = MuseumApprovalRevision::fingerprint($entry);
             }
+            $eligibleEvents = collect($report['events'])
+                ->filter(static fn ($row) => $row['state'] === 'ready' && $row['error_count'] === 0)
+                ->pluck('id')->all();
+            foreach (MuseumEvent::query()->whereIn('id', $eligibleEvents)->get() as $event) {
+                $eventChecksums[$event->id] = MuseumApprovalRevision::forSubject($event);
+            }
+            $approvedSectionIds = MuseumEntryPublicationState::publishedSectionIds();
+            foreach (MuseumSection::query()->whereIn('id', $approvedSectionIds)->get() as $section) {
+                if (trim((string) $section->title) !== '') {
+                    $sectionChecksums[$section->id] = MuseumApprovalRevision::forSubject($section);
+                }
+            }
         }
+
+        $sections = $actor->isSuperUser()
+            ? MuseumSection::query()->orderBy('sort_order')->orderBy('id')->get()
+            : collect();
 
         return response()->view('entries.preflight', [
             'report' => $report,
             'mayApprove' => $mayApprove,
             'revisionChecksums' => $revisionChecksums,
+            'eventChecksums' => $eventChecksums,
+            'sectionChecksums' => $sectionChecksums,
+            'sections' => $sections,
             'mayRequestExport' => $actor->isSuperUser(),
             'exportQueueConfigured' => $durableQueue,
         ], 200, [

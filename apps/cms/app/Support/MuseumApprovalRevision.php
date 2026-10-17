@@ -5,10 +5,41 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Models\MuseumEntry;
+use App\Models\MuseumEvent;
+use App\Models\MuseumSection;
+use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 
 /** Stable fingerprint for one saved CMS revision and its linked assets. */
 final class MuseumApprovalRevision
 {
+    /** Same editorial decision and hash contract for the three public content owners. */
+    public static function forSubject(Model $subject): string
+    {
+        if ($subject instanceof MuseumEntry) return self::fingerprint($subject);
+        if (! $subject instanceof MuseumEvent && ! $subject instanceof MuseumSection) {
+            throw new InvalidArgumentException('Unsupported editorial approval subject');
+        }
+        $attrs = $subject->getAttributes();
+        ksort($attrs);
+        $extra = [];
+        if ($subject instanceof MuseumEvent) {
+            $extra['related_entry_ids'] = $subject->relatedEntries()
+                ->pluck('museum_entries.id')->sort()->values()->all();
+            $cover = $subject->coverMedia;
+            if ($cover !== null) {
+                $extra['cover_media'] = $cover->getAttributes();
+                ksort($extra['cover_media']);
+            }
+        }
+        return hash('sha256', json_encode([
+            'version' => 1,
+            'type' => $subject instanceof MuseumEvent ? 'event' : 'section',
+            'model' => $attrs,
+            'dependencies' => $extra,
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
+    }
+
     public static function fingerprint(MuseumEntry $entry): string
     {
         // Raw saved fields, NOT "published_at" as an approval clock.

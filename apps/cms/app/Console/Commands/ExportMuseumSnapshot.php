@@ -45,7 +45,7 @@ class ExportMuseumSnapshot extends Command
         // Fail before ANY generated files are touched, including media/documents.
         // Opt-in only: existing pre-contract fixture export is unchanged.
         try {
-            app(\App\Support\MuseumExplicitApprovalGate::class)->assertApproved();
+            $approvedSet = app(\App\Support\MuseumExplicitApprovalGate::class)->capture();
         } catch (\RuntimeException $exception) {
             $this->error('Approval gate denied export: '.$exception->getMessage());
             return self::FAILURE;
@@ -364,7 +364,7 @@ class ExportMuseumSnapshot extends Command
         // Detect edits/attachment changes occurring during snapshot construction.
         // This is a second safety check, not a substitute for an immutable DB snapshot.
         try {
-            app(\App\Support\MuseumExplicitApprovalGate::class)->assertApproved();
+            app(\App\Support\MuseumExplicitApprovalGate::class)->assertUnchanged($approvedSet);
         } catch (\RuntimeException $exception) {
             $this->error('Approval gate denied export after snapshot build: '.$exception->getMessage());
             return self::FAILURE;
