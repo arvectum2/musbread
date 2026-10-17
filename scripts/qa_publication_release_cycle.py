@@ -11,14 +11,18 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from threading import Thread
 
 import release_site as rel
 from verify_static_transfer import make_manifest, verify_manifest
+from publication_sla import measure, maximum_hourly_lag, write_private_result
 
 
 def verify_local_publication_cycle(
     static_output: Path, snapshot: Path, manifest: Path, destination: Path,
+    qa_clock_started_at: str | None = None,
 ) -> dict[str, str]:
     """Fail closed on missing artifacts, corruption or wrong pointer.
 
@@ -68,6 +72,46 @@ def verify_local_publication_cycle(
     if (state["current"] != first or state["verified_release_count"] != 1
             or rel.validate_release((destination / "current").resolve()) != first):
         raise ValueError("Failed initial SHA256-verified release")
+    # Synthetic QA clock: do not confuse with the museum's editorial approval.
+    # Verify the exact HTML over a real loopback HTTP connection.
+    if qa_clock_started_at is not None:
+        class LocalStaticHandler(SimpleHTTPRequestHandler):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, directory=str(destination / "current"), **kwargs)
+
+            def log_message(self, *_args):
+                pass
+
+        html = destination / "current/news/qa-browser-news/index.html"
+        if not html.is_file():
+            raise ValueError("Expected CMS-created news absent from release")
+        expected_hash = hashlib.sha256(html.read_bytes()).hexdigest()
+        server = ThreadingHTTPServer(("127.0.0.1", 0), LocalStaticHandler)
+        worker = Thread(target=server.serve_forever, daemon=True)
+        worker.start()
+        try:
+            result = measure(
+                approval_id="QA-MOONSHINE-PUBLICATION",
+                approved_at=qa_clock_started_at,
+                page_url=f"http://127.0.0.1:{server.server_address[1]}/news/qa-browser-news/",
+                expected_html_sha256=expected_hash,
+            )
+        finally:
+            server.shutdown()
+            server.server_close()
+            worker.join(timeout=5)
+        if result["status"] != "verified_within_60m":
+            raise ValueError("Local HTTP visibility failed: " + result["status"])
+        write_private_result(destination.parent / "qa-http-sla-evidence.json", result)
+        if maximum_hourly_lag(
+            remaining_build_transfer_seconds=result["seconds_since_approval"]
+        )["within_60m_guarantee_possible"]:
+            raise ValueError("Hourly polling cannot guarantee SLA with positive downstream work")
+        print("TZ110_LOCAL_HTTP_SLA_PASS " + json.dumps({
+            "status": result["status"],
+            "seconds_since_qa_clock": result["seconds_since_approval"],
+            "hourly_guarantee": False,
+        }, sort_keys=True), flush=True)
     private = destination / "private-snapshots" / (source_hash + ".json")
     if (not private.is_file() or private.read_bytes() != snapshot.read_bytes()
             or private.stat().st_mode & 0o777 != 0o600):

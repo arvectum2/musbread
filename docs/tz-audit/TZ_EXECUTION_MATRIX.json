@@ -2105,10 +2105,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S0–S1 · инфраструктура",
-      "Что сделать для завершения": "Измерить 60-минутный end-to-end SLA на инфраструктуре",
-      "Что нужно от музея / внешний блокер": "Два сервера и согласованные временные нормативы",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Измерить 60-минутный end-to-end SLA на инфраструктуре",
-      "Что уже есть (доказательство)": "Scheduler and release logic in prototype",
+      "Что сделать для завершения": "Obtain separate factual editorial approval timestamp tied to immutable content version and customer-approved public URL; deploy event-driven/shorter backup publishing with measured build/transfer/cache budget; record independent verifiable appearance of exact version; run >=60min failure and recurring production SLA acceptance.",
+      "Что нужно от музея / внешний блокер": "Museum-approved editorial signoff events, live isolated backend/public servers and network, monitoring, trust, actual UAT",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Obtain separate factual editorial approval timestamp tied to immutable content version and customer-approved public URL; deploy event-driven/shorter backup publishing with measured build/transfer/cache budget; record independent verifiable appearance of exact version; run >=60min failure and recurring production SLA acceptance.",
+      "Что уже есть (доказательство)": "Real local HTTP read-after-release now checks exact HTML SHA256 and timestamps from explicitly supplied QA clock: scripts/publication_sla.py; 8 Python unit tests including boundary 60min, wrong page/hash, 404, redirects, private 0600 receipt, local-only host, worst-case hourly scheduling. Isolated real MoonShine browser→CMS export→Next build→verified 210-file release→localhost HTTP with matching approved QA page, 17.416s synthetic QA measurement, rollback. Local prototype only, NOT museum approval or production.",
       "Учтено в плане": "Да"
     },
     {

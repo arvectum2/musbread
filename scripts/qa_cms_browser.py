@@ -15,6 +15,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import URLError
 from urllib.request import urlopen
@@ -36,7 +37,7 @@ def run(command: list[str], cwd: Path, env: dict[str, str]) -> None:
 
 def verify_browser_created_static_site(workspace: Path, published: Path,
                                        manifest: Path, media: Path, documents: Path,
-                                       env: dict[str, str]) -> None:
+                                       env: dict[str, str], qa_clock_started_at: str) -> None:
     """Build Next.js from the *actual browser-created* CMS snapshot in a disposable tree.
 
     Never replace the tracked developer fixture or touch the normal Next.js build.
@@ -183,7 +184,8 @@ def verify_browser_created_static_site(workspace: Path, published: Path,
     # output -> SHA256-verified local release. This is not a customer network
     # transport. The test uses only the disposable workspace.
     from qa_publication_release_cycle import verify_local_publication_cycle
-    verify_local_publication_cycle(out, published, manifest, workspace / "verified-release")
+    verify_local_publication_cycle(out, published, manifest, workspace / "verified-release",
+                                   qa_clock_started_at=qa_clock_started_at)
     print("Verified UI-created news/event/section with SEO title, description and H1 in static HTML; draft excluded", flush=True)
 
 
@@ -278,6 +280,8 @@ def main() -> int:
                 else:
                     raise RuntimeError("QA PHP server failed readiness")
                 print("Running isolated MoonShine browser smoke tests against loopback", flush=True)
+                # Synthetic start clock, NOT a timestamp of actual museum approval.
+                qa_clock_started_at = datetime.now(timezone.utc).isoformat()
                 run(["npm", "run", "test:cms"], WEB, env)
                 output = root / "published.json"
                 manifest = root / "manifest.json"
@@ -322,7 +326,8 @@ def main() -> int:
                     digest = hashlib.sha256(path.read_bytes()).hexdigest()
                     if audit["files"]["media/" + path.name]["sha256"] != digest:
                         raise RuntimeError("QA exported media checksum mismatch")
-                verify_browser_created_static_site(root, output, manifest, media_folder, documents_folder, env)
+                verify_browser_created_static_site(root, output, manifest, media_folder,
+                                                   documents_folder, env, qa_clock_started_at)
                 print("Verified browser-created event, article, image; draft excluded from public export", flush=True)
             except Exception:
                 print("QA server output tail (without login credentials):", flush=True)
