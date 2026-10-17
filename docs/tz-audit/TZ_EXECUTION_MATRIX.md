@@ -4,7 +4,7 @@
 
 **Легенда:** 🟢 готово в техническом прототипе, 🟡 частично, 🔴 не готово. «Готово» **не означает приёмку заказчиком**. Номер очереди означает *можно начать следующий внутренний этап уже сейчас*, но не отсутствие будущих согласований. Нет номера = явный внешний блокер, обязательная стадия или решение музея.
 
-**Всего 325:** 🟢 46 · 🟡 119 · 🔴 160. **В очереди внутренних работ: 0**, внешняя зависимость/этап: 279.
+**Всего 325:** 🟢 48 · 🟡 117 · 🔴 160. **В очереди внутренних работ: 0**, внешняя зависимость/этап: 277.
 
 ## Сводка по группам
 
@@ -20,7 +20,7 @@
 | 08 | Главная, хедер и футер | 15 | 2 | 8 | 5 | 0 | 13 |
 | 09 | Музей и раздел для посетителей | 18 | 0 | 13 | 5 | 0 | 18 |
 | 10 | Афиша, экскурсии, выставки и наука | 26 | 2 | 13 | 11 | 0 | 24 |
-| 11 | Навигация, поиск, SEO, медиа и EN | 25 | 12 | 12 | 1 | 0 | 13 |
+| 11 | Навигация, поиск, SEO, медиа и EN | 25 | 14 | 10 | 1 | 0 | 11 |
 | 12 | Билеты, формы и внешние интеграции | 8 | 0 | 0 | 8 | 0 | 8 |
 | 13 | Доступность интерфейса и документов | 8 | 3 | 2 | 3 | 0 | 5 |
 | 14 | Технологии и администрирование | 23 | 8 | 13 | 2 | 0 | 15 |
@@ -305,8 +305,8 @@
 | TZ-193 · Осмысленные краткие alt для всех содержательных изображений (п. 2.2.3.6.3) | P0 | 🟡 Частично | — | **Блокер:** Фотобанк музея, утверждённая политика alt, пользовательская приёмка. **После:** Проверить смысл alt каждой реальной карточки/иконки и работу с экранным диктором. | TZ193: required human-reviewed alt in CMS and public export; caption-based draft generator plus static alt audit |
 | TZ-194 · Alt не должен говорить «картинка/изображение/фото/графика», до 100–125 символов (п. 2.2.3.6.3) | P1 | 🟢 Готово | — | Реализовано и проверено в прототипе; приёмка заказчика отдельно. | Private MuseumAltPolicy enforces concise alt <=125 and disallows generic photo/image/picture/graph words on upload and edit; legacy media checked before export, read-only preflight warning, public HTML and JSON static audit plus negative PHP/Python tests; human visual accuracy remains required |
 | TZ-195 · Для длинного описания — отдельный текстовый блок (п. 2.2.3.6.3) | P1 | 🟢 Готово | — | Реализовано и проверено в прототипе; приёмка заказчика отдельно. | Independent nullable long_description up to 3000 chars on private media create/edit, stored in DB, passed through approved export only, rendered as separate visible text paragraph under public RU and EN figures; original alt remains short and old JSON unchanged when empty; PHP/browser end-to-end validation |
-| TZ-196 · Возможность перевода сайта на английский (п. 2.2.3.6.3) | P0 | 🟡 Частично | — | **Блокер:** Английские тексты, переводчик. **После:** Структура полей, язык/URL, экспорт. | CP-27D separate RU/EN root layouts, english nav and metadata; full official English corpus missing |
-| TZ-197 · Добавление страниц в существующие разделы (п. 2.2.3.6.3) | P0 | 🟡 Частично | — | **Блокер:** Структура реального музея, полномочия редакторов и приёмка. **После:** Утвердить фактическое дерево/набор страниц и провести музейный UAT навигации. | MoonShine page create in allowed existing section, public /guide/<slug>/ lists assigned published entries, canonical href/backlink, PHP ACL/export and 4-level static regression |
+| TZ-196 · Возможность перевода сайта на английский (п. 2.2.3.6.3) | P0 | 🟢 Готово | — | Реализовано и проверено в прототипе; приёмка заказчика отдельно. | Technical translation capability proven end-to-end: existing Laravel MuseumEntry title_en/body_en/excerpt_en/SEO fields; MuseumEnglishTranslationTest verifies incomplete text never exports, body sanitizer strips scripts, approved text exports, drafted content withdrawn. Snapshot translations.en yields static EN page with lang=en, translated heading/body/title/description, reciprocal RU↔EN hreflang and link; missing EN stays absent. scripts/qa_bilingual_publication.py builds verified routes and always restores golden snapshot, tested 17.10.2026. |
+| TZ-197 · Добавление страниц в существующие разделы (п. 2.2.3.6.3) | P0 | 🟢 Готово | — | Реализовано и проверено в прототипе; приёмка заказчика отдельно. | Existing MoonShine page/section creation with section-scoped ACL; CMS exporter emits approved sections and assigned content; dynamic guide page renders nested child pages via CMS. scripts/qa_dynamic_navigation.py verifies four-level hierarchy and exact assigned content, and scripts/qa_bilingual_publication.py verifies new CMS-assigned page appears in existing museum list and opens at canonical URL without editing React components. Both scripts restore original published.json and rebuild. 17.10.2026. |
 
 ### 12. Билеты, формы и внешние интеграции — TZ-198…TZ-205
 

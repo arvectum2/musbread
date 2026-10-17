@@ -3734,15 +3734,15 @@
       "Строки оригинала": "246",
       "Требование": "Возможность перевода сайта на английский",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · публичный UI",
-      "Что сделать для завершения": "Структура полей, язык/URL, экспорт",
-      "Что нужно от музея / внешний блокер": "Английские тексты, переводчик",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Структура полей, язык/URL, экспорт",
-      "Что уже есть (доказательство)": "CP-27D separate RU/EN root layouts, english nav and metadata; full official English corpus missing",
+      "Что сделать для завершения": "Capability to add approved EN translations is ready. Full official English language corpus, translation quality and sign-off are separate museum content/legal deliverables and not implied by this technical status.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Technical translation capability proven end-to-end: existing Laravel MuseumEntry title_en/body_en/excerpt_en/SEO fields; MuseumEnglishTranslationTest verifies incomplete text never exports, body sanitizer strips scripts, approved text exports, drafted content withdrawn. Snapshot translations.en yields static EN page with lang=en, translated heading/body/title/description, reciprocal RU↔EN hreflang and link; missing EN stays absent. scripts/qa_bilingual_publication.py builds verified routes and always restores golden snapshot, tested 17.10.2026.",
       "Учтено в плане": "Да"
     },
     {
@@ -3753,15 +3753,15 @@
       "Строки оригинала": "246",
       "Требование": "Добавление страниц в существующие разделы",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · публичный UI",
-      "Что сделать для завершения": "Утвердить фактическое дерево/набор страниц и провести музейный UAT навигации",
-      "Что нужно от музея / внешний блокер": "Структура реального музея, полномочия редакторов и приёмка",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Утвердить фактическое дерево/набор страниц и провести музейный UAT навигации",
-      "Что уже есть (доказательство)": "MoonShine page create in allowed existing section, public /guide/<slug>/ lists assigned published entries, canonical href/backlink, PHP ACL/export and 4-level static regression",
+      "Что сделать для завершения": "Ability to add pages to existing sections is technically complete. Final museum navigation tree, editor account roles, exact content and formal acceptance remain distinct requirements and UAT.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Existing MoonShine page/section creation with section-scoped ACL; CMS exporter emits approved sections and assigned content; dynamic guide page renders nested child pages via CMS. scripts/qa_dynamic_navigation.py verifies four-level hierarchy and exact assigned content, and scripts/qa_bilingual_publication.py verifies new CMS-assigned page appears in existing museum list and opens at canonical URL without editing React components. Both scripts restore original published.json and rebuild. 17.10.2026.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 46,
+    "Да": 48,
     "Нет": 160,
-    "Частично": 119
+    "Частично": 117
   },
   "workflow": {
-    "Готово в прототипе": 46,
-    "Внешний блокер / наступление этапа": 279
+    "Готово в прототипе": 48,
+    "Внешний блокер / наступление этапа": 277
   }
 }
