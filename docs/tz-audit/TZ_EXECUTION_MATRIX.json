@@ -2466,10 +2466,10 @@
       "Режим": "В очереди (можно начать сейчас)",
       "№ очереди": 4,
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
+      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Тексты и фото; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #004. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/o-muzee (200); Next route /guide/museum-history/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены.",
+      "Следующее действие / комментарий": "Задача в очереди #004. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/o-muzee (200); Next route /guide/museum-history/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2485,10 +2485,10 @@
       "Режим": "В очереди (можно начать сейчас)",
       "№ очереди": 5,
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
+      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Исторические материалы; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #005. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/istoriya-zdaniya (200); Next route /guide/building-history/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены.",
+      "Следующее действие / комментарий": "Задача в очереди #005. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/istoriya-zdaniya (200); Next route /guide/building-history/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2504,10 +2504,10 @@
       "Режим": "В очереди (можно начать сейчас)",
       "№ очереди": 6,
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
+      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): План и фотографии; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #006. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/ekspozicii (200); Next route /guide/museum-exposition/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены.",
+      "Следующее действие / комментарий": "Задача в очереди #006. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/ekspozicii (200); Next route /guide/museum-exposition/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2561,10 +2561,10 @@
       "Режим": "В очереди (можно начать сейчас)",
       "№ очереди": 1,
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Museum selects definitive files/editions, files to mirror to CMS and document accessibility verification",
+      "Что сделать для завершения": "Museum selects definitive files/editions, files to mirror to CMS and document accessibility verification Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Official file revisions, reuse permission and CMS signoff",
-      "Следующее действие / комментарий": "Задача в очереди #001. Museum selects definitive files/editions, files to mirror to CMS and document accessibility verification",
-      "Что уже есть (доказательство)": "Grouped original museum files in new /guide/museum-documents, direct verified HTTPS PDF/DOCX links and source pages",
+      "Следующее действие / комментарий": "Задача в очереди #001. Museum selects definitive files/editions, files to mirror to CMS and document accessibility verification Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Grouped original museum files in new /guide/museum-documents, direct verified HTTPS PDF/DOCX links and source pages 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2618,10 +2618,10 @@
       "Режим": "В очереди (можно начать сейчас)",
       "№ очереди": 7,
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "После получения актуальных вакансий, контактного адреса и расписания обновлений заполнить CMS и пройти редакторскую UAT.",
+      "Что сделать для завершения": "После получения актуальных вакансий, контактного адреса и расписания обновлений заполнить CMS и пройти редакторскую UAT. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Вакансии/HR контакты; справочная ссылка/URL без подтверждения музея не эквивалентна договорной приёмке",
-      "Следующее действие / комментарий": "Задача в очереди #007. После получения актуальных вакансий, контактного адреса и расписания обновлений заполнить CMS и пройти редакторскую UAT.",
-      "Что уже есть (доказательство)": "Официальная /vakansii HTTP 200 через Mac mini; существующий /guide/museum-vacancies/ содержит прямую ссылку; реальный HR-контент не утверждён.",
+      "Следующее действие / комментарий": "Задача в очереди #007. После получения актуальных вакансий, контактного адреса и расписания обновлений заполнить CMS и пройти редакторскую UAT. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Официальная /vakansii HTTP 200 через Mac mini; существующий /guide/museum-vacancies/ содержит прямую ссылку; реальный HR-контент не утверждён. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2694,10 +2694,10 @@
       "Режим": "В очереди (можно начать сейчас)",
       "№ очереди": 2,
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
+      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Прейскурант; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Задача в очереди #002. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/stoimost (200); Next route /guide/tickets-and-benefits/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены.",
+      "Следующее действие / комментарий": "Задача в очереди #002. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ. Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/stoimost (200); Next route /guide/tickets-and-benefits/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2713,10 +2713,10 @@
       "Режим": "В очереди (можно начать сейчас)",
       "№ очереди": 3,
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Confirm current returns/visiting rules and whether old-source links should be replaced by CMS originals",
+      "Что сделать для завершения": "Confirm current returns/visiting rules and whether old-source links should be replaced by CMS originals Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
       "Что нужно от музея / внешний блокер": "Зависимость для полного закрытия (не блокирует подготовительную разработку): Museum-approved ticket documents and operator workflow",
-      "Следующее действие / комментарий": "Задача в очереди #003. Confirm current returns/visiting rules and whether old-source links should be replaced by CMS originals",
-      "Что уже есть (доказательство)": "Original museum visits/paid services/returns documents grouped on ticket-refunds and tickets-and-benefits, original PDF/DOCX; октябрьский аудит повторно подтвердил официальный раздел правил возврата HTTP 200",
+      "Следующее действие / комментарий": "Задача в очереди #003. Confirm current returns/visiting rules and whether old-source links should be replaced by CMS originals Completed local draft+document import; next editorial verification/approval, gallery media rights, source revisions, document accessibility and museum infrastructure release tests.",
+      "Что уже есть (доказательство)": "Original museum visits/paid services/returns documents grouped on ticket-refunds and tickets-and-benefits, original PDF/DOCX; октябрьский аудит повторно подтвердил официальный раздел правил возврата HTTP 200 17.10.2026: exact official-site edition imported as editable MoonShine MuseumEntry draft with source URL and timestamp, using non-destructive one-shot importer on Mac mini; 8 drafts and 11 SHA256/formatted original PDF/DOCX private attachments, one 20.2MB PDF deliberately kept as official link due CMS 15MiB limit. Price table persists through HTMLPurifier and isolated export; 8 focused PHP tests; docs/TZ129_142_OFFICIAL_CMS_IMPORT_20261017.md.",
       "Учтено в плане": "Да"
     },
     {
