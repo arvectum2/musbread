@@ -161,7 +161,7 @@
       "title": "Пушкинская карта",
       "parent_slug": "visitors",
       "sort_order": 2,
-      "legacy_path": null
+      "legacy_path": "/pushkinskaya-karta"
     },
     {
       "slug": "accessible-museum",
@@ -343,7 +343,7 @@
       "title": "Пушкинская карта",
       "parent_slug": "children",
       "sort_order": 3,
-      "legacy_path": null
+      "legacy_path": "/pushkinskaya-karta"
     },
     {
       "slug": "exhibitions-guide",
@@ -392,7 +392,7 @@
       "title": "Пушкинская карта",
       "parent_slug": "exhibitions-guide",
       "sort_order": 5,
-      "legacy_path": null
+      "legacy_path": "/pushkinskaya-karta"
     },
     {
       "slug": "science",

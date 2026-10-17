@@ -62,7 +62,7 @@ export const menuGroups: readonly MenuGroup[] = [
   { slug: "visitors", title: "Посетителям", children: [
     legacy("plan-visit", "Спланировать визит", "/posetitelyam"),
     legacy("tickets-and-benefits", "Билеты и льготы", "/stoimost"),
-    requested("pushkin-card", "Пушкинская карта"),
+    legacy("pushkin-card", "Пушкинская карта", "/pushkinskaya-karta"),
     legacy("accessible-museum", "Доступная среда", "/informaciya-dlya-mgn"),
     requested("museum-shop", "Магазин (без продажи)"),
     requested("faq", "Частые вопросы"),
@@ -91,7 +91,7 @@ export const menuGroups: readonly MenuGroup[] = [
     requested("children-interactive", "Интерактивные экскурсии"),
     requested("children-thematic", "Тематические экскурсии"),
     requested("children-workshops", "Мастер-классы для детей"),
-    requested("children-pushkin-card", "Пушкинская карта"),
+    legacy("children-pushkin-card", "Пушкинская карта", "/pushkinskaya-karta"),
   ] },
   { slug: "exhibitions-guide", title: "Выставки", children: [
     legacy("exhibitions-current", "Текущие выставки", "/vistavky/tekushchie-vystavki"),
@@ -99,7 +99,7 @@ export const menuGroups: readonly MenuGroup[] = [
     legacy("exhibitions-traveling", "Передвижные и выездные выставки", "/vistavky/vyezdnye-vystavki"),
     legacy("exhibitions-past", "Прошедшие выставки", "/vistavky/proshedshie-vystavki"),
     legacy("exhibitions-virtual", "Виртуальные выставки", "/vistavky/virtualnye-vystavki"),
-    requested("exhibitions-pushkin-card", "Пушкинская карта"),
+    legacy("exhibitions-pushkin-card", "Пушкинская карта", "/pushkinskaya-karta"),
   ] },
   { slug: "science", title: "Наука", children: [
     requested("science-conferences", "Семинары и конференции"),

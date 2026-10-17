@@ -26,3 +26,13 @@ test("новые разделы отличимы от подтверждённы
   assert.ok(guidePages.some((page) => page.legacyPath));
   assert.ok(guidePages.every((page) => !page.tenderOnly || !page.legacyPath));
 });
+
+test("Пушкинская карта: существующий материал музея, а не выдуманный раздел", () => {
+  for (const slug of ["pushkin-card", "children-pushkin-card", "exhibitions-pushkin-card"]) {
+    const page = guidePages.find((item) => item.slug === slug);
+    assert.ok(page, slug);
+    assert.equal(page.legacyPath, "/pushkinskaya-karta");
+    assert.equal(page.tenderOnly, undefined);
+    assert.equal(legacyUrl(page.legacyPath), "https://muzei-xleb.ru/pushkinskaya-karta");
+  }
+});
