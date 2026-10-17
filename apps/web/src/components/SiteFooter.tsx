@@ -20,9 +20,12 @@ export default function SiteFooter() {
     </div>
     <div className="footer-legal">
       <h2>Ссылки и документы</h2>
+      <Link href="/guide/museum-documents/">Документы музея — каталог</Link>
+      <a href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">Оригиналы документов по обработке персональных данных ↗</a>
       <a href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">Политика конфиденциальности (действующий сайт)</a>
       <Link href="/guide/accessible-museum/">Доступная среда</Link>
       <a href={museumReference.visitorPricesUrl} target="_blank" rel="noopener noreferrer">Цены и льготы</a>
+      <Link href="/guide/ticket-refunds/">Правила посещения и возврата — документы музея</Link>
       <a href={museumReference.refundsUrl} target="_blank" rel="noopener noreferrer">Возврат билетов</a>
       <a href={museumReference.vkUrl} target="_blank" rel="noopener noreferrer">ВКонтакте ↗</a>
       <a href={museumReference.maxUrl} target="_blank" rel="noopener noreferrer">MAX ↗</a>

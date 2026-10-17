@@ -213,3 +213,11 @@ PHP: `MuseumAltDraftTest` (ACL, no public auto-save, rejects generic), `MuseumDo
 ## TZ-241/TZ-250: conservative evidence
 
 After static build `node apps/web/scripts/qa-performance.mjs <private-SSD-json>` (cwd apps/web) measures four routes × three cold contexts with Chromium 4× CPU, RTT150ms, 1.6Mbps; DO NOT equate LCP to full page load or localhost to field SLA. `apps/web/e2e/tz250-layout.spec.ts` tests main content shell >=80% across 1100–3840 CSSpx, three routes, and horizontal overflow.
+
+## TZ-278/282–290/294 pre-award legal/readiness gate
+
+`python3 scripts/audit_legal_readiness.py --json <private report> --markdown <local report>` reads exact 325 TZ records, emits 10 applicable legal-control placeholders and 12 mandatory-disclosure candidates, checks fail-closed restrictions on PII/appeals/analytics; does not mark any law as approved. Three Python tests cover count, zero approvals, and failure on truncated registry. Publisher CI archives JSON/MD report, legal UAT is ALWAYS manual/customer-led. See docs/tz-audit/LEGAL_PREAWARD_READINESS.md.
+
+## Оригиналы документов музея и внешние проверенные источники
+
+`npm run test:official-docs` (16 ссылок из 5 групп, whitelist HTTPS домена muzei-xleb.ru, no unverified external hosts); `apps/web/e2e/tz-museum-official-documents.spec.ts` (каталог оригинальных файлов по группам, страницы ПДн и возврата отдельно, 320px reflow, клавиатура, no cookie consent/PII forms); `python3 scripts/audit_legal_readiness.py` (ровно 325 TZ clauses, legal ready=false и museum approval=false). Источник сравнений: `docs/tz-audit/MUSEUM_DOCUMENTS_BENCHMARK.md`. Нормативная применимость не устанавливается программой. Проверить актуальность файлов и разрешение музея отдельно.

@@ -5,6 +5,8 @@ import { legacyUrl, museumReference, museumAddressMapSearchUrl, REFERENCE_DATE }
 import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
 import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
+import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
+import { officialMuseumGroupsForPage } from "@/data/museum-official-documents";
 import { entriesInCmsSection, entryPublicHref } from "@/data/content";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -71,6 +73,7 @@ export default async function GuidePage({ params }: Props) {
       <p>Уточнение условий посещения: <a href={museumReference.phoneHref}>{museumReference.phone}</a>.</p>
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <a href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</a>.</p>
     </div>}
+    <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
     {isCollection && <p className="reference-facts"><a href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</a></p>}
     {directChildren.length > 0 && <section aria-label={"Подразделы: " + title}>
       <h2>Подразделы</h2>

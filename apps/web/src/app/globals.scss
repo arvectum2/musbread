@@ -235,3 +235,20 @@ html[data-vision-mode="on"] .art-caption{color:#111}
 .section-entries .museum-list-item h3{font-size:1.35rem;line-height:1.3;margin:0 0 .75rem}
 .section-entries .museum-list-item{overflow-wrap:anywhere}
 .cms-entry-section{margin:.5rem 0 1.25rem}
+
+/* Official museum documents, linked verbatim to the real museum-owned source. */
+.official-documents{margin:2rem 0;padding:1.5rem;max-width:100%;border:1px solid var(--line);border-radius:.7rem;background:#fff}
+.official-documents>h2{font-size:2rem;margin:0 0 1rem}
+.official-documents-notice{margin:0 0 1.5rem;max-width:72ch;font-size:.96rem;line-height:1.6}
+.official-documents-group{padding:1.2rem 0;border-top:1px solid var(--line)}
+.official-documents-group h3{font-size:1.35rem;margin:0 0 .65rem;overflow-wrap:anywhere}
+.official-documents-list{list-style:none;margin:0;padding:0;display:grid;gap:.3rem}
+.official-documents-list li{display:flex;align-items:start;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px solid #e7eae6}
+.official-documents-list a{min-width:0;overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:.18em}
+.official-document-format{flex:none;font-size:.75rem;border:1px solid #b0c2b7;padding:.13rem .4rem;border-radius:.2rem}
+.official-documents-source{margin:.85rem 0 0;font-size:.9rem}
+@media(max-width:550px){.official-documents{padding:1rem}.official-documents-list li{flex-direction:column;gap:.25rem}}
+html[data-vision-mode="on"] .official-documents,
+html[data-vision-mode="on"] .official-documents-list li{background:#fff;color:#111;border-color:#111}
+/* Long museum document headings must reflow at 320px (not clip the page). */
+.guide-page>h1{overflow-wrap:anywhere}

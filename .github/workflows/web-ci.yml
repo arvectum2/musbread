@@ -64,6 +64,17 @@ jobs:
           name: musbread-preaward-design-handoff-checklist
           path: /tmp/musbread-design-handoff.json
           retention-days: 7
+      - name: TZ-278…294 legal evidence and museum disclosure audit (NOT legal approval)
+        run: |
+          python3 scripts/audit_legal_readiness.py --json /tmp/musbread-legal-readiness.json --markdown /tmp/musbread-legal-readiness.md
+      - name: Preserve unresolved legal requirements for museum sign-off
+        uses: actions/upload-artifact@v4
+        with:
+          name: musbread-legal-applicability-preaward
+          path: |
+            /tmp/musbread-legal-readiness.json
+            /tmp/musbread-legal-readiness.md
+          retention-days: 7
       - name: Pre-award delivery template and blocker audit
         run: |
           python3 scripts/audit_delivery_readiness.py --require-complete-drafts             --json /tmp/musbread-delivery-readiness.json             --markdown /tmp/musbread-delivery-readiness.md
@@ -129,6 +140,8 @@ jobs:
         run: npm run test:navigation-tree
       - name: TZ-191/TZ-192 published sitemap and draft robots gates
         run: npm run test:seo
+      - name: Official museum-issued documents and guarded provenance
+        run: npm run test:official-docs
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'

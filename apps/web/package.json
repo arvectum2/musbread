@@ -16,7 +16,8 @@
     "test:search": "node --experimental-strip-types --test src/data/search-core.test.ts",
     "test:events": "node --experimental-strip-types --test src/data/event-archive.test.ts",
     "test:navigation-tree": "node --experimental-strip-types --test src/data/navigation-tree.test.ts",
-    "test:seo": "node --experimental-strip-types --test src/data/seo-routes.test.ts"
+    "test:seo": "node --experimental-strip-types --test src/data/seo-routes.test.ts",
+    "test:official-docs": "node --experimental-strip-types --test src/data/museum-official-documents.test.ts"
   },
   "dependencies": {
     "next": "16.4.1",
