@@ -1,7 +1,7 @@
 {
   "report_type": "PREAWARD_NONLEGAL_NONCERTIFYING",
   "requirements_total": 325,
-  "legal_ids_checked": 13,
+  "legal_ids_checked": 17,
   "legal_ready": false,
   "may_activate_appeals": false,
   "may_activate_real_pii_intake": false,
@@ -54,6 +54,46 @@
       "verified_technical_scope": "390-FZ covers the national/state/public security policy framework; no specific website-only technical compliance assertion follows from the title of the law; scope and accountable state institution must be confirmed",
       "external_evidence_needed": "Заключение ответственного лица о сфере применения; не приравнивать сайт к субъекту полномочий государственных органов по умолчанию",
       "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_108546/27f9ddea0cccf9a6b90bb2cb8b545d436f18157b/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-288",
+      "source_clause": "342",
+      "law": "Приказ Минкомсвязи 104 от 25.08.2009",
+      "verified_technical_scope": "order 104 scope requires a relevant federal government information system: museum web site is NOT ASSUMED eligible; existing manifest integrity, backup and deployment check scripts are partial engineering evidence, not commissioned hosting tests",
+      "external_evidence_needed": "Определить, подпадает ли конкретная музейная система под сферу действия приказа (федеральные ГИС); подтвердить параметры надёжности, целостности, резервирования и ответственных",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_92160/d33650469395d1c9beb4a8dd1094f9118f16cd23/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-291",
+      "source_clause": "345",
+      "law": "273-ФЗ «О противодействии коррупции»",
+      "verified_technical_scope": "official museum reference /protivodeystvie-korrupcii exists; unapproved site copies and institutional policies have NOT been synthesized; customer owns source files",
+      "external_evidence_needed": "Утвердить исходный музейный антикоррупционный раздел и документы; проверить обязанности учреждения и ответственных без генерации политик",
+      "reference_url": "https://minjust.gov.ru/ru/documents/7864/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-292",
+      "source_clause": "346",
+      "law": "38-ФЗ «О рекламе»",
+      "verified_technical_scope": "no site-advertisement insertion or ERIR integration in public static prototype; ordinary museum exhibition notices are NOT AUTOMATICALLY advertising; ad status undecided",
+      "external_evidence_needed": "Определить, размещает ли музей реклама в юридическом смысле; при фактической рекламе утвердить роли, маркировку, ЕРИР/идентификатор и рекламодателя до включения блока",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_58968/2c4537e4796f6ff8b2736ed1b0d4fef08e14458e/",
+      "compliance_approved": false,
+      "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
+    },
+    {
+      "id": "TZ-293",
+      "source_clause": "347",
+      "law": "Закон РФ 2124-1 «О СМИ»",
+      "verified_technical_scope": "museum news section alone does NOT prove registration as network mass medium; registered network edition status is unknown, must be verified with customer",
+      "external_evidence_needed": "Установить факт регистрации сайта как сетевого издания или отсутствие регистрации; не объявлять сайт СМИ по наличию новостей",
+      "reference_url": "https://www.consultant.ru/document/cons_doc_LAW_1511/36098bb636761bf8ffb8da67a5c769c0da48380a/",
       "compliance_approved": false,
       "approval_status": "AWAITING_MUSEUM_LEGAL_AND_UAT"
     },
@@ -258,6 +298,6 @@
       "status": "SOURCE_OR_APPROVAL_REQUIRED"
     }
   ],
-  "client_pending_total": 25,
+  "client_pending_total": 29,
   "warning": "Reference navigation is not verified publication. Legal approval is never inferred from filenames, links or passing tests."
 }

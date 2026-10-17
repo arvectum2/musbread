@@ -18,6 +18,10 @@ REFERENCE = {
  "TZ-279": ("126-ФЗ «О связи»", "Сведения об операторе связи, провайдере хостинга и используемых услугах связи; юрист музея фиксирует применимость"),
  "TZ-280": ("149-ФЗ «Об информации, информационных технологиях и о защите информации»", "Владелец ИС и классификация информации, договор хостинга, журналы доступа, резервное копирование, ответственность и документированный план защиты"),
  "TZ-281": ("390-ФЗ «О безопасности»", "Заключение ответственного лица о сфере применения; не приравнивать сайт к субъекту полномочий государственных органов по умолчанию"),
+ "TZ-288": ("Приказ Минкомсвязи 104 от 25.08.2009", "Определить, подпадает ли конкретная музейная система под сферу действия приказа (федеральные ГИС); подтвердить параметры надёжности, целостности, резервирования и ответственных"),
+ "TZ-291": ("273-ФЗ «О противодействии коррупции»", "Утвердить исходный музейный антикоррупционный раздел и документы; проверить обязанности учреждения и ответственных без генерации политик"),
+ "TZ-292": ("38-ФЗ «О рекламе»", "Определить, размещает ли музей реклама в юридическом смысле; при фактической рекламе утвердить роли, маркировку, ЕРИР/идентификатор и рекламодателя до включения блока"),
+ "TZ-293": ("Закон РФ 2124-1 «О СМИ»", "Установить факт регистрации сайта как сетевого издания или отсутствие регистрации; не объявлять сайт СМИ по наличию новостей"),
  "TZ-282": ("152-ФЗ, персональные данные", "Подтвердить актуальность уже опубликованных документов музея и нужны ли новые формы"),
  "TZ-283": ("59-ФЗ, обращения граждан", "Подтвердить официальный канал и порядок обработки обращений, если он входит в проект"),
  "TZ-284": ("Закон 3612-1 о культуре", "Подтвердить список и редакции уже опубликованных документов"),
@@ -33,6 +37,10 @@ SOURCES = {
  "TZ-279": "https://www.consultant.ru/document/cons_doc_LAW_43224/b819c620a8c698de35861ad4c9d9696ee0c3ee7a/",
  "TZ-280": "https://www.consultant.ru/document/cons_doc_LAW_61798/0e9ec16b786dcbdaaa7f44abfc4a15e601d5be22/",
  "TZ-281": "https://www.consultant.ru/document/cons_doc_LAW_108546/27f9ddea0cccf9a6b90bb2cb8b545d436f18157b/",
+ "TZ-288": "https://www.consultant.ru/document/cons_doc_LAW_92160/d33650469395d1c9beb4a8dd1094f9118f16cd23/",
+ "TZ-291": "https://minjust.gov.ru/ru/documents/7864/",
+ "TZ-292": "https://www.consultant.ru/document/cons_doc_LAW_58968/2c4537e4796f6ff8b2736ed1b0d4fef08e14458e/",
+ "TZ-293": "https://www.consultant.ru/document/cons_doc_LAW_1511/36098bb636761bf8ffb8da67a5c769c0da48380a/",
  "TZ-282": "https://www.consultant.ru/document/cons_doc_LAW_61801/eeeebe22bf738fd65bb66b95cc278911ae2525ee/",
  "TZ-283": "https://rostransnadzor.gov.ru/news/16472",
  "TZ-284": "https://mintrud.gov.ru/docs/mintrud/analytics/65",
@@ -94,6 +102,16 @@ def inspect(root: Path) -> dict:
             "website-only technical compliance assertion follows from the title of the law; "
             "scope and accountable state institution must be confirmed"
         ),
+        "TZ-288": ("order 104 scope requires a relevant federal government information system: "
+            "museum web site is NOT ASSUMED eligible; existing manifest integrity, backup and "
+            "deployment check scripts are partial engineering evidence, not commissioned hosting tests"),
+        "TZ-291": ("official museum reference /protivodeystvie-korrupcii exists; unapproved site "
+            "copies and institutional policies have NOT been synthesized; customer owns source files"),
+        "TZ-292": ("no site-advertisement insertion or ERIR integration in public static prototype; "
+            "ordinary museum exhibition notices are NOT AUTOMATICALLY advertising; ad status undecided"),
+        "TZ-293": ("museum news section alone does NOT prove registration as network mass medium; "
+            "registered network edition status is unknown, must be verified with customer"),
+
     }
     controls = [
         {"id": key,"source_clause":by_id[key]["Строки tz.txt"],

@@ -14,10 +14,10 @@ mod=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mod)
 
 class LegalReadinessTest(unittest.TestCase):
-    def test_all_thirteen_legal_requirements_and_twelve_disclosures_are_pending(self):
+    def test_all_seventeen_legal_requirements_and_twelve_disclosures_are_pending(self):
         audit=mod.inspect(ROOT)
         self.assertEqual(audit['requirements_total'],325)
-        self.assertEqual(audit['legal_ids_checked'],13)
+        self.assertEqual(audit['legal_ids_checked'],17)
         self.assertEqual(len(audit['disclosure_register']),12)
         self.assertFalse(audit['legal_ready'])
         self.assertFalse(audit['may_activate_appeals'])
@@ -33,6 +33,11 @@ class LegalReadinessTest(unittest.TestCase):
                 'NOT accepted' if law=='TZ-280' else 'must be confirmed',
                 row['verified_technical_scope'])
             self.assertIn('https://',row['reference_url'])
+        for law in ('TZ-288','TZ-291','TZ-292','TZ-293'):
+            row=next(x for x in audit['legal_controls'] if x['id']==law)
+            self.assertFalse(row['compliance_approved'])
+            self.assertTrue(row['reference_url'].startswith('https://'))
+            self.assertTrue(row['external_evidence_needed'])
         self.assertFalse(audit['signals']['telecom_operator_status_confirmed'])
         self.assertFalse(audit['signals']['state_security_law_applicability_approved'])
         self.assertTrue(audit['signals']['default_public_pii_intake_disabled'])
