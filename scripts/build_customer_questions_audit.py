@@ -221,7 +221,7 @@ def build()->tuple[int,Counter,Counter]:
    "Блокер/данные музея":r["Нужно от заказчика"],
    "Вопрос заказчику":val,"Связанные пункты контракта":contract_ref(n),
   })
- assert len(result)==284
+ assert len(result)==sum(r["Фактически готово"]!="Да" for r in source)
  with (OUT/"OPEN_CUSTOMER_QUESTIONS.csv").open("w",encoding="utf-8-sig",newline="") as f:
   w=csv.DictWriter(f,fieldnames=list(result[0]),delimiter=";",lineterminator="\n");w.writeheader();w.writerows(result)
  grp=defaultdict(list)

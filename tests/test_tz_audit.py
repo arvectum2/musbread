@@ -12,10 +12,10 @@ class OriginalTenderTraceTests(unittest.TestCase):
 
     def test_high_risk_omissions_not_misrepresented_as_ready(self):
         rows = {r['ID']: r for r in read_rows()}
-        # Historical audit omissions still unaddressed must not be quietly
-        # marked complete just because another, nearby feature shipped.
+        # 27 historical omissions now have explicit tasks and owners. Their
+        # planning status improved, NOT their code-readiness status.
         for requirement in ('TZ-018', 'TZ-124', 'TZ-127'):
-            self.assertEqual(rows[requirement]['Учли в плане'], 'Нет')
+            self.assertEqual(rows[requirement]['Учли в плане'], 'Да')
             self.assertEqual(rows[requirement]['Фактически готово'], 'Нет')
         # TZ-189 was once a high-risk omission but has a real full-site link
         # title audit (incl. MoonShine-generated pages) and CI evidence.
@@ -29,7 +29,7 @@ class OriginalTenderTraceTests(unittest.TestCase):
         self.assertEqual(rows['TZ-316']['Фактически готово'], 'Частично')
 
         # Former omission now has a private demo-only workflow, not a live form.
-        self.assertEqual(rows['TZ-085']['Учли в плане'], 'Нет')
+        self.assertEqual(rows['TZ-085']['Учли в плане'], 'Да')
         self.assertEqual(rows['TZ-085']['Фактически готово'], 'Частично')
         self.assertEqual(rows['TZ-091']['Фактически готово'], 'Частично')
         self.assertEqual(rows['TZ-080']['Фактически готово'], 'Нет')

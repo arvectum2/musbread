@@ -17,3 +17,8 @@
 - [25 рисков/разночтений проекта контракта](CONTRACT_DISCREPANCIES_AND_RISKS.csv).
 
 Оригиналы хранятся только в /Volumes/ArvectumSSD/Arvectum/data/tenders/eis/0372200172326000015, не в Git. Их повторные извлечения из Word побайтово совпадают с tz.txt (485 строк) и contract.txt (837 строк); основные приложения ТЗ совпали по 317 содержательным строкам. Закрытые физические построчные регистры только в .local_archive/primary-source-audit. Повторить: python3 scripts/build_customer_questions_audit.py, python3 scripts/audit_primary_contract.py --source-dir /Volumes/ArvectumSSD/Arvectum/data/tenders/eis/0372200172326000015, python3 scripts/render_primary_audit_summary.py. Статус договора: проект, не подписан.
+
+
+## Текущий результат устранения 27 первоначальных пропусков (17.10.2026)
+
+[Все 27 отдельных планов](MISSING_27_REMEDIATION.md): владелец, NOW/CUSTOMER/INTERVIEW/AWARD, заготовка и критерий приёмки. Полнота учёта теперь 233 да / 92 частично / 0 нет, фактическая техническая готовность только 43 зелёных / 110 жёлтых / 172 красных. Открыты 282; два CTA по ТЗ TZ-162/166 закончены, три ранее красных справочных пункта стали жёлтыми. [Текущие 282 вопроса](OPEN_CUSTOMER_QUESTIONS.md). Исторический аудит содержал 27 непрописанных задач — после явного плана они не должны оставаться непрописанными. [Черновик уточнений договора, НЕ отправлено](../handoff/CONTRACT_CUSTOMER_CLARIFICATIONS_DRAFT.md).

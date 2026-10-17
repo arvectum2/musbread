@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Create public traceable summaries of the independently verified originals."""
 from pathlib import Path
-from collections import defaultdict
+from collections import defaultdict, Counter
 import csv,re,json
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"docs/tz-audit"
@@ -14,7 +14,13 @@ def main():
  q=load("OPEN_CUSTOMER_QUESTIONS.csv")
  c=load("CONTRACT_CLAUSE_MAP.csv")
  risks=load("CONTRACT_DISCREPANCIES_AND_RISKS.csv")
- assert len(q)==284 and len(c)==125 and len(risks)==25
+ with (OUT/"requirements.psv").open(encoding="utf-8",newline="") as f:
+  source=list(csv.DictReader(f,delimiter="^"))
+ assert len(source)==325
+ ready=Counter(r["Фактически готово"] for r in source)
+ considered=Counter(r["Учли в плане"] for r in source)
+ open_covered=Counter(r["Учли в плане"] for r in q)
+ assert len(q)==len(source)-ready["Да"] and len(c)==125 and len(risks)==25
  src=json.loads((PRIVATE/"verification.json").read_text())
  assert (src["tz_source_lines"],src["contract_source_lines"],src["tz_contract_annex_exact_lines"])==(485,837,317)
  clause_lines=[
@@ -40,13 +46,13 @@ def main():
  "- Полные построчные таблицы ВСЕХ 485 + 837 строк находятся только в игнорируемом Git каталоге .local_archive/primary-source-audit на Mac mini: tz_485_line_audit.csv и contract_837_line_audit.csv. Исходные Word-файлы в публичный Git не переносятся.",
  "- Отдельно проверено 124 нумерованных пункта контракта и блок антикоррупционных условий: 125 контрольных блоков. [Карта каждого пункта](CONTRACT_CLAUSE_MAP.md) и [CSV](CONTRACT_CLAUSE_MAP.csv).","",
  "## Сводка 325 обязательств ТЗ и полнота учёта","",
- "**Фактический светофор без изменения:** 🟢 41 готовы технически, 🟡 107 частично, 🔴 177 не готовы.",
+ f"**Фактический светофор текущего прототипа:** 🟢 {ready['Да']} готовы технически, 🟡 {ready['Частично']} частично, 🔴 {ready['Нет']} не готовы.",
  "",
- "**Учли в плане:** Да — 205; Частично — 92; Нет — 28. Исправлены четыре исторические ошибки учёта TZ-222, TZ-250, TZ-262 и TZ-311 на основании наличия кода и тестов. Техническая готовность этих требований при этом НЕ повышалась.",
+ f"**Учли в плане:** Да — {considered['Да']}; Частично — {considered['Частично']}; Нет — {considered['Нет']}. Исторически 27 открытых пунктов были не учтены; они внесены в [план их устранения](MISSING_27_REMEDIATION.md), без присвоения ложного статуса готовности.",
  "",
- "**Открыто 284 пункта:** 165 учтены в плане, 92 — частично, **27 не учтены**. Из открытых 160 имеют P0. Все 284 имеют уникальный краткий вопрос заказчику, исходную строку, доказательство, недостающее действие, блокер и ссылку на связанные условия договора: [основная таблица](OPEN_CUSTOMER_QUESTIONS.md) / [CSV для фильтрации](OPEN_CUSTOMER_QUESTIONS.csv).",
+ f"**Открыто {len(q)} пункта:** {open_covered['Да']} учтены в плане, {open_covered['Частично']} — частично, **{open_covered['Нет']} не учтены**. Из открытых {sum(x['Приоритет']=='P0' for x in q)} имеют P0. Все {len(q)} имеют уникальный вопрос заказчику, исходную строку, доказательство, недостающее действие и блокер: [основная таблица](OPEN_CUSTOMER_QUESTIONS.md) / [CSV](OPEN_CUSTOMER_QUESTIONS.csv).",
  "",
- "**Нулевая внутренняя очередь — условное распределение стадий, НЕ доказательство отсутствия пропусков или необходимости ждать клиента по каждому из 284 пунктов.** В частности, 27 открытых «не учли» требуют плана и контроля без искусственного перекрашивания в зелёный.",
+ f"**Нулевая внутренняя очередь — условное распределение стадий, НЕ доказательство готовности {len(q)} обязательств.** Все 27 исторических пропусков спланированы явно (MISSING_27_REMEDIATION.md), часть технически реализована. Технический статус отдельно оценивается только по тестам и проверке источника.",
  "",
  "## Группы открытых требований","",
  "| Группа | Открыто | Не учли | Частично учли | P0 |",
@@ -54,7 +60,8 @@ def main():
  ]
  for name,items in groups.items():
   text.append(f"| {esc(name)} | {len(items)} | {sum(x['Учли в плане']=='Нет' for x in items)} | {sum(x['Учли в плане']=='Частично' for x in items)} | {sum(x['Приоритет']=='P0' for x in items)} |")
- text+=["","## 27 открытых пунктов, не учтённых в прежней карте",""]
+ text+=["","## Исторические 27 пропусков — теперь с планом выполнения","",
+ "[Отдельная матрица 27 обязательств с этапом, владельцем, подготовкой, критерием сдачи и клиентскими блокерами](MISSING_27_REMEDIATION.md). Даже если учтено — это НЕ означает выполнение.",""]
  for item in q:
   if item["Учли в плане"]=="Нет":
    text.append(f"- **{item['ID']}** ({item['Приоритет']}): {esc(item['Требование'])}. Вопрос: {esc(item['Вопрос заказчику'])}")
@@ -85,12 +92,12 @@ def main():
  "5. **Перед сдачей**: полный функциональный, доступностный и нагрузочный протокол; сервер и домен заказчика; обучение; акт/ЕИС, перенос доступа и прав; гарантийный регламент 24 ч/5 рабочих дней.",
  "",
  "## Файлы для работы","",
- "- [284 индивидуальных вопроса по открытым TZ](OPEN_CUSTOMER_QUESTIONS.md) / [CSV](OPEN_CUSTOMER_QUESTIONS.csv).",
+ f"- [{len(q)} индивидуальных вопросов по открытым TZ](OPEN_CUSTOMER_QUESTIONS.md) / [CSV](OPEN_CUSTOMER_QUESTIONS.csv).",
  "- [125 пунктов проекта контракта](CONTRACT_CLAUSE_MAP.md) / [CSV](CONTRACT_CLAUSE_MAP.csv).",
  "- [25 замечаний и вопросов по проекту контракта](CONTRACT_DISCREPANCIES_AND_RISKS.csv).",
  "- [325 требований и их готовность](TZ_EXECUTION_MATRIX.md); [основная дорожная карта](../ROADMAP.md).",
  "- Воспроизводимость: python3 scripts/build_customer_questions_audit.py; python3 scripts/audit_primary_contract.py --source-dir PRIVATE_EIS_FOLDER; python3 scripts/render_primary_audit_summary.py. Первичные Word-файлы и посрочные исходные таблицы не публикуются.",
  ""]
  (OUT/"TZ_CONTRACT_ROADMAP_DEEP_AUDIT.md").write_text("\n".join(text).rstrip("\n")+"\n",encoding="utf-8")
- print('SUMMARY_READY: 284 questions, 125 contract clauses, 25 discrepancy flags, 19 groups; report lines',len(text))
+ print('SUMMARY_READY:',len(q),'questions, 125 contract clauses, 25 discrepancy flags, 19 groups; report lines',len(text))
 if __name__=="__main__":main()

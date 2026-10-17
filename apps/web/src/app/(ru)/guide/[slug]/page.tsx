@@ -111,6 +111,11 @@ export default async function GuidePage({ params }: Props) {
       <span> · Пока там тестовые записи; программа публикуется на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</MuseumAnchor>.</span>
     </p>}
     <OfficialMuseumDocuments groups={officialMuseumGroupsForPage(slug)} />
+    {["children", "children-pushkin-card", "exhibitions-guide", "exhibitions-pushkin-card"].includes(slug) && <section className="reference-facts" aria-label="Переход к Пушкинской карте">
+      <h2>«Пушкинская карта»</h2>
+      <p>Условия участия и актуальная информация размещены на действующем официальном сайте музея. Участие конкретного мероприятия в программе необходимо уточнять перед посещением.</p>
+      <MuseumAnchor href={legacyUrl("/pushkinskaya-karta")} target="_blank" rel="noopener noreferrer" className="primary-button">Открыть «Пушкинскую карту» на сайте музея ↗</MuseumAnchor>
+    </section>}
     {isCollection && <p className="reference-facts"><MuseumAnchor href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</MuseumAnchor></p>}
     {directChildren.length > 0 && <p className="guide-subnav-hint">
       Подразделы этого раздела доступны в боковой навигации; на мобильном экране — ниже основного текста.

@@ -21,9 +21,9 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
   by_id={x["ID"]:x for x in src}
   expected={x["ID"] for x in src if x["Фактически готово"]!="Да"}
   self.assertEqual(len(src),325)
-  self.assertEqual(len(q),284)
+  self.assertEqual(len(q),282)
   self.assertEqual({x["ID"] for x in q},expected)
-  self.assertEqual(len(set(x["Вопрос заказчику"] for x in q)),284)
+  self.assertEqual(len(set(x["Вопрос заказчику"] for x in q)),282)
   for item in q:
    self.assertEqual(item["Строки оригинала"],by_id[item["ID"]]["Строки tz.txt"])
    self.assertEqual(item["Учли в плане"],by_id[item["ID"]]["Учли в плане"])
@@ -32,7 +32,7 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
    self.assertLessEqual(len(item["Вопрос заказчику"]),165)
    self.assertTrue(item["Что не выполнено"])
    self.assertTrue(item["Блокер/данные музея"])
-  self.assertEqual(Counter(x["Учли в плане"] for x in q),Counter({"Да":165,"Частично":92,"Нет":27}))
+  self.assertEqual(Counter(x["Учли в плане"] for x in q),Counter({"Да":190,"Частично":92}))
   self.assertEqual(sum(x["Приоритет"]=="P0" for x in q),160)
 
  def test_contract_map_and_discrepancies_are_complete_and_grounded(self):
@@ -49,17 +49,36 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
   md=(OUT/"TZ_CONTRACT_ROADMAP_DEEP_AUDIT.md").read_text()
   for r in risks:self.assertIn(r["ID"],md)
   self.assertIn("317",md)
-  self.assertIn("284",md)
-  self.assertIn("27",md)
+  self.assertIn("282",md)
+  self.assertIn("MISSING_27_REMEDIATION.md",md)
 
- def test_ready_count_unchanged_by_documentary_review(self):
+ def test_ready_count_changes_only_after_verified_cta_and_partial_sources(self):
   r=rows("requirements.psv","^")
-  self.assertEqual(Counter(x["Фактически готово"] for x in r),Counter({"Да":41,"Частично":107,"Нет":177}))
-  self.assertEqual(Counter(x["Учли в плане"] for x in r),Counter({"Да":205,"Частично":92,"Нет":28}))
+  self.assertEqual(Counter(x["Фактически готово"] for x in r),Counter({"Да":43,"Частично":110,"Нет":172}))
+  self.assertEqual(Counter(x["Учли в плане"] for x in r),Counter({"Да":233,"Частично":92}))
   roadmap=(ROOT/"docs/ROADMAP.md").read_text()
   self.assertIn("Аудит дорожной карты против ПОЛНОГО ТЗ и проекта контракта",roadmap)
   self.assertIn("OPEN_CUSTOMER_QUESTIONS.md",roadmap)
   self.assertIn("CONTRACT_CLAUSE_MAP.md",roadmap)
+
+ def test_historical_27_are_planned_without_faking_readiness(self):
+  import importlib.util
+  spec=importlib.util.spec_from_file_location("missing27",ROOT/"scripts/build_missing_27_remediation.py")
+  module=importlib.util.module_from_spec(spec)
+  assert spec.loader is not None
+  spec.loader.exec_module(module)
+  source={r["ID"]:r for r in rows("requirements.psv","^")}
+  self.assertEqual(len(module.IDS),27)
+  for n in module.IDS:
+   r=source[f"TZ-{n:03d}"]
+   self.assertEqual(r["Учли в плане"],"Да")
+   self.assertIn(n,module.ITEMS)
+   self.assertTrue(all(module.ITEMS[n]))
+  self.assertEqual(source["TZ-162"]["Фактически готово"],"Да")
+  self.assertEqual(source["TZ-166"]["Фактически готово"],"Да")
+  self.assertEqual(source["TZ-170"]["Фактически готово"],"Частично")
+  self.assertIn("403",source["TZ-170"]["Чекпоинт/доказательство"])
+  self.assertIn("TZ-324",(OUT/"MISSING_27_REMEDIATION.md").read_text())
 
  def test_question_generator_and_summary_are_idempotent(self):
   names=("OPEN_CUSTOMER_QUESTIONS.csv","OPEN_CUSTOMER_QUESTIONS.md",
