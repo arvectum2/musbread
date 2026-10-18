@@ -1,5 +1,6 @@
 import sanitizeHtml from "sanitize-html";
 import {museumLinkTitle} from "@/data/link-titles";
+import MuseumTableScrollKeys from "@/components/MuseumTableScrollKeys";
 
 /**
  * Defense in depth: PHP sanitizes content before storage, and the static site
@@ -12,10 +13,20 @@ export default function RichText({ html }: { html: string }) {
       "ul", "ol", "li", "blockquote", "h2", "h3", "h4", "a",
       "table", "thead", "tbody", "tr", "th", "td",
     ],
-    allowedAttributes: { a: ["href", "title", "rel", "tabindex"] },
+    allowedAttributes: {
+      a: ["href", "title", "rel", "tabindex"],
+      // The official site's original tariffs are wider than a 320px
+      // viewport. Let keyboard-only and screen reader users focus + scroll
+      // the actual table, without flattening real 2026 museum price cells.
+      table: ["tabindex"],
+    },
     allowedSchemes: ["http", "https", "mailto"],
     allowedSchemesByTag: { a: ["http", "https", "mailto"] },
     transformTags: {
+      table: () => ({
+        tagName: "table",
+        attribs: {tabindex: "0"},
+      }),
       a: (_tag, attributes) => ({
         tagName: "a",
         attribs: {
@@ -32,5 +43,8 @@ export default function RichText({ html }: { html: string }) {
     enforceHtmlBoundary: true,
   });
 
-  return <div className="article-content rich-text" dangerouslySetInnerHTML={{ __html: safeHtml }} />;
+  return <div className="article-content rich-text">
+    <div dangerouslySetInnerHTML={{ __html: safeHtml }} />
+    <MuseumTableScrollKeys />
+  </div>;
 }

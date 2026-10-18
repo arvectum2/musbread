@@ -689,3 +689,21 @@ html[data-vision-mode="on"] .museum-shop-item,html[data-vision-mode="on"] .museu
   background:var(--surface-muted,transparent);border-left:3px solid currentColor;
   white-space:pre-wrap;overflow-wrap:anywhere}
 .museum-rich-video-content{min-width:0}
+
+/* Museum's real contact e-mail is long at 320px and 125% large-text mode.
+ * Break the visually displayed address without changing the mailto target.
+ * Do not hide document overflow globally: that would conceal real defects.
+ */
+a[href^="mailto:"]{overflow-wrap:anywhere;word-break:break-word}
+
+/* Real Drupal source pricing tables scroll within themselves on small
+ * screens. Table stays semantic and its native Tab target can scroll.
+ */
+.official-source-content .rich-text table:focus-visible{
+  outline:3px solid #155fef;
+  outline-offset:-3px;
+}
+html[data-vision-mode="on"] .official-source-content .rich-text table:focus-visible{
+  outline:4px solid #074cdb;
+  outline-offset:-4px;
+}
