@@ -621,3 +621,13 @@ html[data-vision-mode="on"] .museum-shop-item,html[data-vision-mode="on"] .museu
 
 .museum-workshop-footer{border-top:1px solid var(--line);padding-top:1rem;max-width:75ch}
 .museum-workshop-footer p{line-height:1.6}
+
+
+.museum-science-portal{margin:1.6rem 0 2rem;min-width:0;overflow-wrap:anywhere}
+.museum-science-portal>h2{font-size:clamp(1.5rem,2.4vw,2rem)}
+.museum-science-portal>p{max-width:79ch;line-height:1.6}
+.museum-science-portal .museum-science-note{border-left:3px solid currentColor;padding-left:1rem;max-width:78ch;margin:1.25rem 0}
+.museum-science-portal .official-museum-program-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.museum-science-article{overflow-x:auto;overflow-wrap:anywhere}
+.museum-science-article a{overflow-wrap:anywhere}
+@media(max-width:760px){.museum-science-portal .official-museum-program-grid{grid-template-columns:1fr}}

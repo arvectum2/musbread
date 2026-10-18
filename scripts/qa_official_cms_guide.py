@@ -28,7 +28,10 @@ REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-
             "exhibitions-current", "exhibitions-traveling",
             "exhibitions-past", "exhibitions-virtual",
             "museum-exhibit-2026-10-05-ot-remesla-do-iskusstva-reznye-pryanichnye-doski",
-            "museum-exhibit-2025-10-08-hleb-blokadnogo-goroda"}
+            "museum-exhibit-2025-10-08-hleb-blokadnogo-goroda",
+            "science-conferences","science-publications","science-collection",
+            "science-researchers","science-materials",
+            "science-organization","science-methodical-council"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -74,8 +77,12 @@ def main() -> None:
             if n != 12:
                 raise RuntimeError("All 12 real museum workshop source pages must remain drafts")
             n = db.execute("select count(*) from museum_entries where status='draft'").fetchone()[0]
-            if n != 73:
-                raise RuntimeError("Private working CMS count changed: expected 73 drafts")
+            if n != 80:
+                raise RuntimeError("Private working CMS count changed: expected 80 drafts")
+            n = db.execute("select count(*) from museum_entries where slug in "
+                           "('science-organization','science-methodical-council') and status='draft'").fetchone()[0]
+            if n != 2:
+                raise RuntimeError("Two genuine scientific institutional source drafts must stay private")
             n = db.execute("select count(*) from museum_entries "
                            "where slug like 'museum-exhibit-%' and type='exhibition' and status='draft'").fetchone()[0]
             if n != 6:
@@ -129,6 +136,15 @@ def main() -> None:
                        "excerpt='QA: редакторский анонс выездной выставки.',"
                        "body='<p>QA: редакция выездной выставки о блокадном хлебе.</p>' "
                        "where slug='museum-exhibit-2025-10-08-hleb-blokadnogo-goroda'")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes') "
+                       "where slug in ('science-conferences','science-publications',"
+                       "'science-collection','science-researchers','science-materials')")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: редакторский научно-методический совет',"
+                       "body='<p>QA: проверенная правка научного отдела музея.</p>' "
+                       "where slug='science-methodical-council'")
             shop_section_id = db.execute(
                 "select id from museum_sections where slug='museum-shop'").fetchone()[0]
             db.execute("insert into museum_entries "
@@ -408,6 +424,47 @@ def main() -> None:
         future_section=future.xpath("//main//section[@aria-label='Будущие выставки из CMS']")[0]
         if "Выставка о хлебопечении" in future_section.text_content():
             raise RuntimeError("Precontract demo exhibition falsely appears in future exhibition section")
+        science_slugs=[
+            "science-conferences","science-publications","science-collection",
+            "science-researchers","science-materials",
+        ]
+        for slug in science_slugs:
+            page=html.fromstring((out/"guide"/slug/"index.html").read_bytes())
+            if not page.xpath("//main//section[contains(@class,'museum-science-portal')]"):
+                raise RuntimeError("Isolated CMS science section no longer rendered: "+slug)
+            if "Содержание, опубликованное редактором музея" not in page.text_content():
+                raise RuntimeError("Isolated CMS science landing draft not published: "+slug)
+        science_materials=html.fromstring((out/"guide/science-materials/index.html").read_bytes())
+        if "QA: редакторский научно-методический совет" not in science_materials.text_content():
+            raise RuntimeError("Scientific original has not been replaced by editor-reviewed revision")
+        if "QA: проверенная правка научного отдела музея" not in science_materials.text_content():
+            raise RuntimeError("Scientific material CMS text override did not reach Next.js")
+        if len(science_materials.xpath("//main//article[contains(@class,'official-museum-program-card')]"))!=2:
+            raise RuntimeError("Two original scientific museum sources missing in CMS-fed catalogue")
+        if len(science_materials.xpath("//main//a[starts-with(@href,'/museum/science-methodical-council/')]"))!=1:
+            raise RuntimeError("Published scientific source detail link missing")
+        if science_materials.xpath("//main//a[starts-with(@href,'/museum/science-organization/')]"):
+            raise RuntimeError("Unpublished scientific organizational paper leaked as CMS route")
+        if not (out/"museum/science-methodical-council/index.html").is_file():
+            raise RuntimeError("Published scientific council detail page missing")
+        if (out/"museum/science-organization/index.html").is_file():
+            raise RuntimeError("Scientific concept unapproved source draft exposed")
+        conference=html.fromstring((out/"guide/science-conferences/index.html").read_bytes())
+        if "Подтверждённый" in conference.text_content() and "На действующем сайте" not in conference.text_content():
+            raise RuntimeError("Scientific conference calendar implies nonexistent confirmed events")
+        if "Не является действительной" in conference.text_content():
+            raise RuntimeError("Irrelevant demo programme in science conference view")
+        publication=html.fromstring((out/"guide/science-publications/index.html").read_bytes())
+        if "Подтверждённая библиография" not in publication.text_content():
+            raise RuntimeError("Scientific source PDF misclassified as published academic bibliography")
+        collection=html.fromstring((out/"guide/science-collection/index.html").read_bytes())
+        if "https://goskatalog.ru/portal/#/collections?museumIds=1200" not in collection.xpath("//main//a/@href"):
+            raise RuntimeError("Exact original museum Goskatalog collection ID not preserved")
+        researchers=html.fromstring((out/"guide/science-researchers/index.html").read_bytes())
+        if "https://muzei-xleb.ru/sites/default/files/page/20260203112347-poryadok_dostupa.pdf" not in researchers.xpath("//main//a/@href"):
+            raise RuntimeError("True museum rules for collection access not linked on researcher page")
+        if researchers.xpath("//main//section[contains(@class,'museum-science-portal')]//form"):
+            raise RuntimeError("Unverified researcher application form introduced")
         h1 = [str(x).strip() for x in privacy.xpath("//main//h1/text()")]
         if h1 != ["QA: заголовок из редактируемой CMS"]:
             raise RuntimeError("CMS H1 not authoritative on guide route: " + repr(h1))
@@ -461,13 +518,14 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 29 isolated approved CMS records incl. 4 exhibition indexes"
-          " (2 current with source dates, 4 traveling, 12 past and 12 virtual),"
-          " 2 verified edited exhibition descriptions, 4 other exhibit drafts private,"
-          " 12 master classes (both audience views), CMS shop with temporary QA-only"
-          " mock item, zero checkout, 17 actual excursions, nine FAQ answers,"
-          " 11 museum halls and 44 unchanged SHA256-verified official documents;"
-          " real working DB remains 73 private content drafts and 44 documents.")
+    print("PASS: 35 isolated approved CMS records incl. five scientific category"
+          " pages and one source-verified council article editor override, other"
+          " scientific record private; original collections access policy and"
+          " museum Goskatalog link preserved, no fabricated publications or"
+          " conferences; four original exhibition catalogs, 17 real excursions,"
+          " 12 original workshops, 11 halls, nine FAQ, temporary QA-only shop"
+          " item, and 44 unchanged museum documents with source SHA256;"
+          " real working CMS remains 80 private drafts and 44 documents.")
     # Historical predecessor output deliberately superseded by current scope.
     # print("PASS: 23 isolated published CMS records including 12 real workshop cards"
 

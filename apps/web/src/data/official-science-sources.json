@@ -1,0 +1,46 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "snapshot_utc": "2026-10-18T08:05:14+00:00",
+  "count": 2,
+  "pages": [
+    {
+      "slug": "science-organization",
+      "path": "/nauchno-organizacionnaya-deyatelnost",
+      "source_url": "https://muzei-xleb.ru/nauchno-organizacionnaya-deyatelnost",
+      "captured_utc": "2026-10-18T08:05:14+00:00",
+      "title": "Научно-организационная деятельность",
+      "html": "<a href=\"https://muzei-xleb.ru/sites/default/files/page/20260203111659-koncepciya_komplektovaniya_mh.pdf\">Концепция комплектования музейных фондов СПб ГБУК «Санкт-Петербургский музей Хлеба» на 2025 — 2035 гг.</a>",
+      "html_sha256": "0bbe545eb5098c7411efac6114517010cbdd0aaa07c62bfec8e081a278d77dd8",
+      "text_sha256": "d7706d7025485eacdafdea5cc365942ab98d36ca97364dcf3aa02159b5aa15be",
+      "text_length": 102,
+      "documents": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/page/20260203111659-koncepciya_komplektovaniya_mh.pdf",
+          "label": "Концепция комплектования музейных фондов СПб ГБУК «Санкт-Петербургский музей Хлеба» на 2025 — 2035 гг.",
+          "format": "pdf"
+        }
+      ],
+      "photos_rights_confirmed": false
+    },
+    {
+      "slug": "science-methodical-council",
+      "path": "/nauchno-metodicheskiy-sovet",
+      "source_url": "https://muzei-xleb.ru/nauchno-metodicheskiy-sovet",
+      "captured_utc": "2026-10-18T08:05:14+00:00",
+      "title": "Научно-методический совет",
+      "html": "<p><a href=\"https://muzei-xleb.ru/sites/default/files/page/polozhenie_o_nauchno-metodicheskom_sovete_spb_gbuk_sankt-peterburgskiy_muzey_hleba.docx\">Положение о Научно-методическом совете СПб ГБУК «Санкт-Петербургский музей Хлеба»</a></p>\n<p>Согласно Приказу №41 от 28.04.2022 г. внесены дополнения к Положению и утвержден следующий состав Научно-методического совета Санкт-Петербургского государственного бюджетного учреждения культуры «Санкт-Петербургский музей Хлеба»: Председатель –директор музея, заместитель председателя научно-методического совета музея– зам. директора по развитию, члены – главный хранитель, зав. научно-экспозиционным отделом, зав. экскурсионным отделом, зав. сектором учета, старший научный сотрудник, специалист по экспозиционной и выставочной работе, специалист по учету музейных предметов,  секретарь – специалист по экспозиционной и выставочной работе.</p>",
+      "html_sha256": "99c56d681dd86f4dfab5672e01af6020a3fe2cb8e791659f245a4ce9a3e74efe",
+      "text_sha256": "c92ef481c5ff223fbfaadf85d0bf317452ea3625d7752b0077aac4d78deb02fd",
+      "text_length": 722,
+      "documents": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/page/polozhenie_o_nauchno-metodicheskom_sovete_spb_gbuk_sankt-peterburgskiy_muzey_hleba.docx",
+          "label": "Положение о Научно-методическом совете СПб ГБУК «Санкт-Петербургский музей Хлеба»",
+          "format": "docx"
+        }
+      ],
+      "photos_rights_confirmed": false
+    }
+  ],
+  "classification": "Administrative scientific activity documents only. No invented publications, conferences, collection objects or researcher privileges."
+}

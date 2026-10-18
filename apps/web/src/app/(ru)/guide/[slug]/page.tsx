@@ -21,6 +21,7 @@ import OfficialMuseumExcursionPrograms from "@/components/OfficialMuseumExcursio
 import MuseumShopShowcase from "@/components/MuseumShopShowcase";
 import OfficialMuseumWorkshops from "@/components/OfficialMuseumWorkshops";
 import OfficialMuseumExhibitions from "@/components/OfficialMuseumExhibitions";
+import OfficialMuseumScience, {isScienceSection} from "@/components/OfficialMuseumScience";
 import {exhibitionSourceIndex,officialExhibitionSourceSlugs} from "@/data/official-exhibitions";
 import {officialWorkshopSlugs} from "@/data/official-workshops";
 import {isProgramCategory,originalMuseumProgramSlugs} from "@/data/official-excursion-programs";
@@ -71,7 +72,6 @@ export default async function GuidePage({ params }: Props) {
   const isAccess = slug === "accessible-museum";
   const childExcursionCategory = slug === "children-interactive" ? "excursion-interactive"
     : slug === "children-thematic" ? "excursion-thematic" : null;
-  const isCollection = slug === "science-collection";
   const isTeam = slug === "museum-team";
   const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: guideHref(child.slug) })) : [];
   const directChildren = usesCmsNavigation ? findPublicNavigationNode(navigationTree, slug)?.children ?? [] : [];
@@ -86,7 +86,8 @@ export default async function GuidePage({ params }: Props) {
       // presented once in the detailed category cards, not duplicated below.
       && !(isProgramCategory(slug) && originalMuseumProgramSlugs.has(entry.slug))
       && !(slug === "children-workshops" && officialWorkshopSlugs.has(entry.slug))
-      && !(exhibitionSourceIndex(slug) && officialExhibitionSourceSlugs.has(entry.slug)))
+      && !(exhibitionSourceIndex(slug) && officialExhibitionSourceSlugs.has(entry.slug))
+      && !(slug === "science-materials" && ["science-organization","science-methodical-council"].includes(entry.slug)))
     : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
   const officialSnapshot = officialSnapshotByPath(page?.legacyPath)
@@ -136,6 +137,8 @@ export default async function GuidePage({ params }: Props) {
             ? "Этот раздел опубликован редактором музея; сведения можно изменять через CMS."
             : slug === "faq"
             ? "Ответы собраны по действующим официальным материалам музея. Вопросы подготовлены для нового сайта и могут уточняться редактором."
+            : isScienceSection(slug)
+            ? "Научный раздел использует только официально подтверждённые документы музея, публикации редактора и музейный Госкаталог. Неустановленные сведения не выдумываются."
             : slug === "exhibitions-future"
             ? "Раздел будущих выставок готов: отображаются только утверждённые события с будущими датами начала. Действительных анонсов пока нет."
             : exhibitionSourceIndex(slug)
@@ -175,6 +178,7 @@ export default async function GuidePage({ params }: Props) {
     {isPlanVisit && <VisitAccessibilityGuide />}
     {isPlanVisit && <OfficialVisitorRules />}
     {slug === "museum-shop" && <MuseumShopShowcase />}
+    {isScienceSection(slug) && <OfficialMuseumScience section={slug} />}
     {exhibitionSourceIndex(slug) && <OfficialMuseumExhibitions category={slug} />}
     {slug === "children-workshops" && <OfficialMuseumWorkshops audience="children" />}
     {slug === "excursion-workshops-adults" && <OfficialMuseumWorkshops audience="adults" />}
@@ -233,7 +237,6 @@ export default async function GuidePage({ params }: Props) {
       <p>Условия участия и актуальная информация размещены на действующем официальном сайте музея. Участие конкретного мероприятия в программе необходимо уточнять перед посещением.</p>
       <MuseumAnchor href={legacyUrl("/pushkinskaya-karta")} target="_blank" rel="noopener noreferrer" className="primary-button">Открыть «Пушкинскую карту» на сайте музея ↗</MuseumAnchor>
     </section>}
-    {isCollection && <p className="reference-facts"><MuseumAnchor href={museumReference.goskatalogUrl} target="_blank" rel="noopener noreferrer">Музейная коллекция в Госкаталоге ↗</MuseumAnchor></p>}
     {directChildren.length > 0 && <p className="guide-subnav-hint">
       Подразделы этого раздела доступны в боковой навигации; на мобильном экране — ниже основного текста.
     </p>}
@@ -256,7 +259,7 @@ export default async function GuidePage({ params }: Props) {
     {sourceUrl && <p className="reference-source">
       <MuseumAnchor href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</MuseumAnchor>
     </p>}
-    {page?.tenderOnly && !cmsPage && slug !== "faq" && slug !== "museum-shop" && slug !== "exhibitions-future" && !exhibitionSourceIndex(slug) && slug !== "children-workshops" && slug !== "excursion-workshops-adults" && !childExcursionCategory && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
+    {page?.tenderOnly && !cmsPage && slug !== "faq" && slug !== "museum-shop" && !isScienceSection(slug) && slug !== "exhibitions-future" && !exhibitionSourceIndex(slug) && slug !== "children-workshops" && slug !== "excursion-workshops-adults" && !childExcursionCategory && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
     {page && (page.ancestors.length > 0 || findMenuGroup(parent.slug)
       ? <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>
       : <p><Link href="/" className="text-link">← На главную</Link></p>)}
