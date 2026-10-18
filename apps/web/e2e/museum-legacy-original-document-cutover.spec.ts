@@ -7,6 +7,8 @@ test("original public museum PDF and DOCX URLs stay alive after changing DNS",as
     ["/sites/default/files/page/20260203114639-ustav_2011.docx","application/vnd.openxmlformats-officedocument.wordprocessingml.document","PK"],
     ["/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf","application/pdf","%PDF"],
     ["/sites/default/files/page/20251203120738-informaciya_dlya_dariteley.docx","application/vnd.openxmlformats-officedocument.wordprocessingml.document","PK"],
+    ["/sites/default/files/page/svodnaya_vedomost_sout_3.pdf","application/pdf","%PDF"],
+    ["/sites/default/files/page/20231102115627-pismo_monitoring_2023.docx","application/vnd.openxmlformats-officedocument.wordprocessingml.document","PK"],
   ] as const;
   for(const [originalPath,type,signature] of cases){
     const res=await page.request.get(originalPath);

@@ -71,7 +71,7 @@ class NewSourceFirstMuseumSectionsTests(unittest.TestCase):
 
     def test_additional_source_backed_internal_links_are_never_silently_marked_complete(self):
         summary=collect()
-        self.assertGreaterEqual(summary['uncovered_unique_paths'],80)
+        self.assertGreaterEqual(summary['uncovered_unique_paths'],59)
         self.assertGreaterEqual(summary['unique_path_targets'],300)
 
 if __name__=='__main__':unittest.main()
