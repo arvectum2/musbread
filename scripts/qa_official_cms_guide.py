@@ -20,7 +20,9 @@ ROOT = Path(__file__).resolve().parents[1]
 CMS = ROOT / "apps/cms"
 WEB = ROOT / "apps/web"
 PRIVATE = ROOT / ".local_archive"
-REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history",  "museum-documents", "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card", "faq", "zal-hleb-v-mirovoy-istorii"}
+REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history",  "museum-documents", "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card", "faq", "zal-hleb-v-mirovoy-istorii", "excursion-overview", "excursion-interactive", "excursion-thematic",
+            "excursion-theatrical", "children-interactive", "children-thematic", "museum-tour-kolobok",
+            "museum-tour-interaktivnaya-programma-dlya-detey-lovi-ritm"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -57,6 +59,10 @@ def main() -> None:
                            " and slug like 'zal-%'").fetchone()[0]
             if n != 11:
                 raise RuntimeError("Eleven imported official exposition rooms must all be draft")
+            n = db.execute("select count(*) from museum_entries "
+                           "where slug like 'museum-tour-%' and type='excursion' and status='draft'").fetchone()[0]
+            if n != 17:
+                raise RuntimeError("All 17 source-backed museum excursions must be unpublished working drafts")
 
     with tempfile.TemporaryDirectory(prefix="museum-guide-qa-", dir=PRIVATE) as name:
         work = Path(name)
@@ -74,6 +80,27 @@ def main() -> None:
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes') "
                        "where slug in ('tickets-and-benefits','ticket-refunds','museum-documents','museum-finance','museum-anti-corruption','accessible-museum','pushkin-card','faq')")
+            db.execute("update museum_sections set status='published' "
+                       "where slug in ('children-interactive','children-thematic')")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes') "
+                       "where slug in ('children-interactive','children-thematic')")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes') "
+                       "where slug in ('excursion-overview','excursion-interactive',"
+                       "'excursion-thematic','excursion-theatrical')")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: музей отредактировал программу Колобок',"
+                       "excerpt='QA: аннотация после редактора.',"
+                       "body='<p>QA: изменённое описание программы Колобок.</p>' "
+                       "where slug='museum-tour-kolobok'")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: новая интерактивная программа',"
+                       "excerpt='QA: новый анонс интерактивной программы.',"
+                       "body='<p>QA: новая интерактивная программа от редактора.</p>' "
+                       "where slug='museum-tour-interaktivnaya-programma-dlya-detey-lovi-ritm'")
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes'),"
                        "title='QA: редакция зала утверждена музеем',"
@@ -118,6 +145,18 @@ def main() -> None:
         if any(e["slug"].startswith("zal-") and
                e["slug"] != "zal-hleb-v-mirovoy-istorii" for e in data["entries"]):
             raise RuntimeError("Private museum exposition room draft was exported")
+        published_tours = {e["slug"] for e in data["entries"] if e["slug"].startswith("museum-tour-")}
+        expected_tours = {"museum-tour-kolobok",
+            "museum-tour-interaktivnaya-programma-dlya-detey-lovi-ritm"}
+        if published_tours != expected_tours:
+            raise RuntimeError("Only two edited excursion programs may pass isolated publication gate: "
+                + repr(published_tours))
+        for slug in ("excursion-overview","excursion-interactive",
+                     "excursion-thematic","excursion-theatrical"):
+            if slug not in slugs:
+                raise RuntimeError("CMS category page missing from isolated publication: "+slug)
+        if not {"children-interactive","children-thematic"} <= slugs:
+            raise RuntimeError("Two children information pages missing in test-published CMS export")
         attachment_hrefs = {}
         for slug, recorded in expected_docs.items():
             item = next(entry for entry in data["entries"] if entry["slug"] == slug)
@@ -218,6 +257,40 @@ def main() -> None:
                              "[starts-with(@href,'/museum/')]")) != 1:
             raise RuntimeError("Unpublished source rooms got a private CMS link")
 
+        children_interactive = html.fromstring(
+            (out / "guide/children-interactive/index.html").read_bytes())
+        children_thematic = html.fromstring(
+            (out / "guide/children-thematic/index.html").read_bytes())
+        for kind, doc, count in (("children-interactive",children_interactive,6),
+                                 ("children-thematic",children_thematic,9)):
+            if len(doc.xpath("//main//article[contains(@class,'official-museum-program-card')]")) != count:
+                raise RuntimeError("CMS children subcategory "+kind+" lost source program cards")
+            if "Содержание, опубликованное редактором музея" not in doc.text_content():
+                raise RuntimeError("Editorially approved children section CMS body not displayed: "+kind)
+        interactive = html.fromstring((out / "guide/excursion-interactive/index.html").read_bytes())
+        thematic = html.fromstring((out / "guide/excursion-thematic/index.html").read_bytes())
+        theatrical = html.fromstring((out / "guide/excursion-theatrical/index.html").read_bytes())
+        overview = html.fromstring((out / "guide/excursion-overview/index.html").read_bytes())
+        for kind, doc, count in (("interactive",interactive,6),
+                                 ("thematic",thematic,9),("theatrical",theatrical,2)):
+            if len(doc.xpath("//main//article[contains(@class,'official-museum-program-card')]")) != count:
+                raise RuntimeError("Isolated CMS excursion "+kind+" cards lost official source programs")
+        if "QA: новая интерактивная программа от редактора" not in interactive.text_content():
+            raise RuntimeError("Published editor version failed to replace program text in actual static HTML")
+        if len(interactive.xpath("//main//article[contains(@class,'official-museum-program-card')]"
+                                 "//a[starts-with(@href,'/excursions/')]")) != 1:
+            raise RuntimeError("One edited interactive tour should link internally; five drafts must stay private")
+        if "QA: музей отредактировал программу Колобок" not in theatrical.text_content():
+            raise RuntimeError("Theatrical program CMS override missing in actual static HTML")
+        if len(theatrical.xpath("//main//article[contains(@class,'official-museum-program-card')]"
+                                "//a[starts-with(@href,'/excursions/')]")) != 1:
+            raise RuntimeError("Unpublished theatrical program is incorrectly public")
+        published_detail=html.fromstring(
+            (out/"excursions/museum-tour-kolobok/index.html").read_bytes())
+        if "QA: изменённое описание программы Колобок" not in published_detail.text_content():
+            raise RuntimeError("New CMS excursion detail public route was not correctly exported")
+        if "хлеб для космонавтов" not in overview.text_content():
+            raise RuntimeError("Official overview excursion source lost in CMS category page")
         h1 = [str(x).strip() for x in privacy.xpath("//main//h1/text()")]
         if h1 != ["QA: заголовок из редактируемой CMS"]:
             raise RuntimeError("CMS H1 not authoritative on guide route: " + repr(h1))
@@ -271,11 +344,12 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 10 disposable CMS pages including nine source-verified CMS FAQ answers, "
-          "11 genuine gallery cards with CMS override and no draft leak; "
-          "44 SHA256-verified CMS binary documents, 5 specially marked safe derivatives, "
-          "H1/SEO, prices, no PII form or premature a11y approval; "
-          "real working CMS remains 25 drafts/44 docs with unchanged web fixture.")
+    print("PASS: 18 disposable CMS pages incl. four source excursion categories,"
+          " two children subcategories and two uniquely published excursions;"
+          " 17 original program cards (6/9/2), children catalogs (6/9),"
+          " CMS editor overrides and 15 other tour drafts private,"
+          " 11 exposition halls, nine FAQ answers, 44 SHA256 museum documents;"
+          " real CMS remains 48 private drafts/44 docs and unchanged fixture.")
 
 
 if __name__ == "__main__":

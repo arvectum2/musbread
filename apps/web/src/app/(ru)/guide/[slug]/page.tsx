@@ -16,6 +16,9 @@ import OfficialVisitorRules from "@/components/OfficialVisitorRules";
 import OfficialVisitorFAQ from "@/components/OfficialVisitorFAQ";
 import {officialExpositionSlugs} from "@/data/official-exposition-rooms";
 import {officialSnapshotByPath} from "@/data/official-page-snapshots";
+import {officialExcursionBySlug} from "@/data/official-excursion-pages";
+import OfficialMuseumExcursionPrograms from "@/components/OfficialMuseumExcursionPrograms";
+import {isProgramCategory,originalMuseumProgramSlugs} from "@/data/official-excursion-programs";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
 import CurrentExhibitions from "@/components/CurrentExhibitions";
 import EventAgenda from "@/components/EventAgenda";
@@ -35,7 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = findMenuGroup(slug)?.title ?? findGuidePage(slug)?.title;
   const section = content.sections?.find((item) => item.slug === slug);
   const guide = findGuidePage(slug);
-  const sourceTitle = officialSnapshotByPath(guide?.legacyPath)?.title;
+  const sourceTitle = officialSnapshotByPath(guide?.legacyPath)?.title
+    || officialExcursionBySlug(slug)?.title;
   const cmsPage = content.entries.find((entry) => entry.type === "page" && entry.slug === slug);
   const fallback = fixedPageSeo("/guide/" + slug + "/");
   // Fallback/reference guide pages are unapproved prototypes. Only an
@@ -59,6 +63,8 @@ export default async function GuidePage({ params }: Props) {
   const isContact = slug === "museum-contacts";
   const isPlanVisit = slug === "plan-visit";
   const isAccess = slug === "accessible-museum";
+  const childExcursionCategory = slug === "children-interactive" ? "excursion-interactive"
+    : slug === "children-thematic" ? "excursion-thematic" : null;
   const isCollection = slug === "science-collection";
   const isTeam = slug === "museum-team";
   const groupPages = group && !usesCmsNavigation ? group.children.map((child) => ({ ...child, href: guideHref(child.slug) })) : [];
@@ -69,10 +75,14 @@ export default async function GuidePage({ params }: Props) {
     ? entriesInCmsSection(slug).filter((entry) =>
       !(entry.type === "page" && entry.slug === slug)
       // Room catalogue already displays source-backed CMS room revisions.
-      && !(slug === "museum-exposition" && officialExpositionSlugs.has(entry.slug)))
+      && !(slug === "museum-exposition" && officialExpositionSlugs.has(entry.slug))
+      // Genuine source programs (including approved CMS revisions) are
+      // presented once in the detailed category cards, not duplicated below.
+      && !(isProgramCategory(slug) && originalMuseumProgramSlugs.has(entry.slug)))
     : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
-  const officialSnapshot = officialSnapshotByPath(page?.legacyPath);
+  const officialSnapshot = officialSnapshotByPath(page?.legacyPath)
+    || officialExcursionBySlug(slug);
   // Museum-owned CMS content takes precedence; an operator can replace the
   // official-site reference by publishing a page with this exact guide slug.
   const cmsPage = content.entries.find((entry) => entry.type === "page" && entry.slug === slug);
@@ -81,7 +91,8 @@ export default async function GuidePage({ params }: Props) {
   // show a museum-authored CMS introduction after its own publication.
   const showReferenceBody = !!referenceBody
     && !["museum-contacts", "museum-team", "museum-cookie"].includes(slug)
-    && (slug !== "museum-exposition" || !!cmsPage);
+    && (slug !== "museum-exposition" || !!cmsPage)
+    && (!isProgramCategory(slug) || !!cmsPage);
   const sourceDate = officialSnapshot?.captured_utc.slice(0, 10);
 
   return <article className="section inner-page guide-page">
@@ -116,6 +127,8 @@ export default async function GuidePage({ params }: Props) {
             ? "Этот раздел опубликован редактором музея; сведения можно изменять через CMS."
             : slug === "faq"
             ? "Ответы собраны по действующим официальным материалам музея. Вопросы подготовлены для нового сайта и могут уточняться редактором."
+            : childExcursionCategory
+            ? "Представлены реальные экскурсионные программы с описаниями и возрастными ограничениями действующего музея. Редактируемые карточки программы находятся в CMS."
             : "Этот раздел требуется ТЗ, но сведения на действующем сайте не найдены."}
     </p>
     <div className={directChildren.length > 0 ? "guide-content-layout" : "guide-content-layout guide-content-single"}>
@@ -147,6 +160,8 @@ export default async function GuidePage({ params }: Props) {
     {slug === "faq" && !cmsPage && <OfficialVisitorFAQ />}
     {isAccess && <VisitAccessibilityGuide condensed />}
     {slug === "museum-exposition" && <OfficialExpositionRooms />}
+    {isProgramCategory(slug) && <OfficialMuseumExcursionPrograms category={slug} />}
+    {childExcursionCategory && <OfficialMuseumExcursionPrograms category={childExcursionCategory} childrenSection />}
     {isTeam && <MuseumTeam />}
     {slug === "museum-media" && <MuseumMediaHub />}
     {slug === "exhibitions-current" && <CurrentExhibitions
@@ -218,7 +233,7 @@ export default async function GuidePage({ params }: Props) {
     {sourceUrl && <p className="reference-source">
       <MuseumAnchor href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</MuseumAnchor>
     </p>}
-    {page?.tenderOnly && !cmsPage && slug !== "faq" && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
+    {page?.tenderOnly && !cmsPage && slug !== "faq" && !childExcursionCategory && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
     {page && (page.ancestors.length > 0 || findMenuGroup(parent.slug)
       ? <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>
       : <p><Link href="/" className="text-link">← На главную</Link></p>)}

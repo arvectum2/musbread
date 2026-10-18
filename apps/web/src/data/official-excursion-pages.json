@@ -1,0 +1,96 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "snapshot_utc": "2026-10-18T06:12:22+00:00",
+  "pages": [
+    {
+      "path": "/obzornaya-ekskursiya",
+      "source_url": "https://muzei-xleb.ru/obzornaya-ekskursiya",
+      "title": "Обзорная экскурсия",
+      "captured_utc": "2026-10-18T06:12:22+00:00",
+      "html": "<p>Во время путешествия по экспозиции музея посетители узнают о происхождении зерновых культур, о производстве, потреблении и продаже хлеба с древнейших времен и до начала XXI века. Гости музея могут познакомиться с обрядовыми песнями и посмотреть видеофильмы о русской печи. Побывать на петербургской кухне начала XX века, послушать бурлаков и уличных разносчиков. Сделать замечательные фотографии в кондитерской, расположенной в парадных залах особняка. Заглянуть на современный хлебозавод и узнать, как выпекают хлеб для космонавтов.</p>\n<p>    </p>",
+      "text_sha256": "d5ffdf2b1f1e6e64754981706a32b10db2accaefd464b91c88495a87a7a59952",
+      "html_sha256": "7ec96f65b314a8b403a7919d92b0a27a59bebe5ce8461d16a4c08e0da89a5b0c",
+      "text_length": 533,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20250908150246-1-hdr1.jpg?itok=S6bcd1XW",
+          "alt": "Обзорная экскурсия"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20250908150246-1-hdr2.jpg?itok=ycU9lFcD",
+          "alt": "Обзорная экскурсия"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20250908150246-1-hdr.jpg?itok=CNjpPahP",
+          "alt": "Обзорная экскурсия"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20250908150253-8-hdr.jpg?itok=KEL7Xzsc",
+          "alt": "Обзорная экскурсия"
+        }
+      ],
+      "cms_slug": "excursion-overview",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/interaktivnye-zanyatiya",
+      "source_url": "https://muzei-xleb.ru/interaktivnye-zanyatiya",
+      "title": "Интерактивные занятия",
+      "captured_utc": "2026-10-18T06:12:22+00:00",
+      "html": "<h2>Приглашаем Вас посетить наш музей и предлагаем познавательные интерактивные занятия  и тематические экскурсии.</h2>\n<ul>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/interaktivnaya-programma-dlya-detey-lovi-ritm\">Интерактивная программа для детей «Лови ритм!»</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/interaktivnaya-ekskursiya-dlya-detey-11-13-let-bylo-ne-bylo\">Интерактивная экскурсия для детей 11-13 лет «Было – не было»</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/konvertik-s-muzeynoy-nachinkoy\">«Конвертик с музейной начинкой» (7-8 лет)</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/emelina-pechka-8-let\">«Емелина печка» (8 лет)</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/karavay\">«Каравай» (9-11 лет)</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/s-mechtoy-o-hlebe\">«С мечтой о Хлебе» (9-11 лет)</a></h3>\n</li>\n</ul>\n<p> </p>\n<h2>Проведение занятий и экскурсий только по предварительной записи.</h2>\n<p>Телефон для записи (812) 294-50-82.</p>\n<p>Продолжительность: 50-60 минут.</p>\n<p>Любительская фото- и видеосъемка - бесплатные.</p>\n<p>Съемка разрешена только без вспышки.</p>\n<h3><strong><a href=\"https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf\">Приказ о посещении экскурсий организованными группами.</a></strong></h3>",
+      "text_sha256": "419ba9df959043dc7bfce2b95c5568c52e43a772b3b265df2d0f8ae2172065cc",
+      "html_sha256": "a94989b72214d55506659220432b8568ad9a0fd1a1ab361f4e2eb2472b4d1c84",
+      "text_length": 606,
+      "document_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf",
+          "label": "Приказ о посещении экскурсий организованными группами."
+        }
+      ],
+      "image_links": [],
+      "cms_slug": "excursion-interactive",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/tematicheskie-ekskursii",
+      "source_url": "https://muzei-xleb.ru/tematicheskie-ekskursii",
+      "title": "Тематические экскурсии",
+      "captured_utc": "2026-10-18T06:12:22+00:00",
+      "html": "<h2>Приглашаем Вас посетить наш музей и предлагаем познавательные интерактивные занятия  и тематические экскурсии.</h2>\n<ul>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/tematicheskaya-ekskursiya-ty-tochno-spravishsya\">Тематическая экскурсия «Ты точно справишься»</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/tematicheskaya-ekskursiya-vmesto-serdca-plamennyy-motor\">Тематическая экскурсия «А вместо сердца пламенный мотор»</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/tematicheskaya-ekskursiya-rozh-vs-pshenica-esenin-vs-mayakovskiy\">Тематическая экскурсия «Рожь vs пшеница – Есенин vs Маяковский»</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/tematicheskaya-ekskursiya-revolyuciya-byta-ili-vsyakoe-znanie-vse-taki-med\">Тематическая экскурсия «Революция быта, или Всякое знание – все-таки мед»</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/net-nichego-dorozhe-hleba\">«Нет ничего дороже хлеба» Для учеников 1-2 классов (7-9 лет)</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/vsyakaya-dusha-prazdniku-rada-9-11-let\">«Всякая душа празднику рада» (9-11 лет)</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/zlak-kachestva\">«Злак качества» (школьники с 6го класса и взрослые)</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/cena-hleba\">«Цена хлеба» (дети с 12 лет и взрослые)</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/net-nichego-dorozhe-hleba\">«Нет ничего дороже хлеба» Для учеников 1-2 классов (7-9 лет)</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/i-forma-i-soderzhanie\">«И форма, и содержание…»</a></h3>\n</li>\n</ul>\n<p> </p>\n<h2>Проведение занятий и экскурсий только по предварительной записи.</h2>\n<p>Телефон для записи (812) 294-50-82.</p>\n<p>Одновременно музей принимает не более 53 человек (две группы)!</p>\n<p>Одна экскурсионная группа не более 26 детей плюс 2 сопровождающих взрослых (сопровождающие идут бесплатно).</p>\n<p>Продолжительность: 50-60 минут.</p>\n<p>Любительская фото- и видеосъемка - бесплатные.</p>\n<p>Съемка разрешена только без вспышки.</p>\n<h3><strong><a href=\"https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf\">Приказ о посещении экскурсий организованными группами.</a></strong></h3>",
+      "text_sha256": "4f3d1b8ee5914d58ada516dbce4238ed23fb5ff60b412d15084f995884306d5a",
+      "html_sha256": "b2994b3ffafee97e4c89e38a5d37f5864f07ee850f880844a0456113f92fac67",
+      "text_length": 1071,
+      "document_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf",
+          "label": "Приказ о посещении экскурсий организованными группами."
+        }
+      ],
+      "image_links": [],
+      "cms_slug": "excursion-thematic",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/teatralizovannye-ekskursii",
+      "source_url": "https://muzei-xleb.ru/teatralizovannye-ekskursii",
+      "title": "Театрализованные экскурсии",
+      "captured_utc": "2026-10-18T06:12:22+00:00",
+      "html": "<h2>Приглашаем Вас посетить наш музей и предлагаем познавательные интерактивные занятия  и тематические экскурсии.</h2>\n<ul>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/teatralizovannaya-ekskursiya-pirog-moy-ne-syroy\">Театрализованная экскурсия «Пирог мой не сырой!»</a></h3>\n</li>\n<li>\n<h3><a href=\"https://muzei-xleb.ru/ekskursii/kolobok\">«Колобок» (5-7 лет)</a></h3>\n</li>\n</ul>\n<p> </p>\n<h2>Проведение занятий и экскурсий только по предварительной записи.</h2>\n<p>Телефон для записи (812) 294-50-82.</p>\n<p>Продолжительность: 50-60 минут.</p>\n<p>Любительская фото- и видеосъемка - бесплатные.</p>\n<p>Съемка разрешена только без вспышки.</p>\n<h3><strong><a href=\"https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf\">Приказ о посещении экскурсий организованными группами.</a></strong></h3>",
+      "text_sha256": "24fa22ece30b46af2d68bad862d132337d24633f6b1f00c928706e040a45df3f",
+      "html_sha256": "8e79923308965c76b21b2fbb4742f345260ca5daefb875116cfbd70000db3e86",
+      "text_length": 450,
+      "document_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf",
+          "label": "Приказ о посещении экскурсий организованными группами."
+        }
+      ],
+      "image_links": [],
+      "cms_slug": "excursion-theatrical",
+      "photos_rights_confirmed": false
+    }
+  ],
+  "count": 4,
+  "media_policy": "Only photo URL metadata; do not display or republish without permission"
+}
