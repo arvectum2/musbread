@@ -35,12 +35,12 @@ final class ImportOfficialMuseumPagesTest extends TestCase
         $this->assertFalse(Storage::disk('local')->exists('museum/documents/official-source/dummy.pdf'));
     }
 
-    public function test_apply_imports_eleven_private_pages_with_source_prices_links_and_keeps_editor_edits(): void
+    public function test_apply_imports_thirteen_private_pages_including_visitors_access_and_pushkin_card(): void
     {
         $this->seed(ReferenceMuseumSectionsSeeder::class);
         Storage::fake('local');
         $this->assertSame(0, Artisan::call('museum:import-official-pages', $this->importOptions(['--apply' => true])));
-        $this->assertDatabaseCount('museum_entries', 11);
+        $this->assertDatabaseCount('museum_entries', 13);
         foreach (MuseumEntry::all() as $entry) {
             $this->assertSame('draft', $entry->status);
             $this->assertNull($entry->published_at);
@@ -49,6 +49,14 @@ final class ImportOfficialMuseumPagesTest extends TestCase
             $this->assertStringContainsString('https://muzei-xleb.ru/', $entry->excerpt);
             $this->assertNotEmpty(strip_tags($entry->body));
         }
+        $access = MuseumEntry::where('slug', 'accessible-museum')->firstOrFail();
+        $this->assertStringContainsString('Вход и вестибюль оборудованы пандусами', $access->body);
+        $this->assertStringContainsString('тактильная карта', $access->body);
+        $this->assertSame('draft', $access->status);
+        $pushkin = MuseumEntry::where('slug', 'pushkin-card')->firstOrFail();
+        $this->assertStringContainsString('https://vmuzey.com/museum/', $pushkin->body);
+        $this->assertStringContainsString('«Пушкинская карта»', $pushkin->body);
+        $this->assertSame('draft', $pushkin->status);
         $refund = MuseumEntry::where('slug', 'ticket-refunds')->firstOrFail();
         $this->assertSame('Возврат билетов', $refund->h1);
         $this->assertSame('Порядок возврата билетов', $refund->title);
@@ -64,7 +72,7 @@ final class ImportOfficialMuseumPagesTest extends TestCase
         $history = MuseumEntry::where('slug', 'museum-history')->firstOrFail();
         $history->update(['body' => '<p>Редактор заменил текст!</p>', 'title' => 'Версия музея']);
         $this->assertSame(0, Artisan::call('museum:import-official-pages', $this->importOptions(['--apply' => true])));
-        $this->assertSame(11, MuseumEntry::count());
+        $this->assertSame(13, MuseumEntry::count());
         $this->assertSame('Версия музея', $history->fresh()->title);
         $this->assertSame('<p>Редактор заменил текст!</p>', trim($history->fresh()->body));
         $this->assertDatabaseCount('museum_documents', 0);
@@ -137,7 +145,7 @@ final class ImportOfficialMuseumPagesTest extends TestCase
                 '--apply' => true, '--documents' => true, '--archive' => $dir.'/manifest.json',
             ])));
             $this->assertDatabaseCount('museum_documents', 1);
-            $this->assertDatabaseCount('museum_entries', 11);
+            $this->assertDatabaseCount('museum_entries', 13);
         } finally {
             @unlink($dir.'/'.$sha.'.pdf');
             @unlink($dir.'/manifest.json');
@@ -211,7 +219,7 @@ trailer
             $this->assertSame(2, MuseumEntry::where('slug', 'ticket-refunds')->firstOrFail()->documents()->count());
             $this->assertSame(1, MuseumEntry::where('slug', 'museum-documents')->firstOrFail()->documents()->count());
             $this->assertDatabaseCount('museum_documents', 3);
-            $this->assertSame(11, MuseumEntry::where('status', 'draft')->count());
+            $this->assertSame(13, MuseumEntry::where('status', 'draft')->count());
             $this->assertSame(0, Artisan::call('museum:import-official-pages', $this->importOptions([
                 '--apply' => true, '--documents' => true, '--append-documents' => true,
                 '--archive' => $dir.'/manifest.json',
@@ -250,7 +258,7 @@ trailer
             $this->assertSame('tickets-and-benefits', $after['entries'][0]['slug']);
             $this->assertStringContainsString('400 рублей', $after['entries'][0]['body']);
             $this->assertStringContainsString('<table', $after['entries'][0]['body']);
-            $this->assertSame(10, MuseumEntry::query()->where('status', 'draft')->count());
+            $this->assertSame(12, MuseumEntry::query()->where('status', 'draft')->count());
         } finally {
             @unlink($output);
             @unlink($manifest);
@@ -266,7 +274,7 @@ trailer
         $this->assertDatabaseCount('museum_entries',0);
         $this->assertSame(0, Artisan::call('museum:import-official-pages',
             $this->importOptions(['--apply'=>true])));
-        $this->assertDatabaseCount('museum_entries',11);
+        $this->assertDatabaseCount('museum_entries',13);
         $draft = MuseumEntry::where('slug','museum-documents')->firstOrFail();
         $draft->update(['status'=>'published','published_at'=>now()->subMinute()]);
         $dir = storage_path('framework/testing/official-append-guard');
@@ -297,7 +305,7 @@ trailer
 
         $this->assertSame(0, Artisan::call('museum:import-official-pages',
             $this->importOptions(['--apply' => true, '--rooms' => true])), Artisan::output());
-        $this->assertDatabaseCount('museum_entries', 22);
+        $this->assertDatabaseCount('museum_entries', 24);
         $section = MuseumSection::where('slug', 'museum-exposition')->firstOrFail();
         $rooms = MuseumEntry::where('museum_section_id', $section->id)
             ->where('slug', 'like', 'zal-%')->orderBy('sort_order')->get();
@@ -316,7 +324,7 @@ trailer
         $rooms[0]->update(['body' => '<p>Редактор изменил описание зала.</p>']);
         $this->assertSame(0, Artisan::call('museum:import-official-pages',
             $this->importOptions(['--apply' => true, '--rooms' => true])));
-        $this->assertDatabaseCount('museum_entries', 22);
+        $this->assertDatabaseCount('museum_entries', 24);
         $this->assertSame('<p>Редактор изменил описание зала.</p>', trim($rooms[0]->fresh()->body));
     }
 

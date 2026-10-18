@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CMS = ROOT / "apps/cms"
 WEB = ROOT / "apps/web"
 PRIVATE = ROOT / ".local_archive"
-REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history",  "museum-documents", "museum-finance", "museum-anti-corruption", "zal-hleb-v-mirovoy-istorii"}
+REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history",  "museum-documents", "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card", "zal-hleb-v-mirovoy-istorii"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -73,7 +73,7 @@ def main() -> None:
                        "where slug='museum-privacy'")
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes') "
-                       "where slug in ('tickets-and-benefits','ticket-refunds','museum-documents','museum-finance','museum-anti-corruption')")
+                       "where slug in ('tickets-and-benefits','ticket-refunds','museum-documents','museum-finance','museum-anti-corruption','accessible-museum','pushkin-card')")
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes'),"
                        "title='QA: редакция зала утверждена музеем',"
@@ -109,7 +109,7 @@ def main() -> None:
         data = json.loads(snapshot.read_text())
         slugs = {entry["slug"] for entry in data["entries"]}
         if not {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-documents",
-                "museum-finance", "museum-anti-corruption"} <= slugs or "museum-history" in slugs:
+                "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card"} <= slugs or "museum-history" in slugs:
             raise RuntimeError("Public/private source CMS entries wrongly filtered: " + repr(slugs))
         published_room = next((e for e in data["entries"]
                                if e["slug"] == "zal-hleb-v-mirovoy-istorii"), None)
@@ -179,6 +179,18 @@ def main() -> None:
         hub = html.fromstring((out / "guide/museum-documents/index.html").read_bytes())
         finance = html.fromstring((out / "guide/museum-finance/index.html").read_bytes())
         anticorruption = html.fromstring((out / "guide/museum-anti-corruption/index.html").read_bytes())
+        access = html.fromstring((out / "guide/accessible-museum/index.html").read_bytes())
+        pushkin = html.fromstring((out / "guide/pushkin-card/index.html").read_bytes())
+        if "Содержание, опубликованное редактором музея" not in access.text_content():
+            raise RuntimeError("Current accessible-museum source not editable through approved CMS release")
+        if "Вход и вестибюль оборудованы пандусами" not in access.text_content():
+            raise RuntimeError("Museum accessible visitor source lost in CMS publication")
+        if "Содержание, опубликованное редактором музея" not in pushkin.text_content():
+            raise RuntimeError("Pushkin card source is not editable through approved CMS release")
+        if "14 до 22 лет" not in pushkin.text_content():
+            raise RuntimeError("Pushkin card museum source body lost")
+        if "https://vmuzey.com/museum/sankt-peterburgskiy-muzey-hleba" not in pushkin.xpath("//main//a/@href"):
+            raise RuntimeError("Museum ticket partner source URL lost in Pushkin card")
         fallback = html.fromstring((out / "guide/museum-history/index.html").read_bytes())
         exhibit = html.fromstring((out / "guide/museum-exposition/index.html").read_bytes())
         edited_room = html.fromstring(
@@ -250,11 +262,11 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 7 disposable CMS pages including one museum exposition room, "
+    print("PASS: 9 disposable CMS pages including museum accessibility and Pushkin card, "
           "11 genuine gallery cards with CMS override and no draft leak; "
           "44 SHA256-verified CMS binary documents, 5 specially marked safe derivatives, "
           "H1/SEO, prices, no PII form or premature a11y approval; "
-          "real working CMS remains 22 drafts/44 docs with unchanged web fixture.")
+          "real working CMS remains 24 drafts/44 docs with unchanged web fixture.")
 
 
 if __name__ == "__main__":

@@ -2670,15 +2670,15 @@
       "Строки оригинала": "193",
       "Требование": "Посетителям: доступная среда в планировании визита",
       "Приоритет": "P0",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Данные о МГН, маршруты и входы",
-      "Что нужно от музея / внешний блокер": "Паспорт доступности",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Данные о МГН, маршруты и входы",
-      "Что уже есть (доказательство)": "CP-15",
+      "Что сделать для завершения": "Technically fulfilled from accepted working museum-source edition; editorial changes possible via MoonShine. Production and customer UAT remain separate obligations.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "CP-15 18.10.2026: current official museum accessibility and Pushkin Card source pages copied with SHA256 to editable MoonShine drafts; real source details displayed with direct links in visitor plan and separately accessible page, with direct ticket partner link for Pushkin Card. Full Laravel CMS exporter to Next static verified temporary publication, 44 PDF/DOCX hashes, 4 browser tests on 320px. See docs/TZ140_143_144_VISITOR_SOURCE_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2727,15 +2727,15 @@
       "Строки оригинала": "195",
       "Требование": "Посетителям: Пушкинская карта",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Согласовать и наполнить новой редакцией без дублирования официальных правил и проверить переход к билетам",
-      "Что нужно от музея / внешний блокер": "Подтверждение музеем актуальности правил, цен/билетов и финального текста",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Согласовать и наполнить новой редакцией без дублирования официальных правил и проверить переход к билетам",
-      "Что уже есть (доказательство)": "Официальная страница музея /pushkinskaya-karta проверена HTTP 200, 3 ссылки public navigation + CMS seed и TS/PHP tests",
+      "Что сделать для завершения": "Technically fulfilled from accepted working museum-source edition; editorial changes possible via MoonShine. Production and customer UAT remain separate obligations.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Официальная страница музея /pushkinskaya-karta проверена HTTP 200, 3 ссылки public navigation + CMS seed и TS/PHP tests 18.10.2026: current official museum accessibility and Pushkin Card source pages copied with SHA256 to editable MoonShine drafts; real source details displayed with direct links in visitor plan and separately accessible page, with direct ticket partner link for Pushkin Card. Full Laravel CMS exporter to Next static verified temporary publication, 44 PDF/DOCX hashes, 4 browser tests on 320px. See docs/TZ140_143_144_VISITOR_SOURCE_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2746,15 +2746,15 @@
       "Строки оригинала": "196",
       "Требование": "Посетителям: доступная среда отдельной страницей",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
-      "Что нужно от музея / внешний блокер": "Схема и описание; письменное подтверждение актуального контента, лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Получить от музея разрешённый исходный контент, при необходимости адаптировать/включить материалы в CMS и провести проверку с редакторами. Справочная ссылка не заменяет текст ТЗ.",
-      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/informaciya-dlya-mgn (200); Next route /guide/accessible-museum/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены.",
+      "Что сделать для завершения": "Technically fulfilled from accepted working museum-source edition; editorial changes possible via MoonShine. Production and customer UAT remain separate obligations.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Прямым HTTP через Mac mini 17.10.2026 подтверждён официальный источник https://muzei-xleb.ru/informaciya-dlya-mgn (200); Next route /guide/accessible-museum/ показывает заголовок, честную пометку о справочной версии и ссылку на оригинал. 7/7 Playwright E2E подтверждает href и отсутствие мобильного overflow; полный утверждённый контент и права не получены. 18.10.2026: current official museum accessibility and Pushkin Card source pages copied with SHA256 to editable MoonShine drafts; real source details displayed with direct links in visitor plan and separately accessible page, with direct ticket partner link for Pushkin Card. Full Laravel CMS exporter to Next static verified temporary publication, 44 PDF/DOCX hashes, 4 browser tests on 320px. See docs/TZ140_143_144_VISITOR_SOURCE_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 62,
-    "Нет": 158,
-    "Частично": 105
+    "Да": 65,
+    "Нет": 157,
+    "Частично": 103
   },
   "workflow": {
-    "Готово в прототипе": 62,
-    "Внешний блокер / наступление этапа": 263
+    "Готово в прототипе": 65,
+    "Внешний блокер / наступление этапа": 260
   }
 }

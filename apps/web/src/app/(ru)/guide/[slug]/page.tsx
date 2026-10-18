@@ -11,6 +11,7 @@ import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
 import RichText from "@/components/RichText";
 import OfficialExpositionRooms from "@/components/OfficialExpositionRooms";
+import VisitAccessibilityGuide from "@/components/VisitAccessibilityGuide";
 import {officialExpositionSlugs} from "@/data/official-exposition-rooms";
 import {officialSnapshotByPath} from "@/data/official-page-snapshots";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
@@ -133,6 +134,8 @@ export default async function GuidePage({ params }: Props) {
       <p>Уточнение условий посещения: <MuseumAnchor href={visitorContacts.phoneHref}>{visitorContacts.phone}</MuseumAnchor>.</p>
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</MuseumAnchor>.</p>
     </div>}
+    {isPlanVisit && <VisitAccessibilityGuide />}
+    {isAccess && <VisitAccessibilityGuide condensed />}
     {slug === "museum-exposition" && <OfficialExpositionRooms />}
     {isTeam && <MuseumTeam />}
     {slug === "museum-media" && <MuseumMediaHub />}

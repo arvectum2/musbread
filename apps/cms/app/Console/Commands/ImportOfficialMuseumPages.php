@@ -45,6 +45,8 @@ final class ImportOfficialMuseumPages extends Command
         '/finansovo-hozyaystvennaya-deyatelnost' => 'museum-finance',
         '/protivodeystvie-korrupcii' => 'museum-anti-corruption',
         '/politika-obespecheniya-usloviy-dostupnosti-dlya-invalidov-i-drugih-mobilnyh-grazhdan' => 'museum-accessibility-policy',
+        '/informaciya-dlya-mgn' => 'accessible-museum',
+        '/pushkinskaya-karta' => 'pushkin-card',
     ];
 
     /** Exact source URL allowlist, not text matching of a changing title. */
