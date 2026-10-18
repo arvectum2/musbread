@@ -22,6 +22,7 @@ import MuseumShopShowcase from "@/components/MuseumShopShowcase";
 import OfficialMuseumWorkshops from "@/components/OfficialMuseumWorkshops";
 import OfficialMuseumExhibitions from "@/components/OfficialMuseumExhibitions";
 import OfficialMuseumScience, {isScienceSection} from "@/components/OfficialMuseumScience";
+import OfficialMuseumNightArts from "@/components/OfficialMuseumNightArts";
 import {exhibitionSourceIndex,officialExhibitionSourceSlugs} from "@/data/official-exhibitions";
 import {officialWorkshopSlugs} from "@/data/official-workshops";
 import {isProgramCategory,originalMuseumProgramSlugs} from "@/data/official-excursion-programs";
@@ -197,6 +198,9 @@ export default async function GuidePage({ params }: Props) {
       <Link href="/events/" className="text-link">Открыть афишу и архив мероприятий →</Link>
       <span> · Пока там тестовые записи; программа публикуется на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</MuseumAnchor>.</span>
     </p>}
+    {(slug==="agenda-archive" || slug==="agenda-events") &&
+      <OfficialMuseumNightArts events={events} buildDay={new Date().toISOString().slice(0,10)}
+        archiveOnly={slug==="agenda-archive"} />}
     {isAgendaSection(slug) && <section className="guide-agenda-category" aria-label={"Мероприятия раздела: " + title}>
       <h2>{slug === "agenda-archive" ? "Прошедшие мероприятия" : "События и программа"}</h2>
       <p>Ниже показаны только записи, опубликованные редактором CMS. Демонстрационные записи не являются официальным расписанием музея.</p>

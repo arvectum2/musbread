@@ -2575,15 +2575,15 @@
       "Строки оригинала": "188",
       "Требование": "Музей: новости",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Obtain complete rights-cleared museum historic news/photos, approve new archive and validate import with editors",
-      "Что нужно от музея / внешний блокер": "Museum archive, photos, dates and editorial approval",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Obtain complete rights-cleared museum historic news/photos, approve new archive and validate import with editors",
-      "Что уже есть (доказательство)": "Existing news CMS, authoring, publication, /news/ listing/detail, direct official news source link, ACL and export; historically approved news not yet imported",
+      "Что сделать для завершения": "Latest current museum news page and editor-managed publishing technically complete. Older 28-page historical archive is separate expansion, not a block on current news functionality.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Existing news CMS, authoring, publication, /news/ listing/detail, direct official news source link, ACL and export; historically approved news not yet imported 18.10.2026: direct Mac mini HTTPS with robots 10sec delay captured all 10 newest official /novosty first-page articles, exact H1/title/news publication date/full HTML/source URL/SHA256. /news/ renders ten source-backed readable cards with full text and published MoonShine title/excerpt/body override. 10 private news CMS drafts, protected by pinned index signature and aggregate 10 URL+SHA, repeatable opt-in import, isolated Laravel→Next 1 edited news public and nine other news private; original dated Nov3 event separately. docs/TZ135_147_OFFICIAL_NEWS_AND_NIGHT_ARTS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -2808,10 +2808,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · каталог",
-      "Что сделать для завершения": "Получить оригиналы афиш и разрешения музея, назначить обложки событиям через CMS, сверить реальные даты/программы и утвердить визуальную приёмку; технический выбор обложки завершён.",
-      "Что нужно от музея / внешний блокер": "Официальная программа музея, изображения каждого анонса, подтверждение лицензий и редакционная приёмка",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Получить оригиналы афиш и разрешения музея, назначить обложки событиям через CMS, сверить реальные даты/программы и утвердить визуальную приёмку; технический выбор обложки завершён.",
-      "Что уже есть (доказательство)": "Event list/cards/archive already from approved CMS. Added event cover_media_id FK with MoonShine selector of existing published WebP images, same-section publication/access gates and null-on-delete; JSON cover_image with human alt/caption/long description only if owner entry is public in actual export, lazy image in event cards and details, decorative fallback on demos, isolated real MoonShine upload->selection->static HTML 8/8 and 3 PHP tests incl withdrawal/draft/foreign denial; no unauthorized museum photos used.",
+      "Что сделать для завершения": "One authentic event and CMS pipeline implemented; full all-events calendar still requires separately confirmed individual dates/times/programmes and final acceptance.",
+      "Что нужно от музея / внешний блокер": "Confirm Nov3 museum participation and ticket rules, per-event dates and taxonomy in weekly programme news, rights to imagery.",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. One authentic event and CMS pipeline implemented; full all-events calendar still requires separately confirmed individual dates/times/programmes and final acceptance.",
+      "Что уже есть (доказательство)": "Event list/cards/archive already from approved CMS. Added event cover_media_id FK with MoonShine selector of existing published WebP images, same-section publication/access gates and null-on-delete; JSON cover_image with human alt/caption/long description only if owner entry is public in actual export, lazy image in event cards and details, decorative fallback on demos, isolated real MoonShine upload->selection->static HTML 8/8 and 3 PHP tests incl withdrawal/draft/foreign denial; no unauthorized museum photos used. 18.10.2026: one independently source-verified real museum event from Oct16 original news, Night Arts/Petersburg hospitable, Nov 3 2026 18:00-20:00. Visible as source-labeled event on /events and /guide/agenda-events, archived after actual event date; duplicate source suppressed upon editor-approved MuseumEvent publication. Real CMS event created draft and validated in isolated CMS→Next editor override. Weekly news dates NOT misrepresented as event dates. docs/TZ135_147_OFFICIAL_NEWS_AND_NIGHT_ARTS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 74,
+    "Да": 75,
     "Нет": 144,
-    "Частично": 107
+    "Частично": 106
   },
   "workflow": {
-    "Готово в прототипе": 74,
-    "Внешний блокер / наступление этапа": 251
+    "Готово в прототипе": 75,
+    "Внешний блокер / наступление этапа": 250
   }
 }

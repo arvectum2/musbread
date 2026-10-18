@@ -26,7 +26,9 @@ test("TZ-074/078: новости и контакты доступны из гл�
   await expect(page).toHaveURL(/\/news\/$/);
   await expect(page.locator("main").getByRole("link", {name:/Читать новости музея/}))
     .toHaveAttribute("href", "https://muzei-xleb.ru/novosty");
-  await expect(page.locator("main")).toContainText("Тестовые материалы");
+  await expect(page.locator("main")).toContainText("НОВОСТИ ИЗ ОФИЦИАЛЬНОГО МУЗЕЙНОГО ИСТОЧНИКА");
+  await expect(page.getByRole("region",{name:"Последние новости действующего сайта музея"})
+    .locator(".official-museum-program-card")).toHaveCount(10);
 });
 
 test("TZ-073: существующие разделы и новые страницы по ТЗ не обозначаются одинаково", async ({page}) => {

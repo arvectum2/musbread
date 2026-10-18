@@ -31,7 +31,9 @@ REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-
             "museum-exhibit-2025-10-08-hleb-blokadnogo-goroda",
             "science-conferences","science-publications","science-collection",
             "science-researchers","science-materials",
-            "science-organization","science-methodical-council"}
+            "science-organization","science-methodical-council",
+            "museum-news-2026-10-16-noch-iskusstv-v-muzee-hleba",
+            "museum-news-2026-10-12-sobytiya-v-muzee-s-12-po-19-oktyabrya"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -77,8 +79,16 @@ def main() -> None:
             if n != 12:
                 raise RuntimeError("All 12 real museum workshop source pages must remain drafts")
             n = db.execute("select count(*) from museum_entries where status='draft'").fetchone()[0]
-            if n != 80:
-                raise RuntimeError("Private working CMS count changed: expected 80 drafts")
+            if n != 90:
+                raise RuntimeError("Private working CMS count changed: expected 90 drafts")
+            n = db.execute("select count(*) from museum_entries "
+                           "where slug like 'museum-news-%' and type='news' and status='draft'").fetchone()[0]
+            if n != 10:
+                raise RuntimeError("All ten genuine current museum news records must remain private")
+            event = db.execute("select status,starts_at from museum_events "
+                               "where slug='museum-night-of-arts-2026'").fetchone()
+            if event != ("draft","2026-11-03 00:00:00"):
+                raise RuntimeError("Dated source event must remain unpublished with verified date: "+repr(event))
             n = db.execute("select count(*) from museum_entries where slug in "
                            "('science-organization','science-methodical-council') and status='draft'").fetchone()[0]
             if n != 2:
@@ -145,6 +155,18 @@ def main() -> None:
                        "title='QA: редакторский научно-методический совет',"
                        "body='<p>QA: проверенная правка научного отдела музея.</p>' "
                        "where slug='science-methodical-council'")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: Ночь искусств — редакция музея',"
+                       "excerpt='QA: новый редакторский анонс Ночи искусств.',"
+                       "body='<p>QA: утверждённая редактором новость 16 октября.</p>' "
+                       "where slug='museum-news-2026-10-16-noch-iskusstv-v-muzee-hleba'")
+            db.execute("update museum_events set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: Ночь искусств 3 ноября — анонс редактора',"
+                       "excerpt='QA: музей утвердил программу 3 ноября.',"
+                       "body='<p>QA: музейная программа 18:00–20:00 в новой редакции.</p>' "
+                       "where slug='museum-night-of-arts-2026'")
             shop_section_id = db.execute(
                 "select id from museum_sections where slug='museum-shop'").fetchone()[0]
             db.execute("insert into museum_entries "
@@ -465,6 +487,36 @@ def main() -> None:
             raise RuntimeError("True museum rules for collection access not linked on researcher page")
         if researchers.xpath("//main//section[contains(@class,'museum-science-portal')]//form"):
             raise RuntimeError("Unverified researcher application form introduced")
+        news=html.fromstring((out/"news/index.html").read_bytes())
+        news_feed=news.xpath("//main//section[@aria-label='Последние новости действующего сайта музея']")
+        if len(news_feed)!=1:
+            raise RuntimeError("Ten original museum news feed lost during CMS release")
+        cards=news_feed[0].xpath(".//article[contains(@class,'official-museum-program-card')]")
+        if len(cards)!=10:
+            raise RuntimeError("10 authentic news articles not shown in new site")
+        if "QA: Ночь искусств — редакция музея" not in news_feed[0].text_content():
+            raise RuntimeError("News editor title failed to override original source title")
+        if "QA: утверждённая редактором новость 16 октября." not in news_feed[0].text_content():
+            raise RuntimeError("News editor body failed to override original source text")
+        approved_news={e['slug'] for e in data['entries']
+                       if e['slug'].startswith('museum-news-')}
+        if approved_news!={"museum-news-2026-10-16-noch-iskusstv-v-muzee-hleba"}:
+            raise RuntimeError("Unpublished real museum news draft leaked")
+        if not (out/"news/museum-news-2026-10-16-noch-iskusstv-v-muzee-hleba/index.html").is_file():
+            raise RuntimeError("Published source-backed news not reachable on own detail route")
+        if (out/"news/museum-news-2026-10-12-sobytiya-v-muzee-s-12-po-19-oktyabrya/index.html").is_file():
+            raise RuntimeError("Draft museum weekly news gained unexpected public detail route")
+        official_event={e['slug'] for e in data['events'] if e['slug'].startswith('museum-night-')}
+        if official_event!={"museum-night-of-arts-2026"}:
+            raise RuntimeError("One verified, edited Nov 3 event should be public only in isolated QA")
+        events_html=html.fromstring((out/"events/index.html").read_bytes())
+        if "QA: Ночь искусств 3 ноября — анонс редактора" not in events_html.text_content():
+            raise RuntimeError("Editor-approved Nov 3 event absent from actual published CMS agenda")
+        if events_html.xpath("//main//section[contains(@class,'official-source-event')]"):
+            raise RuntimeError("News-source Night Arts teaser not suppressed when approved CMS event is available")
+        event_detail=html.fromstring((out/"events/museum-night-of-arts-2026/index.html").read_bytes())
+        if "QA: музейная программа 18:00–20:00 в новой редакции" not in event_detail.text_content():
+            raise RuntimeError("Updated CMS event body not published in event detail route")
         h1 = [str(x).strip() for x in privacy.xpath("//main//h1/text()")]
         if h1 != ["QA: заголовок из редактируемой CMS"]:
             raise RuntimeError("CMS H1 not authoritative on guide route: " + repr(h1))
@@ -518,14 +570,16 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 35 isolated approved CMS records incl. five scientific category"
-          " pages and one source-verified council article editor override, other"
-          " scientific record private; original collections access policy and"
-          " museum Goskatalog link preserved, no fabricated publications or"
-          " conferences; four original exhibition catalogs, 17 real excursions,"
-          " 12 original workshops, 11 halls, nine FAQ, temporary QA-only shop"
-          " item, and 44 unchanged museum documents with source SHA256;"
-          " real working CMS remains 80 private drafts and 44 documents.")
+    print("PASS: isolated approved museum source news (10 genuine current cards,"
+          " one CMS-edited news item, 9 remaining unpublished news drafts),"
+          " one editor-approved Nov 3 Night Arts event with exact original date"
+          " and 18:00–20:00 program, no duplicate teaser upon CMS publication,"
+          " five scientific categories/one council override, four exhibition"
+          " categories/two edited exhibition details, two edited excursions,"
+          " 12 master classes, 11 halls, nine FAQ, QA-only shop item,"
+          " unchanged 44 original documents with SHA256;"
+          " real CMS stays at 90 private draft entries, 1 new private event,"
+          " 44 museum documents.")
     # Historical predecessor output deliberately superseded by current scope.
     # print("PASS: 23 isolated published CMS records including 12 real workshop cards"
 
