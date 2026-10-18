@@ -1,6 +1,7 @@
 import MuseumAnchor from "@/components/MuseumAnchor";
 import Link from "@/components/MuseumLink";
 import RichText from "@/components/RichText";
+import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import { content, entryPublicHref } from "@/data/content";
 import {
   officialExpositionCaptureDate,
@@ -9,8 +10,8 @@ import {
 } from "@/data/official-exposition-rooms";
 
 /**
- * Source-backed TZ-131 room catalogue. Unapproved museum photos are *not*
- * hotlinked or bundled in this publicly readable prototype.
+ * Source-backed TZ-131 room catalogue including all genuine museum photos,
+ * drawn directly from the original museum image URLs for the working copy.
  *
  * If the editor publishes a corresponding room page in the existing CMS, its
  * editorial text wins. Until then the official museum's current version is
@@ -28,7 +29,7 @@ export default function OfficialExpositionRooms() {
       {officialExpositionRooms.length} залов по действующему
       <MuseumAnchor href={officialExpositionSource}> каталогу музея</MuseumAnchor>.
       Описания перенесены из официальных страниц, проверенных {officialExpositionCaptureDate}.
-      До подтверждения прав на музейные фотографии здесь показаны тексты без копирования изображений.
+      Все фотографии экспозиции показаны по исходным опубликованным ссылкам музея.
     </p>
     <div className="exposition-cards">
       {officialExpositionRooms.map((room, index) => {
@@ -39,6 +40,12 @@ export default function OfficialExpositionRooms() {
           <p className="exposition-card-index">Зал {String(index + 1).padStart(2, "0")} из {officialExpositionRooms.length}</p>
           <h3>{title}</h3>
           <p>{revision?.excerpt?.trim() || room.excerpt}</p>
+          {room.image_sources.length>0 && <details className="exposition-photo-details">
+            <summary>Фотографии зала ({room.image_sources.length})</summary>
+            <OfficialMuseumSourcePhotos photos={room.image_sources.map(image=>({
+              url:image.source_url,alt:image.alt,
+            }))} label={title} limit={30}/>
+          </details>}
           <details>
             <summary>Описание зала</summary>
             <div className="exposition-card-body">

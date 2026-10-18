@@ -20,7 +20,7 @@ final class ImportOfficialArchiveNews extends Command
 
     // Captured live index page URLs + exact original article HTML hashes.
     // Updated only after a fresh independently verified museum snapshot.
-    private const SOURCE_SET_DIGEST='ea5a6ddb02e4ff0bf64152750447c4c47d4e65f8f095ca5f29ca1bc6e9353e7d';
+    private const SOURCE_SET_DIGEST='98e77f96a86e37ad3d8d25637f201c49988ab1bea4db24d7b70abdb2536d9859';
     private const SOURCE='https://muzei-xleb.ru';
 
     public function handle():int
@@ -35,13 +35,13 @@ final class ImportOfficialArchiveNews extends Command
             $data=json_decode((string)file_get_contents($path),true,flags:JSON_THROW_ON_ERROR);
             $indices=$data['indices']??null;
             $articles=$data['articles']??null;
-            if (($data['source']??null)!==self::SOURCE || ($data['count']??null)!==40
-                || !is_array($indices) || count($indices)!==4
-                || !is_array($articles) || count($articles)!==40) {
+            if (($data['source']??null)!==self::SOURCE || ($data['count']??null)!==60
+                || !is_array($indices) || count($indices)!==6
+                || !is_array($articles) || count($articles)!==60) {
                 throw new RuntimeException('Original museum archive snapshot missing or incomplete');
             }
             $indexed=[];
-            foreach([1,2,3,4] as $offset=>$page) {
+            foreach(range(1,6) as $offset=>$page) {
                 $index=$indices[$offset];
                 if (($index['url']??null)!==self::SOURCE.'/novosty?page='.$page
                     || !preg_match('/^[a-f0-9]{64}$/D',(string)($index['source_listing_sha256']??''))
@@ -103,7 +103,7 @@ final class ImportOfficialArchiveNews extends Command
                 $plans[$slug]=['item'=>$article,'exists'=>$existing!==null];
                 $this->line(($existing?'KEEP EDITOR':'NEW PRIVATE ARCHIVE').' '.$slug);
             }
-            if (count($plans)!==40 || count($indexed)!==40) {
+            if (count($plans)!==60 || count($indexed)!==60) {
                 throw new RuntimeException('Incomplete original museum archive linkage');
             }
             if (!$this->option('apply')) {
@@ -124,7 +124,7 @@ final class ImportOfficialArchiveNews extends Command
                     ]);
                 }
             });
-            $this->info('40 source-backed museum historical news drafts; no events, media or bookings created.');
+            $this->info('60 source-backed museum historical news drafts; no events, media or bookings created.');
             return self::SUCCESS;
         } catch (Throwable $e) {
             $this->error('Original museum archive import refused: '.$e->getMessage());

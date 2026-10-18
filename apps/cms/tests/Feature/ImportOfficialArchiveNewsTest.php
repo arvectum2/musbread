@@ -13,21 +13,21 @@ final class ImportOfficialArchiveNewsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_forty_archival_news_are_private_idempotent_and_not_events():void
+    public function test_sixty_archival_news_are_private_idempotent_and_not_events():void
     {
         $this->assertSame(0,Artisan::call('museum:import-official-archive-news'),Artisan::output());
         $this->assertDatabaseCount('museum_entries',0);
         $this->assertSame(0,Artisan::call('museum:import-official-archive-news',[
             '--apply'=>true,
         ]),Artisan::output());
-        $this->assertSame(40,MuseumEntry::where('type','news')->where('status','draft')->count());
+        $this->assertSame(60,MuseumEntry::where('type','news')->where('status','draft')->count());
         $this->assertSame(0,MuseumEntry::where('status','published')->count());
         $this->assertDatabaseCount('museum_events',0);
         $this->assertDatabaseCount('museum_media',0);
         $this->assertSame(0,Artisan::call('museum:import-official-archive-news',[
             '--apply'=>true,
         ]),Artisan::output());
-        $this->assertDatabaseCount('museum_entries',40);
+        $this->assertDatabaseCount('museum_entries',60);
     }
 
     public function test_editorial_edits_are_preserved_on_reimport():void
@@ -44,7 +44,7 @@ final class ImportOfficialArchiveNewsTest extends TestCase
             '--apply'=>true,
         ]),Artisan::output());
         $this->assertSame('Редакторская правка архива',MuseumEntry::where('slug',$slug)->firstOrFail()->title);
-        $this->assertSame(40,MuseumEntry::where('type','news')->count());
+        $this->assertSame(60,MuseumEntry::where('type','news')->count());
     }
 
     public function test_tampered_archive_text_is_rejected_atomically():void

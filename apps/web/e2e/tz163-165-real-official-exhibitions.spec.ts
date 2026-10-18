@@ -10,7 +10,8 @@ test("TZ-163: museum's two real current exhibitions have exact source dates and 
   await expect(cards.nth(1)).toContainText("3 сентября - 23 ноября 2026 г.");
   await cards.first().locator("summary").click();
   await expect(cards.first().locator(".official-museum-program-body")).not.toBeEmpty();
-  await expect(catalog.locator("img")).toHaveCount(0);
+  await expect(catalog.locator("img")).toHaveCount(2);
+  await expect(catalog.locator("img").first()).toHaveAttribute("src",/muzei-xleb\.ru\/sites\/default\/files/);
   await expect(catalog).toContainText("на дату снимка");
   await expect(page.getByRole("region",{name:"Актуальные выставки из опубликованной афиши"})).toBeVisible();
 });
@@ -32,7 +33,7 @@ test("archival museum shows are correctly labeled past, not active",async({page}
   await expect(catalog.locator(".official-museum-program-card")).toHaveCount(12);
   await expect(catalog).toContainText("Рассказы о ленинградцах");
   await expect(catalog).toContainText("до 28 сентября 2026 г.");
-  await expect(catalog.locator("img")).toHaveCount(0);
+  await expect(catalog.locator("img")).toHaveCount(12);
 });
 
 test("twelve virtual museum exhibitions are source-linked, not invented event dates",async({page})=>{
@@ -72,6 +73,6 @@ test("TZ-163: 12 real archived and 12 virtual exhibitions now have original deta
     const region=page.getByRole("region",{name:regionName});
     await expect(region.locator(".official-museum-program-card")).toHaveCount(12);
     expect(await region.locator("details").count()).toBeGreaterThan(0);
-    await expect(region.locator("img")).toHaveCount(0);
+    await expect(region.locator("img")).toHaveCount(12);
   }
 });

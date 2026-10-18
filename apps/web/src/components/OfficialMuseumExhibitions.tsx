@@ -1,6 +1,7 @@
 import Link from "@/components/MuseumLink";
 import MuseumAnchor from "@/components/MuseumAnchor";
 import RichText from "@/components/RichText";
+import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import {content,entryPublicHref} from "@/data/content";
 import {exhibitionSourceIndex,officialExhibitionDetails} from "@/data/official-exhibitions";
 
@@ -40,6 +41,7 @@ export default function OfficialMuseumExhibitions({category}:{category:string}){
             {isCurrent?"Текущая на дату снимка":isTraveling?"Выездной проект":category==="exhibitions-past"?"Архивная выставка":"Виртуальная выставка"} {String(i+1).padStart(2,"0")}
           </p>
           <h3>{editor?.title?.trim() || original?.title || item.title}</h3>
+          <OfficialMuseumSourcePhotos photos={index.image_links?.[i] ? [index.image_links[i]] : original?.image_links} label={item.title} limit={1}/>
           {item.date_text && <p><strong>Сроки по музею:</strong> {item.date_text}</p>}
           {original && <>
             {original.image_only && !editor
@@ -61,7 +63,7 @@ export default function OfficialMuseumExhibitions({category}:{category:string}){
       })}
     </div>
     <p className="official-museum-program-warning">
-      Изображения и плакаты с действующего сайта не перепубликуются до подтверждения прав.
+      Оригинальные фотографии и плакаты взяты с действующего сайта музея для рабочего прототипа.
       <span> </span><Link href="/guide/plan-visit/">Контакты и посещение музея →</Link>
     </p>
   </section>;

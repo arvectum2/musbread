@@ -1,6 +1,7 @@
 import Link from "@/components/MuseumLink";
 import MuseumAnchor from "@/components/MuseumAnchor";
 import RichText from "@/components/RichText";
+import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import {content, entryPublicHref} from "@/data/content";
 import {officialMuseumNews, officialMuseumArchiveNews, museumNewsSourceIndex, museumNewsSourceSnapshot} from "@/data/official-museum-news";
 
@@ -23,6 +24,7 @@ export default function OfficialMuseumNews(){
         return <article className="official-museum-program-card" key={item.slug}>
           <p className="official-museum-program-number">Новость от {item.published_on.split("-").reverse().join(".")}</p>
           <h3>{editor?.title?.trim() || item.title}</h3>
+          <OfficialMuseumSourcePhotos photos={item.image_links} label={item.title} limit={2}/>
           <p>{editor?.excerpt?.trim() || item.intro}</p>
           <details>
             <summary>Прочитать сообщение музея</summary>
@@ -39,7 +41,7 @@ export default function OfficialMuseumNews(){
     </div>
     <p className="official-museum-program-warning">
       Это последние десять публикаций с первой страницы официального списка.
-      Исторический архив приведён отдельно ниже. Фотографии не выводятся до подтверждения прав.
+      Исторический архив приведён отдельно ниже. Оригинальные фотографии музея используются в рабочем прототипе.
     </p>
   </section>
   <section className="official-museum-programs museum-news-archive"
@@ -47,7 +49,7 @@ export default function OfficialMuseumNews(){
     <h2>Архив новостей музея</h2>
     <p>Дополнительно перенесены {officialMuseumArchiveNews.length} подлинных архивных новостей
       с официальных страниц музея. Это прошлые публикации, а не действующее расписание.
-      Права на изображения требуют отдельного подтверждения.</p>
+      Для объявлений-плакатов показаны оригинальные музейные изображения, без распознавания и пересказа.</p>
     <details>
       <summary>Показать {officialMuseumArchiveNews.length} архивных публикаций</summary>
       <div className="official-museum-program-grid">
@@ -56,6 +58,7 @@ export default function OfficialMuseumNews(){
           return <article className="official-museum-program-card" key={item.slug}>
             <p className="official-museum-program-number">Архивная публикация от {item.published_on.split("-").reverse().join(".")}</p>
             <h3>{editor?.title?.trim() || item.title}</h3>
+            <OfficialMuseumSourcePhotos photos={item.image_links} label={item.title} limit={2}/>
             {item.image_only && !editor ? <p>Оригинальное объявление опубликовано музеем в виде изображения. Его можно посмотреть по исходной ссылке.</p>
               : <p>{editor?.excerpt?.trim() || item.intro}</p>}
             {(editor?.body?.trim() || item.html) && <details>

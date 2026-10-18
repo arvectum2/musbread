@@ -10,6 +10,7 @@ import NavigationBranch from "@/components/NavigationBranch";
 import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
 import MuseumRichBody from "@/components/MuseumRichBody";
+import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import OfficialExpositionRooms from "@/components/OfficialExpositionRooms";
 import VisitAccessibilityGuide from "@/components/VisitAccessibilityGuide";
 import OfficialVisitorRules from "@/components/OfficialVisitorRules";
@@ -235,6 +236,14 @@ export default async function GuidePage({ params }: Props) {
       {officialSnapshot && !cmsPage && <p className="meta">Источник: {officialSnapshot.source_url} · проверено {sourceDate}.
         Текст перенесён без самостоятельной юридической редакции; заказчик может обновить страницу в CMS.</p>}
       <MuseumRichBody html={referenceBody!} videos={cmsPage?.videos} />
+      {!cmsPage && officialSnapshot?.image_links?.length
+        && ["https://muzei-xleb.ru/istoriya-zdaniya",
+            "https://muzei-xleb.ru/obzornaya-ekskursiya"].includes(officialSnapshot.source_url)
+        ? <div className="official-museum-original-gallery">
+            <h3>Оригинальные фотографии музея ({officialSnapshot.image_links.length})</h3>
+            <OfficialMuseumSourcePhotos photos={officialSnapshot.image_links}
+              label={officialSnapshot.title} limit={30}/>
+          </div> : null}
     </section>}
     {slug === "museum-cookie" && <p className="reference-facts">
       Документ описывает использование cookie на прежнем сайте музея. Мы сохраняем ссылку на действующую редакцию,

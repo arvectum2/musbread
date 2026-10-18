@@ -1,6 +1,7 @@
 import Link from "@/components/MuseumLink";
 import MuseumAnchor from "@/components/MuseumAnchor";
 import RichText from "@/components/RichText";
+import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import {content,entryPublicHref} from "@/data/content";
 import {officialWorkshopIndex,officialWorkshops} from "@/data/official-workshops";
 
@@ -29,6 +30,7 @@ export default function OfficialMuseumWorkshops({audience}:{audience:"children"|
         return <article className="official-museum-program-card" key={p.slug}>
           <p className="official-museum-program-number">Мастер-класс {String(index+1).padStart(2,"0")}</p>
           <h3>{editor?.title?.trim() || p.title}</h3>
+          <OfficialMuseumSourcePhotos photos={p.image_links} label={p.title}/>
           <p>{editor?.excerpt?.trim() || p.intro}</p>
           <details>
             <summary>Полное описание и возраст</summary>
@@ -50,7 +52,7 @@ export default function OfficialMuseumWorkshops({audience}:{audience:"children"|
       <p>Запись и билеты — на <MuseumAnchor href={officialWorkshopIndex.source_url}
         target="_blank" rel="noopener noreferrer">официальной странице мастер-классов музея ↗</MuseumAnchor>.
         Уточнение условий посещения: <Link href="/guide/plan-visit/">план визита →</Link>.</p>
-      <p>Изображения мастер-классов не скопированы на новый сайт до подтверждения прав музея.</p>
+      <p>В рабочем прототипе используются настоящие изображения мастер-классов с действующего сайта музея.</p>
     </div>
   </section>;
 }

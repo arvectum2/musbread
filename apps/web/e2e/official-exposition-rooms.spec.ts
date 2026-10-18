@@ -8,11 +8,12 @@ test("all 11 official museum rooms have their own readable descriptions", async 
   await expect(cards).toHaveCount(11);
   await expect(cards.first()).toContainText("Зал «Хлеб в мировой истории»");
   await expect(cards.nth(7)).toContainText("Зал «Хлеб в блокадном Ленинграде»");
-  await cards.nth(7).locator("summary").click();
+  await cards.nth(7).getByText("Описание зала").click();
   await expect(cards.nth(7).locator(".exposition-card-body")).toBeVisible();
   await expect(cards.nth(7).locator(".exposition-card-body")).not.toBeEmpty();
-  await expect(catalog.locator("img")).toHaveCount(0);
-  await expect(catalog).toContainText("До подтверждения прав");
+  await expect(catalog.locator(".official-museum-source-photos img")).toHaveCount(85);
+  await expect(catalog).toContainText("Все фотографии экспозиции показаны");
+  await expect(cards.last().locator(".official-museum-source-photos img")).toHaveCount(25);
 });
 
 test("exposition descriptions fit a 320px phone", async ({ page }) => {
@@ -20,7 +21,7 @@ test("exposition descriptions fit a 320px phone", async ({ page }) => {
   await page.goto("/guide/museum-exposition/");
   const cards = page.locator(".exposition-card");
   await expect(cards).toHaveCount(11);
-  await cards.last().locator("summary").click();
+  await cards.last().getByText("Описание зала").click();
   await expect(cards.last().locator(".exposition-card-body")).toBeVisible();
   const dimensions = await page.evaluate(() => ({
     viewport: document.documentElement.clientWidth,
@@ -37,4 +38,13 @@ test("each source link points to a different official room; unpublished CMS draf
   expect(links).toHaveLength(11);
   expect(new Set(links).size).toBe(11);
   await expect(page.locator(".exposition-card a[href^='/museum/']")).toHaveCount(0);
+});
+
+
+test("building history shows all 15 authentic museum-source historic illustrations",async({page})=>{
+  await page.goto("/guide/building-history/");
+  const region=page.getByRole("region",{name:"Содержание действующего сайта музея"});
+  await expect(region.locator(".official-museum-source-photos img")).toHaveCount(15);
+  await expect(region.locator(".official-museum-source-photos img").first())
+    .toHaveAttribute("src",/muzei-xleb\.ru\/sites\/default\/files/);
 });

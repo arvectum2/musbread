@@ -584,7 +584,7 @@ html[data-vision-mode="on"] .visit-practical-list>div{border:2px solid currentCo
 html[data-vision-mode="on"] .visitor-faq-number,.visit-practical-doc span{color:inherit}
 
 
-/* Real museum excursion program cards. No source photography or ticket cart. */
+/* Verified source photos, displayed directly from the museum in our working prototype. */
 .official-museum-programs{margin:2rem 0;min-width:0;overflow-wrap:anywhere}
 .official-museum-programs>h2{font-size:clamp(1.55rem,2.6vw,2rem)}
 .official-museum-programs>p{max-width:76ch}
@@ -592,6 +592,10 @@ html[data-vision-mode="on"] .visitor-faq-number,.visit-practical-doc span{color:
 .official-museum-program-card{border:1px solid var(--line);min-width:0;padding:1.2rem;overflow-wrap:anywhere}
 .official-museum-program-card h3{font-size:1.22rem;line-height:1.3;margin:.4rem 0 .7rem}
 .official-museum-program-card>p{line-height:1.55}
+.official-museum-source-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8rem),1fr));gap:.5rem;margin:.65rem 0 1rem;min-width:0}
+.official-museum-source-photos>a{display:block;min-width:0;border-radius:.4rem;overflow:hidden;aspect-ratio:3/2;background:var(--subtle, #eee)}
+.official-museum-source-photos img{display:block;width:100%;height:100%;max-width:100%;object-fit:contain}
+.official-museum-source-photos>a:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 .official-museum-program-number{font-size:.8rem;color:var(--mute);margin:0}
 .official-museum-program-card details{padding-top:.8rem;margin:.8rem 0;border-top:1px solid var(--line)}
 .official-museum-program-card summary{cursor:pointer;font-weight:650;text-decoration:underline;text-underline-offset:.2em}

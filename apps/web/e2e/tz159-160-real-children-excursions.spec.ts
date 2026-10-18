@@ -21,7 +21,7 @@ test("TZ-160 children thematic tour section contains nine real museum programs a
   await expect(cards.nth(4)).toContainText(/блокад/i);
   await expect(page.getByRole("region",{name:"Программы по действующему каталогу музея"}))
     .toContainText("часть программ рассчитана на подростков");
-  await expect(page.locator("main img")).toHaveCount(0);
+  await expect(page.getByRole("region",{name:"Программы по действующему каталогу музея"}).locator("img")).toHaveCount(19);
 });
 
 test("children expedition source content remains usable on narrow phones",async({page})=>{

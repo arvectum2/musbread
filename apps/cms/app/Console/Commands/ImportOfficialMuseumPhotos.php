@@ -258,6 +258,13 @@ final class ImportOfficialMuseumPhotos extends Command
                             // Source rights remain embargoed and alt needs review.
                             $alt=mb_substr(trim((string)$item['title']),0,MuseumAltPolicy::MAX_LENGTH);
                         }
+                        // "График работы музея" means its operating schedule,
+                        // NOT an image/graph placeholder. Keep its factual
+                        // meaning while avoiding the generic type-word rule.
+                        if (MuseumAltPolicy::issue($alt)
+                            && preg_match('/^График работы музея$/iu',$alt)) {
+                            $alt='Расписание работы музея';
+                        }
                         if (MuseumAltPolicy::issue($alt)) {
                             $this->warn('Museum image needs human alt caption; original preserved: '.$item['cms_slug']);
                             $skipped++;continue;

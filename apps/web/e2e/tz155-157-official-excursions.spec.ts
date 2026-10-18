@@ -7,7 +7,7 @@ test("TZ-155 overview excursion displays full original description",async({page}
   await expect(source).toContainText("хлеб для космонавтов");
   await expect(page.getByRole("link",{name:/исходную страницу/})).toHaveAttribute("href",
     "https://muzei-xleb.ru/obzornaya-ekskursiya");
-  await expect(source.locator("img")).toHaveCount(0);
+  await expect(source.locator(".official-museum-source-photos img")).toHaveCount(4);
 });
 
 test("TZ-156 six genuine interactive excursion cards with their full original text",async({page})=>{
@@ -19,7 +19,7 @@ test("TZ-156 six genuine interactive excursion cards with their full original te
   await cards.first().locator("summary").click();
   await expect(cards.first().locator(".official-museum-program-body")).toContainText("ритм");
   await expect(catalog.locator('a[href^="https://muzei-xleb.ru/ekskursii/"]')).toHaveCount(6);
-  await expect(catalog.locator("img")).toHaveCount(0);
+  await expect(catalog.locator("img")).toHaveCount(9);
   await expect(page.getByRole("region",{name:"Содержание действующего сайта музея"})).toHaveCount(0);
 });
 
@@ -35,12 +35,12 @@ test("TZ-157 nine thematic cards without source duplicate",async({page})=>{
   expect(new Set(links).size).toBe(9);
 });
 
-test("source theatrical programs are exactly two and no unlicensed photo is displayed",async({page})=>{
+test("source theatrical programs have two genuine museum photos",async({page})=>{
   await page.goto("/guide/excursion-theatrical/");
   const catalog=page.getByRole("region",{name:"Программы по действующему каталогу музея"});
   await expect(catalog.locator(".official-museum-program-card")).toHaveCount(2);
   await expect(catalog).toContainText("Колобок");
-  await expect(catalog.locator("img")).toHaveCount(0);
+  await expect(catalog.locator("img")).toHaveCount(2);
 });
 
 test("real excursion program descriptions fit 320px viewport",async({page})=>{

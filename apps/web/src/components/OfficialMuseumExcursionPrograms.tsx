@@ -1,6 +1,7 @@
 import MuseumAnchor from "@/components/MuseumAnchor";
 import Link from "@/components/MuseumLink";
 import RichText from "@/components/RichText";
+import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import {content,entryPublicHref} from "@/data/content";
 import {officialExcursionBySlug} from "@/data/official-excursion-pages";
 import {sourceProgramsForCategory} from "@/data/official-excursion-programs";
@@ -32,6 +33,7 @@ export default function OfficialMuseumExcursionPrograms({
         return <article className="official-museum-program-card" key={item.slug}>
           <p className="official-museum-program-number">Программа {String(index+1).padStart(2,"0")}</p>
           <h3>{published?.title?.trim() || item.title}</h3>
+          <OfficialMuseumSourcePhotos photos={item.image_links} label={item.title}/>
           <p>{published?.excerpt?.trim() || item.intro}</p>
           <details>
             <summary>Полное описание программы</summary>
@@ -49,8 +51,7 @@ export default function OfficialMuseumExcursionPrograms({
         </article>;
       })}
     </div>
-    <p className="official-museum-program-warning">Фотографии с прежнего сайта не переносятся
-      до подтверждения прав на публикацию. Для записи и уточнения условий
+    <p className="official-museum-program-warning">Показаны подлинные фотографии действующего музея. Для записи и уточнения условий
       обратитесь в музей по контактам на странице <Link href="/guide/plan-visit/">«Спланировать визит»</Link>.
     </p>
   </section>;

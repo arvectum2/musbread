@@ -11,7 +11,7 @@ test("TZ-161 children workshops show twelve original programs and source ages",a
   await expect(listing).toContainText("Роспись изразца");
   await expect(listing.locator('a[href^="https://muzei-xleb.ru/master-klassy/"]')).toHaveCount(11);
   await expect(listing.locator('a[href^="https://muzei-xleb.ru/ekskursii/master-klass-"]')).toHaveCount(1);
-  await expect(listing.locator("img")).toHaveCount(0);
+  await expect(listing.locator("img")).toHaveCount(32);
 });
 
 test("TZ-158 adult workshop page distinguishes actual catalogue from adult eligibility",async({page})=>{

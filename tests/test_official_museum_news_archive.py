@@ -11,11 +11,11 @@ class MuseumArchiveSourceTests(unittest.TestCase):
         cls.data=json.loads((ROOT/'apps/web/src/data/official-museum-news-archive.json').read_text())
         cls.latest=json.loads((ROOT/'apps/web/src/data/official-museum-news.json').read_text())
 
-    def test_forty_original_articles_have_exact_source_index_association(self):
+    def test_sixty_original_articles_have_exact_source_index_association(self):
         data=self.data
         self.assertEqual(data['source'],'https://muzei-xleb.ru')
-        self.assertEqual(data['count'],40)
-        self.assertEqual(len(data['indices']),4)
+        self.assertEqual(data['count'],60)
+        self.assertEqual(len(data['indices']),6)
         urls=[]
         for n,index in enumerate(data['indices'],start=1):
             self.assertEqual(index['url'],f'https://muzei-xleb.ru/novosty?page={n}')
@@ -23,7 +23,7 @@ class MuseumArchiveSourceTests(unittest.TestCase):
             self.assertEqual(len(set(index['article_paths'])),10)
             urls.extend(index['article_paths'])
         self.assertEqual(urls,[a['path'] for a in data['articles']])
-        self.assertEqual(len(set(urls)),40)
+        self.assertEqual(len(set(urls)),60)
         self.assertFalse({a['slug'] for a in data['articles']}
                          & {a['slug'] for a in self.latest['articles']})
 
@@ -48,6 +48,6 @@ class MuseumArchiveSourceTests(unittest.TestCase):
                 self.assertFalse(article['photos_rights_confirmed'])
                 self.assertNotIn('<img',article['html'].lower())
                 self.assertNotIn('<script',article['html'].lower())
-                self.assertIn(article['archive_index_page'],(1,2,3,4))
+                self.assertIn(article['archive_index_page'],tuple(range(1,7)))
 
 if __name__=='__main__':unittest.main()

@@ -17,6 +17,7 @@ export type MuseumExhibitionIndex = {
   captured_utc:string;
   html_sha256:string;
   linked_exhibitions:MuseumExhibitionIndexItem[];
+  image_links:{url:string;alt:string}[];
   images_rights_confirmed:false;
 };
 export type MuseumExhibitionSource = {
@@ -27,6 +28,7 @@ export type MuseumExhibitionSource = {
   title:string;
   intro:string;
   html:string;
+  image_links:{url:string;alt:string}[];
   html_sha256:string;
   captured_utc:string;
   photos_rights_confirmed:false;
