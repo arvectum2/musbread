@@ -23,6 +23,7 @@ SOURCES={
  'official-exhibition-indexes.json':['indexes'],
  'official-exhibition-details.json':['exhibitions'],
  'official-exhibition-archive.json':['exhibitions'],
+ 'official-exhibition-news-linked.json':['exhibitions'],
  'official-museum-videos.json':['groups'],
  'official-exposition-rooms.json':['rooms'],
  'official-museum-news.json':['articles'],

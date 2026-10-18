@@ -46,5 +46,5 @@ test("building history shows all 15 authentic museum-source historic illustratio
   const region=page.getByRole("region",{name:"Содержание действующего сайта музея"});
   await expect(region.locator(".official-museum-source-photos img")).toHaveCount(15);
   await expect(region.locator(".official-museum-source-photos img").first())
-    .toHaveAttribute("src",/muzei-xleb\.ru\/sites\/default\/files/);
+    .toHaveAttribute("src",/^\/media\/museum-source\/[a-f0-9]{64}\.webp$/);
 });

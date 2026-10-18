@@ -126,6 +126,18 @@ final class ImportOfficialMuseumPhotos extends Command
                     (string)$building['source_url'],$building['html_sha256']??null,
                     (string)$image['url']);
             }
+            // Original accessibility article has seven real linked photos;
+            // store them as true CMS media instead of dead Drupal hotlinks.
+            $mgn=array_values(array_filter($pages['pages'],
+                static fn(array $page):bool=>($page['path']??'')==='/informaciya-dlya-mgn'));
+            if(count($mgn)!==1 || count($mgn[0]['image_links']??[])!==7) {
+                throw new RuntimeException('Expected original seven museum MGN photographs');
+            }
+            foreach($mgn[0]['image_links'] as $i=>$image) {
+                $register('accessible-museum',$i,$name,(string)$mgn[0]['title'],
+                    (string)$mgn[0]['source_url'],$mgn[0]['html_sha256']??null,
+                    (string)$image['url']);
+            }
             $name='official-excursion-pages.json';
             $overview=$read($name);
             $overview=array_values(array_filter($overview['pages'],

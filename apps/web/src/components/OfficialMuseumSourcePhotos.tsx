@@ -1,34 +1,28 @@
 /**
- * Source-first prototype: show the very same photos published by the museum.
- * No generated substitute, no third-party stock; images stay at their original
- * muzei-xleb.ru URL so the current museum masters are used without rehosting.
+ * Self-hosted original museum image library. The SOURCE URL is provenance only.
+ * Old Drupal/muzei-xleb.ru image requests must never appear in new site's HTML;
+ * after cutover, all image bytes are served from our static Next.js deployment.
  */
+import {localMuseumPhoto} from "@/data/museum-photo-assets";
+
 export type OriginalMuseumPhoto = {url:string;alt?:string};
 
-function museumPhoto(url:string):boolean {
-  try {
-    const u=new URL(url);
-    return u.protocol==="https:" && u.hostname==="muzei-xleb.ru"
-      && u.pathname.startsWith("/sites/default/files/")
-      && /\.(?:jpe?g|png|webp)$/i.test(u.pathname);
-  }catch{return false;}
-}
-
-export default function OfficialMuseumSourcePhotos({photos, label,limit=4}:{
+export default function OfficialMuseumSourcePhotos({photos:items,label,limit=4}:{
   photos:readonly OriginalMuseumPhoto[]|undefined;
   label:string;
   limit?:number;
 }){
-  const checked=(photos || []).filter(p=>museumPhoto(p.url)).slice(0,limit);
+  const checked=(items||[]).map(item=>({item,src:localMuseumPhoto(item.url)}))
+    .filter((p):p is {item:OriginalMuseumPhoto;src:string}=>p.src!==null).slice(0,limit);
   if(checked.length===0)return null;
   return <div className="official-museum-source-photos" aria-label={`Фотографии музея: ${label}`}>
-    {checked.map((photo,index)=><a href={photo.url} key={photo.url}
+    {checked.map(({item,src},index)=><a href={src} key={item.url}
       target="_blank" rel="noopener noreferrer"
-      aria-label={`Открыть оригинальное фото музея ${index+1}: ${photo.alt?.trim() || label}`}>
-      {/* Original museum images are external documentary references, not app assets. */}
+      aria-label={`Открыть фотографию ${index+1}: ${item.alt?.trim() || label}`}>
+      {/* All exported bytes are stored in this website's own static files. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={photo.url} alt={photo.alt?.trim() || `${label} — фото музея ${index+1}`}
-        loading="lazy" decoding="async" width="420" height="280"/>
+      <img src={src} alt={item.alt?.trim() || `${label} — фотография ${index+1}`}
+        loading="lazy" decoding="async" width="420" height="280" />
     </a>)}
   </div>;
 }

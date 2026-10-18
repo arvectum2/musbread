@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Capture genuine archive news from six verified museum index pages.
+"""Capture genuine archive news from eight verified museum index pages.
 
 Original page listings are privately saved on ArvectumSSD. No placeholders,
 images, event creation, PII or unlicensed media. Never overwrite latest news.
@@ -58,7 +58,7 @@ def main():
     seen={p['source_url'] for p in latest['articles']}
     stamp=datetime.now(timezone.utc).isoformat(timespec='seconds')
     links=[];indices=[]
-    for page in range(1,7):
+    for page in range(1,9):
         path=INDICES/f'news-list-page-{page}-20261018.html'
         raw=path.read_text(encoding='utf-8')
         tree=lx.fromstring(raw)
@@ -80,7 +80,7 @@ def main():
                         'source_listing_sha256':sha256(raw.encode('utf-8')).hexdigest(),
                         'index_html_sha256':sha256(sanitized.encode('utf-8')).hexdigest(),
                         'article_paths':collected})
-    if len(links)!=60:raise RuntimeError('Expected 60 verified historical articles')
+    if len(links)!=80:raise RuntimeError('Expected 80 verified historical articles')
     entries=[];last_request=False
     PRIVATE_CACHE.mkdir(parents=True,exist_ok=True)
     for n,meta in enumerate(links,1):

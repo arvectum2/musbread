@@ -274,6 +274,25 @@ def queue()->list[dict]:
                 'source_snapshot':'official-museum-news-archive.json',
                 'source_html_sha256':item['html_sha256'],
             })
+    # Genuine photographs linked as source HTML and photo thumbnails on the
+    # existing accessibility / MGN page. Without these assets, its original
+    # inline image links would become broken after museum domain cutover.
+    accessible=[x for x in pages['pages'] if x['path']=='/informaciya-dlya-mgn']
+    if len(accessible)!=1 or len(accessible[0].get('image_links',[]))!=7:
+        raise ValueError('Expected exactly seven original museum accessibility photographs')
+    accessible=accessible[0]
+    for i,photo in enumerate(accessible['image_links']):
+        original=canonical(photo['url'])
+        if original in seen:raise ValueError('Repeated official museum accessibility photo')
+        seen.add(original)
+        result.append({
+            'cms_slug':'accessible-museum','title':accessible['title'],
+            'source_page_url':accessible['source_url'],
+            'source_image_url':photo['url'],'source_image_index':i,
+            'original_url':original,'source_alt':photo.get('alt',''),
+            'source_snapshot':'official-page-snapshots.json',
+            'source_html_sha256':accessible['html_sha256'],
+        })
     return result
 
 def detect(buf:bytes)->str:

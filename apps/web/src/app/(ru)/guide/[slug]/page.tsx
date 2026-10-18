@@ -238,7 +238,8 @@ export default async function GuidePage({ params }: Props) {
       <MuseumRichBody html={referenceBody!} videos={cmsPage?.videos} />
       {!cmsPage && officialSnapshot?.image_links?.length
         && ["https://muzei-xleb.ru/istoriya-zdaniya",
-            "https://muzei-xleb.ru/obzornaya-ekskursiya"].includes(officialSnapshot.source_url)
+            "https://muzei-xleb.ru/obzornaya-ekskursiya",
+            "https://muzei-xleb.ru/informaciya-dlya-mgn"].includes(officialSnapshot.source_url)
         ? <div className="official-museum-original-gallery">
             <h3>Оригинальные фотографии музея ({officialSnapshot.image_links.length})</h3>
             <OfficialMuseumSourcePhotos photos={officialSnapshot.image_links}

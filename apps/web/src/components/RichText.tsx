@@ -1,5 +1,6 @@
 import sanitizeHtml from "sanitize-html";
 import {museumLinkTitle} from "@/data/link-titles";
+import {localMuseumPhoto} from "@/data/museum-photo-assets";
 import MuseumTableScrollKeys from "@/components/MuseumTableScrollKeys";
 
 /**
@@ -33,6 +34,10 @@ export default function RichText({ html }: { html: string }) {
         tagName: "a",
         attribs: {
           ...attributes,
+          // Historical official-site anchors to JPEG/PNG are now permanent
+          // local files after domain cutover, not retired Drupal paths.
+          ...(attributes.href && localMuseumPhoto(attributes.href)
+            ? {href:localMuseumPhoto(attributes.href)!} : {}),
           // Source HTML cannot force a hostile positive/negative tab order.
           // macOS WebKit also needs explicit 0 to focus article links via Tab.
           tabindex: attributes.href ? "0" : "-1",

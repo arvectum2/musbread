@@ -1,6 +1,7 @@
 import indexes from "./official-exhibition-indexes.json";
 import details from "./official-exhibition-details.json";
 import archive from "./official-exhibition-archive.json";
+import newsLinked from "./official-exhibition-news-linked.json";
 
 /** Verified current museum site. No photos republished without source rights. */
 export type MuseumExhibitionIndexItem = {
@@ -35,7 +36,8 @@ export type MuseumExhibitionSource = {
   image_only?:boolean;
 };
 export const officialExhibitionIndexes = indexes.indexes as MuseumExhibitionIndex[];
-export const officialExhibitionDetails = [...details.exhibitions,...archive.exhibitions] as MuseumExhibitionSource[];
+export const officialExhibitionNewsLinked = newsLinked.exhibitions as MuseumExhibitionSource[];
+export const officialExhibitionDetails = [...details.exhibitions,...archive.exhibitions,...officialExhibitionNewsLinked] as MuseumExhibitionSource[];
 export const officialExhibitionSourceSlugs = new Set(officialExhibitionDetails.map(x=>x.slug));
 export function exhibitionSourceIndex(slug:string):MuseumExhibitionIndex|undefined {
   return officialExhibitionIndexes.find(x=>x.slug===slug);
