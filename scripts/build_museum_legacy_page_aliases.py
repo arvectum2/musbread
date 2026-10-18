@@ -118,6 +118,32 @@ def build_map():
                     'exhibitions-traveling','excursion-overview','excursion-interactive',
                     'excursion-thematic','excursion-theatrical'):
                 put(item['source_url'],f'/guide/{slug}/','original-editorial-catalogue')
+    # These top-level and exhibition-catalog paths have exact original HTML
+    # separately verified against the actual museum source and export 200 pages.
+    original_sections=DATA/'official-original-legacy-sections.json'
+    if original_sections.exists():
+        corpus=json.loads(original_sections.read_text(encoding='utf-8'))
+        if corpus.get('source')!=SOURCE or corpus.get('count')!=37:
+            raise RuntimeError('Incomplete original museum sections source corpus')
+        for item in corpus['sections']:
+            old= item['path']
+            if old not in mapping or not mapping[old]['why'].startswith(('menu:','original-')):
+                raise RuntimeError('Unlisted/unsafe original museum old section '+old)
+            mapping[old]={'target':mapping[old]['target'],'why':'original-source-section'}
+    # Secondary source audit found full genuine museum documents and video
+    # pages linked from originals; preserve their actual canonical paths.
+    more=DATA/'official-museum-crosslink-pages.json'
+    if more.exists():
+        extra=json.loads(more.read_text(encoding='utf-8'))
+        if extra.get('source')!=SOURCE or extra.get('count')!=15 or len(extra.get('redirects',[]))!=10:
+            raise RuntimeError('Verified museum source crosslink corpus incomplete')
+        for page in extra['pages']:
+            put(page['source_url'],'/guide/museum-media/' if page['path'].startswith('/video/') else '/guide/museum-documents/',
+                'original-crosslink-page')
+        for redirect in extra['redirects']:
+            if redirect.get('original_server_redirect_proven') is not True:
+                raise RuntimeError('Unproven original Drupal 301 proposed')
+            put(redirect['original_node'],redirect['effective_path']+'/', 'source-verified-drupal-node')
     return mapping
 
 
@@ -136,7 +162,7 @@ def build_aliases(write=True,strict=True):
             if f'id="{uri.fragment}"' not in payload and f'id=\"{uri.fragment}\"' not in payload:
                 missing.append((source,target+' (missing anchor)'));continue
         alias=OUT/(source.lstrip('/'))/'index.html'
-        if meta['why'] in ('original-news-article','original-exhibition-detail','original-news-node-exhibition'):
+        if meta['why'] in ('original-news-article','original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page'):
             # Native, independently generated Next.js route at the ORIGINAL
             # indexable museum URL. Never overwrite it with a meta-refresh.
             if not alias.is_file():
@@ -144,7 +170,10 @@ def build_aliases(write=True,strict=True):
             original_html=alias.read_text(encoding='utf-8')
             required_canonical=SOURCE+source
             required_marker=('data-official-original-news=' if meta['why']=='original-news-article'
-                             else 'data-original-museum-exhibition=')
+                             else 'data-original-museum-exhibition=' if meta['why'] in ('original-exhibition-detail','original-news-node-exhibition')
+                             else 'data-original-museum-room=' if meta['why']=='original-exposition-room'
+                             else 'data-original-museum-section=' if meta['why'] in ('original-source-section','original-crosslink-page')
+                             else 'data-original-museum-program=')
             if (required_marker not in original_html
                 or f'href="{required_canonical}"' not in original_html
                 or 'http-equiv="refresh"' in original_html.lower()

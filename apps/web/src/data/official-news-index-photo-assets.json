@@ -1,0 +1,106 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "count": 10,
+  "photos": {
+    "https://muzei-xleb.ru/sites/default/files/novosty/20261016140727-vhod.jpg": {
+      "original_sha256": "444fa99835e4872c9b4a191ab3c3c361ba5f0d167ca304e86c3a6e831897d2b4",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20261016140727-vhod.jpg",
+      "original_bytes": 294736,
+      "path": "/media/museum-source/444fa99835e4872c9b4a191ab3c3c361ba5f0d167ca304e86c3a6e831897d2b4.webp",
+      "static_sha256": "611c2c18e755c56dd166dfce8ca2355fb6f25bbaf6882ee49bcb6e5ee2c32877",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20261016140727-20250922153709-1.jpg": {
+      "original_sha256": "7f6c7abb4521d7e3d6967d9d61ca0c6b45ebbafebbcc85c8ac5430009c77ca63",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20261016140727-20250922153709-1.jpg",
+      "original_bytes": 185585,
+      "path": "/media/museum-source/7f6c7abb4521d7e3d6967d9d61ca0c6b45ebbafebbcc85c8ac5430009c77ca63.webp",
+      "static_sha256": "b14f5ae14bee20cd39250f33cbe0aaabc9e30e53039385e48e937576224de509",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20261005140159-afisha_2.jpg": {
+      "original_sha256": "d1c2f83bf55bbebea45fa61ad3ec15bc464c2ae51c7cd6be5c9045e428ab00ba",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20261005140159-afisha_2.jpg",
+      "original_bytes": 526859,
+      "path": "/media/museum-source/d1c2f83bf55bbebea45fa61ad3ec15bc464c2ae51c7cd6be5c9045e428ab00ba.webp",
+      "static_sha256": "3812e0b584a6de7c8092b332b4e52939a46392a30195e52f79cf859da5cd9598",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20260909092947-vystavka_foto1.jpg": {
+      "original_sha256": "efa0e846b0f535d695602e372232351352ebe2db2ee3899751473046c7a7a5a5",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20260909092947-vystavka_foto1.jpg",
+      "original_bytes": 212773,
+      "path": "/media/museum-source/efa0e846b0f535d695602e372232351352ebe2db2ee3899751473046c7a7a5a5.webp",
+      "static_sha256": "5d6582dff7005cae4beecf3639444b9e3497af99b3a44525572c9ada7edcdd4b",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki.jpeg": {
+      "original_sha256": "5fd5fbdb6b134e077432eb9bfa8c6a9c749e0542f0c8e2bdf23abf720f594802",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki.jpeg",
+      "original_bytes": 106716,
+      "path": "/media/museum-source/5fd5fbdb6b134e077432eb9bfa8c6a9c749e0542f0c8e2bdf23abf720f594802.webp",
+      "static_sha256": "b41e34bb3146d303f9813fc8219896b34b91e3501b4b2815f6d5b272b4e16634",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki1.jpeg": {
+      "original_sha256": "01b193087afce21bae92bfbe22f1d011832d1b75feddcf83a5ad3990bf8c1e75",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki1.jpeg",
+      "original_bytes": 420420,
+      "path": "/media/museum-source/01b193087afce21bae92bfbe22f1d011832d1b75feddcf83a5ad3990bf8c1e75.webp",
+      "static_sha256": "13653e1366d270746fdee057e512da1f225daf7dd0805806f24fae7e6c545373",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki2.jpeg": {
+      "original_sha256": "216136e75695f2ac4de4ab77b7e7c698e677ec42cf231cc11f1294632ceae3aa",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki2.jpeg",
+      "original_bytes": 321828,
+      "path": "/media/museum-source/216136e75695f2ac4de4ab77b7e7c698e677ec42cf231cc11f1294632ceae3aa.webp",
+      "static_sha256": "d866918688a546d4cf70580392f501c84bf80c2ead695e6e79265e6134eacaed",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki3.jpeg": {
+      "original_sha256": "b7f24183254f819b4fb76ffa83bda985de86859d65ca8c138f0b1d87c2d069c2",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki3.jpeg",
+      "original_bytes": 389532,
+      "path": "/media/museum-source/b7f24183254f819b4fb76ffa83bda985de86859d65ca8c138f0b1d87c2d069c2.webp",
+      "static_sha256": "2fc8e7efdce9de3725ddabeec062de8c8f34e235c3d8777358cb4339be3d0712",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki4.jpeg": {
+      "original_sha256": "c3f6e26f9aa6e0d53a9059f5648534b82a063e1252cb81f9a7113cd2f718e779",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki4.jpeg",
+      "original_bytes": 324142,
+      "path": "/media/museum-source/c3f6e26f9aa6e0d53a9059f5648534b82a063e1252cb81f9a7113cd2f718e779.webp",
+      "static_sha256": "a92e00d449495d9a6c07e15625c5e9c04fa0f3f0d4edba4ea73bb8a23b9e272c",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    },
+    "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki5.jpeg": {
+      "original_sha256": "929d1759d452298fa3b0d616c33caebe3df4dc5f6f4c80383bc71bb97579d9c4",
+      "original_format": "jpg",
+      "source_url": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki5.jpeg",
+      "original_bytes": 381144,
+      "path": "/media/museum-source/929d1759d452298fa3b0d616c33caebe3df4dc5f6f4c80383bc71bb97579d9c4.webp",
+      "static_sha256": "2413f1fa39d5973995e513b2edd63489799122322c889a3772be86bccc2ef19e",
+      "source_page_url": "https://muzei-xleb.ru/novosty",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736"
+    }
+  }
+}

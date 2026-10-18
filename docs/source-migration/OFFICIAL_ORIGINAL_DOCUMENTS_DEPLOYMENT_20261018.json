@@ -1,8 +1,8 @@
 {
   "source": "https://muzei-xleb.ru",
   "description": "Copied byte-for-byte from user-owned original source files on Mac mini; not included in git.",
-  "count": 57,
-  "total_bytes": 218175898,
+  "count": 59,
+  "total_bytes": 218581229,
   "files": [
     {
       "legacy_path": "/sites/default/files/page/191218113728_0001.pdf",
@@ -72,6 +72,13 @@
       "url": "https://muzei-xleb.ru/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_4.pdf",
       "sha256": "06fa00f52e70255b396ec923b2107e0de10239327f885dc561528c3c8d531614",
       "size_bytes": 573938,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf",
+      "sha256": "db6e5f419c844165c3614ace26663bc60118d863e2bbd78bc4a4ff93ee566cd5",
+      "size_bytes": 391445,
       "format": "pdf"
     },
     {
@@ -150,6 +157,13 @@
       "sha256": "bd36d3535137254338d635e5311e57bab3f740aa8fae81bafa99bcde450d920a",
       "size_bytes": 614108,
       "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20251203120738-informaciya_dlya_dariteley.docx",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20251203120738-informaciya_dlya_dariteley.docx",
+      "sha256": "98af3e0ee6462f0b2a5d81f317f8d988ddab8ff4ed85b64cdb002280995d7c25",
+      "size_bytes": 13886,
+      "format": "docx"
     },
     {
       "legacy_path": "/sites/default/files/page/20251224111619-plan_na_2026-2027_gg.pdf",

@@ -7,21 +7,45 @@ import { museumReference } from "@/data/museum-reference";
 import OfficialMuseumNews from "@/components/OfficialMuseumNews";
 import {officialMuseumNewsSlugs} from "@/data/official-museum-news";
 import {fixedPageH1,fixedPageMetadata} from "@/data/fixed-page-seo";
+import RichText from "@/components/RichText";
+import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
+import originalSections from "@/data/official-original-legacy-sections.json";
+import extraOriginalPages from "@/data/official-museum-crosslink-pages.json";
+
+
+const verifiedOldRoots=[...originalSections.sections,...extraOriginalPages.pages]
+  .filter(item=>/^\/[a-z0-9-]+$/.test(item.path));
+const oldRootByPath=new Map(verifiedOldRoots.map(item=>[item.path,item]));
 
 type Props = { params: Promise<{ section: string }> };
 
 export function generateStaticParams() {
-  return Object.keys(sections).map((section) => ({ section }));
+  return [...Object.keys(sections).map((section) => ({ section })),
+    ...verifiedOldRoots.map(item=>({section:item.path.slice(1)}))];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { section } = await params;
+  const original=oldRootByPath.get('/'+section);
+  if(original)return {title:original.title,alternates:{canonical:original.source_url}};
   if (!isMuseumSection(section)) return { title: "Раздел не найден" };
   return fixedPageMetadata("/"+section+"/",sections[section].title);
 }
 
 export default async function MuseumSectionPage({ params }: Props) {
   const { section } = await params;
+  const original=oldRootByPath.get('/'+section);
+  if(original)return <article className="section inner-page museum-detail" data-original-museum-section={original.path}>
+    <nav className="breadcrumbs" aria-label="Хлебные крошки"><Link href="/">Главная</Link>
+      <span aria-hidden="true">/</span><span aria-current="page">{original.title}</span></nav>
+    <h1>{original.title}</h1>
+    <OfficialMuseumSourcePhotos photos={original.image_links} label={original.title} limit={40}/>
+    <RichText html={original.html}/>
+    {original.path==='/gostevaya-kniga' && <p>Сохранён доступный на исходной странице отзыв. Отправка новых отзывов
+      в доконтрактном прототипе не подключена и требует согласованной реализации.</p>}
+    <p>Материал воспроизведён по исходному адресу музея; сведения могут уточняться редакцией музея.</p>
+    <Link href="/" className="text-link">← На главную музея</Link>
+  </article>;
   if (!isMuseumSection(section)) notFound();
   const entries = entriesInSection(section)
     .filter(e=>section!=="news" || !officialMuseumNewsSlugs.has(e.slug));

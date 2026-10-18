@@ -37,7 +37,7 @@ def render():
             # Native original date-based museum article is 200; new technical
             # /news/ copy gets a single 301 TO the historic human-readable URL.
             register(item['target'],source,'new_news_duplicate_to_original')
-        elif item['why'] in ('original-exhibition-detail','original-news-node-exhibition'):
+        elif item['why'] in ('original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page'):
             # Native /vistavky/YYYY-MM-DD/... is a full source-verified 200
             # page; NEVER redirect it to a generic catalogue-card anchor.
             continue
@@ -54,6 +54,19 @@ def render():
             raise ValueError('Museum original bytes not covered by local WebP')
         register(canonical,local,'original_photo')
         register(asset['source_image_url'],local,'original_photo_thumbnail')
+    # Ten actual FULL-SIZE news-index photographs are distinct from the CMS
+    # gallery set; retain original links in the real source main news page.
+    index_asset_file=ROOT/'apps/web/src/data/official-news-index-photo-assets.json'
+    index_photos=json.loads(index_asset_file.read_text(encoding='utf-8'))
+    if index_photos.get('source')!='https://muzei-xleb.ru' or index_photos.get('count')!=10:
+        raise RuntimeError('Extra news image originals not downloaded/verified')
+    for original,entry in index_photos['photos'].items():
+        if not original.startswith('https://muzei-xleb.ru/sites/default/files/novosty/'):
+            raise ValueError('Unverified original museum image in news-index gallery')
+        target=entry['path']
+        if not re.fullmatch(r'/media/museum-source/[a-f0-9]{64}\.webp',target):
+            raise ValueError('News museum original image not self-hosted')
+        register(original,target,'original_news_index_photo')
     output=['# GENERATED FROM source-verified museum HTML and local static WebP assets.',
             '# Include ONLY from the nginx http{} context, not server{}.',
             '# Redirects work only after you configure this as the museum domain itself.',
@@ -70,8 +83,8 @@ def render():
       '}\n',encoding='utf-8')
     counts={'total':len(routes),'page':sum(v in ('page','new_news_duplicate_to_original') for v in kinds.values()),
             'image':sum(v not in ('page','new_news_duplicate_to_original') for v in kinds.values()),
-            'photo_original':photo_assets['count']}
-    if counts['page']!=sum(v['why'] not in ('original-exhibition-detail','original-news-node-exhibition')
+            'photo_original':photo_assets['count'],'news_index_original_photos':index_photos['count']}
+    if counts['page']!=sum(v['why'] not in ('original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page')
                            for v in old_pages.values()) or counts['image']<photo_assets['count']:
         raise RuntimeError('Dropped museum original photo or page redirects')
     print('MUSEUM_PRODUCTION_HTTP301_CONFIG_PREPARED',counts,'not deployed',flush=True)

@@ -10,9 +10,10 @@ class MuseumNginxCutoverTests(unittest.TestCase):
     def test_original_museum_pages_and_webp_sources_receive_only_safe_local_301_destinations(self):
         stats=render()
         self.assertGreaterEqual(stats['total'],664)
-        self.assertEqual(stats['page'],len(build_map())-76)
+        self.assertEqual(stats['page'],350)  # 280 technical news URLs plus 70 actual museum Drupal /node links
         data=json.loads((ROOT/'apps/web/src/data/official-museum-photo-assets.json').read_text())
         self.assertEqual(stats['photo_original'],data['count'])
+        self.assertEqual(stats['news_index_original_photos'],10)
         conf=(ROOT/'deploy/nginx/legacy_museum_redirects.map.conf').read_text()
         self.assertTrue(conf.startswith('# GENERATED FROM source-verified'))
         self.assertIn('map $uri $musbread_legacy_target {',conf)
@@ -24,20 +25,27 @@ class MuseumNginxCutoverTests(unittest.TestCase):
         self.assertEqual(len(match),stats['total'])
         parsed=dict(match)
         self.assertEqual(len(parsed),len(match))
-        self.assertIn('/novosty',parsed)
+        self.assertNotIn('/novosty',parsed)  # Original index now has its own canonical HTML 200
         for old,item in build_map().items():
             if item['why']=='original-news-article':
                 self.assertNotIn(old,parsed)
                 self.assertEqual(parsed[item['target'].rstrip('/')],old)
-            elif item['why'] in ('original-exhibition-detail','original-news-node-exhibition'):
-                self.assertNotIn(old,parsed)
-            else:
+            elif item['why']=='source-verified-drupal-node':
                 self.assertEqual(parsed[old],item['target'])
+            else:
+                # 448 source original article/section/program URLs now serve
+                # their own real HTML and must NOT redirect to catalogue anchors.
+                self.assertNotIn(old,parsed)
         for original,photo in data['photos'].items():
             for source in (original,photo['source_image_url']):
                 self.assertEqual(parsed[urlsplit(source).path],photo['path'])
                 self.assertTrue((ROOT/'apps/web/public'/photo['path'].removeprefix('/')).is_file())
-        self.assertTrue(any('#museum-tour-' in value for value in parsed.values()))
+        self.assertTrue(all('#' not in value for value in parsed.values()))
+        index=json.loads((ROOT/'apps/web/src/data/official-news-index-photo-assets.json').read_text())
+        self.assertEqual(index['count'],10)
+        for original,asset in index['photos'].items():
+            self.assertEqual(parsed[urlsplit(original).path],asset['path'])
+            self.assertTrue((ROOT/'apps/web/public'/asset['path'].removeprefix('/')).is_file())
         for old,target in match:
             self.assertTrue(old.startswith('/'))
             self.assertTrue(target.startswith('/'))

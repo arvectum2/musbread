@@ -1,7 +1,8 @@
 import photoIndex from "./official-museum-photo-assets.json";
+import newsIndexPhotos from "./official-news-index-photo-assets.json";
 
 /** Map actual old official museum photo URLs to permanently self-hosted files. */
-const photoLookup=photoIndex.photos as Record<string,{path:string;static_sha256:string}>;
+const photoLookup={...photoIndex.photos,...newsIndexPhotos.photos} as Record<string,{path:string;static_sha256:string}>;
 export function localMuseumPhoto(url:string):string|null {
   try {
     const u=new URL(url);

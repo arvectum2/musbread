@@ -1,0 +1,334 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "count": 6,
+  "pages": [
+    {
+      "path": "/informaciya-dlya-dariteley",
+      "source_url": "https://muzei-xleb.ru/informaciya-dlya-dariteley",
+      "title": "Информация для дарителей",
+      "html": "<div id=\"block-system-main\" class=\"block block-system clearfix\">\n\n    \n  <div class=\"content\">\n    <article id=\"node-543\" class=\"node node-page clearfix\">\n\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p style=\"font-family: font; font-size: 24px;\"><a href=\"/sites/default/files/page/20251203120738-informaciya_dlya_dariteley.docx\" title=\"Информация для дарителей\">Информация для дарителей</a></p>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n</div>\n  ",
+      "html_sha256": "f540dcf47da3f68ba19bca69a406305b1f0d8cf216357228f431f0181c56a7b4",
+      "source_page_sha256": "9462fb78b50c9026a192519dcef49f5d5000e3e852d99f8e0960f911348ef311",
+      "source_record": "official-remaining-original-sections.json",
+      "image_links": [],
+      "link_count": 1,
+      "source_links": [
+        {
+          "label": "Информация для дарителей",
+          "href": "/sites/default/files/page/20251203120738-informaciya_dlya_dariteley.docx"
+        }
+      ],
+      "captured_at": "2026-10-18"
+    },
+    {
+      "path": "/master-klassy",
+      "source_url": "https://muzei-xleb.ru/master-klassy",
+      "title": "Мастер-классы",
+      "html": "<div id=\"block-system-main\" class=\"block block-system clearfix\">\n\n    \n  <div class=\"content\">\n    <article id=\"node-43\" class=\"node node-page clearfix\">\n\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p>Приглашаем Вас на музейные творческие мастер-классы!</p>\n<p>Перед каждым мастер-классом проводится небольшая тематическая экскурсия (продолжительность 30 мин.)</p>\n<p>Общая продолжительность программы - 60 мин.</p>\n<p>Программа проводится для групп 6-15 чел.</p>\n<h3>Обрядовые куклы</h3>\n<ul>\n<li><a href=\"/master-klassy/kukly-kuvadki\"><strong>«Кувадка»</strong></a></li>\n<li><a href=\"/master-klassy/kukly-vesnyanki\"><strong>«Веснянка»</strong></a></li>\n<li><a href=\"/master-klassy/zernovushka-blagopoluchnica\"><strong>«Зерновушка»</strong></a></li>\n<li><a href=\"/master-klassy/ptichiy-dvor\"><strong>«Птичий двор»</strong></a></li>\n<li><a href=\"/master-klassy/pashalnyy-zaychik\"><strong>«Пасхальный заяц»</strong></a></li>\n<li><a href=\"/master-klassy/rozhdestvenskiy-angel\"><strong>«Ангел»</strong></a></li>\n</ul>\n<h3>Изделия из лыка и соломы</h3>\n<ul>\n<li><a href=\"/master-klassy/okno-radosti\"><strong>«Окно радости»</strong></a></li>\n<li><a href=\"/master-klassy/kon-solnce\"><strong>«Конь-Солнце»</strong></a></li>\n<li><a href=\"/ekskursii/master-klass-melnica-vertelnica\"><strong>«Мельница-вертельница»</strong></a></li>\n<li><a href=\"/master-klassy/solnce-na-radost\"><strong>«Солнце на радость»</strong></a></li>\n</ul>\n<h3>Роспись деревянных заготовок</h3>\n<ul>\n<li><strong>«Новогодние украшения»</strong></li>\n<li><a href=\"/master-klassy/pashalnye-ukrasheniya\"><strong>«Пасхальные украшения»</strong></a></li>\n<li><strong>«Символ года»</strong></li>\n</ul>\n<h3><a href=\"/master-klassy/rospis-izrazca\" style=\"color: #3a6f43;\">Роспись изразцов</a><br>\n\t </h3>\n<h2><a href=\"https://vmuzey.com/museum/sankt-peterburgskiy-muzey-hleba\" target=\"_blank\"><u>Купить билет на мастер-класс</u></a></h2>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n</div>\n  ",
+      "html_sha256": "0a629963c187f2970f7fa0e59b15a4b671558a188c526c43b5e3c0f30ad33bbf",
+      "source_page_sha256": "3a5037767e765f3dfb5aee3c89b636171ab3d8a157cfc5e0bc063456e1d16b18",
+      "source_record": "official-remaining-original-sections.json",
+      "image_links": [],
+      "link_count": 13,
+      "source_links": [
+        {
+          "label": "«Кувадка»",
+          "href": "/master-klassy/kukly-kuvadki"
+        },
+        {
+          "label": "«Веснянка»",
+          "href": "/master-klassy/kukly-vesnyanki"
+        },
+        {
+          "label": "«Зерновушка»",
+          "href": "/master-klassy/zernovushka-blagopoluchnica"
+        },
+        {
+          "label": "«Птичий двор»",
+          "href": "/master-klassy/ptichiy-dvor"
+        },
+        {
+          "label": "«Пасхальный заяц»",
+          "href": "/master-klassy/pashalnyy-zaychik"
+        },
+        {
+          "label": "«Ангел»",
+          "href": "/master-klassy/rozhdestvenskiy-angel"
+        },
+        {
+          "label": "«Окно радости»",
+          "href": "/master-klassy/okno-radosti"
+        },
+        {
+          "label": "«Конь-Солнце»",
+          "href": "/master-klassy/kon-solnce"
+        },
+        {
+          "label": "«Мельница-вертельница»",
+          "href": "/ekskursii/master-klass-melnica-vertelnica"
+        },
+        {
+          "label": "«Солнце на радость»",
+          "href": "/master-klassy/solnce-na-radost"
+        },
+        {
+          "label": "«Пасхальные украшения»",
+          "href": "/master-klassy/pashalnye-ukrasheniya"
+        },
+        {
+          "label": "Роспись изразцов",
+          "href": "/master-klassy/rospis-izrazca"
+        },
+        {
+          "label": "Купить билет на мастер-класс",
+          "href": "https://vmuzey.com/museum/sankt-peterburgskiy-muzey-hleba"
+        }
+      ],
+      "captured_at": "2026-10-18"
+    },
+    {
+      "path": "/novosty",
+      "source_url": "https://muzei-xleb.ru/novosty",
+      "title": "Новости",
+      "html": "<div id=\"block-system-main\" class=\"block block-system clearfix\">\n\n    \n  <div class=\"content\">\n    <div class=\"view view-novosty view-id-novosty view-display-id-page novosty view-dom-id-ba2412a15b44cb685529d7276e45422c\">\n        \n  \n  \n      <div class=\"view-content\">\n        <div class=\"novost\">\n    <article id=\"node-724\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-10-16/noch-iskusstv-v-muzee-hleba\">Ночь искусств в Музее Хлеба</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p><strong>Программа \"Петербург гостеприимный\"</strong></p>\n<p><strong>3 ноября 2026 г., 18:00–20:00</strong></p>\n<p>Программа расскажет о традиционных праздниках и обрядах, которые можно отмечать всей семьей.</p>\n<p>Участники узнают:</p>\n<ul>\n<li>как проходили осенне-зимние посиделки и вечёрки,</li>\n<li>как готовились к приему гостей</li>\n<li>как встречали гостей.</li>\n</ul>\n<p>Участники познакомятся с историей формирования многонационального характера Санкт-Петербурга, его кухней и вкусовыми предпочтениями жителей. Особое внимание будет уделено фольклору. Вас ждут народные песни и наигрыши, а также возможность освоить традиционные игры, танцы и хороводы.</p>\n</div></div></div><div class=\"field field-name-field-novost-foto field-type-image field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20261016140727-vhod.jpg\" title=\"Ночь искусств в Музее Хлеба\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-724-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Ночь искусств в Музее Хлеба\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20261016140727-vhod.jpg?itok=iaWOmRbC\" width=\"480\" height=\"318\" alt=\"Ночь искусств в Музее Хлеба\" title=\"\"></a></div><div class=\"field-item odd\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20261016140727-20250922153709-1.jpg\" title=\"Ночь искусств в Музее Хлеба\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-724-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Ночь искусств в Музее Хлеба\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20261016140727-20250922153709-1.jpg?itok=tDTQ5AF_\" width=\"480\" height=\"258\" alt=\"Ночь искусств в Музее Хлеба\" title=\"\"></a></div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-723\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya\">События в музее с 12 по 19 октября</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p><strong>ЭКСКУРСИИ. МАСТЕР-КЛАССЫ</strong></p>\n<p><strong>12 октября</strong></p>\n<ul>\n<li>13:00 Мастер-класс «Кувадка» (6+)</li>\n<li>15:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>16:00 Интерактивная экскурсия «Каравай» (9+)</li>\n<li>17:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>14 октября</strong></p>\n<ul>\n<li>12:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>15 октября</strong></p>\n<ul>\n<li>12:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)</li>\n<li>13:00 Тематическая экскурсия «Долой кухонное рабство» (12+)</li>\n<li>15:00 Тематическая экскурсия «Средь шумного звона тарелок, ложек и ножей» (12+)</li>\n</ul>\n<p><strong>16 октября</strong></p>\n<ul>\n<li>15:00 Тематическая программа «Рожь&amp;Пшеница — Есенин&amp;Маяковский» (12+)</li>\n<li>15:30 Интерактивное занятие «С песней о хлебе» (9+)</li>\n</ul>\n<p><strong>17 октября</strong></p>\n<ul>\n<li>15:00 Литературная гостиная «Изба-Читальня» (12+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>18 октября</strong></p>\n<ul>\n<li>14:00 Тематическая экскурсия «Героя хлеб кормит» (9+)</li>\n<li>15:00 Тематическая экскурсия «Обслужим всех культурно» (12+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>19 октября</strong></p>\n<ul>\n<li>16:00 Интерактивная экскурсия «Каравай» (9+)</li>\n<li>17:00 Тематическая экскурсия «А вместо сердца пламенный мотор» (12+)</li>\n</ul>\n<p><strong>ВЫСТАВКИ</strong></p>\n<ul>\n<li>«Первое, второе и компот»<br>\n\t\t(<strong>до 23 ноября</strong>)</li>\n<li>«От ремесла до искусства: Резные пряничные доски. Из коллекций Е. Ю. Андреевой, А. В. Старынина и Санкт-Петербургского Музея Хлеба»<br>\n\t\t(<strong>до 7 декабря</strong>)</li>\n</ul>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-722\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-10-05/vystavka-ot-remesla-do-iskusstva-reznye-pryanichnye-doski\">Выставка «От Ремесла До Искусства. Резные Пряничные Доски»</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p>2 октября 2026 года, в Музее открылась выставка «От ремесла до искусства. Резные пряничные доски», в партнерстве с Всероссийской общественной организации «Гильдия мастеров пряничного дела и знаменщиков России».</p>\n<p><a href=\"/node/721\"><u><strong>Подробнее</strong></u></a></p>\n</div></div></div><div class=\"field field-name-field-novost-foto field-type-image field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20261005140159-afisha_2.jpg\" title=\"Выставка «От Ремесла До Искусства. Резные Пряничные Доски»\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-722-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Выставка «От Ремесла До Искусства. Резные Пряничные Доски»\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20261005140159-afisha_2.jpg?itok=HVX7iS0M\" width=\"339\" height=\"480\" alt=\"Выставка «От Ремесла До Искусства. Резные Пряничные Доски»\" title=\"\"></a></div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-718\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya\">События в музее с 5 по 12 октября</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p><strong>ЭКСКУРСИИ. МАСТЕР-КЛАССЫ</strong></p>\n<p><strong>5 октября</strong></p>\n<ul>\n<li>13:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>14:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>15:00 Интерактивная экскурсия «Каравай» (9+)</li>\n<li>16:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>7 октября</strong></p>\n<ul>\n<li>16:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>8 октября</strong></p>\n<ul>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>17:00 Мастер-класс «Кувадка» (6+)</li>\n</ul>\n<p><strong>9 октября</strong></p>\n<ul>\n<li>14:00 Тематическая экскурсия «Злак качества» (12+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>17:00 Мастер-класс «Солнце на радость» (9+)</li>\n</ul>\n<p><strong>10 октября</strong></p>\n<ul>\n<li>15:00 Тематическая экскурсия «Обслужим культурно всех» (12+)</li>\n<li>17:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>11 октября</strong></p>\n<ul>\n<li>17:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>12 октября</strong></p>\n<ul>\n<li>13:00 Мастер-класс «Кувадка» (6+)</li>\n<li>15:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>16:00 Интерактивная экскурсия «Каравай» (9+)</li>\n<li>17:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>ВЫСТАВКИ</strong></p>\n<ul>\n<li>«Первое, второе и компот»<br>\n\t\t(<strong>до 23 ноября</strong>)</li>\n<li>«От ремесла до искусства: Резные пряничные доски. Из коллекций Е. Ю. Андреевой, А. В. Старынина и Санкт-Петербургского Музея Хлеба»<br>\n\t\t(<strong>до 7 декабря</strong>)</li>\n</ul>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-717\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya\">События в музее с 28 сентября по 5 октября</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p><strong>ЭКСКУРСИИ. МАСТЕР-КЛАССЫ</strong></p>\n<p><strong>28 сентября</strong></p>\n<ul>\n<li>12:00 Мастер-класс «Кувадка» (6+)</li>\n<li>13:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>14:00 Интерактивное занятие «Каравай» (9+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>16:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>16:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>17:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>17:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>30 сентября</strong></p>\n<ul>\n<li>10:30 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>11:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>15:00 Мастер-класс «Конь-Солнце» (9+)</li>\n<li>16:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>17:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>1 октября</strong></p>\n<ul>\n<li>15:00 Кураторская экскурсия по выставке «Первое, второе и компот» (12+)</li>\n<li>15:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>16:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)</li>\n<li>17:00 Мастер-класс «Птичий двор» (9+)</li>\n</ul>\n<p><strong>2 октября</strong></p>\n<ul>\n<li>13:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>14:00 Интерактивная экскурсия «Емелина печка» (8+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>16:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>17:00 Мастер-класс «Кувадка» (6+)</li>\n</ul>\n<p><strong>4 октября</strong></p>\n<ul>\n<li>13:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)</li>\n</ul>\n<p><strong>5 октября</strong></p>\n<ul>\n<li>13:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>14:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>15:00 Интерактивная экскурсия «Каравай» (9+)</li>\n<li>16:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>ВЫСТАВКИ</strong></p>\n<ul>\n<li>«Первое, второе и компот»<br>\n\t\t(<strong>до 23 ноября</strong>)</li>\n<li>«Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева<br>\n\t\t(<strong>до 28 сентября</strong>)</li>\n<li>«От ремесла до искусства: Резные пряничные доски. Из коллекций Е. Ю. Андреевой, А. В. Старынина и Санкт-Петербургского Музея Хлеба»<br>\n\t\t(<strong>со 2 октября до 7 декабря</strong>)</li>\n</ul>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-713\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya\">События в музее с 21 по 28 сентября</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p><strong>ЭКСКУРСИИ. МАСТЕР-КЛАССЫ</strong></p>\n<p><strong>21 сентября</strong></p>\n<ul>\n<li>15:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>16:00 Экскурсия «От сохи до орбиты» (6+)</li>\n<li>17:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>23 сентября</strong></p>\n<ul>\n<li>15:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>16:00 Экскурсия «От сохи до орбиты» (6+)</li>\n<li>17:00 Мастер-класс «Зерновушка» (7+)</li>\n</ul>\n<p><strong>25 сентября</strong></p>\n<ul>\n<li>10:30 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>11:00 Экскурсия «От сохи до орбиты» (6+)</li>\n<li>12:00 Театрализованная экскурсия «Колобок» (5+)</li>\n<li>14:00 Тематическая программа «Рожь&amp;Пшеница — Есенин&amp;Маяковский» (12+)</li>\n<li>15:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>16:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>17:00 Экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>26 сентября</strong></p>\n<ul>\n<li>15:00 Тематическая экскурсия «Долой кухонное рабство!» (12+)</li>\n<li>16:00 Мастер-класс «Птичий базар» (9+)</li>\n<li>17:00 Экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>27 сентября</strong></p>\n<ul>\n<li>15:00 Литературная гостиная «Изба-Читальня» (12+)</li>\n<li>16:00 Мастер-класс «Роспись изразца» (7+)</li>\n<li>17:00 Тематическая экскурсия «Цена хлебам» (12+)</li>\n</ul>\n<p><strong>28 сентября</strong></p>\n<ul>\n<li>12:00 Мастер-класс «Кувадки» (6+)</li>\n<li>13:00 Экскурсия «От сохи до орбиты» (6+)</li>\n<li>14:00 Интерактивное занятие «Каравай» (9+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>16:00 Экскурсия «От сохи до орбиты» (6+)</li>\n<li>16:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>17:00 Экскурсия «От сохи до орбиты» (6+)</li>\n<li>17:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>ВЫСТАВКИ</strong></p>\n<ul>\n<li>«Первое, второе и компот»<br>\n\t\t(<strong>до 23 ноября</strong>)</li>\n<li>«Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева<br>\n\t\t(<strong>до 28 сентября</strong>)</li>\n</ul>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-712\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya\">События в музее с 14 по 21 сентября</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p><strong>ЭКСКУРСИИ. МАСТЕР-КЛАССЫ</strong></p>\n<p><strong>14 сентября</strong></p>\n<ul>\n<li>12:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>13:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>15:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>16 сентября</strong></p>\n<ul>\n<li>14:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>15:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>17 сентября</strong></p>\n<ul>\n<li>12:00 Тематическая экскурсия “Всякая душа празднику рада” (9+)</li>\n<li>14:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>16:30 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>17:00 Тематическая экскурсия “Жил-был Дом” (12+)</li>\n</ul>\n<p><strong>18 сентября</strong></p>\n<ul>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>19 сентября</strong></p>\n<ul>\n<li>12:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>13:00 Интерактивная программа «Геометрия вкуса» (12+)</li>\n<li>13:00 Тематическая экскурсия “Злак качества” (7+)</li>\n<li>15:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>16:00 Мастер-класс “Мельница-Вертельница” (10+)</li>\n<li>17:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>20 сентября</strong></p>\n<ul>\n<li>11:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>13:00 Интерактивная программа «Геометрия вкуса» (12+)</li>\n<li>15:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>16:00 Мастер-класс “Конь-Солнце” (9+)</li>\n<li>17:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>21 сентября</strong></p>\n<ul>\n<li>15:00 Прогулка-экскурсия «Жил-был Дом» (12+)</li>\n<li>16:30 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>17:00 Тематическая экскурсия “Цена Хлеба” (12+)</li>\n</ul>\n<p><strong>ВЫСТАВКИ</strong></p>\n<ul>\n<li>“Первое, второе и компот”<br>\n\t\t(<strong>до 23 ноября</strong>)</li>\n<li>«Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева<br>\n\t\t(<strong>до 28 сентября</strong>)</li>\n</ul>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-710\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-09-09/vystavka-rasskazy-o-leningradcah-reprodukcii-ofortov-yu-m-neprinceva\">Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p>Офорты Юрия Непринцева передают тяготы войны и блокады. На них изображены женщины и старики, копающие окопы, школьницы в рядах МПВО, девушка, умершая на Марсовом поле, и отряд моряков, отправляющийся на фронт. Эти работы трогают до глубины души, но они — взгляд на суровую правду. Мы должны помнить об этом, чтобы подобное никогда не повторилось.</p>\n<p><a href=\"/node/709\"><u><strong>Подробнее</strong></u></a></p>\n</div></div></div><div class=\"field field-name-field-novost-foto field-type-image field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20260909092947-vystavka_foto1.jpg\" title=\"Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-710-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20260909092947-vystavka_foto1.jpg?itok=diIuHK78\" width=\"347\" height=\"480\" alt=\"Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева\" title=\"\"></a></div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-708\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya\">События в музее с 7 по 14 сентября</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p><strong>ЭКСКУРСИИ. МАСТЕР-КЛАССЫ</strong></p>\n<p><strong>7 сентября</strong></p>\n<ul>\n<li>11:00 Интерактивная экскурсия «Была война. Была блокада» (7+)</li>\n<li>12:00 Мастер-класс «Блокадная ласточка» (6+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>9 сентября</strong></p>\n<ul>\n<li>12:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>13:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>10 сентября</strong></p>\n<ul>\n<li>12:00 Интерактивная экскурсия «С мечтой о хлебе» (9+)</li>\n<li>13:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>11 сентября</strong></p>\n<ul>\n<li>12:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>13:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>14:00 Интерактивная экскурсия «Емелина печка» (8+)</li>\n<li>15:00 Интерактивная экскурсия «Каравай» (9+)</li>\n</ul>\n<p><strong>12 сентября</strong></p>\n<ul>\n<li>11:00 Творческая мастерская: ткань/ленты – «Зерновушка» (7+)</li>\n<li>13:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>14:00 Интерактивная экскурсия «С мечтой о хлебе» (9+)</li>\n<li>15:00 Тематическая программа «Обслужим культурно всех» (12+)</li>\n</ul>\n<p><strong>13 сентября</strong></p>\n<ul>\n<li>11:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n<li>13:00 Театрализованная экскурсия «Колобок» (5+)</li>\n<li>14:00 Тематическая экскурсия “Злак качества” (7+)</li>\n<li>15:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n</ul>\n<p><strong>14 сентября</strong></p>\n<ul>\n<li>12:00 Тематическая экскурсия “Всякая душа празднику рада” (9+)</li>\n<li>13:00 Тематическая экскурсия «Цена хлеба» (12+)</li>\n<li>15:00 Обзорная экскурсия «От сохи до орбиты» (6+)</li>\n</ul>\n<p><strong>ВЫСТАВКИ</strong></p>\n<ul>\n<li>“Первое, второе и компот”<br>\n\t\t(<strong>до 23 ноября</strong>)</li>\n<li>«Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева<br>\n\t\t(<strong>до 28 сентября</strong>)</li>\n</ul>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n  <div class=\"novost\">\n    <article id=\"node-707\" class=\"node node-novost clearfix\">\n\n    <header>\n              <h2><a href=\"/novosty/2026-09-04/vystavka-pervoe-vtoroe-i-kompot\">Выставка “Первое, второе и компот”</a></h2>\n        \n      </header>\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><p>2 сентября 2026 года в музее открылась выставка “Первое, второе и компот”.</p>\n<p>Выставка рассказывает историю ленинградских фабрик-кухонь — уникального феномена общественного питания. Эта столетняя история интересна и сегодня, ведь основы работы этих фабрик используются и в современном мире. На фоне ярких лозунгов 1920-1930-х годов Советская республика создала производственный бизнес-механизм, способный накормить тысячи жителей крупных и средних городов. Как это происходило, какие особенности были у общепита, как фабрики-кухни работают сегодня и почему эта тема важна для нас — на эти и другие вопросы можно ответить, посетив выставку или дополнительные мероприятия Музея Хлеба.</p>\n<p>Небольшой Музей Хлеба принял множество гостей, что стало для него настоящим приятным испытанием. Но это говорит о большом интересе к музею и его выставочным темам.</p>\n<p>Открытие провели директор Музея Хлеба Елизавета Тапакова-Боярская и директор Архива кинофотодокументов Санкт-Петербурга Оксана Морозан. Они отметили актуальность темы и поблагодарили всех, кто участвовал в создании выставки, а также первых гостей. Куратор выставки Варвара Лапковская провела экскурсию и ответила на вопросы посетителей. А компот из сухофруктов, который разливала очаровательная \"буфетчица\", стал приятным дополнением. Гости удивлялись: “Прямо из пищевого цеха фабрики-кухни?”.</p>\n<p>В рамках выставки подготовлена параллельная программа: тематические и кураторские экскурсии, интерактивные занятия.</p>\n<p>Следите за анонсами! Ждем вас в музее и на выставке!</p>\n<p>Выставка работает до 23 ноября 2026 года.</p>\n</div></div></div><div class=\"field field-name-field-novost-foto field-type-image field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki.jpeg\" title=\"Выставка “Первое, второе и компот”\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-707-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Выставка “Первое, второе и компот”\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20260904101907-otkrytie_vystavki.jpeg?itok=DmdPMYQZ\" width=\"335\" height=\"480\" alt=\"Выставка “Первое, второе и компот”\" title=\"\"></a></div><div class=\"field-item odd\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki1.jpeg\" title=\"Выставка “Первое, второе и компот”\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-707-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Выставка “Первое, второе и компот”\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20260904101907-otkrytie_vystavki1.jpeg?itok=jmo8q8Nl\" width=\"360\" height=\"480\" alt=\"Выставка “Первое, второе и компот”\" title=\"\"></a></div><div class=\"field-item even\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki2.jpeg\" title=\"Выставка “Первое, второе и компот”\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-707-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Выставка “Первое, второе и компот”\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20260904101907-otkrytie_vystavki2.jpeg?itok=RnwDnOoK\" width=\"360\" height=\"480\" alt=\"Выставка “Первое, второе и компот”\" title=\"\"></a></div><div class=\"field-item odd\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki3.jpeg\" title=\"Выставка “Первое, второе и компот”\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-707-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Выставка “Первое, второе и компот”\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20260904101907-otkrytie_vystavki3.jpeg?itok=IaACaRcE\" width=\"360\" height=\"480\" alt=\"Выставка “Первое, второе и компот”\" title=\"\"></a></div><div class=\"field-item even\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki4.jpeg\" title=\"Выставка “Первое, второе и компот”\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-707-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Выставка “Первое, второе и компот”\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20260904101907-otkrytie_vystavki4.jpeg?itok=qEpJu5pC\" width=\"360\" height=\"480\" alt=\"Выставка “Первое, второе и компот”\" title=\"\"></a></div><div class=\"field-item odd\"><a href=\"https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki5.jpeg\" title=\"Выставка “Первое, второе и компот”\" class=\"colorbox\" data-colorbox-gallery=\"gallery-node-707-S5CwuISEFko\" data-cbox-img-attrs='{\"title\": \"\", \"alt\": \"Выставка “Первое, второе и компот”\"}'><img src=\"https://muzei-xleb.ru/sites/default/files/styles/large/public/novosty/20260904101907-otkrytie_vystavki5.jpeg?itok=y6n9Hg3g\" width=\"360\" height=\"480\" alt=\"Выставка “Первое, второе и компот”\" title=\"\"></a></div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n    </div>\n  \n      <h2 class=\"element-invisible\">Страницы</h2><div class=\"item-list\"><ul class=\"pager\"><li class=\"pager-current first\">1</li>\n<li class=\"pager-item\"><a title=\"На страницу номер 2\" href=\"/novosty?page=1\">2</a></li>\n<li class=\"pager-item\"><a title=\"На страницу номер 3\" href=\"/novosty?page=2\">3</a></li>\n<li class=\"pager-item\"><a title=\"На страницу номер 4\" href=\"/novosty?page=3\">4</a></li>\n<li class=\"pager-item\"><a title=\"На страницу номер 5\" href=\"/novosty?page=4\">5</a></li>\n<li class=\"pager-item\"><a title=\"На страницу номер 6\" href=\"/novosty?page=5\">6</a></li>\n<li class=\"pager-item\"><a title=\"На страницу номер 7\" href=\"/novosty?page=6\">7</a></li>\n<li class=\"pager-item\"><a title=\"На страницу номер 8\" href=\"/novosty?page=7\">8</a></li>\n<li class=\"pager-item\"><a title=\"На страницу номер 9\" href=\"/novosty?page=8\">9</a></li>\n<li class=\"pager-ellipsis\">…</li>\n<li class=\"pager-next\"><a title=\"На следующую страницу\" href=\"/novosty?page=1\">следующая ›</a></li>\n<li class=\"pager-last last\"><a title=\"На последнюю страницу\" href=\"/novosty?page=27\">последняя »</a></li>\n</ul></div>  \n  \n  \n      <div class=\"view-footer\">\n      <h3><em><a href=\"/novosti\">Другие новости &gt;&gt;</a></em></h3>    </div>\n  \n  \n</div>  </div>\n</div>\n  ",
+      "html_sha256": "7180ee8a0d1c90b9400898c764b0886d97af0df42c2f27265bbc242a1aa4f430",
+      "source_page_sha256": "f5d3e1d226dcc394a1eb95722167e9c73dff02004a3067e640ee0e073a5b9736",
+      "source_record": "official-remaining-original-sections.json",
+      "image_links": [],
+      "link_count": 33,
+      "source_links": [
+        {
+          "label": "Ночь искусств в Музее Хлеба",
+          "href": "/novosty/2026-10-16/noch-iskusstv-v-muzee-hleba"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20261016140727-vhod.jpg"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20261016140727-20250922153709-1.jpg"
+        },
+        {
+          "label": "События в музее с 12 по 19 октября",
+          "href": "/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+        },
+        {
+          "label": "Выставка «От Ремесла До Искусства. Резные Пряничные Доски»",
+          "href": "/novosty/2026-10-05/vystavka-ot-remesla-do-iskusstva-reznye-pryanichnye-doski"
+        },
+        {
+          "label": "Подробнее",
+          "href": "/node/721"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20261005140159-afisha_2.jpg"
+        },
+        {
+          "label": "События в музее с 5 по 12 октября",
+          "href": "/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+        },
+        {
+          "label": "События в музее с 28 сентября по 5 октября",
+          "href": "/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+        },
+        {
+          "label": "События в музее с 21 по 28 сентября",
+          "href": "/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+        },
+        {
+          "label": "События в музее с 14 по 21 сентября",
+          "href": "/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+        },
+        {
+          "label": "Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева",
+          "href": "/novosty/2026-09-09/vystavka-rasskazy-o-leningradcah-reprodukcii-ofortov-yu-m-neprinceva"
+        },
+        {
+          "label": "Подробнее",
+          "href": "/node/709"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20260909092947-vystavka_foto1.jpg"
+        },
+        {
+          "label": "События в музее с 7 по 14 сентября",
+          "href": "/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+        },
+        {
+          "label": "Выставка “Первое, второе и компот”",
+          "href": "/novosty/2026-09-04/vystavka-pervoe-vtoroe-i-kompot"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki.jpeg"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki1.jpeg"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki2.jpeg"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki3.jpeg"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki4.jpeg"
+        },
+        {
+          "label": "",
+          "href": "https://muzei-xleb.ru/sites/default/files/novosty/20260904101907-otkrytie_vystavki5.jpeg"
+        },
+        {
+          "label": "2",
+          "href": "/novosty?page=1"
+        },
+        {
+          "label": "3",
+          "href": "/novosty?page=2"
+        },
+        {
+          "label": "4",
+          "href": "/novosty?page=3"
+        },
+        {
+          "label": "5",
+          "href": "/novosty?page=4"
+        },
+        {
+          "label": "6",
+          "href": "/novosty?page=5"
+        },
+        {
+          "label": "7",
+          "href": "/novosty?page=6"
+        },
+        {
+          "label": "8",
+          "href": "/novosty?page=7"
+        },
+        {
+          "label": "9",
+          "href": "/novosty?page=8"
+        },
+        {
+          "label": "следующая ›",
+          "href": "/novosty?page=1"
+        },
+        {
+          "label": "последняя »",
+          "href": "/novosty?page=27"
+        },
+        {
+          "label": "Другие новости >>",
+          "href": "/novosti"
+        }
+      ],
+      "captured_at": "2026-10-18"
+    },
+    {
+      "path": "/posetitelyam",
+      "source_url": "https://muzei-xleb.ru/posetitelyam",
+      "title": "Посетителям",
+      "html": "<div id=\"block-system-main\" class=\"block block-system clearfix\">\n\n    \n  <div class=\"content\">\n    <article id=\"node-505\" class=\"node node-page clearfix\">\n\n  \n  <div class=\"content\">\n      </div>\n    \n     \n\n  \n</article>  </div>\n</div>\n<div id=\"block-menu-block-5\" class=\"block block-menu-block dop-menu clearfix\">\n\n    \n  <div class=\"content\">\n    <div class=\"menu-block-wrapper menu-block-5 menu-name-main-menu parent-mlid-0 menu-level-2\">\n  <ul class=\"menu\"><li class=\"first leaf menu-mlid-720\"><a href=\"/adres\">Адрес</a></li>\n<li class=\"leaf menu-mlid-721\"><a href=\"/chasy-raboty\">Часы работы</a></li>\n<li class=\"leaf menu-mlid-287\"><a href=\"/stoimost\">Стоимость</a></li>\n<li class=\"leaf menu-mlid-719\"><a href=\"https://vmuzey.com/museum/sankt-peterburgskiy-muzey-hleba\" title=\"\">Купить билет</a></li>\n<li class=\"leaf menu-mlid-285\"><a href=\"/gostevaya-kniga\" class=\"punkt02\">Гостевая книга</a></li>\n<li class=\"last leaf menu-mlid-783\"><a href=\"/informaciya-dlya-dariteley\">Информация для дарителей</a></li>\n</ul></div>\n  </div>\n</div>\n  ",
+      "html_sha256": "bf85499ef1fd0604ae9ee441fb56a682f6c828e51a142fafd9e321088bc4003f",
+      "source_page_sha256": "3e43084a360d8e5694d1c780440b1a6db5d69ea5cafe81baae868c7bd0caaa98",
+      "source_record": "official-remaining-original-sections.json",
+      "image_links": [],
+      "link_count": 6,
+      "source_links": [
+        {
+          "label": "Адрес",
+          "href": "/adres"
+        },
+        {
+          "label": "Часы работы",
+          "href": "/chasy-raboty"
+        },
+        {
+          "label": "Стоимость",
+          "href": "/stoimost"
+        },
+        {
+          "label": "Купить билет",
+          "href": "https://vmuzey.com/museum/sankt-peterburgskiy-muzey-hleba"
+        },
+        {
+          "label": "Гостевая книга",
+          "href": "/gostevaya-kniga"
+        },
+        {
+          "label": "Информация для дарителей",
+          "href": "/informaciya-dlya-dariteley"
+        }
+      ],
+      "captured_at": "2026-10-18"
+    },
+    {
+      "path": "/video",
+      "source_url": "https://muzei-xleb.ru/video",
+      "title": "Видео",
+      "html": "<div id=\"block-system-main\" class=\"block block-system clearfix\">\n\n    \n  <div class=\"content\">\n    <article id=\"node-168\" class=\"node node-page clearfix\">\n\n  \n  <div class=\"content\">\n    <div class=\"field field-name-body field-type-text-with-summary field-label-hidden\"><div class=\"field-items\"><div class=\"field-item even\"><h2><a href=\"/video/o-muzee\">О музее</a></h2>\n<h2><a href=\"/video/vystavky\">Выставки</a></h2>\n<h2><a href=\"/video/proekt-neobzornaya-ekskursiya\">Проект \"НЕобзорная экскурсия\"</a></h2>\n<h2><a href=\"/node/190\">Семинары</a></h2>\n</div></div></div>  </div>\n    \n     \n\n  \n</article>  </div>\n</div>\n  ",
+      "html_sha256": "abb6ae00bcd8e5cb8be0890bb58f2a9e5b986076525bcb0fe5d358ef4279778b",
+      "source_page_sha256": "43373b24fca461cd8d27272ab8027a81a0056adc9741e2490d928c1a478db2be",
+      "source_record": "official-remaining-original-sections.json",
+      "image_links": [],
+      "link_count": 4,
+      "source_links": [
+        {
+          "label": "О музее",
+          "href": "/video/o-muzee"
+        },
+        {
+          "label": "Выставки",
+          "href": "/video/vystavky"
+        },
+        {
+          "label": "Проект \"НЕобзорная экскурсия\"",
+          "href": "/video/proekt-neobzornaya-ekskursiya"
+        },
+        {
+          "label": "Семинары",
+          "href": "/node/190"
+        }
+      ],
+      "captured_at": "2026-10-18"
+    },
+    {
+      "path": "/vistavky",
+      "source_url": "https://muzei-xleb.ru/vistavky",
+      "title": "Выставки",
+      "html": "<div id=\"block-system-main\" class=\"block block-system clearfix\">\n\n    \n  <div class=\"content\">\n    <article id=\"node-506\" class=\"node node-page clearfix\">\n\n  \n  <div class=\"content\">\n      </div>\n    \n     \n\n  \n</article>  </div>\n</div>\n<div id=\"block-menu-block-5\" class=\"block block-menu-block dop-menu clearfix\">\n\n    \n  <div class=\"content\">\n    <div class=\"menu-block-wrapper menu-block-5 menu-name-main-menu parent-mlid-0 menu-level-2\">\n  <ul class=\"menu\"><li class=\"first leaf menu-mlid-317\"><a href=\"/vistavky/tekushchie-vystavki\" class=\"punkt03\" title=\"\">Текущие выставки</a></li>\n<li class=\"leaf menu-mlid-710\"><a href=\"/vistavky/proshedshie-vystavki\" title=\"\">Прошедшие выставки</a></li>\n<li class=\"leaf menu-mlid-711\"><a href=\"/vistavky/virtualnye-vystavki\" title=\"\">Виртуальные выставки</a></li>\n<li class=\"last leaf menu-mlid-712\"><a href=\"/vistavky/vyezdnye-vystavki\" title=\"\">Выездные выставки</a></li>\n</ul></div>\n  </div>\n</div>\n  ",
+      "html_sha256": "c0e2fc46e0651a2cc7585c7e5f7fa05692c49f0d6829e150c36d06213d120ad4",
+      "source_page_sha256": "82a14d06836b3d1ff7abae689626156790f9471059b504661f66b9e38393fe4b",
+      "source_record": "official-remaining-original-sections.json",
+      "image_links": [],
+      "link_count": 4,
+      "source_links": [
+        {
+          "label": "Текущие выставки",
+          "href": "/vistavky/tekushchie-vystavki"
+        },
+        {
+          "label": "Прошедшие выставки",
+          "href": "/vistavky/proshedshie-vystavki"
+        },
+        {
+          "label": "Виртуальные выставки",
+          "href": "/vistavky/virtualnye-vystavki"
+        },
+        {
+          "label": "Выездные выставки",
+          "href": "/vistavky/vyezdnye-vystavki"
+        }
+      ],
+      "captured_at": "2026-10-18"
+    }
+  ]
+}
