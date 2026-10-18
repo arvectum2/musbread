@@ -179,6 +179,16 @@ export default async function GuidePage({ params }: Props) {
       <p>Уточнение условий посещения: <MuseumAnchor href={visitorContacts.phoneHref}>{visitorContacts.phone}</MuseumAnchor>.</p>
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</MuseumAnchor>.</p>
     </div>}
+    {isPlanVisit && !cmsPage && officialSnapshotByPath("/adres") && <section
+      className="reference-facts official-source-content"
+      aria-label="Как добраться: официальная инструкция музея">
+      <h2>Подробный маршрут к музею</h2>
+      <p className="meta">Текст действующей страницы музея:
+        <MuseumAnchor href="https://muzei-xleb.ru/adres" target="_blank"
+          rel="noopener noreferrer">оригинальная инструкция «Адрес» ↗</MuseumAnchor>.
+      </p>
+      <MuseumRichBody html={officialSnapshotByPath("/adres")!.html}/>
+    </section>}
     {(isContact || isPlanVisit) && <OfficialMuseumSocialLinks />}
     {isPlanVisit && <VisitAccessibilityGuide />}
     {isPlanVisit && <OfficialVisitorRules />}

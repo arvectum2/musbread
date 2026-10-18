@@ -89,8 +89,21 @@ def main() -> None:
             if n != 12:
                 raise RuntimeError("All 12 real museum workshop source pages must remain drafts")
             n = db.execute("select count(*) from museum_entries where status='draft'").fetchone()[0]
-            if n != 97:
-                raise RuntimeError("Private working CMS count changed: expected 97 drafts")
+            if n != 100:
+                raise RuntimeError("Private working CMS count changed: expected 100 drafts")
+            legal_slugs=("museum-accounting-policy","museum-anti-terror","museum-antimonopoly")
+            legal=db.execute("select slug,status from museum_entries "
+                "where slug in (?,?,?) order by slug",legal_slugs).fetchall()
+            if len(legal)!=3 or any(status!="draft" for _slug,status in legal):
+                raise RuntimeError("The three original museum legal menu source drafts must stay private")
+            official_count=db.execute("select count(*) from museum_documents").fetchone()[0]
+            if official_count!=50:
+                raise RuntimeError("Expected 44 original documents plus 6 additional verified legal originals")
+            extra=db.execute("select e.slug,count(d.id) from museum_entries e "
+                "left join museum_documents d on d.museum_entry_id=e.id "
+                "where e.slug in (?,?,?) group by e.slug",legal_slugs).fetchall()
+            if dict(extra)!={"museum-accounting-policy":5,"museum-anti-terror":0,"museum-antimonopoly":1}:
+                raise RuntimeError("Verified legal PDF attachment counts changed")
             sem=db.execute("select count(*) from museum_entries where slug like "
                            "'science-seminar-%' and status='draft'").fetchone()[0]
             if sem != 7:
@@ -692,14 +705,15 @@ def main() -> None:
           " five scientific categories/one council override, four exhibition"
           " categories/two edited exhibition details, two edited excursions,"
           " 12 master classes, 11 halls, nine FAQ, QA-only shop item,"
-          " unchanged 44 original documents with SHA256;"
+          " original 44 legacy official documents preserved with SHA256,"
+          " plus 6 new originals in three private legal source pages;"
           " 124 real verified timed museum sessions across 6 weekly programmes,"
           " one genuine dated CMS-edited Oct18 session in isolated publication,"
           " 123 other source sessions private, 16 source overlap duplicates folded,"
           " 7 real dated scientific seminars and 16 associated original VK videos,"
           " one edited published only in isolated QA, six others private,"
-          " real CMS remains 97 private draft entries, 125 private event drafts,"
-          " 44 museum documents.")
+          " real CMS remains 100 private draft entries, 125 private event drafts,"
+          " 50 museum documents.")
     # Historical predecessor output deliberately superseded by current scope.
     # print("PASS: 23 isolated published CMS records including 12 real workshop cards"
 
