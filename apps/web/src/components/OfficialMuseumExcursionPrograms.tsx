@@ -30,7 +30,7 @@ export default function OfficialMuseumExcursionPrograms({
     <div className="official-museum-program-grid">
       {items.map((item,index)=>{
         const published=approved.get(item.slug);
-        return <article className="official-museum-program-card" key={item.slug}>
+        return <article className="official-museum-program-card" key={item.slug} id={item.slug}>
           <p className="official-museum-program-number">Программа {String(index+1).padStart(2,"0")}</p>
           <h3>{published?.title?.trim() || item.title}</h3>
           <OfficialMuseumSourcePhotos photos={item.image_links} label={item.title}/>

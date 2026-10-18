@@ -27,7 +27,7 @@ export default function OfficialMuseumWorkshops({audience}:{audience:"children"|
     <div className="official-museum-program-grid">
       {officialWorkshops.map((p,index)=>{
         const editor=published.get(p.slug);
-        return <article className="official-museum-program-card" key={p.slug}>
+        return <article className="official-museum-program-card" key={p.slug} id={p.slug}>
           <p className="official-museum-program-number">Мастер-класс {String(index+1).padStart(2,"0")}</p>
           <h3>{editor?.title?.trim() || p.title}</h3>
           <OfficialMuseumSourcePhotos photos={p.image_links} label={p.title}/>

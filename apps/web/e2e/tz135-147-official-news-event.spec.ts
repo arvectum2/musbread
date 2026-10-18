@@ -48,8 +48,8 @@ test("TZ-135: historical museum news archives remain separate from ten latest po
   const latest=page.getByRole("region",{name:"Последние новости действующего сайта музея"});
   const archive=page.getByRole("region",{name:"Исторический архив новостей музея"});
   await expect(latest.locator(".official-museum-program-card")).toHaveCount(10);
-  await expect(archive.locator(".official-museum-program-card")).toHaveCount(80);
-  await archive.getByText("Показать 80 архивных публикаций").click();
+  await expect(archive.locator(".official-museum-program-card")).toHaveCount(120);
+  await archive.getByText("Показать 120 архивных публикаций").click();
   await expect(archive.locator(".official-museum-program-card").first()).toContainText("31.08.2026");
   await expect(archive.locator('a[href="https://muzei-xleb.ru/novosty/2026-08-31/sobytiya-v-muzee-s-31-avgusta-po-7-sentyabrya"]')).toHaveCount(1);
   await expect(archive.locator("img").first()).toHaveAttribute("src",/^\/media\/museum-source\/[a-f0-9]{64}\.webp$/);

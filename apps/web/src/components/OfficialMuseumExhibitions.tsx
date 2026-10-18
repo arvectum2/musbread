@@ -36,7 +36,7 @@ export default function OfficialMuseumExhibitions({category}:{category:string}){
       {index.linked_exhibitions.map((item,i)=>{
         const original=source.get(item.source_url);
         const editor=original && published.get(original.slug);
-        return <article className="official-museum-program-card" key={item.source_url}>
+        return <article className="official-museum-program-card" key={item.source_url} id={original?.slug}>
           <p className="official-museum-program-number">
             {isCurrent?"Текущая на дату снимка":isTraveling?"Выездной проект":category==="exhibitions-past"?"Архивная выставка":"Виртуальная выставка"} {String(i+1).padStart(2,"0")}
           </p>
@@ -71,7 +71,7 @@ export default function OfficialMuseumExhibitions({category}:{category:string}){
       <div className="official-museum-program-grid">
         {officialExhibitionNewsLinked.map(original=>{
           const editor=published.get(original.slug);
-          return <article className="official-museum-program-card" key={original.slug}>
+          return <article className="official-museum-program-card" key={original.slug} id={original.slug}>
             <p className="official-museum-program-number">Архивная выставка из музейных новостей</p>
             <h3>{editor?.title?.trim() || original.title}</h3>
             <p>{editor?.excerpt?.trim() || original.intro}</p>

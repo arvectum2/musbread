@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "python3 ../../scripts/build_museum_legacy_page_aliases.py",
     "start": "next start",
     "lint": "eslint",
     "test:e2e": "python3 ../../scripts/build_csp.py out --output .csp-header.txt && playwright test",

@@ -36,7 +36,7 @@ export default function OfficialExpositionRooms() {
         const revision = revisions.get(room.slug);
         const title = revision?.title?.trim() || room.title;
         const description = revision?.body ?? room.html;
-        return <article className="exposition-card" key={room.slug}>
+        return <article className="exposition-card" key={room.slug} id={room.slug}>
           <p className="exposition-card-index">Зал {String(index + 1).padStart(2, "0")} из {officialExpositionRooms.length}</p>
           <h3>{title}</h3>
           <p>{revision?.excerpt?.trim() || room.excerpt}</p>

@@ -10,9 +10,9 @@ class MuseumSelfHostedPhotoTests(unittest.TestCase):
         data=json.loads((ROOT/'apps/web/src/data/official-museum-photo-assets.json').read_text())
         self.assertEqual(data['source'],'https://muzei-xleb.ru')
         self.assertEqual(data['mode'],'self-hosted-static-images')
-        self.assertEqual(data['count'],213)
-        self.assertEqual(data['unique_static_assets'],209)
-        self.assertEqual(len(data['photos']),213)
+        self.assertEqual(data['count'],222)
+        self.assertEqual(data['unique_static_assets'],218)
+        self.assertEqual(len(data['photos']),222)
         used={}
         for original,item in data['photos'].items():
             with self.subTest(url=original):
@@ -29,11 +29,11 @@ class MuseumSelfHostedPhotoTests(unittest.TestCase):
                     self.assertEqual(frame.format,'WEBP')
                     self.assertEqual((frame.width,frame.height),(item['width'],item['height']))
                 used[item['path']]=True
-        self.assertEqual(len(used),209)
+        self.assertEqual(len(used),218)
     def test_export_manifest_replay_works_offline(self):
         result=generate(verify_only=True)
-        self.assertEqual(result['count'],213)
-        self.assertEqual(result['unique'],209)
+        self.assertEqual(result['count'],222)
+        self.assertEqual(result['unique'],218)
     def test_accessibility_photo_images_have_real_selfhosted_mappings(self):
         data=json.loads((ROOT/'apps/web/src/data/official-museum-photo-assets.json').read_text())
         matches=[x for x in data['photos'].values() if x['source_slug']=='accessible-museum']

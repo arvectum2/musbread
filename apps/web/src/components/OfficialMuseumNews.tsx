@@ -23,7 +23,7 @@ export default function OfficialMuseumNews(){
         const editor=published.get(item.slug);
         return <article className="official-museum-program-card" key={item.slug}>
           <p className="official-museum-program-number">Новость от {item.published_on.split("-").reverse().join(".")}</p>
-          <h3>{editor?.title?.trim() || item.title}</h3>
+          <h3><Link href={`/news/${item.slug}/`}>{editor?.title?.trim() || item.title}</Link></h3>
           <OfficialMuseumSourcePhotos photos={item.image_links} label={item.title} limit={2}/>
           <p>{editor?.excerpt?.trim() || item.intro}</p>
           <details>
@@ -57,7 +57,7 @@ export default function OfficialMuseumNews(){
           const editor=published.get(item.slug);
           return <article className="official-museum-program-card" key={item.slug}>
             <p className="official-museum-program-number">Архивная публикация от {item.published_on.split("-").reverse().join(".")}</p>
-            <h3>{editor?.title?.trim() || item.title}</h3>
+            <h3><Link href={`/news/${item.slug}/`}>{editor?.title?.trim() || item.title}</Link></h3>
             <OfficialMuseumSourcePhotos photos={item.image_links} label={item.title} limit={2}/>
             {item.image_only && !editor ? <p>Оригинальное объявление опубликовано музеем в виде изображения. Его можно посмотреть по исходной ссылке.</p>
               : <p>{editor?.excerpt?.trim() || item.intro}</p>}

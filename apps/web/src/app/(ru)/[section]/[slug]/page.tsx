@@ -6,24 +6,34 @@ import { notFound } from "next/navigation";
 import { content, findEntry, isMuseumSection, sections } from "@/data/content";
 import MuseumRichBody from "@/components/MuseumRichBody";
 import Image from "next/image";
+import OfficialMuseumNewsDetail from "@/components/OfficialMuseumNewsDetail";
+import {officialMuseumNews,officialMuseumArchiveNews} from "@/data/official-museum-news";
 
 type Props = { params: Promise<{ section: string; slug: string }> };
 
+const originalNews = new Map([...officialMuseumNews,...officialMuseumArchiveNews]
+  .map(article=>[article.slug,article]));
+
 export function generateStaticParams() {
-  return content.entries.flatMap((entry) =>
+  const cms=content.entries.flatMap((entry) =>
     Object.entries(sections)
       .filter(([, section]) => section.type === entry.type)
-      .map(([section]) => ({ section, slug: entry.slug })),
+      .map(([section]) => ({section,slug:entry.slug})),
   );
+  const owned=new Set(cms.map(item=>item.section+"/"+item.slug));
+  const verified=[...originalNews.keys()].filter(slug=>!owned.has("news/"+slug))
+    .map(slug=>({section:"news",slug}));
+  return [...cms,...verified];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { section, slug } = await params;
   if (!isMuseumSection(section)) return { title: "Материал не найден" };
   const entry = findEntry(section, slug);
+  const original=section==="news"?originalNews.get(slug):undefined;
   return {
-    title: entry?.seo_title || entry?.title || "Материал не найден",
-    description: entry?.seo_description || entry?.excerpt || undefined,
+    title: entry?.seo_title || entry?.title || original?.title || "Материал не найден",
+    description: entry?.seo_description || entry?.excerpt || original?.intro || undefined,
     ...(entry?.translations?.en ? { alternates: {
       canonical: "/" + section + "/" + slug + "/",
       languages: { "ru-RU": "/" + section + "/" + slug + "/",
@@ -36,6 +46,8 @@ export default async function MuseumEntryPage({ params }: Props) {
   const { section, slug } = await params;
   if (!isMuseumSection(section)) notFound();
   const entry = findEntry(section, slug);
+  const original=section==="news"?originalNews.get(slug):undefined;
+  if(!entry && original)return <OfficialMuseumNewsDetail article={original}/>;
   if (!entry) notFound();
   return <article className="section inner-page museum-detail">
     <nav aria-label="Хлебные крошки" className="breadcrumbs">
