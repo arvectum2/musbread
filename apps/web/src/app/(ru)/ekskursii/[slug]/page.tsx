@@ -1,3 +1,4 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import Link from "@/components/MuseumLink";
@@ -19,7 +20,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
   const original=originals.get(`/ekskursii/${slug}`);
   if(!original)return {title:"Экскурсия не найдена",robots:{index:false}};
   return {title:original.title,description:original.intro?.trim()||undefined,
-    alternates:{canonical:original.source_url}};
+    alternates:{canonical:original.source_url},robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST)};
 }
 export default async function OldMuseumExcursion({params}:Props){
   const {slug}=await params;

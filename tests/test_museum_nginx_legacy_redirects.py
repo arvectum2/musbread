@@ -10,10 +10,12 @@ class MuseumNginxCutoverTests(unittest.TestCase):
     def test_original_museum_pages_and_webp_sources_receive_only_safe_local_301_destinations(self):
         stats=render()
         self.assertGreaterEqual(stats['total'],664)
-        self.assertEqual(stats['page'],350)  # 280 technical news URLs plus 70 actual museum Drupal /node links
+        self.assertEqual(stats['page'],368)  # 280 technical URLs + 88 source-verified original Drupal /node links
         data=json.loads((ROOT/'apps/web/src/data/official-museum-photo-assets.json').read_text())
         self.assertEqual(stats['photo_original'],data['count'])
         self.assertEqual(stats['news_index_original_photos'],10)
+        self.assertEqual(stats['deep_original_photos'],37)
+        self.assertEqual(stats['historical_exhibition_photos'],4)
         conf=(ROOT/'deploy/nginx/legacy_museum_redirects.map.conf').read_text()
         self.assertTrue(conf.startswith('# GENERATED FROM source-verified'))
         self.assertIn('map $uri $musbread_legacy_target {',conf)
@@ -33,7 +35,7 @@ class MuseumNginxCutoverTests(unittest.TestCase):
             elif item['why']=='source-verified-drupal-node':
                 self.assertEqual(parsed[old],item['target'])
             else:
-                # 448 source original article/section/program URLs now serve
+                # 467 source original article/section/program URLs now serve
                 # their own real HTML and must NOT redirect to catalogue anchors.
                 self.assertNotIn(old,parsed)
         for original,photo in data['photos'].items():
@@ -46,6 +48,11 @@ class MuseumNginxCutoverTests(unittest.TestCase):
         for original,asset in index['photos'].items():
             self.assertEqual(parsed[urlsplit(original).path],asset['path'])
             self.assertTrue((ROOT/'apps/web/public'/asset['path'].removeprefix('/')).is_file())
+        tea=json.loads((ROOT/'apps/web/src/data/official-historical-exhibition-image-assets.json').read_text())
+        self.assertEqual(tea['count'],4)
+        for old,asset in tea['photos'].items():
+            self.assertEqual(parsed[urlsplit(old).path],asset['path'])
+            self.assertTrue((ROOT/'apps/web/public'/asset['path'].lstrip('/')).is_file())
         for old,target in match:
             self.assertTrue(old.startswith('/'))
             self.assertTrue(target.startswith('/'))

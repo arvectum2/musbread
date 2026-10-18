@@ -1,3 +1,4 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import type {Metadata} from "next";
 import Link from "@/components/MuseumLink";
 import RichText from "@/components/RichText";
@@ -13,7 +14,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
   const {slug}=await params;
   const item=byPath.get(`/video/${slug}`);
   if(!item)return {title:"Видеоматериал не найден",robots:{index:false}};
-  return {title:item.title,alternates:{canonical:item.source_url}};
+  return {title:item.title,alternates:{canonical:item.source_url},robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST)};
 }
 export default async function OriginalMuseumVideoSection({params}:Props){
   const {slug}=await params;

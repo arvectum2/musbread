@@ -1,3 +1,4 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import Link from "@/components/MuseumLink";
@@ -14,7 +15,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
   const {slug}=await params;
   const item=byPath.get('/vistavky/'+slug);
   if(!item)return {title:"Каталог музея не найден",robots:{index:false}};
-  return {title:item.title,alternates:{canonical:item.source_url}};
+  return {title:item.title,alternates:{canonical:item.source_url},robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST)};
 }
 export default async function OriginalMuseumExhibitionIndex({params}:Props){
   const {slug}=await params;

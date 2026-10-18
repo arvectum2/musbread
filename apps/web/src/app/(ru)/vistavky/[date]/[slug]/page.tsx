@@ -1,12 +1,20 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import type {Metadata} from "next";
 import Link from "@/components/MuseumLink";
 import {notFound} from "next/navigation";
 import RichText from "@/components/RichText";
 import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import {officialExhibitionDetails,type MuseumExhibitionSource} from "@/data/official-exhibitions";
+import deeperOriginals from "@/data/official-deep-museum-pages.json";
 
 /** Historical museum exhibitions retained at the original public /vistavky/YYYY… URL. */
-const realShows=officialExhibitionDetails;
+// An extra museum exhibition discovered in old /novosti links: preserve its
+// original source URL and true H1; do not invent an intro or visit schedule.
+const deeperExhibitions=deeperOriginals.pages
+  .filter(item=>/^\/vistavky\/\d{4}-\d{2}-\d{2}\/[a-z0-9-]+$/.test(item.path))
+  .map(item=>({...item,slug:item.path.split("/")[3],category_slug:"exhibitions-past",
+    intro:"",photos_rights_confirmed:false as const,captured_utc:item.source_page_captured_at}));
+const realShows=[...officialExhibitionDetails,...deeperExhibitions] as MuseumExhibitionSource[];
 const byOriginal=new Map<string,MuseumExhibitionSource>(realShows.map(x=>[new URL(x.source_url).pathname,x]));
 type Props={params:Promise<{date:string;slug:string}>};
 export function generateStaticParams(){
@@ -23,6 +31,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
     title:item.title,
     description:item.intro.trim()||undefined,
     alternates:{canonical:item.source_url},
+    robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST),
   };
 }
 export default async function OriginalMuseumExhibitionPage({params}:Props){

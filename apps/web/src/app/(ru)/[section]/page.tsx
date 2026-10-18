@@ -1,3 +1,4 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
 import Link from "@/components/MuseumLink";
@@ -11,9 +12,10 @@ import RichText from "@/components/RichText";
 import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import originalSections from "@/data/official-original-legacy-sections.json";
 import extraOriginalPages from "@/data/official-museum-crosslink-pages.json";
+import deepOriginalPages from "@/data/official-deep-museum-pages.json";
 
 
-const verifiedOldRoots=[...originalSections.sections,...extraOriginalPages.pages]
+const verifiedOldRoots=[...originalSections.sections,...extraOriginalPages.pages,...deepOriginalPages.pages]
   .filter(item=>/^\/[a-z0-9-]+$/.test(item.path));
 const oldRootByPath=new Map(verifiedOldRoots.map(item=>[item.path,item]));
 
@@ -27,7 +29,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { section } = await params;
   const original=oldRootByPath.get('/'+section);
-  if(original)return {title:original.title,alternates:{canonical:original.source_url}};
+  if(original)return {title:original.title,alternates:{canonical:original.source_url},robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST)};
   if (!isMuseumSection(section)) return { title: "Раздел не найден" };
   return fixedPageMetadata("/"+section+"/",sections[section].title);
 }

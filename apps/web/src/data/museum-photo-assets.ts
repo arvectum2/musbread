@@ -1,11 +1,15 @@
 import photoIndex from "./official-museum-photo-assets.json";
 import newsIndexPhotos from "./official-news-index-photo-assets.json";
+import deeperNewsPhotos from "./official-deep-news-image-assets.json";
+import originalExhibitionPhotos from "./official-historical-exhibition-image-assets.json";
 
 /** Map actual old official museum photo URLs to permanently self-hosted files. */
-const photoLookup={...photoIndex.photos,...newsIndexPhotos.photos} as Record<string,{path:string;static_sha256:string}>;
+const photoLookup={...photoIndex.photos,...newsIndexPhotos.photos,...deeperNewsPhotos.photos,...originalExhibitionPhotos.photos} as Record<string,{path:string;static_sha256:string}>;
 export function localMuseumPhoto(url:string):string|null {
   try {
-    const u=new URL(url);
+    // Drupal HTML often stores original links as root-relative /sites/default/files/…
+    // Resolve those against the known museum origin, not the preview hostname.
+    const u=new URL(url,"https://muzei-xleb.ru");
     // Historical original article HTML sometimes uses obsolete http://...
     if(!["http:","https:"].includes(u.protocol) || u.hostname!=="muzei-xleb.ru")return null;
     const path=u.pathname.replace(/^\/sites\/default\/files\/styles\/[^/]+\/public\//,"/sites/default/files/");

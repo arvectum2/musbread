@@ -37,7 +37,7 @@ def render():
             # Native original date-based museum article is 200; new technical
             # /news/ copy gets a single 301 TO the historic human-readable URL.
             register(item['target'],source,'new_news_duplicate_to_original')
-        elif item['why'] in ('original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page'):
+        elif item['why'] in ('original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page','original-deep-page'):
             # Native /vistavky/YYYY-MM-DD/... is a full source-verified 200
             # page; NEVER redirect it to a generic catalogue-card anchor.
             continue
@@ -67,6 +67,40 @@ def render():
         if not re.fullmatch(r'/media/museum-source/[a-f0-9]{64}\.webp',target):
             raise ValueError('News museum original image not self-hosted')
         register(original,target,'original_news_index_photo')
+    # Historical /novosti (not /novosty) contains 37 authentic linked JPEGs.
+    # Each literal source path is backed by locally saved raw source SHA and
+    # an exported WebP; avoid dependence on retiring Drupal after DNS cutover.
+    deep_file=ROOT/'apps/web/src/data/official-deep-news-image-assets.json'
+    deep=json.loads(deep_file.read_text(encoding='utf-8'))
+    if deep.get('source')!='https://muzei-xleb.ru' or deep.get('count')!=len(deep.get('photos',{})):
+        raise RuntimeError('Deep museum photo source corpus malformed')
+    if deep['count']+len(deep.get('unavailable',[]))!=37:
+        raise RuntimeError('Not all 37 source-linked historical museum JPEGs classified')
+    for original,asset in deep['photos'].items():
+        if not original.startswith('https://muzei-xleb.ru/sites/default/files/page/'):
+            raise RuntimeError('Non-source old JPEG supplied as museum photo')
+        local=asset['path']
+        if not re.fullmatch(r'/media/museum-source/[a-f0-9]{64}\.webp',local):
+            raise RuntimeError('Museum historical original not exported as independent local WebP')
+        stored=ROOT/'apps/web/public'/local.lstrip('/')
+        if not stored.is_file():raise RuntimeError('Exported museum old source photo missing '+local)
+        register(original,local,'deep_original_museum_photo')
+    # Four original exhibition gallery JPEG source links discovered in a real
+    # 2019 article. Every photo was downloaded and verified against archived
+    # museum source HTML and a local unmodified source JPG SHA-256.
+    exhibit_file=ROOT/'apps/web/src/data/official-historical-exhibition-image-assets.json'
+    exhibition=json.loads(exhibit_file.read_text(encoding='utf-8'))
+    if exhibition.get('source')!='https://muzei-xleb.ru' or exhibition.get('count',-1)+len(exhibition.get('unavailable',[]))!=4:
+        raise RuntimeError('Museum original 2019 exhibition image source incomplete')
+    for original,asset in exhibition['photos'].items():
+        if not original.startswith('https://muzei-xleb.ru/sites/default/files/vistavky/'):
+            raise RuntimeError('Unverified source museum exhibition image URL')
+        local=asset['path']
+        if not re.fullmatch(r'/media/museum-source/[a-f0-9]{64}\.webp',local):
+            raise RuntimeError('No local museum exhibit WebP target')
+        stored=ROOT/'apps/web/public'/local.lstrip('/')
+        if not stored.is_file():raise RuntimeError('Original exhibition image not stored as standalone file')
+        register(original,local,'original_2019_exhibition_photo')
     output=['# GENERATED FROM source-verified museum HTML and local static WebP assets.',
             '# Include ONLY from the nginx http{} context, not server{}.',
             '# Redirects work only after you configure this as the museum domain itself.',
@@ -83,8 +117,8 @@ def render():
       '}\n',encoding='utf-8')
     counts={'total':len(routes),'page':sum(v in ('page','new_news_duplicate_to_original') for v in kinds.values()),
             'image':sum(v not in ('page','new_news_duplicate_to_original') for v in kinds.values()),
-            'photo_original':photo_assets['count'],'news_index_original_photos':index_photos['count']}
-    if counts['page']!=sum(v['why'] not in ('original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page')
+            'photo_original':photo_assets['count'],'news_index_original_photos':index_photos['count'],'deep_original_photos':deep['count'],'historical_exhibition_photos':exhibition['count']}
+    if counts['page']!=sum(v['why'] not in ('original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page','original-deep-page')
                            for v in old_pages.values()) or counts['image']<photo_assets['count']:
         raise RuntimeError('Dropped museum original photo or page redirects')
     print('MUSEUM_PRODUCTION_HTTP301_CONFIG_PREPARED',counts,'not deployed',flush=True)

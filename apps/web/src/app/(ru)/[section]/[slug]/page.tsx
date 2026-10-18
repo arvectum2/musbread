@@ -1,3 +1,4 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import RichText from "@/components/RichText";
 import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
@@ -8,6 +9,13 @@ import MuseumRichBody from "@/components/MuseumRichBody";
 import Image from "next/image";
 import OfficialMuseumNewsDetail from "@/components/OfficialMuseumNewsDetail";
 import {officialMuseumNews,officialMuseumArchiveNews} from "@/data/official-museum-news";
+import deeperOldPages from "@/data/official-deep-museum-pages.json";
+
+// Source-native second-level museum original URLs, e.g. the actual
+// government assignment reports /gosudarstvennoe-zadanie/2023, not guessed CMS.
+const deeperByPath=new Map(deeperOldPages.pages
+  .filter(x=>/^\/[a-z0-9-]+\/[a-z0-9-]+$/.test(x.path))
+  .map(x=>[x.path,x]));
 
 type Props = { params: Promise<{ section: string; slug: string }> };
 
@@ -23,11 +31,14 @@ export function generateStaticParams() {
   const owned=new Set(cms.map(item=>item.section+"/"+item.slug));
   const verified=[...originalNews.keys()].filter(slug=>!owned.has("news/"+slug))
     .map(slug=>({section:"news",slug}));
-  return [...cms,...verified];
+  const oldPages=[...deeperByPath.keys()].map(p=>({section:p.split("/")[1],slug:p.split("/")[2]}));
+  return [...cms,...verified,...oldPages];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { section, slug } = await params;
+  const deeper=deeperByPath.get(`/${section}/${slug}`);
+  if(deeper)return {title:deeper.title,alternates:{canonical:deeper.source_url},robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST)};
   if (!isMuseumSection(section)) return { title: "Материал не найден" };
   const entry = findEntry(section, slug);
   const original=section==="news"?originalNews.get(slug):undefined;
@@ -45,6 +56,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function MuseumEntryPage({ params }: Props) {
   const { section, slug } = await params;
+  const deeper=deeperByPath.get(`/${section}/${slug}`);
+  if(deeper)return <article className="section inner-page museum-detail" data-original-museum-section={deeper.path}>
+    <nav aria-label="Хлебные крошки" className="breadcrumbs"><Link href="/">Главная</Link>
+      <span aria-hidden="true">/</span><Link href={`/${section}/`}>Раздел музея</Link>
+      <span aria-hidden="true">/</span><span aria-current="page">{deeper.title}</span></nav>
+    <h1>{deeper.title}</h1>
+    <RichText html={deeper.html}/>
+    <p>Подлинный документ музейного сайта на прежнем URL.</p>
+  </article>;
   if (!isMuseumSection(section)) notFound();
   const entry = findEntry(section, slug);
   const original=section==="news"?originalNews.get(slug):undefined;

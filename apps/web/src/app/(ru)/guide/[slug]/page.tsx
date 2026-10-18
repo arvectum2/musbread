@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const fallback = fixedPageSeo("/guide/" + slug + "/");
   // Fallback/reference guide pages are unapproved prototypes. Only an
   // explicit site-approval gate permits indexing approved CMS section routes.
-  const approved = siteSeoApproved(process.env.MUSBREAD_SITE_APPROVED) && !!section;
+  const approved = siteSeoApproved(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST) && !!section;
   return {
     title: cmsPage?.seo_title?.trim() || section?.seo_title?.trim() || fallback?.seo_title?.trim() || sourceTitle || title || "Раздел не найден",
     description: cmsPage?.seo_description?.trim() || section?.seo_description?.trim() || fallback?.seo_description?.trim() || undefined,

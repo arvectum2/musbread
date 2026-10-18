@@ -1,0 +1,51 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "count": 4,
+  "photos": {
+    "https://muzei-xleb.ru/sites/default/files/vistavky/img_8600.jpg": {
+      "original_url": "https://muzei-xleb.ru/sites/default/files/vistavky/img_8600.jpg",
+      "source_page_url": "https://muzei-xleb.ru/vistavky/2019-06-21/peterburgskoe-chaepitie-20-iyunya-31-avgusta-2019-g",
+      "source_html_sha256": "4cbf5dbc37c695d57da1371aba6734dae7413a8556f54bae682c54c29899bc06",
+      "source_label": "",
+      "original_sha256": "82cfc5127f8c8113a2a066cfb416540ebc718865f94239adebcd556dd6419857",
+      "original_format": "jpg",
+      "original_bytes": 176288,
+      "path": "/media/museum-source/82cfc5127f8c8113a2a066cfb416540ebc718865f94239adebcd556dd6419857.webp",
+      "static_sha256": "4fe2c923dd275f3b302cd11a535adacf787297936ef3edce98c93a56967a79a2"
+    },
+    "https://muzei-xleb.ru/sites/default/files/vistavky/img_8601.jpg": {
+      "original_url": "https://muzei-xleb.ru/sites/default/files/vistavky/img_8601.jpg",
+      "source_page_url": "https://muzei-xleb.ru/vistavky/2019-06-21/peterburgskoe-chaepitie-20-iyunya-31-avgusta-2019-g",
+      "source_html_sha256": "4cbf5dbc37c695d57da1371aba6734dae7413a8556f54bae682c54c29899bc06",
+      "source_label": "",
+      "original_sha256": "1023cfb4c172653c60d782b88372222c4ed023dfa7cf246fc1fcec84ded7d458",
+      "original_format": "jpg",
+      "original_bytes": 405276,
+      "path": "/media/museum-source/1023cfb4c172653c60d782b88372222c4ed023dfa7cf246fc1fcec84ded7d458.webp",
+      "static_sha256": "395d2fe62f2acc4fae8d462a3ae3476508312624c54a687622a153ec347f0aa9"
+    },
+    "https://muzei-xleb.ru/sites/default/files/vistavky/img_8605.jpg": {
+      "original_url": "https://muzei-xleb.ru/sites/default/files/vistavky/img_8605.jpg",
+      "source_page_url": "https://muzei-xleb.ru/vistavky/2019-06-21/peterburgskoe-chaepitie-20-iyunya-31-avgusta-2019-g",
+      "source_html_sha256": "4cbf5dbc37c695d57da1371aba6734dae7413a8556f54bae682c54c29899bc06",
+      "source_label": "",
+      "original_sha256": "4d043f4d3b00e652f9ae1329274d32241a65d39cc096ce492520a9cca38a3f36",
+      "original_format": "jpg",
+      "original_bytes": 171713,
+      "path": "/media/museum-source/4d043f4d3b00e652f9ae1329274d32241a65d39cc096ce492520a9cca38a3f36.webp",
+      "static_sha256": "2cc601612577f901aba481e56b7d2f60d4ac7ee5755aad8804c0ec3fb89bfe84"
+    },
+    "https://muzei-xleb.ru/sites/default/files/vistavky/img_8606.jpg": {
+      "original_url": "https://muzei-xleb.ru/sites/default/files/vistavky/img_8606.jpg",
+      "source_page_url": "https://muzei-xleb.ru/vistavky/2019-06-21/peterburgskoe-chaepitie-20-iyunya-31-avgusta-2019-g",
+      "source_html_sha256": "4cbf5dbc37c695d57da1371aba6734dae7413a8556f54bae682c54c29899bc06",
+      "source_label": "",
+      "original_sha256": "0d1a364a979ca1b4e3ae613f61b3579de8531e85a29f20521ca3e66e1afb706e",
+      "original_format": "jpg",
+      "original_bytes": 175672,
+      "path": "/media/museum-source/0d1a364a979ca1b4e3ae613f61b3579de8531e85a29f20521ca3e66e1afb706e.webp",
+      "static_sha256": "5b2c7717caad7381ff7edeb2645e8523e972b970ac4d39cde7fc9d93288e6be2"
+    }
+  },
+  "unavailable": []
+}

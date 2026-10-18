@@ -1,3 +1,4 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import Link from "@/components/MuseumLink";
@@ -18,7 +19,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
   const item=originals.get(`/ekspozicii/${date}/${slug}`);
   if(!item)return {title:"Зал экспозиции не найден",robots:{index:false}};
   return {title:item.title,description:item.excerpt.trim()||undefined,
-    alternates:{canonical:item.source_url}};
+    alternates:{canonical:item.source_url},robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST)};
 }
 export default async function OldMuseumRoom({params}:Props){
   const {date,slug}=await params;

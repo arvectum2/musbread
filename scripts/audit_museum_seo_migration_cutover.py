@@ -35,7 +35,7 @@ def known_originals():
        ('official-exhibition-news-linked.json','exhibitions'),('official-node-linked-exhibitions.json','exhibitions'),
        ('official-excursion-programs.json','programs'),('official-workshop-pages.json','programs'),
        ('official-page-snapshots.json','pages'),('official-original-legacy-sections.json','sections'),
-       ('official-museum-crosslink-pages.json','pages'),('official-exposition-rooms.json','rooms')]:
+       ('official-museum-crosslink-pages.json','pages'),('official-deep-museum-pages.json','pages'),('official-exposition-rooms.json','rooms')]:
         src=load(file)
         for item in src[key]:
             u=item.get('source_url')
@@ -84,10 +84,12 @@ def audit():
         effective_info=new_info if old_generic_redirect else old_info
         effective_target=target if old_generic_redirect else old
         no_match=bool(source_title and not any(source_title in value for value in [effective_info['title'],effective_info['h1']]))
+        source_canonical_mismatch=not old_generic_redirect and effective_info['canonical']!=f'https://muzei-xleb.ru{old}'
         problem=('meta-refresh-instead-of-HTTP' if old_generic_redirect else 'full-source-html-200')
         if '#' in effective_target:problem+=';target-is-anchor-not-standalone'
         if not effective_info['canonical']:problem+=';effective-canonical-not-explicit'
         if no_match:problem+=';source-title-not-in-target-title-or-h1'
+        if source_canonical_mismatch:problem+=';source-canonical-not-exact'
         rows.append({'legacy_url':'https://muzei-xleb.ru'+old,
            'legacy_path':old,'original_classification':section,'original_title_if_source_verified':source_title,
            'original_html_sha256':source.get('html_sha256','') if source else '',
@@ -98,7 +100,7 @@ def audit():
            'prototype_new_canonical':effective_info['canonical'],
            'prototype_target_robots':effective_info['robots'],
            'recommended_production_action':prefer,
-           'seo_compatibility':'NO_GO' if old_generic_redirect or '#' in effective_target or no_match or not effective_info['canonical'] else 'REVIEW',
+           'seo_compatibility':'NO_GO' if old_generic_redirect or '#' in effective_target or no_match or source_canonical_mismatch or not effective_info['canonical'] else 'REVIEW',
            'specific_finding':problem,
            'ownership_approval':'NOT_APPROVED'})
     if errors:raise RuntimeError('Missing static museum source destination '+str(errors[:8]))
@@ -109,6 +111,7 @@ def audit():
     anchors=sum('#' in x['prototype_target'] for x in rows)
     missing_canonical=sum(not x['prototype_new_canonical'] for x in rows)
     title_loss=sum('source-title-not-in-target-title-or-h1' in x['specific_finding'] for x in rows)
+    canonical_loss=sum('source-canonical-not-exact' in x['specific_finding'] for x in rows)
     news=sum(x['original_classification']=='original-news-article' for x in rows)
     indexed=load('official-museum-news-archive.json')
     if indexed['count']!=270 or len(indexed['indices'])!=27:raise RuntimeError('Missing historical museum news pagination')
@@ -116,6 +119,12 @@ def audit():
     if original_photos['count']!=259:raise RuntimeError('Original museum photos missing')
     extra_photos=load('official-news-index-photo-assets.json')
     if extra_photos['count']!=10:raise RuntimeError('Extra original museum index photos absent')
+    extra_deep_photos=load('official-deep-news-image-assets.json')
+    if extra_deep_photos['count']+len(extra_deep_photos.get('unavailable',[]))!=37:
+        raise RuntimeError('Incomplete museum historical news image source corpus')
+    exhibition_photos=load('official-historical-exhibition-image-assets.json')
+    if exhibition_photos['count']+len(exhibition_photos.get('unavailable',[]))!=4:
+        raise RuntimeError('Four original museum historical exhibition images not all classified')
     docs=source_documents()
     doc_missing=[]
     for old,src in docs.items():
@@ -127,6 +136,14 @@ def audit():
         target=OUT/photo['path'].lstrip('/')
         if not target.is_file():photo_missing.append((source,photo['path']))
     for source,photo in extra_photos['photos'].items():
+        target=OUT/photo['path'].lstrip('/')
+        if not target.is_file() or digest(target)!=photo['static_sha256']:
+            photo_missing.append((source,photo['path']))
+    for source,photo in extra_deep_photos['photos'].items():
+        target=OUT/photo['path'].lstrip('/')
+        if not target.is_file() or digest(target)!=photo['static_sha256']:
+            photo_missing.append((source,photo['path']))
+    for source,photo in exhibition_photos['photos'].items():
         target=OUT/photo['path'].lstrip('/')
         if not target.is_file() or digest(target)!=photo['static_sha256']:
             photo_missing.append((source,photo['path']))
@@ -145,7 +162,8 @@ def audit():
        'alias_meta_refresh_pages':meta_refresh,'source_old_details_pointing_at_anchors':anchors,
        'new_target_missing_explicit_canonical':missing_canonical,
        'original_titles_not_in_new_title_or_h1':title_loss,
-       'original_photo_urls':original_photos['count']+extra_photos['count'], 'photo_assets_missing':len(photo_missing),
+       'original_source_canonical_mismatches':canonical_loss,
+       'original_photo_urls':original_photos['count']+extra_photos['count']+extra_deep_photos['count']+exhibition_photos['count'], 'photo_assets_missing':len(photo_missing),
        'original_documents':len(docs),'document_files_missing_or_changed':len(doc_missing),
        'nginx_rules_prepared_not_activated':aliases['total'],
        'preview_robots_all_blocked':prot_noindex,'preview_sitemap_url_count':len(xml_urls),
@@ -172,12 +190,13 @@ def audit():
 | Известные старые пути страниц, проверенные в статической сборке | **{len(rows)}** |
 | Исторические и последние настоящие новости | **280 (10 + 270)** |
 | Архивные URL новостей, связанные с конкретными реальными страницами | **{news}** |
-| Старые адреса с самостоятельным полным HTML `200` и canonical | **{len(rows)-meta_refresh}** (280 новостей, 76 выставок, 40 экскурсионных/экспозиционных страниц, 37 разделов, 15 найденных по ссылкам страниц) |
+| Старые адреса с самостоятельным полным HTML `200` и canonical | **{len(rows)-meta_refresh}** (280 новостей, 76 выставок + одна дополнительная выставка 2019 года, 40 программ/залов, 37 разделов, 15 ранее найденных страниц, 18 новых административных/научных материалов) |
 | Старые адреса, обслуживаемые `meta refresh` вместо эквивалентного 200 / HTTP 301 | **{meta_refresh}** |
 | Старые URL, ведущие в якоря общих страниц (не отдельные индексируемые статьи) | **{anchors}** |
 | Цели, у которых нет явного `rel=canonical` в статическом HTML | **{missing_canonical}** |
 | Исходный заголовок отсутствует в `title` и H1 целевой страницы (включая карточки выставок) | **{title_loss}** |
-| Исходные изображения: музейная медиатека + прямые фото из новостной ленты | **259 + 10 = 269 исходных URL** (255 WebP медиатеки + 10 дополнительных самостоятельных WebP) |
+| Настоящие исходные HTML с canonical, отличающимся от точного прежнего URL (включая лишний `/`) | **{canonical_loss}** |
+| Исходные изображения: музейная медиатека + прямые фото из новостной ленты | **259 + 10 + {extra_deep_photos['count']} + {exhibition_photos['count']} = {original_photos['count']+extra_photos['count']+extra_deep_photos['count']+exhibition_photos['count']} старых URL**; собственные локальные WebP, SHA-256 проверены |
 | Отсутствующих публичных файлов из проверенной музейной фотобиблиотеки | **{len(photo_missing)}** |
 | Проверенных PDF/DOCX по исходным адресам, SHA-256 без изменений | **{len(docs)}** |
 | Ошибок доступности/контроля SHA-256 этих документов в полной сборке | **{len(doc_missing)}** |
@@ -201,13 +220,13 @@ def audit():
 
 ## Очерёдность без риска
 
-- [x] Проверены все 28 исходных индексных страниц новостей и 280 уникальных публикаций, source-backed описания выставок, 61 найденный Drupal `/node/N`, 269 оригинальных фото-URL, 59 документов по исходным путям. Полная сборка `npm run build:museum-deploy` проверена на Mac mini.
+- [x] Проверены все 28 исходных индексных страниц новостей и 280 уникальных публикаций, source-backed описания выставок, 88 проверенных исходных Drupal-переходов `/node/N`, 310 оригинальных фото-URL, 101 документ по исходным путям. Полная сборка `npm run build:museum-deploy` проверена на Mac mini.
 - [x] Известные старые URL, сохранённые целевые HTML/якоря и исходные вложения сведены в автоматическую матрицу (без имитации статистики поисковиков).
-- [x] **280 новостей, 76 выставок, 40 программ/залов, 37 прежних разделов и 15 дополнительно найденных страниц возвращают самостоятельный source-first HTML** на исходных исторических URL с полным текстом, H1 и canonical; 60 настоящих Drupal `/node/N` в будущей Nginx-карте ведут сразу на конкретную старую человекочитаемую страницу выставки.
-- [ ] **Включить реальные HTTP 301 для {meta_refresh} исторических `/node/N` и перепроверить расширенный перечень внутренних ссылок:** {len({x['linked_path'] for x in crosslink_gaps})} адреса ещё требуют скачивания первоисточников или отдельного решения. Проверить `/novosty?page=N`, все шаблоны sitemap, URL без завершающего слеша и реальные коды сервера отдельно.
+- [x] **280 новостей, 77 выставок, 40 программ/залов, 37 прежних разделов и 33 дополнительно найденные административные/научные страницы возвращают самостоятельный source-first HTML** на исходных исторических URL с полным текстом, H1 и canonical; 88 настоящих Drupal `/node/N` в будущей Nginx-карте ведут сразу на конкретную старую человекочитаемую страницу выставки.
+- [ ] **Включить реальные HTTP 301 для {meta_refresh} исторических `/node/N` и отдельно согласовать три исходно недоступных URL:** {len({x['linked_path'] for x in crosslink_gaps})} адреса источника по-прежнему недоступны (два 403 и один PDF 404), без заменителей. Проверить `/novosty?page=N`, все шаблоны sitemap, URL без завершающего слеша и реальные коды сервера отдельно.
 - [ ] Сформировать **боевой** sitemap.xml на `https://muzei-xleb.ru` и robots.txt для новой архитектуры (разрешить публичные страницы, закрыть CMS/тестовые пути), валидные canonical, internal links и H1/title/description. Тестовую сборку сохранять `noindex`/`Disallow` до релиза.
 - [ ] Получить у заказчика Яндекс Вебмастер, Google Search Console, Метрику/GA4, подтверждения владения и список важных посадочных страниц; снять baseline за 28 и 90 дней **перед релизом**, согласовать legacy-исключения и резервный откат.
-- [ ] После договора и настройки сервера: `nginx -t`, проверка полного локального пакета 59 PDF/DOCX, реальные HEAD/GET/301 и canonical на поддомене/hosts-подмене, проверка SSR/статических путей; только после **100% критичных проверок** менять DNS.
+- [ ] После договора и настройки сервера: `nginx -t`, проверка полного локального пакета 101 PDF/DOCX, реальные HEAD/GET/301 и canonical на поддомене/hosts-подмене, проверка SSR/статических путей; только после **100% критичных проверок** менять DNS.
 
 **Оценка SEO: красный стоп-гейт релиза** до устранения проблем 1–4 и предоставления нужных подтверждений. Это **внутренний дополнительный критерий безопасности**, а не новый пункт 325 требований исходного ТЗ. Формальный светофор ТЗ не изменён.
 '''

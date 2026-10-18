@@ -1,3 +1,4 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import OfficialMuseumNewsDetail from "@/components/OfficialMuseumNewsDetail";
@@ -24,6 +25,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
     title:original.title,
     description:original.intro.trim()||undefined,
     alternates:{canonical:original.source_url},
+    robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST),
     // In the unapproved prototype inherited layout robots remain noindex.
     // Only source-URL release gates can subsequently make this indexable.
   };

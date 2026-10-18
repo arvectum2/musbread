@@ -1,14 +1,21 @@
 {
   "source": "https://muzei-xleb.ru",
   "description": "Copied byte-for-byte from user-owned original source files on Mac mini; not included in git.",
-  "count": 82,
-  "total_bytes": 256641124,
+  "count": 101,
+  "total_bytes": 301950004,
   "files": [
     {
       "legacy_path": "/sites/default/files/page/191218113728_0001.pdf",
       "url": "https://muzei-xleb.ru/sites/default/files/page/191218113728_0001.pdf",
       "sha256": "17cd30bed83ea29ae2a231ba0747e991aaee92943eed166bfad9a6a2abcfe121",
       "size_bytes": 975435,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/201125154142_0001.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/201125154142_0001.pdf",
+      "sha256": "c3dbc2843b2dd39f4cf0c0c9ccc6f503cd8b93d0ba9810041c383640ccef4d0f",
+      "size_bytes": 1325305,
       "format": "pdf"
     },
     {
@@ -124,6 +131,62 @@
       "format": "pdf"
     },
     {
+      "legacy_path": "/sites/default/files/page/20240826123831-gz_2024_1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240826123831-gz_2024_1.pdf",
+      "sha256": "75293c7a58a4a045cc7fff332f4c94f8dda68d23fedaabe4bfbf1de86bc75bb5",
+      "size_bytes": 4050890,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240826123831-gz_2024_2.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240826123831-gz_2024_2.pdf",
+      "sha256": "6842b9da9850b4318f1c290485d86509cf9a965ef614672fc8a1cf9ae13a4171",
+      "size_bytes": 12663016,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240829122031-gos_zadanie_2023.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240829122031-gos_zadanie_2023.pdf",
+      "sha256": "fa77ff7f369954009b59a059cf666661b7ca56de3622962c0ebeba3cfaa51394",
+      "size_bytes": 1608295,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240829122031-gos_zadanie_2023_1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240829122031-gos_zadanie_2023_1.pdf",
+      "sha256": "fc61804ca4b5c3caffe3eef000480d7f607a1619259582d12194ab6e9e94e3e2",
+      "size_bytes": 3882606,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_2023.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_2023.pdf",
+      "sha256": "642a612c8895a2014bf9d25e6e701bdaa7cab016ddb64736c105f3b6abf50d8c",
+      "size_bytes": 1542856,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_3_kvartal_2023.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_3_kvartal_2023.pdf",
+      "sha256": "e058bb460fb471950c19abe65bc4639bd76bebf6f3d9c34ec5cc9ae594ed14a5",
+      "size_bytes": 1481012,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_pervyy_kvartal_2023.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_pervyy_kvartal_2023.pdf",
+      "sha256": "cf540fa15b302f6753a3c0071101eb75a1bfdae927f147e4766121d8a0d3472a",
+      "size_bytes": 1079225,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_vtoroy_kvartal_2023.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_vtoroy_kvartal_2023.pdf",
+      "sha256": "ece45aed149bd31d19b11b9d5813c7550db9c58cbfc1228df49f7b2355347447",
+      "size_bytes": 1491019,
+      "format": "pdf"
+    },
+    {
       "legacy_path": "/sites/default/files/page/20240829125555-f_0503730_balans.pdf",
       "url": "https://muzei-xleb.ru/sites/default/files/page/20240829125555-f_0503730_balans.pdf",
       "sha256": "a7346ae34e0c1cd0fd7e05e77f2d134aedbe4f5827d4cd5bd560363179a543b6",
@@ -180,10 +243,24 @@
       "format": "pdf"
     },
     {
+      "legacy_path": "/sites/default/files/page/20241001142425-otchet_gos_zadanie_3_kv._24.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20241001142425-otchet_gos_zadanie_3_kv._24.pdf",
+      "sha256": "f78a028c291b46c562cfa8740270bde48e2cffaedd0273e05d9a5500a6dd5180",
+      "size_bytes": 1140109,
+      "format": "pdf"
+    },
+    {
       "legacy_path": "/sites/default/files/page/20241114141130-1.pdf",
       "url": "https://muzei-xleb.ru/sites/default/files/page/20241114141130-1.pdf",
       "sha256": "c1fdc87c3c37754600ef2cb5142c3493de6ede0e62bc090c3331d16b8f265a15",
       "size_bytes": 1049223,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20241210114124-skan_gz_2024_no_3.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20241210114124-skan_gz_2024_no_3.pdf",
+      "sha256": "6ad4c2d21d778142d13e7a05cfc122b21d9d385821dc07f8fb9278ecbc67a6ef",
+      "size_bytes": 457437,
       "format": "pdf"
     },
     {
@@ -198,6 +275,34 @@
       "url": "https://muzei-xleb.ru/sites/default/files/page/20241223124307-otchet_po_planu_meropriyatiy_za_2024_g.pdf",
       "sha256": "a2524f096aa1cce78cc3afc29e6bbe801832381fd9ac3b1d83af6f2fcce89338",
       "size_bytes": 1278795,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20241226162035-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20241226162035-1.pdf",
+      "sha256": "4d184987e966049ff903021f2ce39b306d3244b499368721b9d52d333a0f6d21",
+      "size_bytes": 2004442,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20250311125318-otchet_za_2024_god.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20250311125318-otchet_za_2024_god.pdf",
+      "sha256": "825946595323a3d54f31ca658261ee5fc406e3c6dc36320dc45a32434f15f357",
+      "size_bytes": 300781,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20250418101345-2._goszadanie_ot_28.03.2025.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20250418101345-2._goszadanie_ot_28.03.2025.pdf",
+      "sha256": "b00e08c1fa50fb83aa6ae570ef79ddfce2ddb8ed7c0267e60a244fb14e941c0b",
+      "size_bytes": 6731917,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20250418101345-otchet_gos_zadanie_1_kv_2025.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20250418101345-otchet_gos_zadanie_1_kv_2025.pdf",
+      "sha256": "976726e1d7691500d14b0331287b12d632022c427b539fc68d3d6c8ef7be73c4",
+      "size_bytes": 563864,
       "format": "pdf"
     },
     {
@@ -219,6 +324,20 @@
       "url": "https://muzei-xleb.ru/sites/default/files/page/20250620100746-monitoring_pervoe_polugodie_2025.pdf",
       "sha256": "5f51552c058b08c59d91d3df8886dcbc4039ce9106ea43437f176f2b00de8700",
       "size_bytes": 351925,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20250704154330-otchet_gos_zadanie_2_kv_2025.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20250704154330-otchet_gos_zadanie_2_kv_2025.pdf",
+      "sha256": "d6ab5d74876078bc29ddba4ce7f02f100750da2252aaaa90a203fb11118d4093",
+      "size_bytes": 604470,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20251001132902-otchet_gos_zadanie_3_kv_2025.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20251001132902-otchet_gos_zadanie_3_kv_2025.pdf",
+      "sha256": "039bb479d0656dfadadbfbe4e6a5012308775eecca67788bf1835e4c307c4efa",
+      "size_bytes": 2289288,
       "format": "pdf"
     },
     {
@@ -471,6 +590,20 @@
       "url": "https://muzei-xleb.ru/sites/default/files/page/221216115845_0001.pdf",
       "sha256": "223e8e662c1388e2438e376fa973943f4ce3f08cad20a54482bf272de1d1f07d",
       "size_bytes": 1027685,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/240826132631_0001.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/240826132631_0001.pdf",
+      "sha256": "a1ce2f6b7f2a5bcbdd0d9b72cdac73205c5609dc599f17c76eaade0d0ead2507",
+      "size_bytes": 973987,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/240826132725_0001.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/240826132725_0001.pdf",
+      "sha256": "3ff77bc31355731633bc882c8f06f4dbafcf33f6e650bddaaf9cbf087d92048c",
+      "size_bytes": 1118361,
       "format": "pdf"
     },
     {

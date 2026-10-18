@@ -30,16 +30,31 @@ export function publishedSitemapPaths(
   return [...new Set(paths)].sort((a,b)=>a.localeCompare(b,"en"));
 }
 
-/** Pre-contract build MUST block indexing. Post-contract release opt-in only. */
-export function siteSeoApproved(value: string | undefined): boolean { return value === "true"; }
+/** Two independent explicit approvals must exist before any SEO publishing.
+ * Prevent enabling public indexing by changing a single prototype env flag.
+ */
+export function siteSeoApproved(value: string | undefined, releaseHost: string | undefined): boolean {
+  return value==="true" && releaseHost==="muzei-xleb.ru";
+}
 
-export function sitemapUrls(paths: readonly string[], approved: boolean, base = "https://musbread.ru") {
+/** Only proven ORIGINAL source-backed pages can override default demo noindex;
+ * robots.txt and the global prototype metadata retain the block otherwise.
+ */
+export function verifiedSourceRobots(approval:string|undefined,releaseHost:string|undefined){
+ const published=siteSeoApproved(approval,releaseHost);
+ return {index:published,follow:published};
+}
+
+export function sitemapUrls(paths: readonly string[], approved: boolean, base = "https://muzei-xleb.ru") {
   if (!approved) return [];
-  if (base !== "https://musbread.ru") throw new Error("Approval required to change tender domain");
+  if (base !== "https://muzei-xleb.ru") throw new Error("Only the original customer museum domain may enter canonical sitemap");
+  if (new Set(paths).size!==paths.length || paths.some(path=>!/^\/(?:[a-z0-9-]+\/)*[a-z0-9-]+\/?$|^\/$/.test(path))){
+    throw new Error("Only distinct clean original museum URL paths permitted in production sitemap");
+  }
   return paths.map(path=>({url:base+path,changeFrequency:"weekly" as const}));
 }
 
 export function robotsRules(approved:boolean) {
   return { rules:[{userAgent:"*",allow: approved ? "/" : undefined,
-    disallow:approved?undefined:"/"}], sitemap:approved?"https://musbread.ru/sitemap.xml":undefined };
+    disallow:approved?undefined:"/"}], sitemap:approved?"https://muzei-xleb.ru/sitemap.xml":undefined };
 }

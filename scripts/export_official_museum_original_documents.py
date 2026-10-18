@@ -19,6 +19,7 @@ MANIFESTS=[ROOT/p for p in (
  '.local_archive/news-original-documents',
  '.local_archive/extra-original-documents',
  '.local_archive/deep-original-documents',
+ '.local_archive/government-original-documents',
 )]
 DEPLOYMENT_LIST=ROOT/'docs/source-migration/OFFICIAL_ORIGINAL_DOCUMENTS_DEPLOYMENT_20261018.json'
 FILE_URL=re.compile(r'^/sites/default/files/[A-Za-z0-9._~!$&\x27()*+,;=:@%/-]+\.(?:pdf|docx)$',re.I)
@@ -33,7 +34,7 @@ def source_documents():
     records={}
     for folder in MANIFESTS:
         source_manifest=folder/'manifest.json'
-        if folder.name in ('news-original-documents','extra-original-documents','deep-original-documents') and not source_manifest.exists():
+        if folder.name in ('news-original-documents','extra-original-documents','deep-original-documents','government-original-documents') and not source_manifest.exists():
             continue  # Fully source-verified news documents not discovered yet
         data=json.loads(source_manifest.read_text())
         if data.get('source')!='https://muzei-xleb.ru' or data.get('errors',[])!=[]:

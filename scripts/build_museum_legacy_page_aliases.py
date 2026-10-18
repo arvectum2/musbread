@@ -144,6 +144,23 @@ def build_map():
             if redirect.get('original_server_redirect_proven') is not True:
                 raise RuntimeError('Unproven original Drupal 301 proposed')
             put(redirect['original_node'],redirect['effective_path']+'/', 'source-verified-drupal-node')
+    # Nested original museum links discovered after the 518-URL checkpoint.
+    # Their old Drupal node targets have been independently followed over
+    # direct Mac mini HTTP, retaining only genuine source effective paths.
+    deep=DATA/'official-deep-museum-pages.json'
+    if deep.exists():
+        d=json.loads(deep.read_text(encoding='utf-8'))
+        if d.get('source')!=SOURCE or len(d.get('pages',[]))!=d.get('count') or not isinstance(d.get('redirects'),list):
+            raise RuntimeError('Unverified deeper museum source path mapping')
+        for item in d['pages']:
+            if item['source_url']!=SOURCE+item['path']:
+                raise RuntimeError('Fabricated old museum canonical URL '+str(item['path']))
+            put(item['source_url'],'/guide/exhibitions-past/' if item['path'].startswith('/vistavky/') else '/guide/museum-documents/',
+                'original-deep-page')
+        for item in d['redirects']:
+            if item.get('original_server_redirect_proven') is not True:
+                raise RuntimeError('No evidence for numeric old Drupal redirect')
+            put(item['original_node'],item['effective_path']+'/', 'source-verified-drupal-node')
     return mapping
 
 
@@ -162,7 +179,7 @@ def build_aliases(write=True,strict=True):
             if f'id="{uri.fragment}"' not in payload and f'id=\"{uri.fragment}\"' not in payload:
                 missing.append((source,target+' (missing anchor)'));continue
         alias=OUT/(source.lstrip('/'))/'index.html'
-        if meta['why'] in ('original-news-article','original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page'):
+        if meta['why'] in ('original-news-article','original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page','original-deep-page'):
             # Native, independently generated Next.js route at the ORIGINAL
             # indexable museum URL. Never overwrite it with a meta-refresh.
             if not alias.is_file():
@@ -170,15 +187,28 @@ def build_aliases(write=True,strict=True):
             original_html=alias.read_text(encoding='utf-8')
             required_canonical=SOURCE+source
             required_marker=('data-official-original-news=' if meta['why']=='original-news-article'
-                             else 'data-original-museum-exhibition=' if meta['why'] in ('original-exhibition-detail','original-news-node-exhibition')
+                             else 'data-original-museum-exhibition=' if meta['why'] in ('original-exhibition-detail','original-news-node-exhibition') or meta['why']=='original-deep-page' and source.startswith('/vistavky/')
                              else 'data-original-museum-room=' if meta['why']=='original-exposition-room'
-                             else 'data-original-museum-section=' if meta['why'] in ('original-source-section','original-crosslink-page')
+                             else 'data-original-museum-section=' if meta['why'] in ('original-source-section','original-crosslink-page','original-deep-page')
                              else 'data-original-museum-program=')
+            # Next.js trailingSlash=true may normalize absolute canonical
+            # URLs when metadataBase is the SAME official source host.
+            # The museum's original source paths in verified old HTML do not
+            # have that trailing slash. Restore exactly one source-backed
+            # <link rel=canonical> in the deployed static HTML instead of
+            # silently rewriting all 467 URLs and losing canonical history.
+            matched=re.search(r'<link rel="canonical" href="([^"]+)"',original_html)
+            if not matched or matched.group(1) not in (required_canonical,required_canonical+'/'):
+                raise RuntimeError('Unapproved canonical target in original source page '+source)
+            if matched.group(1)==required_canonical+'/' and write:
+                original_html=(original_html[:matched.start(1)]+required_canonical+
+                    original_html[matched.end(1):])
+                alias.write_text(original_html,encoding='utf-8')
             if (required_marker not in original_html
-                or f'href="{required_canonical}"' not in original_html
+                or f'<link rel="canonical" href="{required_canonical}"' not in original_html
                 or 'http-equiv="refresh"' in original_html.lower()
                 or (alias.parent/'.musbread-legacy-alias').exists()):
-                raise RuntimeError('Original museum source URL lacks standalone canonical HTML: '+source)
+                raise RuntimeError('Original museum source URL lacks standalone source-exact canonical HTML: '+source)
             rows.append({'legacy_path':source,'new_relative_url':target,'source_kind':meta['why'],
                          'mode':'native-source-URL-200; no redirect'})
             continue

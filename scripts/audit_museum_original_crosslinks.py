@@ -12,7 +12,7 @@ SRC=ROOT/'apps/web/src/data'
 OUT=ROOT/'docs/seo/ORIGINAL_MUSEUM_CROSSLINK_GAPS_20261018.csv'
 sys.path.insert(0,str(ROOT/'scripts'))
 from build_museum_legacy_page_aliases import build_map
-SOURCES=[('official-museum-news.json','articles'),('official-museum-news-archive.json','articles'),('official-exhibition-details.json','exhibitions'),('official-exhibition-archive.json','exhibitions'),('official-exhibition-news-linked.json','exhibitions'),('official-node-linked-exhibitions.json','exhibitions'),('official-excursion-programs.json','programs'),('official-workshop-pages.json','programs'),('official-exposition-rooms.json','rooms'),('official-original-legacy-sections.json','sections'),('official-museum-crosslink-pages.json','pages')]
+SOURCES=[('official-museum-news.json','articles'),('official-museum-news-archive.json','articles'),('official-exhibition-details.json','exhibitions'),('official-exhibition-archive.json','exhibitions'),('official-exhibition-news-linked.json','exhibitions'),('official-node-linked-exhibitions.json','exhibitions'),('official-excursion-programs.json','programs'),('official-workshop-pages.json','programs'),('official-exposition-rooms.json','rooms'),('official-original-legacy-sections.json','sections'),('official-museum-crosslink-pages.json','pages'),('official-deep-museum-pages.json','pages')]
 def collect():
   original=[]
   for name,key in SOURCES:
@@ -30,7 +30,9 @@ def collect():
   paths=build_map()
   photos=json.loads((SRC/'official-museum-photo-assets.json').read_text())['photos']
   index_photos=json.loads((SRC/'official-news-index-photo-assets.json').read_text())['photos']
-  photopath={urlsplit(x).path for x in photos}|{urlsplit(x).path for x in index_photos}
+  deep_photos=json.loads((SRC/'official-deep-news-image-assets.json').read_text())['photos']
+  historic_photos=json.loads((SRC/'official-historical-exhibition-image-assets.json').read_text())['photos']
+  photopath={urlsplit(x).path for x in photos}|{urlsplit(x).path for x in index_photos}|{urlsplit(x).path for x in deep_photos}|{urlsplit(x).path for x in historic_photos}
   documents=json.loads((ROOT/'docs/source-migration/OFFICIAL_ORIGINAL_DOCUMENTS_DEPLOYMENT_20261018.json').read_text())['files']
   docpath={x['legacy_path'] for x in documents}
   gaps=[];seen=set()

@@ -1,3 +1,4 @@
+import {verifiedSourceRobots} from "@/data/seo-routes";
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import Link from "@/components/MuseumLink";
@@ -17,7 +18,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
   const item=originals.get(`/master-klassy/${slug}`);
   if(!item)return {title:"Мастер-класс не найден",robots:{index:false}};
   return {title:item.title,description:item.intro.trim()||undefined,
-    alternates:{canonical:item.source_url}};
+    alternates:{canonical:item.source_url},robots:verifiedSourceRobots(process.env.MUSBREAD_SITE_APPROVED,process.env.MUSBREAD_RELEASE_HOST)};
 }
 export default async function OldMuseumWorkshop({params}:Props){
   const {slug}=await params;
