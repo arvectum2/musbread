@@ -280,6 +280,47 @@ final class ImportOfficialMuseumPhotosTest extends TestCase
         $this->assertDatabaseCount('museum_media',1);
     }
 
+    public function test_last_of_twenty_five_original_pastry_hall_photos_stays_private():void
+    {
+        Storage::fake('local');
+        $source=json_decode((string)file_get_contents(
+            base_path('../web/src/data/official-exposition-rooms.json')),true);
+        $room=array_values(array_filter($source['rooms'],
+            static fn(array $r):bool=>count($r['image_sources'])===25))[0];
+        MuseumEntry::create([
+            'slug'=>$room['slug'],'title'=>$room['title'],
+            'type'=>'page','status'=>'draft','body'=>'<p>Исходный зал музея.</p>',
+        ]);
+        $path=$this->originalManifest();
+        $manifest=json_decode((string)file_get_contents($path),true);
+        $row=&$manifest['files'][0];
+        $image=$room['image_sources'][24];
+        $row['cms_slug']=$room['slug'];
+        $row['title']=$room['title'];
+        $row['source_page_url']=$room['source_url'];
+        $row['source_image_url']=$image['source_url'];
+        $row['source_snapshot']='official-exposition-rooms.json';
+        $row['source_image_index']=24;
+        $row['source_html_sha256']=$room['html_sha256'];
+        $row['source_alt']=$image['alt'];
+        $row['original_url']=preg_replace(
+            '~^https://muzei-xleb\\.ru/sites/default/files/styles/[^/]+/public/~',
+            'https://muzei-xleb.ru/sites/default/files/',$image['source_url']);
+        $row['original_url']=explode('?',$row['original_url'],2)[0];
+        file_put_contents($path,json_encode($manifest,JSON_UNESCAPED_UNICODE));
+        $this->assertSame(0,Artisan::call('museum:import-official-photos',[
+            '--apply'=>true,'--manifest'=>$path,
+        ]),Artisan::output());
+        $media=MuseumMedia::firstOrFail();
+        $this->assertSame($room['slug'],$media->entry->slug);
+        $this->assertSame($row['original_url'],$media->source_original_url);
+        $this->assertTrue($media->source_rights_pending);
+        $this->assertSame(0,Artisan::call('museum:import-official-photos',[
+            '--apply'=>true,'--manifest'=>$path,
+        ]),Artisan::output());
+        $this->assertDatabaseCount('museum_media',1);
+    }
+
     public function test_last_historic_building_illustration_requires_original_source_hash():void
     {
         Storage::fake('local');

@@ -16,14 +16,14 @@ class RoomPhotoCoverageTests(unittest.TestCase):
         self.assertEqual(len(rows),12)
         self.assertEqual(len({row['cms_slug'] for row in rows}),12)
         self.assertEqual(sum(int(row['total_real_original_images']) for row in rows),100)
-        self.assertEqual(sum(int(row['archived_original_images']) for row in rows),48)
-        self.assertEqual(sum(int(row['still_to_copy']) for row in rows),52)
+        self.assertEqual(sum(int(row['archived_original_images']) for row in rows),100)
+        self.assertEqual(sum(int(row['still_to_copy']) for row in rows),0)
         rooms=[r for r in rows if r['cms_slug'].startswith('zal-')]
         self.assertEqual(len(rooms),11)
         for row in rooms:
-            self.assertEqual(int(row['archived_original_images']),3)
+            self.assertEqual(int(row['archived_original_images']),int(row['total_real_original_images']))
             self.assertEqual(int(row['still_to_copy']),
-                             int(row['total_real_original_images'])-3)
+                             0)
             self.assertTrue(row['original_page_url'].startswith('https://muzei-xleb.ru/'))
             self.assertEqual(row['rights_status'],'private-not-verified')
         history=next(x for x in rows if x['cms_slug']=='building-history')

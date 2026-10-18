@@ -42,3 +42,16 @@ test("original news and source-based Night Arts event work on 320px",async({page
     expect(x).toBeLessThanOrEqual(1);
   }
 });
+
+test("TZ-135: historical museum news archives remain separate from ten latest posts",async({page})=>{
+  await page.goto("/news/");
+  const latest=page.getByRole("region",{name:"Последние новости действующего сайта музея"});
+  const archive=page.getByRole("region",{name:"Исторический архив новостей музея"});
+  await expect(latest.locator(".official-museum-program-card")).toHaveCount(10);
+  await expect(archive.locator(".official-museum-program-card")).toHaveCount(20);
+  await archive.getByText("Показать 20 архивных публикаций").click();
+  await expect(archive.locator(".official-museum-program-card").first()).toContainText("31.08.2026");
+  await expect(archive.locator('a[href="https://muzei-xleb.ru/novosty/2026-08-31/sobytiya-v-muzee-s-31-avgusta-po-7-sentyabrya"]')).toHaveCount(1);
+  await expect(archive.locator("img")).toHaveCount(0);
+  await expect(archive).toContainText("а не действующее расписание");
+});

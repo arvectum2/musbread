@@ -70,7 +70,7 @@ final class ImportOfficialMuseumPhotos extends Command
                 $source=$read($name);
                 foreach ($source['programs'] as $item) {
                     $slug=$item['slug']??$item['cms_slug']??'';
-                    foreach (array_slice($item['image_links']??[],0,3,true) as $i=>$image) {
+                    foreach (($item['image_links']??[]) as $i=>$image) {
                         $register($slug,$i,$name,(string)$item['title'],
                             (string)$item['source_url'],$item['html_sha256']??null,
                             (string)$image['url']);
@@ -80,7 +80,7 @@ final class ImportOfficialMuseumPhotos extends Command
             $name='official-exposition-rooms.json';
             $rooms=$read($name);
             foreach ($rooms['rooms'] as $room) {
-                foreach(array_slice($room['image_sources']??[],0,3,true) as $i=>$image) {
+                foreach(($room['image_sources']??[]) as $i=>$image) {
                     $register((string)$room['slug'],$i,$name,(string)$room['title'],
                         (string)$room['source_url'],$room['html_sha256']??null,
                         (string)$image['source_url']);
@@ -108,7 +108,7 @@ final class ImportOfficialMuseumPhotos extends Command
                             (string)$index['image_links'][$i]['url']);
                     }
                 } elseif(in_array($index['slug'],['exhibitions-past','exhibitions-virtual'],true)) {
-                    foreach(array_slice($index['image_links'],0,4,true) as $i=>$image) {
+                    foreach($index['image_links'] as $i=>$image) {
                         $register((string)$index['slug'],$i,$name,(string)$index['title'],
                             (string)$index['source_url'],$index['html_sha256']??null,
                             (string)$image['url']);
@@ -124,6 +124,16 @@ final class ImportOfficialMuseumPhotos extends Command
             foreach($building['image_links'] as $i=>$image) {
                 $register('building-history',$i,$name,(string)$building['title'],
                     (string)$building['source_url'],$building['html_sha256']??null,
+                    (string)$image['url']);
+            }
+            $name='official-excursion-pages.json';
+            $overview=$read($name);
+            $overview=array_values(array_filter($overview['pages'],
+                static fn(array $page):bool=>($page['path']??'')==='/obzornaya-ekskursiya'));
+            if(count($overview)!==1)throw new RuntimeException('Missing actual original overview gallery');
+            foreach($overview[0]['image_links'] as $i=>$image) {
+                $register('excursion-overview',$i,$name,(string)$overview[0]['title'],
+                    (string)$overview[0]['source_url'],$overview[0]['html_sha256']??null,
                     (string)$image['url']);
             }
             $files=[]; $seen=[];

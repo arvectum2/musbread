@@ -182,6 +182,77 @@ def queue()->list[dict]:
             'source_snapshot':'official-page-snapshots.json',
             'source_html_sha256':building['html_sha256'],
         })
+    # Remaining genuine original images in the 11 existing rooms, indices
+    # 3 onwards. Append AFTER the 122 already imported entries, preserving
+    # source ordering and stable previous provenance. No URL substitutions.
+    for room in rooms['rooms']:
+        for i,image in enumerate(room['image_sources'][3:],start=3):
+            url=canonical(image['source_url'])
+            if url in seen:
+                raise ValueError('Duplicate original room image URL: '+url)
+            seen.add(url)
+            result.append({
+                'cms_slug':room['slug'],'title':room['title'],
+                'source_page_url':room['source_url'],
+                'source_image_url':image['source_url'],
+                'source_image_index':i,'original_url':url,
+                'source_alt':image.get('alt',''),
+                'source_snapshot':'official-exposition-rooms.json',
+                'source_html_sha256':room['html_sha256'],
+            })
+    # Finish the two ORIGINAL four-photo program galleries, preserving the
+    # source-bounded 3-photo queue and all prior manifest associations.
+    for filename,key in SOURCES:
+        programs=json.loads((SRC/filename).read_text(encoding='utf-8'))[key]
+        for entry in programs:
+            for i,image in enumerate(entry.get('image_links',[])[3:],start=3):
+                url=canonical(image['url'])
+                if url in seen:raise ValueError('Duplicate genuine gallery URL: '+url)
+                seen.add(url)
+                result.append({
+                    'cms_slug':entry.get('slug') or entry.get('cms_slug'),
+                    'title':entry['title'],'source_page_url':entry['source_url'],
+                    'source_image_url':image['url'],'source_image_index':i,
+                    'original_url':url,'source_alt':image.get('alt',''),
+                    'source_snapshot':filename,
+                    'source_html_sha256':entry.get('html_sha256'),
+                })
+    # Eight remaining genuine images in each real exhibition archive index.
+    for exhibition_index in indices['indexes']:
+        if exhibition_index['slug'] not in ('exhibitions-past','exhibitions-virtual'):
+            continue
+        for i,photo in enumerate(exhibition_index['image_links'][4:],start=4):
+            url=canonical(photo['url'])
+            if url in seen:raise ValueError('Duplicate museum archive URL: '+url)
+            seen.add(url)
+            result.append({
+                'cms_slug':exhibition_index['slug'],
+                'title':exhibition_index['title'],
+                'source_page_url':exhibition_index['source_url'],
+                'source_image_url':photo['url'],'source_image_index':i,
+                'original_url':url,'source_alt':photo.get('alt',''),
+                'source_snapshot':'official-exhibition-indexes.json',
+                'source_html_sha256':exhibition_index['html_sha256'],
+            })
+    # Standalone original overview gallery belongs to an existing private
+    # museum page, not to a fictitious individual excursion.
+    overview_pages=json.loads((SRC/'official-excursion-pages.json').read_text(encoding='utf-8'))
+    if overview_pages.get('source')!=HOST:raise ValueError('Unknown overview original')
+    overview=[x for x in overview_pages['pages'] if x['path']=='/obzornaya-ekskursiya']
+    if len(overview)!=1:raise ValueError('Original overview excursion missing')
+    overview=overview[0]
+    for i,photo in enumerate(overview['image_links']):
+        url=canonical(photo['url'])
+        if url in seen:raise ValueError('Duplicate museum overview URL: '+url)
+        seen.add(url)
+        result.append({
+            'cms_slug':'excursion-overview',
+            'title':overview['title'],'source_page_url':overview['source_url'],
+            'source_image_url':photo['url'],'source_image_index':i,
+            'original_url':url,'source_alt':photo.get('alt',''),
+            'source_snapshot':'official-excursion-pages.json',
+            'source_html_sha256':overview['html_sha256'],
+        })
     return result
 
 def detect(buf:bytes)->str:

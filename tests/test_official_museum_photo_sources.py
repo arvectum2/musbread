@@ -10,16 +10,22 @@ import cache_official_museum_photos as cache
 class SourcePhotoInventoryTests(unittest.TestCase):
     def test_gallery_uses_only_literal_official_museum_urls(self):
         candidates=cache.queue()
-        self.assertEqual(len(candidates),122)
+        self.assertEqual(len(candidates),196)
         self.assertEqual(len({x['original_url'] for x in candidates}),len(candidates))
         self.assertTrue(all(x['original_url'].startswith('https://muzei-xleb.ru/sites/default/files/')
                             for x in candidates))
         self.assertTrue(all(x['source_page_url'].startswith('https://muzei-xleb.ru/')
                             for x in candidates))
         self.assertEqual(sum(x['source_image_index']==0 for x in candidates[:60]),27)
-        self.assertEqual(len([x for x in candidates if x['cms_slug'].startswith('zal-')]),33)
-        for slug in {x['cms_slug'] for x in candidates if x['cms_slug'].startswith('zal-')}:
-            self.assertEqual({x['source_image_index'] for x in candidates if x['cms_slug']==slug},{0,1,2})
+        self.assertEqual(len([x for x in candidates if x['cms_slug'].startswith('zal-')]),85)
+        rooms=json.loads((ROOT/'apps/web/src/data/official-exposition-rooms.json').read_text())['rooms']
+        for room in rooms:
+            slug=room['slug']
+            self.assertEqual({x['source_image_index'] for x in candidates if x['cms_slug']==slug},
+                             set(range(len(room['image_sources']))))
+        for index_slug in ('exhibitions-past','exhibitions-virtual'):
+            self.assertEqual({x['source_image_index'] for x in candidates if x['cms_slug']==index_slug},set(range(12)))
+        self.assertEqual({x['source_image_index'] for x in candidates if x['cms_slug']=='excursion-overview'},set(range(4)))
         self.assertEqual(len([x for x in candidates if x['cms_slug'].startswith('museum-exhibit-')]),6)
         self.assertEqual(len([x for x in candidates if x['cms_slug']=='building-history']),15)
         self.assertEqual({x['source_image_index'] for x in candidates if x['cms_slug']=='building-history'},set(range(15)))
@@ -29,14 +35,14 @@ class SourcePhotoInventoryTests(unittest.TestCase):
         p=ROOT/'docs/source-migration/OFFICIAL_PHOTOS_IMPORTED_20261018.csv'
         with p.open(encoding='utf-8-sig',newline='') as f:
             rows=list(csv.DictReader(f,delimiter=';'))
-        self.assertEqual(len(rows),122)
+        self.assertEqual(len(rows),196)
         self.assertEqual(len({r['original_url'] for r in rows}),len(rows))
-        self.assertEqual(len({r['original_sha256'] for r in rows}),121)
-        self.assertEqual(len({r['cms_slug'] for r in rows}),47)
+        self.assertGreaterEqual(len({r['original_sha256'] for r in rows}),193)
+        self.assertEqual(len({r['cms_slug'] for r in rows}),48)
         self.assertTrue(all(r['cms_slug'] in {x['cms_slug'] for x in cache.queue()} for r in rows))
         self.assertTrue(all(x['rights_status']=='private-needs-editorial-and-rights-review' for x in rows))
         self.assertTrue(all(re.fullmatch(r'[a-f0-9]{64}',x['original_sha256']) for x in rows))
-        self.assertGreaterEqual(sum(int(x['source_image_index'])>0 for x in rows),33)
+        self.assertGreaterEqual(sum(int(x['source_image_index'])>0 for x in rows),80)
         self.assertTrue(all(x['original_url'].startswith('https://muzei-xleb.ru/sites/default/files/')
                             for x in rows))
         self.assertTrue(all('stock' not in x['original_url'] for x in rows))
