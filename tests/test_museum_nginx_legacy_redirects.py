@@ -10,7 +10,7 @@ class MuseumNginxCutoverTests(unittest.TestCase):
     def test_original_museum_pages_and_webp_sources_receive_only_safe_local_301_destinations(self):
         stats=render()
         self.assertGreaterEqual(stats['total'],664)
-        self.assertEqual(stats['page'],len(build_map()))
+        self.assertEqual(stats['page'],len(build_map())-76)
         data=json.loads((ROOT/'apps/web/src/data/official-museum-photo-assets.json').read_text())
         self.assertEqual(stats['photo_original'],data['count'])
         conf=(ROOT/'deploy/nginx/legacy_museum_redirects.map.conf').read_text()
@@ -26,7 +26,13 @@ class MuseumNginxCutoverTests(unittest.TestCase):
         self.assertEqual(len(parsed),len(match))
         self.assertIn('/novosty',parsed)
         for old,item in build_map().items():
-            self.assertEqual(parsed[old],item['target'])
+            if item['why']=='original-news-article':
+                self.assertNotIn(old,parsed)
+                self.assertEqual(parsed[item['target'].rstrip('/')],old)
+            elif item['why'] in ('original-exhibition-detail','original-news-node-exhibition'):
+                self.assertNotIn(old,parsed)
+            else:
+                self.assertEqual(parsed[old],item['target'])
         for original,photo in data['photos'].items():
             for source in (original,photo['source_image_url']):
                 self.assertEqual(parsed[urlsplit(source).path],photo['path'])

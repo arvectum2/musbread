@@ -1,0 +1,1292 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "news_count": 280,
+  "node_count": 61,
+  "verified_exhibition_node_count": 60,
+  "new_exhibition_count": 42,
+  "existing_exhibition_count": 18,
+  "unavailable_nodes": [
+    {
+      "path": "/node/462",
+      "status": 403,
+      "resolved_url": "https://muzei-xleb.ru/afisha/2026-05",
+      "content_type": "text/html; charset=utf-8",
+      "html_sha256": "",
+      "original_title": "",
+      "text_chars": 0,
+      "html_canonical": "",
+      "referring_news_count": 9
+    }
+  ],
+  "other_pages": [],
+  "verified_node_targets": [
+    {
+      "node_path": "/node/556",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-12-18/solnce-na-skovorodke",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/617",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-03-18/zhili-byli-bytovye-tradicii-korennyh-narodov-leningradskoy-oblasti",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/587",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-02-10/kitayskiy-novyy-god",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/606",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-03-04/iskusstvo-shit-krasivo",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/276",
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-02-17/cikl-mini-vystavok-voydi-v-moy-dom-otveday-moego-hleba",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/568",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-01-21/rastrevozhennaya-pamyat",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/255",
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-10-18/v-ozhidanii-chuda-25-noyabrya-2021-g-15-yanvarya-2022-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/218",
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-04-13/v-gostyah-u-skazki-13-aprelya-29-maya-2021-g",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/222",
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-04-20/pashalnye-tradicii-peterburga-20-aprelya-1-iyunya-2021-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/251",
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-09-30/blokada-leningrada-80-let-29-sentyabrya-16-oktyabrya-2021-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/254",
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-10-18/hroniki-golodnyh-let-s-25-noyabrya-2021-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/258",
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-11-10/hleb-v-mirovoy-istorii-s-3-noyabrya-2021-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/278",
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-02-25/loskutnaya-polifoniya-25-fevralya-26-marta-2022-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/295",
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-05-26/koordinaty-chudes-miry-igorya-i-anny-ignatevyh-20-maya-13-avgusta-2022-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/303",
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-07-07/naedine-s-petrom-30-iyunya-21-avgusta-2022-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/313",
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-09-15/pishcha-nasha-14-sentyabrya-9-oktyabrya-2022-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/315",
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-09-15/zhurnal-pechorina-kavkaz-14-sentyabrya-16-oktyabrya-2022-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/323",
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-10-21/chestnaya-reklama-20-oktyabrya-4-dekabrya-2022-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/327",
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-10-28/k-istorii-hlebopecheniya-v-peterburge-petrograde-leningrade-27-oktyabrya-4",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/357",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-03-02/ko-dnyu-koshek-1-marta-2-aprelya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/363",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-04-14/pasha-v-peterburge-pozdravleniya-i-podarki-5-23-aprelya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/365",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-04-17/hleb-v-russkih-tradiciyah-13-aprelya-30-noyabrya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/373",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-05-12/v-krayu-dranikov-27-aprelya-18-iyunya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/378",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-05-25/gorod-znakomyy-do-slyoz-k-320-letiyu-sankt-peterburga",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/381",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-07-07/ot-chak-chaka-do-echpochmaka-21-iyunya-6-avgusta-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/383",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-07-10/pishcha-bogov-ko-vsemirnomu-dnyu-shokolada",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/389",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-08-11/v-banke-v-vazochke-v-rozetke-9-avgusta-1-oktyabrya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/392",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-08-29/o-hlebe-i-cvetah-24-avgusta-1-oktyabrya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/394",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-09-22/battl-rozh-vs-pshenica-21-sentyabrya-3-dekabrya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/397",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-10-11/hleb-mnogonacionalnogo-peterburga-11-22-oktyabrya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/400",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-10-26/byl-bolshoy-lakomka-fmdostoevskiy-26-oktyabrya-10-dekabrya-2023-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/404",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-10-27/v-muzee-otkryta-vystavka-mery-i-razmery",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/410",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-12-21/i-ya-tam-byl-21-dekabrya-2023-g-30-iyunya-2024-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/413",
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-12-25/zhizn-delennaya-na-grammy-21-dekabrya-2023-g-28-yanvarya-2024-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/420",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-01-26/nachalo-dorogi-zhizni-vostochnyy-bereg-ladogi-17-yanvarya-25-fevralya-2024-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/427",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-03-01/iz-chego-tolko-sdelany-baryshni-1-marta-21-aprelya-2024-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/433",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-04-19/istoriya-hlebopekarnoy-promyshlennosti-sankt-peterburga-17-aprelya-23-iyunya",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/441",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-05-27/gorod-nad-volnoy-nevoy-8-maya-16-iyunya-2024-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/445",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-07-02/celyy-mir-v-malenkoy-chashke-19-iyunya-25-avgusta-2024-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/456",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-08-30/mariyskie-tradicii-29-avgusta-29-sentyabrya-2024-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/463",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-10-02/virtualnaya-vystavka-podnoshenie-gostyam",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/465",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-10-02/koroli-konditerskogo-dela-tovarishchestvo-aiabrikosova-synovey-k-200-letiyu",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/469",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-10-23/odyozhka-dlya-konfety",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/473",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-11-22/zavtra-byl-mir-20-noyabrya-2024-g-29-iyunya-2025-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/476",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-12-11/s-rozhdestvom-11-dekabrya-2024-g-19-yanvarya-2025-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/478",
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-12-23/gde-spryatalsya-podarok-19-dekabrya-2024-g-2-fevralya-2025-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/484",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-01-30/vashe-zdorove-tema-alkogolya-v-kollekcii-sankt-peterburgskogo-muzeya-hleba",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/497",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-05-05/o-sport-ty-mir-1-maya-1-iyunya-2025-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/500",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-06-05/my-v-etom-gorode-zhivyom-4-iyunya-13-iyulya-2025-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/502",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-06-16/ptichiy-bazar-11-iyunya-3-avgusta-2025-g",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/524",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-10-24/slava-hlebu-na-stole",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/530",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-10-31/vystavka-o-vystavke",
+      "exists_in_prior_catalogue": false
+    },
+    {
+      "node_path": "/node/532",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-11-12/bastion-kultury",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/540",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-11-25/supnica-istoriya-v-kazhdoy-lozhke",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/549",
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-12-12/vystavka-s-novym-godom",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/626",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-04-08/dom-na-tryoh-ulicah-v-centralnom-gosudarstvennom-arhive",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/638",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-05-06/mimoletnosti-zima-i-snova-leto",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/644",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-05-14/ya-bez-propitaniya-ostavatsya-ne-mogu",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/709",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-09-09/vystavka-rasskazy-o-leningradcah-reprodukcii-ofortov-yu-m-neprinceva",
+      "exists_in_prior_catalogue": true
+    },
+    {
+      "node_path": "/node/721",
+      "source_url": "https://muzei-xleb.ru/vistavky/2026-10-05/ot-remesla-do-iskusstva-reznye-pryanichnye-doski",
+      "exists_in_prior_catalogue": true
+    }
+  ],
+  "exhibitions": [
+    {
+      "node_path": "/node/276",
+      "node_paths": [
+        "/node/276"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-02-17/cikl-mini-vystavok-voydi-v-moy-dom-otveday-moego-hleba",
+      "path": "/vistavky/2022-02-17/cikl-mini-vystavok-voydi-v-moy-dom-otveday-moego-hleba",
+      "title": "Цикл мини-выставок «Войди в мой дом, отведай моего хлеба»",
+      "html": "<p><strong>В музее открылась камерная выставка из цикла &quot;Войди в мой дом, отведай моего хлеба&quot; &quot;У нас на Севере&quot;.</strong></p>\n<p>Жизнь на Русском Севере сформировала особую культуру, объединяющую народы от Карельского перешейка до Чукотки. Ее главные ценности — взаимовыручка, строгий нравственный кодекс, бережное отношение к природе Севера и гостеприимство.</p>\n<p>Кураторы выставки рассказывают о традиционных занятиях северных народов. Это собирательство, земледелие, оленеводство, охота, рыболовство, добыча соли, морской и пушной промысел и многое другое.</p>\n<p>На экспозиции посетители увидят и традиционную выпечку народов Севера. Калитки, шаньги, пироги с различной начинкой и козули известны не только за полярным кругом, но и во всем мире.</p>\n<p>Выставка создана совместно с ГКУ ЛО «Дом дружбы Ленинградской области» и интерактивным музеем культуры народов коми.</p>\n<p><em>Выставка открыта до 30 декабря.</em></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "04db56075ff526995828c6663359f6d47a73a3e4df47e0cd88c1c1dfeb826b8c",
+      "source_page_sha256": "8e3582a5f61fa48022b04bfbc03d07bd0079c978be8909640905cb7f0d028471",
+      "text_length": 860,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2022-02-17-cikl-mini-vystavok-voydi-v-moy-dom-otveday-moego-hleba",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открылась камерная выставка из цикла \"Войди в мой дом, отведай моего хлеба\" \"У нас на Севере\". Жизнь на Русском Севере сформировала особую культуру, объединяющую народы от Карельского перешейка до Чукотки. Ее главные ценности — взаимовыр",
+      "linked_news_slug": "museum-news-2022-10-12-vystavka-u-nas-na-severe",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-10-12/vystavka-u-nas-na-severe",
+      "linked_news_html_sha256": "bbd7acced94f248e0772955a4ebe5b0962496335f082630194d18f8ef7b36c9f",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/255",
+      "node_paths": [
+        "/node/255"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-10-18/v-ozhidanii-chuda-25-noyabrya-2021-g-15-yanvarya-2022-g",
+      "path": "/vistavky/2021-10-18/v-ozhidanii-chuda-25-noyabrya-2021-g-15-yanvarya-2022-g",
+      "title": "«В ожидании чуда» (25 ноября 2021 г. — 29 января 2022 г.)",
+      "html": "<p>Музей открывает цикл выставок «Рождество в Европе». Первая выставка знакомит посетителей с рождественскими традициями Италии и создана по мотивам сказки Д.Родари «Путешествие Голубой стрелы».</p>\n<p>Рождество для Италии, как и для всей Европы – праздник особенный. Его принято проводить в кругу семьи, а готовиться к нему начинают заблаговременно. Этот праздник считается более важным, чем Новый год.</p>\n<p>Выставка приглашает юных посетителей отправиться в рождественское путешествие по Италии, узнать, как зовут самых главных рождественских итальянских персонажей, отгадать рождественский кроссворд.</p>\n<p>На выставке посетители увидят игрушки, кондитерскую упаковку и итальянский рождественский вертеп из фондов музея.</p>\n<p>Выставка рассчитана на семейную аудиторию.</p>\n<p>Открыта до 29 января 2022 года в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "32463087c54b9e9e334f6b28a502fdff6b3310dee162e9a30fd19feb403dd53b",
+      "source_page_sha256": "5386a936f838d5e991729902ba89d09792dd3c259ed13ed9a4122d1ab8e89f29",
+      "text_length": 798,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2021-10-18-v-ozhidanii-chuda-25-noyabrya-2021-g-15-yanvarya-2022-g",
+      "category_slug": "exhibitions-past",
+      "intro": "Музей открывает цикл выставок «Рождество в Европе». Первая выставка знакомит посетителей с рождественскими традициями Италии и создана по мотивам сказки Д.Родари «Путешествие Голубой стрелы». Рождество для Италии, как и для всей Европы – праздни",
+      "linked_news_slug": "museum-news-2022-01-11-prodlenie-raboty-vystavki",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-01-11/prodlenie-raboty-vystavki",
+      "linked_news_html_sha256": "27fa864f41bcdede59a09503350ae972d55e91f4f7d1885f374711667e0abe19",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/222",
+      "node_paths": [
+        "/node/222"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-04-20/pashalnye-tradicii-peterburga-20-aprelya-1-iyunya-2021-g",
+      "path": "/vistavky/2021-04-20/pashalnye-tradicii-peterburga-20-aprelya-1-iyunya-2021-g",
+      "title": "«Пасхальные традиции Петербурга» (20 апреля — 1 июня 2021 г.)",
+      "html": "<p>20 апреля 2021 года Санкт- Петербургский музей Хлеба открывает выставку «Пасхальные традиции Петербурга».</p>\n<p>Выставка продолжает серию временных музейных экспозиций, посвященных христианским праздникам в разные исторические периоды у разных народов. В этом году она расскажет о праздновании Пасхи в Санкт-Петербурге.</p>\n<p>Выставка показывает бытовые традиции празднования Пасхи в Санкт-Петербурге. Посетители увидят традиционные пасхальные подарки: пасхальные яйца, открытки и кондитерские упаковочные коробки из фондов музея. Представлены формы для выпечки куличей и приготовления творожной пасхи, традиционная пасхальная посуда (блюда и подставки для яиц).</p>\n<p>Выставка будет работать с 20 апреля по 1 июня 2021 г.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "985ef1a65818603e6177348c291b795d3182676f949201cb55add945dd379ee6",
+      "source_page_sha256": "2a01da6634b6043fc1e7e1bb5430ecca13a3327f8ab88dfb8205ec3a7f7fa5ea",
+      "text_length": 704,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2021-04-20-pashalnye-tradicii-peterburga-20-aprelya-1-iyunya-2021-g",
+      "category_slug": "exhibitions-past",
+      "intro": "20 апреля 2021 года Санкт- Петербургский музей Хлеба открывает выставку «Пасхальные традиции Петербурга». Выставка продолжает серию временных музейных экспозиций, посвященных христианским праздникам в разные исторические периоды у разных народов",
+      "linked_news_slug": "museum-news-2021-04-20-vystavka-pashalnye-tradicii-peterburga",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2021-04-20/vystavka-pashalnye-tradicii-peterburga",
+      "linked_news_html_sha256": "3619693f7dcb38239813eaaca843b5780b150d8524f9b06f417698e0055a4173",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/251",
+      "node_paths": [
+        "/node/251"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-09-30/blokada-leningrada-80-let-29-sentyabrya-16-oktyabrya-2021-g",
+      "path": "/vistavky/2021-09-30/blokada-leningrada-80-let-29-sentyabrya-16-oktyabrya-2021-g",
+      "title": "«Блокада Ленинграда. 80 лет» (29 сентября — 16 октября 2021 г.)",
+      "html": "<p>В музее Хлеба открыта выставка &quot;Блокада Ленинграда. 80 лет&quot;, созданная совместно с Фондом &quot;Истфак&quot;. На ней представлены работы победителей молодежного историко-культурного фестиваля «Истории достоинства. От Владимира - до Владимира», посвящённой 80-летию начала установления Блокады Ленинграда.</p>\n<p>С целью сохранения исторической правды и отдавая дань уважения всем пережившим Блокаду и тем, кто не вынес ее тягот, ребята создали свои работы. Мало уметь рисовать. Необходимо изучить тему и попробовать понять, что переживали непокоренные люди в те скорбные дни. Именно свои эмоции и чувства каждый ребенок выразил красками на больших форматах. В экспозиции представлены более двадцати репродукций картин. Они являются иллюстрациями к аудиоспектаклю, который создан с участием школьников на основе дневников блокадников.</p>\n<p>Выставка работает с 29 сентября до 16 октября 2021 г.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "8a5391d0d88c8f94181bd8a3c28a97e0f5b6247ebe32c57f5581c2c8238b8009",
+      "source_page_sha256": "28c4c3479ed79a25127eb97c61f851fb3599c2b56e368403637366c6f22df164",
+      "text_length": 870,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2021-09-30-blokada-leningrada-80-let-29-sentyabrya-16-oktyabrya-2021-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее Хлеба открыта выставка \"Блокада Ленинграда. 80 лет\", созданная совместно с Фондом \"Истфак\". На ней представлены работы победителей молодежного историко-культурного фестиваля «Истории достоинства. От Владимира - до Владимира», посвящённой",
+      "linked_news_slug": "museum-news-2021-09-30-vystavka-blokada-leningrada-80-let",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2021-09-30/vystavka-blokada-leningrada-80-let",
+      "linked_news_html_sha256": "1dbdfd51cc95ca5d5f9904479b7ab138cfaf815615e52865d0920eced3f6164e",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/254",
+      "node_paths": [
+        "/node/254"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-10-18/hroniki-golodnyh-let-s-25-noyabrya-2021-g",
+      "path": "/vistavky/2021-10-18/hroniki-golodnyh-let-s-25-noyabrya-2021-g",
+      "title": "«Хроники голодных лет» (с 25 ноября 2021 г.) (переведена в статус постоянной экспозиции)",
+      "html": "<p>В нашем музее открылась выставка &quot;Хроники голодных лет&quot;.</p>\n<p>Она рассказывает о периодах неурожая пшеницы и ржи в России за исторический период с XVIII и до середины XX века и о его трагических последствиях – голоде, о климатических, социальных, биологических причинах неурожаев.</p>\n<p>Год за годом ученые боролись с гибелью урожая и искали способы предотвратить массовый голод при неблагоприятных погодных условиях.</p>\n<p>Этот опыт особенно пригодился в трагический период блокады Ленинграда.</p>\n<p>На выставке можно изучить карту главных житниц нашей страны, увидеть фонарь, который использовался на Дороге жизни, и узнать стоимость хлеба во время блокады.</p>\n<p>Выставка открыта с 25 ноября 2021 года в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "7b08f2356164c511caca09c2a75b1e69309b56d1fc80c1d3b01b6edd80ee4035",
+      "source_page_sha256": "af84a8e57dc2812878de07e9324a35b0ada677a0b921bd9f400e8561ffa96881",
+      "text_length": 697,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2021-10-18-hroniki-golodnyh-let-s-25-noyabrya-2021-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка \"Хроники голодных лет\". Она рассказывает о периодах неурожая пшеницы и ржи в России за исторический период с XVIII и до середины XX века и о его трагических последствиях – голоде, о климатических, социальных, био",
+      "linked_news_slug": "museum-news-2021-11-27-vystavka-hroniki-golodnyh-let",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2021-11-27/vystavka-hroniki-golodnyh-let",
+      "linked_news_html_sha256": "58ef2395f1c3c09e8dbbeaae53c809a6cc976c68c7016bfd72002e6a10c892d3",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/258",
+      "node_paths": [
+        "/node/258"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2021-11-10/hleb-v-mirovoy-istorii-s-3-noyabrya-2021-g",
+      "path": "/vistavky/2021-11-10/hleb-v-mirovoy-istorii-s-3-noyabrya-2021-g",
+      "title": "«Хлеб в мировой истории» (с 3 ноября 2021 г.) (переведена в статус постоянной экспозиции)",
+      "html": "<p>В музее открылась выставка &quot;Хлеб в мировой истории&quot;.</p>\n<p>Зал рассказывает об истории главных злаков человеческой цивилизации.</p>\n<p>История цивилизаций – это история хлеба. Тысячелетиями человек выращивает хлеб, который дает силу людям. Этот круговорот в природе повторяется из года в год, из века в век.</p>\n<p>Для того, чтобы построить город. нужно долгие годы жить на одном месте. Для того, чтобы осесть на месте, нужно найти растение, которое прокормит людей и будет длительный период давать урожай с одного поля. Мир знает три таких растения, три «хлеба человечества» - пшеницу, рис и кукурузу. На них выросло три мощных цивилизации: средиземноморская, положившая начало европейской; азиатская и американская.</p>\n<p>На выставке можно узнать о злаках, распространенных на всей планете, и зерновых, характерных для Северо-Запада России, о видах почв, об античном хлебопечении и работе известных ученых, занимавшихся историей важнейших пищевых растений.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "71588c7210e461b260c13c7546ba8065a7deaec1433336ebd7e9e46ce295c1be",
+      "source_page_sha256": "e23d89670f9f418df9cb60bb9fd76d0f5c39990adf845afcec65cf54583c9018",
+      "text_length": 932,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2021-11-10-hleb-v-mirovoy-istorii-s-3-noyabrya-2021-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открылась выставка \"Хлеб в мировой истории\". Зал рассказывает об истории главных злаков человеческой цивилизации. История цивилизаций – это история хлеба. Тысячелетиями человек выращивает хлеб, который дает силу людям. Этот круговорот в ",
+      "linked_news_slug": "museum-news-2021-11-10-vystavka-hleb-v-mirovoy-istorii",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2021-11-10/vystavka-hleb-v-mirovoy-istorii",
+      "linked_news_html_sha256": "e93f87ce37d80864b3128b8e2e5dcbae8069286043a797b62c78fb6fc81174ab",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/278",
+      "node_paths": [
+        "/node/278"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-02-25/loskutnaya-polifoniya-25-fevralya-26-marta-2022-g",
+      "path": "/vistavky/2022-02-25/loskutnaya-polifoniya-25-fevralya-26-marta-2022-g",
+      "title": "«Лоскутная полифония» (25 февраля — 26 марта 2022 г.)",
+      "html": "<p>В нашем музее открылась выставка студии арт-квилта Ирины Ворониной «ЛОСКУТНАЯ ПОЛИФОНИЯ».</p>\n<p>Арт-квилт – это одно из направлений популярного и активно развивающегося как в России, так и во всем мире лоскутного движения.</p>\n<p>Лоскутное шитьё, как вид народного творчества, сопровождало человечество с древних времен. Наши бабушки и пра-пра-бабушки использовали его при шитье одеял, одежды, головных уборов, конского снаряжения, детских игрушек и оберегов. Лоскутное шитье присутствовало в повседневной жизни практически всех народов мира: от крайнего Севера до Африки, от Востока до Европы и Америки.</p>\n<p>Ирина Воронина – руководитель студии, член Союза художников России, секции ДПИ, член Творческого объединения &quot;Синий гранат&quot;, член Европейского творческого объединения &quot;Art Quilt Fusion&quot;, участник и призер различных конкурсов и фестивалей квилта в России, Франции, Германии, Голландии, Великобритании. С 1990-х работает над текстильными панно в технике арт-квилт.</p>\n<p>На выставке представлены три проекта Студии - «Петербургские зарисовки», «Чугунное кружево Петербурга» и «Уральские сказы П. П. Бажова».</p>\n<p>В рамках выставки состоится мастер – класс «Лоскутное одеяло в русских свадебных традициях».</p>\n<p>Выставка открыта с 25 февраля до 26 марта 2022 года в рабочие часы музея.</p>\n<p>На фото: работы студии арт-квилта Ирины Ворониной. Фрагменты выставки &quot;Лоскутная полифония&quot;.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "b96e9b507f813291436b25d37bb259a9ae53771d895fbfd6d1c2b9698f126b6c",
+      "source_page_sha256": "34e253950d813c803a7d0e43e9d5bfd6b72d6805931d3e00cf39d64fc2c5f95e",
+      "text_length": 1351,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2022-02-25-loskutnaya-polifoniya-25-fevralya-26-marta-2022-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка студии арт-квилта Ирины Ворониной «ЛОСКУТНАЯ ПОЛИФОНИЯ». Арт-квилт – это одно из направлений популярного и активно развивающегося как в России, так и во всем мире лоскутного движения. Лоскутное шитьё, как вид нар",
+      "linked_news_slug": "museum-news-2022-02-25-vystavka-loskutnaya-polifoniya",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-02-25/vystavka-loskutnaya-polifoniya",
+      "linked_news_html_sha256": "38ec2a9080e49384916c3ce5da500985a687da2210f2915c9fb5e4d44efe82f4",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/295",
+      "node_paths": [
+        "/node/295"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-05-26/koordinaty-chudes-miry-igorya-i-anny-ignatevyh-20-maya-13-avgusta-2022-g",
+      "path": "/vistavky/2022-05-26/koordinaty-chudes-miry-igorya-i-anny-ignatevyh-20-maya-13-avgusta-2022-g",
+      "title": "«Координаты чудес. Миры Игоря и Анны Игнатьевых» (20 мая — 28 августа 2022 г.)",
+      "html": "<p>Наш музей открыл выставку «Кукольного театра сказки» «Координаты чудес. Миры Игоря и Анны Игнатьевых».</p>\n<p>На выставке представлены декорации, куклы, реквизит и костюмы к спектаклям: «ИЗ ЛИВЕРПУЛЬСКОЙ ГАВАНИ…» (по сказкам Редьярда Киплинга); «СОЛОМЕННЫЙ БЫЧОК» (детективная история в двух действиях с прологом, эпилогом, погонями, засадами и счастливым концом); «ЦИРК», который побывал на гастролях в Швеции и Дании.</p>\n<p>Выставка посвящена памяти Игоря и Анны Игнатьевых, режиссера и художницы «Кукольного театра Сказки».</p>\n<p>Авторы спектаклей Игнатьевы радовали своим творчеством зрителей театра 33 года, создавая удивительные миры.</p>\n<p>Приглашаем всех в наш музей окунуться в атмосферу сказки и детства!</p>\n<p><strong>Выставка работает до 28 августа 2022 г.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "a6dfa218a56f0dd7d5dd6e668e6801a68c6efad0a9dd3566b9cb819c91cf6dee",
+      "source_page_sha256": "75caa2a0decd92b10a3d6e110ab2094051364cafb22ce6d942d892c0ab2beddf",
+      "text_length": 729,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2022-05-26-koordinaty-chudes-miry-igorya-i-anny-ignatevyh-20-maya-13-avgusta-2022-g",
+      "category_slug": "exhibitions-past",
+      "intro": "Наш музей открыл выставку «Кукольного театра сказки» «Координаты чудес. Миры Игоря и Анны Игнатьевых». На выставке представлены декорации, куклы, реквизит и костюмы к спектаклям: «ИЗ ЛИВЕРПУЛЬСКОЙ ГАВАНИ…» (по сказкам Редьярда Киплинга); «СОЛОМЕ",
+      "linked_news_slug": "museum-news-2022-05-26-vystavka-koordinaty-chudes-miry-igorya-i-anny-ignatevyh",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-05-26/vystavka-koordinaty-chudes-miry-igorya-i-anny-ignatevyh",
+      "linked_news_html_sha256": "beca900249e80b5a5d52c1827ab68240e05951dcff78e9b3ae52427f01fc2d65",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/303",
+      "node_paths": [
+        "/node/303"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-07-07/naedine-s-petrom-30-iyunya-21-avgusta-2022-g",
+      "path": "/vistavky/2022-07-07/naedine-s-petrom-30-iyunya-21-avgusta-2022-g",
+      "title": "«Наедине с Петром» (30 июня — 21 августа 2022 г.)",
+      "html": "<p>В музее Хлеба открылась выставка &quot;Наедине с Петром&quot;.</p>\n<p>Экспозиция посвящена 350-летию со дня рождения Петра Великого.</p>\n<p>Содержание выставки связано с романом писателя Д. А. Гранина «Вечера с Петром Великим». Каждый автор находит в этом человеке интересное для себя. Д. А. Гранин, написавший немало книг об ученых, увидел в царе исследователя. Любознательность, желание самому посмотреть в микроскоп, самому управлять кораблем были понятны писателю. Создатели выставки постарались показать, что императору-исследователю удалось сделать со страной, которая отставала от Европы на несколько столетий. Отправляя людей учиться в Голландию, в Германию, он понимал, что его «пенсионеры» привезут в Россию не только знания, но и энергию, с которой страна начнет меняться. Через десять лет в российской Академии наук, на смену немецким и шведским ученым, появятся российские ученые.</p>\n<p>О людях, которые рядом с Петром Великим реформировали Россию, и рассказывает выставка.</p>\n<p> Выставка работает с 30 июня до 21 августа 2022 г.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "aaea7e7bac2914311d46464d53941aa49587acf5e234cdd6b810bb2489c84b99",
+      "source_page_sha256": "eefebd104fb1589ac454b1e268a61301e3a91c881a627e7cbd5b891c7c5847c2",
+      "text_length": 1006,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2022-07-07-naedine-s-petrom-30-iyunya-21-avgusta-2022-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее Хлеба открылась выставка \"Наедине с Петром\". Экспозиция посвящена 350-летию со дня рождения Петра Великого. Содержание выставки связано с романом писателя Д. А. Гранина «Вечера с Петром Великим». Каждый автор находит в этом человеке инте",
+      "linked_news_slug": "museum-news-2022-07-07-vystavka-naedine-s-petrom",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-07-07/vystavka-naedine-s-petrom",
+      "linked_news_html_sha256": "063757b93cac8dc316dd49909c9820040e46e41e15c8b1115d37dfb8ec5af8db",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/313",
+      "node_paths": [
+        "/node/313"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-09-15/pishcha-nasha-14-sentyabrya-9-oktyabrya-2022-g",
+      "path": "/vistavky/2022-09-15/pishcha-nasha-14-sentyabrya-9-oktyabrya-2022-g",
+      "title": "«Пища наша» (14 сентября — 9 октября 2022 г.)",
+      "html": "<p>В музее открылась выставка &quot;Пища наша&quot;, посвященная продуктам питания, оказавшим огромное влияние на гастрономическую историю России.</p>\n<p>Экспозиция повествует об определенных этапах исторических событий в России, повлекших серьезные изменения в кулинарном мире.</p>\n<p>На выставке рассказана история появления в петербургской кулинарии четырех продуктов, представляющих сейчас основу нашего стола (сахар, чай, картофель, томаты) и сопровождающие их предметы сервировки из фондовской коллекции музея.</p>\n<p>С приходом дешевой технологии печати начали массово издаваться кулинарные книги и рецепты. Первые кулинарные книги появились в Европе около середины 16 века. В 18-м веке в России тоже появляются первые кулинарные книги - переводы с французского и немецкого языков. Представленная на выставке старейшая кулинарная книга из фондов музея – 1796 года издания.</p>\n<p>Особое место на выставке занимает тема здорового питания и необходимости сохранения экологической среды вокруг человека. На выставке демонстрируется разработанная учеными «Пирамида здорового питания» и художественная инсталляция «Береги планету».</p>\n<p>Открыта выставка до 9 октября 2022 г. в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "e47d224e19ffe231ac3e0b440581593bc275e5cfa2a371ea978ce82eab986873",
+      "source_page_sha256": "29a7e30186a4c318f977ab7e445f2a2aab1c216376a3c5fae7064b45bca58fd8",
+      "text_length": 1152,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2022-09-15-pishcha-nasha-14-sentyabrya-9-oktyabrya-2022-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открылась выставка \"Пища наша\", посвященная продуктам питания, оказавшим огромное влияние на гастрономическую историю России. Экспозиция повествует об определенных этапах исторических событий в России, повлекших серьезные изменения в кул",
+      "linked_news_slug": "museum-news-2022-09-15-vystavka-pishcha-nasha",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-09-15/vystavka-pishcha-nasha",
+      "linked_news_html_sha256": "fe7544aee059980a5e229c9a13634772bd06f4c4aac7785ad90a4c4f01ebddbe",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/315",
+      "node_paths": [
+        "/node/315"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-09-15/zhurnal-pechorina-kavkaz-14-sentyabrya-16-oktyabrya-2022-g",
+      "path": "/vistavky/2022-09-15/zhurnal-pechorina-kavkaz-14-sentyabrya-16-oktyabrya-2022-g",
+      "title": "«Журнал Печорина. Кавказ» (14 сентября — 16 октября 2022 г.)",
+      "html": "<p>В музее открылась выставка &quot;Журнал Печорина. Кавказ&quot;!</p>\n<p>На выставке представлены работы заслуженного художника Российской Федерации Юрия Валентиновича Иванова. Рисунки, наполненные мелкими деталями и отличающиеся лиричностью и психологизмом, были выполнены к подарочному изданию прозы Лермонтова. Сама уникальная книга, оформленная под мундир лейб-гвардии Гусарского полка, где служил Лермонтов, также представлена на выставке.</p>\n<p>А музейные экспонаты расскажут о том, чем могли угощать гостей на свадьбе сестры Бэлы, как сервировали стол для кофейного «тет-а-тет» и чем увлекалось в свободное время «водяное общество».</p>\n<p>Выставка создана совместно с <a href=\"https://vk.com/biblioteka_lermontova\">Библиотекой им. М.Ю.Лермонтова</a> и <a href=\"https://vk.com/forumnarodov47\">Домом дружбы Ленинградской области</a>.</p>\n<p>Открыта выставка до 16 октября 2022 г. в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "9ab64113d322d0577e62d93f0670eeffc8ad942926cb8b580dee94622da42255",
+      "source_page_sha256": "c3bc9bdc5b93a37272f5cc8c2f2afe5ea89726a84276e569f2af390a689f7046",
+      "text_length": 773,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2022-09-15-zhurnal-pechorina-kavkaz-14-sentyabrya-16-oktyabrya-2022-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открылась выставка \"Журнал Печорина. Кавказ\"! На выставке представлены работы заслуженного художника Российской Федерации Юрия Валентиновича Иванова. Рисунки, наполненные мелкими деталями и отличающиеся лиричностью и психологизмом, были ",
+      "linked_news_slug": "museum-news-2022-09-15-vystavka-zhurnal-pechorina-kavkaz",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-09-15/vystavka-zhurnal-pechorina-kavkaz",
+      "linked_news_html_sha256": "2bdab60053d8060cf43dfe1a73038d5c58cbf397e27c90caae310e3cde6f1a23",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/323",
+      "node_paths": [
+        "/node/323"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-10-21/chestnaya-reklama-20-oktyabrya-4-dekabrya-2022-g",
+      "path": "/vistavky/2022-10-21/chestnaya-reklama-20-oktyabrya-4-dekabrya-2022-g",
+      "title": "«Честная реклама» (20 октября — 4 декабря 2022 г.)",
+      "html": "<p>Кто не знает крылатого выражения «Реклама – двигатель торговли»? Тем не менее представление о рекламе гораздо шире и охватывает самые разные направления человеческой деятельности – от политики до быта и досуга.</p>\n<p>У российской рекламы свой путь развития, обусловленный особенностями разных исторических периодов. Сегодня и всегда реклама - это не просто объявление или вывеска, это социальное явление, которое с одной стороны оказывает влияние на стиль нашей жизни, с другой - зависит от него.</p>\n<p>История рекламы тесно связана с историей повседневности. В лубках и ярмарочных «кричалках», на страницах первых печатных изданий и вывесках магазинов можно узнать о развитии городской жизни, бытовой культуре людей, их потребностях и пристрастиях.</p>\n<p>Учитывая историко-бытовой характер коллекций предметов музея, особое место в этой связи занимает реклама хлебобулочных, кондитерских, чайных и других продовольственных изделий.</p>\n<p>На выставке можно рассмотреть рекламные листки и вкладыши, упаковочные коробки и банки, заглянуть в витрину кондитерского магазина и попасть на ярмарку. У Вас есть шанс сравнить броскую рекламу эпохи НЭПа и повествовательную времени «оттепели», и даже увидеть первый советский телевизионный рекламный ролик.</p>\n<p><strong>Выставка работает с 20 октября до 4 декабря 2022 г.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "38c404a3477665fb1921cde055526a5f585a995c9c6234b1bd517e5f565c9d9c",
+      "source_page_sha256": "39ea251dcb3b12cbc2ee7db422e21efb283a3fca5af911b4b720e769398736ab",
+      "text_length": 1274,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2022-10-21-chestnaya-reklama-20-oktyabrya-4-dekabrya-2022-g",
+      "category_slug": "exhibitions-past",
+      "intro": "Кто не знает крылатого выражения «Реклама – двигатель торговли»? Тем не менее представление о рекламе гораздо шире и охватывает самые разные направления человеческой деятельности – от политики до быта и досуга. У российской рекламы свой путь раз",
+      "linked_news_slug": "museum-news-2022-10-21-vystavka-chestnaya-reklama",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-10-21/vystavka-chestnaya-reklama",
+      "linked_news_html_sha256": "6102f03763397383b1f5c284664fc416d4672cdfecd8573633d3f00c525489ad",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/327",
+      "node_paths": [
+        "/node/327"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2022-10-28/k-istorii-hlebopecheniya-v-peterburge-petrograde-leningrade-27-oktyabrya-4",
+      "path": "/vistavky/2022-10-28/k-istorii-hlebopecheniya-v-peterburge-petrograde-leningrade-27-oktyabrya-4",
+      "title": "«К истории хлебопечения в Петербурге – Петрограде – Ленинграде» (27 октября — 4 декабря 2022 г.)",
+      "html": "<p>Санкт-Петербургский музей Хлеба совместно с СПб ГКУ «Центральный государственный архив научно-технической документации Санкт-Петербурга» открывает выставку «К истории хлебопечения в Петербурге – Петрограде – Ленинграде».</p>\n<p>На выставке можно узнать, как развивалось и менялось хлебопечение в нашем городе в разные периоды истории, начиная с конца XIX века и заканчивая современностью.</p>\n<p>Представленные документы из ЦГАНТД СПб иллюстрируют технические новшества и технологии, которые внедрялись на хлебозаводы Ленинграда в 1930-1940 е годы XX века для увеличения производительности и улучшения качества выпускаемой продукции.</p>\n<p>Также на выставке представлен макет Кушелевского хлебозавода, изготовленный студентами ФГБОУ ВО «Санкт-Петербургский государственный архитектурно-строительный университет». Он иллюстрирует конструктивные особенности хлебозаводов, построенных по системе инженера – конструктора Г. П. Марсакова.</p>\n<p>Дополняют тематику выставки экспонаты из фондов СПб ГБУК «Санкт-Петербургский музей Хлеба»: формы для выпечки хлеба, муляжи, фотографии, ассортиментные альбомы, реклама хлебозаводов и упаковка.</p>\n<p><strong>Выставка открыта до 4 декабря 2022 г.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "7663ec97107653e89619aaf718888844054f3b98b7cccfbad691f1d4ba8dbf17",
+      "source_page_sha256": "abe9901c9ea56af9cefb959bf997f2ccd3352bc2de82d884a71bda515308e2fe",
+      "text_length": 1145,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2022-10-28-k-istorii-hlebopecheniya-v-peterburge-petrograde-leningrade-27-oktyabrya-4",
+      "category_slug": "exhibitions-past",
+      "intro": "Санкт-Петербургский музей Хлеба совместно с СПб ГКУ «Центральный государственный архив научно-технической документации Санкт-Петербурга» открывает выставку «К истории хлебопечения в Петербурге – Петрограде – Ленинграде». На выставке можно узнать",
+      "linked_news_slug": "museum-news-2022-10-28-vystavka-k-istorii-hlebopecheniya-v-peterburge-petrograde-leningrade",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2022-10-28/vystavka-k-istorii-hlebopecheniya-v-peterburge-petrograde-leningrade",
+      "linked_news_html_sha256": "513044d62b4f0ae994ed74511b0606357553221f457cbae88dc256eed5130371",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/357",
+      "node_paths": [
+        "/node/357"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-03-02/ko-dnyu-koshek-1-marta-2-aprelya-2023-g",
+      "path": "/vistavky/2023-03-02/ko-dnyu-koshek-1-marta-2-aprelya-2023-g",
+      "title": "Ко Дню кошек (1 марта — 2 апреля 2023 г.)",
+      "html": "<p>В нашем музее открылась выставка, посвященная Дню кошек!</p>\n<p>Кошки – самые популярные домашние животные в мире. Всего насчитывается примерно 500 миллионов кошек и почти 40 пород.</p>\n<p>Во многих странах существуют праздники, посвящённые кошкам. В Японии, США, Польше, Италии, Бельгии есть свои традиции, связанные с этим днём.</p>\n<p>1 марта день кошек отмечают в России. Идея праздника принадлежит Абрамову А. и Дмитриевой Н., благодаря которым в 2004 г. была организована выставка в Московском музее кошки, прошедшая под девизом «Любовь к кошкам – навсегда!». На этой выставке было объявлено об учреждении нового праздника, ставшего любимым для многих обожателей кошек.</p>\n<p>В этот день принято проводить различные мероприятия, посвящённые кошкам: клубные собрания владельцев породистых кошек, акции со сбором средств для помощи бездомным кошкам, различные выставки и т.д.</p>\n<p>Кошки всегда привлекали внимание людей своим поведением, грацией, независимостью. Многие художники, дизайнеры, декораторы обращались в своём творчестве к образу кошки.</p>\n<p>Музей Хлеба с радостью представляет вашему вниманию мини-выставку, посвящённую дню кошек. На выставке представлены открытки, обёртки для шоколада и конфет, упаковочные кондитерские коробки, эскиз для пряничного штампа из собрания Санкт-Петербургского музея Хлеба.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "ca9edcadab195d6a9d67183f83f258a10a26e8c4d29f3916e2e176b10150938d",
+      "source_page_sha256": "950230a112fb5ef19db046432d80a1f5e900525f6781abffc2cd87ef18090931",
+      "text_length": 1284,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-03-02-ko-dnyu-koshek-1-marta-2-aprelya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка, посвященная Дню кошек! Кошки – самые популярные домашние животные в мире. Всего насчитывается примерно 500 миллионов кошек и почти 40 пород. Во многих странах существуют праздники, посвящённые кошкам. В Японии, ",
+      "linked_news_slug": "museum-news-2023-03-02-vystavka-ko-dnyu-koshek",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-03-02/vystavka-ko-dnyu-koshek",
+      "linked_news_html_sha256": "d546938905df24e535cd6c05ffa62d5731298ba9afbb86bd86bfc4f178f7070e",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/363",
+      "node_paths": [
+        "/node/363"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-04-14/pasha-v-peterburge-pozdravleniya-i-podarki-5-23-aprelya-2023-g",
+      "path": "/vistavky/2023-04-14/pasha-v-peterburge-pozdravleniya-i-podarki-5-23-aprelya-2023-g",
+      "title": "«Пасха в Петербурге: поздравления и подарки» (5 — 23 апреля 2023 г.)",
+      "html": "<p>«Христос воскресе!» – одно из наиболее частых поздравлений в дореволюционной России. Пасхальные открытки выпускались огромными тиражами в российских и западноевропейских типографиях. Среди наиболее узнаваемых сюжетов, связанных с Пасхой – крашеные яйца, верба, куличи, цыплята, пасхальные кролики. Некоторые из этих символов возникли за рубежом, однако вместе с европейскими открытками органично вплелись в городскую праздничную культуру России.</p>\n<p>Долгожданный праздник возрождения и воскресения сопровождался весёлыми гуляниями и сердечными поздравлениями: открытки и письма адресовали друзьям, родственникам, сослуживцам; отправляли по почте и передавали лично, как традиционный подарок на светлый праздник.</p>\n<p>На выставке представлены пасхальные открытки из коллекции музея Хлеба, изданные в России, Германии, Австрии, Франции, Швеции и Швейцарии в 1890-х – 1910-х годах, а также декоративные шкатулки и подставки в виде пасхальных яиц, произведённые в России конца XIX – начала XX вв.</p>\n<p>Выставка работает с 5 по 23 апреля 2023 года в зале №12.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "0ca55ea5f0797ed942b9537cfede39efa769cdbc62123a76bd6aceffbb0b832e",
+      "source_page_sha256": "717f10a3a35d70d6378a64a13f5ececf67d66dfef43181d490ec8cfcd873778a",
+      "text_length": 1040,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-04-14-pasha-v-peterburge-pozdravleniya-i-podarki-5-23-aprelya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "«Христос воскресе!» – одно из наиболее частых поздравлений в дореволюционной России. Пасхальные открытки выпускались огромными тиражами в российских и западноевропейских типографиях. Среди наиболее узнаваемых сюжетов, связанных с Пасхой – крашен",
+      "linked_news_slug": "museum-news-2023-04-14-vystavka-pasha-v-peterburge-pozdravleniya-i-podarki",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-04-14/vystavka-pasha-v-peterburge-pozdravleniya-i-podarki",
+      "linked_news_html_sha256": "9ddb527895f50dc3776c354ce9ed1225cbb6f20fd49a8410ea1989a3529c5f12",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/365",
+      "node_paths": [
+        "/node/365"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-04-17/hleb-v-russkih-tradiciyah-13-aprelya-30-noyabrya-2023-g",
+      "path": "/vistavky/2023-04-17/hleb-v-russkih-tradiciyah-13-aprelya-30-noyabrya-2023-g",
+      "title": "«Хлеб в русских традициях» в Пикалёвском краеведческом музее",
+      "html": "<p>В Пикалевском краеведческом музее открылась выставка «Хлеб в русских традициях», созданная совместно с Санкт-Петербургским музеем Хлеба. На выставке можно узнать, как раньше выращивали хлеб, какая выпечка считалась праздничной и каким был хлеб на каждый день.</p>\n<p>Выставка рассказывает о традициях домашнего хлебопечения в Древней Руси, об устройстве русской печи, о повседневных занятиях женщины на Руси.</p>\n<p>Главными экспонатами выставки являются кухонная утварь из фондов музея. Почëтное место в выставочном пространстве занимает каравай – ржаной хлеб традиционной круглой формы.</p>\n<p>Выставка открыта ежедневно с 10 до 18 часов. Воскресенье и понедельник - выходные дни. Телефон для справок - 8 (81366) 4-00-23.</p>\n<p>Адрес музея: Ленинградская область, г. Пикалёво, ул. Советская, 14.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "253bc6ae97ebc1e05f91fb77c903eb131411b0dcf4aa49d8f4369b596cdfbd3b",
+      "source_page_sha256": "91d9d9646a24aadca102461f984e9fbfdf13d04619dbc37e9fcb5e7370212a45",
+      "text_length": 770,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-04-17-hleb-v-russkih-tradiciyah-13-aprelya-30-noyabrya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В Пикалевском краеведческом музее открылась выставка «Хлеб в русских традициях», созданная совместно с Санкт-Петербургским музеем Хлеба. На выставке можно узнать, как раньше выращивали хлеб, какая выпечка считалась праздничной и каким был хлеб н",
+      "linked_news_slug": "museum-news-2023-04-17-vystavka-hleb-v-russkih-tradiciyah-v-pikalevo",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-04-17/vystavka-hleb-v-russkih-tradiciyah-v-pikalevo",
+      "linked_news_html_sha256": "092dd83630b8b224801eb3ff7140551b61c3e6b966a07e5264fe7e88599414b3",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/373",
+      "node_paths": [
+        "/node/373"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-05-12/v-krayu-dranikov-27-aprelya-18-iyunya-2023-g",
+      "path": "/vistavky/2023-05-12/v-krayu-dranikov-27-aprelya-18-iyunya-2023-g",
+      "title": "В краю драников» (27 апреля — 18 июня 2023 г.)",
+      "html": "<p>Выставка &quot;В краю драников&quot; знакомит посетителей с белорусскими традициями выпечки хлеба и традиционными ремеслами.</p>\n<p>Картофель в Беларуси по праву считается вторым хлебом. Драники, клецки, пюре, колдуны — для этих и многих других блюд национальной кухни основой стала именно картошка. Да и практически каждый турист начинает свое погружение в культуру страны озер, лесов и васильков именно с ароматных драников — визитной карточки Беларуси.  Картофельная революция в Беларуси началась в годы первой мировой. Тогда картошку стали широко употреблять в пищу из-за нехватки зерна. В мирные 1920-е годы потребление картофеля не снижалось, а даже выросло.</p>\n<p>Зерновые культуры использовали не только для выпечки хлеба, но и для создания традиционных изделий. Например, белорусская соломка — это традиционный материал, который используется для создания различных изделий. Она получается из соломы различных злаковых культур, таких как пшеница, рожь, овес. Изделия из белорусской соломки являются символом белорусской народной культуры.</p>\n<p>На выставке посетители увидят изделия из соломки, муляжи выпечки, традиционный мужской костюм и вышивку.</p>\n<p>Выставка создана совместно с <a href=\"https://vk.com/forumnarodov47\">Домом дружбы Ленинградской области и Фондом «Белые Росы»</a>.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "93a24091df9fc9051073ae6cb642cd34e277ac680f62ea25575bc952c9612ff3",
+      "source_page_sha256": "9742eadcf7ab53d348b1477c0ee18d40d4ce628f6e831f08284fb2cda22a6a76",
+      "text_length": 1214,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-05-12-v-krayu-dranikov-27-aprelya-18-iyunya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "Выставка \"В краю драников\" знакомит посетителей с белорусскими традициями выпечки хлеба и традиционными ремеслами. Картофель в Беларуси по праву считается вторым хлебом. Драники, клецки, пюре, колдуны — для этих и многих других блюд национальной",
+      "linked_news_slug": "museum-news-2023-05-12-vystavka-v-krayu-dranikov",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-05-12/vystavka-v-krayu-dranikov",
+      "linked_news_html_sha256": "c8a17617875b7d61954a847bd1164a42cfa82b2a2abedfd5f9a3c7d7bb7b001e",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/381",
+      "node_paths": [
+        "/node/381"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-07-07/ot-chak-chaka-do-echpochmaka-21-iyunya-6-avgusta-2023-g",
+      "path": "/vistavky/2023-07-07/ot-chak-chaka-do-echpochmaka-21-iyunya-6-avgusta-2023-g",
+      "title": "«От чак-чака до эчпочмака» (21 июня — 6 августа 2023 г.)",
+      "html": "<p>Санкт-Петербургский музей Хлеба совместно с Домом дружбы Ленинградской области и Татарским Культурным Обществом «Файда» открыл выставку «От чак-чака до эчпочмака»!</p>\n<p>Это камерная выставка из цикла «Многонациональный Петербург», рассказывающая об обычаях и традиционной кухне татар.</p>\n<p>Кулинарные традиции татарской кухни складывались не одно столетие. Сохраняя свою самобытность, многое в кухне менялось: она совершенствовалась, обогащалась новыми знаниям и продуктами, о которых татары узнавали от соседей.</p>\n<p>Несомненно, что на состав продуктов влияли природные условия, образ жизни, а также расположение на стыке двух географических зон - лесного Севера и степного Юга. Расположение в бассейне двух крупных рек - Волги и Камы способствовало обмену продуктами вследствие развития торговли.</p>\n<p>Особенностью традиционного татарского стола является разнообразие мучных изделий из разных видов теста. На выставке можно познакомиться с наиболее известными видами татарской выпечки, такими как чак-чак, эчпочмак, губадия, перемяч , а также узнать историю выпечки и традиции связанные с ней.</p>\n<p>Неотъемлемой частью жизни любого народа являются праздники, которые сопровождаются различными обычаями и обрядами. Одним из самых известных татарских праздников является Сабантуй (Праздник плуга). Это главный татарский национальный праздник, уходящий в глубокую древность, посвященный труду на земле, отмечает окончание весенних полевых работ и красиво раскрывает все традиции, обряды и обычаи татарского народа. На нашей выставке посетители могут увидеть праздничные костюмы, украшения и другие детали традиционного костюма татар.</p>\n<p><strong>Выставка работает в зале №12 до 6 августа 2023 г.<br>с 10.00 до 17.00, по адресу: ул. Михайлова, д.2</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "f817857194767da3a490a153f8829b599f3a8410b929b274e83dca20f1176baf",
+      "source_page_sha256": "7d1416afb3cb916aaadc04e8a7cebbd42097b768c71bf7a2fdec95aacbd30b48",
+      "text_length": 1704,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-07-07-ot-chak-chaka-do-echpochmaka-21-iyunya-6-avgusta-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "Санкт-Петербургский музей Хлеба совместно с Домом дружбы Ленинградской области и Татарским Культурным Обществом «Файда» открыл выставку «От чак-чака до эчпочмака»! Это камерная выставка из цикла «Многонациональный Петербург», рассказывающая об о",
+      "linked_news_slug": "museum-news-2023-07-07-vystavka-ot-chak-chaka-do-echpochmaka",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-07-07/vystavka-ot-chak-chaka-do-echpochmaka",
+      "linked_news_html_sha256": "fc15be8c9c0bdc35f5213044b9aeb0ca02631c18e9252cca381d2eb9a10be033",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/389",
+      "node_paths": [
+        "/node/389"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-08-11/v-banke-v-vazochke-v-rozetke-9-avgusta-1-oktyabrya-2023-g",
+      "path": "/vistavky/2023-08-11/v-banke-v-vazochke-v-rozetke-9-avgusta-1-oktyabrya-2023-g",
+      "title": "«В банке, в вазочке, в розетке...» (9 августа — 1 октября 2023 г.)",
+      "html": "<p>В нашем музее открывается камерная выставка «В банке, в вазочке, в розетке…», посвященная любимому русскому лакомству - варенью!</p>\n<p>В конце лета – начале осени нам непременно хочется только что сваренного, ещё теплого варенья из свежих ягод. А, быть может, сварить вишневый компот или затеять желе из красной смородины? Кухни в городских квартирах и на дачах превращаются в место, где хозяйки перебирают, чистят, протирают, варят, стерилизуют, ну а дети лакомятся пенками от варенья.</p>\n<p>Давно замечено, что варка варенья в августе сродни попытке задержать, поймать лето. Поймать и разложить по баночкам летние вкусы и запахи, а вместе с ними - приятные воспоминания и яркие впечатления.</p>\n<p>На выставке можно будет ознакомится с различными приспособлениями для обработки фруктов, посудой для варки варенья, предметами сервировки и хранения из фондов Санкт-Петербургского музея Хлеба.</p>\n<p><strong>Выставка открыта до 1 октября 2023 г.</strong></p>\n<p>Вход на выставку по входным билетам в музей.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "6009e64bfe837723686c25022bdd0131e2988ef478612577622bf1d6529dbbab",
+      "source_page_sha256": "956f21bb883e70554c9191e4eaa4b4435ab87e52b3702ef1afc077224611f92d",
+      "text_length": 956,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-08-11-v-banke-v-vazochke-v-rozetke-9-avgusta-1-oktyabrya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открывается камерная выставка «В банке, в вазочке, в розетке…», посвященная любимому русскому лакомству - варенью! В конце лета – начале осени нам непременно хочется только что сваренного, ещё теплого варенья из свежих ягод. А, быт",
+      "linked_news_slug": "museum-news-2023-08-11-vystavka-v-banke-v-vazochke-v-rozetke",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-08-11/vystavka-v-banke-v-vazochke-v-rozetke",
+      "linked_news_html_sha256": "4ad8d6c0daff9767fe51ce2a837a15c4e6d93b89cbe4ecebbfbea32198ecb3e9",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/392",
+      "node_paths": [
+        "/node/392"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-08-29/o-hlebe-i-cvetah-24-avgusta-1-oktyabrya-2023-g",
+      "path": "/vistavky/2023-08-29/o-hlebe-i-cvetah-24-avgusta-1-oktyabrya-2023-g",
+      "title": "«О хлебе и цветах» (24 августа — 1 октября 2023 г.)",
+      "html": "<p>В музее открылась художественная выставка арт-клуба «Алая роза»!</p>\n<p>Клуб был создан в 2016 году художником ВасильевымКонстантином Константиновичем при поддержке СМИ &quot;Новости Купчино&quot;. Идеей клуба является девиз: &quot;Искусство доступно каждому!&quot;.</p>\n<p>Тема хлеба очень обширна и близка для многих художников. В июне 2023 г. клуб «Алая роза» посетил с экскурсией наш музей и это стало поводом для создания новых картин. Тогда же и возникла идея выставки, на которой художники смогли бы представить свои работы и свой особый взгляд.</p>\n<p>На выставке представлено более 40 работ, объединённых поэтическим названием «О хлебе и цветах».</p>\n<p>Посетители увидят не только классические пейзажи и натюрморты о хлебе, но и смогут окунуться в мир цветов и оттенков, домашнего уюта и нестандартного подхода к теме хлеба и цветов!</p>\n<p>Выставка будет работать до 1 октября 2023 г. в презентационном зале музея.</p>\n<p>Вход на выставку по входным билетам в музей.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "53f6fa7566245434ffb5225f514c6728de2ff5a142cce57a5360ef8c8e2aae13",
+      "source_page_sha256": "6c83c1756e97e15a4d098e3195eab0b6741e72c3e5ba5d00182645903868ea13",
+      "text_length": 915,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-08-29-o-hlebe-i-cvetah-24-avgusta-1-oktyabrya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открылась художественная выставка арт-клуба «Алая роза»! Клуб был создан в 2016 году художником ВасильевымКонстантином Константиновичем при поддержке СМИ \"Новости Купчино\". Идеей клуба является девиз: \"Искусство доступно каждому!\". Тема ",
+      "linked_news_slug": "museum-news-2023-08-29-vystavka-o-hlebe-i-cvetah",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-08-29/vystavka-o-hlebe-i-cvetah",
+      "linked_news_html_sha256": "267804ff291f88a008b1fcce00e894a6c4e35aa40835587679a1cb77c5cde8ba",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/394",
+      "node_paths": [
+        "/node/394"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-09-22/battl-rozh-vs-pshenica-21-sentyabrya-3-dekabrya-2023-g",
+      "path": "/vistavky/2023-09-22/battl-rozh-vs-pshenica-21-sentyabrya-3-dekabrya-2023-g",
+      "title": "«Баттл: рожь vs пшеница» (21 сентября — 3 декабря 2023 г.)",
+      "html": "<p>В музее открыта выставка &quot;Баттл: рожь vs пшеница&quot;!</p>\n<p>Приглашаем поучаствовать в предвыборной борьбе за звание «Главный злак России».</p>\n<p>Истории двух главных зерновых культур России – пшеницы и ржи – тесно переплетены. История их взаимоотношений увлекательна и напоминает роман: сосуществование на протяжении столетий, вытеснение друг друга с территории, забвение и вновь возобновление «отношений». На их популярность у человека оказывали влияние не только природные особенности и погодные условия, но нередко и политические установки, и модные тенденции.</p>\n<p>Появившись на севере Африки, пшеница постепенно продвигалась на север, приведя с собой рожь в качестве сорняка. Прижившись в суровых климатических условиях, рожь вытеснила пшеницу на огромной территории неплодородных почв России на многие столетия. Но в XX веке происходит «возвращение» пшеницы благодаря указам руководства страны. А в современном мире из-за моды на похудение, проблем с глютеном и мифам о муке и дрожжах любому хлеба (что ржаному, что пшеничному) живется непросто.</p>\n<p>Выставка предлагает проследить параллели и пересечения историй ржи и пшеницы в нашей стране и поразмышлять о том, какой же злак является основополагающим для нашей земледельческой культуры.</p>\n<p><strong>Не забудьте отдать свой голос достойному кандидату!</strong></p>\n<p>На выставке представлены предметы из коллекции музея: хлебсольные блюда, декоративные тарелки, плакетки, хлебницы, почтовые открытки.</p>\n<p><strong>Благодарим за участие в создании выставки:</strong></p>\n<ul>\n<li>ФГБНУ «Федеральный исследовательский центр Всероссийский институт генетических ресурсов растений имени Н.И. Вавилова»</li>\n<li>Национальный центр зерна им. П.П.Лукьяненко (Краснодар)</li>\n<li>АО &quot;Ленинградский комбинат хлебопродуктов им. С.М. Кирова&quot;</li>\n<li>Студентов ФГБОУ высшего образования «Санкт-Петербургский государственный институт культуры»</li>\n<li>Студентов СПб ГБПОУ «Санкт-Петербургский техникум библиотечных и информационных технологий»</li>\n</ul>\n<p><strong>Выставка открыта в часы работы музея с 21 сентября до 3 декабря 2023 г.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "d081be91e47e9cc9c056acf72d0c2c5dcf932f41997854711b70b9509ed2b315",
+      "source_page_sha256": "5110bcaecc2f2b79ce7f1feff5120184c05877c05a980b32afc313d85eaf3172",
+      "text_length": 1940,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-09-22-battl-rozh-vs-pshenica-21-sentyabrya-3-dekabrya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открыта выставка \"Баттл: рожь vs пшеница\"! Приглашаем поучаствовать в предвыборной борьбе за звание «Главный злак России». Истории двух главных зерновых культур России – пшеницы и ржи – тесно переплетены. История их взаимоотношений увлек",
+      "linked_news_slug": "museum-news-2023-09-22-vystavka-battl-rozh-vs-pshenica",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-09-22/vystavka-battl-rozh-vs-pshenica",
+      "linked_news_html_sha256": "0836e754188da159fc0fc8f522f9958dba9446baf8b493ffa46a9d767b96fe94",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/397",
+      "node_paths": [
+        "/node/397"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-10-11/hleb-mnogonacionalnogo-peterburga-11-22-oktyabrya-2023-g",
+      "path": "/vistavky/2023-10-11/hleb-mnogonacionalnogo-peterburga-11-22-oktyabrya-2023-g",
+      "title": "«Хлеб многонационального Петербурга» (11 — 22 октября 2023 г.)",
+      "html": "<p>В музее открылась выставка &quot;Хлеб многонационального Петербурга&quot;.</p>\n<p>С момента своего основания наш город был многонациональным. Каждый приезжающий в наш город привозил свои обычаи, а также рецепты традиционной выпечки.</p>\n<p>Выставка рассказывает о трех самых распространенных в городе традициях выпечки - кавказской, среднеазиатской и финно-угорской. Можно увидеть муляжи выпечки и посуду.</p>\n<p>Эта выставка - уникальный шанс изучить часть музейной коллекции декоративных кукол, изображающих представителей разных национальностей, населяющих нашу страну и город.</p>\n<p>Выставка работает с 11 по 22 октября 2023 года в зале №12.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "22af5c2095fad18a16efc8f1a0a5204bbdec08ee95b91c13d965b301f5213da5",
+      "source_page_sha256": "c0d59364db2dfc897e6d89bf92a98c393c14ce80f8735d4b97d8949aac5e56b5",
+      "text_length": 608,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-10-11-hleb-mnogonacionalnogo-peterburga-11-22-oktyabrya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открылась выставка \"Хлеб многонационального Петербурга\". С момента своего основания наш город был многонациональным. Каждый приезжающий в наш город привозил свои обычаи, а также рецепты традиционной выпечки. Выставка рассказывает о трех ",
+      "linked_news_slug": "museum-news-2023-10-11-vystavka-hleb-mnogonacionalnogo-peterburga",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-10-11/vystavka-hleb-mnogonacionalnogo-peterburga",
+      "linked_news_html_sha256": "67de173a35abf594002b309e31c0f7bd8af12b9df4e015e677267fee306cb9cd",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/400",
+      "node_paths": [
+        "/node/400"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-10-26/byl-bolshoy-lakomka-fmdostoevskiy-26-oktyabrya-10-dekabrya-2023-g",
+      "path": "/vistavky/2023-10-26/byl-bolshoy-lakomka-fmdostoevskiy-26-oktyabrya-10-dekabrya-2023-g",
+      "title": "«Он был большой лакомка» (Ф.М.Достоевский) (26 октября — 10 декабря 2023 г.)",
+      "html": "<p>В музее Хлеба открыта выставка &quot;Он был большой лакомка&quot; (Ф.М.Достоевский) из цикла выставок &quot;Обед у литератора&quot;!</p>\n<p>Творчество Федора Михайловича Достоевского прочно ассоциируется с нравственными исканиями и исследованиями человеческой души. Но сам писатель был прежде всего человеком – противоречивым, большую часть жизни неустроенным в быту. Герои его романов часто идут по стопам автора – живут в тех же местах, ходят в те же трактиры и… заказывают те же блюда.</p>\n<p>Достоевский любил вкусно и сытно поесть. Но к кулинарным изыскам был равнодушен, а к блюдам нетребователен. Отдавал должное супам (особенно, солянке), бульонам, пирогам, сыру, фруктам. Больше всего любил вареную курицу, а запивал её тёплым молоком.</p>\n<p>Особую любовь писатель питал к сладостям и сухофруктам. Его дочь Любовь Федоровна вспоминала: «Отец с удовольствием ел сладости днем, а иногда и ночью».</p>\n<p>Из воспоминаний писателя Всеволода Соловьёва: «Постойте, голубчик! — часто говорил он, останавливаясь среди разговора. Он подходил к своему маленькому шкафику, отворял его и вынимал различные сласти: жестянку с королевским черносливом, свежую пастилу, изюм, виноград. Он ставил все это на стол и усиленно приглашал хорошенько заняться этими вещами. Он был большой лакомка…»</p>\n<p>Знал толк Достоевский и в чае. Крепкий чёрный чай он пил в больших количествах, сидя за письменным столом в своём кабинете. В стакан добавлял два кусочка сахара. И очень не любил, если его тревожили в это время.</p>\n<p>На выставке «Он был большой лакомка» представлена посуда и кондитерская упаковка конца XIX века из коллекции музея.</p>\n<p>Выставка открыта с 26 октября до 10 декабря 2023 г. в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "4ec007d2f954b74d71802fa5dff608dd7fea84974ebefc5376137691b32dfd09",
+      "source_page_sha256": "d5ec11abcc759dad50b68155f390f49883cbab45de2c741ae7ad03706a806284",
+      "text_length": 1639,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-10-26-byl-bolshoy-lakomka-fmdostoevskiy-26-oktyabrya-10-dekabrya-2023-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее Хлеба открыта выставка \"Он был большой лакомка\" (Ф.М.Достоевский) из цикла выставок \"Обед у литератора\"! Творчество Федора Михайловича Достоевского прочно ассоциируется с нравственными исканиями и исследованиями человеческой души. Но сам",
+      "linked_news_slug": "museum-news-2023-10-26-vystavka-byl-bolshoy-lakomka",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-10-26/vystavka-byl-bolshoy-lakomka",
+      "linked_news_html_sha256": "fe90f43e89d5b057a6f9c6222cf91f3b226f8eb81e42bbce40b5e1e7c09a21ff",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/404",
+      "node_paths": [
+        "/node/404"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-10-27/v-muzee-otkryta-vystavka-mery-i-razmery",
+      "path": "/vistavky/2023-10-27/v-muzee-otkryta-vystavka-mery-i-razmery",
+      "title": "В музее открыта выставка «Меры и размеры»",
+      "html": "<p>Чему равен метр, сколько весит килограмм, кто сумел вычислить одну лошадиную силу и каков твой рост в вершках?</p>\n<p>Об этом и о многом другом вы сможете узнать на нашей выставке, а также увидеть старинные весы и другие измерительные приборы из коллекции музея.</p>\n<p>Старинные меры веса, объема и длины всегда базировались на окружающих человека предметах. Космический объект – Солнце – с момента зарождения человеческой цивилизации лежало в основе вычисления времени, а длину и ширину измеряли популярными для той или иной страны злаками или элементами тела человека.</p>\n<p>Зерно как постоянная мера длины и веса были известны и в Древнем Египте, и на Руси. В России в XVIII веке входит в употребление такая мера длины, как линия, которая была равна 2,54 мм. Это ширина пшеничного зерна. 10 линий составляли 1 дюйм, который был равен длине трех сухих зерен ячменя, взятых из середины колоса (2,54 см).</p>\n<p>В настоящее время самой распространенной на планете Земля является метрическая система мер.</p>\n<p>На выставке представлены предметы из коллекции музея.</p>\n<p>Выставка открыта с 26 октября до 3 декабря 2023 г. в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "c342a907545da187819906590aef55728124c66a00ce09b0e8ba073e2bdc47f7",
+      "source_page_sha256": "867dc9ac022620042fae337cabc7c89ad45dd068a56d88b9fded54172f25b37f",
+      "text_length": 1104,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-10-27-v-muzee-otkryta-vystavka-mery-i-razmery",
+      "category_slug": "exhibitions-past",
+      "intro": "Чему равен метр, сколько весит килограмм, кто сумел вычислить одну лошадиную силу и каков твой рост в вершках? Об этом и о многом другом вы сможете узнать на нашей выставке, а также увидеть старинные весы и другие измерительные приборы из коллек",
+      "linked_news_slug": "museum-news-2023-10-27-vystavka-mery-i-razmery",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-10-27/vystavka-mery-i-razmery",
+      "linked_news_html_sha256": "f2dd7abdad61a346b0ca7bc2768d35c0a4334407c16180141059b4b09b702273",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/410",
+      "node_paths": [
+        "/node/410"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-12-21/i-ya-tam-byl-21-dekabrya-2023-g-30-iyunya-2024-g",
+      "path": "/vistavky/2023-12-21/i-ya-tam-byl-21-dekabrya-2023-g-30-iyunya-2024-g",
+      "title": "«И я там был» (21 декабря 2023 г. — 30 июня 2024 г.)",
+      "html": "<p>В музее Хлеба открылась выставка &quot;И я там был...&quot;</p>\n<p>Выставка охватывает всеми любимые и известные сюжеты сказок А.С.Пушкина: «Сказка о рыбаке и рыбке», «Сказка о золотом петушке» и «Сказка о мертвой царевне и семи богатырях»! Здесь каждый посетитель почувствует себя героем сказочного сюжета, попробовав свои силы в увлекательных интерактивных зонах, посвященных произведениям А.С. Пушкина. Попытается поймать свою золотую рыбку и написать заветное желание, погадает в тереме у злой мачехи, побывает за столом у Шамаханской царицы.</p>\n<p>Кроме того, на выставке будут представлены предметы из коллекции музея: елочные игрушки, кондитерская упаковка, конфетные обёртки и другие предметы, связанные с творчеством поэта. А.С. Пушкин и сюжеты его произведений начали появляться на упаковке кондитерских изделий еще в конце 1830-х годов в формате карамели. И уже к концу 19 века большинство крупных кондитерских фабрик имело в своем ассортименте продукцию с персонажами А.С. Пушкина. Эта традиция продолжилась и после революции. Образ А.С. Пушкина и его героев использовался не только в кондитерской промышленности, а вот где еще, вы узнаете, придя на нашу выставку.</p>\n<p>Выставка открыта до 30 июня 2024 г.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "10d19daea4f3b958015925da8992fbefa836bedce8dc911abca246bec21389b2",
+      "source_page_sha256": "2abe4a991bba2608de4f4d3c7875bfa65bbd990967325706ecc926ad920aee60",
+      "text_length": 1189,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-12-21-i-ya-tam-byl-21-dekabrya-2023-g-30-iyunya-2024-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее Хлеба открылась выставка \"И я там был...\" Выставка охватывает всеми любимые и известные сюжеты сказок А.С.Пушкина: «Сказка о рыбаке и рыбке», «Сказка о золотом петушке» и «Сказка о мертвой царевне и семи богатырях»! Здесь каждый посетите",
+      "linked_news_slug": "museum-news-2023-12-21-vystavka-i-ya-tam-byl",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-12-21/vystavka-i-ya-tam-byl",
+      "linked_news_html_sha256": "6c0d9aee4b762dc92d202d98c7112afa1fdc353402b2e6b4da1b4745ab5e6378",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/413",
+      "node_paths": [
+        "/node/413"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2023-12-25/zhizn-delennaya-na-grammy-21-dekabrya-2023-g-28-yanvarya-2024-g",
+      "path": "/vistavky/2023-12-25/zhizn-delennaya-na-grammy-21-dekabrya-2023-g-28-yanvarya-2024-g",
+      "title": "«Жизнь, деленная на граммы» (21 декабря 2023 г. — 28 января 2024 г.)",
+      "html": "<p>В музее Хлеба открылась выставка &quot;Жизнь, деленная на граммы&quot;.</p>\n<p>В 2022 году по поручению Председателя Совета Федерации Федерального Собрания Российской Федерации Валентины Ивановны Матвиенко по регионам России проходил второй этап конкурса детского рисунка, посвященного 80-летию прорыва блокады Ленинграда.</p>\n<p>В конкурсе приняли участие 45 500 детей в возрасте от 6 до 18 лет из 61 региона Российской Федерации. Примечательно, что среди участников ребята из новых субъектов — Донецкой и Луганской Народных Республик. Подготовка к написанию конкурсных картин велась с мая 2022 года. За это время участники изучили блокадные дневники, архивные документы, семейные материалы, посмотрели фильмы о блокаде.</p>\n<p>20 марта 2023 года завершился процесс обработки рисунков и произошло определение победителей. Выбор финалистов шел двумя способами: оценку производило как компетентное жюри , так подписчики ТГ канала партнера проекта. В голосовании приняли участие более 30 000 человек. Материалы были просмотрены более 200 000 раз и получили свыше 1000 репостов. По инициативе подписчиков канала организован второй этап конкурса, он получил название «Жизнь, деленная на граммы».</p>\n<p>Каждая картина имеет трогательную аудио историю, созданную специально для нее ребятами из разных уголков нашей страны. Прослушать можно по ссылке QR-кода.</p>\n<p>На выставке представлены работы-победители конкурса.</p>\n<p>Выставка открыта до 28 января 2024 г.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "7a25169fc7507c29d1338d77282fdf657bbb1bc0803cbb5143ad5d15cc47f3a6",
+      "source_page_sha256": "96e4c5edecea71dbf6998fa8dcadca0ee6bc20c71b0035f3bdab94e16f1a26bc",
+      "text_length": 1406,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2023-12-25-zhizn-delennaya-na-grammy-21-dekabrya-2023-g-28-yanvarya-2024-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее Хлеба открылась выставка \"Жизнь, деленная на граммы\". В 2022 году по поручению Председателя Совета Федерации Федерального Собрания Российской Федерации Валентины Ивановны Матвиенко по регионам России проходил второй этап конкурса детског",
+      "linked_news_slug": "museum-news-2023-12-25-vystavka-zhizn-delennaya-na-grammy",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2023-12-25/vystavka-zhizn-delennaya-na-grammy",
+      "linked_news_html_sha256": "c5b68c4f59466f4ed7f949bd54d5c819550661ffb3dedeec0e0549c543874923",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/420",
+      "node_paths": [
+        "/node/420"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-01-26/nachalo-dorogi-zhizni-vostochnyy-bereg-ladogi-17-yanvarya-25-fevralya-2024-g",
+      "path": "/vistavky/2024-01-26/nachalo-dorogi-zhizni-vostochnyy-bereg-ladogi-17-yanvarya-25-fevralya-2024-g",
+      "title": "«Начало Дороги Жизни — восточный берег Ладоги» (17 января — 25 февраля 2024 г.)",
+      "html": "<p>В нашем музее открылась выставка «Начало Дороги Жизни - восточный берег Ладоги», посвященная 80-летию полного освобождения Ленинграда от фашистской блокады.</p>\n<p>Выставка рассказывает о строительстве коммуникаций для доставки продовольствия в голодающий город из глубины СССР на восточный берег Шлиссельбургской губы Ладожского озера зимой 1941-1942 годов.</p>\n<p>Экспонаты выставки помогают представить всю сложность экстренной прокладки автомобильных и железнодорожных путей по необжитым местам восточного приладожья. В основу выставки положены материалы летней экспедиции музея в Бокситогорский район Ленинградской области по местам прокладки знаменитой «Военной автомобильной дороги №102», которая огромным полукружием обогнула занятый врагом Тихвин и обеспечила подвоз продовольствия в Кобону в самый критический период блокады – в декабре 1941 года.</p>\n<p>На выставке представлены предметы военного быта: зажигалки, котелки для еды, ложка с кружкой, фляга, кисет, набор инструментов военного топографа, каска. Представляют интерес фотографии взорванных железнодорожных путей и разрушенных станций в районе Ладоги, а также цветные зарисовки В.Г.Карымова из цикла «По дороге жизни».</p>\n<p>Выставка создана в рамках музейного форума &quot;Дневные звёзды&quot; и в содружестве с музеями Ленинградской области и с Центральным музеем железнодорожного транспорта Российской Федерации.</p>\n<p><strong>Выставка открыта до 25 февраля 2024 г.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "f590232b83727c3c675f4db0988c5717aa33ac6e5b040260759884cade33c421",
+      "source_page_sha256": "cd2cfd54326822f0478c5b4d05439ced15db512daf4adbb1666c77b8774f5b73",
+      "text_length": 1388,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-01-26-nachalo-dorogi-zhizni-vostochnyy-bereg-ladogi-17-yanvarya-25-fevralya-2024-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка «Начало Дороги Жизни - восточный берег Ладоги», посвященная 80-летию полного освобождения Ленинграда от фашистской блокады. Выставка рассказывает о строительстве коммуникаций для доставки продовольствия в голодаю",
+      "linked_news_slug": "museum-news-2024-01-26-vystavka-nachalo-dorogi-zhizni-vostochnyy-bereg-ladogi",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-01-26/vystavka-nachalo-dorogi-zhizni-vostochnyy-bereg-ladogi",
+      "linked_news_html_sha256": "79d245aba50f2bca82d14340f302f672a14e2e1c8b9bb6652d5c3d95378ef268",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/427",
+      "node_paths": [
+        "/node/427"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-03-01/iz-chego-tolko-sdelany-baryshni-1-marta-21-aprelya-2024-g",
+      "path": "/vistavky/2024-03-01/iz-chego-tolko-sdelany-baryshni-1-marta-21-aprelya-2024-g",
+      "title": "«Из чего только сделаны барышни...» (1 марта — 21 апреля 2024 г.)",
+      "html": "<p>В самом-самом начале весны главное для всех нас, пожалуй, ожидание, предчувствие нового. Солнышка пока очень мало, но дни уже заметно длиннее. Очень хочется убрать подальше теплые вещи, хотя точно известно, что делать этого не стоит.</p>\n<p>Совсем скоро зацветут луковичные цветы – крокусы, тюльпаны, нарциссы, гиацинты… Но пока еще лежит снег, мы можем полюбоваться «луковым узором» - кобальтово-голубой росписью «цвибельмустер». И кто сказал, что украшать нужно только чашки и тарелки? А как же скалка или тёрка?</p>\n<p>Маленькие хозяйки тоже не отстают от взрослых, на кухне у них полный порядок! Девочки точно будут рады получить в подарок настоящий сервиз для кукольного чаепития. А может, просто, самим мамам этих маленьких девочек хотелось иметь такой сервиз в детстве?</p>\n<p>Весной особенно хочется быть красивой! Например, завить кудри или, если они уже есть, как следует выпрямить их. Купить самую современную и чудесную косметику в хорошенькой упаковке. И, как и сто лет назад, пудра и помада нам пообещают, что мы станем еще прекраснее. Хотя, куда уж прекраснее?</p>\n<p> А еще в начале весны праздник у всех-всех барышень. Думается, в начале марта именно барышнями ощущают себя все представительницы прекрасного пола, независимо от своего возраста и статуса. Музей Хлеба присоединяется к поздравлениям, а воплощённые в фарфоре образы из нашей музейной коллекции подтверждают: милые барышни, вы прекрасны!</p>\n<p>Выставка открыта в зале №12 с 1 марта до 21 апреля 2024 г.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "1c7cc019a379cd28426c63caa15e8050942f9def7cc93bb60beea5d0cf6915eb",
+      "source_page_sha256": "d4c984a5aeaccd9c204a160c2eee1ee0f6af2b04677a5be314b7ea4ddc29f47b",
+      "text_length": 1447,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-03-01-iz-chego-tolko-sdelany-baryshni-1-marta-21-aprelya-2024-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В самом-самом начале весны главное для всех нас, пожалуй, ожидание, предчувствие нового. Солнышка пока очень мало, но дни уже заметно длиннее. Очень хочется убрать подальше теплые вещи, хотя точно известно, что делать этого не стоит. Совсем скор",
+      "linked_news_slug": "museum-news-2024-03-01-vystavka-iz-chego-tolko-sdelany-baryshni",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-03-01/vystavka-iz-chego-tolko-sdelany-baryshni",
+      "linked_news_html_sha256": "97cba80be5b48be36abc86f0d80e2380f6a2bdb39d1c445b5f3fdc5695e45d3f",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/433",
+      "node_paths": [
+        "/node/433"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-04-19/istoriya-hlebopekarnoy-promyshlennosti-sankt-peterburga-17-aprelya-23-iyunya",
+      "path": "/vistavky/2024-04-19/istoriya-hlebopekarnoy-promyshlennosti-sankt-peterburga-17-aprelya-23-iyunya",
+      "title": "«История хлебопекарной промышленности Санкт-Петербурга» (17 апреля — 29 сентября 2024 г.)",
+      "html": "<p>В нашем музее открылась выставка «История хлебопекарной промышленности Санкт-Петербурга». Это совместный проект музея и Центрального государственного архива научно-технической документации.</p>\n<p>Выставка посвящена истории петербургского хлебопечения за минувшее столетие, с конца XIX века вплоть до современности. Представленные материалы отражают не только путь, пройденный конкретными хлебозаводами нашего города, но и процесс научно-технического развития, благодаря которому хлебопекарная отрасль постоянно совершенствовалась и шла в ногу со своим временем.</p>\n<p>Основой для выставки стали документы и фотографии из фондов ЦГАНТД СПБ и Санкт-Петербургского музея Хлеба. Ценные дополнительные материалы предоставлены Санкт-Петербургским филиалом НИИ хлебопекарной промышленности, Ассоциацией «Хлебопёки Санкт-Петербурга» и петербургскими хлебозаводами «Каравай» и «Арнаут».</p>\n<p>Выставка работает с 17 апреля по 29 сентября 2024 года.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "e8cfa39af7877db356b37f11e8e90bd8453d33c19d3cd0461d2da7adbbc637a3",
+      "source_page_sha256": "99ecc2489b58957f30df8b252721451fe4d0ddd61919503eef066da5424eef2b",
+      "text_length": 921,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-04-19-istoriya-hlebopekarnoy-promyshlennosti-sankt-peterburga-17-aprelya-23-iyunya",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка «История хлебопекарной промышленности Санкт-Петербурга». Это совместный проект музея и Центрального государственного архива научно-технической документации. Выставка посвящена истории петербургского хлебопечения ",
+      "linked_news_slug": "museum-news-2024-04-19-vystavka-istoriya-hlebopekarnoy-promyshlennosti-sankt-peterburga",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-04-19/vystavka-istoriya-hlebopekarnoy-promyshlennosti-sankt-peterburga",
+      "linked_news_html_sha256": "821e208896a0d29777c8a89e09d61f6ddfcfde976665c569735d59521044f581",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/441",
+      "node_paths": [
+        "/node/441"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-05-27/gorod-nad-volnoy-nevoy-8-maya-16-iyunya-2024-g",
+      "path": "/vistavky/2024-05-27/gorod-nad-volnoy-nevoy-8-maya-16-iyunya-2024-g",
+      "title": "«Город над вольной Невой...» (8 мая — 16 июня 2024 г.)",
+      "html": "<p>В музее работает выставка &quot;Город над вольной Невой...&quot;</p>\n<p>В этом году исполнилось 100 лет с момента переименования Петрограда в Ленинград.</p>\n<p>Очень быстро новое имя города появилось на открытках, плакатах, буклетах и даже кондитерской упаковке, где можно было рассмотреть не только традиционные символы города, но и новостройки.</p>\n<p>На выставке можно увидеть коробки для конфет и зефира, банки для монпансье, типографские оттиски образцов упаковки.</p>\n<p>Выставка открыта до 16 июня 2024 г. в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "8a1d88783ba840d5c4aad4174f3b701c26dd9db8cfa96de719b5e35aa5fe2df7",
+      "source_page_sha256": "f6fb81fadf06a256d78099a44d82b381920ce4a9d34eb8c748a67d50fe5101bb",
+      "text_length": 496,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-05-27-gorod-nad-volnoy-nevoy-8-maya-16-iyunya-2024-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее работает выставка \"Город над вольной Невой...\" В этом году исполнилось 100 лет с момента переименования Петрограда в Ленинград. Очень быстро новое имя города появилось на открытках, плакатах, буклетах и даже кондитерской упаковке, где мо",
+      "linked_news_slug": "museum-news-2024-05-27-vystavka-gorod-nad-volnoy-nevoy",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-05-27/vystavka-gorod-nad-volnoy-nevoy",
+      "linked_news_html_sha256": "39e064259ed8b67e013958981a9215ea7e50aad3923bdaa143ec5c336227f6d7",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/445",
+      "node_paths": [
+        "/node/445"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-07-02/celyy-mir-v-malenkoy-chashke-19-iyunya-25-avgusta-2024-g",
+      "path": "/vistavky/2024-07-02/celyy-mir-v-malenkoy-chashke-19-iyunya-25-avgusta-2024-g",
+      "title": "«Целый мир в маленькой чашке» (19 июня — 25 августа 2024 г.)",
+      "html": "<p>В нашем музее открылась выставка &quot;Целый мир в маленькой чашке&quot;, посвященная году культуры России и Китая.</p>\n<p>Во времена правления Михаила Федоровича в России появляется чай, который в 1638 г. русский посол Василий Стариков привез в дар от монгольского хана. А уже в 1769 году Россия заключает с Китаем первый договор на поставку чая. Но долгое время чай в России был довольно дорогим удовольствием, поскольку путь от Пекина до Москвы занимал более полугода.</p>\n<p>Со строительством Транссибирской железнодорожной магистрали в конце 19 века начинается триумфальное шествие чая по России. По всей стране открываются чайные, вырабатывается чайный этикет - появляется особый вид приглашения в гости &quot;на чай&quot;.</p>\n<p>На выставке посетители смогут увидеть предметы и посуду, связанную с чаем и чайным этикетом. Кроме того, здесь будет выставлена коллекция миниатюрных сувенирных чайников, предоставленных частным коллекционером.</p>\n<p><strong>Выставка открыта с 19 июня по 25 августа 2024 г.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "177dbc6f97d6486e26c6e08ad083cdef819d537b116814ea843fc052cadbaf50",
+      "source_page_sha256": "1096c9f6b5f8e90092c9e0b08a479598e5340258ab14a996245c1de248b7cf5e",
+      "text_length": 955,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-07-02-celyy-mir-v-malenkoy-chashke-19-iyunya-25-avgusta-2024-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка \"Целый мир в маленькой чашке\", посвященная году культуры России и Китая. Во времена правления Михаила Федоровича в России появляется чай, который в 1638 г. русский посол Василий Стариков привез в дар от монгольск",
+      "linked_news_slug": "museum-news-2024-07-02-vystavka-celyy-mir-v-malenkoy-chashke",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-07-02/vystavka-celyy-mir-v-malenkoy-chashke",
+      "linked_news_html_sha256": "d62d8030313ffd6c07af2126c212eb3667dd924c5d23f9273f38d1b2587b1d11",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/456",
+      "node_paths": [
+        "/node/456"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-08-30/mariyskie-tradicii-29-avgusta-29-sentyabrya-2024-g",
+      "path": "/vistavky/2024-08-30/mariyskie-tradicii-29-avgusta-29-sentyabrya-2024-g",
+      "title": "«Марийские традиции» (29 августа — 29 сентября 2024 г.)",
+      "html": "<p>В нашем музее открылась выставка«Марийские традиции».</p>\n<p>Открытие выставки приурочено к 8 сентября, трагической дате начала фашистской блокады Ленинграда. Среди воинов, защищавших наш город в период Великой Отечественной войны, были представители разных национальностей, в том числе и марийцы.</p>\n<p>На выставке можно увидеть не только материалы о защитниках Ленинграда, но и экспонаты, рассказывающие об истории и традициях марийского народа. Акцент сделан на особенностях марийской выпечки и ее значении в марийских культурных традициях.</p>\n<p>В экспозиции представлены марийские национальные костюмы, предметы быта, образцы ритуальной выпечки, а также наряду с подлинными традиционными украшениями есть и авторские работы.</p>\n<p>Выставка подготовлена совместно с Марийской национально-культурной автономией Ленинградской области «Ший корно» и Домом дружбы Ленинградской области.</p>\n<p><strong>Выставка работает с 29 августа по 29 сентября 2024 г.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "46b20759f025c953e7afe329a9ec765bafe0d246de095178ea6192d0034fe3de",
+      "source_page_sha256": "333d85d2aa88fd6863a7c144fcab7f40d45d4005bc475a5400e5adfa35d9600d",
+      "text_length": 914,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-08-30-mariyskie-tradicii-29-avgusta-29-sentyabrya-2024-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка«Марийские традиции». Открытие выставки приурочено к 8 сентября, трагической дате начала фашистской блокады Ленинграда. Среди воинов, защищавших наш город в период Великой Отечественной войны, были представители р",
+      "linked_news_slug": "museum-news-2024-08-30-vystavka-mariyskie-tradicii",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-08-30/vystavka-mariyskie-tradicii",
+      "linked_news_html_sha256": "9884cf7ec5f43e4d4ad6af0e16997282bcabf5699c9acf8e427115a7cca71110",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/465",
+      "node_paths": [
+        "/node/465"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-10-02/koroli-konditerskogo-dela-tovarishchestvo-aiabrikosova-synovey-k-200-letiyu",
+      "path": "/vistavky/2024-10-02/koroli-konditerskogo-dela-tovarishchestvo-aiabrikosova-synovey-k-200-letiyu",
+      "title": "Короли кондитерского дела. «Товарищество А.И.Абрикосова Сыновей» (к 200-летию А.И.Абрикосова)",
+      "html": "<p>В нашем музее открылась выставка &quot;Короли кондитерского дела. «Товарищество А.И.Абрикосова Сыновей» (к 200-летию А.И.Абрикосова)&quot;.</p>\n<p>Алексей Иванович Абрикосов (1824-1904 гг.) - русский предприниматель, глава &quot;Товарищества А.И.Абрикосова Сыновей&quot;. Унаследовав убыточную лавку отца, он механизировал производство, привлек наемных рабочих, наладил собственное создание упаковки и развернул мощную рекламную кампанию. Это было новаторство для того времени!</p>\n<p>Отдельное внимание Абрикосовы уделяли упаковке, ведь она должна была не только хранить товар, но и «продавать» его. Упаковка фирмы сразу стала предметом коллекционирования.</p>\n<p>К концу XIX века фирма была ведущей по разнообразию продукции среди всех кондитерских компаний России, она выпускала около 750 видов кондитерский изделий, включая 80 разновидностей шоколада. В 1898 году «Товариществу А. И. Абрикосова Сыновей» было присвоено почетное звание «Поставщик Двора его Императорского Величества».</p>\n<p>На выставке представлена часть коллекции кондитерской упаковки, оберток для конфет и утвари конца XIX - начала XX вв.</p>\n<p>Выставка открыта со 2 октября по 10 ноября 2024 г. в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "96427a50589ee7d7d0ab3ad18573e46f0c5e35ee17d7d3ff9b1ad01cde4e9b65",
+      "source_page_sha256": "05a5c0a497c596ea78c363613d683728c08bfbd174ac6d273ec06590b11816d5",
+      "text_length": 1137,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-10-02-koroli-konditerskogo-dela-tovarishchestvo-aiabrikosova-synovey-k-200-letiyu",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка \"Короли кондитерского дела. «Товарищество А.И.Абрикосова Сыновей» (к 200-летию А.И.Абрикосова)\". Алексей Иванович Абрикосов (1824-1904 гг.) - русский предприниматель, глава \"Товарищества А.И.Абрикосова Сыновей\". ",
+      "linked_news_slug": "museum-news-2024-10-02-vystavka-koroli-konditerskogo-dela-tovarishchestvo-aiabrikosova-synovey-k-200",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-10-02/vystavka-koroli-konditerskogo-dela-tovarishchestvo-aiabrikosova-synovey-k-200",
+      "linked_news_html_sha256": "045e259c8a5660f730d054757b9b74720c0a9aee7603e95ab9a96546849e54a7",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/473",
+      "node_paths": [
+        "/node/473"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-11-22/zavtra-byl-mir-20-noyabrya-2024-g-29-iyunya-2025-g",
+      "path": "/vistavky/2024-11-22/zavtra-byl-mir-20-noyabrya-2024-g-29-iyunya-2025-g",
+      "title": "«А завтра был мир»",
+      "html": "<p>В музее открыта выставка «А завтра был мир»!</p>\n<p>Выставка - это рассказ о жизни Ленинграда накануне Победы через образ коммунальной квартиры 1944 – 1945 гг.</p>\n<p>Война уже далеко отошла от Ленинграда, и постепенно ее атрибуты начинают исчезать из города – стираются объявления об убежищах на стенах домов, снова открываются магазины, восстанавливается работа хлебозаводов, возвращаются жители из эвакуации.</p>\n<p>Коммунальные «углы» на выставке служат лишь фоном для создания ощущения последних месяцев перед Победой, времени, когда каждый день с нетерпением ожидали радостных известий по радио и особенно переживали за своих близких на фронте. Казалось, что сил и терпения уже не осталось, но еще чуть-чуть – и Победа!</p>\n<p>Выставка на протяжении своей работы будет трансформироваться, показывая преображение квартиры в первый год после освобождения Ленинграда от фашистской блокады. Из репродуктора будут звучать мелодии и сообщения Совинформбюро о продвижениях войск в 1945 году.</p>\n<p>На выставке будут представлены предметы из коллекции музея: мебель, фотографии, посуда, предметы быта, декоративно-прикладное искусство, игрушки. А также предметы из частных коллекций.</p>\n<p><strong>Выставка открыта с 20 ноября 2024 г. по 29 июня 2025 г. в часы работы музея.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "09d3c0fbe7f1112e2abe12ade8c134fba3c93ac398513d52979971b8491665d4",
+      "source_page_sha256": "4ac0853776b6cd08d05d1f824bc7c64054e0cf8af3020ed9e72babacebbf1ce9",
+      "text_length": 1224,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-11-22-zavtra-byl-mir-20-noyabrya-2024-g-29-iyunya-2025-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открыта выставка «А завтра был мир»! Выставка - это рассказ о жизни Ленинграда накануне Победы через образ коммунальной квартиры 1944 – 1945 гг. Война уже далеко отошла от Ленинграда, и постепенно ее атрибуты начинают исчезать из города ",
+      "linked_news_slug": "museum-news-2024-11-22-vystavka-zavtra-byl-mir",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-11-22/vystavka-zavtra-byl-mir",
+      "linked_news_html_sha256": "b162c22ab9e4497a3c49c7d46b5ce55547051f405b850b750e374ae89ddb84e7",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/476",
+      "node_paths": [
+        "/node/476"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-12-11/s-rozhdestvom-11-dekabrya-2024-g-19-yanvarya-2025-g",
+      "path": "/vistavky/2024-12-11/s-rozhdestvom-11-dekabrya-2024-g-19-yanvarya-2025-g",
+      "title": "«Съ Рождествомъ!» (11 декабря 2024 г. — 19 января 2025 г.)",
+      "html": "<p>В музее открылась выставка &quot;Съ Рождествомъ!&quot;, посвященная празднованию Рождества в Петербурге в конце XIX - начале ХХ вв.</p>\n<p><em>…Всюду праздничные речи,<br>Всюду счастье деток ждет…<br>Вскинув елочку на плечи,<br>Ангел с радостью идет…<br>Загляните в окна сами, —<br>Там большое торжество!<br>Елки светятся огнями,<br>Как бывает в Рождество…</em></p>\n<p><em>Ф.М.Достоевский. В сочельник</em></p>\n<p>Рождество Христово — один из главных христианских праздников. По старому стилю Рождество отмечали 25 декабря, 1 января праздновали Новый, а 6 января — Крещение. Эти праздники составляли единый цикл — Святки.</p>\n<p>Но начинался праздник ещё 24 декабря, в сочельник.  Рождество по традиции петербуржцы праздновали дома, в кругу семьи. На следующий день навещали друзей, родственников и ходили в гости «с визитами». За день успевали посетить несколько домов и везде поднимали тосты в честь праздника и угощались рождественскими блюдами.</p>\n<p>Со второго дня после Рождества устраивали детские праздники, костюмированные маскарады, гуляния. Горожане катались с ледяных гор и на коньках, посещали театры и балы.</p>\n<p>Официальными праздничными днями были 25 и 26 декабря, 1 и 6 января, но на самом деле праздник длился более двух недель.</p>\n<p>На  выставке можно увидеть поздравительные почтовые открытки, ёлочные игрушки и кондитерскую упаковку того времени.</p>\n<p>Выставка открыта с 11 декабря 2024 г. по 19 января 2025 г. в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "db7d1f95e0c8e15747fd8e29de9ee266619e4ccdb2bfb8a25e84ad62443d9d9e",
+      "source_page_sha256": "f1e645f47e35fc30e2cdda2ae91528c69b61879c226d3d2905431a43fb4f51c0",
+      "text_length": 1346,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-12-11-s-rozhdestvom-11-dekabrya-2024-g-19-yanvarya-2025-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открылась выставка \"Съ Рождествомъ!\", посвященная празднованию Рождества в Петербурге в конце XIX - начале ХХ вв. …Всюду праздничные речи,Всюду счастье деток ждет…Вскинув елочку на плечи,Ангел с радостью идет…Загляните в окна сами, —Там ",
+      "linked_news_slug": "museum-news-2024-12-11-vystavka-s-rozhdestvom",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-12-11/vystavka-s-rozhdestvom",
+      "linked_news_html_sha256": "f4b7bd0f02b441ce55cb8c5d56a3b70e2fdbb180cf9dbaade6d239f2cbc55a7f",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/478",
+      "node_paths": [
+        "/node/478"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2024-12-23/gde-spryatalsya-podarok-19-dekabrya-2024-g-2-fevralya-2025-g",
+      "path": "/vistavky/2024-12-23/gde-spryatalsya-podarok-19-dekabrya-2024-g-2-fevralya-2025-g",
+      "title": "«Где спрятался подарок?» (19 декабря 2024 г. — 2 февраля 2025 г.)",
+      "html": "<p>В нашем музее открылась выставка «Где спрятался подарок?»</p>\n<p>Так где же прячется подарок? Под елкой мы найдем красивые упаковки, в которых затаились подарки! А без чего не обходится ни один Новый год? Конечно же без разнообразных сладостей в красочной коробочке. Именно о кондитерской упаковке второй половины 20 века рассказывает выставка.</p>\n<p>Мы приглашаем наших гостей перенестись в предновогоднюю сказочную мастерскую Деда Мороза, где он и его помощники упаковывают новогодние подарки.</p>\n<p>Самые любознательные познакомятся с коллекцией кондитерских упаковочных коробок, оберток от конфет, почтовых открыток второй половины 20 века и другими интересными экспонатами. Взрослые посетители на несколько мгновений вернутся во времена своего детства, увидят знакомые вещи, которые приносили столько радости и каждый окунется в приятные воспоминания о том, как он встречал Новый год.</p>\n<p>Самые маленькие смогут увидеть подарки, которые радовали их родителей, бабушек и дедушек на Новый год и сравнить их с теми, которые они получают от Деда Мороза.</p>\n<p>Самые любопытные смогут заглянуть в замочную скважину и увидеть Деда Мороза в его покоях, когда он отдыхает от предпраздничной суеты.</p>\n<p>Добро пожаловать в предновогоднюю сказку…</p>\n<p>Выставка открыта с 19 декабря 2024 г. по 2 февраля 2025 г. в часы работы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "a43a2dfb0660bcff1e85edfe4527f41df2bd5d73354e13c2ac42e93127684745",
+      "source_page_sha256": "79959b09358b1f2deb70121e78129a6074398de26e612513fbe71ff24857b591",
+      "text_length": 1287,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2024-12-23-gde-spryatalsya-podarok-19-dekabrya-2024-g-2-fevralya-2025-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка «Где спрятался подарок?» Так где же прячется подарок? Под елкой мы найдем красивые упаковки, в которых затаились подарки! А без чего не обходится ни один Новый год? Конечно же без разнообразных сладостей в красоч",
+      "linked_news_slug": "museum-news-2024-12-23-vystavka-gde-spryatalsya-podarok",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2024-12-23/vystavka-gde-spryatalsya-podarok",
+      "linked_news_html_sha256": "b06f3610f7c4df00140a4a60789a75d726216498ba515d7672984e6dc00dcc69",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/484",
+      "node_paths": [
+        "/node/484"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-01-30/vashe-zdorove-tema-alkogolya-v-kollekcii-sankt-peterburgskogo-muzeya-hleba",
+      "path": "/vistavky/2025-01-30/vashe-zdorove-tema-alkogolya-v-kollekcii-sankt-peterburgskogo-muzeya-hleba",
+      "title": "«Ваше здоровье!» (Тема алкоголя в коллекции Санкт-Петербургского музея Хлеба)",
+      "html": "<p>В музее открылась выставка &quot;«Ваше здоровье!» (Тема алкоголя в коллекции Санкт-Петербургского музея Хлеба)&quot;.</p>\n<p>Алкоголь сопровождает человечество на протяжении всей его истории. А человеку свойственно стремление к декоративному оформлению окружающих его вещей. Так и появились бутылки с рельефными узорами, бокалы и рюмки с инкрустациями и монограммами, богато украшенные пивные кружки и даже фигурные навершия на пробках.</p>\n<p>Выставка «Ваше здоровье!» посвящена декоративному оформлению предметов конца XIX – середины XX вв., которое и превращало бытовую вещь в символ роскоши, объект внимания коллекционеров и экспонат.</p>\n<p>На выставке можно увидеть лишь часть богатой коллекции музея - пивные кружки, пробки для бутылок, открытки.</p>\n<p>И напоминаем: употребление алкоголя, даже из красивого кубка, негативно влияет на Ваше здоровье!</p>\n<p>Выставка работает с 29 января до 16 марта.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "88afd8360ba5ad17c6412b61bcd69d9cf872dcdeba607f6a4381a26bfd4a4f6b",
+      "source_page_sha256": "1b4fca99103cb0535d15fbbbd43c2873c1ff0f3a07dfe3e7ca76a5c0cd64fcae",
+      "text_length": 862,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2025-01-30-vashe-zdorove-tema-alkogolya-v-kollekcii-sankt-peterburgskogo-muzeya-hleba",
+      "category_slug": "exhibitions-past",
+      "intro": "В музее открылась выставка \"«Ваше здоровье!» (Тема алкоголя в коллекции Санкт-Петербургского музея Хлеба)\". Алкоголь сопровождает человечество на протяжении всей его истории. А человеку свойственно стремление к декоративному оформлению окружающи",
+      "linked_news_slug": "museum-news-2025-01-30-vystavka-vashe-zdorove-tema-alkogolya-v-kollekcii-sankt-peterburgskogo-muzeya",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2025-01-30/vystavka-vashe-zdorove-tema-alkogolya-v-kollekcii-sankt-peterburgskogo-muzeya",
+      "linked_news_html_sha256": "449cf18207957f1425eb7b35a9bb05775aa891cce0eb5022114d562c735e7d98",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/497",
+      "node_paths": [
+        "/node/497"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-05-05/o-sport-ty-mir-1-maya-1-iyunya-2025-g",
+      "path": "/vistavky/2025-05-05/o-sport-ty-mir-1-maya-1-iyunya-2025-g",
+      "title": "«О, спорт, ты — мир!» (1 мая — 1 июня 2025 г.)",
+      "html": "<p>В нашем музее открыта выставка &quot;О, спорт, ты - мир!&quot;</p>\n<p>Первые изображения спортивных состязаний появились еще в VI веке до нашей эры на древнейших упаковках – древнегреческих амфорах, в которых хранили и транспортировали благовония, злаки, вина и другую продукцию. Появление этих изображений было связано с проведением в Древней Греции олимпийских игр.</p>\n<p>В России культ спорта всегда был развит. Пропаганда спорта и призыв «В здоровом теле здоровый дух» в самых разных вариациях существовали ещё в начале XIX века. В конце ХIX века - начале ХХ века различные виды спорта стали появляться на упаковках, этикетках и в торговой рекламе, в том числе и кондитерских изделий. Свои серии спортивного шоколада выпускали Рамонская паровая фабрика, «Наследница Яни», Товарищества Эйнейм, Абрикосова, Жорж Борман и др. А конфеты и карамель «Спорт» были практически у каждого производителя.</p>\n<p>В 20 – 30-е годы ХХ века в Советском Союзе тема спорта на упаковках и этикетках была особенно популярна, так как население страны готовили к «труду и обороне»!</p>\n<p>В 50 – 70-е годы прошлого века практически все виды спорта можно было увидеть на спичечных этикетках, на обертках для конфет и шоколада, выпускавшихся огромными тиражами.</p>\n<p>А в 70-х – начале 80-х гг. прошлого века многие виды продуктов и товаров, выпускаемых в СССР, упаковывались в «олимпийскую» упаковку в преддверии знаменательного события для всей страны – Олимпиады - 80.</p>\n<p>Выставка открыта с 3 мая по 1 июня 2025 г. в рабочие часы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "c42ed2a41de641a6471b4f80e0fd56bbac2eb10052b51c67a4406559ea447004",
+      "source_page_sha256": "b9d13143f5e3c2fd5989698cd5f13146594fa1aca50b04c82110b42bd132d901",
+      "text_length": 1474,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2025-05-05-o-sport-ty-mir-1-maya-1-iyunya-2025-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открыта выставка \"О, спорт, ты - мир!\" Первые изображения спортивных состязаний появились еще в VI веке до нашей эры на древнейших упаковках – древнегреческих амфорах, в которых хранили и транспортировали благовония, злаки, вина и ",
+      "linked_news_slug": "museum-news-2025-05-05-vystavka-o-sport-ty-mir",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2025-05-05/vystavka-o-sport-ty-mir",
+      "linked_news_html_sha256": "ad7b1bfbac9e2ecf96bfad028fa6b00b3199134d7045c5470c7b278805307241",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/500",
+      "node_paths": [
+        "/node/500"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-06-05/my-v-etom-gorode-zhivyom-4-iyunya-13-iyulya-2025-g",
+      "path": "/vistavky/2025-06-05/my-v-etom-gorode-zhivyom-4-iyunya-13-iyulya-2025-g",
+      "title": "«Мы в этом городе живём»",
+      "html": "<p>В нашем музее открылась выставка «Мы в этом городе живём» - представление работ Народного коллектива – студии флористики «Волшебная соломка» им. Г.П.Энгельке, посвященных Санкт-Петербургу.</p>\n<p>Студия флористики «Волшебная соломка» СПб ГБУ «Культурно-досуговый комплекс «Красносельский» начала свою деятельность в 2015 году.</p>\n<p>Основатель студии – Энгельке Георгий Павлович – житель блокадного Ленинграда, почётный житель МО «Урицк» Красносельского района Санкт-Петербурга, ветеран Кировского завода. Георгий Павлович более 40 лет занимался соломкой, и это увлечение стало для него любовью всей жизни. В мае 2024 г. основателя студии не стало, и было принято решение присвоить студии его имя.</p>\n<p>На данный момент в студии занимаются 25 человек. Это люди «серебряного» возраста с огромной жизненной энергией и творческим потенциалом, умеющие создавать красоту своими руками. Изготовление картин требует большой усидчивости и терпения, фантазии и влюблённости в материал. Процесс воплощения художественного замысла очень трудоемкий: нужно не только выбрать подходящую солому, но и правильно ее распарить, оттонировать и, в завершении, скомпоновать. Среди мастеров нет профессиональных художников, это представители самых разных профессий, но все они – творческие люди с разнообразными интересами и «золотыми руками».</p>\n<p>Выставки студии (более 400) успели побывать во многих городах России, а также в Англии и во Франции.</p>\n<p>Студия флористики «Волшебная соломка» - участник и Лауреат районных, городских, Всероссийских конкурсов и фестивалей. В 2022 году Правительством Санкт-Петербурга студии флористики «Волшебная соломка» присвоено почётное звание «Народный коллектив».</p>\n<p>Выставка работает с 04.06.2025 г. по 13.07.2025 г., в часы работы музея.</p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "c8eb0e922d4fcdddcd1aa6ef446b04f795ec321c4c6691bc52e211477824b508",
+      "source_page_sha256": "c28f4c4f18cef8cc5d0ca68abbabc7587ed49037ddd399fc5faa2928458f3050",
+      "text_length": 1725,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2025-06-05-my-v-etom-gorode-zhivyom-4-iyunya-13-iyulya-2025-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка «Мы в этом городе живём» - представление работ Народного коллектива – студии флористики «Волшебная соломка» им. Г.П.Энгельке, посвященных Санкт-Петербургу. Студия флористики «Волшебная соломка» СПб ГБУ «Культурно",
+      "linked_news_slug": "museum-news-2025-06-05-vystavka-my-v-etom-gorode-zhivyom",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2025-06-05/vystavka-my-v-etom-gorode-zhivyom",
+      "linked_news_html_sha256": "102ed603d564b646370916d17c98cecd24a30d414438e157c27ebaf18c9e6706",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/502",
+      "node_paths": [
+        "/node/502"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-06-16/ptichiy-bazar-11-iyunya-3-avgusta-2025-g",
+      "path": "/vistavky/2025-06-16/ptichiy-bazar-11-iyunya-3-avgusta-2025-g",
+      "title": "«Птичий базар»",
+      "html": "<p>В нашем музее открылась выставка &quot;Птичий базар&quot;!</p>\n<p>Птицы всегда служили для человека объектом интереса и поклонения. Их способность летать делала их символом связи человека и небес.</p>\n<p>В античности птицы ассоциировались с главными богами пантеона. В Средневековье они обрели символическое значение, связанное с христианством. Позже пернатые стали персонажами аллегорий.</p>\n<p>И сейчас мы считаем лебедей символом верности, сову – мудрости, пеликана – жертвенности, страуса – трусости, орла - храбрости. Мы говорим: «поёт как соловей», «сорока на хвосте принесла», «стреляный воробей», «как с гуся вода». Мы считаем ворон, пишем как курица лапой, держим синицу в руках и смотрим на журавля в небе.</p>\n<p>Образ птицы, их грация и красота всегда привлекали художников. Пернатые появились на гербах и монетах, на значках и медалях, на флагах и эмблемах, на картинах и в скульптуре. Но и обычные, утилитарные вещи не смогли обойтись без изображения птиц. Выставка «Птичий базар» и показывает такие предметы, хранящиеся в коллекции Санкт-Петербургского музея Хлеба.</p>\n<p><strong>Выставка открыта с 11 июня до 3 августа 2025 г.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "b7d9d747be9454402bd928aa6f83087871cd83450674d2f1e5d5e9afa4bf856a",
+      "source_page_sha256": "8efce51188a75ca560e9209844f66701fa1ba2ac4692a8a4e47b15b8d8fd8482",
+      "text_length": 1090,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2025-06-16-ptichiy-bazar-11-iyunya-3-avgusta-2025-g",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка \"Птичий базар\"! Птицы всегда служили для человека объектом интереса и поклонения. Их способность летать делала их символом связи человека и небес. В античности птицы ассоциировались с главными богами пантеона. В ",
+      "linked_news_slug": "museum-news-2025-06-16-vy-stavka-ptichiy-bazar",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2025-06-16/vy-stavka-ptichiy-bazar",
+      "linked_news_html_sha256": "45c3c2a337fcb4c82f0520eda91e34466bc63783a752625e5103141aa5b9c1ab",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/524",
+      "node_paths": [
+        "/node/524"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-10-24/slava-hlebu-na-stole",
+      "path": "/vistavky/2025-10-24/slava-hlebu-na-stole",
+      "title": "«Слава хлебу на столе!»",
+      "html": "<p>В нашем музее открылась выставка «Слава хлебу на столе!». Она приурочена к Международному дню хлеба и посвящена творчеству прекрасного детского поэта Сергея Васильевича Погореловского, воспевшего в своих стихах нелегкий труд хлебороба. Строка из его поэмы «Урожай» стала названием выставки.</p>\n<p>Сергей Васильевич Погореловский (13.04.1910, Царское Село – 12.12. 1995, Пушкин) – поэт, переводчик, член редколлегии альманаха «Звёздочка», редактор детского раздела журнала «Нева», автор текстов детских музыкальных произведений – песен, кантат, сюит, радио-опер.</p>\n<p>При жизни Сергея Васильевича были изданы около семидесяти  книг. «Урожай» стал самой популярной из них. С 1952 по 1984 годы книга переиздавалась одиннадцать раз (в том числе на немецком, румынском, венгерском, сербском и украинском языках, со словарём – для казахских школ) и дважды включалась в его сборники стихов. Вводная часть этого поэтического рассказа вошла в ряд учебных пособий для начальной школы, а также вдохновила композиторов А. и Г. Заволокиных, Е. Туманян и Т. Зебряк на создание песен. Общий тираж книги «Урожай» составил 1 320 000 экземпляров!</p>\n<p>В небольшой экспозиции представлено около восьмидесяти предметов, большинство которых демонстрируются впервые. Здесь – книги «Урожай» разных лет, иллюстраторами которых были известные художники Н. Костров, И. Харкевич, Б. Гуревич, Т. Соловьева… Особенно ценным является экземпляр книги 1954 года с авторской правкой, предоставленный музеем школы №500 г. Пушкина.</p>\n<p>Выставка рассказывает и об увлечениях поэта. Представленные на экспозиции значки с гербами городов, в которых имеются сельскохозяйственные символы, являются частью собранной С.В.Погореловским коллекции. Переданные дочерью поэта Татьяной Сергеевной фотографии 1950-1970-х годов знакомят нас с членами его семьи и их путешествиями по стране.</p>\n<p><strong>Выставка открыта с 23 октября по 30 ноября 2025 года.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "04346bc670b36a0602a96a9ffa640f95f2b4c39c85e626061fd0670e3e1c29c1",
+      "source_page_sha256": "4c270364a61eea7d65d5073f8f9a6d461976731e865789c7d71a7a10b96d196d",
+      "text_length": 1873,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2025-10-24-slava-hlebu-na-stole",
+      "category_slug": "exhibitions-past",
+      "intro": "В нашем музее открылась выставка «Слава хлебу на столе!». Она приурочена к Международному дню хлеба и посвящена творчеству прекрасного детского поэта Сергея Васильевича Погореловского, воспевшего в своих стихах нелегкий труд хлебороба. Строка из",
+      "linked_news_slug": "museum-news-2025-10-24-vystavka-slava-hlebu-na-stole",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2025-10-24/vystavka-slava-hlebu-na-stole",
+      "linked_news_html_sha256": "4df32e48c7c029b1d671f3ea030f8e388bb2d79fbae7e43205aba01f3ced3396",
+      "photos_rights_confirmed": false
+    },
+    {
+      "node_path": "/node/530",
+      "node_paths": [
+        "/node/530"
+      ],
+      "source_url": "https://muzei-xleb.ru/vistavky/2025-10-31/vystavka-o-vystavke",
+      "path": "/vistavky/2025-10-31/vystavka-o-vystavke",
+      "title": "Выставка о выставке",
+      "html": "<p>Выставка рассказывает о художественно-промышленных выставках как одном из культурных аспектов жизни российского общества на примере Петербурга, который возник в переломную эпоху бурного технического развития, повлиявшего на все сферы жизни. На временной экспозиции представлены павильоны, в которых демонстрируются изделия из фарфора, стекла, дерева, металла, текстиля – экспонаты из основного фонда музея.</p>\n<p>В ходе интенсивного развития капиталистических отношений в России XIX в. неуклонно увеличивалась мощность промышленного производства, что получило свое отражение в регулярных художественно-промышленных выставках. Первая Всероссийская мануфактурная выставка открылась в 1829 г. в Петербурге.</p>\n<p>Такие выставки показывали не только достижения различных видов художественного и кустарного творчества, но и являлись действенным средством демонстрации технического и промышленного развития России.</p>\n<p>На промышленных выставках середины XIX - начала XX века изделия были представлены на всеобщее обозрение как произведения искусства. Прототипом выставочного оборудования – витрин, стендов, подставок – служили шкафы и комоды, «горки» для фарфора, пюпитры для нот, балдахины из тканей и т.д. Выставляемые образцы продукции блистали в этой «роскоши». Ведущие российские производители (Кузнецов, Корнилов, Борман, Абрикосов, Эйнем) считали участие в выставках обязательным и почётным.</p>\n<p>Выставка создана при участии СПб ГБУК «Государственный музей истории Санкт-Петербурга».</p>\n<p><strong>Выставка работает с 30.10.2025 г. по 30.11.2025 г., в часы работы музея.</strong></p>",
+      "captured_utc": "2026-10-18T17:46:35+00:00",
+      "html_sha256": "eba03f73f35dc29e24782840732046dddceb0dc1995beb60614cf5b27dc9b2d6",
+      "source_page_sha256": "2477ede0ad12f8daca7f9b7bd4e21079cd0ce1a39c621862c4d228f3edb67ac8",
+      "text_length": 1537,
+      "image_links": [],
+      "document_links": [],
+      "slug": "museum-exhibit-2025-10-31-vystavka-o-vystavke",
+      "category_slug": "exhibitions-past",
+      "intro": "Выставка рассказывает о художественно-промышленных выставках как одном из культурных аспектов жизни российского общества на примере Петербурга, который возник в переломную эпоху бурного технического развития, повлиявшего на все сферы жизни. На в",
+      "linked_news_slug": "museum-news-2025-10-31-vystavka-vystavka-o-vystavke",
+      "linked_news_url": "https://muzei-xleb.ru/novosty/2025-10-31/vystavka-vystavka-o-vystavke",
+      "linked_news_html_sha256": "40862ad51be98e0f311e68e14282b6daf0d2d3b82b644e8dd6e9908e536d622c",
+      "photos_rights_confirmed": false
+    }
+  ]
+}

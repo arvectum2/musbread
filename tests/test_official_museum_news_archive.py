@@ -11,11 +11,11 @@ class MuseumArchiveSourceTests(unittest.TestCase):
         cls.data=json.loads((ROOT/'apps/web/src/data/official-museum-news-archive.json').read_text())
         cls.latest=json.loads((ROOT/'apps/web/src/data/official-museum-news.json').read_text())
 
-    def test_hundred_sixty_original_articles_have_exact_source_index_association(self):
+    def test_two_hundred_seventy_original_articles_have_exact_source_index_association(self):
         data=self.data
         self.assertEqual(data['source'],'https://muzei-xleb.ru')
-        self.assertEqual(data['count'],160)
-        self.assertEqual(len(data['indices']),16)
+        self.assertEqual(data['count'],270)
+        self.assertEqual(len(data['indices']),27)
         urls=[]
         for n,index in enumerate(data['indices'],start=1):
             self.assertEqual(index['url'],f'https://muzei-xleb.ru/novosty?page={n}')
@@ -23,9 +23,43 @@ class MuseumArchiveSourceTests(unittest.TestCase):
             self.assertEqual(len(set(index['article_paths'])),10)
             urls.extend(index['article_paths'])
         self.assertEqual(urls,[a['path'] for a in data['articles']])
-        self.assertEqual(len(set(urls)),160)
+        self.assertEqual(len(set(urls)),270)
         self.assertFalse({a['slug'] for a in data['articles']}
                          & {a['slug'] for a in self.latest['articles']})
+
+
+    def test_all_27_source_index_html_files_are_original_and_have_matching_sha256(self):
+        """No guessed page positions, duplicates or synthetic museum history."""
+        source_dir=ROOT/'.local_archive/official-site-originals'
+        paths=[]
+        for i,index in enumerate(self.data['indices'],1):
+            page=source_dir/f'news-list-page-{i}-20261018.html'
+            self.assertTrue(page.is_file(),f'Museum archive index {i} not verified on Mac mini')
+            self.assertEqual(hashlib.sha256(page.read_bytes()).hexdigest(),index['source_listing_sha256'])
+            paths.extend(index['article_paths'])
+        self.assertEqual(len(paths),270)
+        self.assertEqual(len(paths),len(set(paths)))
+
+    def test_all_original_article_cache_files_match_public_record(self):
+        """A verified article has an independent private source record on SSD."""
+        cache=ROOT/'.local_archive/news-archive-verified-articles'
+        self.assertEqual(self.data['count'],270)
+        for article in self.data['articles']:
+            filename=article['path'].rsplit('/',1)[-1]+'-'+article['published_on']+'.json'
+            p=cache/filename
+            with self.subTest(article=filename):
+                self.assertTrue(p.is_file())
+                saved=json.loads(p.read_text(encoding='utf-8'))
+                self.assertEqual(saved['title'],article['title'])
+                self.assertEqual(saved['source_url'],article['source_url'])
+                self.assertEqual(saved['html_sha256'],article['html_sha256'])
+                self.assertEqual(saved['image_links'],article['image_links'])
+
+    def test_source_short_title_is_preserved_literally(self):
+        short=[article for article in self.data['articles'] if article['title']=='ГИС ЖКХ']
+        self.assertEqual(len(short),1)
+        self.assertEqual(short[0]['source_url'],'https://muzei-xleb.ru/novosty/2022-04-26/gis-zhkh')
+        self.assertTrue(short[0]['image_only'])
 
     def test_short_real_news_are_preserved_and_never_represented_as_future_events(self):
         for article in self.data['articles']:
@@ -48,6 +82,6 @@ class MuseumArchiveSourceTests(unittest.TestCase):
                 self.assertFalse(article['photos_rights_confirmed'])
                 self.assertNotIn('<img',article['html'].lower())
                 self.assertNotIn('<script',article['html'].lower())
-                self.assertIn(article['archive_index_page'],tuple(range(1,17)))
+                self.assertIn(article['archive_index_page'],tuple(range(1,28)))
 
 if __name__=='__main__':unittest.main()

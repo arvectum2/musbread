@@ -21,9 +21,9 @@ final class ImportOfficialNewsLinkedExhibitionsTest extends TestCase
         $this->assertSame(0,Artisan::call('museum:import-official-news-linked-exhibitions',[
             '--apply'=>true,
         ]),Artisan::output());
-        $this->assertDatabaseCount('museum_entries',2);
-        $this->assertSame(2,MuseumEntry::where('type','exhibition')->where('status','draft')->count());
-        $this->assertSame(2,MuseumEntry::whereHas('section',
+        $this->assertDatabaseCount('museum_entries',4);
+        $this->assertSame(4,MuseumEntry::where('type','exhibition')->where('status','draft')->count());
+        $this->assertSame(4,MuseumEntry::whereHas('section',
             static fn($q)=>$q->where('slug','exhibitions-past'))->count());
         $this->assertDatabaseCount('museum_media',0);
         $this->assertDatabaseCount('museum_events',0);
@@ -32,7 +32,7 @@ final class ImportOfficialNewsLinkedExhibitionsTest extends TestCase
         $this->assertSame(0,Artisan::call('museum:import-official-news-linked-exhibitions',[
             '--apply'=>true,
         ]),Artisan::output());
-        $this->assertDatabaseCount('museum_entries',2);
+        $this->assertDatabaseCount('museum_entries',4);
         $this->assertSame('Согласованная редакция музея',$editor->fresh()->title);
     }
 

@@ -34,7 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: entry?.seo_title || entry?.title || original?.title || "Материал не найден",
     description: entry?.seo_description || entry?.excerpt || original?.intro || undefined,
-    ...(entry?.translations?.en ? { alternates: {
+    ...(original ? {alternates:{canonical:original.source_url}} : {}),
+    ...(!original && entry?.translations?.en ? { alternates: {
       canonical: "/" + section + "/" + slug + "/",
       languages: { "ru-RU": "/" + section + "/" + slug + "/",
         "en-US": "/en/" + section + "/" + slug + "/" },

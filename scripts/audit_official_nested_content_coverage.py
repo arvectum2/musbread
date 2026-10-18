@@ -24,6 +24,7 @@ SOURCES={
  'official-exhibition-details.json':['exhibitions'],
  'official-exhibition-archive.json':['exhibitions'],
  'official-exhibition-news-linked.json':['exhibitions'],
+ 'official-node-linked-exhibitions.json':['exhibitions'],
  'official-museum-videos.json':['groups'],
  'official-exposition-rooms.json':['rooms'],
  'official-museum-news.json':['articles'],

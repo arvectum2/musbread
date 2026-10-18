@@ -3,7 +3,7 @@ import MuseumAnchor from "@/components/MuseumAnchor";
 import RichText from "@/components/RichText";
 import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos";
 import {content,entryPublicHref} from "@/data/content";
-import {exhibitionSourceIndex,officialExhibitionDetails,officialExhibitionNewsLinked} from "@/data/official-exhibitions";
+import {exhibitionSourceIndex,officialExhibitionDetails,officialExhibitionNewsLinked,officialExhibitionNodeLinked} from "@/data/official-exhibitions";
 
 /** The old museum site is a dated source, not proof of future availability. */
 export default function OfficialMuseumExhibitions({category}:{category:string}){
@@ -65,7 +65,7 @@ export default function OfficialMuseumExhibitions({category}:{category:string}){
     {category==="exhibitions-past" && officialExhibitionNewsLinked.length>0 && <section
       aria-label="Дополнительные музейные выставки, найденные в архиве новостей">
       <h3>Дополнительные архивные выставки из новостей музея</h3>
-      <p>Две подлинные музейные страницы найдены по прямым ссылкам из старых музейных новостей;
+      <p>Подлинные музейные страницы ({officialExhibitionNewsLinked.length}) найдены по прямым ссылкам из старых музейных новостей;
         в обследованной подборке из 12 прошедших выставок их не было.
         Даты публикаций относятся к исходным материалам, не к предстоящим показам.</p>
       <div className="official-museum-program-grid">
@@ -83,6 +83,36 @@ export default function OfficialMuseumExhibitions({category}:{category:string}){
               {editor && <Link href={entryPublicHref(editor)} className="text-link">Редакция музея →</Link>}
               <MuseumAnchor href={original.source_url} target="_blank" rel="noopener noreferrer"
                 className="text-link">Исходная страница музея ↗</MuseumAnchor>
+            </div>
+          </article>;
+        })}
+      </div>
+    </section>}
+    {category==="exhibitions-past" && officialExhibitionNodeLinked.length>0 && <section
+      aria-label="Подлинные выставки, восстановленные по ссылкам Drupal из старых новостей">
+      <h3>Подробные описания выставок, найденные в старых новостях</h3>
+      <p>Эти {officialExhibitionNodeLinked.length} подлинных музейных страниц
+        обнаружены по старым ссылкам формата <code>/node/…</code> внутри
+        публикаций 2019–2026 годов. Даты и сведения взяты из исходных публикаций;
+        они не означают проведение выставки сегодня.</p>
+      <div className="official-museum-program-grid">
+        {officialExhibitionNodeLinked.map(original=>{
+          const editor=published.get(original.slug);
+          return <article className="official-museum-program-card" key={original.slug} id={original.slug}>
+            <p className="official-museum-program-number">Подлинная архивная выставка</p>
+            <h3>{editor?.title?.trim() || original.title}</h3>
+            <OfficialMuseumSourcePhotos photos={original.image_links}
+              label={original.title} limit={4}/>
+            <p>{editor?.excerpt?.trim() || original.intro}</p>
+            <details><summary>Полное музейное описание</summary>
+              <div className="official-museum-program-body">
+                <RichText html={editor?.body?.trim()||original.html}/>
+              </div>
+            </details>
+            <div className="official-museum-program-links">
+              {editor && <Link href={entryPublicHref(editor)} className="text-link">Редакция музея →</Link>}
+              <MuseumAnchor href={original.source_url} target="_blank" rel="noopener noreferrer"
+                className="text-link">Исходная публикация музея ↗</MuseumAnchor>
             </div>
           </article>;
         })}

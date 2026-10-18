@@ -20,7 +20,7 @@ final class ImportOfficialArchiveNews extends Command
 
     // Captured live index page URLs + exact original article HTML hashes.
     // Updated only after a fresh independently verified museum snapshot.
-    private const SOURCE_SET_DIGEST='f8b1a8244e41d0e405e3498e1433110852b92f63ecdc797fc36440af7cab84fd';
+    private const SOURCE_SET_DIGEST='18ad928aebe2b8435791aba959c1cb7a3522ceaa665b3f00ff050bf2eef7dcef';
     private const SOURCE='https://muzei-xleb.ru';
 
     public function handle():int
@@ -35,13 +35,13 @@ final class ImportOfficialArchiveNews extends Command
             $data=json_decode((string)file_get_contents($path),true,flags:JSON_THROW_ON_ERROR);
             $indices=$data['indices']??null;
             $articles=$data['articles']??null;
-            if (($data['source']??null)!==self::SOURCE || ($data['count']??null)!==160
-                || !is_array($indices) || count($indices)!==16
-                || !is_array($articles) || count($articles)!==160) {
+            if (($data['source']??null)!==self::SOURCE || ($data['count']??null)!==270
+                || !is_array($indices) || count($indices)!==27
+                || !is_array($articles) || count($articles)!==270) {
                 throw new RuntimeException('Original museum archive snapshot missing or incomplete');
             }
             $indexed=[];
-            foreach(range(1,16) as $offset=>$page) {
+            foreach(range(1,27) as $offset=>$page) {
                 $index=$indices[$offset];
                 if (($index['url']??null)!==self::SOURCE.'/novosty?page='.$page
                     || !preg_match('/^[a-f0-9]{64}$/D',(string)($index['source_listing_sha256']??''))
@@ -77,7 +77,7 @@ final class ImportOfficialArchiveNews extends Command
                     || ($article['source_url']??'')!==self::SOURCE.$path
                     || ($article['archive_index_page']??null)!==($indexed[$path]??null)
                     || ($article['photos_rights_confirmed']??null)!==false
-                    || !is_string($article['title']??null) || mb_strlen($article['title'])<8
+                    || !is_string($article['title']??null) || mb_strlen($article['title'])<3
                     || !is_string($article['intro']??null)
                     || !is_string($article['html']??null)
                     || (($article['image_only']??false)===true
@@ -103,7 +103,7 @@ final class ImportOfficialArchiveNews extends Command
                 $plans[$slug]=['item'=>$article,'exists'=>$existing!==null];
                 $this->line(($existing?'KEEP EDITOR':'NEW PRIVATE ARCHIVE').' '.$slug);
             }
-            if (count($plans)!==160 || count($indexed)!==160) {
+            if (count($plans)!==270 || count($indexed)!==270) {
                 throw new RuntimeException('Incomplete original museum archive linkage');
             }
             if (!$this->option('apply')) {
@@ -124,7 +124,7 @@ final class ImportOfficialArchiveNews extends Command
                     ]);
                 }
             });
-            $this->info('160 source-backed museum historical news drafts; no events, media or bookings created.');
+            $this->info('270 source-backed museum historical news drafts; no events, media or bookings created.');
             return self::SUCCESS;
         } catch (Throwable $e) {
             $this->error('Original museum archive import refused: '.$e->getMessage());

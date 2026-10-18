@@ -4,12 +4,12 @@ from pathlib import Path
 from lxml import html
 ROOT=Path(__file__).resolve().parents[1]
 class MuseumNewsExhibitionProofTests(unittest.TestCase):
-    def test_exact_two_original_exhibition_articles_are_linked_from_source_news(self):
+    def test_exact_four_original_exhibition_articles_are_linked_from_source_news(self):
         d=json.loads((ROOT/'apps/web/src/data/official-exhibition-news-linked.json').read_text())
         n=json.loads((ROOT/'apps/web/src/data/official-museum-news-archive.json').read_text())
         self.assertEqual(d['source'],'https://muzei-xleb.ru')
-        self.assertEqual(d['count'],2)
-        self.assertEqual(len(d['exhibitions']),2)
+        self.assertEqual(d['count'],4)
+        self.assertEqual(len(d['exhibitions']),4)
         source={a['slug']:a for a in n['articles']}
         for exhibit in d['exhibitions']:
             with self.subTest(exhibit=exhibit['slug']):
@@ -22,5 +22,6 @@ class MuseumNewsExhibitionProofTests(unittest.TestCase):
                 news=source[exhibit['linked_news_slug']]
                 self.assertEqual(exhibit['linked_news_html_sha256'],news['html_sha256'])
                 self.assertEqual(exhibit['linked_news_url'],news['source_url'])
-                self.assertEqual([a.get('href') for a in html.fragment_fromstring(news['html'],create_parent='div').xpath('.//a[@href]')].count(exhibit['source_url']),1)
+                self.assertEqual(sum(href in (exhibit['source_url'],exhibit['source_url'].replace('https://','http://'))
+                    for href in [a.get('href') for a in html.fragment_fromstring(news['html'],create_parent='div').xpath('.//a[@href]')]),1)
                 self.assertFalse(exhibit['photos_rights_confirmed'])

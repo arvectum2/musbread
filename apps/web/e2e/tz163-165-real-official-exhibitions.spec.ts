@@ -1,4 +1,5 @@
 import {expect,test} from "@playwright/test";
+import verifiedDrupalNodes from "../src/data/official-node-linked-exhibitions.json";
 
 test("TZ-163: museum's two real current exhibitions have exact source dates and full texts",async({page})=>{
   await page.goto("/guide/exhibitions-current/");
@@ -30,7 +31,7 @@ test("TZ-165: four original traveling exhibitions are real museum programmes, no
 test("archival museum shows are correctly labeled past, not active",async({page})=>{
   await page.goto("/guide/exhibitions-past/");
   const catalog=page.getByRole("region",{name:"Выставки из официального раздела: Прошедшие выставки"});
-  await expect(catalog.locator(".official-museum-program-card")).toHaveCount(14);
+  await expect(catalog.locator(".official-museum-program-card")).toHaveCount(16+verifiedDrupalNodes.new_exhibition_count);
   await expect(catalog).toContainText("Рассказы о ленинградцах");
   await expect(catalog).toContainText("до 28 сентября 2026 г.");
   await expect(catalog.locator("img")).toHaveCount(12);
@@ -71,7 +72,7 @@ test("TZ-163: 12 real archived and 12 virtual exhibitions now have original deta
   ]) {
     await page.goto(route);
     const region=page.getByRole("region",{name:regionName});
-    await expect(region.locator(".official-museum-program-card")).toHaveCount(route.includes("past")?14:12);
+    await expect(region.locator(".official-museum-program-card")).toHaveCount(route.includes("past")?16+verifiedDrupalNodes.new_exhibition_count:12);
     expect(await region.locator("details").count()).toBeGreaterThan(0);
     await expect(region.locator("img")).toHaveCount(12);
   }
@@ -83,8 +84,23 @@ test("Two additional genuine museum exhibition pages from historical news are pr
   const extra=page.getByRole("region",{
     name:"Дополнительные музейные выставки, найденные в архиве новостей",
   });
-  await expect(extra.locator(".official-museum-program-card")).toHaveCount(2);
+  await expect(extra.locator(".official-museum-program-card")).toHaveCount(4);
   await expect(extra).toContainText("Дом на трех улицах");
   await expect(extra).toContainText("В сердце Азии");
   await expect(extra.locator("img")).toHaveCount(0);
+});
+
+
+test("Source-verified museum exhibitions recovered from historical /node/N links show actual dated descriptions",async({page})=>{
+  await page.goto("/guide/exhibitions-past/");
+  const section=page.getByRole("region",{
+    name:"Подлинные выставки, восстановленные по ссылкам Drupal из старых новостей",
+  });
+  await expect(section.locator(".official-museum-program-card"))
+    .toHaveCount(verifiedDrupalNodes.new_exhibition_count);
+  await expect(section.locator(".official-museum-program-card").first()).toContainText(verifiedDrupalNodes.exhibitions[0].title);
+  await expect(section).toContainText("Даты и сведения взяты из исходных публикаций");
+  const card=section.locator(".official-museum-program-card").first();
+  await card.locator("summary").click();
+  await expect(card.locator(".official-museum-program-body")).not.toBeEmpty();
 });

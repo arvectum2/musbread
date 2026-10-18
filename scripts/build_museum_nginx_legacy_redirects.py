@@ -16,7 +16,7 @@ DATA=ROOT/'apps/web/src/data/official-museum-photo-assets.json'
 OUTPUT=ROOT/'deploy/nginx/legacy_museum_redirects.map.conf'
 SERVER=ROOT/'deploy/nginx/legacy_museum_redirects.server.conf'
 ALLOWED=re.compile(r'^/[A-Za-z0-9._~%!$&\x27()*+,;=:@/-]+$')
-NEW=re.compile(r'^/(?:[a-z0-9-]+/)*(?:[a-f0-9]{64}\.webp)?(?:#[a-z0-9-]+)?$')
+NEW=re.compile(r'^/(?:[a-z0-9-]+/)*(?:[a-z0-9-]+|[a-f0-9]{64}\.webp)?(?:#[a-z0-9-]+)?$')
 
 def render():
     routes={}
@@ -32,7 +32,17 @@ def render():
         routes[source]=target
         kinds[source]=kind
     old_pages=build_map()
-    for source,item in old_pages.items():register(source,item['target'],'page')
+    for source,item in old_pages.items():
+        if item['why']=='original-news-article':
+            # Native original date-based museum article is 200; new technical
+            # /news/ copy gets a single 301 TO the historic human-readable URL.
+            register(item['target'],source,'new_news_duplicate_to_original')
+        elif item['why'] in ('original-exhibition-detail','original-news-node-exhibition'):
+            # Native /vistavky/YYYY-MM-DD/... is a full source-verified 200
+            # page; NEVER redirect it to a generic catalogue-card anchor.
+            continue
+        else:
+            register(source,item['target'],'page')
     photo_assets=json.loads(DATA.read_text(encoding='utf-8'))
     if photo_assets.get('source')!='https://muzei-xleb.ru' or photo_assets.get('count')!=len(photo_assets.get('photos',{})):
         raise ValueError('Not a verified museum photo corpus')
@@ -58,10 +68,11 @@ def render():
       'if ($musbread_legacy_target != "") {\n'
       '    return 301 $musbread_legacy_target;\n'
       '}\n',encoding='utf-8')
-    counts={'total':len(routes),'page':sum(v=='page' for v in kinds.values()),
-            'image':sum(v!='page' for v in kinds.values()),
+    counts={'total':len(routes),'page':sum(v in ('page','new_news_duplicate_to_original') for v in kinds.values()),
+            'image':sum(v not in ('page','new_news_duplicate_to_original') for v in kinds.values()),
             'photo_original':photo_assets['count']}
-    if counts['page']!=len(old_pages) or counts['image']<photo_assets['count']:
+    if counts['page']!=sum(v['why'] not in ('original-exhibition-detail','original-news-node-exhibition')
+                           for v in old_pages.values()) or counts['image']<photo_assets['count']:
         raise RuntimeError('Dropped museum original photo or page redirects')
     print('MUSEUM_PRODUCTION_HTTP301_CONFIG_PREPARED',counts,'not deployed',flush=True)
     return counts

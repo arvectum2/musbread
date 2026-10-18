@@ -5,7 +5,7 @@ import OfficialMuseumSourcePhotos from "@/components/OfficialMuseumSourcePhotos"
 import type {OfficialMuseumNewsItem} from "@/data/official-museum-news";
 
 /** Static detail URL for each ORIGINAL museum news article, not just a feed anchor. */
-export default function OfficialMuseumNewsDetail({article}:{article:OfficialMuseumNewsItem}){
+export default function OfficialMuseumNewsDetail({article,originalPath=false}:{article:OfficialMuseumNewsItem;originalPath?:boolean}){
   return <article className="section inner-page museum-detail" data-official-original-news={article.slug}>
     <nav aria-label="Хлебные крошки" className="breadcrumbs">
       <Link href="/">Главная</Link><span aria-hidden="true">/</span>
@@ -22,9 +22,11 @@ export default function OfficialMuseumNewsDetail({article}:{article:OfficialMuse
       ? <p>Музей опубликовал это объявление изображением без текста. Ниже показан
           сохранённый подлинный плакат; расшифровка или добавленные сведения отсутствуют.</p>
       : <RichText html={article.html}/>}
-    <p>Первоначальный источник: <MuseumAnchor href={article.source_url} className="text-link"
-      target="_blank" rel="noopener noreferrer">архив музея ↗</MuseumAnchor>.
-      После перевода домена старый путь будет перенаправлен на эту самостоятельную страницу.</p>
+    {originalPath
+      ? <p>Первоначальный адрес музейной публикации сохранён для совместимости с историческими ссылками и поисковыми системами.</p>
+      : <p>Источник: <MuseumAnchor href={article.source_url} className="text-link"
+          rel="noopener noreferrer">оригинальный адрес музейной новости</MuseumAnchor>.
+          Эта техническая копия указывает canonical на первоначальный адрес.</p>}
     <Link href="/news/" className="text-link">← К новостям и архиву музея</Link>
   </article>;
 }

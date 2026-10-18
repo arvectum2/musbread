@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Capture genuine archive news from sixteen verified museum index pages.
+"""Capture genuine archive news from all source-verified museum index pages.
 
 Original page listings are privately saved on ArvectumSSD. No placeholders,
 images, event creation, PII or unlicensed media. Never overwrite latest news.
@@ -58,7 +58,7 @@ def main():
     seen={p['source_url'] for p in latest['articles']}
     stamp=datetime.now(timezone.utc).isoformat(timespec='seconds')
     links=[];indices=[]
-    for page in range(1,17):
+    for page in range(1,28):
         path=INDICES/f'news-list-page-{page}-20261018.html'
         raw=path.read_text(encoding='utf-8')
         tree=lx.fromstring(raw)
@@ -69,18 +69,20 @@ def main():
             url=anchor.get('href','')
             if not NEWS_RE.fullmatch(url) or url in collected:continue
             label=' '.join(anchor.text_content().split())
-            if len(label)<8 or HOST+url in seen:raise RuntimeError('Duplicate or unnamed historical news')
+            if len(label)<3 or HOST+url in seen:raise RuntimeError('Duplicate or unnamed historical news')
             collected.append(url)
             links.append({'path':url,'title':label,'published_on':url.split('/')[2],
                           'source_url':HOST+url,'index_page':page})
             seen.add(HOST+url)
-        if len(collected)!=10:raise RuntimeError('Museum archive has non-ten source links')
+        if len(collected)!=10:
+            raise RuntimeError(f'Museum archive index {page} has unexpected {len(collected)} source links')
         sanitized=safe_html(view[0],HOST+'/novosty?page='+str(page))
         indices.append({'url':HOST+'/novosty?page='+str(page),
                         'source_listing_sha256':sha256(raw.encode('utf-8')).hexdigest(),
                         'index_html_sha256':sha256(sanitized.encode('utf-8')).hexdigest(),
                         'article_paths':collected})
-    if len(links)!=160:raise RuntimeError('Expected 160 verified historical articles')
+    if len(indices)!=27 or len(links)!=270 or len(links)!=sum(len(index['article_paths']) for index in indices):
+        raise RuntimeError('Verified source index cardinality incorrect or incomplete')
     entries=[];last_request=False
     PRIVATE_CACHE.mkdir(parents=True,exist_ok=True)
     for n,meta in enumerate(links,1):

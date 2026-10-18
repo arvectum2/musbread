@@ -16,6 +16,7 @@ MANIFESTS=[ROOT/p for p in (
  '.local_archive/official-site-originals',
  '.local_archive/official-menu-originals',
  '.local_archive/science-originals',
+ '.local_archive/news-original-documents',
 )]
 DEPLOYMENT_LIST=ROOT/'docs/source-migration/OFFICIAL_ORIGINAL_DOCUMENTS_DEPLOYMENT_20261018.json'
 FILE_URL=re.compile(r'^/sites/default/files/[A-Za-z0-9._~!$&\x27()*+,;=:@%/-]+\.(?:pdf|docx)$',re.I)
@@ -29,7 +30,10 @@ def signature(path:Path):
 def source_documents():
     records={}
     for folder in MANIFESTS:
-        data=json.loads((folder/'manifest.json').read_text())
+        source_manifest=folder/'manifest.json'
+        if folder.name=='news-original-documents' and not source_manifest.exists():
+            continue  # Fully source-verified news documents not discovered yet
+        data=json.loads(source_manifest.read_text())
         if data.get('source')!='https://muzei-xleb.ru' or data.get('errors',[])!=[]:
             raise RuntimeError('Museum source manifest not approved/verified '+str(folder))
         for item in data['files']:
@@ -52,7 +56,11 @@ def source_documents():
                 continue
             records[path]={'url':uri,'legacy_path':path,'sha256':sha,'size_bytes':size,
                            'format':Path(path).suffix[1:],'source_file':source}
-    if len(records)!=57:raise RuntimeError('Expected exactly 57 separately sourced museum documents')
+    if len(records)<57:raise RuntimeError('Baseline 57 museum original documents missing')
+    new_manifest=ROOT/'.local_archive/news-original-documents/manifest.json'
+    if new_manifest.exists():
+        news_count=json.loads(new_manifest.read_text()).get('count')
+        if len(records)<57+news_count:raise RuntimeError('Linked museum historical PDFs not present in cutover static archive')
     return records
 
 def export(*,apply=False,verify_only=False):

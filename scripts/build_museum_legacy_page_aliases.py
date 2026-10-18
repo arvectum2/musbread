@@ -68,11 +68,34 @@ def build_map():
         if corpus['source']!=SOURCE:raise RuntimeError('Unverified museum news source '+file)
         for article in corpus['articles']:
             put(article['source_url'],f"/news/{article['slug']}/",'original-news-article')
+    known_exhibition_targets={}
     for file in ('official-exhibition-details.json','official-exhibition-archive.json','official-exhibition-news-linked.json'):
         corpus=json.loads((DATA/file).read_text(encoding='utf-8'))
         if corpus['source']!=SOURCE:raise RuntimeError('Unverified museum exhibition source '+file)
         for item in corpus['exhibitions']:
-            put(item['source_url'],f"/guide/{item['category_slug']}/#{item['slug']}",'original-exhibition-detail')
+            destination=f"/guide/{item['category_slug']}/#{item['slug']}"
+            known_exhibition_targets[item['source_url']]=destination
+            put(item['source_url'],destination,'original-exhibition-detail')
+    # Each /node/N alias below was LITERALLY present in true source news,
+    # resolved via the actual old Drupal server and checked against the
+    # corresponding canonical museum exhibition path. Never invent mappings.
+    verified_nodes_file=DATA/'official-node-linked-exhibitions.json'
+    if verified_nodes_file.exists():
+        linked=json.loads(verified_nodes_file.read_text(encoding='utf-8'))
+        if linked.get('source')!=SOURCE or linked.get('node_count')!=61:
+            raise RuntimeError('Incomplete historical museum Drupal node source record')
+        for item in linked['exhibitions']:
+            target=f"/guide/{item['category_slug']}/#{item['slug']}"
+            if item['source_url'] in known_exhibition_targets:
+                raise RuntimeError('Source exhibition record duplicates previously verified museum catalogue')
+            known_exhibition_targets[item['source_url']]=target
+            put(item['source_url'],target,'original-news-node-exhibition')
+        for node in linked['verified_node_targets']:
+            target=known_exhibition_targets.get(node['source_url'])
+            if not target:
+                raise RuntimeError('Original node has no verified separate museum exhibition destination')
+            put(node['node_path'],urlsplit(node['source_url']).path+'/',
+                'source-verified-drupal-node')
     corpus=json.loads((DATA/'official-excursion-programs.json').read_text(encoding='utf-8'))
     if corpus['source']!=SOURCE:raise RuntimeError('Unverified original museum excursion programs')
     for item in corpus['programs']:
@@ -113,6 +136,23 @@ def build_aliases(write=True,strict=True):
             if f'id="{uri.fragment}"' not in payload and f'id=\"{uri.fragment}\"' not in payload:
                 missing.append((source,target+' (missing anchor)'));continue
         alias=OUT/(source.lstrip('/'))/'index.html'
+        if meta['why'] in ('original-news-article','original-exhibition-detail','original-news-node-exhibition'):
+            # Native, independently generated Next.js route at the ORIGINAL
+            # indexable museum URL. Never overwrite it with a meta-refresh.
+            if not alias.is_file():
+                missing.append((source,'missing independently rendered original 200 HTML'));continue
+            original_html=alias.read_text(encoding='utf-8')
+            required_canonical=SOURCE+source
+            required_marker=('data-official-original-news=' if meta['why']=='original-news-article'
+                             else 'data-original-museum-exhibition=')
+            if (required_marker not in original_html
+                or f'href="{required_canonical}"' not in original_html
+                or 'http-equiv="refresh"' in original_html.lower()
+                or (alias.parent/'.musbread-legacy-alias').exists()):
+                raise RuntimeError('Original museum source URL lacks standalone canonical HTML: '+source)
+            rows.append({'legacy_path':source,'new_relative_url':target,'source_kind':meta['why'],
+                         'mode':'native-source-URL-200; no redirect'})
+            continue
         if alias.resolve()==dest.resolve() or alias.exists() and not (alias.parent/'.musbread-legacy-alias').exists():
             collisions.append((source,target));continue
         rows.append({'legacy_path':source,'new_relative_url':target,'source_kind':meta['why'],'mode':'static-meta-refresh; HTTP 301 requires approved webserver config'})

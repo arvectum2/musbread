@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Throwable;
 
-/** Two extra REAL past exhibitions linked from source-verified original news. */
+/** Four extra REAL past exhibitions linked from source-verified original news. */
 final class ImportOfficialNewsLinkedExhibitions extends Command
 {
     protected $signature='museum:import-official-news-linked-exhibitions
@@ -18,7 +18,7 @@ final class ImportOfficialNewsLinkedExhibitions extends Command
         {--source= : Override source JSON for source-validation tests}';
     protected $description='Source-verified exhibitions discovered via the museum historical news archive';
     private const SOURCE='https://muzei-xleb.ru';
-    private const SOURCE_SET_DIGEST='85ea18ce91a883533acd54594cedd4c39b8376f4281f994c13129bbe05637dcf';
+    private const SOURCE_SET_DIGEST='6ee09e97ef1702c43dda28c55d5b0588f79c315ad7bf07ddb653a46d78a2d97e';
 
     public function handle():int
     {
@@ -33,9 +33,9 @@ final class ImportOfficialNewsLinkedExhibitions extends Command
             $news=json_decode((string)file_get_contents(
                 base_path('../web/src/data/official-museum-news-archive.json')),
                 true,flags:JSON_THROW_ON_ERROR);
-            if(($src['source']??null)!==self::SOURCE || ($src['count']??null)!==2
-                || count($src['exhibitions']??[])!==2 || ($news['source']??null)!==self::SOURCE) {
-                throw new RuntimeException('Incomplete two original museum exhibition pages');
+            if(($src['source']??null)!==self::SOURCE || ($src['count']??null)!==4
+                || count($src['exhibitions']??[])!==4 || ($news['source']??null)!==self::SOURCE) {
+                throw new RuntimeException('Incomplete four original museum exhibition pages');
             }
             $set=array_map(static fn(array $item):string=>($item['source_url']??'').'|'
                 .($item['html_sha256']??'').'|'.($item['linked_news_html_sha256']??''),
@@ -69,7 +69,8 @@ final class ImportOfficialNewsLinkedExhibitions extends Command
                     || ($linking['source_url']??null)!==($item['linked_news_url']??null)
                     || ($linking['html_sha256']??null)!==($item['linked_news_html_sha256']??null)
                     || ($linking['html_sha256']??null)!==hash('sha256',$linking['html'])
-                    || !str_contains($linking['html'],self::SOURCE.$path)
+                    || !(str_contains($linking['html'],self::SOURCE.$path)
+                        || str_contains($linking['html'],'http://muzei-xleb.ru'.$path))
                     || isset($plan[$slug])) {
                     throw new RuntimeException('Source news does not verify museum exhibition '.$slug);
                 }
@@ -81,7 +82,7 @@ final class ImportOfficialNewsLinkedExhibitions extends Command
                 $plan[$slug]=$item;
                 $this->line(($existing?'KEEP ORIGINAL EDITOR':'NEW SOURCE-VERIFIED DRAFT').' '.$slug);
             }
-            if(count($plan)!==2)throw new RuntimeException('Museum original two exhibitions incomplete');
+            if(count($plan)!==4)throw new RuntimeException('Museum original four exhibitions incomplete');
             if(!$this->option('apply')){
                 $this->info('Dry run successful, no records edited.');
                 return self::SUCCESS;
@@ -99,7 +100,7 @@ final class ImportOfficialNewsLinkedExhibitions extends Command
                     ]);
                 }
             });
-            $this->info('2 genuine past museum exhibition texts imported as private drafts.');
+            $this->info('4 genuine past museum exhibition texts imported as private drafts.');
             return self::SUCCESS;
         }catch(Throwable $e){
             $this->error('Museum exhibitions source rejected: '.$e->getMessage());
