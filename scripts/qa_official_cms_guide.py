@@ -22,7 +22,9 @@ WEB = ROOT / "apps/web"
 PRIVATE = ROOT / ".local_archive"
 REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history",  "museum-documents", "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card", "faq", "zal-hleb-v-mirovoy-istorii", "excursion-overview", "excursion-interactive", "excursion-thematic",
             "excursion-theatrical", "children-interactive", "children-thematic", "museum-tour-kolobok",
-            "museum-tour-interaktivnaya-programma-dlya-detey-lovi-ritm"}
+            "museum-tour-interaktivnaya-programma-dlya-detey-lovi-ritm",
+            "museum-shop", "children-workshops", "excursion-workshops-adults",
+            "museum-workshop-kukly-kuvadki"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -63,6 +65,13 @@ def main() -> None:
                            "where slug like 'museum-tour-%' and type='excursion' and status='draft'").fetchone()[0]
             if n != 17:
                 raise RuntimeError("All 17 source-backed museum excursions must be unpublished working drafts")
+            n = db.execute("select count(*) from museum_entries "
+                           "where slug like 'museum-workshop-%' and status='draft'").fetchone()[0]
+            if n != 12:
+                raise RuntimeError("All 12 real museum workshop source pages must remain drafts")
+            n = db.execute("select count(*) from museum_entries where status='draft'").fetchone()[0]
+            if n != 63:
+                raise RuntimeError("Private working CMS count changed: expected 63 drafts")
 
     with tempfile.TemporaryDirectory(prefix="museum-guide-qa-", dir=PRIVATE) as name:
         work = Path(name)
@@ -85,6 +94,25 @@ def main() -> None:
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes') "
                        "where slug in ('children-interactive','children-thematic')")
+            db.execute("update museum_sections set status='published' "
+                       "where slug in ('museum-shop','children-workshops','excursion-workshops-adults')")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes') "
+                       "where slug in ('museum-shop','children-workshops','excursion-workshops-adults')")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: обновлённый редактором мастер-класс Кувадка',"
+                       "excerpt='QA: редакторская аннотация программы Кувадка.',"
+                       "body='<p>QA: отредактированное содержание мастер-класса Кувадка.</p>' "
+                       "where slug='museum-workshop-kukly-kuvadki'")
+            shop_section_id = db.execute(
+                "select id from museum_sections where slug='museum-shop'").fetchone()[0]
+            db.execute("insert into museum_entries "
+                       "(type,slug,title,body,status,published_at,museum_section_id,excerpt) "
+                       "values ('page','qa-shop-catalog-item','QA ONLY: проверочный сувенир',"
+                       "'<p>Временная проверка редакторского элемента витрины, не реальный товар.</p>',"
+                       "'published',datetime('now','-10 minutes'),?,"
+                       "'QA ONLY: несуществующая тестовая позиция.')",(shop_section_id,))
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes') "
                        "where slug in ('excursion-overview','excursion-interactive',"
@@ -291,6 +319,32 @@ def main() -> None:
             raise RuntimeError("New CMS excursion detail public route was not correctly exported")
         if "хлеб для космонавтов" not in overview.text_content():
             raise RuntimeError("Official overview excursion source lost in CMS category page")
+        shop = html.fromstring((out/"guide/museum-shop/index.html").read_bytes())
+        adults = html.fromstring((out/"guide/excursion-workshops-adults/index.html").read_bytes())
+        kids = html.fromstring((out/"guide/children-workshops/index.html").read_bytes())
+        for slug, doc in (("children-workshops",kids),
+                          ("excursion-workshops-adults",adults)):
+            if "Содержание, опубликованное редактором музея" not in doc.text_content():
+                raise RuntimeError("Workshop CMS category introduction ignored: "+slug)
+            if len(doc.xpath("//main//article[contains(@class,'official-museum-program-card')]")) != 12:
+                raise RuntimeError("Published workshop category lost original 12 verified museum programs")
+            if "QA: обновлённый редактором мастер-класс Кувадка" not in doc.text_content():
+                raise RuntimeError("Museum workshop editor changes did not replace source: "+slug)
+        if "Отдельного утверждённого музеем каталога" not in adults.text_content():
+            raise RuntimeError("Adult workshop listing claims unverified adult programme")
+        if "QA ONLY: проверочный сувенир" not in shop.text_content():
+            raise RuntimeError("CMS approved shop item not shown in noncommerce gallery")
+        if len(shop.xpath("//main//article[contains(@class,'museum-shop-item')]")) != 1:
+            raise RuntimeError("CMS shop cannot list exactly one reviewed editorial item")
+        if shop.xpath("//main//section[contains(@class,'museum-shop-showcase')]//form"
+                      " | //main//section[contains(@class,'museum-shop-showcase')]//button"):
+            raise RuntimeError("Museum storefront must not contain checkout/payment/order forms")
+        if not (out/"museum/qa-shop-catalog-item/index.html").is_file():
+            raise RuntimeError("CMS reviewed shop item has no working standalone route")
+        if not (out/"museum/museum-workshop-kukly-kuvadki/index.html").is_file():
+            raise RuntimeError("Approved workshop editor detail URL missing")
+        if (out/"museum/museum-workshop-rospis-izrazca/index.html").is_file():
+            raise RuntimeError("Unpublished museum workshop draft incorrectly public")
         h1 = [str(x).strip() for x in privacy.xpath("//main//h1/text()")]
         if h1 != ["QA: заголовок из редактируемой CMS"]:
             raise RuntimeError("CMS H1 not authoritative on guide route: " + repr(h1))
@@ -344,12 +398,12 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 18 disposable CMS pages incl. four source excursion categories,"
-          " two children subcategories and two uniquely published excursions;"
-          " 17 original program cards (6/9/2), children catalogs (6/9),"
-          " CMS editor overrides and 15 other tour drafts private,"
-          " 11 exposition halls, nine FAQ answers, 44 SHA256 museum documents;"
-          " real CMS remains 48 private drafts/44 docs and unchanged fixture.")
+    print("PASS: 23 isolated published CMS records including 12 real workshop cards"
+          " in both adult/children sections, edited workshop detail and a QA-only"
+          " synthetic shop item (on disposable DB ONLY), zero checkout/forms,"
+          " 4 original excursion categories, 17 excursion listings,"
+          " 11 halls, nine FAQ and 44 unchanged museum files with SHA256;"
+          " working CMS remains 63 private drafts/44 docs, no demo item copied back.")
 
 
 if __name__ == "__main__":

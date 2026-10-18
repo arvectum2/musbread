@@ -1,0 +1,353 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "snapshot_utc": "2026-10-18T07:16:33+00:00",
+  "index": {
+    "path": "/master-klassy",
+    "source_url": "https://muzei-xleb.ru/master-klassy",
+    "title": "Мастер-классы",
+    "captured_utc": "2026-10-18T07:16:33+00:00",
+    "html": "<p>Приглашаем Вас на музейные творческие мастер-классы!</p>\n<p>Перед каждым мастер-классом проводится небольшая тематическая экскурсия (продолжительность 30 мин.)</p>\n<p>Общая продолжительность программы - 60 мин.</p>\n<p>Программа проводится для групп 6-15 чел.</p>\n<h3>Обрядовые куклы</h3>\n<ul>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/kukly-kuvadki\"><strong>«Кувадка»</strong></a></li>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/kukly-vesnyanki\"><strong>«Веснянка»</strong></a></li>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/zernovushka-blagopoluchnica\"><strong>«Зерновушка»</strong></a></li>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/ptichiy-dvor\"><strong>«Птичий двор»</strong></a></li>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/pashalnyy-zaychik\"><strong>«Пасхальный заяц»</strong></a></li>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/rozhdestvenskiy-angel\"><strong>«Ангел»</strong></a></li>\n</ul>\n<h3>Изделия из лыка и соломы</h3>\n<ul>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/okno-radosti\"><strong>«Окно радости»</strong></a></li>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/kon-solnce\"><strong>«Конь-Солнце»</strong></a></li>\n<li><a href=\"https://muzei-xleb.ru/ekskursii/master-klass-melnica-vertelnica\"><strong>«Мельница-вертельница»</strong></a></li>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/solnce-na-radost\"><strong>«Солнце на радость»</strong></a></li>\n</ul>\n<h3>Роспись деревянных заготовок</h3>\n<ul>\n<li><strong>«Новогодние украшения»</strong></li>\n<li><a href=\"https://muzei-xleb.ru/master-klassy/pashalnye-ukrasheniya\"><strong>«Пасхальные украшения»</strong></a></li>\n<li><strong>«Символ года»</strong></li>\n</ul>\n<h3><a href=\"https://muzei-xleb.ru/master-klassy/rospis-izrazca\">Роспись изразцов</a><br>\n\t </h3>\n<h2><a href=\"https://vmuzey.com/museum/sankt-peterburgskiy-muzey-hleba\">Купить билет на мастер-класс</a></h2>",
+    "text_sha256": "df39bcabeaec106ba9ac0225f1526889afe2434c3f9f990acfe557b2c4b0bb97",
+    "html_sha256": "196452de05f3132dc0dd943cf00e46dc5222c2545e27a4927dd5d4fc98707193",
+    "text_length": 559,
+    "document_links": [],
+    "image_links": [],
+    "photos_rights_confirmed": false
+  },
+  "count": 12,
+  "programs": [
+    {
+      "path": "/master-klassy/kukly-kuvadki",
+      "source_url": "https://muzei-xleb.ru/master-klassy/kukly-kuvadki",
+      "title": "«Кувадка»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Народная тряпичная кукла – это не только игрушка. Это оберег и защитник.</p>\n\n<p>Кукла-кувадка встречала ребенка сразу после рождения, нескольких кувадок подвешивали над колыбелью. Это была первая игрушка, которую ребенок делал сам. Крутить таких кукол крестьянские дети начинали с 3-4 лет.</p>\n\n<p>Музей приглашает Вас на экскурсию, посвященную жизни в русской деревне и мастер-класс по созданию кукол-кувадок.</p>\n\n<p>Возраст: 6+</p>\n\n<p><a href=\"https://vmuzey.com/event/master-klass-kukly-kuvadki\">Купить билет на мастер-класс</a></p>\n\n<p>      </p>",
+      "text_sha256": "b3cc1db95e7d031493921983be31023700c5b02c2904f9036a0e228f97ac585f",
+      "html_sha256": "d1c44b128d4860ea169ee8d9ecb56019b2366465678f635450fa4582d891a588",
+      "text_length": 436,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20260213171714-kukly-kuvadki_1.jpg?itok=dgxgxT9F",
+          "alt": "«Кувадка»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20260213171714-kukly-kuvadki_2.jpg?itok=I4PXrM00",
+          "alt": "«Кувадка»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20260213171714-kukly-kuvadki_3.jpg?itok=DZ0d9xGQ",
+          "alt": "«Кувадка»"
+        }
+      ],
+      "slug": "museum-workshop-kukly-kuvadki",
+      "source_label": "«Кувадка»",
+      "intro": "Народная тряпичная кукла – это не только игрушка. Это оберег и защитник. Кукла-кувадка встречала ребенка сразу после рождения, нескольких кувадок подвешивали над колыбелью. Это была первая игрушка, которую ребенок делал сам. Крутить таких кукол ",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/kukly-vesnyanki",
+      "source_url": "https://muzei-xleb.ru/master-klassy/kukly-vesnyanki",
+      "title": "«Веснянка»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Мы приглашаем в небольшое путешествие в мир русской деревни.<br>\n\tУчастники программы смогут сделать тряпичную куклу – самую веселую, яркую, радостную народную игрушку, которая символизировала приход весны.</p>\n<p>Возраст: 7+</p>\n<p><a href=\"https://vmuzey.com/event/master-klass-kukly-vesnyanki\"><strong>Купить билет на мастер-класс</strong></a></p>\n<p>      </p>",
+      "text_sha256": "6104a30d6a468fffc90df3013417f1b45462b5ccfc4b8501669f39ed77e48db7",
+      "html_sha256": "2e18c65ad843f8816e5f62d14bacdcc695c4f19281c52ad9cd9d8c055d10ccfb",
+      "text_length": 242,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_0950.jpg?itok=gmzGDUj4",
+          "alt": ""
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_1022.jpg?itok=U5FTpTTl",
+          "alt": ""
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_2421_0.jpg?itok=t3srAfh1",
+          "alt": ""
+        }
+      ],
+      "slug": "museum-workshop-kukly-vesnyanki",
+      "source_label": "«Веснянка»",
+      "intro": "Мы приглашаем в небольшое путешествие в мир русской деревни. Участники программы смогут сделать тряпичную куклу – самую веселую, яркую, радостную народную игрушку, которая символизировала приход весны. Возраст: 7+ Купить билет на мастер-класс",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/zernovushka-blagopoluchnica",
+      "source_url": "https://muzei-xleb.ru/master-klassy/zernovushka-blagopoluchnica",
+      "title": "«Зерновушка-Благополучница»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Страда – пора ответственная. Крестьянам надо было точно определить время, когда ее начинать, – чтоб и в срок, и в хорошую погоду. После жатвы жницы в деревнях делали маленькую тряпичную куклу – «Зерновушку», в которую заворачивали зерно нового урожая. Это зерно в следующем году бросали в первую борозду. «Зерновушка» оберегала семью, способствовала процветанию дома и возрастанию достатка.</p>\n<p>Приглашаем Вас в путешествие по залу «Хлеб в культуре восточных славян» и на мастер-класс по изготовлению народной тряпичной куклы – «Зерновушки-Благополучницы».</p>\n<p>Возраст: 7+</p>\n<p>      </p>",
+      "text_sha256": "e5f5faa287ea1541f0353ebad1bb137ff7efabe81095d5e8a5f13c4aa276e217",
+      "html_sha256": "7d74b7131f98bbd47b3c1cacf593894f3a5db67a2bd5fc9808973a1ae6fca1cd",
+      "text_length": 564,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_3984_0.jpg?itok=oCIP90oe",
+          "alt": ""
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_4177.jpg?itok=tz9RE42z",
+          "alt": ""
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_4178.jpg?itok=wdSEtB0Q",
+          "alt": ""
+        }
+      ],
+      "slug": "museum-workshop-zernovushka-blagopoluchnica",
+      "source_label": "«Зерновушка»",
+      "intro": "Страда – пора ответственная. Крестьянам надо было точно определить время, когда ее начинать, – чтоб и в срок, и в хорошую погоду. После жатвы жницы в деревнях делали маленькую тряпичную куклу – «Зерновушку», в которую заворачивали зерно нового у",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/ptichiy-dvor",
+      "source_url": "https://muzei-xleb.ru/master-klassy/ptichiy-dvor",
+      "title": "«Птичий двор»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Пенье птиц всегда ознаменовывает приход весны. Наблюдая за ними, люди определяли, когда пахать, когда сеять, когда ждать дождей... Пернатых изображали на посуде, мебели, полотенцах, наличниках, на свадебных караваях и курниках.</p>\n<p>На мастер-классе мы создадим яркую тряпичную куклу-сороку. Эта птица своей весёлой трескотнёй приносила вести. Так и говорили: «сорока на хвосте принесла». В сказках она упоминается как сорока-белобока. Люди верили, если она села на крышу или окно, -  жди хороших новостей или гостей.</p>\n<p>Возраст: 9+</p>\n<p>       </p>",
+      "text_sha256": "6d7ce00b2c381db55e864a06bb1989d72e4f609dca7dc65213ee4c10c7ff8f7a",
+      "html_sha256": "16c71506023d761e3c05d26e65e2bb9ae24d1fe5cc2a1284fbde22b4d3998b2f",
+      "text_length": 523,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-03-16_10-10-16.jpg?itok=SXkT33qc",
+          "alt": "«Птичий двор»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-03-16_10-12-25.jpg?itok=ouHrPNY6",
+          "alt": "«Птичий двор»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-03-16_10-13-19.jpg?itok=c25NjAVm",
+          "alt": "«Птичий двор»"
+        }
+      ],
+      "slug": "museum-workshop-ptichiy-dvor",
+      "source_label": "«Птичий двор»",
+      "intro": "Пенье птиц всегда ознаменовывает приход весны. Наблюдая за ними, люди определяли, когда пахать, когда сеять, когда ждать дождей... Пернатых изображали на посуде, мебели, полотенцах, наличниках, на свадебных караваях и курниках. На мастер-классе ",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/pashalnyy-zaychik",
+      "source_url": "https://muzei-xleb.ru/master-klassy/pashalnyy-zaychik",
+      "title": "«Пасхальный заяц»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Пасха – самый важный и торжественный христианский праздник, называемый «Царь дней».</p>\n<p>Во время экскурсии мы узнаем, как к нему готовились, что происходило в деревне и городе. Расскажем о традиционном пасхальном столе, блюдах и угощениях; о символике кулича, пасхи и крашеных яиц. Поговорим о рецептах выпечки и основных ингредиентах. Как украшали к этому дню кондитерские, что там можно было купить на праздник или в качестве подарка? Какие куличи любили цари и императоры?</p>\n<p>Во время мастер-класса сделаем игрушку-упаковку для подарка - «Пасхального зайца» из ткани. Игрушка была не простой – в нее вкладывали сюрприз: пасхальное яйцо.</p>\n<p>Возраст: 6+</p>\n<p>      </p>\n<p>  </p>",
+      "text_sha256": "9e61903368fd3106c84f32c2538045d4885f448e897866b24280dd6bfbe5ccd2",
+      "html_sha256": "0daf78c6a6d3a73d918da7ac878da2ba574b3fc1fcef3a36b1b68e4d28958c5e",
+      "text_length": 644,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_3205.jpg?itok=DSuJ2Akt",
+          "alt": "«Пасхальный заяц»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-03-16_10-15-48vvv.jpg?itok=4OLQ6G3v",
+          "alt": "«Пасхальный заяц»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-03-16_10-17-00apaa.jpg?itok=aOs8V4uv",
+          "alt": "«Пасхальный заяц»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-03-16_10-20-53_-_kopiya.jpg?itok=VmYOiIuu",
+          "alt": "«Пасхальный заяц»"
+        }
+      ],
+      "slug": "museum-workshop-pashalnyy-zaychik",
+      "source_label": "«Пасхальный заяц»",
+      "intro": "Пасха – самый важный и торжественный христианский праздник, называемый «Царь дней». Во время экскурсии мы узнаем, как к нему готовились, что происходило в деревне и городе. Расскажем о традиционном пасхальном столе, блюдах и угощениях; о символи",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/rozhdestvenskiy-angel",
+      "source_url": "https://muzei-xleb.ru/master-klassy/rozhdestvenskiy-angel",
+      "title": "«Рождественский Ангел»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Рождество – время волшебное, время ожидания чуда. В эти дни хозяйки пекли обрядовое печенье – козули. Крестьяне верили, что они принесут им удачу, богатство и благополучие. Один из символов Рождества – фигура Ангела – особенный оберег. Рождественскими Ангелами украшали дом и елку, их дарили близким и друзьям.</p>\n<p>Приглашаем Вас в небольшое путешествие по залу «Хлеб в культуре восточных славян» и на мастер-класс по изготовлению народной тряпичной куклы – Рождественского Ангела.</p>\n<p>Перед мастер-классом на выставке, посвященной Рождеству, проводится экскурсия. </p>\n<p>Возраст: 6+</p>\n<p></p>",
+      "text_sha256": "41709adc4527c9aefcd680d3f9d6df2340560e6cc60ebe43e52a16afbf74484e",
+      "html_sha256": "c0ca41cb224a290c6874cce9a16825ac72f6b313d6b29d9b8dfd7930097dc5dd",
+      "text_length": 568,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_2659.jpg?itok=RHWXWHiQ",
+          "alt": ""
+        }
+      ],
+      "slug": "museum-workshop-rozhdestvenskiy-angel",
+      "source_label": "«Ангел»",
+      "intro": "Рождество – время волшебное, время ожидания чуда. В эти дни хозяйки пекли обрядовое печенье – козули. Крестьяне верили, что они принесут им удачу, богатство и благополучие. Один из символов Рождества – фигура Ангела – особенный оберег. Рождестве",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/okno-radosti",
+      "source_url": "https://muzei-xleb.ru/master-klassy/okno-radosti",
+      "title": "«Окно радости»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Окна бывают разными: окно-фонарь и окно-витрина, окно-обманка и окно-магазин, наконец, просто окно дома. Что они могут рассказать о городе, жителях, времени? Пройдем с экскурсией по старинному купеческому особняку, где сейчас музей, и по дороге посмотрим во все окна.</p>\n\n<p>Мы выясним, что окружало наш дом 100 лет назад: узнаем, что сохранилось до наших дней. В витрине магазина сладостей познакомимся с ассортиментом кондитерских изделий, внимательно изучим упаковку. А на кухне, где есть только фальшь-окно, «прислушаемся» к запахам. Узнаем, как пекари торговали через окно-форточку и посмотрим в «окно на мир» глазами человека XIX века.</p>\n\n<p>На мастер-классе изготовим «Окно радости», через которое в дом будут проникать свет и счастье.</p>\n\n<p>Возраст: 10+</p>\n\n<p><a href=\"https://vmuzey.com/event/master-klass-okno-radosti-1\">Купить билет на мастер-класс</a></p>\n\n<p>        </p>",
+      "text_sha256": "86bce557c4d9b0a51ba8e231b419ad0a240c3d089d8b129051e13c5159bf6b3c",
+      "html_sha256": "c14f5ca747d6c552377867834e3919bbf4d41aef8707781aef38d0388ffb1af0",
+      "text_length": 771,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-02-10_12-43-41.jpg?itok=3WQ2eaYg",
+          "alt": "«Окно радости»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-02-10_12-44-03.jpg?itok=1xPQXuel",
+          "alt": "«Окно радости»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-02-10_12-44-21.jpg?itok=Ywvq8sGf",
+          "alt": "«Окно радости»"
+        }
+      ],
+      "slug": "museum-workshop-okno-radosti",
+      "source_label": "«Окно радости»",
+      "intro": "Окна бывают разными: окно-фонарь и окно-витрина, окно-обманка и окно-магазин, наконец, просто окно дома. Что они могут рассказать о городе, жителях, времени? Пройдем с экскурсией по старинному купеческому особняку, где сейчас музей, и по дороге ",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/kon-solnce",
+      "source_url": "https://muzei-xleb.ru/master-klassy/kon-solnce",
+      "title": "«Конь-солнце»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Приглашаем на мастер-класс по изготовлению игрушки из лыка! Конь-Солнце украсит ваш дом и принесет удачу!</p>\n<p>У наших предков он считался посланником солнца, тепла и богатства!</p>\n<p>Возраст: 9+</p>\n<p><a href=\"https://vmuzey.com/event/master-klass-kon-solnce\"><strong>Купить билет на мастер-класс</strong></a></p>\n<p>       </p>",
+      "text_sha256": "cc4a905e278319492b96518b7536b177db2d0bc859b8b6b2eeb6be9c5a23a4e2",
+      "html_sha256": "797c079e1d380a5e9a8ee6c484c6144ea9c479e7653bfc25dc4cef73b234ea62",
+      "text_length": 213,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20250206155327-img_7146.jpg?itok=A-QTSZaN",
+          "alt": "«Конь-солнце»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20260217171228-img_7180.jpg?itok=dZEQTnvh",
+          "alt": "«Конь-солнце»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20260217171228-img_7182.jpg?itok=f3RWaOpT",
+          "alt": "«Конь-солнце»"
+        }
+      ],
+      "slug": "museum-workshop-kon-solnce",
+      "source_label": "«Конь-Солнце»",
+      "intro": "Приглашаем на мастер-класс по изготовлению игрушки из лыка! Конь-Солнце украсит ваш дом и принесет удачу! У наших предков он считался посланником солнца, тепла и богатства! Возраст: 9+ Купить билет на мастер-класс",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/ekskursii/master-klass-melnica-vertelnica",
+      "source_url": "https://muzei-xleb.ru/ekskursii/master-klass-melnica-vertelnica",
+      "title": "«Мельница-вертельница»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Программа посвящена истории мукомольных предприятий.</p>\n<p>Мы познакомимся с древнейшими приспособлениями для переработки урожая: каменными зернотерками и ступой с пестом, датируемыми III-IV тыс. до н.э. Увидим макеты водяной и ветряной мельниц. Изучим устройство крупорушки и жерновов. Не обойдется и без открытий: мельницы - это не только мука, история знает пильные, красильные, бумажные; у мельников был даже свой язык! Амбар, поставленный на века, закрома которого были полны зерна и муки - ассоциировались у наших предков с богатством. Затронем историю мукомольных предприятий нашего города. Экскурсия позволит проследить эволюцию мельниц от ветряка до элеватора.</p>\n<p>В ходе мастер-класса участник изготовит свою мельницу из природных материалов.</p>\n<p>Возраст: 10+</p>\n<p>   </p>",
+      "text_sha256": "88fe73ff32d942bbb0e4cfb34ba5fc714ead5f1153ec4f4bef99e5dcd0ea0a27",
+      "html_sha256": "e7c68ddf9c26014268a85e8caf152b9f8b72d0fc9822534fad7faba3aece3e7b",
+      "text_length": 755,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20250210141410-img_8097melnica-vertelnica1.jpg?itok=S0zVV_oG",
+          "alt": "Мастер-класс «Мельница-вертельница»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20250210141410-img_8099melnica-vertelnica2.jpg?itok=TTyo0m4Y",
+          "alt": "Мастер-класс «Мельница-вертельница»"
+        }
+      ],
+      "slug": "museum-workshop-master-klass-melnica-vertelnica",
+      "source_label": "«Мельница-вертельница»",
+      "intro": "Программа посвящена истории мукомольных предприятий. Мы познакомимся с древнейшими приспособлениями для переработки урожая: каменными зернотерками и ступой с пестом, датируемыми III-IV тыс. до н.э. Увидим макеты водяной и ветряной мельниц. Изучи",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/solnce-na-radost",
+      "source_url": "https://muzei-xleb.ru/master-klassy/solnce-na-radost",
+      "title": "«Солнце на радость»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Солнце с давних времен было символом достатка, спокойствия и благополучия. Считалось, что его изображение сможет защитить дом.</p>\n<p>Участники мастер-класса смогут познакомиться с солярными символами, узнать об обрядовой выпечке, о народных праздниках и сделать своими руками тряпично-соломенную куклу.</p>\n<p>Возраст: 9+</p>\n<p><a href=\"https://vmuzey.com/event/master-klass-solnce-na-radost\"><strong>Купить билет на мастер-класс</strong></a></p>\n<p>       </p>",
+      "text_sha256": "85ca3170c11cf758631deb07ab8b338536f6b4081b2fd2cc5ac99845b783d2c1",
+      "html_sha256": "2d6a389024dcea8f915f5bb58425747fb0480be8fbd8f4cc8c33fefbce3e52df",
+      "text_length": 337,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20260216170030-solnce_1.jpg?itok=-tEF3D8Q",
+          "alt": "«Солнце на радость»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20260216170030-solnce_2.jpg?itok=rXlz6UA5",
+          "alt": "«Солнце на радость»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/20260216170030-solnce_3.jpg?itok=UiWo6THk",
+          "alt": "«Солнце на радость»"
+        }
+      ],
+      "slug": "museum-workshop-solnce-na-radost",
+      "source_label": "«Солнце на радость»",
+      "intro": "Солнце с давних времен было символом достатка, спокойствия и благополучия. Считалось, что его изображение сможет защитить дом. Участники мастер-класса смогут познакомиться с солярными символами, узнать об обрядовой выпечке, о народных праздниках",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/pashalnye-ukrasheniya",
+      "source_url": "https://muzei-xleb.ru/master-klassy/pashalnye-ukrasheniya",
+      "title": "«Пасхальные украшения»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Пасха – самый важный и торжественный христианский праздник.</p>\n<p>Во время экскурсии мы узнаем, как к нему готовились, что происходило в деревне и городе. Расскажем о традиционном пасхальном столе, блюдах и угощениях; о символике кулича, пасхи и крашеных яиц. Поговорим о рецептах выпечки и основных ингредиентах. Как украшали к этому дню кондитерские, что там можно было купить на праздник или в качестве подарка? Какие куличи любили цари и императоры?  </p>\n<p>Во время мастер-класса распишем деревянную праздничную заготовку.  Вдохновимся «крашенками», «писанками» и народным творчеством.</p>\n<p>Возраст: 9+</p>\n<p> </p>",
+      "text_sha256": "87ffc24ce6e69a858e858f43562e905211c832dc8aeeff8df5ea61c14443ae0e",
+      "html_sha256": "ac470baa435caeba7b4c2c856f4d3b32e718ea7d39a4b012ecf275db802a234c",
+      "text_length": 587,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/photo_2026-03-16_10-21-17cvetav.jpg?itok=HXLvNOl7",
+          "alt": "«Пасхальные украшения»"
+        }
+      ],
+      "slug": "museum-workshop-pashalnye-ukrasheniya",
+      "source_label": "«Пасхальные украшения»",
+      "intro": "Пасха – самый важный и торжественный христианский праздник. Во время экскурсии мы узнаем, как к нему готовились, что происходило в деревне и городе. Расскажем о традиционном пасхальном столе, блюдах и угощениях; о символике кулича, пасхи и краше",
+      "photos_rights_confirmed": false
+    },
+    {
+      "path": "/master-klassy/rospis-izrazca",
+      "source_url": "https://muzei-xleb.ru/master-klassy/rospis-izrazca",
+      "title": "«Роспись изразца»",
+      "captured_utc": "2026-10-18T07:16:33+00:00",
+      "html": "<p>Музей Хлеба находится в здании, построенном в середине XIX в. В доме почетного гражданина Петербурга И.А.Пастухова сохранились росписи стен и потолков, лепнина, метлахская плитка и несколько изразцовых печей. Облицовка двух печей была сделана на финском заводе «Або», а облицовка третьей - на Тверской фабрике Товарищества производства фарфоровых и фаянсовых изделий М.С. Кузнецова.</p>\n<p>Музей предлагает узнать, как вообще появились изразцы, чем голландский изразец отличается от русского, и при чем здесь Китай. Мы заглянем в зал, посвященный мельницам, и узнаем, почему мельница – один из самых распространенных сюжетов изразца.</p>\n<p>После путешествия в Детском центре каждый сможет выбрать рисунок и расписать свой изразец, который можно использовать как подставку или украшение.</p>\n<p>Возраст: 7+</p>\n<p>      </p>",
+      "text_sha256": "84fe0e071698800528584eb77181bf445d16c716cd3dfc9b4050d2a61b18a393",
+      "html_sha256": "38b3699d1a7e0c3b4edf373dabc96a5c5e79eaf50846ab5f35c3712af203651e",
+      "text_length": 785,
+      "document_links": [],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_1068.jpg?itok=OqAt_Ykq",
+          "alt": ""
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_1094.jpg?itok=9Qv1Z2HL",
+          "alt": ""
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/page/img_1103.jpg?itok=q8vhLIB-",
+          "alt": ""
+        }
+      ],
+      "slug": "museum-workshop-rospis-izrazca",
+      "source_label": "Роспись изразцов",
+      "intro": "Музей Хлеба находится в здании, построенном в середине XIX в. В доме почетного гражданина Петербурга И.А.Пастухова сохранились росписи стен и потолков, лепнина, метлахская плитка и несколько изразцовых печей. Облицовка двух печей была сделана на",
+      "photos_rights_confirmed": false
+    }
+  ],
+  "photo_policy": "Only link metadata for source integrity; original pictures not cleared for republication"
+}

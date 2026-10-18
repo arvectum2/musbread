@@ -603,3 +603,21 @@ html[data-vision-mode="on"] .visitor-faq-number,.visit-practical-doc span{color:
 @media(max-width:730px){.official-museum-program-grid{grid-template-columns:1fr}.official-museum-program-card{padding:1rem}}
 html[data-vision-mode="on"] .official-museum-program-card{border:2px solid currentColor}
 html[data-vision-mode="on"] .official-museum-program-number{color:inherit}
+
+
+/* TZ-145 display-only museum souvenir catalogue: intentionally no commerce UX. */
+.museum-shop-showcase{margin:1.5rem 0 2.5rem;min-width:0}
+.museum-shop-showcase h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+.museum-shop-showcase>p{max-width:75ch;line-height:1.6}
+.museum-shop-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.4rem 0}
+.museum-shop-item,.museum-shop-empty{padding:1.25rem;border:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
+.museum-shop-item h3,.museum-shop-empty h3{font-size:1.2rem;margin:0 0 .6rem}
+.museum-shop-item p,.museum-shop-empty p{line-height:1.6}
+.museum-shop-contact{border-top:1px solid var(--line);padding-top:1.2rem;margin-top:1.2rem}
+.museum-shop-contact p{line-height:1.6}
+@media(max-width:700px){.museum-shop-grid{grid-template-columns:1fr}.museum-shop-item,.museum-shop-empty{padding:1rem}}
+html[data-vision-mode="on"] .museum-shop-item,html[data-vision-mode="on"] .museum-shop-empty{border:2px solid currentColor}
+
+
+.museum-workshop-footer{border-top:1px solid var(--line);padding-top:1rem;max-width:75ch}
+.museum-workshop-footer p{line-height:1.6}

@@ -2765,15 +2765,15 @@
       "Строки оригинала": "197",
       "Требование": "Посетителям: магазин БЕЗ функции продажи",
       "Приоритет": "P1",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
+      "Светофор": "🟡 Частично",
+      "Готовность": "Частично",
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Каталог-витрина без checkout",
-      "Что нужно от музея / внешний блокер": "Каталог сувениров",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Каталог-витрина без checkout",
-      "Что уже есть (доказательство)": "НОВЫЙ: CONTENT-SHOP",
+      "Что сделать для завершения": "Noncommerce CMS storefront complete; need real museum souvenir catalog with descriptions, authorizations and images before final acceptance.",
+      "Что нужно от музея / внешний блокер": "Supply approved merchandise names, descriptions, optional informational prices, photo rights. E-commerce deliberately forbidden by TZ.",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Noncommerce CMS storefront complete; need real museum souvenir catalog with descriptions, authorizations and images before final acceptance.",
+      "Что уже есть (доказательство)": "НОВЫЙ: CONTENT-SHOP 18.10.2026: /guide/museum-shop/ displays only CMS published MuseumEntry items in existing museum-shop section; no checkout, cart, payment, order form, collection of personal data or fake inventory. Empty state is truthful and supplies real museum contact details. Opt-in museum:prepare-shop creates one private editor-ready landing. Isolated Laravel→Next QA publishes a clearly marked QA-only mock product ONLY in temporary SQLite, checks public card/detail and zero forms. No official merchandise list found on current museum site, so product content remains externally blocked. docs/TZ145_158_161_MUSEUM_SHOP_WORKSHOPS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3012,15 +3012,15 @@
       "Строки оригинала": "212",
       "Требование": "Экскурсии: мастер-классы для взрослых",
       "Приоритет": "P1",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
+      "Светофор": "🟡 Частично",
+      "Готовность": "Частично",
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · каталог",
-      "Что сделать для завершения": "Раздел/категория",
-      "Что нужно от музея / внешний блокер": "Программа",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Раздел/категория",
-      "Что уже есть (доказательство)": "CP-13",
+      "Что сделать для завершения": "Functional adult program landing and source descriptions work; specific adult eligibility and groups are not confirmed in the original official museum catalog.",
+      "Что нужно от музея / внешний блокер": "Which of the 12 workshops admit adults, which adult sessions/age groups exist, and what is the approved schedule?",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Functional adult program landing and source descriptions work; specific adult eligibility and groups are not confirmed in the original official museum catalog.",
+      "Что уже есть (доказательство)": "CP-13 18.10.2026: official museum /master-klassy catalog HTTP 200, 12 full museum program descriptions captured on Mac mini with verified URL, title, SHA256, original min ages 6+ to 10+. /guide/excursion-workshops-adults/ renders 12 source-backed cards with explicit caveat: adult participation/availability not confirmed by museum. One adult landing CMS draft, same 12 shared source program records (not duplicated) and editor override proven in isolated Laravel→Next QA. docs/TZ145_158_161_MUSEUM_SHOP_WORKSHOPS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3069,15 +3069,15 @@
       "Строки оригинала": "216",
       "Требование": "Детям: мастер-классы для детей",
       "Приоритет": "P1",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · каталог",
-      "Что сделать для завершения": "Категория/посадочная страница",
-      "Что нужно от музея / внешний блокер": "Программа",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Категория/посадочная страница",
-      "Что уже есть (доказательство)": "CP-13",
+      "Что сделать для завершения": "All 12 existing officially published museum workshop descriptions and ages fully integrated with editable CMS and source citations. No invented schedule/stock or images.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "CP-13 18.10.2026: official /master-klassy page plus 12 individual master classes captured directly from Mac mini, URLs/H1/full HTML individually verified by SHA256. Original age limits 6+…10+; all 12 now shown on /guide/children-workshops/ as responsive 320px keyboard native disclosures, with real official links. 12 private MuseumEntry source pages plus children section draft, actual CMS editorial override in isolated Laravel→Next tests with 44 unchanged museum source documents. 32 photo links preserved for provenance only; no photography republished without rights. docs/TZ145_158_161_MUSEUM_SHOP_WORKSHOPS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 71,
-    "Нет": 153,
-    "Частично": 101
+    "Да": 72,
+    "Нет": 150,
+    "Частично": 103
   },
   "workflow": {
-    "Готово в прототипе": 71,
-    "Внешний блокер / наступление этапа": 254
+    "Готово в прототипе": 72,
+    "Внешний блокер / наступление этапа": 253
   }
 }

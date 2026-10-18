@@ -18,6 +18,9 @@ import {officialExpositionSlugs} from "@/data/official-exposition-rooms";
 import {officialSnapshotByPath} from "@/data/official-page-snapshots";
 import {officialExcursionBySlug} from "@/data/official-excursion-pages";
 import OfficialMuseumExcursionPrograms from "@/components/OfficialMuseumExcursionPrograms";
+import MuseumShopShowcase from "@/components/MuseumShopShowcase";
+import OfficialMuseumWorkshops from "@/components/OfficialMuseumWorkshops";
+import {officialWorkshopSlugs} from "@/data/official-workshops";
 import {isProgramCategory,originalMuseumProgramSlugs} from "@/data/official-excursion-programs";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
 import CurrentExhibitions from "@/components/CurrentExhibitions";
@@ -78,7 +81,8 @@ export default async function GuidePage({ params }: Props) {
       && !(slug === "museum-exposition" && officialExpositionSlugs.has(entry.slug))
       // Genuine source programs (including approved CMS revisions) are
       // presented once in the detailed category cards, not duplicated below.
-      && !(isProgramCategory(slug) && originalMuseumProgramSlugs.has(entry.slug)))
+      && !(isProgramCategory(slug) && originalMuseumProgramSlugs.has(entry.slug))
+      && !(slug === "children-workshops" && officialWorkshopSlugs.has(entry.slug)))
     : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
   const officialSnapshot = officialSnapshotByPath(page?.legacyPath)
@@ -127,6 +131,10 @@ export default async function GuidePage({ params }: Props) {
             ? "Этот раздел опубликован редактором музея; сведения можно изменять через CMS."
             : slug === "faq"
             ? "Ответы собраны по действующим официальным материалам музея. Вопросы подготовлены для нового сайта и могут уточняться редактором."
+            : ["children-workshops","excursion-workshops-adults"].includes(slug)
+            ? "Реальные музейные мастер-классы перенесены с действующего сайта. Возраст, даты и условия участия уточняйте по официальному первоисточнику."
+            : slug === "museum-shop"
+            ? "Витрина магазина по ТЗ: без онлайн-продажи, а ассортимент заполняется только проверенными материалами музея."
             : childExcursionCategory
             ? "Представлены реальные экскурсионные программы с описаниями и возрастными ограничениями действующего музея. Редактируемые карточки программы находятся в CMS."
             : "Этот раздел требуется ТЗ, но сведения на действующем сайте не найдены."}
@@ -157,6 +165,9 @@ export default async function GuidePage({ params }: Props) {
     </div>}
     {isPlanVisit && <VisitAccessibilityGuide />}
     {isPlanVisit && <OfficialVisitorRules />}
+    {slug === "museum-shop" && <MuseumShopShowcase />}
+    {slug === "children-workshops" && <OfficialMuseumWorkshops audience="children" />}
+    {slug === "excursion-workshops-adults" && <OfficialMuseumWorkshops audience="adults" />}
     {slug === "faq" && !cmsPage && <OfficialVisitorFAQ />}
     {isAccess && <VisitAccessibilityGuide condensed />}
     {slug === "museum-exposition" && <OfficialExpositionRooms />}
@@ -233,7 +244,7 @@ export default async function GuidePage({ params }: Props) {
     {sourceUrl && <p className="reference-source">
       <MuseumAnchor href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</MuseumAnchor>
     </p>}
-    {page?.tenderOnly && !cmsPage && slug !== "faq" && !childExcursionCategory && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
+    {page?.tenderOnly && !cmsPage && slug !== "faq" && slug !== "museum-shop" && slug !== "children-workshops" && slug !== "excursion-workshops-adults" && !childExcursionCategory && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
     {page && (page.ancestors.length > 0 || findMenuGroup(parent.slug)
       ? <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>
       : <p><Link href="/" className="text-link">← На главную</Link></p>)}
