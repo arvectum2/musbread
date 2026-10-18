@@ -2632,15 +2632,15 @@
       "Строки оригинала": "191",
       "Требование": "Музей: контакты",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Подтвердить справочные сведения и проверить карту/доступность входа",
-      "Что нужно от музея / внешний блокер": "Актуальные контакты, реальное расположение входов и приёмка",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Подтвердить справочные сведения и проверить карту/доступность входа",
-      "Что уже есть (доказательство)": "Guide contact page with source address, email, phone, hours, external map-address search, accessible info source; browser E2E",
+      "Что сделать для завершения": "Full source-backed contacts, verified original map and official networks technically complete; physical entrance and final customer acceptance are UAT.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "18.10.2026: existing original /kontakty official address/metro/hours/phone/email plus museum owned Yandex constructor (source sid pinned and widget HTTP 200), map iframe only on direct visitor click, keyboard and mobile tests, if approved CMS address changes original map deactivates. VK and MAX official link sections; source-backed CMS visitor contacts. docs/TZ138_199_201_OFFICIAL_MAP_AND_SOCIAL_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3791,15 +3791,15 @@
       "Строки оригинала": "248",
       "Требование": "Интеграция картографического сервиса",
       "Приоритет": "P1",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "D9–D30 · интеграции",
-      "Что сделать для завершения": "Адрес, карта/разрешённая ссылка",
-      "Что нужно от музея / внешний блокер": "Платформа/координаты",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Адрес, карта/разрешённая ссылка",
-      "Что уже есть (доказательство)": "CP-20 mock disabled",
+      "Что сделать для завершения": "Actual existing museum map service fully integrated with visitor-controlled loading and fallback.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "18.10.2026: real map constructor sid from original official /kontakty verified direct from Mac mini, unique Yandex widget HTTP200, official reference pinned URL/SHA. Map on contact and visit planning: zero Yandex requests before opt-in click; frame-src restricts Yandex iframe and no other third-party JS/analytics; direct address-search fallback, CMS-address-change fail-close, keyboard and mobile Playwright. docs/TZ138_199_201_OFFICIAL_MAP_AND_SOCIAL_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3829,15 +3829,15 @@
       "Строки оригинала": "248",
       "Требование": "Интеграция социальных сетей",
       "Приоритет": "P1",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "D9–D30 · интеграции",
-      "Что сделать для завершения": "URL и оформление",
-      "Что нужно от музея / внешний блокер": "Официальные аккаунты",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. URL и оформление",
-      "Что уже есть (доказательство)": "CP-20 disabled links",
+      "Что сделать для завершения": "Official social networks are available on primary visitor touchpoints and integrated using simple low-overhead links.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "18.10.2026: two official social URLs documented on museum /kontakty source and verified: vk.com/club37126776 and max.ru/id7808018523_gos; direct links in desktop/mobile header, footer, contact and planning with rel noopener noreferrer. No passive social feed/tracking, pages 320px and Playwright source assertions. No requirement for embedded post streams in TZ. docs/TZ138_199_201_OFFICIAL_MAP_AND_SOCIAL_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 78,
-    "Нет": 144,
-    "Частично": 103
+    "Да": 81,
+    "Нет": 142,
+    "Частично": 102
   },
   "workflow": {
-    "Готово в прототипе": 78,
-    "Внешний блокер / наступление этапа": 247
+    "Готово в прототипе": 81,
+    "Внешний блокер / наступление этапа": 244
   }
 }

@@ -24,6 +24,9 @@ class CspTests(unittest.TestCase):
         self.assertNotIn("script-src 'self' 'unsafe-inline'", policy)
         self.assertNotIn("'unsafe-eval'", policy)
         self.assertIn("frame-ancestors 'none'", policy)
+        self.assertIn("frame-src https://yandex.ru", policy)
+        self.assertNotIn("script-src 'self' https://yandex.ru", policy)
+        self.assertNotIn("connect-src 'self' https://yandex.ru", policy)
         self.assertIn("object-src 'none'", policy)
 
     def test_collects_all_pages_not_just_home(self):

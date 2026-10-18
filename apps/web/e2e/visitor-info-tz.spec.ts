@@ -6,7 +6,7 @@ test("TZ-125/TZ-138: footer contact facts and contacts route with external map l
  await expect(main.getByRole("heading",{name:"Контакты"})).toBeVisible();
  await expect(main).toContainText("Михайлова, д. 2");
  await expect(main.getByRole("link",{name:"musbread@cult.gugov.spb.ru"})).toHaveAttribute("href","mailto:musbread@cult.gugov.spb.ru");
- const map=main.getByRole("link",{name:/Найти адрес на карте/});
+ const map=main.getByRole("link",{name:/Открыть адрес в Яндекс Картах/});
  await expect(map).toHaveAttribute("href",/^https:\/\/yandex\.ru\/maps\/\?text=/);
  await expect(map).toHaveAttribute("rel",/noopener noreferrer/);
  await expect(main.getByRole("link",{name:"Условия доступности музея"})).toHaveAttribute("href","/guide/accessible-museum/");

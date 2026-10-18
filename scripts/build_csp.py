@@ -75,6 +75,10 @@ def make_csp(build: Path) -> str:
         "img-src 'self' data:",
         "font-src 'self' data:",
         "connect-src 'self'",
+        # A specific pre-verified museum-owned Yandex constructor may load
+        # only after the visitor explicitly activates its iframe.
+        # Never open script-src / connect-src / img-src to Yandex at top level.
+        "frame-src https://yandex.ru",
         "worker-src 'self'",
         "manifest-src 'self'",
     ]

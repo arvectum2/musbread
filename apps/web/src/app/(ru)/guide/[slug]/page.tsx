@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "@/components/MuseumLink";
 import { notFound } from "next/navigation";
 import { guideHref, legacyUrl, museumReference, REFERENCE_DATE } from "@/data/museum-reference";
-import {visitorContacts,visitorAddressMapSearchUrl} from "@/data/visitor-contacts";
+import {visitorContacts} from "@/data/visitor-contacts";
 import { findGuidePage, findMenuGroup, guidePages, menuGroups, navigationTree, usesCmsNavigation } from "@/data/navigation";
 import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
@@ -24,6 +24,8 @@ import OfficialMuseumExhibitions from "@/components/OfficialMuseumExhibitions";
 import OfficialMuseumScience, {isScienceSection} from "@/components/OfficialMuseumScience";
 import OfficialMuseumNightArts from "@/components/OfficialMuseumNightArts";
 import OfficialMuseumSessions from "@/components/OfficialMuseumSessions";
+import OfficialMuseumMap from "@/components/OfficialMuseumMap";
+import OfficialMuseumSocialLinks from "@/components/OfficialMuseumSocialLinks";
 import {exhibitionSourceIndex,officialExhibitionSourceSlugs} from "@/data/official-exhibitions";
 import {officialWorkshopSlugs} from "@/data/official-workshops";
 import {isProgramCategory,originalMuseumProgramSlugs} from "@/data/official-excursion-programs";
@@ -166,7 +168,7 @@ export default async function GuidePage({ params }: Props) {
       {(isContact || isPlanVisit) && <section aria-label="Как добраться">
         <h3>Как добраться</h3>
         <p>Ближайшая станция метро: {visitorContacts.metro}. Адрес для навигатора: {visitorContacts.address}.</p>
-        <p><MuseumAnchor href={visitorAddressMapSearchUrl} target="_blank" rel="noopener noreferrer" className="text-link">Найти адрес на карте ↗</MuseumAnchor> <small>(внешний поиск адреса, без передачи данных посещения этой страницей)</small></p>
+        <OfficialMuseumMap/>
         <p><Link href="/guide/accessible-museum/" className="text-link">Условия доступности музея</Link> · <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Официальная информация на действующем сайте ↗</MuseumAnchor></p>
       </section>}
       {slug === "tickets-and-benefits" && <p><MuseumAnchor href={museumReference.ticketUrl} target="_blank" rel="noopener noreferrer" className="primary-button">Купить билет на действующей площадке ↗</MuseumAnchor></p>}
@@ -177,6 +179,7 @@ export default async function GuidePage({ params }: Props) {
       <p>Уточнение условий посещения: <MuseumAnchor href={visitorContacts.phoneHref}>{visitorContacts.phone}</MuseumAnchor>.</p>
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</MuseumAnchor>.</p>
     </div>}
+    {(isContact || isPlanVisit) && <OfficialMuseumSocialLinks />}
     {isPlanVisit && <VisitAccessibilityGuide />}
     {isPlanVisit && <OfficialVisitorRules />}
     {slug === "museum-shop" && <MuseumShopShowcase />}

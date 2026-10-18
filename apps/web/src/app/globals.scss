@@ -638,3 +638,18 @@ html[data-vision-mode="on"] .museum-shop-item,html[data-vision-mode="on"] .museu
 .official-session-day>h3{border-bottom:1px solid var(--border,#dadad2);padding-bottom:.5rem;margin-bottom:.8rem}
 .official-session-day .official-museum-program-card h4{overflow-wrap:anywhere;line-height:1.35;font-size:1.06rem}
 .official-agenda-sessions button.text-link{display:block;cursor:pointer;margin:1.1rem auto;padding:.65rem}
+
+
+/* Third-party museum map is never instantiated before visitor opt-in. */
+.official-visitor-map{margin-block:1.1rem;max-width:100%;min-width:0;overflow-wrap:anywhere}
+.official-visitor-map p{max-width:72ch;line-height:1.55}
+.visitor-map-button{display:inline-block;min-height:2.75rem;margin:.55rem 0 1rem;
+  border:1px solid currentColor;border-radius:.55rem;background:transparent;
+  color:inherit;padding:.5rem 1rem;font:inherit;font-weight:650;cursor:pointer}
+.visitor-map-button:hover{text-decoration:underline}
+.visitor-map-button:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.official-map-frame{width:100%;max-width:62rem;min-height:19rem;overflow:hidden;
+  border:1px solid var(--line,#cecec6);border-radius:.65rem}
+.official-map-frame iframe{display:block;border:0;width:100%;height:clamp(19rem,48vw,32rem)}
+.official-museum-socials{margin-block:1.25rem;min-width:0;overflow-wrap:anywhere}
+.official-museum-social-buttons{display:flex;gap:.6rem 1.15rem;flex-wrap:wrap}
