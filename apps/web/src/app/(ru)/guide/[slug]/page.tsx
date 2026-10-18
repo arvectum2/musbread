@@ -23,6 +23,7 @@ import OfficialMuseumWorkshops from "@/components/OfficialMuseumWorkshops";
 import OfficialMuseumExhibitions from "@/components/OfficialMuseumExhibitions";
 import OfficialMuseumScience, {isScienceSection} from "@/components/OfficialMuseumScience";
 import OfficialMuseumNightArts from "@/components/OfficialMuseumNightArts";
+import OfficialMuseumSessions from "@/components/OfficialMuseumSessions";
 import {exhibitionSourceIndex,officialExhibitionSourceSlugs} from "@/data/official-exhibitions";
 import {officialWorkshopSlugs} from "@/data/official-workshops";
 import {isProgramCategory,originalMuseumProgramSlugs} from "@/data/official-excursion-programs";
@@ -201,6 +202,11 @@ export default async function GuidePage({ params }: Props) {
     {(slug==="agenda-archive" || slug==="agenda-events") &&
       <OfficialMuseumNightArts events={events} buildDay={new Date().toISOString().slice(0,10)}
         archiveOnly={slug==="agenda-archive"} />}
+    {(["agenda-excursions","agenda-children","agenda-meetings",
+      "agenda-workshops","agenda-festivals","agenda-exhibitions",
+      "agenda-archive"] as const).some(x=>x===slug) && <OfficialMuseumSessions
+      section={slug as "agenda-excursions"|"agenda-children"|"agenda-meetings"|"agenda-workshops"|"agenda-festivals"|"agenda-exhibitions"|"agenda-archive"}
+      events={events} buildDay={new Date().toISOString().slice(0,10)}/>}
     {isAgendaSection(slug) && <section className="guide-agenda-category" aria-label={"Мероприятия раздела: " + title}>
       <h2>{slug === "agenda-archive" ? "Прошедшие мероприятия" : "События и программа"}</h2>
       <p>Ниже показаны только записи, опубликованные редактором CMS. Демонстрационные записи не являются официальным расписанием музея.</p>

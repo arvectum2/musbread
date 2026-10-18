@@ -89,6 +89,14 @@ def main() -> None:
                                "where slug='museum-night-of-arts-2026'").fetchone()
             if event != ("draft","2026-11-03 00:00:00"):
                 raise RuntimeError("Dated source event must remain unpublished with verified date: "+repr(event))
+            n = db.execute("select count(*) from museum_events where slug like "
+                           "'museum-session-%' and status='draft'").fetchone()[0]
+            if n != 124:
+                raise RuntimeError("Expected 124 true Sep–Oct weekly museum source event drafts, all unpublished")
+            n = db.execute("select count(*) from museum_events "
+                           "where status='draft'").fetchone()[0]
+            if n != 125:
+                raise RuntimeError("Expected 124 confirmed timed sessions + one Nov3 source event as drafts")
             n = db.execute("select count(*) from museum_entries where slug in "
                            "('science-organization','science-methodical-council') and status='draft'").fetchone()[0]
             if n != 2:
@@ -167,6 +175,12 @@ def main() -> None:
                        "excerpt='QA: музей утвердил программу 3 ноября.',"
                        "body='<p>QA: музейная программа 18:00–20:00 в новой редакции.</p>' "
                        "where slug='museum-night-of-arts-2026'")
+            db.execute("update museum_events set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: Истинная экскурсия 18 октября — редакция музея',"
+                       "excerpt='QA: сеанс 18 октября подтверждён музеем.',"
+                       "body='<p>QA: редакторская версия на 18 октября 14:00.</p>' "
+                       "where slug='museum-session-2026-10-18-1400-f7f11bc2731f'")
             shop_section_id = db.execute(
                 "select id from museum_sections where slug='museum-shop'").fetchone()[0]
             db.execute("insert into museum_entries "
@@ -517,6 +531,23 @@ def main() -> None:
         event_detail=html.fromstring((out/"events/museum-night-of-arts-2026/index.html").read_bytes())
         if "QA: музейная программа 18:00–20:00 в новой редакции" not in event_detail.text_content():
             raise RuntimeError("Updated CMS event body not published in event detail route")
+        session_entries={e['slug'] for e in data['events']
+                         if e['slug'].startswith('museum-session-')}
+        if session_entries!={"museum-session-2026-10-18-1400-f7f11bc2731f"}:
+            raise RuntimeError("Only one edited verified source session may be public in isolated QA")
+        session_page=html.fromstring((out/"events/museum-session-2026-10-18-1400-f7f11bc2731f/index.html").read_bytes())
+        if "QA: редакторская версия на 18 октября 14:00." not in session_page.text_content():
+            raise RuntimeError("Published official dated session missing editor-customized body")
+        if (out/"events/museum-session-2026-10-18-1500-ddf212b58640/index.html").is_file():
+            raise RuntimeError("Unapproved 15:00 museum session draft gained public URL")
+        source_agenda=html.fromstring((out/"events/index.html").read_bytes())
+        source_region=source_agenda.xpath("//main//section[@aria-label='Проверенные сеансы из официальных недельных афиш музея']")
+        if len(source_region)!=1 or "124 отдельных сеанса" not in source_region[0].text_content():
+            raise RuntimeError("Full 124 genuine weekly museum sessions source count missing")
+        if "QA: Истинная экскурсия 18 октября — редакция музея" not in source_agenda.text_content():
+            raise RuntimeError("CMS approved October 18 edited real session not shown")
+        # Source fallback is hydrated on the client; Playwright asserts its
+        # exact suppression by slug after the CMS approval in browser tests.
         h1 = [str(x).strip() for x in privacy.xpath("//main//h1/text()")]
         if h1 != ["QA: заголовок из редактируемой CMS"]:
             raise RuntimeError("CMS H1 not authoritative on guide route: " + repr(h1))
@@ -578,7 +609,10 @@ def main() -> None:
           " categories/two edited exhibition details, two edited excursions,"
           " 12 master classes, 11 halls, nine FAQ, QA-only shop item,"
           " unchanged 44 original documents with SHA256;"
-          " real CMS stays at 90 private draft entries, 1 new private event,"
+          " 124 real verified timed museum sessions across 6 weekly programmes,"
+          " one genuine dated CMS-edited Oct18 session in isolated publication,"
+          " 123 other source sessions private, 16 source overlap duplicates folded,"
+          " real CMS remains 90 private draft entries, 125 private event drafts,"
           " 44 museum documents.")
     # Historical predecessor output deliberately superseded by current scope.
     # print("PASS: 23 isolated published CMS records including 12 real workshop cards"

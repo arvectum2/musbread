@@ -631,3 +631,10 @@ html[data-vision-mode="on"] .museum-shop-item,html[data-vision-mode="on"] .museu
 .museum-science-article{overflow-x:auto;overflow-wrap:anywhere}
 .museum-science-article a{overflow-wrap:anywhere}
 @media(max-width:760px){.museum-science-portal .official-museum-program-grid{grid-template-columns:1fr}}
+
+
+.official-agenda-sessions{margin:1.75rem 0;min-width:0}
+.official-session-day{margin:1.35rem 0}
+.official-session-day>h3{border-bottom:1px solid var(--border,#dadad2);padding-bottom:.5rem;margin-bottom:.8rem}
+.official-session-day .official-museum-program-card h4{overflow-wrap:anywhere;line-height:1.35;font-size:1.06rem}
+.official-agenda-sessions button.text-link{display:block;cursor:pointer;margin:1.1rem auto;padding:.65rem}

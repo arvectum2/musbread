@@ -4,6 +4,7 @@ import Link from "@/components/MuseumLink";
 import EventAgenda from "@/components/EventAgenda";
 import EventSearch from "@/components/EventSearch";
 import OfficialMuseumNightArts from "@/components/OfficialMuseumNightArts";
+import OfficialMuseumSessions from "@/components/OfficialMuseumSessions";
 import { events } from "@/data/content";
 import { museumReference } from "@/data/museum-reference";
 import {fixedPageH1,fixedPageMetadata} from "@/data/fixed-page-seo";
@@ -17,6 +18,8 @@ export default function EventsPage() {
       <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте Музея хлеба ↗</MuseumAnchor>.
     </p>
     <OfficialMuseumNightArts events={events} buildDay={new Date().toISOString().slice(0,10)} />
+    <OfficialMuseumSessions section="all" events={events}
+      buildDay={new Date().toISOString().slice(0,10)} />
     <EventSearch events={events} />
     <EventAgenda events={events} buildDay={new Date().toISOString().slice(0, 10)} />
   </section>;

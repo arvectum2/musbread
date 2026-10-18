@@ -1,0 +1,2297 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "created_utc": "2026-10-18T09:43:47+00:00",
+  "original_bulletin_count": 6,
+  "raw_rows": 140,
+  "unique_sessions": 124,
+  "category_counts": {
+    "Интерактивное занятие": 4,
+    "Литературная гостиная": 2,
+    "Мастер-класс": 15,
+    "Тематическая программа": 3,
+    "Экскурсия": 100
+  },
+  "sessions": [
+    {
+      "date": "2026-09-07",
+      "time": "11:00",
+      "title": "Интерактивная экскурсия «Была война. Была блокада»",
+      "age_min": 7,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-07-1100-82c0d9431161",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "11:00 Интерактивная экскурсия «Была война. Была блокада» (7+)",
+      "source_rows": [
+        "11:00 Интерактивная экскурсия «Была война. Была блокада» (7+)"
+      ]
+    },
+    {
+      "date": "2026-09-07",
+      "time": "12:00",
+      "title": "Мастер-класс «Блокадная ласточка»",
+      "age_min": 6,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-07-1200-f1a0a42049b2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "12:00 Мастер-класс «Блокадная ласточка» (6+)",
+      "source_rows": [
+        "12:00 Мастер-класс «Блокадная ласточка» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-07",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-07-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "time": "12:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-09-1200-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "12:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "12:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "time": "13:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-09-1300-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-09-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "time": "12:00",
+      "title": "Интерактивная экскурсия «С мечтой о хлебе»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-10-1200-033a98ce8494",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "12:00 Интерактивная экскурсия «С мечтой о хлебе» (9+)",
+      "source_rows": [
+        "12:00 Интерактивная экскурсия «С мечтой о хлебе» (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "time": "13:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-10-1300-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-10-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "time": "12:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-11-1200-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "12:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "12:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "time": "13:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-11-1300-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "time": "14:00",
+      "title": "Интерактивная экскурсия «Емелина печка»",
+      "age_min": 8,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-11-1400-8abd9041ad6e",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "14:00 Интерактивная экскурсия «Емелина печка» (8+)",
+      "source_rows": [
+        "14:00 Интерактивная экскурсия «Емелина печка» (8+)"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "time": "15:00",
+      "title": "Интерактивная экскурсия «Каравай»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-11-1500-59806ae56187",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "15:00 Интерактивная экскурсия «Каравай» (9+)",
+      "source_rows": [
+        "15:00 Интерактивная экскурсия «Каравай» (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-12",
+      "time": "11:00",
+      "title": "Творческая мастерская: ткань/ленты – «Зерновушка»",
+      "age_min": 7,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-12-1100-44f6890712e6",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "11:00 Творческая мастерская: ткань/ленты – «Зерновушка» (7+)",
+      "source_rows": [
+        "11:00 Творческая мастерская: ткань/ленты – «Зерновушка» (7+)"
+      ]
+    },
+    {
+      "date": "2026-09-12",
+      "time": "13:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-12-1300-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-12",
+      "time": "14:00",
+      "title": "Интерактивная экскурсия «С мечтой о хлебе»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-12-1400-033a98ce8494",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "14:00 Интерактивная экскурсия «С мечтой о хлебе» (9+)",
+      "source_rows": [
+        "14:00 Интерактивная экскурсия «С мечтой о хлебе» (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-12",
+      "time": "15:00",
+      "title": "Тематическая программа «Обслужим культурно всех»",
+      "age_min": 12,
+      "category": "Тематическая программа",
+      "slug": "museum-session-2026-09-12-1500-22f36bc0a0f6",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "15:00 Тематическая программа «Обслужим культурно всех» (12+)",
+      "source_rows": [
+        "15:00 Тематическая программа «Обслужим культурно всех» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "time": "11:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-13-1100-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "11:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "11:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "time": "13:00",
+      "title": "Театрализованная экскурсия «Колобок»",
+      "age_min": 5,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-13-1300-c62ab4b51285",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "13:00 Театрализованная экскурсия «Колобок» (5+)",
+      "source_rows": [
+        "13:00 Театрализованная экскурсия «Колобок» (5+)"
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "time": "14:00",
+      "title": "Тематическая экскурсия “Злак качества”",
+      "age_min": 7,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-13-1400-e490bc9a18a9",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "14:00 Тематическая экскурсия “Злак качества” (7+)",
+      "source_rows": [
+        "14:00 Тематическая экскурсия “Злак качества” (7+)"
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-13-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "time": "12:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-14-1200-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "12:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "12:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "time": "12:00",
+      "title": "Тематическая экскурсия “Всякая душа празднику рада”",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-14-1200-73243860203b",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "12:00 Тематическая экскурсия “Всякая душа празднику рада” (9+)",
+      "source_rows": [
+        "12:00 Тематическая экскурсия “Всякая душа празднику рада” (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "time": "13:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-14-1300-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604",
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "13:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "13:00 Тематическая экскурсия «Цена хлеба» (12+)",
+        "13:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "time": "15:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-14-1500-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-07/sobytiya-v-muzee-s-7-po-14-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604",
+        "d73bd62e39f5f1306d12dc9deda6b97877e492b7e16ad1d36f8ebd180f2f9a35"
+      ],
+      "original_row": "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+        "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-14-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "time": "14:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-16-1400-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "14:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "14:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "time": "15:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-16-1500-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "time": "12:00",
+      "title": "Тематическая экскурсия “Всякая душа празднику рада”",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-17-1200-73243860203b",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "12:00 Тематическая экскурсия “Всякая душа празднику рада” (9+)",
+      "source_rows": [
+        "12:00 Тематическая экскурсия “Всякая душа празднику рада” (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "time": "14:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-17-1400-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "14:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "14:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "time": "16:30",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-17-1630-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "16:30 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "16:30 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "time": "17:00",
+      "title": "Тематическая экскурсия “Жил-был Дом”",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-17-1700-a032d4ab58f5",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "17:00 Тематическая экскурсия “Жил-был Дом” (12+)",
+      "source_rows": [
+        "17:00 Тематическая экскурсия “Жил-был Дом” (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-18-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "time": "12:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-19-1200-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "12:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "12:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "time": "13:00",
+      "title": "Интерактивная программа «Геометрия вкуса»",
+      "age_min": 12,
+      "category": "Интерактивное занятие",
+      "slug": "museum-session-2026-09-19-1300-4f9f1b49e740",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "13:00 Интерактивная программа «Геометрия вкуса» (12+)",
+      "source_rows": [
+        "13:00 Интерактивная программа «Геометрия вкуса» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "time": "13:00",
+      "title": "Тематическая экскурсия “Злак качества”",
+      "age_min": 7,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-19-1300-e490bc9a18a9",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "13:00 Тематическая экскурсия “Злак качества” (7+)",
+      "source_rows": [
+        "13:00 Тематическая экскурсия “Злак качества” (7+)"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "time": "15:00",
+      "title": "Прогулка-экскурсия «Жил-был Дом»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-19-1500-c53fcb2906d0",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+      "source_rows": [
+        "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "time": "16:00",
+      "title": "Мастер-класс “Мельница-Вертельница”",
+      "age_min": 10,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-19-1600-478c2eff6985",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "16:00 Мастер-класс “Мельница-Вертельница” (10+)",
+      "source_rows": [
+        "16:00 Мастер-класс “Мельница-Вертельница” (10+)"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "time": "17:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-19-1700-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "time": "11:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-20-1100-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "11:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "11:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "time": "13:00",
+      "title": "Интерактивная программа «Геометрия вкуса»",
+      "age_min": 12,
+      "category": "Интерактивное занятие",
+      "slug": "museum-session-2026-09-20-1300-4f9f1b49e740",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "13:00 Интерактивная программа «Геометрия вкуса» (12+)",
+      "source_rows": [
+        "13:00 Интерактивная программа «Геометрия вкуса» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "time": "15:00",
+      "title": "Прогулка-экскурсия «Жил-был Дом»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-20-1500-c53fcb2906d0",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+      "source_rows": [
+        "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-20-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "time": "16:00",
+      "title": "Мастер-класс “Конь-Солнце”",
+      "age_min": 9,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-20-1600-dee30cf2f36e",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "16:00 Мастер-класс “Конь-Солнце” (9+)",
+      "source_rows": [
+        "16:00 Мастер-класс “Конь-Солнце” (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "time": "17:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-20-1700-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "time": "15:00",
+      "title": "Прогулка-экскурсия «Жил-был Дом»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-21-1500-c53fcb2906d0",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777",
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+      "source_rows": [
+        "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+        "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "time": "16:00",
+      "title": "Экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-21-1600-957044e445a2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "16:00 Экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "16:00 Экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "time": "16:30",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-21-1630-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "16:30 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "16:30 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "time": "17:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-21-1700-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-14/sobytiya-v-muzee-s-14-po-21-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777",
+        "6e72e8da7b7f998aaa8b90c57decabe8392617bc334fdaf02c59e1be798df604"
+      ],
+      "original_row": "17:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "17:00 Тематическая экскурсия «Цена хлеба» (12+)",
+        "17:00 Тематическая экскурсия “Цена Хлеба” (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "time": "15:00",
+      "title": "Прогулка-экскурсия «Жил-был Дом»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-23-1500-c53fcb2906d0",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+      "source_rows": [
+        "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "time": "16:00",
+      "title": "Экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-23-1600-957044e445a2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "16:00 Экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "16:00 Экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "time": "17:00",
+      "title": "Мастер-класс «Зерновушка»",
+      "age_min": 7,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-23-1700-dac4de8fbb80",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "17:00 Мастер-класс «Зерновушка» (7+)",
+      "source_rows": [
+        "17:00 Мастер-класс «Зерновушка» (7+)"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "time": "10:30",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-25-1030-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "10:30 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "10:30 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "time": "11:00",
+      "title": "Экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-25-1100-957044e445a2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "11:00 Экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "11:00 Экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "time": "12:00",
+      "title": "Театрализованная экскурсия «Колобок»",
+      "age_min": 5,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-25-1200-c62ab4b51285",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "12:00 Театрализованная экскурсия «Колобок» (5+)",
+      "source_rows": [
+        "12:00 Театрализованная экскурсия «Колобок» (5+)"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "time": "14:00",
+      "title": "Тематическая программа «Рожь&Пшеница — Есенин&Маяковский»",
+      "age_min": 12,
+      "category": "Тематическая программа",
+      "slug": "museum-session-2026-09-25-1400-b33db77048cc",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "14:00 Тематическая программа «Рожь&Пшеница — Есенин&Маяковский» (12+)",
+      "source_rows": [
+        "14:00 Тематическая программа «Рожь&Пшеница — Есенин&Маяковский» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "time": "15:00",
+      "title": "Прогулка-экскурсия «Жил-был Дом»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-25-1500-c53fcb2906d0",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+      "source_rows": [
+        "15:00 Прогулка-экскурсия «Жил-был Дом» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-25-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "time": "16:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-25-1600-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "16:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "16:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "time": "17:00",
+      "title": "Экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-25-1700-957044e445a2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "17:00 Экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "17:00 Экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Долой кухонное рабство!»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-26-1500-2f7b4b5a22d6",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Долой кухонное рабство!» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Долой кухонное рабство!» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "time": "16:00",
+      "title": "Мастер-класс «Птичий базар»",
+      "age_min": 9,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-26-1600-3a6b89f9e594",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "16:00 Мастер-класс «Птичий базар» (9+)",
+      "source_rows": [
+        "16:00 Мастер-класс «Птичий базар» (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "time": "17:00",
+      "title": "Экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-26-1700-957044e445a2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "17:00 Экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "17:00 Экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "time": "15:00",
+      "title": "Литературная гостиная «Изба-Читальня»",
+      "age_min": 12,
+      "category": "Литературная гостиная",
+      "slug": "museum-session-2026-09-27-1500-44679098fee9",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "15:00 Литературная гостиная «Изба-Читальня» (12+)",
+      "source_rows": [
+        "15:00 Литературная гостиная «Изба-Читальня» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "time": "16:00",
+      "title": "Мастер-класс «Роспись изразца»",
+      "age_min": 7,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-27-1600-c71419231005",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "16:00 Мастер-класс «Роспись изразца» (7+)",
+      "source_rows": [
+        "16:00 Мастер-класс «Роспись изразца» (7+)"
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "time": "17:00",
+      "title": "Тематическая экскурсия «Цена хлебам»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-27-1700-2973dc6a6252",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "17:00 Тематическая экскурсия «Цена хлебам» (12+)",
+      "source_rows": [
+        "17:00 Тематическая экскурсия «Цена хлебам» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "12:00",
+      "title": "Мастер-класс «Кувадка»",
+      "age_min": 6,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-28-1200-d85eb662f909",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "12:00 Мастер-класс «Кувадка» (6+)",
+      "source_rows": [
+        "12:00 Мастер-класс «Кувадка» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "12:00",
+      "title": "Мастер-класс «Кувадки»",
+      "age_min": 6,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-28-1200-a2d404ae9b32",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "12:00 Мастер-класс «Кувадки» (6+)",
+      "source_rows": [
+        "12:00 Мастер-класс «Кувадки» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "13:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1300-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "13:00",
+      "title": "Экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1300-957044e445a2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "13:00 Экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "13:00 Экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "14:00",
+      "title": "Интерактивное занятие «Каравай»",
+      "age_min": 9,
+      "category": "Интерактивное занятие",
+      "slug": "museum-session-2026-09-28-1400-3ce940e5d66c",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805",
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "14:00 Интерактивное занятие «Каравай» (9+)",
+      "source_rows": [
+        "14:00 Интерактивное занятие «Каравай» (9+)",
+        "14:00 Интерактивное занятие «Каравай» (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805",
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "16:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1600-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "16:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "16:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "16:00",
+      "title": "Прогулка-экскурсия «Жил-был Дом»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1600-c53fcb2906d0",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805",
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "16:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+      "source_rows": [
+        "16:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+        "16:00 Прогулка-экскурсия «Жил-был Дом» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "16:00",
+      "title": "Экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1600-957044e445a2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "16:00 Экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "16:00 Экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "17:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1700-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "17:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1700-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805",
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "17:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "17:00 Тематическая экскурсия «Цена хлеба» (12+)",
+        "17:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "time": "17:00",
+      "title": "Экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-28-1700-957044e445a2",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-21/sobytiya-v-muzee-s-21-po-28-sentyabrya"
+      ],
+      "source_html_sha256": [
+        "cd6ea2c5bffdd5d2d6f8206d1ce9e60d09abda5436568fc2173c5bce758fa777"
+      ],
+      "original_row": "17:00 Экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "17:00 Экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "time": "10:30",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-30-1030-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "10:30 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "10:30 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "time": "11:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-30-1100-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "11:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "11:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "time": "15:00",
+      "title": "Мастер-класс «Конь-Солнце»",
+      "age_min": 9,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-09-30-1500-dee30cf2f36e",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "15:00 Мастер-класс «Конь-Солнце» (9+)",
+      "source_rows": [
+        "15:00 Мастер-класс «Конь-Солнце» (9+)"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "time": "16:00",
+      "title": "Прогулка-экскурсия «Жил-был Дом»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-30-1600-c53fcb2906d0",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "16:00 Прогулка-экскурсия «Жил-был Дом» (12+)",
+      "source_rows": [
+        "16:00 Прогулка-экскурсия «Жил-был Дом» (12+)"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "time": "17:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-09-30-1700-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "time": "15:00",
+      "title": "Кураторская экскурсия по выставке «Первое, второе и компот»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-01-1500-26c7da9a7425",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "15:00 Кураторская экскурсия по выставке «Первое, второе и компот» (12+)",
+      "source_rows": [
+        "15:00 Кураторская экскурсия по выставке «Первое, второе и компот» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "time": "15:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-01-1500-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "time": "16:00",
+      "title": "Тематическая экскурсия «Всякая душа празднику рада»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-01-1600-73243860203b",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "16:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)",
+      "source_rows": [
+        "16:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "time": "17:00",
+      "title": "Мастер-класс «Птичий двор»",
+      "age_min": 9,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-10-01-1700-b91e8d524743",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "17:00 Мастер-класс «Птичий двор» (9+)",
+      "source_rows": [
+        "17:00 Мастер-класс «Птичий двор» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "time": "13:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-02-1300-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "13:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "time": "14:00",
+      "title": "Интерактивная экскурсия «Емелина печка»",
+      "age_min": 8,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-02-1400-8abd9041ad6e",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "14:00 Интерактивная экскурсия «Емелина печка» (8+)",
+      "source_rows": [
+        "14:00 Интерактивная экскурсия «Емелина печка» (8+)"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-02-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "time": "16:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-02-1600-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "16:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "16:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "time": "17:00",
+      "title": "Мастер-класс «Кувадка»",
+      "age_min": 6,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-10-02-1700-d85eb662f909",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "17:00 Мастер-класс «Кувадка» (6+)",
+      "source_rows": [
+        "17:00 Мастер-класс «Кувадка» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-04",
+      "time": "13:00",
+      "title": "Тематическая экскурсия «Всякая душа празднику рада»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-04-1300-73243860203b",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "13:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)",
+      "source_rows": [
+        "13:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-05",
+      "time": "13:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-05-1300-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d",
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "13:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "13:00 Тематическая экскурсия «Цена хлеба» (12+)",
+        "13:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-05",
+      "time": "14:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-05-1400-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d",
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "14:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "14:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+        "14:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-05",
+      "time": "15:00",
+      "title": "Интерактивная экскурсия «Каравай»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-05-1500-59806ae56187",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d",
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "15:00 Интерактивная экскурсия «Каравай» (9+)",
+      "source_rows": [
+        "15:00 Интерактивная экскурсия «Каравай» (9+)",
+        "15:00 Интерактивная экскурсия «Каравай» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-05",
+      "time": "16:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-05-1600-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-09-28/sobytiya-v-muzee-s-28-sentyabrya-po-5-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d",
+        "fb802f1b385963f44851c85c883b4ce5b3e4d506000f910b0a59264825b7e805"
+      ],
+      "original_row": "16:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "16:00 Тематическая экскурсия «Цена хлеба» (12+)",
+        "16:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-07",
+      "time": "16:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-07-1600-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "16:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "16:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-08-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "time": "17:00",
+      "title": "Мастер-класс «Кувадка»",
+      "age_min": 6,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-10-08-1700-d85eb662f909",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "17:00 Мастер-класс «Кувадка» (6+)",
+      "source_rows": [
+        "17:00 Мастер-класс «Кувадка» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-09",
+      "time": "14:00",
+      "title": "Тематическая экскурсия «Злак качества»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-09-1400-e490bc9a18a9",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "14:00 Тематическая экскурсия «Злак качества» (12+)",
+      "source_rows": [
+        "14:00 Тематическая экскурсия «Злак качества» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-09",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-09-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-09",
+      "time": "17:00",
+      "title": "Мастер-класс «Солнце на радость»",
+      "age_min": 9,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-10-09-1700-110e027fe2e4",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "17:00 Мастер-класс «Солнце на радость» (9+)",
+      "source_rows": [
+        "17:00 Мастер-класс «Солнце на радость» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-10",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Обслужим культурно всех»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-10-1500-8b800f3f9b16",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Обслужим культурно всех» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Обслужим культурно всех» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-10",
+      "time": "17:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-10-1700-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "17:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-11",
+      "time": "17:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-11-1700-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "17:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "17:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-12",
+      "time": "13:00",
+      "title": "Мастер-класс «Кувадка»",
+      "age_min": 6,
+      "category": "Мастер-класс",
+      "slug": "museum-session-2026-10-12-1300-d85eb662f909",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a",
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "13:00 Мастер-класс «Кувадка» (6+)",
+      "source_rows": [
+        "13:00 Мастер-класс «Кувадка» (6+)",
+        "13:00 Мастер-класс «Кувадка» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-12",
+      "time": "15:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-12-1500-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a",
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+        "15:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-12",
+      "time": "16:00",
+      "title": "Интерактивная экскурсия «Каравай»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-12-1600-59806ae56187",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a",
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "16:00 Интерактивная экскурсия «Каравай» (9+)",
+      "source_rows": [
+        "16:00 Интерактивная экскурсия «Каравай» (9+)",
+        "16:00 Интерактивная экскурсия «Каравай» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-12",
+      "time": "17:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-12-1700-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya",
+        "https://muzei-xleb.ru/novosty/2026-10-05/sobytiya-v-muzee-s-5-po-12-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a",
+        "38b2b74ca95977cf94faaf933ec72dfd25ff1c07eae1a70546ef4cdeb116037d"
+      ],
+      "original_row": "17:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "17:00 Тематическая экскурсия «Цена хлеба» (12+)",
+        "17:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "time": "12:00",
+      "title": "Обзорная экскурсия «От сохи до орбиты»",
+      "age_min": 6,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-14-1200-7246f187a730",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "12:00 Обзорная экскурсия «От сохи до орбиты» (6+)",
+      "source_rows": [
+        "12:00 Обзорная экскурсия «От сохи до орбиты» (6+)"
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-14-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time": "12:00",
+      "title": "Тематическая экскурсия «Всякая душа празднику рада»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-15-1200-73243860203b",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "12:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)",
+      "source_rows": [
+        "12:00 Тематическая экскурсия «Всякая душа празднику рада» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time": "13:00",
+      "title": "Тематическая экскурсия «Долой кухонное рабство»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-15-1300-97ce36c0f494",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "13:00 Тематическая экскурсия «Долой кухонное рабство» (12+)",
+      "source_rows": [
+        "13:00 Тематическая экскурсия «Долой кухонное рабство» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Средь шумного звона тарелок, ложек и ножей»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-15-1500-9892508f58dc",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Средь шумного звона тарелок, ложек и ножей» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Средь шумного звона тарелок, ложек и ножей» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "time": "15:00",
+      "title": "Тематическая программа «Рожь&Пшеница — Есенин&Маяковский»",
+      "age_min": 12,
+      "category": "Тематическая программа",
+      "slug": "museum-session-2026-10-16-1500-b33db77048cc",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "15:00 Тематическая программа «Рожь&Пшеница — Есенин&Маяковский» (12+)",
+      "source_rows": [
+        "15:00 Тематическая программа «Рожь&Пшеница — Есенин&Маяковский» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "time": "15:30",
+      "title": "Интерактивное занятие «С песней о хлебе»",
+      "age_min": 9,
+      "category": "Интерактивное занятие",
+      "slug": "museum-session-2026-10-16-1530-8eeb1936a8fc",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "15:30 Интерактивное занятие «С песней о хлебе» (9+)",
+      "source_rows": [
+        "15:30 Интерактивное занятие «С песней о хлебе» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "time": "15:00",
+      "title": "Литературная гостиная «Изба-Читальня»",
+      "age_min": 12,
+      "category": "Литературная гостиная",
+      "slug": "museum-session-2026-10-17-1500-44679098fee9",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "15:00 Литературная гостиная «Изба-Читальня» (12+)",
+      "source_rows": [
+        "15:00 Литературная гостиная «Изба-Читальня» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-17-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "time": "14:00",
+      "title": "Тематическая экскурсия «Героя хлеб кормит»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-18-1400-f7f11bc2731f",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "14:00 Тематическая экскурсия «Героя хлеб кормит» (9+)",
+      "source_rows": [
+        "14:00 Тематическая экскурсия «Героя хлеб кормит» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Обслужим всех культурно»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-18-1500-59c95b261f47",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Обслужим всех культурно» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Обслужим всех культурно» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "time": "15:00",
+      "title": "Тематическая экскурсия «Цена хлеба»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-18-1500-ddf212b58640",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "15:00 Тематическая экскурсия «Цена хлеба» (12+)",
+      "source_rows": [
+        "15:00 Тематическая экскурсия «Цена хлеба» (12+)"
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "time": "16:00",
+      "title": "Интерактивная экскурсия «Каравай»",
+      "age_min": 9,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-19-1600-59806ae56187",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "16:00 Интерактивная экскурсия «Каравай» (9+)",
+      "source_rows": [
+        "16:00 Интерактивная экскурсия «Каравай» (9+)"
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "time": "17:00",
+      "title": "Тематическая экскурсия «А вместо сердца пламенный мотор»",
+      "age_min": 12,
+      "category": "Экскурсия",
+      "slug": "museum-session-2026-10-19-1700-8794cf3b2d7b",
+      "source_urls": [
+        "https://muzei-xleb.ru/novosty/2026-10-12/sobytiya-v-muzee-s-12-po-19-oktyabrya"
+      ],
+      "source_html_sha256": [
+        "280af595ad43d8ffe8d5d6d86a4ef5e64de84258c3875dc7421a506972d8991a"
+      ],
+      "original_row": "17:00 Тематическая экскурсия «А вместо сердца пламенный мотор» (12+)",
+      "source_rows": [
+        "17:00 Тематическая экскурсия «А вместо сердца пламенный мотор» (12+)"
+      ]
+    }
+  ],
+  "evidence_policy": "Individual day, time, name and age must be explicit in official source. Only session start time is known, no invented end time, prices, bookings or image rights."
+}
