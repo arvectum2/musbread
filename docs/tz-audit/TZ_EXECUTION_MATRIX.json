@@ -3487,15 +3487,15 @@
       "Строки оригинала": "238",
       "Требование": "Видео в контенте",
       "Приоритет": "P0",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · публичный UI",
-      "Что сделать для завершения": "Implement controlled new video authoring by MoonShine editor in arbitrary WYSIWYG materials and captions/transcripts audit; preserve video rights.",
-      "Что нужно от музея / внешний блокер": "Confirm approved media hosts, licensing, subtitles/CC requirements and CMS editor insertion workflow.",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Implement controlled new video authoring by MoonShine editor in arbitrary WYSIWYG materials and captions/transcripts audit; preserve video rights.",
-      "Что уже есть (доказательство)": "CP-20 disabled video 18.10.2026: 47 real external VK video embeds, 31 in official museum media and 16 from real scientific seminars, plus one honest TV SPb MP4 original link in content. Source headings/URLs pinned, one click-to-play iframe at time, no autoplay or background tracking, strict CSP, keyboard and 320px tested. Universal safe CMS WYSIWYG arbitrary embed authoring and accessible subtitles/transcripts not complete. docs/TZ136_167_183_202_ORIGINAL_VIDEO_SCIENCE_20261018.md.",
+      "Что сделать для завершения": "Technical video authoring, in-paragraph positioning and approved static publication are complete. Copyright/captions for real historical videos remain TZ-136 content approval, not a software deficiency.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "CP-20 disabled video 18.10.2026: 47 real external VK video embeds, 31 in official museum media and 16 from real scientific seminars, plus one honest TV SPb MP4 original link in content. Source headings/URLs pinned, one click-to-play iframe at time, no autoplay or background tracking, strict CSP, keyboard and 320px tested. Universal safe CMS WYSIWYG arbitrary embed authoring and accessible subtitles/transcripts not complete. docs/TZ136_167_183_202_ORIGINAL_VIDEO_SCIENCE_20261018.md. 18.10.2026: completed CMS video authoring in arbitrary MuseumEntry TinyMCE paragraphs via [[museum-video:code]] marker and owner-bound MuseumVideo; own section MoonShine resource, strict HTTPS VK video_ext.php oid/id URL policy without autoplay, rights confirmation and >=60-char textual alternative mandatory for published. ALL markers verified before any public assets exported; missing/draft/forged videos fail closed. Approved media metadata included in strict editorial approval fingerprint. Real Next.js inline click-to-play safe iframe, caption/transcript, original link, keyboard, 320px. Isolated Laravel→Next end-to-end real browser tested QA-only video source from actual museum seminar, one approved video and six private seminar records, no real licence asserted. Real CMS video table remains empty until museum grants rights. docs/TZ183_CONTROLLED_CMS_INLINE_VIDEO_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 83,
+    "Да": 84,
     "Нет": 140,
-    "Частично": 102
+    "Частично": 101
   },
   "workflow": {
-    "Готово в прототипе": 83,
-    "Внешний блокер / наступление этапа": 242
+    "Готово в прототипе": 84,
+    "Внешний блокер / наступление этапа": 241
   }
 }

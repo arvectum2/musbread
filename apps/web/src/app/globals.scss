@@ -678,3 +678,14 @@ html[data-vision-mode="on"] .museum-shop-item,html[data-vision-mode="on"] .museu
 .official-science-seminars .official-museum-program-card h4{font-size:1.06rem;line-height:1.42}
 .official-seminar-video{max-width:100%;min-width:0;margin:.7rem 0}
 .official-seminar-video .visitor-map-button{max-width:100%;text-align:left;overflow-wrap:anywhere}
+
+
+/* CMS video insertions are opt-in, readable and work at phone widths. */
+.museum-inline-video{max-width:65rem;min-width:0;overflow-wrap:anywhere;
+  padding:1rem;margin:1.25rem 0;border:1px solid var(--line,#cecec6);border-radius:.7rem}
+.museum-inline-video h3{line-height:1.4}
+.museum-inline-video .visitor-map-button{max-width:100%;overflow-wrap:anywhere;margin-right:.6rem}
+.museum-video-transcript{margin:.8rem 0;padding:.85rem;
+  background:var(--surface-muted,transparent);border-left:3px solid currentColor;
+  white-space:pre-wrap;overflow-wrap:anywhere}
+.museum-rich-video-content{min-width:0}

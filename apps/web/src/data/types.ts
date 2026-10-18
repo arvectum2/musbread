@@ -38,6 +38,13 @@ export interface MuseumPublishedDocument {
   accessibility_reviewed?: boolean;
   accessibility_note?: string | null;
 }
+export interface MuseumPublishedVideo {
+  code:string;
+  title:string;
+  embed_url:string;
+  source_url:string;
+  transcript:string;
+}
 export interface MuseumEntryEnglish {
   title: string;
   excerpt: string | null;
@@ -61,6 +68,7 @@ export interface MuseumEntry {
   related_entries?: MuseumRelatedEntry[];
   related_events?: MuseumRelatedEvent[];
   media?: MuseumPublishedImage[];
+  videos?: MuseumPublishedVideo[];
   documents?: MuseumPublishedDocument[];
   translations?: { en: MuseumEntryEnglish };
 }

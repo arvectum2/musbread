@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Support\MuseumAltPolicy;
+use App\Support\MuseumVideoUrlPolicy;
 use App\Models\MuseumEvent;
 use App\Models\MuseumEntry;
 use App\Models\MuseumSection;
@@ -94,10 +95,40 @@ class ExportMuseumSnapshot extends Command
             ->orderBy('type')
             ->orderBy('sort_order')
             ->orderBy('slug')
-            ->with(['media', 'documents', 'section', 'relatedEntries', 'linkedEvents'])
+            ->with(['media', 'videos', 'documents', 'section', 'relatedEntries', 'linkedEvents'])
             ->get()
             ->filter(static fn (MuseumEntry $entry) =>
                 $entry->museum_section_id === null || in_array($entry->museum_section_id, $approvedIds, true));
+
+        // Fail closed BEFORE exporting files if ANY CMS WYSIWYG placeholder
+        // points at an unapproved, withdrawn or malformed publisher record.
+        // This protects generated document/media directories from partial
+        // changes caused by an invalid late-arriving video marker.
+        foreach ($publicEntries as $publicEntry) {
+            $body = (string) $publicEntry->body;
+            preg_match_all('/\\[\\[museum-video:([a-z0-9]+(?:-[a-z0-9]+)*)\\]\\]/',
+                $body, $tokens);
+            // The public React renderer accepts only isolated TinyMCE
+            // paragraphs; reject tokens glued to other text or HTML.
+            preg_match_all('~<p(?:\\s[^>]*)?>\\s*\\[\\[museum-video:([a-z0-9]+(?:-[a-z0-9]+)*)\\]\\]\\s*</p>~',
+                $body, $placed);
+            if (count($tokens[0]) !== substr_count($body, '[[museum-video:')
+                || count($tokens[0]) !== count($placed[0])) {
+                throw new \RuntimeException('Invalid inline placement for video marker in published entry: '.$publicEntry->slug);
+            }
+            $ready = $publicEntry->videos
+                ->where('status', 'published')->keyBy('code');
+            foreach ($tokens[1] as $code) {
+                $candidate = $ready->get($code);
+                if ($candidate === null
+                    || MuseumVideoUrlPolicy::safeEmbed((string)$candidate->embed_url) !== $candidate->embed_url
+                    || !MuseumVideoUrlPolicy::sourceValid((string)$candidate->source_url)
+                    || !$candidate->rights_confirmed
+                    || mb_strlen(trim((string)$candidate->transcript)) < 60) {
+                    throw new \RuntimeException('Unapproved video marker in published entry: '.$publicEntry->slug);
+                }
+            }
+        }
 
         // Resolve relation links ONLY among approved public records (including
         // the section ancestor check). IDs and CMS pivot rows stay private.
@@ -204,6 +235,34 @@ class ExportMuseumSnapshot extends Command
                         'width' => $image->width, 'height' => $image->height,
                     ];
                 }
+                // Editor inserts [[museum-video:code]] as a standalone
+                // WYSIWYG paragraph. Unapproved/missing media must fail a
+                // publication, never become an uncontrolled third-party iframe.
+                $usedCodes = [];
+                preg_match_all('/\\[\\[museum-video:([a-z0-9]+(?:-[a-z0-9]+)*)\\]\\]/D',
+                    (string) $entry->body, $matches);
+                foreach ($matches[1] as $code) $usedCodes[$code] = true;
+                $videos = [];
+                foreach ($entry->videos as $video) {
+                    if ($video->status !== 'published' || !isset($usedCodes[$video->code])) continue;
+                    $safe = MuseumVideoUrlPolicy::safeEmbed((string)$video->embed_url);
+                    if ($safe === null || $safe !== $video->embed_url
+                        || !MuseumVideoUrlPolicy::sourceValid((string)$video->source_url)
+                        || !$video->rights_confirmed
+                        || mb_strlen(trim((string)$video->transcript)) < 60) {
+                        throw new \RuntimeException('Editorial video validation failed for material '.$entry->slug);
+                    }
+                    $videos[] = [
+                        'code' => $video->code, 'title' => $video->title,
+                        'embed_url' => $safe, 'source_url' => $video->source_url,
+                        'transcript' => $video->transcript,
+                    ];
+                    unset($usedCodes[$video->code]);
+                }
+                if($usedCodes !== [] || preg_match('/\\[\\[museum-video:/D', (string)$entry->body)
+                    && count($matches[0]) !== substr_count((string)$entry->body,'[[museum-video:')) {
+                    throw new \RuntimeException('A video token is invalid or not approved for '.$entry->slug);
+                }
                 $documents = [];
                 foreach ($entry->documents as $document) {
                     $path = Storage::disk('local')->path($document->storage_path);
@@ -257,6 +316,7 @@ class ExportMuseumSnapshot extends Command
                 'related_entries' => $publicLinks($entry->relatedEntries, $entryById, $entryLink),
                 'related_events' => $publicLinks($entry->linkedEvents, $eventById, $eventLink),
                 'media' => $images,
+                'videos' => $videos,
                 'documents' => $documents,
                 'translations' => trim((string) $entry->title_en) !== ''
                     && trim((string) $entry->body_en) !== '' ? [
@@ -270,7 +330,7 @@ class ExportMuseumSnapshot extends Command
                         ],
                     ] : null,
             ], static function ($value, $key): bool {
-                if (in_array($key, ['media', 'documents', 'related_entries', 'related_events'], true)) return count($value) > 0;
+                if (in_array($key, ['media', 'videos', 'documents', 'related_entries', 'related_events'], true)) return count($value) > 0;
                 if ($key === 'section_slug' || $key === 'translations') return $value !== null;
                 return true;
             }, ARRAY_FILTER_USE_BOTH);

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "@/components/MuseumLink";
 import { notFound } from "next/navigation";
 import { content, findEntry, isMuseumSection, sections } from "@/data/content";
-import RichText from "@/components/RichText";
+import MuseumRichBody from "@/components/MuseumRichBody";
 import Image from "next/image";
 
 type Props = { params: Promise<{ section: string; slug: string }> };
@@ -51,7 +51,7 @@ export default async function MuseumEntryPage({ params }: Props) {
     {entry.translations?.en && <p><Link href={"/en/" + section + "/" + slug + "/"} lang="en"
       className="text-link">Read in English →</Link></p>}
     {entry.excerpt && <p className="lead">{entry.excerpt}</p>}
-    <RichText html={entry.body} />
+    <MuseumRichBody html={entry.body} videos={entry.videos} />
     {entry.media && entry.media.length > 0 && <section className="museum-gallery" aria-label="Галерея изображений">
       <h2>Галерея</h2>
       <div className="museum-gallery-grid">

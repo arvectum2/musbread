@@ -41,7 +41,7 @@ class MuseumEntry extends Model
         static::deleting(static function (self $entry): void {
             if ($entry->documents()->exists()) {
                 throw \Illuminate\Validation\ValidationException::withMessages([
-                    'documents' => 'Сначала отвяжите или удалите файлы документов.',
+                    'documents' => 'Сначала отвяжите документы и редакторские видеовставки.',
                 ]);
             }
             $actor = MuseumSectionAccess::user();
@@ -79,6 +79,11 @@ class MuseumEntry extends Model
     public function documents(): HasMany
     {
         return $this->hasMany(MuseumDocument::class, 'museum_entry_id');
+    }
+
+    public function videos(): HasMany
+    {
+        return $this->hasMany(MuseumVideo::class, 'museum_entry_id');
     }
 
     public function media(): HasMany

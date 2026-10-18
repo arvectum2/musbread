@@ -13,6 +13,9 @@ import shutil
 import sqlite3
 import subprocess
 import tempfile
+from functools import partial
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+from threading import Thread
 from pathlib import Path
 from lxml import html
 
@@ -39,7 +42,13 @@ REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
     with log.open("a", encoding="utf-8") as stream:
-        subprocess.run(command, cwd=cwd, env=env, stdout=stream, stderr=subprocess.STDOUT, check=True)
+        try:
+            subprocess.run(command, cwd=cwd, env=env, stdout=stream, stderr=subprocess.STDOUT, check=True)
+        except subprocess.CalledProcessError:
+            stream.flush()
+            print("Isolated QA failed; last subprocess log lines:\n" +
+                  "\n".join(log.read_text(errors="replace").splitlines()[-35:]), flush=True)
+            raise
 
 
 def main() -> None:
@@ -86,6 +95,9 @@ def main() -> None:
                            "'science-seminar-%' and status='draft'").fetchone()[0]
             if sem != 7:
                 raise RuntimeError("All 7 genuine scientific seminar articles must be private")
+            video_total = db.execute("select count(*) from museum_videos").fetchone()[0]
+            if video_total != 0:
+                raise RuntimeError("Real CMS must have zero invented/licence-unapproved videos")
             n = db.execute("select count(*) from museum_entries "
                            "where slug like 'museum-news-%' and type='news' and status='draft'").fetchone()[0]
             if n != 10:
@@ -174,6 +186,23 @@ def main() -> None:
                        "excerpt='QA: редактор уточнил научный семинар.',"
                        "body='<p>QA: проверенное описание семинара 16 апреля.</p>' "
                        "where slug='science-seminar-2026-04-16-633'")
+            # QA-ONLY: one original museum-published VK recording with
+            # fictional TEST transcript/rights created solely in disposable
+            # SQLite. Never copied into real museum database or Git fixture.
+            video_entry=db.execute("select id from museum_entries "
+                "where slug='science-seminar-2026-04-16-633'").fetchone()[0]
+            qa_transcript="QA: доступное текстовое описание музейного семинара. " * 3
+            db.execute("insert into museum_videos (museum_entry_id,code,title,embed_url,"
+                "source_url,transcript,rights_confirmed,status,created_at,updated_at) "
+                "values (?, 'qa-editor-approved','QA: запись научного семинара',"
+                "'https://vk.com/video_ext.php?oid=-37126776&id=456239157',"
+                "'https://muzei-xleb.ru/seminar-k-istorii-mukomolnyh-melnic-v-rossii-16-aprelya-2026-g',"
+                "?,1,'published',datetime('now'),datetime('now'))",
+                (video_entry,qa_transcript))
+            db.execute("update museum_entries set body="
+                "'<p>QA: часть текста до ролика.</p><p>[[museum-video:qa-editor-approved]]</p>'"
+                "||'<p>QA: часть текста после ролика.</p>' "
+                "where id=?",(video_entry,))
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes'),"
                        "title='QA: Ночь искусств — редакция музея',"
@@ -249,6 +278,15 @@ def main() -> None:
              "--media-output-dir=" + str(media),
              "--preflight-strict"], CMS, environment, log)
         data = json.loads(snapshot.read_text())
+        approved_video=next(e for e in data["entries"] if e["slug"]=="science-seminar-2026-04-16-633")
+        if len(approved_video.get("videos",[]))!=1:
+            raise RuntimeError("Exactly one QA-original video must pass controlled CMS export")
+        if approved_video["videos"][0]["code"]!="qa-editor-approved":
+            raise RuntimeError("Video code corrupted in published CMS JSON")
+        if not approved_video["videos"][0]["transcript"].startswith("QA: доступное текстовое описание"):
+            raise RuntimeError("Video text alternative missing from published JSON")
+        if any("rights_confirmed" in v for v in approved_video.get("videos",[])):
+            raise RuntimeError("Unnecessary private licence-review status leaked into public CMS JSON")
         slugs = {entry["slug"] for entry in data["entries"]}
         if not {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-documents",
                 "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card", "faq"} <= slugs or "museum-history" in slugs:
@@ -526,8 +564,12 @@ def main() -> None:
         if (out/"museum/science-seminar-2025-11-06-536/index.html").is_file():
             raise RuntimeError("Unpublished official seminar draft accidentally exported")
         seminar_page=html.fromstring((out/"museum/science-seminar-2026-04-16-633/index.html").read_bytes())
-        if "QA: проверенное описание семинара 16 апреля." not in seminar_page.text_content():
-            raise RuntimeError("Edited official seminar CMS body did not reach public page")
+        if not seminar_page.xpath("//section[contains(@class,'museum-inline-video')]"):
+            raise RuntimeError("Controlled inline museum VK player missing from published CMS page")
+        if seminar_page.xpath("//section[contains(@class,'museum-inline-video')]//iframe"):
+            raise RuntimeError("Passive VK iframe loaded before visitor explicitly opts in")
+        if "QA: часть текста до ролика" not in seminar_page.text_content() or "QA: часть текста после ролика" not in seminar_page.text_content():
+            raise RuntimeError("CMS TinyMCE inline video split lost surrounding genuine editor paragraphs")
         news=html.fromstring((out/"news/index.html").read_bytes())
         news_feed=news.xpath("//main//section[@aria-label='Последние новости действующего сайта музея']")
         if len(news_feed)!=1:
@@ -573,6 +615,21 @@ def main() -> None:
             raise RuntimeError("Full 124 genuine weekly museum sessions source count missing")
         if "QA: Истинная экскурсия 18 октября — редакция музея" not in source_agenda.text_content():
             raise RuntimeError("CMS approved October 18 edited real session not shown")
+        # Real browser check against the disposable published Next static site.
+        # The server uses a dynamic localhost port and is stopped before
+        # the isolated temporary QA filesystem is removed.
+        handler=partial(SimpleHTTPRequestHandler, directory=str(out))
+        server=ThreadingHTTPServer(("127.0.0.1",0),handler)
+        thread=Thread(target=server.serve_forever,daemon=True)
+        thread.start()
+        try:
+            url=f"http://127.0.0.1:{server.server_port}/"
+            run(["node",str(WEB/"scripts/qa_editorial_video_browser.cjs"),url],
+                WEB,environment,log)
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=3)
         # Source fallback is hydrated on the client; Playwright asserts its
         # exact suppression by slug after the CMS approval in browser tests.
         h1 = [str(x).strip() for x in privacy.xpath("//main//h1/text()")]

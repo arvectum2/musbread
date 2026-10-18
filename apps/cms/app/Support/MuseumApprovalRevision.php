@@ -55,6 +55,14 @@ final class MuseumApprovalRevision
                 ksort($attrs);
                 return $attrs;
             })->all();
+        // Video metadata is approval-sensitive: switching a URL, captions,
+        // rights or publication status invalidates any earlier editorial vote.
+        $videos = $entry->videos()->orderBy('id')->get()
+            ->map(static function ($row): array {
+                $attrs = $row->getAttributes();
+                ksort($attrs);
+                return $attrs;
+            })->all();
         $documents = $entry->documents()->orderBy('id')->get()
             ->map(static function ($row): array {
                 $attrs = $row->getAttributes();
@@ -65,6 +73,7 @@ final class MuseumApprovalRevision
         $events = $entry->linkedEvents()->pluck('museum_events.id')->all();
         sort($media);
         sort($documents);
+        sort($videos);
         sort($relations);
         sort($events);
         return hash('sha256', json_encode([
@@ -72,6 +81,7 @@ final class MuseumApprovalRevision
             'model' => $attributes,
             'media' => $media,
             'documents' => $documents,
+            'videos' => $videos,
             'relations' => $relations,
             'events' => $events,
         ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));

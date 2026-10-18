@@ -38,6 +38,10 @@ final class MuseumEntryFormPage extends FormPage
                     ->nullable(),
                 Textarea::make('Анонс', 'excerpt'),
                 self::bodyEditorField(),
+                // A video is inserted inline with a text paragraph, never
+                // arbitrary iframe HTML. Configure its URL, license and
+                // textual alternative in the dedicated Video resource.
+
                 Select::make('Статус', 'status')
                     ->options(['draft' => 'Черновик', 'published' => 'Опубликовано'])
                     ->default('draft')->required(),
@@ -66,7 +70,7 @@ final class MuseumEntryFormPage extends FormPage
         return match ($mode) {
             'html-source' => Textarea::make('Основной текст (HTML-код; h2, p, ul, li, a)', 'body')
                 ->required(),
-            'tinymce' => TinyMce::make('Основной текст', 'body')
+            'tinymce' => TinyMce::make('Основной текст (для видео: отдельный абзац [[museum-video:код]], карточка — в Видео материалов)', 'body')
                 ->locale('ru')
                 ->plugins(['autolink', 'link', 'lists', 'code', 'wordcount', 'autoresize'])
                 ->menubar(false)

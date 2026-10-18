@@ -9,7 +9,7 @@ import { findPublicNavigationNode } from "@/data/navigation-tree";
 import NavigationBranch from "@/components/NavigationBranch";
 import OfficialMuseumDocuments from "@/components/OfficialMuseumDocuments";
 import MuseumTeam from "@/components/MuseumTeam";
-import RichText from "@/components/RichText";
+import MuseumRichBody from "@/components/MuseumRichBody";
 import OfficialExpositionRooms from "@/components/OfficialExpositionRooms";
 import VisitAccessibilityGuide from "@/components/VisitAccessibilityGuide";
 import OfficialVisitorRules from "@/components/OfficialVisitorRules";
@@ -224,7 +224,7 @@ export default async function GuidePage({ params }: Props) {
       <h2>{cmsPage ? "Содержание, опубликованное редактором музея" : "Содержание с официального сайта музея"}</h2>
       {officialSnapshot && !cmsPage && <p className="meta">Источник: {officialSnapshot.source_url} · проверено {sourceDate}.
         Текст перенесён без самостоятельной юридической редакции; заказчик может обновить страницу в CMS.</p>}
-      <RichText html={referenceBody!} />
+      <MuseumRichBody html={referenceBody!} videos={cmsPage?.videos} />
     </section>}
     {slug === "museum-cookie" && <p className="reference-facts">
       Документ описывает использование cookie на прежнем сайте музея. Мы сохраняем ссылку на действующую редакцию,
