@@ -201,6 +201,87 @@ final class ImportOfficialMuseumPhotosTest extends TestCase
         $this->assertDatabaseCount('museum_media',2);
     }
 
+    public function test_real_room_photo_matches_exact_existing_museum_room_source():void
+    {
+        Storage::fake('local');
+        $source=json_decode((string)file_get_contents(
+            base_path('../web/src/data/official-exposition-rooms.json')),true);
+        $room=$source['rooms'][0];
+        MuseumEntry::create([
+            'slug'=>$room['slug'],'title'=>$room['title'],
+            'type'=>'page','status'=>'draft','body'=>'<p>Сохранённый оригинальный зал музея.</p>',
+        ]);
+        $path=$this->originalManifest();
+        $manifest=json_decode((string)file_get_contents($path),true);
+        $photo=$room['image_sources'][0]['source_url'];
+        $row=&$manifest['files'][0];
+        $row['cms_slug']=$room['slug'];
+        $row['title']=$room['title'];
+        $row['source_page_url']=$room['source_url'];
+        $row['source_image_url']=$photo;
+        $row['source_snapshot']='official-exposition-rooms.json';
+        $row['source_image_index']=0;
+        $row['source_html_sha256']=$room['html_sha256'];
+        $row['source_alt']=$room['image_sources'][0]['alt'];
+        $row['original_url']=preg_replace(
+            '~^https://muzei-xleb\\.ru/sites/default/files/styles/[^/]+/public/~',
+            'https://muzei-xleb.ru/sites/default/files/',$photo);
+        $row['original_url']=explode('?',$row['original_url'],2)[0];
+        file_put_contents($path,json_encode($manifest,JSON_UNESCAPED_UNICODE));
+        $this->assertSame(0,Artisan::call('museum:import-official-photos',[
+            '--apply'=>true,'--manifest'=>$path,
+        ]),Artisan::output());
+        $this->assertDatabaseHas('museum_media',[
+            'source_original_url'=>$row['original_url'],'source_rights_pending'=>1,
+        ]);
+        $this->assertSame($room['slug'],MuseumMedia::firstOrFail()->entry->slug);
+    }
+
+    public function test_real_exhibition_cover_must_match_exact_index_and_detail():void
+    {
+        Storage::fake('local');
+        $source=json_decode((string)file_get_contents(
+            base_path('../web/src/data/official-exhibition-details.json')),true);
+        $index=json_decode((string)file_get_contents(
+            base_path('../web/src/data/official-exhibition-indexes.json')),true);
+        $details=$source['exhibitions'][0];
+        $cover=$index['indexes'][0]['image_links'][0]['url'];
+        MuseumEntry::create([
+            'slug'=>$details['slug'],'title'=>$details['title'],
+            'type'=>'exhibition','status'=>'draft','body'=>'<p>Тестовый исходный музейный анонс.</p>',
+        ]);
+        $path=$this->originalManifest();
+        $manifest=json_decode((string)file_get_contents($path),true);
+        $row=&$manifest['files'][0];
+        $row['cms_slug']=$details['slug'];
+        $row['title']=$details['title'];
+        $row['source_page_url']=$details['source_url'];
+        $row['source_image_url']=$cover;
+        $row['source_snapshot']='official-exhibition-indexes.json';
+        $row['source_image_index']=0;
+        $row['source_html_sha256']=$details['html_sha256'];
+        $row['source_alt']=$index['indexes'][0]['image_links'][0]['alt'];
+        $row['original_url']=preg_replace(
+            '~^https://muzei-xleb\\.ru/sites/default/files/styles/[^/]+/public/~',
+            'https://muzei-xleb.ru/sites/default/files/',$cover);
+        $row['original_url']=explode('?',$row['original_url'],2)[0];
+        file_put_contents($path,json_encode($manifest,JSON_UNESCAPED_UNICODE));
+        $this->assertSame(0,Artisan::call('museum:import-official-photos',[
+            '--apply'=>true,'--manifest'=>$path,
+        ]),Artisan::output());
+        $this->assertDatabaseHas('museum_media',[
+            'source_original_url'=>$row['original_url'],'source_rights_pending'=>1,
+        ]);
+        $this->assertSame($details['slug'],MuseumMedia::firstOrFail()->entry->slug);
+
+        $row['source_page_url']='https://muzei-xleb.ru/vistavky/other';
+        file_put_contents($path,json_encode($manifest,JSON_UNESCAPED_UNICODE));
+        $this->assertSame(1,Artisan::call('museum:import-official-photos',[
+            '--apply'=>true,'--manifest'=>$path,
+        ]));
+        $this->assertDatabaseCount('museum_media',1);
+    }
+
     public function test_same_actual_original_bytes_at_two_different_museum_urls_keep_both_pages():void
     {
         Storage::fake('local');

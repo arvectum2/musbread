@@ -40,43 +40,112 @@ final class ImportOfficialMuseumPhotos extends Command
                 || !is_array($manifest['files']??null)) {
                 throw new RuntimeException('Unverified museum original-photo archive');
             }
-            $snapshots=[];
-            foreach (['official-workshop-pages.json','official-excursion-programs.json'] as $name) {
+            // Expected image and owner are independently derived from the
+            // captured actual museum pages, never from arbitrary manifest
+            // metadata. This supports programs, 11 rooms, official exhibition
+            // cards, the building's history and actual collection catalogues.
+            $references=[];
+            $register=static function(
+                string $slug,int $index,string $snapshot,string $title,
+                string $sourceUrl,?string $htmlSha,string $imageUrl
+            ) use (&$references):void {
+                if(isset($references[$slug][$index])) {
+                    throw new RuntimeException('Ambiguous source image association for '.$slug);
+                }
+                $references[$slug][$index]=[
+                    'snapshot'=>$snapshot,'title'=>$title,
+                    'source_url'=>$sourceUrl,'html_sha256'=>$htmlSha,
+                    'image_url'=>$imageUrl,
+                ];
+            };
+            $read=static function(string $name):array {
                 $source=json_decode((string)file_get_contents(
                     base_path('../web/src/data/'.$name)),true,flags:JSON_THROW_ON_ERROR);
                 if (($source['source']??'')!=='https://muzei-xleb.ru') {
-                    throw new RuntimeException('Changed original source for '.$name);
+                    throw new RuntimeException('Changed museum photo source: '.$name);
                 }
+                return $source;
+            };
+            foreach (['official-workshop-pages.json','official-excursion-programs.json'] as $name) {
+                $source=$read($name);
                 foreach ($source['programs'] as $item) {
-                    $slug=$item['slug']??$item['cms_slug']??null;
-                    if ($slug && isset($snapshots[$slug])) {
-                        throw new RuntimeException('Duplicate original CMS source slug');
+                    $slug=$item['slug']??$item['cms_slug']??'';
+                    foreach (array_slice($item['image_links']??[],0,3,true) as $i=>$image) {
+                        $register($slug,$i,$name,(string)$item['title'],
+                            (string)$item['source_url'],$item['html_sha256']??null,
+                            (string)$image['url']);
                     }
-                    if ($slug) $snapshots[$slug]=['item'=>$item,'snapshot'=>$name];
                 }
+            }
+            $name='official-exposition-rooms.json';
+            $rooms=$read($name);
+            foreach ($rooms['rooms'] as $room) {
+                if (!isset($room['image_sources'][0]))continue;
+                $register((string)$room['slug'],0,$name,(string)$room['title'],
+                    (string)$room['source_url'],$room['html_sha256']??null,
+                    (string)$room['image_sources'][0]['source_url']);
+            }
+            $name='official-exhibition-indexes.json';
+            $indices=$read($name);
+            $details=$read('official-exhibition-details.json');
+            $detailsByUrl=[];
+            foreach ($details['exhibitions'] as $detail) {
+                $detailsByUrl[$detail['source_url']]=$detail;
+            }
+            foreach ($indices['indexes'] as $index) {
+                if(in_array($index['slug'],['exhibitions-current','exhibitions-traveling'],true)) {
+                    if(count($index['linked_exhibitions'])!==count($index['image_links'])) {
+                        throw new RuntimeException('Exhibition cover order changed');
+                    }
+                    foreach ($index['linked_exhibitions'] as $i=>$link) {
+                        $detail=$detailsByUrl[$link['source_url']]??null;
+                        if (!$detail || $detail['title']!==$link['title']) {
+                            throw new RuntimeException('Exhibition photo has no matching actual detail');
+                        }
+                        $register((string)$detail['slug'],$i,$name,(string)$detail['title'],
+                            (string)$detail['source_url'],$detail['html_sha256']??null,
+                            (string)$index['image_links'][$i]['url']);
+                    }
+                } elseif(in_array($index['slug'],['exhibitions-past','exhibitions-virtual'],true)) {
+                    foreach(array_slice($index['image_links'],0,4,true) as $i=>$image) {
+                        $register((string)$index['slug'],$i,$name,(string)$index['title'],
+                            (string)$index['source_url'],$index['html_sha256']??null,
+                            (string)$image['url']);
+                    }
+                }
+            }
+            $name='official-page-snapshots.json';
+            $pages=$read($name);
+            $building=array_values(array_filter($pages['pages'],
+                static fn(array $page):bool=>($page['path']??'')==='/istoriya-zdaniya'));
+            if(count($building)!==1)throw new RuntimeException('Missing actual museum building history');
+            $building=$building[0];
+            foreach(array_slice($building['image_links'],0,8,true) as $i=>$image) {
+                $register('building-history',$i,$name,(string)$building['title'],
+                    (string)$building['source_url'],$building['html_sha256']??null,
+                    (string)$image['url']);
             }
             $files=[]; $seen=[];
             foreach ($manifest['files'] as $photo) {
                 $slug=$photo['cms_slug']??'';
-                $snapshot=$snapshots[$slug]??null;
-                $meta=$snapshot['item']??null;
                 $original=$photo['original_url']??'';
                 $styled=$photo['source_image_url']??'';
                 $sourceHash=$photo['sha256']??'';
                 $fileName=$photo['local_name']??'';
+                $imageIndex=$photo['source_image_index']??0;
+                $expectedSource=is_int($imageIndex) && $imageIndex>=0
+                    ? ($references[$slug][$imageIndex]??null) : null;
                 $allowedPath='https://muzei-xleb.ru/sites/default/files/';
                 $expected=preg_replace(
                     '~^https://muzei-xleb\.ru/sites/default/files/styles/[^/]+/public/~',
                     $allowedPath,$styled);
                 $expected=explode('?',(string)$expected,2)[0];
-                $imageIndex=$photo['source_image_index']??0;
-                if (!$meta || ($photo['source_snapshot']??'')!==$snapshot['snapshot']
-                    || !is_int($imageIndex) || $imageIndex<0 || $imageIndex>2
-                    || !is_array($meta['image_links']??null)
-                    || ($meta['image_links'][$imageIndex]['url']??'')!==$styled
-                    || ($meta['source_url']??'')!==($photo['source_page_url']??'')
-                    || ($meta['title']??'')!==($photo['title']??'')
-                    || ($meta['html_sha256']??null)!==($photo['source_html_sha256']??null)
+                if (!$expectedSource
+                    || ($photo['source_snapshot']??'')!==$expectedSource['snapshot']
+                    || $expectedSource['image_url']!==$styled
+                    || $expectedSource['source_url']!==($photo['source_page_url']??'')
+                    || $expectedSource['title']!==($photo['title']??'')
+                    || $expectedSource['html_sha256']!==($photo['source_html_sha256']??null)
                     || $expected!==$original
                     || !str_starts_with($original,$allowedPath)
                     || !preg_match('/^[a-f0-9]{64}$/D',(string)$sourceHash)
@@ -95,8 +164,7 @@ final class ImportOfficialMuseumPhotos extends Command
                 }
                 $entry=MuseumEntry::where('slug',$slug)->first();
                 if (!$entry || $entry->status!=='draft'
-                    || !in_array($entry->type,['excursion','page'],true)
-                    || !str_contains($entry->slug, 'museum-')) {
+                    || !in_array($entry->type,['excursion','page','exhibition'],true)) {
                     throw new RuntimeException('Image owner must be a real private original museum program: '.$slug);
                 }
                 $files[]=[...$photo,'source_path'=>$sourceFile,'entry'=>$entry];

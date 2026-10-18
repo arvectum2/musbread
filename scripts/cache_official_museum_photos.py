@@ -65,6 +65,88 @@ def queue()->list[dict]:
                     'source_snapshot':filename,
                     'source_html_sha256':entry.get('html_sha256'),
                 })
+    # All eleven existing permanent museum rooms: first authentic room
+    # photo (these have separate page slugs already editable in CMS).
+    rooms=json.loads((SRC/'official-exposition-rooms.json').read_text(encoding='utf-8'))
+    if rooms.get('source')!=HOST:raise ValueError('Changed rooms source')
+    for room in rooms['rooms']:
+        if not room.get('image_sources'):continue
+        image=room['image_sources'][0]
+        url=canonical(image['source_url'])
+        if url not in seen:
+            seen.add(url)
+            result.append({
+                'cms_slug':room['slug'],'title':room['title'],
+                'source_page_url':room['source_url'],
+                'source_image_url':image['source_url'],
+                'source_image_index':0,'original_url':url,
+                'source_alt':image.get('alt',''),
+                'source_snapshot':'official-exposition-rooms.json',
+                'source_html_sha256':room['html_sha256'],
+            })
+    # Only the six current/travelling exhibition images tied 1-to-1 to
+    # real detailed CMS exhibitions; do not invent a relation for archives.
+    indices=json.loads((SRC/'official-exhibition-indexes.json').read_text(encoding='utf-8'))
+    details=json.loads((SRC/'official-exhibition-details.json').read_text(encoding='utf-8'))
+    if indices.get('source')!=HOST or details.get('source')!=HOST:
+        raise ValueError('Changed exhibition source')
+    by_url={x['source_url']:x for x in details['exhibitions']}
+    for exhibition_index in indices['indexes']:
+        if exhibition_index['slug'] not in ('exhibitions-current','exhibitions-traveling'):continue
+        links=exhibition_index['linked_exhibitions'];photos=exhibition_index['image_links']
+        if len(links)!=len(photos):raise ValueError('Current exhibition photo order incomplete')
+        for i,(link,photo) in enumerate(zip(links,photos)):
+            actual=by_url.get(link['source_url'])
+            if actual is None or actual['title']!=link['title']:
+                raise ValueError('Exhibition cover cannot be matched to real museum page')
+            url=canonical(photo['url'])
+            if url in seen:continue
+            seen.add(url)
+            result.append({
+                'cms_slug':actual['slug'],'title':actual['title'],
+                'source_page_url':actual['source_url'],
+                'source_image_url':photo['url'],'source_image_index':i,
+                'original_url':url,'source_alt':photo.get('alt',''),
+                'source_snapshot':'official-exhibition-indexes.json',
+                'source_html_sha256':actual['html_sha256'],
+            })
+    # Museum building history: original historical portraits/architecture
+    # without fake captions. First eight images, remaining later.
+    pages=json.loads((SRC/'official-page-snapshots.json').read_text(encoding='utf-8'))
+    building=[x for x in pages['pages'] if x['path']=='/istoriya-zdaniya']
+    if len(building)!=1:raise ValueError('Original building-history source missing')
+    building=building[0]
+    for i,photo in enumerate(building['image_links'][:8]):
+        url=canonical(photo['url'])
+        if url in seen:continue
+        seen.add(url)
+        result.append({
+            'cms_slug':'building-history','title':building['title'],
+            'source_page_url':building['source_url'],
+            'source_image_url':photo['url'],'source_image_index':i,
+            'original_url':url,'source_alt':photo.get('alt',''),
+            'source_snapshot':'official-page-snapshots.json',
+            'source_html_sha256':building['html_sha256'],
+        })
+    # Archive and virtual exhibition catalogues include real museum object
+    # thumbnails with original museum captions. The original CMS category
+    # page remains the owner; the item is not misattributed to a fictional
+    # or nonexistent detailed exhibition.
+    for exhibition_index in indices['indexes']:
+        if exhibition_index['slug'] not in ('exhibitions-past','exhibitions-virtual'):continue
+        for i,photo in enumerate(exhibition_index['image_links'][:4]):
+            url=canonical(photo['url'])
+            if url in seen:continue
+            seen.add(url)
+            result.append({
+                'cms_slug':exhibition_index['slug'],
+                'title':exhibition_index['title'],
+                'source_page_url':exhibition_index['source_url'],
+                'source_image_url':photo['url'],'source_image_index':i,
+                'original_url':url,'source_alt':photo.get('alt',''),
+                'source_snapshot':'official-exhibition-indexes.json',
+                'source_html_sha256':exhibition_index['html_sha256'],
+            })
     return result
 
 def detect(buf:bytes)->str:

@@ -80,55 +80,54 @@ def report():
         w=csv.DictWriter(f,fieldnames=list(table[0]),delimiter=';',lineterminator='\n')
         w.writeheader();w.writerows(table)
     counts=Counter(r['cms_slug'] for r in table)
-    workshop=sum(s.startswith('museum-workshop-') for s in counts)
-    tours=sum(s.startswith('museum-tour-') for s in counts)
+    groups={
+        'Мастер-классы':sum(s.startswith('museum-workshop-') for s in counts),
+        'Экскурсии':sum(s.startswith('museum-tour-') for s in counts),
+        'Экспозиционные залы':sum(s.startswith('zal-') for s in counts),
+        'Выставки':sum(s.startswith('museum-exhibit-') for s in counts),
+        'История здания':int('building-history' in counts),
+        'Выставочные каталоги':sum(s in ('exhibitions-past','exhibitions-virtual') for s in counts),
+    }
+    originals=len({r['original_sha256'] for r in table})
+    kinds=Counter(source['format'] for source in data['files'])
     lines=[
-        '# Оригинальные фотографии музея — приватный перенос 18.10.2026',
+        '# Оригинальные фотографии музея — перенос 18.10.2026',
         '',
-        '**Без заменителей, генерации и стоковых изображений.**',
-        'Источник — реальные фотографии на https://muzei-xleb.ru,'
-        ' адреса получены из проверенных музейных страниц экскурсий и мастер-классов.',
+        '**Без заменителей, генерации или стоковых изображений.**',
+        'Источник: подлинные опубликованные фото с действующего muzei-xleb.ru.',
         '',
-        '- Прямых оригиналов JPEG/PNG/WebP сохранено на ArvectumSSD: **'+str(len(table))+'**.',
-        '- Оригинальные страницы, к которым привязаны снимки в CMS: **'+str(len(counts))+'**'
-          ' ('+str(workshop)+' мастер-классов, '+str(tours)+' экскурсионных программ).',
-        '- Дополнительных снимков внутри галерей сверх первой фотографии: **'
-          +str(len(table)-len(counts))+'**.',
-        '- Уникальных наборов байтов по SHA-256: **'
-          +str(len({r['original_sha256'] for r in table}))+'**. Одна фотография'
-          ' действительно используется музеем в двух материалах с разными URL;'
-          ' оба исходных URL и обе связи в CMS сохранены.',
-        '- Подлинные исходные файлы и их SHA-256 проверены повторно.'
-          ' Оригиналы остаются неизменными в закрытом .local_archive.',
-        '- Для просмотра в MoonShine созданы технические WebP-превью'
-          ' по оригинальным изображениям с сохранением изображения целиком,'
-          ' без кадрирования или визуальной генерации. Один большой JPEG'
-          ' пропорционально уменьшен только для превью; полный оригинал сохранён.',
-        '- **Ноль** фотографий автоматически допускается к публичному экспорту:'
-          ' у всех признак source_rights_pending=true, исходные ссылки сохранены.'
-          ' Требуются отдельные правовые и редакторские согласования с музеем.',
+        f'- Подлинных исходных адресов изображений в CMS: **{len(table)}**.',
+        f'- Уникальных исходных файлов по SHA-256: **{originals}**.',
+        f'- Привязанных реальных страниц музея: **{len(counts)}**.',
+        f'- Повторное использование одинаковых исходных байтов в разных реальных URL: **{len(table)-originals}**.',
+        f'- Исходные форматы: {dict(kinds)}.',
         '',
-        '## Воспроизведение',
+        '## Разделы',
         '',
-        'Список источников и хешей: [OFFICIAL_PHOTOS_IMPORTED_20261018.csv]'
-          '(OFFICIAL_PHOTOS_IMPORTED_20261018.csv).',
-        'Приватные оригиналы и манифест — .local_archive/museum-official-photos/'
-          ' на внешнем ArvectumSSD; эти файлы не добавляются в Git.',
-        'Скрипт прямого скачивания — scripts/cache_official_museum_photos.py'
-          ' (museum robots Crawl-delay 10 сек), проверка —'
-          ' scripts/audit_official_museum_photo_import.py.',
-        'Импорт — php artisan museum:import-official-photos --apply;'
-          ' без --apply запускается только безопасный dry-run.',
+    ]
+    lines += [f'- {name}: **{number}** материалов' for name,number in groups.items() if number]
+    lines += [
         '',
-        '## Следующие реальные пробелы',
+        '## Происхождение и доступ',
         '',
-        'Сейчас захвачены обложки и часть исходных галерей программ.'
-        ' Следом переносим остальные кадры экскурсионных/детских галерей,'
-        ' затем фотографии выставок, 11 залов и истории здания.'
-        ' Иконки PDF, QR-коды и другие служебные изображения'
-        ' необходимо отличать от музейных фотографий.',
+        '- Неизменённые оригинальные фото хранятся приватно на ArvectumSSD.',
+        '- Размеры и SHA-256 перепроверяются перед каждым переносом.',
+        '- CMS получает только производный WebP-предпросмотр с сохранением полного кадра.',
+        '- Исходный адрес, checksum и музейная исходная подпись сохраняются.',
+        '- У всех исходных музейных фото source_rights_pending=true, поэтому',
+        '  они не экспортируются в общедоступную сборку и не становятся обложками событий.',
+        '- [Полный CSV с исходными ссылками и хешами](OFFICIAL_PHOTOS_IMPORTED_20261018.csv).',
+        '- Скачать оригиналы: scripts/cache_official_museum_photos.py.',
+        '- Сверка: scripts/audit_official_museum_photo_import.py.',
+        '- Импорт в приватную CMS: php artisan museum:import-official-photos --apply.',
         '',
-        'Светофор полного ТЗ **84/102/139**, не завышался.'
+        '## Открытый остаток',
+        '',
+        'Не все кадры больших исторических/экспозиционных галерей перенесены.',
+        'Следующий этап: дополнительные реальные фото 11 залов и история здания,',
+        'не служебные иконки PDF или QR-коды, не заменители.',
+        '',
+        'Светофор полного ТЗ неизменен: 84/102/139.',
     ]
     REPORT.write_text('\n'.join(lines)+'\n',encoding='utf-8')
     print('VERIFIED PRIVATE SOURCE PHOTOS',len(table),'IN',len(counts),'MUSEUM ENTRIES',dict(Counter(r['source_image_index'] for r in table)))

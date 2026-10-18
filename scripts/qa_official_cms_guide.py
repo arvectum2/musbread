@@ -108,16 +108,19 @@ def main() -> None:
                            "'science-seminar-%' and status='draft'").fetchone()[0]
             if sem != 7:
                 raise RuntimeError("All 7 genuine scientific seminar articles must be private")
-            # 44 genuine private museum photo associations (43 unique
-            # originals; one genuine repeated photo at two source URLs)
-            # must never leak through this editor-approval export.
-            media_count=db.execute("select count(*) from museum_media").fetchone()[0]
+            manifest_path=ROOT/'.local_archive/museum-official-photos/manifest.json'
+            media_manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+            if media_manifest.get('source')!='https://muzei-xleb.ru':
+                raise RuntimeError('Unexpected museum source photo provenance')
+            expected_media=media_manifest['count']
+            expected_owners=len({x['cms_slug'] for x in media_manifest['files']})
+            media_count=db.execute('select count(*) from museum_media').fetchone()[0]
             media_pending=db.execute("select count(*) from museum_media "
                 "where source_rights_pending=1 and source_original_sha256 is not null "
                 "and source_original_url like 'https://muzei-xleb.ru/sites/default/files/%'").fetchone()[0]
             media_owners=db.execute("select count(distinct museum_entry_id) from museum_media").fetchone()[0]
-            if (media_count,media_pending,media_owners)!=(44,44,27):
-                raise RuntimeError("44 original rights-pending photos in 27 museum programs must remain private")
+            if (media_count,media_pending,media_owners)!=(expected_media,expected_media,expected_owners):
+                raise RuntimeError('Actual source photos must stay private and bound to the original museum pages')
             video_total = db.execute("select count(*) from museum_videos").fetchone()[0]
             if video_total != 0:
                 raise RuntimeError("Real CMS must have zero invented/licence-unapproved videos")
@@ -723,8 +726,8 @@ def main() -> None:
           " 7 real dated scientific seminars and 16 associated original VK videos,"
           " one edited published only in isolated QA, six others private,"
           " real CMS remains 100 private draft entries, 125 private event drafts,"
-          " 50 museum documents and 44 source-verified rights-pending"
-          " photo associations across 27 genuine programs.")
+          " 50 museum documents and original rights-pending"
+          " images linked to genuine museum pages in private CMS.")
     # Historical predecessor output deliberately superseded by current scope.
     # print("PASS: 23 isolated published CMS records including 12 real workshop cards"
 
