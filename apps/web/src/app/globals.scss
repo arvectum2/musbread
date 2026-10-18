@@ -721,3 +721,9 @@ html[data-vision-mode="on"] .official-source-content .rich-text table:focus-visi
   padding:.45rem 0;text-decoration:underline;text-underline-offset:.2rem}
 .museum-document-html-edition summary:focus-visible{outline:3px solid #155fef;outline-offset:3px}
 .museum-document-html-edition .rich-text{max-width:100%;min-width:0}
+
+/* Historical museum's 28 source-backed Drupal news index pages */
+.museum-news-original-pagination {margin-block:1.6rem;padding-block:1rem;border-block-start:1px solid #b7b7b7;}
+.museum-news-original-pagination-links {display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;}
+.museum-news-original-pagination-links a,.museum-news-original-pagination-links strong {min-width:2rem;min-height:2rem;display:inline-flex;align-items:center;justify-content:center;border:1px solid currentColor;border-radius:.25rem;padding:.18rem .45rem;}
+.museum-news-original-pagination-links a:focus-visible {outline:3px solid currentColor;outline-offset:2px;}

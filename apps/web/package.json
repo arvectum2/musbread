@@ -19,7 +19,7 @@
     "test:navigation-tree": "node --experimental-strip-types --test src/data/navigation-tree.test.ts",
     "test:seo": "node --experimental-strip-types --test src/data/seo-routes.test.ts",
     "test:official-docs": "node --experimental-strip-types --test src/data/museum-official-documents.test.ts",
-    "build:museum-deploy": "npm run build && python3 ../../scripts/export_official_museum_original_documents.py --apply"
+    "build:museum-deploy": "npm run build && python3 ../../scripts/export_official_museum_original_documents.py --apply && ../../.venv/bin/python ../../scripts/export_official_museum_news_pagination.py"
   },
   "dependencies": {
     "next": "16.4.1",

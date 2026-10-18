@@ -12,6 +12,8 @@
 
 **18.10.2026 — текущая фактическая карта (не включена):** **822 точных правил HTTP 301** = 280 технических `/news/museum-news-...` → старые канонические URL новостей, 70 реальных Drupal `/node/N` → соответствующие человекочитаемые музейные материалы и 472 старых JPEG/thumbnail путей → настоящие self-hosted WebP. **448 исходных публичных URL уже содержат полноценный статический HTML `200` и не должны перенаправляться**. Отображаемые фотографии: 259 оригинальных URL фотобиблиотеки + 10 дополнительных старых новостных ссылок → 264 уникальных WebP. **59 исходных PDF/DOCX (208,46 МиБ)** должны отдаваться напрямую из полной локальной сборки по старым адресам. [Матрица](../../docs/seo/URL_MIGRATION_MATRIX_20261018.csv); [неразобранные дополнительные 82 ссылки](../../docs/seo/ORIGINAL_MUSEUM_CROSSLINK_GAPS_20261018.csv). Всё ещё **NO-GO**, до активации нужны договор, инфраструктура, тест Nginx/HTTP, robots/sitemap, реальные данные индексации.
 
+**18.10.2026 — CP-SEO-04: критическая совместимость URL архива новостей:** на старом Drupal `/novosty?page=1`–`?page=27` содержат **27 РАЗНЫХ страниц по 10 оригинальных новостей**. Нельзя после смены движка возвращать для них одинаковый список последней десятки! Локальная команда `npm run build:museum-deploy` дополнительно генерирует `apps/web/out/__museum_legacy_pager/page-{1..27}.html` и обязательные два конфига: `museum_news_original_query_pages.map.conf` (внутри блока `http`) и `museum_news_original_query_pages.server.conf` (внутри соответствующего `server`). Nginx использует `$arg_page` через `try_files` и обслуживает каждый **прежний query URL непосредственно кодом 200 без HTTP редиректа**. Канонический адрес у всех исходных списков, как у старого Drupal, остаётся `https://muzei-xleb.ru/novosty`. Автоматический тест сверяет все 270 оригинальных ссылок и 27 HTML по архивным снимкам SHA-256. [Подробная матрица проверки](../../docs/seo/ORIGINAL_MUSEUM_NEWS_PAGINATION_PRESERVATION_20261018.md). **ВАЖНО:** локальный обычный `python3 -m http.server` не поддерживает `$arg_page` и при `?page=N` отдаёт ту же `/novosty`; обязательная приёмка на реальном Nginx должна доказать разный HTML для 27 URL, код 200 и исходный canonical. Это **ещё не выполнено**. Релиз NO-GO.
+
 ## Включение после заключения договора
 
 Концепция конфигурации на боевом сервере (не активировать без адаптации путей и проверки конфигурации):
@@ -19,6 +21,7 @@
 ```nginx
 http {
     include /etc/nginx/musbread/legacy_museum_redirects.map.conf;
+    include /etc/nginx/musbread/museum_news_original_query_pages.map.conf;
     server {
         listen 443 ssl;
         server_name muzei-xleb.ru www.muzei-xleb.ru;
@@ -26,6 +29,7 @@ http {
         # согласовываются по инфраструктуре заказчика.
         root /srv/musbread/out;
         include /etc/nginx/musbread/legacy_museum_redirects.server.conf;
+        include /etc/nginx/musbread/museum_news_original_query_pages.server.conf;
         location / { try_files $uri/index.html $uri $uri/ =404; }
     }
 }

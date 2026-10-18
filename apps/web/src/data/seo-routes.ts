@@ -55,6 +55,16 @@ export function sitemapUrls(paths: readonly string[], approved: boolean, base = 
 }
 
 export function robotsRules(approved:boolean) {
-  return { rules:[{userAgent:"*",allow: approved ? "/" : undefined,
-    disallow:approved?undefined:"/"}], sitemap:approved?"https://muzei-xleb.ru/sitemap.xml":undefined };
+  // The original Drupal site explicitly disallowed admin, account actions
+  // and site-search result pages, not public original museum articles.
+  // Preserve these sensitive/noisy robots exclusions, add our private CMS,
+  // but never turn indexing on in pre-contract builds.
+  const blocked=["/admin/","/cms/","/moonshine/","/user/","/search/",
+    "/node/add/","/comment/reply/","/filter/tips/"];
+  return {
+    rules:[{userAgent:"*",allow:approved?"/":undefined,
+      disallow:approved?blocked:"/",
+      crawlDelay:approved?10:undefined}],
+    sitemap:approved?"https://muzei-xleb.ru/sitemap.xml":undefined,
+  };
 }

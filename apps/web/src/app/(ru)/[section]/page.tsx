@@ -43,6 +43,12 @@ export default async function MuseumSectionPage({ params }: Props) {
     <h1>{original.title}</h1>
     <OfficialMuseumSourcePhotos photos={original.image_links} label={original.title} limit={40}/>
     <RichText html={original.html}/>
+    {original.path==='/novosty' && <nav aria-label="Страницы архива новостей музея" className="museum-news-original-pagination">
+      <p>Архив новостей: 28 страниц, включая 27 исторических. Все ссылки ведут на прежние адреса музея.</p>
+      <div className="museum-news-original-pagination-links"><strong aria-current="page">1</strong>
+        {Array.from({length:27},(_,i)=><a key={i} href={`/novosty?page=${i+1}`}>{i+2}</a>)}
+      </div>
+    </nav>}
     {original.path==='/gostevaya-kniga' && <p>Сохранён доступный на исходной странице отзыв. Отправка новых отзывов
       в доконтрактном прототипе не подключена и требует согласованной реализации.</p>}
     <p>Материал воспроизведён по исходному адресу музея; сведения могут уточняться редакцией музея.</p>

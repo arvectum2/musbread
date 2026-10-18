@@ -37,6 +37,10 @@ test("TZ-192: sitemap and robots never permit indexing unless explicit site-appr
  assert.equal(robotsRules(false).rules[0].disallow,"/");
  assert.equal(robotsRules(false).sitemap,undefined);
  assert.equal(robotsRules(true).rules[0].allow,"/");
+ assert.equal(robotsRules(true).rules[0].crawlDelay,10);
+ assert.equal(robotsRules(false).rules[0].crawlDelay,undefined);
+ assert.deepEqual(robotsRules(true).rules[0].disallow,
+  ["/admin/","/cms/","/moonshine/","/user/","/search/","/node/add/","/comment/reply/","/filter/tips/"]);
  assert.equal(robotsRules(true).sitemap,"https://muzei-xleb.ru/sitemap.xml");
  assert.ok(sitemapUrls(routes,true).every(r=>r.url.startsWith("https://muzei-xleb.ru/")));
  assert.throws(()=>sitemapUrls(routes,true,"https://unapproved.test"));

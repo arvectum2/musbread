@@ -22,6 +22,7 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from build_museum_legacy_page_aliases import build_map
 from build_museum_nginx_legacy_redirects import render as verify_map
 from export_official_museum_original_documents import source_documents,signature
+from export_official_museum_news_pagination import source_pages
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -115,6 +116,30 @@ def audit():
     news=sum(x['original_classification']=='original-news-article' for x in rows)
     indexed=load('official-museum-news-archive.json')
     if indexed['count']!=270 or len(indexed['indices'])!=27:raise RuntimeError('Missing historical museum news pagination')
+    # The old original museum index also has 27 distinct ?page=N variants.
+    # A static Next page alone CANNOT represent these; require all 27 source
+    # hash-checked separate files and the Nginx $arg_page map, without
+    # claiming live query routing is configured until real HTTP test.
+    old_index_pages,old_details=source_pages()
+    if len(old_index_pages)!=28 or len(old_details)!=280:
+        raise RuntimeError('Missing real museum original source news index pagination')
+    paginated_dir=OUT/'__museum_legacy_pager'
+    pagination_unavailable=[]
+    for news_page,paths,_ in old_index_pages[1:]:
+        out_file=paginated_dir/f'page-{news_page}.html'
+        if not out_file.is_file():
+            pagination_unavailable.append(news_page)
+            continue
+        tree=lx.fromstring(out_file.read_bytes())
+        links=tree.xpath('//article[@data-original-museum-archive-item]/@data-original-museum-archive-item')
+        canon=tree.xpath('//link[@rel="canonical"]/@href')
+        if links!=paths or canon!=['https://muzei-xleb.ru/novosty']:
+            pagination_unavailable.append(news_page)
+    pager_map=ROOT/'deploy/nginx/museum_news_original_query_pages.map.conf'
+    pager_locations=ROOT/'deploy/nginx/museum_news_original_query_pages.server.conf'
+    pager_nginx_prepared=pager_map.is_file() and pager_locations.is_file()
+    if not pager_nginx_prepared or pagination_unavailable:
+        raise RuntimeError('Museum news source pagination missing or source mismatch '+str(pagination_unavailable))
     original_photos=load('official-museum-photo-assets.json')
     if original_photos['count']!=259:raise RuntimeError('Original museum photos missing')
     extra_photos=load('official-news-index-photo-assets.json')
@@ -165,6 +190,10 @@ def audit():
        'original_source_canonical_mismatches':canonical_loss,
        'original_photo_urls':original_photos['count']+extra_photos['count']+extra_deep_photos['count']+exhibition_photos['count'], 'photo_assets_missing':len(photo_missing),
        'original_documents':len(docs),'document_files_missing_or_changed':len(doc_missing),
+       'original_news_index_listing_pages':len(old_index_pages),
+       'source_verified_query_archive_static_files':len(old_index_pages)-1-len(pagination_unavailable),
+       'source_verified_query_archive_missing_or_wrong':len(pagination_unavailable),
+       'query_pagination_nginx_mapping_prepared_not_deployed':pager_nginx_prepared,
        'nginx_rules_prepared_not_activated':aliases['total'],
        'preview_robots_all_blocked':prot_noindex,'preview_sitemap_url_count':len(xml_urls),
        'old_website_broken_documents':broken['count'],
@@ -189,6 +218,9 @@ def audit():
 |---|---:|
 | Известные старые пути страниц, проверенные в статической сборке | **{len(rows)}** |
 | Исторические и последние настоящие новости | **280 (10 + 270)** |
+| Проверенные исходные страницы списка `/novosty` и `?page=1…27` | **{len(old_index_pages)}** (28 разных списков по десять оригинальных публикаций) |
+| Отдельные HTML-файлы для оригинального `?page=N`, canonical на `/novosty` | **{len(old_index_pages)-1-len(pagination_unavailable)}** из 27 (не включены в Nginx) |
+| Подготовленное правило Nginx `$arg_page` для исходных URL пагинации | **{pager_nginx_prepared}**, только локально, реальный HTTP не протестирован |
 | Архивные URL новостей, связанные с конкретными реальными страницами | **{news}** |
 | Старые адреса с самостоятельным полным HTML `200` и canonical | **{len(rows)-meta_refresh}** (280 новостей, 76 выставок + одна дополнительная выставка 2019 года, 40 программ/залов, 37 разделов, 15 ранее найденных страниц, 18 новых административных/научных материалов) |
 | Старые адреса, обслуживаемые `meta refresh` вместо эквивалентного 200 / HTTP 301 | **{meta_refresh}** |
@@ -214,7 +246,7 @@ def audit():
 1. **P0: ещё {meta_refresh} исторических `/node/N` имеют запасной `meta refresh` только на тестовом статическом стенде.** На настоящем хостинге они должны отвечать одной проверенной HTTP 301 прямо на сохранившийся человекочитаемый URL; предложенные правила ещё не активированы. Это пригодно для доконтрактного просмотра, **не** для безопасной замены Drupal и сохранения выдачи. Переход на 301 с нового URL к якорю общего каталога тоже недостаточен для важных индексируемых страниц.
 2. **P0: {anchors} переходов на якоря.** В первую очередь нужно сохранить существующие отдельные старые URL с исходным H1, body и метаданными (`200 OK`); `/news/…` и другие технические пути оформить дублями с `301` к исходным, если они останутся нужны. Для `/node/N`, которые действительно были HTTP-переходами музея, сделать только проверенную точечную 301-карту на старый человекочитаемый URL без цепочек.
 3. **P0: {missing_canonical} эффективных целевых HTML без явного canonical, {title_loss} отличаются H1/title от заголовка исходной публикации.** Они не обязательно означают потерю контента (например, выставка содержится в карточке), но это **неэквивалентность для индексации**.
-4. **P0: режим разрешения индексации пока привязан к демонстрационному домену `musbread.ru`, не `muzei-xleb.ru`.** Запускать `MUSBREAD_SITE_APPROVED=true` как готовую миграцию нельзя: sitemap с неправильным доменом, неутверждённые описания и дубли. Не копировать демонстрационные `/events` как актуальную афишу.
+4. **P0: режим разрешения индексации пока привязан к демонстрационному домену `musbread.ru`, не `muzei-xleb.ru`.** Запускать `MUSBREAD_SITE_APPROVED=true` как готовую миграцию нельзя: `musbread.ru` и неподтверждённые URL уже исключены из защищённой генерации; до отдельного разрешения index всё равно запрещён и нельзя развертывать на действующем домене. Не копировать демонстрационные `/events` как актуальную афишу.
 5. **Внешние дефекты первоисточника:** PDF-приказ №94 от 27.10.2021 уже отдаёт 404 на действующем музее; `/node/462` (архивный адрес афиши) отдаёт 403. Нужно документировать и согласовать исправление по существу; не добавлять пустышки.
 6. **До доступа к исходным кабинетам заказчика** неизвестны топовые входные страницы, действительные canonical из поисковой выдачи, индекс/показы/CTR, Метрика, коды подтверждения; точную потерю/рост органики нельзя оценить. Сохранение домена само по себе не гарантирует сохранения позиций.
 
@@ -223,6 +255,7 @@ def audit():
 - [x] Проверены все 28 исходных индексных страниц новостей и 280 уникальных публикаций, source-backed описания выставок, 88 проверенных исходных Drupal-переходов `/node/N`, 310 оригинальных фото-URL, 101 документ по исходным путям. Полная сборка `npm run build:museum-deploy` проверена на Mac mini.
 - [x] Известные старые URL, сохранённые целевые HTML/якоря и исходные вложения сведены в автоматическую матрицу (без имитации статистики поисковиков).
 - [x] **280 новостей, 77 выставок, 40 программ/залов, 37 прежних разделов и 33 дополнительно найденные административные/научные страницы возвращают самостоятельный source-first HTML** на исходных исторических URL с полным текстом, H1 и canonical; 88 настоящих Drupal `/node/N` в будущей Nginx-карте ведут сразу на конкретную старую человекочитаемую страницу выставки.
+- [x] Историческая пагинация `/novosty?page=1..27`: все 27 разных исходных списков перенесены в source-hash-locked статические HTML с оригинальным canonical `/novosty`; [Nginx map/location](ORIGINAL_MUSEUM_NEWS_PAGINATION_PRESERVATION_20261018.md) подготовлены, но **не включены**.
 - [ ] **Включить реальные HTTP 301 для {meta_refresh} исторических `/node/N` и отдельно согласовать три исходно недоступных URL:** {len({x['linked_path'] for x in crosslink_gaps})} адреса источника по-прежнему недоступны (два 403 и один PDF 404), без заменителей. Проверить `/novosty?page=N`, все шаблоны sitemap, URL без завершающего слеша и реальные коды сервера отдельно.
 - [ ] Сформировать **боевой** sitemap.xml на `https://muzei-xleb.ru` и robots.txt для новой архитектуры (разрешить публичные страницы, закрыть CMS/тестовые пути), валидные canonical, internal links и H1/title/description. Тестовую сборку сохранять `noindex`/`Disallow` до релиза.
 - [ ] Получить у заказчика Яндекс Вебмастер, Google Search Console, Метрику/GA4, подтверждения владения и список важных посадочных страниц; снять baseline за 28 и 90 дней **перед релизом**, согласовать legacy-исключения и резервный откат.
