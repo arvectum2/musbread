@@ -14,12 +14,17 @@
 
 **18.10.2026 — CP-SEO-04: критическая совместимость URL архива новостей:** на старом Drupal `/novosty?page=1`–`?page=27` содержат **27 РАЗНЫХ страниц по 10 оригинальных новостей**. Нельзя после смены движка возвращать для них одинаковый список последней десятки! Локальная команда `npm run build:museum-deploy` дополнительно генерирует `apps/web/out/__museum_legacy_pager/page-{1..27}.html` и обязательные два конфига: `museum_news_original_query_pages.map.conf` (внутри блока `http`) и `museum_news_original_query_pages.server.conf` (внутри соответствующего `server`). Nginx использует `$arg_page` через `try_files` и обслуживает каждый **прежний query URL непосредственно кодом 200 без HTTP редиректа**. Канонический адрес у всех исходных списков, как у старого Drupal, остаётся `https://muzei-xleb.ru/novosty`. Автоматический тест сверяет все 270 оригинальных ссылок и 27 HTML по архивным снимкам SHA-256. [Подробная матрица проверки](../../docs/seo/ORIGINAL_MUSEUM_NEWS_PAGINATION_PRESERVATION_20261018.md). **ВАЖНО:** локальный обычный `python3 -m http.server` не поддерживает `$arg_page` и при `?page=N` отдаёт ту же `/novosty`; обязательная приёмка на реальном Nginx должна доказать разный HTML для 27 URL, код 200 и исходный canonical. Это **ещё не выполнено**. Релиз NO-GO.
 
+**CP-SEO-06, 19.10.2026 — ВПЕРВЫЕ ПРОВЕРЕНО НА НАСТОЯЩЕМ ЛОКАЛЬНОМ NGINX:** [полный HTTP-отчёт](../../docs/seo/CP_SEO_06_REAL_NGINX_LOOPBACK_20261019.md). На изолированном Docker Nginx после исправления `map_hash_bucket_size 256` / `map_hash_max_size 8192` и `absolute_redirect off` проверены все **881 старых 301, 881 HTTP 200-целей, 467 исходных HTML, 27 исторических `?page=N`, 101 PDF/DOCX и 303 WebP**. **0 HTTP-ошибок/цепочек**. `nginx -t` успешно пройден. [Воспроизводимая loopback-команда](../../scripts/verify_museum_nginx_loopback.sh) сама удаляет контейнер, действует только через `127.0.0.1` и не меняет DNS/сайт. **НЕ ПУТАТЬ с боевой проверкой:** музейный HTTPS, www и Яндекс/Google требуют согласования. **NO-GO.**
+
 ## Включение после заключения договора
 
 Концепция конфигурации на боевом сервере (не активировать без адаптации путей и проверки конфигурации):
 
 ```nginx
 http {
+    # Обязательно: по настоящему nginx -t стандартная карта длинных URL не запускается.
+    map_hash_bucket_size 256;
+    map_hash_max_size 8192;
     include /etc/nginx/musbread/legacy_museum_redirects.map.conf;
     include /etc/nginx/musbread/museum_news_original_query_pages.map.conf;
     server {
@@ -28,6 +33,10 @@ http {
         # Реальные certificate/key, static root, права, security headers и HTTPS
         # согласовываются по инфраструктуре заказчика.
         root /srv/musbread/out;
+        # Сохранить исходный Host и не выдавать внутренний порт после 301.
+        absolute_redirect off;
+        port_in_redirect off;
+        server_name_in_redirect off;
         include /etc/nginx/musbread/legacy_museum_redirects.server.conf;
         include /etc/nginx/musbread/museum_news_original_query_pages.server.conf;
         location / { try_files $uri/index.html $uri $uri/ =404; }

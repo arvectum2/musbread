@@ -1,0 +1,64 @@
+# CP-SEO-06 · реальный Nginx / локальный HTTP-приёмочный прогон · 19.10.2026
+
+**Статус: локальный Nginx-приёмочный прогон ПРОШЁЛ. ПУБЛИЧНЫЙ РЕЛИЗ И SEO — ВСЁ ЕЩЁ NO-GO.**
+
+Проверяли на Mac mini в Docker с официальным `nginx:stable-alpine` (запущенный тест сообщил версию **1.30.6**), с настоящими Nginx `map`, `location`, `try_files`, `return 301` и **реальными HTTP-запросами** к `127.0.0.1:18088`. Исходный действующий сайт музея, его DNS, сертификат и поисковый индекс **не изменены**. Данные `apps/web/out` и nginx-map-файлы смонтированы только на чтение. Тестовый Nginx слушал исключительно localhost, контейнер автоматически удалён.
+
+## Что обнаружили именно на настоящем сервере
+
+1. **Nginx отказывался запускать карту длинных музейных URL**: `could not build map_hash, you should increase map_hash_bucket_size: 64`. Исправлено в проверенном конфиге: `map_hash_bucket_size 256; map_hash_max_size 8192;` внутри `http`. После этого настоящий `nginx -t` → **успех**.
+2. **Редирект `return 301 /relative/path` превращался Nginx в абсолютный URL со внутренним портом `8080`** (`http://127.0.0.1:8080/...` вместо исходного вызывающего хоста). Это сломало бы SEO/переходы за TLS-терминатором. Исправлено в тестируемом `server`: `absolute_redirect off; port_in_redirect off; server_name_in_redirect off;`. После этого заголовок `Location` содержит строго исходный относительный путь, например `/vistavky/2026-10-05/.../`, без хоста и внутреннего порта.
+3. После исправлений убедились, что **`/novosty?page=1` и `/novosty?page=27` отвечают разным HTML с кодом 200**, а не копией текущей первой страницы. `?page=1…27` не добавляют отдельные canonical, всё осталось на исходном `https://muzei-xleb.ru/novosty`.
+
+## Итог реальных HTTP-проверок
+
+| Проверяемое свойство | Проверено / результат |
+|---|---:|
+| `nginx -t` (полная карта 881 путей + 27 query-map) | **PASS** |
+| 881 исходный URL, прямой HTTP 301 и точный относительный `Location` | **881 / 881** |
+| 881 конечная цель редиректа сразу HTTP 200, без второго 301 | **881 / 881** |
+| Исторические полноценные HTML с реальным HTTP 200, единственным исходным canonical и `noindex` стенда | **467 / 467** |
+| `GET /novosty?page=1..27`: ровно 10 музейных ссылок каждой страницы, сохранённый порядок, исходный canonical | **27 / 27** |
+| `GET /novosty`: навигация на все 27 исторических query-адресов | **PASS** |
+| Прямые исторические URL настоящих PDF/DOCX, код 200, точная длина байтов | **101 / 101** |
+| Уникальные собственные WebP, код 200, `image/webp`, точная длина | **303 / 303** |
+| Три исходно недоступных URL (два 403, один PDF 404 у старого музея): новый сайт не выдумывает контент | **3 × 404 в стенде** |
+| `robots.txt` тестового сайта блокирует индексацию, sitemap не содержит публичных URL | **PASS** |
+| Доступность тестового HTTP извне Mac mini | **Запрещена: Docker bind `127.0.0.1`** |
+| Влияние на живой музей, DNS и продакшн-SSL | **Никакого** |
+
+## Как повторить в проекте
+
+```sh
+cd /Volumes/ArvectumSSD/arvectum/repos/musbread
+cd apps/web && npm run build:museum-deploy && cd ../..
+./scripts/verify_museum_nginx_loopback.sh
+```
+
+`verify_museum_nginx_loopback.sh` автоматически запустит контейнер, применит [отдельный проверенный loopback-конфиг](../../deploy/nginx/museum_local_loopback.conf), выполнит настоящий `nginx -t`, вызовет [строгий HTTP-аудит](../../scripts/audit_museum_nginx_http_loopback.py), затем **выключит и удалит контейнер даже при ошибке**. Docker image может быть загружен в локальный кэш при первом запуске. Для выбора свободного порта допускается `MUSBREAD_NGINX_PORT=18089` (только localhost). Корпус настоящих материалов и PDF остаётся на ArvectumSSD; файлы оригиналов в Git не публикуются.
+
+Обязательные параметры для будущего *согласованного* боевого Nginx — **не копировать тестовый конфиг как боевой**:
+
+```nginx
+http {
+    map_hash_bucket_size 256;
+    map_hash_max_size 8192;
+    include /etc/nginx/musbread/legacy_museum_redirects.map.conf;
+    include /etc/nginx/musbread/museum_news_original_query_pages.map.conf;
+    server {
+        # Музейный HTTPS / TLS / root / server_name согласовываются отдельно.
+        absolute_redirect off;
+        port_in_redirect off;
+        server_name_in_redirect off;
+        include /etc/nginx/musbread/legacy_museum_redirects.server.conf;
+        include /etc/nginx/musbread/museum_news_original_query_pages.server.conf;
+        location / { try_files $uri/index.html $uri $uri/ =404; }
+    }
+}
+```
+
+## Что остаётся обязательным перед переключением DNS
+
+Результат **не** доказывает настройку боевого HTTPS, оба `www`/без `www`, права доступа на сервере музея, реальное наличие всех PDF/WebP после деплоя, интеграцию MoonShine/Laravel, договор и приёмку, состояние Яндекс Вебмастера и Google Search Console, цели Метрики, безопасность персональных данных и возможность отката. Исходные `www` и bare сайт сегодня оба отвечают HTTP 200/self-canonical — решение о первичном домене и перенаправлении нельзя принимать без поисковых метрик. Эти внешние блокеры сохраняют **NO-GO**.
+
+Формальный светофор исходного ТЗ не корректировался произвольно: **🟢 84 / 🟡 102 / 🔴 139**, открыто 241.
