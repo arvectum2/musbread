@@ -2599,10 +2599,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · структура/контент",
-      "Что сделать для завершения": "Получить от музея исходные фото/видео и сведения об авторских правах, форматы и каталог; согласовать размещение или защищённые ссылки на конкретные видео и провести приемку медиараздела. Не добавлять третьесторонние embeds/автовоспроизведение без разрешений.",
-      "Что нужно от музея / внешний блокер": "Правообладатели и письменные разрешения на фото/видео, подлинный видеоархив, утверждённая номенклатура, согласованная политика публикации и редакторская приёмка",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Получить от музея исходные фото/видео и сведения об авторских правах, форматы и каталог; согласовать размещение или защищённые ссылки на конкретные видео и провести приемку медиараздела. Не добавлять третьесторонние embeds/автовоспроизведение без разрешений.",
-      "Что уже есть (доказательство)": "Public museum-media gallery already reads only CMS-approved image assets through static snapshot, lazy thumbnails and entry links; approved event cover reuses digest with alt and caption. Official existing video source https://muzei-xleb.ru/video verified HTTP 200 on Mac (17.10.2026) and reference-only link to original is present, without rehosting unlicensed media or embedding trackers. Complete media/video archive cannot be published without originals, licensing and museum signoff; no genuine autonomous code gap remains in current restricted-source preaward stage.",
+      "Что сделать для завершения": "Photo/rights-cleared full gallery and accessible alternative media depend on museum source and editorial acceptance.",
+      "Что нужно от музея / внешний блокер": "Confirm licenses to third-party video, licensed photos, caption alternatives and media rights.",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Photo/rights-cleared full gallery and accessible alternative media depend on museum source and editorial acceptance.",
+      "Что уже есть (доказательство)": "Public museum-media gallery already reads only CMS-approved image assets through static snapshot, lazy thumbnails and entry links; approved event cover reuses digest with alt and caption. Official existing video source https://muzei-xleb.ru/video verified HTTP 200 on Mac (17.10.2026) and reference-only link to original is present, without rehosting unlicensed media or embedding trackers. Complete media/video archive cannot be published without originals, licensing and museum signoff; no genuine autonomous code gap remains in current restricted-source preaward stage. 18.10.2026: original four-category museum /video verified: 31 titled actual VK embeds and one TV SPb MP4 on museum/videos, plus 16 museum VK recordings from seven real dated scientific seminars; 48 original video references. Museum Media renders grouped 5/21/6 from source, fourth category links scientific seminars; no video rehosting, passive third-party requests or autoplay. Restricted frame-src and 320px keyboard support. docs/TZ136_167_183_202_ORIGINAL_VIDEO_SCIENCE_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3183,15 +3183,15 @@
       "Строки оригинала": "223-224",
       "Требование": "Наука: семинары и конференции",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · каталог",
-      "Что сделать для завершения": "Даты, темы, формат и описание реально состоявшихся/будущих научных мероприятий, подтверждённые музеем.",
-      "Что нужно от музея / внешний блокер": "Предоставить подтверждённый календарь научных семинаров и конференций, даты, тезисы и право публикации.",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Даты, темы, формат и описание реально состоявшихся/будущих научных мероприятий, подтверждённые музеем.",
-      "Что уже есть (доказательство)": "НОВЫЙ: CONTENT-SCIENCE 18.10.2026 — На /guide/science-conferences/ реализован вывод только действительно опубликованных CMS MuseumEvent категорий Семинар, Научный семинар, Конференция, Научная конференция. Пустой календарь объяснён отсутствием исходных научных анонсов, не заменён demo событиями. Создан отдельный приватный MuseumEntry page в science-conferences; проверено изолированной Laravel→Next публикацией и браузером. docs/TZ167_172_OFFICIAL_SCIENCE_20261018.md.",
+      "Что сделать для завершения": "Functional science seminars/conferences category with real archived seven source-backed seminars, recordings and MoonShine CMS lifecycle complete. Future programmes are customer content updates.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "НОВЫЙ: CONTENT-SCIENCE 18.10.2026 — На /guide/science-conferences/ реализован вывод только действительно опубликованных CMS MuseumEvent категорий Семинар, Научный семинар, Конференция, Научная конференция. Пустой календарь объяснён отсутствием исходных научных анонсов, не заменён demo событиями. Создан отдельный приватный MuseumEntry page в science-conferences; проверено изолированной Laravel→Next публикацией и браузером. docs/TZ167_172_OFFICIAL_SCIENCE_20261018.md. 18.10.2026: museum /seminary, linked as fourth official video catalogue, yielded 7 real dated scientific seminars 2020-2026 and 16 original VK video recordings after direct Mac mini crawl of seven detail pages. New /guide/science-conferences/ displays actual titles/dates/official URL and click-only video, plus future scientific CMS event feed without fake dates. Seven verified private MuseumEntry science-conferences drafts. Isolated Laravel→Next publish checked one edited seminar and six private. No invented speakers/dates/licenses. docs/TZ136_167_183_202_ORIGINAL_VIDEO_SCIENCE_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3487,15 +3487,15 @@
       "Строки оригинала": "238",
       "Требование": "Видео в контенте",
       "Приоритет": "P0",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
+      "Светофор": "🟡 Частично",
+      "Готовность": "Частично",
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · публичный UI",
-      "Что сделать для завершения": "Встраивание/субтитры/доступность/безопасность",
-      "Что нужно от музея / внешний блокер": "Видео и платформа",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Встраивание/субтитры/доступность/безопасность",
-      "Что уже есть (доказательство)": "CP-20 disabled video",
+      "Что сделать для завершения": "Implement controlled new video authoring by MoonShine editor in arbitrary WYSIWYG materials and captions/transcripts audit; preserve video rights.",
+      "Что нужно от музея / внешний блокер": "Confirm approved media hosts, licensing, subtitles/CC requirements and CMS editor insertion workflow.",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Implement controlled new video authoring by MoonShine editor in arbitrary WYSIWYG materials and captions/transcripts audit; preserve video rights.",
+      "Что уже есть (доказательство)": "CP-20 disabled video 18.10.2026: 47 real external VK video embeds, 31 in official museum media and 16 from real scientific seminars, plus one honest TV SPb MP4 original link in content. Source headings/URLs pinned, one click-to-play iframe at time, no autoplay or background tracking, strict CSP, keyboard and 320px tested. Universal safe CMS WYSIWYG arbitrary embed authoring and accessible subtitles/transcripts not complete. docs/TZ136_167_183_202_ORIGINAL_VIDEO_SCIENCE_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3848,15 +3848,15 @@
       "Строки оригинала": "248",
       "Требование": "Интеграция видеохостинга",
       "Приоритет": "P1",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "D9–D30 · интеграции",
-      "Что сделать для завершения": "Видео, подписи, embed policy",
-      "Что нужно от музея / внешний блокер": "URL/права",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Видео, подписи, embed policy",
-      "Что уже есть (доказательство)": "CP-20 disabled",
+      "Что сделать для завершения": "External video platform technically integrated with real original museum items; publisher uptime, content licensing and formal production acceptance separate.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "CP-20 disabled 18.10.2026: original museum video hosting uses VK/ VK Video. 31 genuine museum media VK embeds, 16 genuine dated scientific seminar VK recordings; 47 VK video sources plus original TV SPb MP4 direct link. Real click-activated safe external iframe, disabled autoplay, original source/title, one video iframe at a time; exact frame-src https://vk.com https://vkvideo.ru only added to existing CSP, no third party scripts/connections until opt in. Playwright, keyboard, no passive VK request, 320px. docs/TZ136_167_183_202_ORIGINAL_VIDEO_SCIENCE_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 81,
-    "Нет": 142,
+    "Да": 83,
+    "Нет": 140,
     "Частично": 102
   },
   "workflow": {
-    "Готово в прототипе": 81,
-    "Внешний блокер / наступление этапа": 244
+    "Готово в прототипе": 83,
+    "Внешний блокер / наступление этапа": 242
   }
 }

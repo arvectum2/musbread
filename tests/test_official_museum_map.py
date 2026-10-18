@@ -21,7 +21,7 @@ class OfficialMuseumMapTests(unittest.TestCase):
         self.assertRegex(i['http_200_verified_utc'],r'^2026-10-18T')
     def test_web_security_csp_does_not_allow_yandex_scripts_or_extra_trackers(self):
         s=(ROOT/'scripts/build_csp.py').read_text()
-        self.assertIn('"frame-src https://yandex.ru"',s)
+        self.assertIn('"frame-src https://yandex.ru https://vk.com https://vkvideo.ru"',s)
         self.assertNotIn('"script-src https://yandex.ru"',s)
         self.assertNotIn('"connect-src https://yandex.ru"',s)
         self.assertIn('frame-ancestors',s)

@@ -28,7 +28,11 @@ test("TZ-136: public media route never publishes private assets without approved
   await expect(page.getByRole("heading",{name:"Опубликованные фотоматериалы"})).toBeVisible();
   await expect(page.locator(".museum-media-hub")).toContainText("Утверждённые фотоматериалы пока не опубликованы");
   await expect(page.locator(".museum-gallery-preview")).toHaveCount(0);
-  await expect(page.locator(".museum-media-hub .reference-source")).toContainText("видеохостингу");
+  await expect(page.getByRole("region",{name:"Официальные видео музея"}))
+    .toContainText("32 настоящих видеоматериала");
+  await expect(page.locator(".museum-media-hub iframe")).toHaveCount(0);
+  await expect(page.locator(".museum-media-hub .reference-source").last())
+    .toContainText("только после явного действия посетителя");
 });
 
 test("TZ-175/252/262: representative pages preserve semantic layout, crumbs and footer",async ({page})=>{

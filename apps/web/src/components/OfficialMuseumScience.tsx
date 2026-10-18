@@ -4,6 +4,8 @@ import RichText from "@/components/RichText";
 import EventAgenda from "@/components/EventAgenda";
 import {content,entriesInCmsSection,entryPublicHref} from "@/data/content";
 import {officialScienceInstitutionalRecords,museumCollectionsAccessDocument} from "@/data/official-science";
+import OfficialMuseumSeminars from "@/components/OfficialMuseumSeminars";
+import {officialSeminarSlugs} from "@/data/official-museum-seminars";
 import {museumReference} from "@/data/museum-reference";
 
 type ScienceSection="science-conferences"|"science-publications"|"science-collection"|"science-researchers"|"science-materials";
@@ -35,13 +37,15 @@ export default function OfficialMuseumScience({section}:{section:ScienceSection}
     <h2>{heading[section]}</h2>
 
     {section==="science-conferences" && <>
-      <p>Ниже показываются только научные мероприятия, отдельно опубликованные в редакторской
-        афише музея с категорией «Семинар», «Научный семинар», «Конференция» или
-        «Научная конференция». Административные документы не считаются проведёнными конференциями.</p>
+      <p>Ниже — настоящие прошедшие семинары, опубликованные действующим музеем,
+        и отдельно новые научные мероприятия из редакторской афиши.
+        Административные документы не считаются проведёнными конференциями.</p>
+      <OfficialMuseumSeminars />
+      <h3>Новые семинары и конференции</h3>
       <EventAgenda events={newsEvents} buildDay={new Date().toISOString().slice(0,10)}/>
-      {!newsEvents.length && <p role="status">На действующем сайте музея не обнаружено
-        подтверждённого календаря научных конференций для переноса.
-        Раздел подготовлен для публикации музеем.</p>}
+      {!newsEvents.length && <p role="status">Подтверждённых предстоящих научных
+        мероприятий в редакторской афише пока нет. Это не отменяет
+        семь состоявшихся семинаров в архиве выше.</p>}
     </>}
 
     {section==="science-publications" && <>
@@ -114,12 +118,14 @@ export default function OfficialMuseumScience({section}:{section:ScienceSection}
       </div>
     </>}
 
-    {sourceEntries.filter(e=>section!=="science-materials" ||
-      !officialScienceInstitutionalRecords.some(src=>src.slug===e.slug)).length>0 && <>
+    {sourceEntries.filter(e=>(section!=="science-materials" ||
+      !officialScienceInstitutionalRecords.some(src=>src.slug===e.slug))
+      && !(section==="science-conferences"&&officialSeminarSlugs.has(e.slug))).length>0 && <>
       <h3>Материалы, опубликованные редактором</h3>
       <div className="museum-list">
-        {sourceEntries.filter(e=>section!=="science-materials" ||
-          !officialScienceInstitutionalRecords.some(src=>src.slug===e.slug)).map(e=>
+        {sourceEntries.filter(e=>(section!=="science-materials" ||
+          !officialScienceInstitutionalRecords.some(src=>src.slug===e.slug))
+          && !(section==="science-conferences"&&officialSeminarSlugs.has(e.slug))).map(e=>
           <Link key={e.slug} className="museum-list-item" href={entryPublicHref(e)}>
             <h3>{e.title}</h3>{e.excerpt && <p>{e.excerpt}</p>}
             <span className="text-link">Читать →</span>
@@ -127,7 +133,7 @@ export default function OfficialMuseumScience({section}:{section:ScienceSection}
       </div>
     </>}
     <p className="museum-science-note">
-      В раздел не добавляются вымышленные публикации, семинары,
+      В раздел не добавляются вымышленные публикации, анонсы семинаров,
       инвентарные номера, условия доступа или изображения музейных предметов.
     </p>
   </section>;

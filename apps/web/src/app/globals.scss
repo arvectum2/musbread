@@ -653,3 +653,28 @@ html[data-vision-mode="on"] .museum-shop-item,html[data-vision-mode="on"] .museu
 .official-map-frame iframe{display:block;border:0;width:100%;height:clamp(19rem,48vw,32rem)}
 .official-museum-socials{margin-block:1.25rem;min-width:0;overflow-wrap:anywhere}
 .official-museum-social-buttons{display:flex;gap:.6rem 1.15rem;flex-wrap:wrap}
+
+
+/* Source-verified museum original media; external player loaded on click only. */
+.official-video-library{margin:1.5rem 0;min-width:0}
+.official-video-categories{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.1rem 0}
+.official-video-categories button{font:inherit;font-size:.95rem;padding:.55rem .85rem;
+  background:transparent;color:inherit;border:1px solid currentColor;border-radius:.55rem;cursor:pointer}
+.official-video-categories button[aria-pressed=true]{font-weight:750;text-decoration:underline;text-underline-offset:.2rem}
+.official-video-categories button:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.official-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem;min-width:0}
+.official-video-card{min-width:0;overflow-wrap:anywhere;padding:1rem;
+ border:1px solid var(--line,#cecec6);border-radius:.7rem}
+.official-video-card h3{font-size:1.07rem;line-height:1.4;margin:0 0 .85rem}
+.official-video-card p{line-height:1.5}
+.official-video-frame{aspect-ratio:16 / 9;position:relative;max-width:100%;background:#111;
+ overflow:hidden;border-radius:.45rem}
+.official-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.official-video-source{margin-top:.7rem;font-size:.9rem}
+
+
+.official-science-seminars{margin:1.3rem 0;min-width:0}
+.official-science-seminars .official-museum-program-card{min-width:0;overflow-wrap:anywhere}
+.official-science-seminars .official-museum-program-card h4{font-size:1.06rem;line-height:1.42}
+.official-seminar-video{max-width:100%;min-width:0;margin:.7rem 0}
+.official-seminar-video .visitor-map-button{max-width:100%;text-align:left;overflow-wrap:anywhere}

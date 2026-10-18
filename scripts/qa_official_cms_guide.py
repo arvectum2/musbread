@@ -32,6 +32,7 @@ REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-
             "science-conferences","science-publications","science-collection",
             "science-researchers","science-materials",
             "science-organization","science-methodical-council",
+            "science-seminar-2026-04-16-633",
             "museum-news-2026-10-16-noch-iskusstv-v-muzee-hleba",
             "museum-news-2026-10-12-sobytiya-v-muzee-s-12-po-19-oktyabrya"}
 
@@ -79,8 +80,12 @@ def main() -> None:
             if n != 12:
                 raise RuntimeError("All 12 real museum workshop source pages must remain drafts")
             n = db.execute("select count(*) from museum_entries where status='draft'").fetchone()[0]
-            if n != 90:
-                raise RuntimeError("Private working CMS count changed: expected 90 drafts")
+            if n != 97:
+                raise RuntimeError("Private working CMS count changed: expected 97 drafts")
+            sem=db.execute("select count(*) from museum_entries where slug like "
+                           "'science-seminar-%' and status='draft'").fetchone()[0]
+            if sem != 7:
+                raise RuntimeError("All 7 genuine scientific seminar articles must be private")
             n = db.execute("select count(*) from museum_entries "
                            "where slug like 'museum-news-%' and type='news' and status='draft'").fetchone()[0]
             if n != 10:
@@ -163,6 +168,12 @@ def main() -> None:
                        "title='QA: редакторский научно-методический совет',"
                        "body='<p>QA: проверенная правка научного отдела музея.</p>' "
                        "where slug='science-methodical-council'")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: музей отредактировал семинар о мельницах',"
+                       "excerpt='QA: редактор уточнил научный семинар.',"
+                       "body='<p>QA: проверенное описание семинара 16 апреля.</p>' "
+                       "where slug='science-seminar-2026-04-16-633'")
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes'),"
                        "title='QA: Ночь искусств — редакция музея',"
@@ -501,6 +512,22 @@ def main() -> None:
             raise RuntimeError("True museum rules for collection access not linked on researcher page")
         if researchers.xpath("//main//section[contains(@class,'museum-science-portal')]//form"):
             raise RuntimeError("Unverified researcher application form introduced")
+        approved_science={e["slug"] for e in data["entries"] if e["slug"].startswith("science-seminar-")}
+        if approved_science!={"science-seminar-2026-04-16-633"}:
+            raise RuntimeError("Only one edited scientific seminar allowed publicly in isolated QA")
+        science=html.fromstring((out/"guide/science-conferences/index.html").read_bytes())
+        science_text=science.text_content()
+        if "QA: музей отредактировал семинар о мельницах" not in science_text:
+            raise RuntimeError("Real source seminar CMS editor override not shown on science landing")
+        if "7 научных мероприятий 2020–2026 годов" not in science_text:
+            raise RuntimeError("Seven genuine original museum dated science seminars absent")
+        if not (out/"museum/science-seminar-2026-04-16-633/index.html").is_file():
+            raise RuntimeError("Approved edited scientific seminar has no public detail route")
+        if (out/"museum/science-seminar-2025-11-06-536/index.html").is_file():
+            raise RuntimeError("Unpublished official seminar draft accidentally exported")
+        seminar_page=html.fromstring((out/"museum/science-seminar-2026-04-16-633/index.html").read_bytes())
+        if "QA: проверенное описание семинара 16 апреля." not in seminar_page.text_content():
+            raise RuntimeError("Edited official seminar CMS body did not reach public page")
         news=html.fromstring((out/"news/index.html").read_bytes())
         news_feed=news.xpath("//main//section[@aria-label='Последние новости действующего сайта музея']")
         if len(news_feed)!=1:
@@ -612,7 +639,9 @@ def main() -> None:
           " 124 real verified timed museum sessions across 6 weekly programmes,"
           " one genuine dated CMS-edited Oct18 session in isolated publication,"
           " 123 other source sessions private, 16 source overlap duplicates folded,"
-          " real CMS remains 90 private draft entries, 125 private event drafts,"
+          " 7 real dated scientific seminars and 16 associated original VK videos,"
+          " one edited published only in isolated QA, six others private,"
+          " real CMS remains 97 private draft entries, 125 private event drafts,"
           " 44 museum documents.")
     # Historical predecessor output deliberately superseded by current scope.
     # print("PASS: 23 isolated published CMS records including 12 real workshop cards"

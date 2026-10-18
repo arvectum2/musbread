@@ -1,9 +1,11 @@
 import {expect,test} from "@playwright/test";
 
-test("TZ-167 science conferences show only real CMS events and honest empty source status",async({page})=>{
+test("TZ-167 science conferences show seven source-verified historical seminars, while future CMS calendar remains empty",async({page})=>{
   await page.goto("/guide/science-conferences/");
   const area=page.getByRole("region",{name:"Семинары и научные конференции"});
-  await expect(area).toContainText("На действующем сайте музея не обнаружено");
+  await expect(area).toContainText("Подтверждённых предстоящих научных");
+  await expect(area.getByRole("region",{name:"Реальные научные семинары музея"})
+    .locator(".official-museum-program-card")).toHaveCount(7);
   await expect(area.locator(".event-card")).toHaveCount(0);
   await expect(area).not.toContainText("Демонстрационная экскурсия");
 });

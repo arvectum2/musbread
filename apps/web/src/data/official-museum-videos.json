@@ -1,0 +1,390 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "source_index_url": "https://muzei-xleb.ru/video",
+  "snapshot_utc": "2026-10-18T10:20:57+00:00",
+  "group_count": 3,
+  "video_count": 32,
+  "vk_embeds": 31,
+  "external_mp4_file_links": 1,
+  "groups": [
+    {
+      "slug": "museum",
+      "title": "О музее",
+      "source_url": "https://muzei-xleb.ru/video/o-muzee",
+      "source_html_sha256": "39e08bf45a50c359f61691e608c53607e74b6dc448ff011a1bec74021627d5e0",
+      "count": 5,
+      "videos": [
+        {
+          "id": "museum-01",
+          "title": "Репортаж о музее в передаче «Хороший день» телеканала «78»",
+          "source_page": "https://muzei-xleb.ru/video/o-muzee",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239119&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239119&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "museum-02",
+          "title": "«Ночь музеев — 2021»",
+          "source_page": "https://muzei-xleb.ru/video/o-muzee",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239081&hash=a94e0114bfa1c226&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239081&hash=a94e0114bfa1c226&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "museum-03",
+          "title": "Репортаж о музейной программе «Солнцу родственники» интернет-канала «Теледетки»",
+          "source_page": "https://muzei-xleb.ru/video/o-muzee",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239060&hash=a9b63a4c8ca42fb0&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239060&hash=a9b63a4c8ca42fb0&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "museum-04",
+          "title": "Репортаж о музее телеканала \"Город+\"",
+          "source_page": "https://muzei-xleb.ru/video/o-muzee",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-64852945&id=456240016&hash=5664f79a76592f61&hd=1",
+          "embed_url": "https://vk.com/video_ext.php?oid=-64852945&id=456240016&hash=5664f79a76592f61&hd=1",
+          "kind": "vk",
+          "video_owner_id": "-64852945",
+          "hosted_in_museum_vk_group": false,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "museum-05",
+          "title": "Репортаж об экскурсии \"Хлеб в пути не в тягость\" интернет-канала \"Теледетки\"",
+          "source_page": "https://muzei-xleb.ru/video/o-muzee",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239017&hash=5c8785153dcd3a44&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239017&hash=5c8785153dcd3a44&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        }
+      ]
+    },
+    {
+      "slug": "exhibitions",
+      "title": "Выставки",
+      "source_url": "https://muzei-xleb.ru/video/vystavky",
+      "source_html_sha256": "6412db5f523932cab22c1688b1abc65b5015c6a056168063972ff026854d40fa",
+      "count": 21,
+      "videos": [
+        {
+          "id": "exhibitions-01",
+          "title": "Открытие выставки \"Первое, второе и компот\" 2 сентября 2026 г.",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://cdnvideo.tvspb.ru/tvspbru-uploads/2026/09/utro_02_09_26_pryamoe_fabrika_kuhnya_site.mp4",
+          "embed_url": null,
+          "kind": "external-mp4-link",
+          "direct_file_url": "https://cdnvideo.tvspb.ru/tvspbru-uploads/2026/09/utro_02_09_26_pryamoe_fabrika_kuhnya_site.mp4",
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-02",
+          "title": "Экскурсия по выставке «А завтра был мир» (2025 г.)",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vkvideo.ru/video_ext.php?oid=-37126776&id=456239153&hash=12a893d67c99344f&hd=2",
+          "embed_url": "https://vkvideo.ru/video_ext.php?oid=-37126776&id=456239153&hash=12a893d67c99344f&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-03",
+          "title": "Репортаж медиапроекта «Теледетки» о выставках «Где спрятался подарок?» и «Съ Рождествомъ!»",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-29830693&id=456242311&hd=2&autoplay=1",
+          "embed_url": "https://vk.com/video_ext.php?oid=-29830693&id=456242311&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-29830693",
+          "hosted_in_museum_vk_group": false,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-04",
+          "title": "Выставка «Баттл: рожь vs пшеница»",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239100&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239100&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-05",
+          "title": "Программа «Петербург 3.2.0» о выставке «Меры и размеры»",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239103&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239103&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-06",
+          "title": "Выставка «Праздничная культура Петербурга». Часть 1",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239089&hash=6a963ed3acca6e8d&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239089&hash=6a963ed3acca6e8d&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-07",
+          "title": "Выставка «Праздничная культура Петербурга». Часть 2",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239094&hash=7cbecdbe0564d19d&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239094&hash=7cbecdbe0564d19d&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-08",
+          "title": "Выставка «Честная реклама» (2022 г.)",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239086&hash=3f1b4ff99308af25&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239086&hash=3f1b4ff99308af25&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-09",
+          "title": "Выставка «Журнал Печорина. Кавказ»",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239085&hash=c2a80ada1610c6bf&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239085&hash=c2a80ada1610c6bf&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-10",
+          "title": "Выставка «Пасхальные традиции Петербурга»",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239062&hash=cf7eead3df20e307&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239062&hash=cf7eead3df20e307&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-11",
+          "title": "Выставка «Искусство есть красиво». Часть 1",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239051&hash=1b717716554b79f4&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239051&hash=1b717716554b79f4&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-12",
+          "title": "Выставка «Искусство есть красиво». Часть 2",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239055&hash=a7d50aaf8d4a09cd&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239055&hash=a7d50aaf8d4a09cd&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-13",
+          "title": "Выставка «Рождество в Петербурге. Метаморфозы праздника»",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239057&hash=81693f5587f4fa77&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239057&hash=81693f5587f4fa77&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-14",
+          "title": "Рисунки воспитанников детских садов Куйбышевского района Ленинграда 1942-1945 гг. на выставке \"Хлебопёки Ленинграда в годы Великой Отечественной войны\"",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239027&hash=56ce3626081d9986&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239027&hash=56ce3626081d9986&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-15",
+          "title": "«Нашим родным посвящается...»",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239026&hash=fbe6df5b17428841&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239026&hash=fbe6df5b17428841&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-16",
+          "title": "Выставка \"Первые хлебозаводы\"",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239025&hash=cad060ce56e9caf8&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239025&hash=cad060ce56e9caf8&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-17",
+          "title": "Выставка \"Пасхальные традиции Петербурга\"",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239023&hash=241583079ab8dbf6&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239023&hash=241583079ab8dbf6&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-18",
+          "title": "Репортаж о юбилейной выставке \"Нам 30 лет!\" телеканала \"Санкт-Петербург\"",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-23702661&id=456243151&hash=b25e2da1d7c1d216&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-23702661&id=456243151&hash=b25e2da1d7c1d216&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-23702661",
+          "hosted_in_museum_vk_group": false,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-19",
+          "title": "Репортаж о выставке \"Пряничная сказка\" интернет-канала \"Теледетки\"",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-29830693&id=456239731&hash=08bf8402e3da4c49&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-29830693&id=456239731&hash=08bf8402e3da4c49&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-29830693",
+          "hosted_in_museum_vk_group": false,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-20",
+          "title": "Репортаж о выставке \"Накормить весь мир\" телеканала \"Санкт-Петербург\"",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-23702661&id=456248642&hash=b82fec4eae7246d0&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-23702661&id=456248642&hash=b82fec4eae7246d0&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-23702661",
+          "hosted_in_museum_vk_group": false,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "exhibitions-21",
+          "title": "Выставка \"Хлебопёки Ленинграда в годы Великой Отечественной войны\"",
+          "source_page": "https://muzei-xleb.ru/video/vystavky",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239018&hash=05c0614d7e5f5ecc&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239018&hash=05c0614d7e5f5ecc&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        }
+      ]
+    },
+    {
+      "slug": "unusual-tour",
+      "title": "Проект \"НЕобзорная экскурсия\"",
+      "source_url": "https://muzei-xleb.ru/video/proekt-neobzornaya-ekskursiya",
+      "source_html_sha256": "f78fa4a698874caa4a58a7ce82f8105646f0d7b88416713f363b18f9afbaccab",
+      "count": 6,
+      "videos": [
+        {
+          "id": "unusual-tour-01",
+          "title": "Медогонка",
+          "source_page": "https://muzei-xleb.ru/video/proekt-neobzornaya-ekskursiya",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239126&hd=2&autoplay=1",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239126&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "unusual-tour-02",
+          "title": "Рождественские традиции в Петербурге XIX в.",
+          "source_page": "https://muzei-xleb.ru/video/proekt-neobzornaya-ekskursiya",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239112&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239112&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "unusual-tour-03",
+          "title": "День космонавтики",
+          "source_page": "https://muzei-xleb.ru/video/proekt-neobzornaya-ekskursiya",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239076&hash=7567148e9cd16b1a&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239076&hash=7567148e9cd16b1a&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "unusual-tour-04",
+          "title": "\"Чудо техники двести лет назад\". Часть 1",
+          "source_page": "https://muzei-xleb.ru/video/proekt-neobzornaya-ekskursiya",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239019&hash=b84ba4af9cbf4d69&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239019&hash=b84ba4af9cbf4d69&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "unusual-tour-05",
+          "title": "\"Чудо техники двести лет назад\". Часть 2",
+          "source_page": "https://muzei-xleb.ru/video/proekt-neobzornaya-ekskursiya",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239021&hash=28250a65ff83a5a4&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239021&hash=28250a65ff83a5a4&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        },
+        {
+          "id": "unusual-tour-06",
+          "title": "\"Короли шоколадного дела\"",
+          "source_page": "https://muzei-xleb.ru/video/proekt-neobzornaya-ekskursiya",
+          "source_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239022&hash=0f76b38ad7fd9fb4&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239022&hash=0f76b38ad7fd9fb4&hd=2",
+          "kind": "vk",
+          "video_owner_id": "-37126776",
+          "hosted_in_museum_vk_group": true,
+          "third_party_embed_requires_click": true
+        }
+      ]
+    }
+  ],
+  "policy": "Existing original museum video titles and VK embeds. No video/image rehosting. Third party player loads by click only. No autoplay. Captions/transcripts/rights not established."
+}

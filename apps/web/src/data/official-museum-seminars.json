@@ -1,0 +1,242 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "index_url": "https://muzei-xleb.ru/seminary",
+  "index_html_sha256": "d3317f19b3b1a78b1b8478e73205e74b57d8fafe6f2939cf13540a483cb6158e",
+  "snapshot_utc": "2026-10-18T10:26:57+00:00",
+  "count": 7,
+  "video_count": 16,
+  "seminars": [
+    {
+      "id": "science-seminar-2026-04-16-633",
+      "title": "Семинар «К истории мукомольных мельниц в России» (16 апреля 2026 г.)",
+      "date_start": "2026-04-16",
+      "date_end": null,
+      "dated_range": false,
+      "index_source_url": "https://muzei-xleb.ru/seminary",
+      "index_detail_path": "/node/633",
+      "source_url": "https://muzei-xleb.ru/seminar-k-istorii-mukomolnyh-melnic-v-rossii-16-aprelya-2026-g",
+      "page_html_sha256": "5b7401814f0012df402662c404b32e702b2b346b493dfc77bb4e29731591d1a5",
+      "original_body_text": "Часть 1 Часть 2",
+      "video_count": 2,
+      "videos": [
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239157",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239157",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239158",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239158",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        }
+      ],
+      "media_rehosted": false,
+      "photo_rights_confirmed": false
+    },
+    {
+      "id": "science-seminar-2025-11-06-536",
+      "title": "Семинар «Купцы-хлеботорговцы в Петербурге» (6 ноября 2025 г.)",
+      "date_start": "2025-11-06",
+      "date_end": null,
+      "dated_range": false,
+      "index_source_url": "https://muzei-xleb.ru/seminary",
+      "index_detail_path": "/node/536",
+      "source_url": "https://muzei-xleb.ru/seminar-kupcy-hlebotorgovcy-v-peterburge-6-noyabrya-2025-g",
+      "page_html_sha256": "16b27afd18b98c2d713e7cb7d5bffac226b231eb26479f6cfc233ab19c04dbb6",
+      "original_body_text": "Часть 1 Часть 2",
+      "video_count": 2,
+      "videos": [
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239148&autoplay=1",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239148",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239149&autoplay=1",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239149",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        }
+      ],
+      "media_rehosted": false,
+      "photo_rights_confirmed": false
+    },
+    {
+      "id": "science-seminar-2024-02-07-425",
+      "title": "Семинар «Проблемы доставки продовольствия в блокированный Ленинград» (7 февраля 2024 г.)",
+      "date_start": "2024-02-07",
+      "date_end": null,
+      "dated_range": false,
+      "index_source_url": "https://muzei-xleb.ru/seminary",
+      "index_detail_path": "/node/425",
+      "source_url": "https://muzei-xleb.ru/seminar-problemy-dostavki-prodovolstviya-v-blokirovannyy-leningrad-7-fevralya-2024-g",
+      "page_html_sha256": "6771fc6b3997ca7f1bb7f07d0af136292097db075d6270285feb01d6527b7049",
+      "original_body_text": "Часть 1 Часть 2",
+      "video_count": 2,
+      "videos": [
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239115&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239115&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239116&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239116&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        }
+      ],
+      "media_rehosted": false,
+      "photo_rights_confirmed": false
+    },
+    {
+      "id": "science-seminar-2023-04-05-361",
+      "title": "Семинар «Застолье как культурный феномен в традиции русской литературы 2-й половины XIX века» (К 200-летию со дня рождения А.Н.Островского) (5 апреля 2023 г.)",
+      "date_start": "2023-04-05",
+      "date_end": null,
+      "dated_range": false,
+      "index_source_url": "https://muzei-xleb.ru/seminary",
+      "index_detail_path": "/node/361",
+      "source_url": "https://muzei-xleb.ru/seminar-zastole-kak-kulturnyy-fenomen-v-tradicii-russkoy-literatury-2-y-poloviny-xix-veka-k-200",
+      "page_html_sha256": "6fd38e7762732d4e18638b1b6d4034d2968ccbe6708f1efc73936845d55075c3",
+      "original_body_text": "Часть 1 Часть 2",
+      "video_count": 2,
+      "videos": [
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239092&hash=ed12dccfdb21c243&hd=1",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239092&hash=ed12dccfdb21c243&hd=1",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239093&hash=d422582ade52d35c&hd=1",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239093&hash=d422582ade52d35c&hd=1",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        }
+      ],
+      "media_rehosted": false,
+      "photo_rights_confirmed": false
+    },
+    {
+      "id": "science-seminar-2022-04-14-291",
+      "title": "Семинар «Научное наследие историка хлебопечения С.В.Коновцева» (14 апреля 2022 г.)",
+      "date_start": "2022-04-14",
+      "date_end": null,
+      "dated_range": false,
+      "index_source_url": "https://muzei-xleb.ru/seminary",
+      "index_detail_path": "/node/291",
+      "source_url": "https://muzei-xleb.ru/seminar-nauchnoe-nasledie-istorika-hlebopecheniya-svkonovceva-14-aprelya-2022-g",
+      "page_html_sha256": "72148dab1dfd5cd42d1e4723566024a3b78c81e9585a6d84e2c6d05f09b7b4c5",
+      "original_body_text": "Часть 1 Часть 2",
+      "video_count": 2,
+      "videos": [
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239078&hash=14a8de97f105c577&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239078&hash=14a8de97f105c577&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239080&hash=93d058dc32590635&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239080&hash=93d058dc32590635&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        }
+      ],
+      "media_rehosted": false,
+      "photo_rights_confirmed": false
+    },
+    {
+      "id": "science-seminar-2021-11-10-271",
+      "title": "Семинар \"Организация продажи хлебобулочных изделий\" (10 ноября 2021 г.)",
+      "date_start": "2021-11-10",
+      "date_end": null,
+      "dated_range": false,
+      "index_source_url": "https://muzei-xleb.ru/seminary",
+      "index_detail_path": "/node/271",
+      "source_url": "https://muzei-xleb.ru/seminar-organizaciya-prodazhi-hlebobulochnyh-izdeliy-10-noyabrya-2021-g",
+      "page_html_sha256": "bb51fe39c650d61b4e31e002b410717aa141007bdd7c30d3f4e59c195faeb4b5",
+      "original_body_text": "Часть 1 Часть 2 Часть 3",
+      "video_count": 3,
+      "videos": [
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239068&hash=e92bbe02dd49714f&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239068&hash=e92bbe02dd49714f&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239069&hash=0f7dc3458e035e14&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239069&hash=0f7dc3458e035e14&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239070&hash=9f5c605771ce8bd1&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239070&hash=9f5c605771ce8bd1&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        }
+      ],
+      "media_rehosted": false,
+      "photo_rights_confirmed": false
+    },
+    {
+      "id": "science-seminar-2020-11-10-189",
+      "title": "Семинар «Ладожские каналы как часть водной системы доставки хлеба в Санкт Петербург» (10-12 ноября 2020 г.)",
+      "date_start": "2020-11-10",
+      "date_end": "2020-11-12",
+      "dated_range": true,
+      "index_source_url": "https://muzei-xleb.ru/seminary",
+      "index_detail_path": "/node/189",
+      "source_url": "https://muzei-xleb.ru/seminar-ladozhskie-kanaly-kak-chast-vodnoy-sistemy-dostavki-hleba-v-sankt-peterburg-10-12-noyabrya",
+      "page_html_sha256": "5e27d3f396aae1cbcf3c58233e1a640084735d14de32b01906efa019cd7c9887",
+      "original_body_text": "Доклад М.Г.Кочиевой, кандидата культурологии, методиста отдела музейной педагогики ГМИ СПб, \"История строительства Ладожского канала\" Доклад М.Ю.Вальковой, заведующей музеем истории города Шлиссельбурга, \"Современное состояние Ладожских каналов\" Доклад М.А.Балтрашевич \"Доставка хлебных грузов в Петербург во второй половине XIX века водным транспортом и по железной дороге. Сравнительный анализ\"",
+      "video_count": 3,
+      "videos": [
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239054&hash=a41b581850dc44eb&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239054&hash=a41b581850dc44eb&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239053&hash=c6fa322c4c994da6&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239053&hash=c6fa322c4c994da6&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        },
+        {
+          "original_iframe_src": "https://vk.com/video_ext.php?oid=-37126776&id=456239052&hash=8e84b809e39dc5c0&hd=2",
+          "embed_url": "https://vk.com/video_ext.php?oid=-37126776&id=456239052&hash=8e84b809e39dc5c0&hd=2",
+          "owner_id": "-37126776",
+          "is_museum_vk_channel": true,
+          "part_label": ""
+        }
+      ],
+      "media_rehosted": false,
+      "photo_rights_confirmed": false
+    }
+  ],
+  "editorial_policy": "Only genuine original dated seminars. Videos load after click; original publisher captions/rights may need confirmation. Future science events not guessed."
+}
