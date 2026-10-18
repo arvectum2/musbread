@@ -1,0 +1,407 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "description": "Copied byte-for-byte from user-owned original source files on Mac mini; not included in git.",
+  "count": 57,
+  "total_bytes": 218175898,
+  "files": [
+    {
+      "legacy_path": "/sites/default/files/page/191218113728_0001.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/191218113728_0001.pdf",
+      "sha256": "17cd30bed83ea29ae2a231ba0747e991aaee92943eed166bfad9a6a2abcfe121",
+      "size_bytes": 975435,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/202112011404-211201133055_0001.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/202112011404-211201133055_0001.pdf",
+      "sha256": "1f3e24848ad249038c3b8df2c2ce28b8b9f6f4a8c7b59b6ab50bfc2593c4da0c",
+      "size_bytes": 713716,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20221004160204-polozhenie_o_komissii.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20221004160204-polozhenie_o_komissii.pdf",
+      "sha256": "be3d96e92381d766a587cf97a3ea628eea69a501356fbb205843fa5291300173",
+      "size_bytes": 2031561,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20231220172435-plan_meropriyatiy_2024-25.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20231220172435-plan_meropriyatiy_2024-25.pdf",
+      "sha256": "9684471b5b0f4d2f28d9feafaac9d94d048c2c6db090b8c82fa335fbfae09087",
+      "size_bytes": 998974,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20231220172435-protokoly_zasedaniya_komissii_po_protivodeystviyu_korrupcii_v_2023_godu.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20231220172435-protokoly_zasedaniya_komissii_po_protivodeystviyu_korrupcii_v_2023_godu.pdf",
+      "sha256": "333b080f03aaeb91e47ae37abcbf600ee0e55e2abaf34d49ed901bef487aa3f5",
+      "size_bytes": 1527195,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240117170312-uchetnaya_politika.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240117170312-uchetnaya_politika.pdf",
+      "sha256": "4588450da53d9bf01596c6f6d6e0a6c1503f419ba7611950ea0907269087f3b2",
+      "size_bytes": 37204479,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_1.pdf",
+      "sha256": "337d65ce1cab178ba561e983e38d9a64a40c0dcc5ad1f1c813c27a8186b61e24",
+      "size_bytes": 949082,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_2.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_2.pdf",
+      "sha256": "4758fd36ea7f3bc6dbdf0aa42d80573ad0fbe35f81a59281e3e157354b831f57",
+      "size_bytes": 4087990,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_3.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_3.pdf",
+      "sha256": "7dad89b1ee11e9e5ed419ff5daf4f832c4d26020e2aee4e884f8c23fcb5a825b",
+      "size_bytes": 673024,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_4.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240117170312-uchetnaya_politika_izmenenie_4.pdf",
+      "sha256": "06fa00f52e70255b396ec923b2107e0de10239327f885dc561528c3c8d531614",
+      "size_bytes": 573938,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240513102409-uchetnaya_politika_izmenenie_5.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240513102409-uchetnaya_politika_izmenenie_5.pdf",
+      "sha256": "38ea9c278daf8bb2ab92a4eb075f419a759d9f88ab210f17a91b6364c30e99db",
+      "size_bytes": 14351047,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240829125555-f_0503730_balans.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240829125555-f_0503730_balans.pdf",
+      "sha256": "a7346ae34e0c1cd0fd7e05e77f2d134aedbe4f5827d4cd5bd560363179a543b6",
+      "size_bytes": 850623,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240829133388-otchet_o_rez.deyat-ti_2023.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240829133388-otchet_o_rez.deyat-ti_2023.pdf",
+      "sha256": "ef6be6b96f4aa1da0ccdb62fbb6da32fd03411a126487f64a9d8cb679fdc0332",
+      "size_bytes": 11834431,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240902161350-lichnaya_bezopasnost.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240902161350-lichnaya_bezopasnost.pdf",
+      "sha256": "c77b5872795a8c3dc0da229f37698a1f5c76a885d18aa6351cfd150e97535c07",
+      "size_bytes": 234147,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240902161350-pamyatka_dlya_detey_po_protivodeystviyu_terrorizmu.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240902161350-pamyatka_dlya_detey_po_protivodeystviyu_terrorizmu.pdf",
+      "sha256": "1a773442eeeb4460299a0751237c5261ce543ab55e9237a390a1ebc8b6c8b6b9",
+      "size_bytes": 50414,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240902161350-urovni_opasnosti.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240902161350-urovni_opasnosti.pdf",
+      "sha256": "6f145f2f071333b53dce8729b2121f7d872520320108e34be3f2164fe8d85e33",
+      "size_bytes": 1269956,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20240909163077-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20240909163077-1.pdf",
+      "sha256": "ccaf820e83d229fa8d021d2381f648b5f8e90d6052acce6eb62c3892d8567064",
+      "size_bytes": 911084,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20241223124153-protokoly_zasedaniy_komissii_za_2024_g.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20241223124153-protokoly_zasedaniy_komissii_za_2024_g.pdf",
+      "sha256": "2b3c544086c8d2bbca3506492b140a900a694ce275a213821537b73ee77e7aa6",
+      "size_bytes": 2355902,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20241223124307-otchet_po_planu_meropriyatiy_za_2024_g.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20241223124307-otchet_po_planu_meropriyatiy_za_2024_g.pdf",
+      "sha256": "a2524f096aa1cce78cc3afc29e6bbe801832381fd9ac3b1d83af6f2fcce89338",
+      "size_bytes": 1278795,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20251112142222-otchet_o_rezultatah_deyatelnosti_za_2024_god.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20251112142222-otchet_o_rezultatah_deyatelnosti_za_2024_god.pdf",
+      "sha256": "0e72163f1a14727fffd6cc3c16aba2c180108a04f3b83dd5479c714d123e4274",
+      "size_bytes": 1945939,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20251127220642.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20251127220642.pdf",
+      "sha256": "bd36d3535137254338d635e5311e57bab3f740aa8fae81bafa99bcde450d920a",
+      "size_bytes": 614108,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20251224111619-plan_na_2026-2027_gg.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20251224111619-plan_na_2026-2027_gg.pdf",
+      "sha256": "bac1ab710c22f986096d621f1d9cdf16b7087ed49d02e3cd87f39fe21fe7f6d3",
+      "size_bytes": 1544320,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203104919-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203104919-1.pdf",
+      "sha256": "692d5743ed47e53b8bbf9522251b78770809193d26cc9feef4a1f622ce5d5f83",
+      "size_bytes": 20206284,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203104920-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203104920-1.pdf",
+      "sha256": "e919a5d2a1f2ffec767905b2890ae6935a3f806a189bd4a8fcd05d98ad9e38b4",
+      "size_bytes": 922050,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203105537-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203105537-1.pdf",
+      "sha256": "d46a0715743f5219703a36900853251052050e148714883a387eac0e8b4b552b",
+      "size_bytes": 2848635,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203105703-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203105703-1.pdf",
+      "sha256": "d358731c769dcb81b2bff2e8f86bba6c5791495ecb99cb3b1c0c4288539c912c",
+      "size_bytes": 1040069,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203111659-koncepciya_komplektovaniya_mh.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203111659-koncepciya_komplektovaniya_mh.pdf",
+      "sha256": "97ae9192f82c1137f0ce832220c8044652ca2b36524b35d53b33779f31735202",
+      "size_bytes": 14986046,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203112119-svedeniya_o_vidah_predostavlyaemyh_uslug.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203112119-svedeniya_o_vidah_predostavlyaemyh_uslug.pdf",
+      "sha256": "ee71631e6abbaa5e66a9efc1782bdbab699db1f63dd18196e920acf417fdec2b",
+      "size_bytes": 1116752,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203112237-polozhenie_o_platnyh_uslugah.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203112237-polozhenie_o_platnyh_uslugah.pdf",
+      "sha256": "14eb22bd7a2264a00c1f38e3148941fc601d9cd88b9a75dd549b3c23f780db2d",
+      "size_bytes": 4824266,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203112347-poryadok_dostupa.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203112347-poryadok_dostupa.pdf",
+      "sha256": "0e6237a585ea6b14442acec9b7a86bd193fafdbd6444bc877077a693489ac3c4",
+      "size_bytes": 5320060,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203113223-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203113223-1.pdf",
+      "sha256": "22d214f5d2f54d8def33d7e0f21adc6d0a631565149b1b2195590256f1a9e03f",
+      "size_bytes": 3559011,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203113346-prilozhenie_1_k_polozheniyu_o_vozvrate.docx",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203113346-prilozhenie_1_k_polozheniyu_o_vozvrate.docx",
+      "sha256": "5831f3489181b56817ec55b0528cc154956e14c6bd25ce5fab57a65e2a5e6a8b",
+      "size_bytes": 21845,
+      "format": "docx"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203113458-prikaz_o_primenenii_servisa_cifrovogo_id.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203113458-prikaz_o_primenenii_servisa_cifrovogo_id.pdf",
+      "sha256": "b96d73811d4987da481083a17303874a985afa2205baf1f7a9357acf3e8fbe0f",
+      "size_bytes": 1269497,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203114639-ustav_2011.docx",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203114639-ustav_2011.docx",
+      "sha256": "b8c75b8523e674acd3cc29a65dea652dc995d101300412a40812f288493f2e44",
+      "size_bytes": 3932749,
+      "format": "docx"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203114727-izmeneniya_v_ustav_2022.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203114727-izmeneniya_v_ustav_2022.pdf",
+      "sha256": "8884da5da89828c7e4d9a815704b23574160b1ae897e01d587ba06b7831bea5b",
+      "size_bytes": 3196871,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203114846-rekvizity_uchrezhdeniya.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203114846-rekvizity_uchrezhdeniya.pdf",
+      "sha256": "c63f014f8ad0cd392ede62d4fc62563c6214e74d2bc153072a8c50ef785fc908",
+      "size_bytes": 889586,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203114928-svidetelstvo_o_gosudarstvennoy_registracii_uchrezhdeniya.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203114928-svidetelstvo_o_gosudarstvennoy_registracii_uchrezhdeniya.pdf",
+      "sha256": "5f11313dc446a3a06114bd098246b5ff40c3aec73958c529c6850519e766d041",
+      "size_bytes": 337118,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115029-obshchaya_informaciya.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115029-obshchaya_informaciya.pdf",
+      "sha256": "bd8a8a6c702a42953e43655217d3ea844959d03b71a571a1b0f03218d8c68944",
+      "size_bytes": 308950,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115109-reshenie_uchreditelya_o_sozdanii_gosudarstvennogo_municipalnogo_uchrezhdeniya.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115109-reshenie_uchreditelya_o_sozdanii_gosudarstvennogo_municipalnogo_uchrezhdeniya.pdf",
+      "sha256": "d641338c80f9d0606b121d0d89fad4d93aa1849547158da093adaacdcee0df4e",
+      "size_bytes": 835638,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115202-uchreditel_muzeya.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115202-uchreditel_muzeya.pdf",
+      "sha256": "1c30a529cac0e047a8e42d3656a8f3300fdb9274c87df737281a43a063d9c760",
+      "size_bytes": 20794,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115235-prikaz_o_naznachenii_direktora_muzeya.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115235-prikaz_o_naznachenii_direktora_muzeya.pdf",
+      "sha256": "bf15b30478ff388fcd1e56382b343b3d1d73c57f6492d5e7c1bd2be1e8631d07",
+      "size_bytes": 583368,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115411-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115411-1.pdf",
+      "sha256": "0d43e4fdd76c5fa0267209aa30245481c2561a72536a705d194083406435041b",
+      "size_bytes": 219101,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115448-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115448-1.pdf",
+      "sha256": "b424a77b7ba3da0a0dacbe9c555cef62fa7d53413bf135cc8ab8145811fef9ab",
+      "size_bytes": 754009,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115545-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115545-1.pdf",
+      "sha256": "f38b5f9ad880289262109373dbecb9bc08151bf121b711b9748d7b66b26fffd5",
+      "size_bytes": 1719390,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115621-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115621-1.pdf",
+      "sha256": "aca0707a1c6614609cb1c621f6a733554d9b90a1a643b0bfc60a94756b5fd414",
+      "size_bytes": 2511572,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115739-struktura_muzeya.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115739-struktura_muzeya.pdf",
+      "sha256": "5959fb4403c3e7a995603709083c0ce8b913701aad98232c30bade44812d6efe",
+      "size_bytes": 106370,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260203115820-1.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260203115820-1.pdf",
+      "sha256": "c05fe1064dd45becbe976184900ab7318eb00ef0145988c915b76cfd092985c3",
+      "size_bytes": 19368853,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20260506172519-eup_compressed.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20260506172519-eup_compressed.pdf",
+      "sha256": "7b85bf0b9dda2c79a8fcf0db3c250704660a725b28d4d8dfb795f2df907b3ab1",
+      "size_bytes": 15394110,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/20261006153547-prikaz_no_80_preiskurant.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/20261006153547-prikaz_no_80_preiskurant.pdf",
+      "sha256": "16420584d1d5d080b3b2374f27c69bb7e3e318d2b332993854a48aca3ac8556d",
+      "size_bytes": 9975858,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/211116131115_0001.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/211116131115_0001.pdf",
+      "sha256": "469391e47d01c18578ac24e597cffe904619f74c7d0fc64f55aa8c9f2f8a478f",
+      "size_bytes": 904711,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/kodeks_etiki.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/kodeks_etiki.pdf",
+      "sha256": "8d36da1bfa8367595c4978235b073aae71bda535397d5156ead73ff95e1d324b",
+      "size_bytes": 3299770,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/plan_meropriyatiy_po_protivodeystviyu_korrupcii_na_2018_g.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/plan_meropriyatiy_po_protivodeystviyu_korrupcii_na_2018_g.pdf",
+      "sha256": "2e206de396dc3d404ec386dd4712efab46705d4afe9aad30bcd6625401d34c60",
+      "size_bytes": 5205510,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/plan_na_2023_g.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/plan_na_2023_g.pdf",
+      "sha256": "e49a507ff24a79602676f1be9979248e1e76fb608ae14965b1f5d55ee1814b15",
+      "size_bytes": 998139,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/plan_protivodeystvie_korrupcii_19.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/plan_protivodeystvie_korrupcii_19.pdf",
+      "sha256": "7f68bef54348a6c2e8a997d36eacf1dc5e5b5837623c44ad9151d4896fbea29d",
+      "size_bytes": 1163694,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/polozhenie_o_nauchno-metodicheskom_sovete_spb_gbuk_sankt-peterburgskiy_muzey_hleba.docx",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/polozhenie_o_nauchno-metodicheskom_sovete_spb_gbuk_sankt-peterburgskiy_muzey_hleba.docx",
+      "sha256": "111a6f848da5598692386378f22867a6e8bbe29481259b09c68a231648e63f7a",
+      "size_bytes": 1744296,
+      "format": "docx"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/prikaz_ob_utverzhdenii_komissii_po_protivodeystviyu_korrupcii.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/prikaz_ob_utverzhdenii_komissii_po_protivodeystviyu_korrupcii.pdf",
+      "sha256": "e858259dcbe3f6aa64864c2abb34863e0414335a6a2542ff81734dfb2b7ddbba",
+      "size_bytes": 311629,
+      "format": "pdf"
+    },
+    {
+      "legacy_path": "/sites/default/files/page/protokoly_zasedaniya_komissii_po_protivodeystviyu_korrupcii_v_spb_gbuk_sankt-peterburgskiy_muzey_hleba_za_2022_god.pdf",
+      "url": "https://muzei-xleb.ru/sites/default/files/page/protokoly_zasedaniya_komissii_po_protivodeystviyu_korrupcii_v_spb_gbuk_sankt-peterburgskiy_muzey_hleba_za_2022_god.pdf",
+      "sha256": "8a3c6f55c1ccda89930014a8bca258559039cb47d2a7e676ee2e701a716dd9b4",
+      "size_bytes": 1303137,
+      "format": "pdf"
+    }
+  ]
+}

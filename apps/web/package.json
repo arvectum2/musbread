@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "python3 ../../scripts/build_museum_legacy_page_aliases.py",
+    "postbuild": "python3 ../../scripts/build_museum_legacy_page_aliases.py && python3 ../../scripts/build_museum_nginx_legacy_redirects.py",
     "start": "next start",
     "lint": "eslint",
     "test:e2e": "python3 ../../scripts/build_csp.py out --output .csp-header.txt && playwright test",
@@ -18,7 +18,8 @@
     "test:events": "node --experimental-strip-types --test src/data/event-archive.test.ts src/data/event-categories.test.ts src/data/current-exhibitions.test.ts",
     "test:navigation-tree": "node --experimental-strip-types --test src/data/navigation-tree.test.ts",
     "test:seo": "node --experimental-strip-types --test src/data/seo-routes.test.ts",
-    "test:official-docs": "node --experimental-strip-types --test src/data/museum-official-documents.test.ts"
+    "test:official-docs": "node --experimental-strip-types --test src/data/museum-official-documents.test.ts",
+    "build:museum-deploy": "npm run build && python3 ../../scripts/export_official_museum_original_documents.py --apply"
   },
   "dependencies": {
     "next": "16.4.1",
