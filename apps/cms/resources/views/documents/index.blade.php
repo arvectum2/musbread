@@ -11,7 +11,7 @@ label{display:block;margin-top:.7rem}
 input,select,button{font:inherit;padding:.45rem}
 input,select{max-width:100%}
 table{border-collapse:collapse;width:100%}td,th{padding:.65rem;border-bottom:1px solid #d7dcdf;text-align:left}
-button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:.2rem solid #1679be}
+button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:.2rem solid #1679be}
 .warning{border-left:.35rem solid #c47411;padding:.8rem;background:#fff4dc}
 .drop{border:.15rem dashed #687f8b;padding:1rem;background:#f2f9f9;border-radius:.55rem;margin:.5rem 0}
 .drop.drag{border-color:#007e83;background:#d9f2ef}
@@ -47,19 +47,43 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,s
 <table><thead><tr><th>Название</th><th>Формат</th><th>Материал</th><th>Действие</th></tr></thead><tbody>
 @foreach($documents as $document)<tr>
 <td>{{ $document->label }}</td><td>{{ strtoupper($document->file_type) }} @if($document->source_type === "xls")(из XLS, только значения)@endif ({{ round($document->size_bytes/1024) }} КБ)
-<p>{{ $document->accessibility_reviewed ? 'HTML-альтернатива проверена редактором' : 'Доступность не подтверждена' }}</p></td>
+<p>{{ $document->accessible_edition_sha256
+  ? 'Проверенная полнотекстовая HTML-редакция'
+  : ($document->accessibility_reviewed ? 'Проверено только пояснение (не полная HTML-редакция)' : 'Доступность не подтверждена') }}</p></td>
 <td>{{ $document->entry?->title }}</td>
 <td><a href="{{ route('museum.documents.download', $document) }}">Скачать</a>
 <form action="{{ route('museum.documents.accessibility', $document) }}" method="post">
 @csrf @method('PATCH')
-<label for="accessibility-{{ $document->id }}">Текстовая альтернатива или пояснение по доступности</label>
+<label for="accessibility-{{ $document->id }}">Пояснение по доступности (не равно полной HTML-версии)</label>
 <textarea id="accessibility-{{ $document->id }}" name="accessibility_note" maxlength="2000"
   rows="3" style="width:100%">{{ $document->accessibility_note }}</textarea>
 <input type="hidden" name="accessibility_reviewed" value="0">
 <label for="reviewed-{{ $document->id }}"><input id="reviewed-{{ $document->id }}"
   name="accessibility_reviewed" type="checkbox" value="1"
-  @checked($document->accessibility_reviewed)> Редактор проверил полноту HTML-альтернативы (не означает PDF/UA)</label>
-<button type="submit">Сохранить доступность</button></form>
+  @checked($document->accessibility_reviewed)> Пояснение проверено редактором (не подтверждает эквивалентность HTML или PDF/UA)</label>
+<button type="submit">Сохранить пояснение</button></form>
+<form action="{{ route('museum.documents.accessible-edition', $document) }}" method="post">
+@csrf @method('PATCH')
+<input type="hidden" name="source_sha256" value="{{ $document->sha256 }}">
+<label for="html-edition-{{ $document->id }}">Полнотекстовая доступная HTML-редакция исходного файла (до 200 КБ)</label>
+<p id="html-guidance-{{ $document->id }}">
+  <strong>Важно:</strong> вставьте только проверенный полный текст из оригинала.
+  Не используйте аннотацию вместо документа. Допустимы заголовки h2–h4, абзацы,
+  списки и таблицы. Статус черновика не делает текст публичным.
+  После сверки каждой страницы оригинального PDF сотрудник музея может подтвердить эквивалентность.
+  Любое изменение HTML или исходного PDF аннулирует подтверждение.
+</p>
+<textarea id="html-edition-{{ $document->id }}" name="accessible_html"
+  maxlength="200000" rows="7" style="width:100%" aria-describedby="html-guidance-{{ $document->id }}">{{ old('accessible_html', $document->accessible_html) }}</textarea>
+<input type="hidden" name="approve_equivalence" value="0">
+<label for="approve-equivalence-{{ $document->id }}">
+  <input type="checkbox" name="approve_equivalence" value="1" id="approve-equivalence-{{ $document->id }}"
+    @checked($document->accessible_edition_sha256 !== null)>
+  Я сопоставил содержимое HTML со всеми страницами именно этого исходного файла (SHA-256:
+  <code>{{ $document->sha256 }}</code>) и подтверждаю содержательную эквивалентность для публикации.
+</label>
+<button type="submit">Сохранить HTML-редакцию / подтверждение</button>
+</form>
 <form action="{{ route('museum.documents.destroy', $document) }}" method="post">@csrf @method('DELETE')
 <button type="submit">Удалить</button></form></td>
 </tr>@endforeach

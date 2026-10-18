@@ -11,7 +11,7 @@ export default function RichText({ html }: { html: string }) {
     allowedTags: [
       "p", "br", "strong", "em", "b", "i", "u",
       "ul", "ol", "li", "blockquote", "h2", "h3", "h4", "a",
-      "table", "thead", "tbody", "tr", "th", "td",
+      "table", "caption", "thead", "tbody", "tfoot", "tr", "th", "td",
     ],
     allowedAttributes: {
       a: ["href", "title", "rel", "tabindex"],
@@ -19,6 +19,8 @@ export default function RichText({ html }: { html: string }) {
       // viewport. Let keyboard-only and screen reader users focus + scroll
       // the actual table, without flattening real 2026 museum price cells.
       table: ["tabindex"],
+      th: ["scope", "id", "colspan", "rowspan"],
+      td: ["headers", "colspan", "rowspan"],
     },
     allowedSchemes: ["http", "https", "mailto"],
     allowedSchemesByTag: { a: ["http", "https", "mailto"] },

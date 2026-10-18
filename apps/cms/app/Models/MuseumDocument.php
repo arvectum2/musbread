@@ -11,11 +11,16 @@ final class MuseumDocument extends Model
         'museum_entry_id', 'label', 'file_type', 'storage_path',
         'sha256', 'size_bytes', 'uploaded_by', 'source_type',
         'accessibility_note', 'accessibility_reviewed',
+        'accessible_html', 'accessible_edition_sha256',
+        'accessible_reviewed_at', 'accessible_reviewed_by',
     ];
 
     protected function casts(): array
     {
-        return ['accessibility_reviewed' => 'boolean'];
+        return [
+            'accessibility_reviewed' => 'boolean',
+            'accessible_reviewed_at' => 'datetime',
+        ];
     }
 
     public function entry(): BelongsTo

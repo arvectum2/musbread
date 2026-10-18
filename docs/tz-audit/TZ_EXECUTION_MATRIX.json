@@ -4057,15 +4057,15 @@
       "Строки оригинала": "257",
       "Требование": "Альтернатива: эквивалентная HTML/машиночитаемая версия PDF",
       "Приоритет": "P0",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
+      "Светофор": "🟡 Частично",
+      "Готовность": "Частично",
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 / D25–D40 · доступность",
-      "Что сделать для завершения": "Загрузить пары PDF+HTML, проверить эквивалентность",
-      "Что нужно от музея / внешний блокер": "Документы/разрешение конвертации",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Загрузить пары PDF+HTML, проверить эквивалентность",
-      "Что уже есть (доказательство)": "Нет системного хранения альтернатив 18.10.2026 generated verified source metadata inventory for all 44 documents with page counts and extractable-text risk; no legally false accessible HTML versions fabricated from source scans. Need original text/OCR proofreading and museum approval for equal-content alternatives. docs/TZ211_212_213_OFFICIAL_DOCUMENT_ACCESSIBILITY_20261018.md.",
+      "Что сделать для завершения": "Technical source-hash-bound CMS editing and reviewed full HTML publication complete, but legally equivalent accessible versions of each real original PDF still require OCR/original text, meticulous review and museum signoff.",
+      "Что нужно от музея / внешний блокер": "Provide original editable PDF source text or permission for OCR and transcription; museum legal/editorial owner must verify complete content, original version, tables, signatures and approval for every HTML edition.",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Technical source-hash-bound CMS editing and reviewed full HTML publication complete, but legally equivalent accessible versions of each real original PDF still require OCR/original text, meticulous review and museum signoff.",
+      "Что уже есть (доказательство)": "Нет системного хранения альтернатив 18.10.2026 generated verified source metadata inventory for all 44 documents with page counts and extractable-text risk; no legally false accessible HTML versions fabricated from source scans. Need original text/OCR proofreading and museum approval for equal-content alternatives. docs/TZ211_212_213_OFFICIAL_DOCUMENT_ACCESSIBILITY_20261018.md. 18.10.2026: private MoonShine full-document HTML equivalence drafts now separate from short accessibility_note. Source PDF file SHA and size checked; safe HTMLPurifier, explicit human source-hash-bound equivalence signoff with reviewer/time, minimum 300 text characters as accidental-annotation gate only. Digest of exact original SHA and clean HTML verified BEFORE generated assets; changing reviewed text or original fails closed. Next.js exposes reviewed HTML in accessible disclosure beside original PDF, unreviewed text never public. Five PHP tests for draft/approval/sanitization/mismatch/revocation and revision fingerprint. No original museum PDFs claimed compliant: actual 42 untagged PDFs lack approved full legal text, ZERO full HTML editions in live local CMS. docs/TZ213_EDITORIAL_HTML_EQUIVALENTS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6199,8 +6199,8 @@
   ],
   "counts": {
     "Да": 84,
-    "Нет": 140,
-    "Частично": 101
+    "Нет": 139,
+    "Частично": 102
   },
   "workflow": {
     "Готово в прототипе": 84,

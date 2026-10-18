@@ -130,6 +130,30 @@ class ExportMuseumSnapshot extends Command
             }
         }
 
+        // Accessible HTML is independent of the shorter accessibility note.
+        // Never deliver an edition whose editorial approval no longer matches
+        // the *current* PDF SHA and the *exact* cleaned text.
+        $accessibleEdition = app(\App\Support\MuseumDocumentAccessibleEdition::class);
+        foreach ($publicEntries as $publicEntry) {
+            foreach ($publicEntry->documents as $document) {
+                if ($document->accessible_edition_sha256 === null) continue;
+                $html=(string)$document->accessible_html;
+                if ($document->accessible_reviewed_at === null
+                    || $document->accessible_reviewed_by === null
+                    || $html === ''
+                    || $accessibleEdition->clean($html) !== $html
+                    || !hash_equals((string)$document->accessible_edition_sha256,
+                        $accessibleEdition->signature((string)$document->sha256,$html))) {
+                    throw new \RuntimeException('Accessible document edition needs new editorial approval: '.$document->id);
+                }
+                try {
+                    $accessibleEdition->assertReviewable($html);
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    throw new \RuntimeException('Incomplete accessible HTML edition: '.$document->id,0,$e);
+                }
+            }
+        }
+
         // Resolve relation links ONLY among approved public records (including
         // the section ancestor check). IDs and CMS pivot rows stay private.
         $entryById = $publicEntries->keyBy('id');
@@ -298,6 +322,10 @@ class ExportMuseumSnapshot extends Command
                         // Unreviewed editorial notes must never leak to the public JSON.
                         'accessibility_note' => $document->accessibility_reviewed
                             ? $document->accessibility_note : null,
+                        // Distinct full-text HTML, published only after human
+                        // equivalence attestation and immutable hash binding.
+                        ...($document->accessible_edition_sha256 !== null
+                            ? ['accessible_html'=>$document->accessible_html] : []),
                     ];
                 }
 

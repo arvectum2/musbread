@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MuseumDocument;
 use App\Models\MuseumEntry;
 use App\Support\MuseumDocumentInspector;
+use App\Support\MuseumDocumentAccessibleEdition;
 use App\Support\MuseumLegacySpreadsheetNormalizer;
 use App\Support\MuseumSectionAccess;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -101,6 +102,46 @@ final class MuseumDocumentController extends Controller
         ]);
         return redirect()->route('museum.documents.index')
             ->with('status', 'Отметка редакторской проверки доступности сохранена.');
+    }
+
+    /** Draft and independently verify an equivalence candidate against the
+     * EXACT current file hash. An accessibility note is never an HTML edition.
+     */
+    public function accessibleEdition(
+        Request $request, MuseumDocument $document,
+        MuseumDocumentAccessibleEdition $edition
+    ): RedirectResponse {
+        $this->requireEntry($document->entry);
+        $validated=$request->validate([
+            'source_sha256'=>['required','string','size:64'],
+            'accessible_html'=>['nullable','string','max:200000'],
+            'approve_equivalence'=>['required','boolean'],
+        ]);
+        $path=Storage::disk('local')->path($document->storage_path);
+        if (!hash_equals((string)$document->sha256,$validated['source_sha256'])
+            || !is_file($path)
+            || !hash_equals((string)$document->sha256,(string)hash_file('sha256',$path))
+            || filesize($path)!==$document->size_bytes) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'source_sha256'=>'Оригинал изменён: HTML-редакцию нельзя согласовать по устаревшему файлу.',
+            ]);
+        }
+        $clean=$edition->clean((string)($validated['accessible_html'] ?? ''));
+        $approved=(bool)$validated['approve_equivalence'];
+        if($approved){
+            $edition->assertReviewable($clean);
+        }
+        $document->update([
+            'accessible_html'=>$clean !== '' ? $clean : null,
+            'accessible_edition_sha256'=>$approved
+                ? $edition->signature($document->sha256,$clean) : null,
+            'accessible_reviewed_at'=>$approved ? now() : null,
+            'accessible_reviewed_by'=>$approved ? MuseumSectionAccess::user()?->id : null,
+        ]);
+        return redirect()->route('museum.documents.index')
+            ->with('status',$approved
+                ? 'Редактор подтвердил эквивалентную HTML-редакцию исходного документа.'
+                : 'HTML-черновик сохранён приватно; эквивалентность ещё не подтверждена.');
     }
 
     public function destroy(MuseumDocument $document): RedirectResponse

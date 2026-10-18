@@ -1,3 +1,4 @@
+import RichText from "@/components/RichText";
 import MuseumAnchor from "@/components/MuseumAnchor";
 import type { Metadata } from "next";
 import Link from "@/components/MuseumLink";
@@ -72,13 +73,23 @@ export default async function MuseumEntryPage({ params }: Props) {
           <MuseumAnchor href={document.href} download className="text-link">
             {document.label} ({document.format.toUpperCase()}, {Math.ceil(document.size_bytes / 1024)} КБ)
           </MuseumAnchor>
+          {document.accessible_html
+            ? <details id={"html-edition-"+document.href.split("/").pop()?.split(".")[0]}
+                className="museum-document-html-edition">
+                <summary>Читать проверенную HTML-версию этого документа</summary>
+                <p>HTML-редакция подготовлена и сверена с исходным документом редактором музея.
+                Оригинальный файл доступен по ссылке выше.</p>
+                <RichText html={document.accessible_html}/>
+              </details>
+            : null}
           {document.accessibility_reviewed && document.accessibility_note
             ? <p className="museum-document-accessibility">{document.accessibility_note}</p>
-            : <p className="museum-document-accessibility">Доступность документа ещё проверяется редактором;
-              основную информацию можно прочесть в тексте этой страницы.</p>}
+            : <p className="museum-document-accessibility">Полнотекстовая HTML-версия пока не утверждена; доступность исходного файла
+              для экранного диктора может быть ограничена.</p>}
         </li>)}
       </ul>
-      <p>Файлы скачиваются на устройство. Для доступного просмотра используйте описание на этой странице.</p>
+      <p>Файлы скачиваются на устройство. Полная HTML-версия появляется отдельно
+        только после подтверждения эквивалентности редактором музея.</p>
     </section>}
     {entry.related_entries && entry.related_entries.length > 0 && <section className="museum-related" aria-label="Связанные материалы">
       <h2>Связанные материалы</h2>

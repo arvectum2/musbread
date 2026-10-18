@@ -25,12 +25,22 @@ const assert=require('node:assert/strict');
   assert(text.indexOf('QA: часть текста после ролика')>text.indexOf('QA: запись научного семинара'),'Following paragraph appears after player');
   await video.getByRole('button',{name:'Читать текстовую альтернативу'}).click();
   assert.match(await video.getByRole('region',{name:/Текстовая альтернатива/}).textContent(),/QA: доступное текстовое описание/);
+  // Install the request listener BEFORE click. iframe attachment is
+  // synchronous, network navigation is asynchronous in Chromium.
+  const firstVerifiedVkRequest=page.waitForRequest(
+    request=>/^https:\/\/(vk\.com|vkvideo\.ru)\//.test(request.url()),
+    {timeout:8000});
   await video.getByRole('button',{name:'Посмотреть видеозапись'}).click();
   assert.equal(await video.locator('iframe').count(),1);
   assert.match(await video.locator('iframe').getAttribute('src'),/^https:\/\/vk\.com\/video_ext\.php\?/);
   assert.equal(await video.locator('iframe').getAttribute('referrerpolicy'),'no-referrer');
   await page.waitForFunction(()=>document.querySelector('.museum-inline-video iframe')!==null);
-  assert(external.length>0,'Click must permit request to verified VK iframe host');
+  const requested=await firstVerifiedVkRequest;
+  // Chromium may emit a frame navigation request which CSP blocks before
+  // Playwright route interception. Do not require the route hook to see it:
+  // the actual page request and safe iframe URL are the evidence of opt-in.
+  assert.match(requested.url(),/^https:\/\/(vk\.com|vkvideo\.ru)\/video_ext\.php\?/,
+    'Video click must initiate only the verified VK iframe navigation');
   const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
   assert(noOverflow<=2,'CMS inline video overflows 320px by '+noOverflow);
   await video.getByRole('button',{name:'Закрыть видеоплеер'}).click();

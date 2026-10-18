@@ -13,6 +13,7 @@ Route::middleware(\MoonShine\Laravel\Http\Middleware\Authenticate::class)->group
     Route::post('/admin/museum-documents', [\App\Http\Controllers\MuseumDocumentController::class, 'store'])->name('museum.documents.store');
     Route::get('/admin/museum-documents/{document}/download', [\App\Http\Controllers\MuseumDocumentController::class, 'download'])->name('museum.documents.download');
     Route::patch('/admin/museum-documents/{document}/accessibility', [\App\Http\Controllers\MuseumDocumentController::class, 'accessibility'])->name('museum.documents.accessibility');
+    Route::patch('/admin/museum-documents/{document}/accessible-edition', [\App\Http\Controllers\MuseumDocumentController::class, 'accessibleEdition'])->name('museum.documents.accessible-edition');
     Route::delete('/admin/museum-documents/{document}', [\App\Http\Controllers\MuseumDocumentController::class, 'destroy'])->name('museum.documents.destroy');
     Route::get('/admin/museum-activity', [\App\Http\Controllers\MuseumUserActivityController::class, 'index'])->name('museum.activity.stats');
     Route::get('/admin/museum-sections/tree', [\App\Http\Controllers\MuseumSectionTreeController::class, 'index'])->name('museum.sections.tree');

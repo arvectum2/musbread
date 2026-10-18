@@ -37,6 +37,8 @@ export interface MuseumPublishedDocument {
   size_bytes: number;
   accessibility_reviewed?: boolean;
   accessibility_note?: string | null;
+  /** Human-reviewed full-text HTML equivalent, never a short description. */
+  accessible_html?: string;
 }
 export interface MuseumPublishedVideo {
   code:string;

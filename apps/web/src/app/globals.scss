@@ -707,3 +707,13 @@ html[data-vision-mode="on"] .official-source-content .rich-text table:focus-visi
   outline:4px solid #074cdb;
   outline-offset:-4px;
 }
+
+
+/* TZ-213: independently reviewed full-text HTML edition lives next to the
+ * original download, never confused with a short editorial comment. */
+.museum-document-html-edition{max-width:100%;min-width:0;margin:.8rem 0;
+  padding:.8rem;border:1px solid var(--line);border-radius:.4rem;overflow-wrap:anywhere}
+.museum-document-html-edition summary{cursor:pointer;font-weight:700;
+  padding:.45rem 0;text-decoration:underline;text-underline-offset:.2rem}
+.museum-document-html-edition summary:focus-visible{outline:3px solid #155fef;outline-offset:3px}
+.museum-document-html-edition .rich-text{max-width:100%;min-width:0}
