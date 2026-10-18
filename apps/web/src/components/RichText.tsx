@@ -12,7 +12,7 @@ export default function RichText({ html }: { html: string }) {
       "ul", "ol", "li", "blockquote", "h2", "h3", "h4", "a",
       "table", "thead", "tbody", "tr", "th", "td",
     ],
-    allowedAttributes: { a: ["href", "title", "rel"] },
+    allowedAttributes: { a: ["href", "title", "rel", "tabindex"] },
     allowedSchemes: ["http", "https", "mailto"],
     allowedSchemesByTag: { a: ["http", "https", "mailto"] },
     transformTags: {
@@ -20,6 +20,9 @@ export default function RichText({ html }: { html: string }) {
         tagName: "a",
         attribs: {
           ...attributes,
+          // Source HTML cannot force a hostile positive/negative tab order.
+          // macOS WebKit also needs explicit 0 to focus article links via Tab.
+          tabindex: attributes.href ? "0" : "-1",
           ...(attributes.title?.trim() || !attributes.href
             ? {} : {title: museumLinkTitle(attributes.href) ?? ""}),
         },

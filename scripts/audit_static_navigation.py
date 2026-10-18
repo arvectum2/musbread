@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Check all internal anchor links and fragments in an exported Next.js site.
+"""Check static navigation, fragments and explicit Tab order for public links.
 
-Scope: static HTML routes and in-page anchors; no external link requests.
+All exported internal/external anchors must be sequentially focusable by
+native macOS WebKit (explicit tabindex=0), never through a JS keyboard hack.
 """
 from __future__ import annotations
 
@@ -14,7 +15,7 @@ from urllib.parse import unquote, urljoin, urlsplit
 class Anchors(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.links: list[str] = []
+        self.links: list[tuple[str, str | None]] = []
         self.ids: set[str] = set()
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -22,7 +23,7 @@ class Anchors(HTMLParser):
         if data.get("id"):
             self.ids.add(data["id"])  # type: ignore[arg-type]
         if tag == "a" and data.get("href"):
-            self.links.append(data["href"])  # type: ignore[arg-type]
+            self.links.append((data["href"], data.get("tabindex")))  # type: ignore[arg-type]
 
 
 def audit_links(root: Path) -> dict[str, int]:
@@ -44,7 +45,9 @@ def audit_links(root: Path) -> dict[str, int]:
     for page in pages:
         relative = page.relative_to(root).as_posix()
         url_path = "/" + relative.removesuffix("index.html")
-        for href in parsed(page).links:
+        for href, tabindex in parsed(page).links:
+            if tabindex != "0":
+                errors.append(f"{url_path} -> {href} (missing safe sequential tabindex=0)")
             if href.lower().startswith("javascript:"):
                 errors.append(f"{url_path} -> forbidden JavaScript URL")
                 continue
@@ -66,7 +69,7 @@ def audit_links(root: Path) -> dict[str, int]:
             checked += 1
 
     if errors:
-        raise ValueError(f"{len(errors)} broken internal links:\n" + "\n".join(errors[:40]))
+        raise ValueError(f"{len(errors)} unsafe public links / broken navigation:\n" + "\n".join(errors[:40]))
     return {"pages": len(pages), "verified_internal_links": checked}
 
 
