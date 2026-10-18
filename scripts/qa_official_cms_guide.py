@@ -24,7 +24,11 @@ REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-
             "excursion-theatrical", "children-interactive", "children-thematic", "museum-tour-kolobok",
             "museum-tour-interaktivnaya-programma-dlya-detey-lovi-ritm",
             "museum-shop", "children-workshops", "excursion-workshops-adults",
-            "museum-workshop-kukly-kuvadki"}
+            "museum-workshop-kukly-kuvadki",
+            "exhibitions-current", "exhibitions-traveling",
+            "exhibitions-past", "exhibitions-virtual",
+            "museum-exhibit-2026-10-05-ot-remesla-do-iskusstva-reznye-pryanichnye-doski",
+            "museum-exhibit-2025-10-08-hleb-blokadnogo-goroda"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -70,8 +74,12 @@ def main() -> None:
             if n != 12:
                 raise RuntimeError("All 12 real museum workshop source pages must remain drafts")
             n = db.execute("select count(*) from museum_entries where status='draft'").fetchone()[0]
-            if n != 63:
-                raise RuntimeError("Private working CMS count changed: expected 63 drafts")
+            if n != 73:
+                raise RuntimeError("Private working CMS count changed: expected 73 drafts")
+            n = db.execute("select count(*) from museum_entries "
+                           "where slug like 'museum-exhibit-%' and type='exhibition' and status='draft'").fetchone()[0]
+            if n != 6:
+                raise RuntimeError("All six real exhibition description drafts must remain private")
 
     with tempfile.TemporaryDirectory(prefix="museum-guide-qa-", dir=PRIVATE) as name:
         work = Path(name)
@@ -105,6 +113,22 @@ def main() -> None:
                        "excerpt='QA: редакторская аннотация программы Кувадка.',"
                        "body='<p>QA: отредактированное содержание мастер-класса Кувадка.</p>' "
                        "where slug='museum-workshop-kukly-kuvadki'")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes') "
+                       "where slug in ('exhibitions-current','exhibitions-traveling',"
+                       "'exhibitions-past','exhibitions-virtual')")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: резные пряничные доски музея',"
+                       "excerpt='QA: редакторская аннотация текущей выставки.',"
+                       "body='<p>QA: утверждённая редакция выставки резных досок.</p>' "
+                       "where slug='museum-exhibit-2026-10-05-ot-remesla-do-iskusstva-reznye-pryanichnye-doski'")
+            db.execute("update museum_entries set status='published',"
+                       "published_at=datetime('now','-10 minutes'),"
+                       "title='QA: передвижной Хлеб блокадного города',"
+                       "excerpt='QA: редакторский анонс выездной выставки.',"
+                       "body='<p>QA: редакция выездной выставки о блокадном хлебе.</p>' "
+                       "where slug='museum-exhibit-2025-10-08-hleb-blokadnogo-goroda'")
             shop_section_id = db.execute(
                 "select id from museum_sections where slug='museum-shop'").fetchone()[0]
             db.execute("insert into museum_entries "
@@ -345,6 +369,45 @@ def main() -> None:
             raise RuntimeError("Approved workshop editor detail URL missing")
         if (out/"museum/museum-workshop-rospis-izrazca/index.html").is_file():
             raise RuntimeError("Unpublished museum workshop draft incorrectly public")
+        current_exhibition = html.fromstring(
+            (out/"guide/exhibitions-current/index.html").read_bytes())
+        traveling_exhibition = html.fromstring(
+            (out/"guide/exhibitions-traveling/index.html").read_bytes())
+        past_exhibition = html.fromstring(
+            (out/"guide/exhibitions-past/index.html").read_bytes())
+        virtual_exhibition = html.fromstring(
+            (out/"guide/exhibitions-virtual/index.html").read_bytes())
+        for name, doc, count in (
+            ("current",current_exhibition,2),
+            ("traveling",traveling_exhibition,4),
+            ("past",past_exhibition,12),
+            ("virtual",virtual_exhibition,12),
+        ):
+            if len(doc.xpath("//main//article[contains(@class,'official-museum-program-card')]")) != count:
+                raise RuntimeError("Published CMS exhibition index "+name+" lost real source item count")
+            if "Содержание, опубликованное редактором музея" not in doc.text_content():
+                raise RuntimeError("Exhibition CMS index no longer editor-managed: "+name)
+        if "3 октября – 7 декабря 2026 г." not in current_exhibition.text_content():
+            raise RuntimeError("Original current exhibition date lost")
+        if "QA: резные пряничные доски музея" not in current_exhibition.text_content():
+            raise RuntimeError("CMS approved current exhibit did not override the source title")
+        if "QA: передвижной Хлеб блокадного города" not in traveling_exhibition.text_content():
+            raise RuntimeError("CMS approved traveling exhibit did not override the source title")
+        for name, doc in (("current",current_exhibition),("traveling",traveling_exhibition)):
+            links=doc.xpath("//main//section[contains(@class,'official-exhibitions')]"
+                            "//a[starts-with(@href,'/exhibitions/')]")
+            if len(links)!=1:
+                raise RuntimeError("CMS exhibition "+name+" links to draft exhibits or lost editor entry")
+        if not (out/"exhibitions/museum-exhibit-2026-10-05-ot-remesla-do-iskusstva-reznye-pryanichnye-doski/index.html").is_file():
+            raise RuntimeError("Approved current source exhibition lacks public detail route")
+        if (out/"exhibitions/museum-exhibit-2025-10-08-hleb-v-russkih-tradiciyah/index.html").is_file():
+            raise RuntimeError("Unapproved traveling source draft was released")
+        future=html.fromstring((out/"guide/exhibitions-future/index.html").read_bytes())
+        if not future.xpath("//main//section[@aria-label='Будущие выставки из CMS']"):
+            raise RuntimeError("Missing CMS-filtered future exhibitions section")
+        future_section=future.xpath("//main//section[@aria-label='Будущие выставки из CMS']")[0]
+        if "Выставка о хлебопечении" in future_section.text_content():
+            raise RuntimeError("Precontract demo exhibition falsely appears in future exhibition section")
         h1 = [str(x).strip() for x in privacy.xpath("//main//h1/text()")]
         if h1 != ["QA: заголовок из редактируемой CMS"]:
             raise RuntimeError("CMS H1 not authoritative on guide route: " + repr(h1))
@@ -398,12 +461,16 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 23 isolated published CMS records including 12 real workshop cards"
-          " in both adult/children sections, edited workshop detail and a QA-only"
-          " synthetic shop item (on disposable DB ONLY), zero checkout/forms,"
-          " 4 original excursion categories, 17 excursion listings,"
-          " 11 halls, nine FAQ and 44 unchanged museum files with SHA256;"
-          " working CMS remains 63 private drafts/44 docs, no demo item copied back.")
+    print("PASS: 29 isolated approved CMS records incl. 4 exhibition indexes"
+          " (2 current with source dates, 4 traveling, 12 past and 12 virtual),"
+          " 2 verified edited exhibition descriptions, 4 other exhibit drafts private,"
+          " 12 master classes (both audience views), CMS shop with temporary QA-only"
+          " mock item, zero checkout, 17 actual excursions, nine FAQ answers,"
+          " 11 museum halls and 44 unchanged SHA256-verified official documents;"
+          " real working DB remains 73 private content drafts and 44 documents.")
+    # Historical predecessor output deliberately superseded by current scope.
+    # print("PASS: 23 isolated published CMS records including 12 real workshop cards"
+
 
 
 if __name__ == "__main__":

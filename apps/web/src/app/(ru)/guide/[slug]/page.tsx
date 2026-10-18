@@ -20,10 +20,13 @@ import {officialExcursionBySlug} from "@/data/official-excursion-pages";
 import OfficialMuseumExcursionPrograms from "@/components/OfficialMuseumExcursionPrograms";
 import MuseumShopShowcase from "@/components/MuseumShopShowcase";
 import OfficialMuseumWorkshops from "@/components/OfficialMuseumWorkshops";
+import OfficialMuseumExhibitions from "@/components/OfficialMuseumExhibitions";
+import {exhibitionSourceIndex,officialExhibitionSourceSlugs} from "@/data/official-exhibitions";
 import {officialWorkshopSlugs} from "@/data/official-workshops";
 import {isProgramCategory,originalMuseumProgramSlugs} from "@/data/official-excursion-programs";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
 import CurrentExhibitions from "@/components/CurrentExhibitions";
+import FutureExhibitions from "@/components/FutureExhibitions";
 import EventAgenda from "@/components/EventAgenda";
 import {isAgendaSection,publishedEventsForAgendaSection} from "@/data/agenda-sections";
 import {events} from "@/data/content";
@@ -82,7 +85,8 @@ export default async function GuidePage({ params }: Props) {
       // Genuine source programs (including approved CMS revisions) are
       // presented once in the detailed category cards, not duplicated below.
       && !(isProgramCategory(slug) && originalMuseumProgramSlugs.has(entry.slug))
-      && !(slug === "children-workshops" && officialWorkshopSlugs.has(entry.slug)))
+      && !(slug === "children-workshops" && officialWorkshopSlugs.has(entry.slug))
+      && !(exhibitionSourceIndex(slug) && officialExhibitionSourceSlugs.has(entry.slug)))
     : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
   const officialSnapshot = officialSnapshotByPath(page?.legacyPath)
@@ -96,7 +100,8 @@ export default async function GuidePage({ params }: Props) {
   const showReferenceBody = !!referenceBody
     && !["museum-contacts", "museum-team", "museum-cookie"].includes(slug)
     && (slug !== "museum-exposition" || !!cmsPage)
-    && (!isProgramCategory(slug) || !!cmsPage);
+    && (!isProgramCategory(slug) || !!cmsPage)
+    && (!exhibitionSourceIndex(slug) || !!cmsPage);
   const sourceDate = officialSnapshot?.captured_utc.slice(0, 10);
 
   return <article className="section inner-page guide-page">
@@ -131,6 +136,10 @@ export default async function GuidePage({ params }: Props) {
             ? "Этот раздел опубликован редактором музея; сведения можно изменять через CMS."
             : slug === "faq"
             ? "Ответы собраны по действующим официальным материалам музея. Вопросы подготовлены для нового сайта и могут уточняться редактором."
+            : slug === "exhibitions-future"
+            ? "Раздел будущих выставок готов: отображаются только утверждённые события с будущими датами начала. Действительных анонсов пока нет."
+            : exhibitionSourceIndex(slug)
+            ? "Реальный каталог выставок перенесён с действующего сайта музея, даты и статусы соответствуют исходной редакции на дату снимка."
             : ["children-workshops","excursion-workshops-adults"].includes(slug)
             ? "Реальные музейные мастер-классы перенесены с действующего сайта. Возраст, даты и условия участия уточняйте по официальному первоисточнику."
             : slug === "museum-shop"
@@ -166,6 +175,7 @@ export default async function GuidePage({ params }: Props) {
     {isPlanVisit && <VisitAccessibilityGuide />}
     {isPlanVisit && <OfficialVisitorRules />}
     {slug === "museum-shop" && <MuseumShopShowcase />}
+    {exhibitionSourceIndex(slug) && <OfficialMuseumExhibitions category={slug} />}
     {slug === "children-workshops" && <OfficialMuseumWorkshops audience="children" />}
     {slug === "excursion-workshops-adults" && <OfficialMuseumWorkshops audience="adults" />}
     {slug === "faq" && !cmsPage && <OfficialVisitorFAQ />}
@@ -176,6 +186,8 @@ export default async function GuidePage({ params }: Props) {
     {isTeam && <MuseumTeam />}
     {slug === "museum-media" && <MuseumMediaHub />}
     {slug === "exhibitions-current" && <CurrentExhibitions
+      events={events} buildDay={new Date().toISOString().slice(0,10)} />}
+    {slug === "exhibitions-future" && <FutureExhibitions
       events={events} buildDay={new Date().toISOString().slice(0,10)} />}
     {(slug === "agenda" || slug === "agenda-events") && <p className="reference-source">
       <Link href="/events/" className="text-link">Открыть афишу и архив мероприятий →</Link>
@@ -244,7 +256,7 @@ export default async function GuidePage({ params }: Props) {
     {sourceUrl && <p className="reference-source">
       <MuseumAnchor href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</MuseumAnchor>
     </p>}
-    {page?.tenderOnly && !cmsPage && slug !== "faq" && slug !== "museum-shop" && slug !== "children-workshops" && slug !== "excursion-workshops-adults" && !childExcursionCategory && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
+    {page?.tenderOnly && !cmsPage && slug !== "faq" && slug !== "museum-shop" && slug !== "exhibitions-future" && !exhibitionSourceIndex(slug) && slug !== "children-workshops" && slug !== "excursion-workshops-adults" && !childExcursionCategory && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
     {page && (page.ancestors.length > 0 || findMenuGroup(parent.slug)
       ? <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>
       : <p><Link href="/" className="text-link">← На главную</Link></p>)}

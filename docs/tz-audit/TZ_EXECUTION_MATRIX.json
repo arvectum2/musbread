@@ -3107,15 +3107,15 @@
       "Строки оригинала": "218-219",
       "Требование": "Выставки: текущие",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · каталог",
-      "Что сделать для завершения": "Загрузить согласованное музейное расписание текущих/будущих выставок, проверить многодневные даты и принять итоговую подачу",
-      "Что нужно от музея / внешний блокер": "Официальный календарь и описания реальных выставок, даты открытия/закрытия, права на изображения",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Загрузить согласованное музейное расписание текущих/будущих выставок, проверить многодневные даты и принять итоговую подачу",
-      "Что уже есть (доказательство)": "Existing published CMS event calendar now drives /guide/exhibitions-current/ live filter: event category Выставка, start <= visitor today <= inclusive end date; separate future listings and no false current claims; units + Playwright date rollovers",
+      "Что сделать для завершения": "Technical current exhibition route, two existing true museum dates and descriptions and editorial calendar complete. Client UAT and later museum schedule changes separate.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Existing published CMS event calendar now drives /guide/exhibitions-current/ live filter: event category Выставка, start <= visitor today <= inclusive end date; separate future listings and no false current claims; units + Playwright date rollovers 18.10.2026: official museum /vistavky/tekushchie-vystavki source fetched over configured Mac mini, 2 genuine current exhibitions with original source dates (Oct 3 to Dec 7, 2026; Sep 3 to Nov 23, 2026), full 2 article descriptions saved and SHA256-verified, source-labeled dynamic /guide/exhibitions-current/ cards with inclusive CMS current-event filter. Both exhibition details are private editable CMS drafts; isolated Laravel→Next confirms one published edited title/body override and unpublished draft secrecy. Distinct official visitor dates are not inferred from URL timestamps. docs/TZ163_165_OFFICIAL_EXHIBITIONS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3126,15 +3126,15 @@
       "Строки оригинала": "220",
       "Требование": "Выставки: будущие",
       "Приоритет": "P1",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
+      "Светофор": "🟡 Частично",
+      "Готовность": "Частично",
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · каталог",
-      "Что сделать для завершения": "Будущие с правильным статусом и датами",
-      "Что нужно от музея / внешний блокер": "Афиша выставок",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Будущие с правильным статусом и датами",
-      "Что уже есть (доказательство)": "CP-13",
+      "Что сделать для завершения": "Future exhibitions technical view and CMS scheduling ready, but needs at least one museum-authorized future programme, dates, rights and release verification.",
+      "Что нужно от музея / внешний блокер": "Supply true future exhibition names, opening/end dates, text, approved image, museum schedule for CMS; verify UAT.",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Future exhibitions technical view and CMS scheduling ready, but needs at least one museum-authorized future programme, dates, rights and release verification.",
+      "Что уже есть (доказательство)": "CP-13 18.10.2026: new /guide/exhibitions-future/ page filters only published CMS exhibition events by start_date after user local today, refreshes on visibility/time, contains truthful empty state. Explicitly suppresses only original testing fixture exhibition event with known dummy title/date from published.json; validated actual source exhibition content is never presented as imaginary future exhibition. No official source future catalogue or approved dates found; no mock future exhibitions created. docs/TZ163_165_OFFICIAL_EXHIBITIONS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -3145,15 +3145,15 @@
       "Строки оригинала": "221",
       "Требование": "Выставки: передвижные",
       "Приоритет": "P1",
-      "Светофор": "🟡 Частично",
-      "Готовность": "Частично",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S2 · каталог",
-      "Что сделать для завершения": "Получить список выставок, сроки и разрешённые изображения, наполнить раздел через CMS.",
-      "Что нужно от музея / внешний блокер": "Сведения о проектах; справочная ссылка/URL без подтверждения музея не эквивалентна договорной приёмке",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Получить список выставок, сроки и разрешённые изображения, наполнить раздел через CMS.",
-      "Что уже есть (доказательство)": "Официальная /vistavky/vyezdnye-vystavki HTTP 200; уже привязана к справочному /guide/exhibitions-traveling/. Не импортированы музейные фото и даты.",
+      "Что сделать для завершения": "Four official traveling museum projects and their complete descriptions implemented; actual touring dates/locations not fabricated. Technical category fulfilled, production acceptance separate.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "Официальная /vistavky/vyezdnye-vystavki HTTP 200; уже привязана к справочному /guide/exhibitions-traveling/. Не импортированы музейные фото и даты. 18.10.2026: existing official /vistavky/vyezdnye-vistavki source checked by direct Mac mini request: actual Drupal URL /vistavky/vyezdnye-vystavki, 4 genuine traveling projects: Хлеб в русских традициях, Хлеб блокадного города, Широкая Масленица, Дом на трёх улицах. Full original body/H1/source URL and 4 HTML SHA256 captured, all 4 displayed as detailed source-linked cards on /guide/exhibitions-traveling/. Four distinct editable exhibition drafts in existing MoonShine; isolated Laravel→Next verifies editorial override, unpublished records private. Distinguishes projects from confirmed travel sessions. docs/TZ163_165_OFFICIAL_EXHIBITIONS_20261018.md.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 72,
-    "Нет": 150,
-    "Частично": 103
+    "Да": 74,
+    "Нет": 149,
+    "Частично": 102
   },
   "workflow": {
-    "Готово в прототипе": 72,
-    "Внешний блокер / наступление этапа": 253
+    "Готово в прототипе": 74,
+    "Внешний блокер / наступление этапа": 251
   }
 }

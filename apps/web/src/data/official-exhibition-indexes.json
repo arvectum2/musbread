@@ -1,0 +1,372 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "snapshot_utc": "2026-10-18T07:35:34+00:00",
+  "count": 4,
+  "indexes": [
+    {
+      "slug": "exhibitions-current",
+      "path": "/vistavky/tekushchie-vystavki",
+      "source_url": "https://muzei-xleb.ru/vistavky/tekushchie-vystavki",
+      "title": "Текущие выставки",
+      "captured_utc": "2026-10-18T07:35:34+00:00",
+      "html": "«От ремесла до искусства. Резные пряничные доски»    \n          3 октября – 7 декабря 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-10-05/ot-remesla-do-iskusstva-reznye-pryanichnye-doski\">«От ремесла до искусства. Резные пряничные доски»</a>    \n  \n      \n              \n          «Первое, второе и компот»    \n          3 сентября - 23 ноября 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-08-31/pervoe-vtoroe-i-kompot\">«Первое, второе и компот»</a>",
+      "html_sha256": "e25db8fc56df9eab0f8b29596aa9689c9608709a244e408725b6a0f3e6fd7b88",
+      "raw_text_sha256": "cb5cb0d44e9739bab75ec8c963f27c88ae464da005879fa1458b1e4a1496de71",
+      "text_length": 212,
+      "linked_exhibitions": [
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-10-05/ot-remesla-do-iskusstva-reznye-pryanichnye-doski",
+          "title": "«От ремесла до искусства. Резные пряничные доски»",
+          "path": "/vistavky/2026-10-05/ot-remesla-do-iskusstva-reznye-pryanichnye-doski",
+          "date_text": "3 октября – 7 декабря 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-08-31/pervoe-vtoroe-i-kompot",
+          "title": "«Первое, второе и компот»",
+          "path": "/vistavky/2026-08-31/pervoe-vtoroe-i-kompot",
+          "date_text": "3 сентября - 23 ноября 2026 г."
+        }
+      ],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20261005140159-c1ecd3a8-7efb-4673-b856-e57eea8fa2c5.jpg?itok=Vp-6BVrF",
+          "alt": "«От ремесла до искусства. Резные пряничные доски»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260831122118-vystavka1.jpg?itok=1WigbJzs",
+          "alt": "«Первое, второе и компот»"
+        }
+      ],
+      "images_rights_confirmed": false
+    },
+    {
+      "slug": "exhibitions-traveling",
+      "path": "/vistavky/vyezdnye-vystavki",
+      "source_url": "https://muzei-xleb.ru/vistavky/vyezdnye-vystavki",
+      "title": "Выездные выставки",
+      "captured_utc": "2026-10-18T07:35:34+00:00",
+      "html": "«Хлеб в русских традициях»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-10-08/hleb-v-russkih-tradiciyah\">«Хлеб в русских традициях»</a>    \n  \n      \n              \n          «Хлеб блокадного города»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-10-08/hleb-blokadnogo-goroda\">«Хлеб блокадного города»</a>    \n  \n      \n              \n          «Широкая Масленица»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-10-08/shirokaya-maslenica\">«Широкая Масленица»</a>    \n  \n      \n              \n          «Дом на трёх улицах»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-10-08/dom-na-tryoh-ulicah\">«Дом на трёх улицах»</a>",
+      "html_sha256": "4ce6fc2e506812a34ef28a9c85fb35735af6cb7ac9867fb8b8f3a63ec4c56186",
+      "raw_text_sha256": "a8472bc016a99ed7adc5ff869d5b94fa35788d0ab10aeaa481620b3925f73ceb",
+      "text_length": 185,
+      "linked_exhibitions": [
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-10-08/hleb-v-russkih-tradiciyah",
+          "title": "«Хлеб в русских традициях»",
+          "path": "/vistavky/2025-10-08/hleb-v-russkih-tradiciyah",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-10-08/hleb-blokadnogo-goroda",
+          "title": "«Хлеб блокадного города»",
+          "path": "/vistavky/2025-10-08/hleb-blokadnogo-goroda",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-10-08/shirokaya-maslenica",
+          "title": "«Широкая Масленица»",
+          "path": "/vistavky/2025-10-08/shirokaya-maslenica",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-10-08/dom-na-tryoh-ulicah",
+          "title": "«Дом на трёх улицах»",
+          "path": "/vistavky/2025-10-08/dom-na-tryoh-ulicah",
+          "date_text": null
+        }
+      ],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20251008144109-20230417143830-996fxik48xs.jpg?itok=Cujd0yLw",
+          "alt": "«Хлеб в русских традициях»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20230119172642-img_20230118_105202_0.jpg?itok=tI3lHO8z",
+          "alt": "«Хлеб блокадного города»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260218141809-shirokaya_maslenica_0.jpg?itok=Xiu3HOcT",
+          "alt": "«Широкая Масленица»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20251008144345-img_0077.jpg?itok=Mgrb_Oz6",
+          "alt": "«Дом на трёх улицах»"
+        }
+      ],
+      "images_rights_confirmed": false
+    },
+    {
+      "slug": "exhibitions-past",
+      "path": "/vistavky/proshedshie-vystavki",
+      "source_url": "https://muzei-xleb.ru/vistavky/proshedshie-vystavki",
+      "title": "Прошедшие выставки",
+      "captured_utc": "2026-10-18T07:35:34+00:00",
+      "html": "Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева    \n          до 28 сентября 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-09-09/vystavka-rasskazy-o-leningradcah-reprodukcii-ofortov-yu-m-neprinceva\">Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева</a>    \n  \n      \n              \n          «Дом на трёх улицах»    \n          25 июня - 31 августа 2026 года    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-06-28/dom-na-tryoh-ulicah\">«Дом на трёх улицах»</a>    \n  \n      \n              \n          «Я без пропитания оставаться не могу...»    \n          13 мая – 06 сентября 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-05-14/ya-bez-propitaniya-ostavatsya-ne-mogu\">«Я без пропитания оставаться не могу...»</a>    \n  \n      \n              \n          «Мимолетности. Зима и снова лето»    \n          06 мая 2026 г. - 14 июня 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-05-06/mimoletnosti-zima-i-snova-leto\">«Мимолетности. Зима и снова лето»</a>    \n  \n      \n              \n          «Дом на трёх улицах» в Центральном государственном архиве    \n          30 марта — 31 мая 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-04-08/dom-na-tryoh-ulicah-v-centralnom-gosudarstvennom-arhive\">«Дом на трёх улицах» в Центральном государственном архиве</a>    \n  \n      \n              \n          «Жили-были... (бытовые традиции коренных народов Ленинградской области)»    \n          18 марта — 3 мая 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-03-18/zhili-byli-bytovye-tradicii-korennyh-narodov-leningradskoy-oblasti\">«Жили-были... (бытовые традиции коренных народов Ленинградской области)»</a>    \n  \n      \n              \n          «Искусство шить красиво»    \n          5 марта 2026 г. - 19 апреля 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-03-04/iskusstvo-shit-krasivo\">«Искусство шить красиво»</a>    \n  \n      \n              \n          «Новый год по-китайски»    \n          11 февраля 2026 г. - 15 марта 2026 г    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-02-10/kitayskiy-novyy-god\">«Новый год по-китайски»</a>    \n  \n      \n              \n          «Растревоженная память»    \n          21 января 2026 г. — 01 марта 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2026-01-21/rastrevozhennaya-pamyat\">«Растревоженная память»</a>    \n  \n      \n              \n          «Солнце на сковородке»    \n          17 декабря 2025 г. — 12 апреля 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-12-18/solnce-na-skovorodke\">«Солнце на сковородке»</a>    \n  \n      \n              \n          Выставка «С Новым годом!»    \n          10 декабря — 08 февраля 2026 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-12-12/vystavka-s-novym-godom\">Выставка «С Новым годом!»</a>    \n  \n      \n              \n          «Бастион культуры»    \n          12 ноября — 14 декабря 2025 г.    \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-11-12/bastion-kultury\">«Бастион культуры»</a>",
+      "html_sha256": "2b073a64459456fb10dabc5e0e78ce5ba61292ce55dc2956117601e428998e01",
+      "raw_text_sha256": "f7f02a8c619d2c8c337d77cc66970a37ead90e0d90d885383e9ad715c2cda113",
+      "text_length": 1260,
+      "linked_exhibitions": [
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-09-09/vystavka-rasskazy-o-leningradcah-reprodukcii-ofortov-yu-m-neprinceva",
+          "title": "Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева",
+          "path": "/vistavky/2026-09-09/vystavka-rasskazy-o-leningradcah-reprodukcii-ofortov-yu-m-neprinceva",
+          "date_text": "до 28 сентября 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-06-28/dom-na-tryoh-ulicah",
+          "title": "«Дом на трёх улицах»",
+          "path": "/vistavky/2026-06-28/dom-na-tryoh-ulicah",
+          "date_text": "25 июня - 31 августа 2026 года"
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-05-14/ya-bez-propitaniya-ostavatsya-ne-mogu",
+          "title": "«Я без пропитания оставаться не могу...»",
+          "path": "/vistavky/2026-05-14/ya-bez-propitaniya-ostavatsya-ne-mogu",
+          "date_text": "13 мая – 06 сентября 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-05-06/mimoletnosti-zima-i-snova-leto",
+          "title": "«Мимолетности. Зима и снова лето»",
+          "path": "/vistavky/2026-05-06/mimoletnosti-zima-i-snova-leto",
+          "date_text": "06 мая 2026 г. - 14 июня 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-04-08/dom-na-tryoh-ulicah-v-centralnom-gosudarstvennom-arhive",
+          "title": "«Дом на трёх улицах» в Центральном государственном архиве",
+          "path": "/vistavky/2026-04-08/dom-na-tryoh-ulicah-v-centralnom-gosudarstvennom-arhive",
+          "date_text": "30 марта — 31 мая 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-03-18/zhili-byli-bytovye-tradicii-korennyh-narodov-leningradskoy-oblasti",
+          "title": "«Жили-были... (бытовые традиции коренных народов Ленинградской области)»",
+          "path": "/vistavky/2026-03-18/zhili-byli-bytovye-tradicii-korennyh-narodov-leningradskoy-oblasti",
+          "date_text": "18 марта — 3 мая 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-03-04/iskusstvo-shit-krasivo",
+          "title": "«Искусство шить красиво»",
+          "path": "/vistavky/2026-03-04/iskusstvo-shit-krasivo",
+          "date_text": "5 марта 2026 г. - 19 апреля 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-02-10/kitayskiy-novyy-god",
+          "title": "«Новый год по-китайски»",
+          "path": "/vistavky/2026-02-10/kitayskiy-novyy-god",
+          "date_text": "11 февраля 2026 г. - 15 марта 2026 г"
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2026-01-21/rastrevozhennaya-pamyat",
+          "title": "«Растревоженная память»",
+          "path": "/vistavky/2026-01-21/rastrevozhennaya-pamyat",
+          "date_text": "21 января 2026 г. — 01 марта 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-12-18/solnce-na-skovorodke",
+          "title": "«Солнце на сковородке»",
+          "path": "/vistavky/2025-12-18/solnce-na-skovorodke",
+          "date_text": "17 декабря 2025 г. — 12 апреля 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-12-12/vystavka-s-novym-godom",
+          "title": "Выставка «С Новым годом!»",
+          "path": "/vistavky/2025-12-12/vystavka-s-novym-godom",
+          "date_text": "10 декабря — 08 февраля 2026 г."
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-11-12/bastion-kultury",
+          "title": "«Бастион культуры»",
+          "path": "/vistavky/2025-11-12/bastion-kultury",
+          "date_text": "12 ноября — 14 декабря 2025 г."
+        }
+      ],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260909092947-vystavka_foto1.jpg?itok=icLUzD6M",
+          "alt": "Выставка «Рассказы о ленинградцах». Репродукции офортов Ю. М. Непринцева"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260628131109-foto_dlya_zastavki_o_vystavke.jpg?itok=dxuAas4b",
+          "alt": "«Дом на трёх улицах»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260514143523-img_2241.jpg?itok=i5m0kzrG",
+          "alt": "«Я без пропитания оставаться не могу...»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260506144848-glavnoe_foto.jpeg?itok=GLJXjZRK",
+          "alt": "«Мимолетности. Зима и снова лето»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260408154101-rfdelncjipswnactitkeq_ozeodnp6lif.jpg?itok=SatTHFYO",
+          "alt": "«Дом на трёх улицах»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260318171036-img_1901.jpg?itok=DbK4tV2g",
+          "alt": "«Жили-были... (бытовые традиции коренных народов Ленинградской области)»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260304152442-na_glavnuyu_stranicu.jpg?itok=RIr4Ym2M",
+          "alt": "«Искусство шить красиво»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260210165957-na_glavnuyu_stranicu.jpg?itok=YT_SjNxf",
+          "alt": "«Новый год по-китайски»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20260121085206-img_5066.jpg?itok=ff4R0F8l",
+          "alt": "«Растревоженная память»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20251218140249-img_1268.jpg?itok=8-LkTsSU",
+          "alt": "«Солнце на сковородке»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/img_20251210_101036.jpg?itok=uTTguFqT",
+          "alt": "Выставка «С Новым годом!»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20251114161915-bastion_kultury.jpg?itok=hIPsqkMC",
+          "alt": "«Бастион культуры»"
+        }
+      ],
+      "images_rights_confirmed": false
+    },
+    {
+      "slug": "exhibitions-virtual",
+      "path": "/vistavky/virtualnye-vystavki",
+      "source_url": "https://muzei-xleb.ru/vistavky/virtualnye-vystavki",
+      "title": "Виртуальные выставки",
+      "captured_utc": "2026-10-18T07:35:34+00:00",
+      "html": "Супница: история в каждой ложке    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-11-25/supnica-istoriya-v-kazhdoy-lozhke\">Супница: история в каждой ложке</a>    \n  \n      \n              \n          Елизавета Бём    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2025-11-21/elizaveta-byom\">Елизавета Бём</a>    \n  \n      \n              \n          «Одёжка для конфеты»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2024-10-23/odyozhka-dlya-konfety\">«Одёжка для конфеты»</a>    \n  \n      \n              \n          «Подношение гостям»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2024-10-02/virtualnaya-vystavka-podnoshenie-gostyam\">«Подношение гостям»</a>    \n  \n      \n              \n          «Хранительница тайн»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2024-07-23/hranitelnica-tayn\">«Хранительница тайн»</a>    \n  \n      \n              \n          «Праздник праздников»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2024-05-20/prazdnik-prazdnikov\">«Праздник праздников»</a>    \n  \n      \n              \n          «Копейка рубль бережёт»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2024-03-29/kopeyka-rubl-berezhyot\">«Копейка рубль бережёт»</a>    \n  \n      \n              \n          «Атрибут дальних странствий» (к Международному дню чая)    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2024-01-17/atribut-dalnih-stranstviy-k-mezhdunarodnomu-dnyu-chaya\">«Атрибут дальних странствий» (к Международному дню чая)</a>    \n  \n      \n              \n          «Пустые ящики почтовые как разведенные мосты…»    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2023-10-09/pustye-yashchiki-pochtovye-kak-razvedennye-mosty\">«Пустые ящики почтовые как разведенные мосты…»</a>    \n  \n      \n              \n          «Пища богов» (ко Всемирному дню шоколада)    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2023-07-10/pishcha-bogov-ko-vsemirnomu-dnyu-shokolada\">«Пища богов» (ко Всемирному дню шоколада)</a>    \n  \n      \n              \n          «Город, знакомый до слёз» (к 320-летию Санкт-Петербурга)    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2023-05-25/gorod-znakomyy-do-slyoz-k-320-letiyu-sankt-peterburga\">«Город, знакомый до слёз» (к 320-летию Санкт-Петербурга)</a>    \n  \n      \n              \n          «Защитникам Отечества...» (к 23 февраля 2023 г.)    \n              \n          <a href=\"https://muzei-xleb.ru/vistavky/2023-02-21/zashchitnikam-otechestva-k-23-fevralya-2023-g\">«Защитникам Отечества...» (к 23 февраля 2023 г.)</a>",
+      "html_sha256": "d3390b182091829774cb8ce0b984973841075a183c39839bdb50d253104e885f",
+      "raw_text_sha256": "c3eb80bba24e5115ada2dd4dcdbcc7faabcb677aafa3fda865c21aa0bd755fed",
+      "text_length": 809,
+      "linked_exhibitions": [
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-11-25/supnica-istoriya-v-kazhdoy-lozhke",
+          "title": "Супница: история в каждой ложке",
+          "path": "/vistavky/2025-11-25/supnica-istoriya-v-kazhdoy-lozhke",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2025-11-21/elizaveta-byom",
+          "title": "Елизавета Бём",
+          "path": "/vistavky/2025-11-21/elizaveta-byom",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2024-10-23/odyozhka-dlya-konfety",
+          "title": "«Одёжка для конфеты»",
+          "path": "/vistavky/2024-10-23/odyozhka-dlya-konfety",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2024-10-02/virtualnaya-vystavka-podnoshenie-gostyam",
+          "title": "«Подношение гостям»",
+          "path": "/vistavky/2024-10-02/virtualnaya-vystavka-podnoshenie-gostyam",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2024-07-23/hranitelnica-tayn",
+          "title": "«Хранительница тайн»",
+          "path": "/vistavky/2024-07-23/hranitelnica-tayn",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2024-05-20/prazdnik-prazdnikov",
+          "title": "«Праздник праздников»",
+          "path": "/vistavky/2024-05-20/prazdnik-prazdnikov",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2024-03-29/kopeyka-rubl-berezhyot",
+          "title": "«Копейка рубль бережёт»",
+          "path": "/vistavky/2024-03-29/kopeyka-rubl-berezhyot",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2024-01-17/atribut-dalnih-stranstviy-k-mezhdunarodnomu-dnyu-chaya",
+          "title": "«Атрибут дальних странствий» (к Международному дню чая)",
+          "path": "/vistavky/2024-01-17/atribut-dalnih-stranstviy-k-mezhdunarodnomu-dnyu-chaya",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2023-10-09/pustye-yashchiki-pochtovye-kak-razvedennye-mosty",
+          "title": "«Пустые ящики почтовые как разведенные мосты…»",
+          "path": "/vistavky/2023-10-09/pustye-yashchiki-pochtovye-kak-razvedennye-mosty",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2023-07-10/pishcha-bogov-ko-vsemirnomu-dnyu-shokolada",
+          "title": "«Пища богов» (ко Всемирному дню шоколада)",
+          "path": "/vistavky/2023-07-10/pishcha-bogov-ko-vsemirnomu-dnyu-shokolada",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2023-05-25/gorod-znakomyy-do-slyoz-k-320-letiyu-sankt-peterburga",
+          "title": "«Город, знакомый до слёз» (к 320-летию Санкт-Петербурга)",
+          "path": "/vistavky/2023-05-25/gorod-znakomyy-do-slyoz-k-320-letiyu-sankt-peterburga",
+          "date_text": null
+        },
+        {
+          "source_url": "https://muzei-xleb.ru/vistavky/2023-02-21/zashchitnikam-otechestva-k-23-fevralya-2023-g",
+          "title": "«Защитникам Отечества...» (к 23 февраля 2023 г.)",
+          "path": "/vistavky/2023-02-21/zashchitnikam-otechestva-k-23-fevralya-2023-g",
+          "date_text": null
+        }
+      ],
+      "image_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20251125095918-1.jpg?itok=hilsmCaZ",
+          "alt": "Супница. Россия, «Товарищество производства фарфоровых и фаянсовых изделий М. С. Кузнецова», конец XIX - начало ХХ вв. Фаянс, формовка, обжиг, деколь, отводка."
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20251121120437-1.jpg?itok=kW85SxiE",
+          "alt": "Бём Е.М. Открытка почтовая немаркированная иллюстрированная. Россия, Петроград. 1910-е гг. Из коллекции Санкт-Петербургского музея Хлеба."
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20241023124913-image001.jpg?itok=kSCW_W0z",
+          "alt": "Обертка для карамели \"Яблочная\" фабрики конфет и шоколада Торгового дома \"Э.Ф. Пальке и Ко\" в Петрограде. После 1914 г. Из коллекции Санкт-Петербургского музея Хлеба."
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20241002093152-image001.jpg?itok=F1GHOEwj",
+          "alt": "Поднос. 2-я пол. XIX в. Лак, дерево, роспись. Китай. Из коллекции Санкт-Петербургского музея Хлеба"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20240723161134-image001.jpg?itok=FriwlTb2",
+          "alt": "Шкатулка. Вт. пол. XIX в. Зап. Европа. Металл. Из коллекции Санкт-Петербургского музея Хлеба"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20240520152758-image001.jpg?itok=Pk8eUHso",
+          "alt": "Яйцо пасхальное декоративное. Конец ХIX - начало ХХ вв. Селенит, краска, токарная работа, роспись. Из коллекции СПб музея Хлеба"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20240329152159-1.jpg?itok=iCTTjiuo",
+          "alt": "Монета. 1771 г. Медь, чеканка. Россия, Екатеринбург. Из коллекции Санкт-Петербургского музея Хлеба."
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20240117125658-image001.jpg?itok=LLlp8jfO",
+          "alt": "Подстаканник. Нач. ХХ в. Царство Польское, Варшава. Из коллекции Санкт-Петербургского музея Хлеба"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20231009164026-image001.jpg?itok=F9xpUvwN",
+          "alt": "«Пустые ящики почтовые как разведенные мосты…»"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20230710171842-mh_of_4328-111.jpg?itok=ubgao5_v",
+          "alt": "Самокиш-Судковская Е.П. Рекламный листок шоколада «Миньон» Товарищества Эйнем в Москве. Типографский оттиск. Конец XIX в. Россия. Из коллекции Санкт-Петербургского музея Хлеба"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20230525115003-mh_of_5745.jpg?itok=UqaIgsiu",
+          "alt": "Мочалов С.М. Открытка почтовая немаркированная иллюстрированная. 1940-е гг. СССР. Из коллекции СПб музея Хлеба"
+        },
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/styles/foto/public/vistavky/20230221105632-7154774f033_1200.jpg?itok=MXtRXWOh",
+          "alt": "«Защитникам Отечества...» (к 23 февраля 2023 г.)"
+        }
+      ],
+      "images_rights_confirmed": false
+    }
+  ],
+  "photos": "Original image URLs preserved solely for provenance. Images not republished."
+}
