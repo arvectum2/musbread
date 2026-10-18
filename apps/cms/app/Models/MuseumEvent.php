@@ -46,7 +46,7 @@ class MuseumEvent extends Model
             if ($event->cover_media_id !== null) {
                 $media=\App\Models\MuseumMedia::query()
                     ->with('entry')->find($event->cover_media_id);
-                if ($media===null || $media->entry===null
+                if ($media===null || $media->source_rights_pending || $media->entry===null
                     || $media->entry->status!=='published'
                     || $media->entry->published_at===null
                     || $media->entry->published_at->isFuture()

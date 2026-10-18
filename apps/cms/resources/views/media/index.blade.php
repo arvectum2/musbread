@@ -98,6 +98,16 @@
                         <p class="meta">Материал: {{ $item->entry?->title ?? 'Удалён' }}
                             ({{ $item->entry?->status ?? 'нет' }})</p>
                         <p class="meta">{{ $item->width }}×{{ $item->height }} · {{ round($item->size_bytes/1024) }} КБ</p>
+                        @if($item->source_rights_pending)
+                            <p class="notice" role="note"><strong>Подлинная фотография действующего музея — закрытая копия.</strong>
+                                Не попадёт в публичную сборку, пока отдельно не подтверждены право использования
+                                и точность alt. Исходные байты сохранены на ArvectumSSD.</p>
+                            @if($item->source_original_url)
+                                <p class="small"><strong>Первоначальная музейная публикация:</strong>
+                                    <a href="{{ $item->source_original_url }}" target="_blank"
+                                      rel="noopener noreferrer">исходный файл на сайте музея ↗</a></p>
+                            @endif
+                        @endif
                         <form method="post" action="{{ route('museum.media.update', $item) }}">
                             @csrf @method('PATCH')
                             <label for="edit-alt-{{ $item->id }}">Alt-текст</label>

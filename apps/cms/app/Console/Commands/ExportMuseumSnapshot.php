@@ -197,7 +197,7 @@ class ExportMuseumSnapshot extends Command
             // editorial section. A withdrawn/draft entry cannot leak an
             // image into the event page, however stale the foreign key.
             $cover=$event->coverMedia;
-            if ($cover!==null && $cover->entry!==null
+            if ($cover!==null && !$cover->source_rights_pending && $cover->entry!==null
                 && $entryById->has($cover->museum_entry_id)
                 && $cover->entry->museum_section_id===$event->museum_section_id
                 && preg_match('/^[a-f0-9]{64}$/D',$cover->sha256)) {
@@ -224,6 +224,11 @@ class ExportMuseumSnapshot extends Command
                 $entryById, $eventById, $entryLink, $eventLink, $publicLinks): array {
                 $images = [];
                 foreach ($entry->media as $image) {
+                    // Original museum source photos are copied ONLY into the
+                    // private CMS until rights/alt and eventual release are
+                    // explicitly reviewed. Publishing the parent entry alone
+                    // must never leak a source-restricted photo.
+                    if ($image->source_rights_pending) continue;
                     // Also protect older records inserted before the new
                     // upload policy. Never export a non-compliant public alt.
                     if ($issue = MuseumAltPolicy::issue($image->alt)) {
