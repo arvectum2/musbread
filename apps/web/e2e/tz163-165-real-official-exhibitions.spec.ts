@@ -62,3 +62,16 @@ test("exhibition details preserve source pages on 320px, with no horizontally ov
     expect(m.document).toBeLessThanOrEqual(m.viewport+1);
   }
 });
+
+test("TZ-163: 12 real archived and 12 virtual exhibitions now have original detailed texts",async({page})=>{
+  for (const [route,regionName] of [
+    ["/guide/exhibitions-past/","Выставки из официального раздела: Прошедшие выставки"],
+    ["/guide/exhibitions-virtual/","Выставки из официального раздела: Виртуальные выставки"],
+  ]) {
+    await page.goto(route);
+    const region=page.getByRole("region",{name:regionName});
+    await expect(region.locator(".official-museum-program-card")).toHaveCount(12);
+    expect(await region.locator("details").count()).toBeGreaterThan(0);
+    await expect(region.locator("img")).toHaveCount(0);
+  }
+});

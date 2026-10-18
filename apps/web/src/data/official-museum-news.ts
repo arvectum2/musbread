@@ -11,6 +11,7 @@ export type OfficialMuseumNewsItem = {
   html_sha256:string;
   image_links:{url:string;alt:string}[];
   photos_rights_confirmed:false;
+  image_only?: boolean;
 };
 export const officialMuseumNews = source.articles as OfficialMuseumNewsItem[];
 export const officialMuseumArchiveNews = archive.articles as OfficialMuseumNewsItem[];

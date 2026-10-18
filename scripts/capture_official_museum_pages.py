@@ -73,7 +73,7 @@ def safe_html(element, base:str) -> str:
         if child.tail:parts.append(escape(child.tail))
     return ''.join(parts).strip()
 
-def parse(source:str,path:str,captured:str)->dict:
+def parse(source:str,path:str,captured:str,min_text_length:int=30)->dict:
     root=lx.fromstring(source)
     headers=root.xpath('//h1')
     title=' '.join(headers[0].text_content().split()) if headers else ''
@@ -103,7 +103,7 @@ def parse(source:str,path:str,captured:str)->dict:
         if dest and urlparse(dest).hostname in ('muzei-xleb.ru','www.muzei-xleb.ru'):
             images.append({'url':dest,'alt':img.get('alt','')[:280]})
     safe=safe_html(chosen,HOST+path)
-    if len(text)<30:raise ValueError('Short or empty Drupal body '+path)
+    if len(text)<min_text_length:raise ValueError('Short or empty Drupal body '+path)
     return {
         'path':path, 'source_url':HOST+path, 'title':title,
         'captured_utc':captured, 'html':safe,

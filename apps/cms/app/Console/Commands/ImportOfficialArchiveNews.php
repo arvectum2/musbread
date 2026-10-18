@@ -20,7 +20,7 @@ final class ImportOfficialArchiveNews extends Command
 
     // Captured live index page URLs + exact original article HTML hashes.
     // Updated only after a fresh independently verified museum snapshot.
-    private const SOURCE_SET_DIGEST='1a2dd55f55cd7077b1c34f2499a3bebfcfa3ad52289c02cc48e2931621b99f0a';
+    private const SOURCE_SET_DIGEST='ea5a6ddb02e4ff0bf64152750447c4c47d4e65f8f095ca5f29ca1bc6e9353e7d';
     private const SOURCE='https://muzei-xleb.ru';
 
     public function handle():int
@@ -35,13 +35,13 @@ final class ImportOfficialArchiveNews extends Command
             $data=json_decode((string)file_get_contents($path),true,flags:JSON_THROW_ON_ERROR);
             $indices=$data['indices']??null;
             $articles=$data['articles']??null;
-            if (($data['source']??null)!==self::SOURCE || ($data['count']??null)!==20
-                || !is_array($indices) || count($indices)!==2
-                || !is_array($articles) || count($articles)!==20) {
+            if (($data['source']??null)!==self::SOURCE || ($data['count']??null)!==40
+                || !is_array($indices) || count($indices)!==4
+                || !is_array($articles) || count($articles)!==40) {
                 throw new RuntimeException('Original museum archive snapshot missing or incomplete');
             }
             $indexed=[];
-            foreach([1,2] as $offset=>$page) {
+            foreach([1,2,3,4] as $offset=>$page) {
                 $index=$indices[$offset];
                 if (($index['url']??null)!==self::SOURCE.'/novosty?page='.$page
                     || !preg_match('/^[a-f0-9]{64}$/D',(string)($index['source_listing_sha256']??''))
@@ -56,7 +56,9 @@ final class ImportOfficialArchiveNews extends Command
             }
             $set=[];
             foreach($articles as $article) {
-                $set[]=($article['source_url']??'').'|'.($article['html_sha256']??'');
+                $set[]=($article['source_url']??'').'|'.($article['html_sha256']??'')
+                    .'|'.($article['source_page_sha256']??'')
+                    .'|'.implode(',',array_column($article['image_links']??[],'url'));
             }
             if (hash('sha256',implode("\n",$set))!==self::SOURCE_SET_DIGEST) {
                 throw new RuntimeException('Known original archive page signatures mismatch');
@@ -76,11 +78,21 @@ final class ImportOfficialArchiveNews extends Command
                     || ($article['archive_index_page']??null)!==($indexed[$path]??null)
                     || ($article['photos_rights_confirmed']??null)!==false
                     || !is_string($article['title']??null) || mb_strlen($article['title'])<8
-                    || !is_string($article['intro']??null) || mb_strlen($article['intro'])<18
-                    || !is_string($article['html']??null) || mb_strlen($article['html'])<30
+                    || !is_string($article['intro']??null)
+                    || !is_string($article['html']??null)
+                    || (($article['image_only']??false)===true
+                        ? ($article['html']!=='' || $article['intro']!==''
+                            || !preg_match('/^[a-f0-9]{64}$/D',(string)($article['source_page_sha256']??''))
+                            || count($article['image_links']??[])<1)
+                        : (mb_strlen($article['intro'])<8 || mb_strlen($article['html'])<12))
                     || hash('sha256',$article['html'])!==($article['html_sha256']??'')
                     || stripos($article['html'],'<img')!==false
                     || stripos($article['html'],'<script')!==false
+                    || (($article['image_only']??false)===true && count(array_filter(
+                        array_column($article['image_links'],'url'),
+                        static fn($url):bool=>is_string($url)
+                            && str_starts_with($url,'https://muzei-xleb.ru/sites/default/files/')
+                            && (bool)preg_match('/\.(jpg|jpeg|png|webp)$/iD',$url)))!==count($article['image_links']))
                     || isset($plans[$slug]) || isset($current[$slug])) {
                     throw new RuntimeException('Museum historical news page provenance mismatch: '.$slug);
                 }
@@ -91,7 +103,7 @@ final class ImportOfficialArchiveNews extends Command
                 $plans[$slug]=['item'=>$article,'exists'=>$existing!==null];
                 $this->line(($existing?'KEEP EDITOR':'NEW PRIVATE ARCHIVE').' '.$slug);
             }
-            if (count($plans)!==20 || count($indexed)!==20) {
+            if (count($plans)!==40 || count($indexed)!==40) {
                 throw new RuntimeException('Incomplete original museum archive linkage');
             }
             if (!$this->option('apply')) {
@@ -112,7 +124,7 @@ final class ImportOfficialArchiveNews extends Command
                     ]);
                 }
             });
-            $this->info('20 source-backed museum historical news drafts; no events, media or bookings created.');
+            $this->info('40 source-backed museum historical news drafts; no events, media or bookings created.');
             return self::SUCCESS;
         } catch (Throwable $e) {
             $this->error('Original museum archive import refused: '.$e->getMessage());

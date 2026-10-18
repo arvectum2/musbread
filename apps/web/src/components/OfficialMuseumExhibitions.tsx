@@ -42,11 +42,13 @@ export default function OfficialMuseumExhibitions({category}:{category:string}){
           <h3>{editor?.title?.trim() || original?.title || item.title}</h3>
           {item.date_text && <p><strong>Сроки по музею:</strong> {item.date_text}</p>}
           {original && <>
-            <p>{editor?.excerpt?.trim() || original.intro}</p>
-            <details>
+            {original.image_only && !editor
+              ? <p>Исходная страница содержит изображение без текстового описания. Оригинал доступен на сайте музея.</p>
+              : <p>{editor?.excerpt?.trim() || original.intro}</p>}
+            {(editor?.body?.trim() || original.html) && <details>
               <summary>Полное описание выставки</summary>
               <div className="official-museum-program-body"><RichText html={editor?.body?.trim()||original.html}/></div>
-            </details>
+            </details>}
           </>}
           <div className="official-museum-program-links">
             {editor && <Link href={entryPublicHref(editor)} className="text-link">

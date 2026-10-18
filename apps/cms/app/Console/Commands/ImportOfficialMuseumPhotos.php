@@ -136,6 +136,19 @@ final class ImportOfficialMuseumPhotos extends Command
                     (string)$overview[0]['source_url'],$overview[0]['html_sha256']??null,
                     (string)$image['url']);
             }
+            $name='official-museum-news-archive.json';
+            $historicalNews=$read($name);
+            foreach($historicalNews['articles'] as $article) {
+                if (($article['image_only']??false)!==true) continue;
+                if (($article['html']??null)!=='' || ($article['photos_rights_confirmed']??null)!==false) {
+                    throw new RuntimeException('Unverified image-only news source');
+                }
+                foreach($article['image_links'] as $i=>$photo) {
+                    $register((string)$article['slug'],$i,$name,(string)$article['title'],
+                        (string)$article['source_url'],$article['html_sha256']??null,
+                        (string)$photo['url']);
+                }
+            }
             $files=[]; $seen=[];
             foreach ($manifest['files'] as $photo) {
                 $slug=$photo['cms_slug']??'';
@@ -175,7 +188,7 @@ final class ImportOfficialMuseumPhotos extends Command
                 }
                 $entry=MuseumEntry::where('slug',$slug)->first();
                 if (!$entry || $entry->status!=='draft'
-                    || !in_array($entry->type,['excursion','page','exhibition'],true)) {
+                    || !in_array($entry->type,['excursion','page','exhibition','news'],true)) {
                     throw new RuntimeException('Image owner must be a real private original museum program: '.$slug);
                 }
                 $files[]=[...$photo,'source_path'=>$sourceFile,'entry'=>$entry];

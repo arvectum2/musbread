@@ -280,6 +280,45 @@ final class ImportOfficialMuseumPhotosTest extends TestCase
         $this->assertDatabaseCount('museum_media',1);
     }
 
+    public function test_real_image_only_museum_news_poster_is_private_not_a_fabricated_article():void
+    {
+        Storage::fake('local');
+        $source=json_decode((string)file_get_contents(
+            base_path('../web/src/data/official-museum-news-archive.json')),true);
+        $original=array_values(array_filter($source['articles'],
+            static fn(array $n):bool=>($n['image_only']??false)===true))[0];
+        MuseumEntry::create([
+            'slug'=>$original['slug'],'title'=>$original['title'],
+            'type'=>'news','status'=>'draft',
+            'body'=>'<p>Исходное объявление музея; оригинал доступен по ссылке.</p>',
+        ]);
+        $path=$this->originalManifest();
+        $manifest=json_decode((string)file_get_contents($path),true);
+        $row=&$manifest['files'][0];
+        $picture=$original['image_links'][0];
+        $row['cms_slug']=$original['slug'];
+        $row['title']=$original['title'];
+        $row['source_page_url']=$original['source_url'];
+        $row['source_image_url']=$picture['url'];
+        $row['source_snapshot']='official-museum-news-archive.json';
+        $row['source_image_index']=0;
+        $row['source_html_sha256']=$original['html_sha256'];
+        $row['source_alt']=$picture['alt'];
+        $row['original_url']=$picture['url'];
+        file_put_contents($path,json_encode($manifest,JSON_UNESCAPED_UNICODE));
+        $this->assertSame(0,Artisan::call('museum:import-official-photos',[
+            '--apply'=>true,'--manifest'=>$path,
+        ]),Artisan::output());
+        $this->assertDatabaseHas('museum_media',[
+            'source_original_url'=>$picture['url'],'source_rights_pending'=>1,
+        ]);
+        $this->assertSame('news',MuseumMedia::firstOrFail()->entry->type);
+        $this->assertSame(0,Artisan::call('museum:import-official-photos',[
+            '--apply'=>true,'--manifest'=>$path,
+        ]),Artisan::output());
+        $this->assertDatabaseCount('museum_media',1);
+    }
+
     public function test_last_of_twenty_five_original_pastry_hall_photos_stays_private():void
     {
         Storage::fake('local');

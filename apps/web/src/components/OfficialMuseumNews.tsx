@@ -56,11 +56,12 @@ export default function OfficialMuseumNews(){
           return <article className="official-museum-program-card" key={item.slug}>
             <p className="official-museum-program-number">Архивная публикация от {item.published_on.split("-").reverse().join(".")}</p>
             <h3>{editor?.title?.trim() || item.title}</h3>
-            <p>{editor?.excerpt?.trim() || item.intro}</p>
-            <details>
+            {item.image_only && !editor ? <p>Оригинальное объявление опубликовано музеем в виде изображения. Его можно посмотреть по исходной ссылке.</p>
+              : <p>{editor?.excerpt?.trim() || item.intro}</p>}
+            {(editor?.body?.trim() || item.html) && <details>
               <summary>Прочитать архивное сообщение</summary>
               <div className="official-museum-program-body"><RichText html={editor?.body?.trim() || item.html}/></div>
-            </details>
+            </details>}
             <div className="official-museum-program-links">
               {editor && <Link href={entryPublicHref(editor)} className="text-link">Редакция на новом сайте →</Link>}
               <MuseumAnchor className="text-link" href={item.source_url} target="_blank"

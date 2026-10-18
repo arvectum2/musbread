@@ -82,6 +82,7 @@ def report():
     counts=Counter(r['cms_slug'] for r in table)
     groups={
         'Мастер-классы':sum(s.startswith('museum-workshop-') for s in counts),
+        'Архивные новости-плакаты':sum(s.startswith('museum-news-') for s in counts),
         'Экскурсии':sum(s.startswith('museum-tour-') for s in counts),
         'Экспозиционные залы':sum(s.startswith('zal-') for s in counts),
         'Выставки':sum(s.startswith('museum-exhibit-') for s in counts),

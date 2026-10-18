@@ -253,6 +253,27 @@ def queue()->list[dict]:
             'source_snapshot':'official-excursion-pages.json',
             'source_html_sha256':overview['html_sha256'],
         })
+    # Source news consisting solely of a real museum notice poster. Preserve
+    # the literal poster, not synthetic/placeholder HTML or invented OCR text.
+    news=json.loads((SRC/'official-museum-news-archive.json').read_text(encoding='utf-8'))
+    if news.get('source')!=HOST:raise ValueError('Unknown archival news source')
+    for item in news['articles']:
+        if item.get('image_only') is not True:continue
+        if item.get('html')!='' or item.get('photos_rights_confirmed') is not False:
+            raise ValueError('Museum image-only notice source inconsistent')
+        for i,photo in enumerate(item['image_links']):
+            original=canonical(photo['url'])
+            if original in seen:raise ValueError('Duplicate historical museum image URL')
+            seen.add(original)
+            result.append({
+                'cms_slug':item['slug'],'title':item['title'],
+                'source_page_url':item['source_url'],
+                'source_image_url':photo['url'],
+                'source_image_index':i,'original_url':original,
+                'source_alt':photo.get('alt',''),
+                'source_snapshot':'official-museum-news-archive.json',
+                'source_html_sha256':item['html_sha256'],
+            })
     return result
 
 def detect(buf:bytes)->str:
