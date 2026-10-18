@@ -12,6 +12,8 @@ import MuseumTeam from "@/components/MuseumTeam";
 import RichText from "@/components/RichText";
 import OfficialExpositionRooms from "@/components/OfficialExpositionRooms";
 import VisitAccessibilityGuide from "@/components/VisitAccessibilityGuide";
+import OfficialVisitorRules from "@/components/OfficialVisitorRules";
+import OfficialVisitorFAQ from "@/components/OfficialVisitorFAQ";
 import {officialExpositionSlugs} from "@/data/official-exposition-rooms";
 import {officialSnapshotByPath} from "@/data/official-page-snapshots";
 import MuseumMediaHub from "@/components/MuseumMediaHub";
@@ -92,7 +94,9 @@ export default async function GuidePage({ params }: Props) {
         </span>) : null}
       <span aria-current="page">{title}</span>
     </nav>
-    <span className="eyebrow">{page?.legacyPath
+    <span className="eyebrow">{cmsPage
+      ? "ОПУБЛИКОВАНО РЕДАКТОРОМ МУЗЕЯ"
+      : page?.legacyPath
       ? "РАЗДЕЛ НА ДЕЙСТВУЮЩЕМ САЙТЕ"
       : page ? "НОВЫЙ РАЗДЕЛ ПО ТЗ — ЧЕРНОВИК" : "НАВИГАЦИЯ ПО ТЗ — ПРОЕКТ"} · {REFERENCE_DATE}</span>
     <h1>{cmsPage?.h1?.trim() || cmsPage?.title?.trim() || publishedSection?.h1?.trim() || fixedPageH1("/guide/" + slug + "/",title)}</h1>
@@ -108,7 +112,11 @@ export default async function GuidePage({ params }: Props) {
               : showReferenceBody
                 ? "Содержание перенесено с действующего официального сайта музея как исходная редакция. Заказчик сможет изменить его в CMS."
                 : "Этот раздел существует на официальном сайте музея; пока сохранена ссылка на первоисточник.")
-          : "Этот раздел требуется ТЗ, но сведения на действующем сайте не найдены."}
+          : cmsPage
+            ? "Этот раздел опубликован редактором музея; сведения можно изменять через CMS."
+            : slug === "faq"
+            ? "Ответы собраны по действующим официальным материалам музея. Вопросы подготовлены для нового сайта и могут уточняться редактором."
+            : "Этот раздел требуется ТЗ, но сведения на действующем сайте не найдены."}
     </p>
     <div className={directChildren.length > 0 ? "guide-content-layout" : "guide-content-layout guide-content-single"}>
       <div className="guide-primary">
@@ -135,6 +143,8 @@ export default async function GuidePage({ params }: Props) {
       <p>Перед посещением уточните доступный вход, возможность сопровождения и временные ограничения по телефону музея. <MuseumAnchor href={museumReference.accessibilityUrl} target="_blank" rel="noopener noreferrer" className="text-link">Актуальные сведения о доступности на официальном сайте ↗</MuseumAnchor>.</p>
     </div>}
     {isPlanVisit && <VisitAccessibilityGuide />}
+    {isPlanVisit && <OfficialVisitorRules />}
+    {slug === "faq" && !cmsPage && <OfficialVisitorFAQ />}
     {isAccess && <VisitAccessibilityGuide condensed />}
     {slug === "museum-exposition" && <OfficialExpositionRooms />}
     {isTeam && <MuseumTeam />}
@@ -208,7 +218,7 @@ export default async function GuidePage({ params }: Props) {
     {sourceUrl && <p className="reference-source">
       <MuseumAnchor href={sourceUrl} target="_blank" rel="noopener noreferrer">Открыть исходную страницу на действующем сайте музея ↗</MuseumAnchor>
     </p>}
-    {page?.tenderOnly && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
+    {page?.tenderOnly && !cmsPage && slug !== "faq" && <p className="reference-source">Страница включена по ТЗ новой закупки. Содержание будет согласовано с музеем; официальных данных пока нет.</p>}
     {page && (page.ancestors.length > 0 || findMenuGroup(parent.slug)
       ? <p><Link href={"/guide/" + (page.ancestors.at(-1)?.slug ?? parent.slug) + "/"} className="text-link">← Ко всем подразделам «{page.ancestors.at(-1)?.title ?? parent.title}»</Link></p>
       : <p><Link href="/" className="text-link">← На главную</Link></p>)}

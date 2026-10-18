@@ -559,3 +559,26 @@ html[data-vision-mode="on"] .exposition-catalog-intro{color:#111}
 .visit-accessibility-contact a{font-weight:700;text-underline-offset:.2em}
 @media(max-width:700px){.visit-accessibility-grid{grid-template-columns:1fr}}
 html[data-vision-mode="on"] .visit-accessibility-fact{border:2px solid currentColor}
+
+
+/* Verified current museum visitor conditions and source-backed FAQ (TZ-139/146). */
+.visit-practical-rules{margin:1.5rem 0 2rem;min-width:0;overflow-wrap:anywhere}
+.visit-practical-rules>h2,.visitor-faq>h2{font-size:clamp(1.45rem,2.5vw,1.9rem)}
+.visit-practical-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:1.2rem 0}
+.visit-practical-list>div{min-width:0;border:1px solid var(--line);padding:1rem}
+.visit-practical-list dt{font-weight:700;margin-bottom:.5rem}
+.visit-practical-list dd{margin:0;line-height:1.6}
+.visit-practical-doc,.visit-practical-source{max-width:70ch;line-height:1.6}
+.visit-practical-doc span{display:block;color:var(--mute)}
+.visitor-faq{margin:2rem 0;min-width:0}
+.visitor-faq>p{max-width:75ch}
+.visitor-faq-list{margin:1.2rem 0;border-top:1px solid var(--line)}
+.visitor-faq-item{border-bottom:1px solid var(--line);min-width:0}
+.visitor-faq-item summary{cursor:pointer;font-weight:650;display:flex;gap:1rem;align-items:baseline;padding:1.1rem 0;line-height:1.5}
+.visitor-faq-item summary:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.visitor-faq-number{flex-shrink:0;color:var(--mute);font-weight:450;font-variant-numeric:tabular-nums}
+.visitor-faq-answer{padding:0 0 1.3rem 2.5rem;max-width:75ch;overflow-wrap:anywhere}
+.visitor-faq-answer p{line-height:1.6}
+@media(max-width:700px){.visit-practical-list{grid-template-columns:1fr}.visitor-faq-answer{padding-left:.8rem}}
+html[data-vision-mode="on"] .visit-practical-list>div{border:2px solid currentColor}
+html[data-vision-mode="on"] .visitor-faq-number,.visit-practical-doc span{color:inherit}

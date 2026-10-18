@@ -1,0 +1,120 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "scope": "Editor-prepared questions on already published museum facts, not formal visiting regulations",
+  "snapshot_utc": "2026-10-18T05:44:46+00:00",
+  "count": 9,
+  "questions": [
+    {
+      "id": "hours",
+      "question": "Когда открыт музей?",
+      "answer": "Музей работает со среды по понедельник с 10:00 до 18:00. Касса и вход открыты до 17:00. Вторник — выходной; санитарный день — последний четверг месяца.",
+      "source_path": "/chasy-raboty",
+      "source_url": "https://muzei-xleb.ru/chasy-raboty",
+      "source_html_sha256": "7de592c18a5a1a6fc9139b536c965bc5480892e68403f36efd0ea51f40494e1f",
+      "source_phrases": [
+        "с 10.00 до 18.00",
+        "до 17.00",
+        "последний четверг месяца"
+      ]
+    },
+    {
+      "id": "address",
+      "question": "Где находится музей?",
+      "answer": "Санкт-Петербург, улица Михайлова, дом 2. Ближайшее метро — «Площадь Ленина», выход к Финляндскому вокзалу.",
+      "source_path": "/kontakty",
+      "source_url": "https://muzei-xleb.ru/kontakty",
+      "source_html_sha256": "fd282473ac621a747fae6a30b3c964bb92f699137f0d4f2b86b285b1d374b3c6",
+      "source_phrases": [
+        "Михайлова, д.2",
+        "Площадь Ленина",
+        "Финляндский вокзал"
+      ]
+    },
+    {
+      "id": "tickets",
+      "question": "Где посмотреть цены на билеты и льготы?",
+      "answer": "Стоимость входного билета для взрослых в прейскуранте с 1 сентября 2026 года — 400 рублей. Остальные тарифы и льготные категории приведены на официальной странице цен музея.",
+      "source_path": "/stoimost",
+      "source_url": "https://muzei-xleb.ru/stoimost",
+      "source_html_sha256": "1850d6a1992bad6b9b437dcfe87649e093519b76db609e0c18e6a6a9e6ffbe45",
+      "source_phrases": [
+        "01.09.2026",
+        "400 рублей/чел.",
+        "Входной билет для льготных категорий"
+      ]
+    },
+    {
+      "id": "excursion",
+      "question": "Нужно ли заранее записываться на экскурсию?",
+      "answer": "Да. Музей указывает, что занятия и экскурсии проводятся только по предварительной записи; телефон записи: (812) 294-50-82.",
+      "source_path": "/ekskursii",
+      "source_url": "https://muzei-xleb.ru/ekskursii",
+      "source_html_sha256": "93a938206d608204af20ad09442be8cf605d2aae69bb5bf2f7ea8fdaa3d5b2c5",
+      "source_phrases": [
+        "только по предварительной записи",
+        "294-50-82"
+      ]
+    },
+    {
+      "id": "group",
+      "question": "Сколько человек может быть в экскурсионной группе?",
+      "answer": "Согласно музейной странице экскурсий, одна детская группа — не более 20 детей и двух сопровождающих взрослых; одновременно музей принимает не более 40 человек (две группы). Условия относятся к экскурсионным группам.",
+      "source_path": "/ekskursii",
+      "source_url": "https://muzei-xleb.ru/ekskursii",
+      "source_html_sha256": "93a938206d608204af20ad09442be8cf605d2aae69bb5bf2f7ea8fdaa3d5b2c5",
+      "source_phrases": [
+        "не более 40 человек",
+        "не более 20 детей плюс 2 сопровождающих взрослых"
+      ]
+    },
+    {
+      "id": "photo",
+      "question": "Можно ли фотографировать экспозицию?",
+      "answer": "На странице экскурсий музея указано, что любительская фото- и видеосъёмка бесплатна и разрешена только без вспышки.",
+      "source_path": "/ekskursii",
+      "source_url": "https://muzei-xleb.ru/ekskursii",
+      "source_html_sha256": "93a938206d608204af20ad09442be8cf605d2aae69bb5bf2f7ea8fdaa3d5b2c5",
+      "source_phrases": [
+        "Любительская фото- и видеосъемка - бесплатные",
+        "только без вспышки"
+      ]
+    },
+    {
+      "id": "accessible",
+      "question": "Есть ли условия для маломобильных посетителей?",
+      "answer": "На действующем сайте музей сообщает о пандусах, подъёмнике и оборудованном туалете на первом этаже. Музей просит связаться с сотрудниками до визита для уточнения условий.",
+      "source_path": "/informaciya-dlya-mgn",
+      "source_url": "https://muzei-xleb.ru/informaciya-dlya-mgn",
+      "source_html_sha256": "31ababf4eae8f2e6f8bb82f89d3f7b1e67970399a77e25bb219b573a21af93f5",
+      "source_phrases": [
+        "пандусами и подъемником",
+        "Специально оборудованный туалет",
+        "Просим Вас позвонить нам заранее"
+      ]
+    },
+    {
+      "id": "pushkin",
+      "question": "Как приобрести билет по «Пушкинской карте»?",
+      "answer": "На странице музея указано, что билеты по «Пушкинской карте» продаются только онлайн. Билет именной и не может передаваться другому человеку.",
+      "source_path": "/pushkinskaya-karta",
+      "source_url": "https://muzei-xleb.ru/pushkinskaya-karta",
+      "source_html_sha256": "61349c23bb82373980a44caaca1198bef8e7d26958e426caec50f426e9907c59",
+      "source_phrases": [
+        "можно купить только онлайн",
+        "является именным"
+      ]
+    },
+    {
+      "id": "refund",
+      "question": "Где найти порядок возврата билетов?",
+      "answer": "Официальные документы о приобретении и возврате билетов и заявление к ним размещены на странице музея «Цены и условия предоставления услуг».",
+      "source_path": "/ceny-i-usloviya-predostavleniya-uslug",
+      "source_url": "https://muzei-xleb.ru/ceny-i-usloviya-predostavleniya-uslug",
+      "source_html_sha256": "3186994787effbe232c32aa0c7b95488fe429b1e39e00ce1668400a033b2809d",
+      "source_phrases": [
+        "Положение о порядке приобретения и возврата",
+        "Приложение № 1"
+      ]
+    }
+  ]
+}

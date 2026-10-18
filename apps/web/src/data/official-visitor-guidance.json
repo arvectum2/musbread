@@ -1,0 +1,36 @@
+{
+  "source": "https://muzei-xleb.ru",
+  "snapshot_utc": "2026-10-18T05:44:46+00:00",
+  "count": 2,
+  "pages": [
+    {
+      "path": "/ekskursii",
+      "source_url": "https://muzei-xleb.ru/ekskursii",
+      "title": "Экскурсии",
+      "captured_utc": "2026-10-18T05:44:46+00:00",
+      "html": "<h2>Приглашаем Вас посетить наш музей и предлагаем познавательные интерактивные занятия  и тематические экскурсии.</h2>\n<p> </p>\n<h2>Проведение занятий и экскурсий только по предварительной записи.</h2>\n<p>Телефон для записи (812) 294-50-82.</p>\n<p>Одновременно музей принимает не более 40 человек (две группы)!</p>\n<p>Одна экскурсионная группа не более 20 детей плюс 2 сопровождающих взрослых (сопровождающие идут бесплатно).</p>\n<p>Продолжительность: 50-60 минут.</p>\n<p>Любительская фото- и видеосъемка - бесплатные.</p>\n<p>Съемка разрешена только без вспышки.</p>\n<h3><strong><a href=\"https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf\">Приказ о посещении экскурсий организованными группами.</a></strong></h3>",
+      "text_sha256": "10ef5fe50446e18a804a05796c2732c6657b8a4573b60d0465b66d5d670ac8ca",
+      "html_sha256": "93a938206d608204af20ad09442be8cf605d2aae69bb5bf2f7ea8fdaa3d5b2c5",
+      "text_length": 552,
+      "document_links": [
+        {
+          "url": "https://muzei-xleb.ru/sites/default/files/page/20240419153512-prikaz_pravila_poseshcheniya_organizovannymi_gruppami_ekskursiy.pdf",
+          "label": "Приказ о посещении экскурсий организованными группами."
+        }
+      ],
+      "image_links": []
+    },
+    {
+      "path": "/chasy-raboty",
+      "source_url": "https://muzei-xleb.ru/chasy-raboty",
+      "title": "Часы работы",
+      "captured_utc": "2026-10-18T05:44:46+00:00",
+      "html": "<p><strong>Среда - понедельник</strong> — с 10.00 до 18.00 (касса и вход — до 17.00)<br>\n\t<strong>Выходной день</strong> — Вторник.<br>\n\t<strong>Санитарный день</strong> — последний четверг месяца.</p>",
+      "text_sha256": "e7b6ea1e75744da01d3afb3f90e563a6bd54e8c7ca479aa34ac827e6e298f05b",
+      "html_sha256": "7de592c18a5a1a6fc9139b536c965bc5480892e68403f36efd0ea51f40494e1f",
+      "text_length": 133,
+      "document_links": [],
+      "image_links": []
+    }
+  ]
+}

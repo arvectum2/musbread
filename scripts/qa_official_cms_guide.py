@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CMS = ROOT / "apps/cms"
 WEB = ROOT / "apps/web"
 PRIVATE = ROOT / ".local_archive"
-REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history",  "museum-documents", "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card", "zal-hleb-v-mirovoy-istorii"}
+REQUIRED = {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-history",  "museum-documents", "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card", "faq", "zal-hleb-v-mirovoy-istorii"}
 
 
 def run(command: list[str], cwd: Path, env: dict, log: Path) -> None:
@@ -73,7 +73,7 @@ def main() -> None:
                        "where slug='museum-privacy'")
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes') "
-                       "where slug in ('tickets-and-benefits','ticket-refunds','museum-documents','museum-finance','museum-anti-corruption','accessible-museum','pushkin-card')")
+                       "where slug in ('tickets-and-benefits','ticket-refunds','museum-documents','museum-finance','museum-anti-corruption','accessible-museum','pushkin-card','faq')")
             db.execute("update museum_entries set status='published',"
                        "published_at=datetime('now','-10 minutes'),"
                        "title='QA: редакция зала утверждена музеем',"
@@ -109,7 +109,7 @@ def main() -> None:
         data = json.loads(snapshot.read_text())
         slugs = {entry["slug"] for entry in data["entries"]}
         if not {"museum-privacy", "tickets-and-benefits", "ticket-refunds", "museum-documents",
-                "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card"} <= slugs or "museum-history" in slugs:
+                "museum-finance", "museum-anti-corruption", "accessible-museum", "pushkin-card", "faq"} <= slugs or "museum-history" in slugs:
             raise RuntimeError("Public/private source CMS entries wrongly filtered: " + repr(slugs))
         published_room = next((e for e in data["entries"]
                                if e["slug"] == "zal-hleb-v-mirovoy-istorii"), None)
@@ -191,6 +191,15 @@ def main() -> None:
             raise RuntimeError("Pushkin card museum source body lost")
         if "https://vmuzey.com/museum/sankt-peterburgskiy-muzey-hleba" not in pushkin.xpath("//main//a/@href"):
             raise RuntimeError("Museum ticket partner source URL lost in Pushkin card")
+        faq = html.fromstring((out / "guide/faq/index.html").read_bytes())
+        if "Содержание, опубликованное редактором музея" not in faq.text_content():
+            raise RuntimeError("FAQ publication did not use editable MoonShine source")
+        if len(faq.xpath("//main//section[contains(@class,'official-source-content')]//h2")) != 10:
+            raise RuntimeError("Nine editorial FAQ questions were not shown from CMS")
+        if faq.xpath("//main//section[contains(@class,'visitor-faq')]"):
+            raise RuntimeError("Stale public FAQ fallback duplicated published CMS answers")
+        if "Официальный музейный первоисточник" not in faq.text_content():
+            raise RuntimeError("FAQ official source provenance lost in true CMS export")
         fallback = html.fromstring((out / "guide/museum-history/index.html").read_bytes())
         exhibit = html.fromstring((out / "guide/museum-exposition/index.html").read_bytes())
         edited_room = html.fromstring(
@@ -262,11 +271,11 @@ def main() -> None:
                                 + ",".join("?" * len(REQUIRED)) + ")", sorted(REQUIRED)))
         if after != originals:
             raise RuntimeError("Original CMS draft state was modified")
-    print("PASS: 9 disposable CMS pages including museum accessibility and Pushkin card, "
+    print("PASS: 10 disposable CMS pages including nine source-verified CMS FAQ answers, "
           "11 genuine gallery cards with CMS override and no draft leak; "
           "44 SHA256-verified CMS binary documents, 5 specially marked safe derivatives, "
           "H1/SEO, prices, no PII form or premature a11y approval; "
-          "real working CMS remains 24 drafts/44 docs with unchanged web fixture.")
+          "real working CMS remains 25 drafts/44 docs with unchanged web fixture.")
 
 
 if __name__ == "__main__":
