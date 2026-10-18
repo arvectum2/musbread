@@ -80,10 +80,11 @@ final class ImportOfficialMuseumPhotos extends Command
             $name='official-exposition-rooms.json';
             $rooms=$read($name);
             foreach ($rooms['rooms'] as $room) {
-                if (!isset($room['image_sources'][0]))continue;
-                $register((string)$room['slug'],0,$name,(string)$room['title'],
-                    (string)$room['source_url'],$room['html_sha256']??null,
-                    (string)$room['image_sources'][0]['source_url']);
+                foreach(array_slice($room['image_sources']??[],0,3,true) as $i=>$image) {
+                    $register((string)$room['slug'],$i,$name,(string)$room['title'],
+                        (string)$room['source_url'],$room['html_sha256']??null,
+                        (string)$image['source_url']);
+                }
             }
             $name='official-exhibition-indexes.json';
             $indices=$read($name);
@@ -120,7 +121,7 @@ final class ImportOfficialMuseumPhotos extends Command
                 static fn(array $page):bool=>($page['path']??'')==='/istoriya-zdaniya'));
             if(count($building)!==1)throw new RuntimeException('Missing actual museum building history');
             $building=$building[0];
-            foreach(array_slice($building['image_links'],0,8,true) as $i=>$image) {
+            foreach($building['image_links'] as $i=>$image) {
                 $register('building-history',$i,$name,(string)$building['title'],
                     (string)$building['source_url'],$building['html_sha256']??null,
                     (string)$image['url']);

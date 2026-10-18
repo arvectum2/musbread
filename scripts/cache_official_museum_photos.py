@@ -20,8 +20,9 @@ OUT=ROOT/'.local_archive/museum-official-photos'
 MANIFEST=OUT/'manifest.json'
 HOST='https://muzei-xleb.ru'
 MAX_SIZE=12_000_000
-# Only source-verified original museum editorial material, and ONLY the first
-# actual uploaded photo of each program, not a placeholder thumbnail.
+# Only source-verified museum editorial images: up to three original
+# program/room photos, all 15 historical building illustrations and known
+# original exhibition images. No generated/stock/placeholder imagery.
 SOURCES=(('official-workshop-pages.json','programs'),
          ('official-excursion-programs.json','programs'))
 
@@ -65,8 +66,9 @@ def queue()->list[dict]:
                     'source_snapshot':filename,
                     'source_html_sha256':entry.get('html_sha256'),
                 })
-    # All eleven existing permanent museum rooms: first authentic room
-    # photo (these have separate page slugs already editable in CMS).
+    # All eleven existing permanent museum rooms: first authentic photograph
+    # per existing editable page. Additional real room photos are appended
+    # after the 93-image stable prefix to avoid re-downloading originals.
     rooms=json.loads((SRC/'official-exposition-rooms.json').read_text(encoding='utf-8'))
     if rooms.get('source')!=HOST:raise ValueError('Changed rooms source')
     for room in rooms['rooms']:
@@ -110,8 +112,9 @@ def queue()->list[dict]:
                 'source_snapshot':'official-exhibition-indexes.json',
                 'source_html_sha256':actual['html_sha256'],
             })
-    # Museum building history: original historical portraits/architecture
-    # without fake captions. First eight images, remaining later.
+    # Museum building history: actual historical portraits and architectural
+    # photographs, not generated art or invented captions. Keep original
+    # first-eight indices stable; append the remaining seven below.
     pages=json.loads((SRC/'official-page-snapshots.json').read_text(encoding='utf-8'))
     building=[x for x in pages['pages'] if x['path']=='/istoriya-zdaniya']
     if len(building)!=1:raise ValueError('Original building-history source missing')
@@ -147,6 +150,38 @@ def queue()->list[dict]:
                 'source_snapshot':'official-exhibition-indexes.json',
                 'source_html_sha256':exhibition_index['html_sha256'],
             })
+    # Continue the ORIGINAL museum content migration beyond the first
+    # photographed cover of each of the 11 rooms. Keep the stable queue prefix
+    # so the initial 93 downloaded photographs need not be fetched again.
+    for room in rooms['rooms']:
+        for i in (1,2):
+            if i>=len(room['image_sources']):continue
+            image=room['image_sources'][i]
+            url=canonical(image['source_url'])
+            if url in seen:continue
+            seen.add(url)
+            result.append({
+                'cms_slug':room['slug'],'title':room['title'],
+                'source_page_url':room['source_url'],
+                'source_image_url':image['source_url'],
+                'source_image_index':i,'original_url':url,
+                'source_alt':image.get('alt',''),
+                'source_snapshot':'official-exposition-rooms.json',
+                'source_html_sha256':room['html_sha256'],
+            })
+    # Preserve every actual documented illustration of the historic building.
+    for i,photo in enumerate(building['image_links'][8:],start=8):
+        url=canonical(photo['url'])
+        if url in seen:continue
+        seen.add(url)
+        result.append({
+            'cms_slug':'building-history','title':building['title'],
+            'source_page_url':building['source_url'],
+            'source_image_url':photo['url'],'source_image_index':i,
+            'original_url':url,'source_alt':photo.get('alt',''),
+            'source_snapshot':'official-page-snapshots.json',
+            'source_html_sha256':building['html_sha256'],
+        })
     return result
 
 def detect(buf:bytes)->str:
