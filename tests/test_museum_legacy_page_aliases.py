@@ -33,6 +33,20 @@ class OriginalMuseumPageCompatibilityTests(unittest.TestCase):
         self.assertGreaterEqual(len(result['rows']),185)
         self.assertEqual(result['missing'],[])
         self.assertEqual(result['collisions'],[])
+    def test_all_legacy_node_fallbacks_have_real_keyboard_landmarks(self):
+        from lxml import html
+        folder=ROOT/'apps/web/out/node'
+        files=list(folder.glob('*/index.html'))
+        self.assertEqual(len(files),88)
+        for file in files:
+            with self.subTest(path=file.parent.name):
+                tree=html.fromstring(file.read_bytes())
+                self.assertEqual(len(tree.xpath('//a[@href="#main"]')),1)
+                self.assertEqual(len(tree.xpath('//main[@id="main"]')),1)
+                self.assertEqual(len(tree.xpath('//h1')),1)
+                self.assertEqual(len(tree.xpath('//meta[@name="viewport"]')),1)
+                self.assertEqual(len(tree.xpath('//meta[@http-equiv="refresh"]')),1)
+
     def test_redirected_original_news_pages_resolve_to_verified_article_html(self):
         m=build_map()
         source=next(s for s,item in m.items() if item['why']=='original-news-article')

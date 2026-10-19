@@ -1,5 +1,8 @@
 # MusBread — чекпоинты исполнения и денежная смета
 
+> **19.10.2026 / CP-TZ111-259, TZ-317, TZ-207, TZ-110, TZ-315–325 — новая серия ПРЕДКОНТРАКТНЫХ проверок:** [настоящие браузеры](tz-audit/CP_TZ111_259_NATIVE_BROWSERS_20261019.md), [Nginx load](performance/CP_TZ317_NGINX_MIXED_LOAD_20261019.md), [945 HTML](tz-audit/CP_TZ207_210_STATIC_ACCESSIBILITY_FOLLOWUP_20261019.md), [передача](handoff/CP_TZ315_325_DELIVERY_READINESS_20261019.md). Edge/Opera/Яндекс/Firefox реально установлены и открыли по 4 маршрута. 400/400 смешанных HTTP запросов на Nginx PASS, p95 16,20/44,69 мс (8/20 клиентов). Настоящий Laravel approval→queue→Next→Docker public HTTP 13,458 с; draft скрыт и rollback исправен. Аудит 945 страниц: ошибок 760→293 после исправления 88 редиректных fallback и 27 архивных skip-link; 293 замечания alt ещё требуют проверки, Firefox 320 px не доказан, Atom не проверен. Документы передачи синхронизированы с Jodit MIT и SBOM 559. **Никакой приёмки, публикации, переписывания музейных PDF или закрытия внешних блокеров не было. Матрица 325 = 🟢85 / 🟡118 / 🔴122.**
+
+
 **19.10.2026 / CP-TZ241-03:** [Nginx+Chromium, полные замеры](performance/CP_TZ241_03_PREFETCH_AND_NGINX_BENCHMARK_20261019.md). 3 страницы без фоновых RSC fetch, загрузка 4 страниц через gzip Nginx 1,4–1,8 с при CPU×4 / 1,6 Мбит/с. 15 браузерных PASS. ТЗ-241 ещё 🟡; светофор 85/118/122. Не публикация.
 
 

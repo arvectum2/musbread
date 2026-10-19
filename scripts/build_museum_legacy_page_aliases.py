@@ -212,23 +212,33 @@ def build_aliases(write=True,strict=True):
             rows.append({'legacy_path':source,'new_relative_url':target,'source_kind':meta['why'],
                          'mode':'native-source-URL-200; no redirect'})
             continue
-        if alias.resolve()==dest.resolve() or alias.exists() and not (alias.parent/'.musbread-legacy-alias').exists():
+        # The full static release intentionally strips private marker files.
+        # A later read-only audit must nevertheless recognise its *exact*
+        # generated fallback HTML without treating it as an unsafe collision.
+        # Any unknown/mutated HTML at this original URL remains a hard error.
+        origin_html=escape(source,quote=True)
+        url=escape(target,quote=True)
+        html=('<!doctype html><html lang="ru"><head><meta charset="utf-8">'
+              '<meta name="viewport" content="width=device-width,initial-scale=1">'
+              '<meta name="robots" content="noindex,follow">'
+              '<meta http-equiv="refresh" content="0;url='+url+'">'
+              '<title>Страница музея перенесена</title></head>'
+              '<body><a tabindex="0" class="skip-link" href="#main">'
+              'Перейти к основному содержимому</a>'
+              '<main id="main"><h1>Страница музея перенесена</h1>'
+              '<p>Оригинальная страница музея переехала: '
+              '<a tabindex="0" title="Открыть материал музея" href="'+url+'">'
+              'открыть материал нового сайта</a>.</p>'
+              '<p>Исторический адрес: '+origin_html+'</p></main></body></html>')
+        if (alias.resolve()==dest.resolve()
+            or (alias.exists() and not (alias.parent/'.musbread-legacy-alias').exists()
+                and alias.read_text(encoding='utf-8') != html+'\n')):
             collisions.append((source,target));continue
         rows.append({'legacy_path':source,'new_relative_url':target,'source_kind':meta['why'],'mode':'static-meta-refresh; HTTP 301 requires approved webserver config'})
         if write:
             alias.parent.mkdir(parents=True,exist_ok=True)
-            origin_html=escape(source,quote=True)
-            url=escape(target,quote=True)
-            html=('<!doctype html><html lang="ru"><head><meta charset="utf-8">'
-                  '<meta name="robots" content="noindex,follow">'
-                  '<meta http-equiv="refresh" content="0;url='+url+'">'
-                  '<title>Страница музея перенесена</title></head>'
-                  '<body><p>Оригинальная страница музея переехала: '
-                  '<a href="'+url+'">открыть материал нового сайта</a>.</p>'
-                  '<p>Исторический адрес: '+origin_html+'</p></body></html>')
-            # TZ-207: historical meta-refresh fallback contains a normal,
-            # keyboard-focusable manual link (never alters canonical/301 map).
-            html=html.replace('<a ', '<a tabindex="0" title="Открыть материал музея" ')
+            # TZ-207: a non-Nginx fallback has landmarks, keyboard skip link
+            # and a source-verified ordinary link, without changing HTTP 301.
             alias.write_text(html+'\n',encoding='utf-8')
             (alias.parent/'.musbread-legacy-alias').write_text(target+'\n')
             written.append(str(alias))

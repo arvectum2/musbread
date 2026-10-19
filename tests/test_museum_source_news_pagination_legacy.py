@@ -36,6 +36,8 @@ class MuseumLegacyNewsPaginationTests(unittest.TestCase):
     self.assertEqual(tree.xpath('//link[@rel="canonical"]/@href'),['https://muzei-xleb.ru/novosty'])
     self.assertEqual(tree.xpath('//meta[@name="robots"]/@content'),['noindex,nofollow'])
     self.assertEqual(tree.xpath('//main/@data-original-museum-news-page'),[str(page)])
+    self.assertEqual(len(tree.xpath('//a[@href="#main"]')),1)
+    self.assertEqual(len(tree.xpath('//main[@id="main"]')),1)
     items=tree.xpath('//article[@data-original-museum-archive-item]')
     self.assertEqual(len(items),10)
     self.assertEqual([x.get('data-original-museum-archive-item') for x in items],paths)

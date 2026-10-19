@@ -130,7 +130,9 @@ def emit():
         markup+='<meta name="robots" content="'+robots+'">'
         markup+='<title>Новости — Санкт-Петербургский музей Хлеба. Страница '+str(page+1)+'</title>'
         markup+='<link rel="canonical" href="'+SOURCE+'/novosty">'
-        markup+=stylesheet+'</head><body><header class="site-header">'
+        # These 27 genuine archive index pages are served as HTTP 200;
+        # give every keyboard user the same skip-to-main action as Next.
+        markup+=stylesheet+'</head><body><a class="skip-link" tabindex="0" href="#main">Перейти к основному содержимому</a><header class="site-header">'
         markup+='<nav aria-label="Основная навигация"><a href="/">Музей Хлеба</a> · <a href="/novosty">Новости</a></nav></header>'
         markup+='<main id="main" class="section inner-page" data-original-museum-news-page="'+str(page)+'">'
         markup+='<nav aria-label="Хлебные крошки"><a href="/">Главная</a> / <a href="/novosty">Новости</a></nav>'

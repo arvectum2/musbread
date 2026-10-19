@@ -7,7 +7,7 @@
 | Next static | Полный список файлов/SHA256; no secret, no backend | Реальные bundled JS/license notices, контент музея, asset provenance |
 | Закрытая CMS | Установленные Composer пакеты и static MoonShine assets | Установка --no-dev, внутренние ограничения доступа, notice для JS |
 | Шрифты CMS | 5 Gilroy WOFF2 по файлам и хешам | Подтверждённая лицензия или замена |
-| TinyMCE | Реальный JS v7.2.1 с GPL-2.0-or-later notice | Правовое решение или полный выход из зависимости и новая проверка |
+| Jodit Community 4.18.4 | Локальный MIT WYSIWYG, LICENSE.txt; прежний TinyMCE runtime удалён | Перепроверить Linux production bundle, MIT notice и UX редакторов |
 | Nginx | Исправлена allowlist для статических MoonShine на loopback | Проверка реального Nginx/FPM и сети музея |
 | Git ZIP | Только отслеживаемые исходники, без installed vendor/build | Не является контрактным binary deployment |
 | Лицензии | Техническая опись, PENDING | Юрист, полный NOTICE, учёт прав сотрудников/подрядчиков |
