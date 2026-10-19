@@ -192,8 +192,10 @@ http { include /etc/nginx/mime.types; default_type application/octet-stream;
   # Nginx directly by its static URL, with editorial drafts absent.
   if required_news is not None:
    real_html=assert_http(f'http://127.0.0.1:{PORT}/'+required_news,200,(src/required_news).read_bytes())
-   if (b'qa-real-laravel-queue-news' not in real_html
-       or b'qa-real-queue-draft-hidden' in real_html):
+   slug=Path(required_news).parts[1]
+   if (slug.encode() not in real_html
+       or b'qa-real-queue-draft-hidden' in real_html
+       or b'qa-unapproved-draft-hidden' in real_html):
     raise AssertionError('Real queued publisher page missing, or draft leaked in Docker public HTTP')
   # Verify fallback release pointer switch uses original trusted checksum.
   live_pointer=run('exec',relay,'readlink','/published/current').stdout.strip()
