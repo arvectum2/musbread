@@ -28,6 +28,8 @@ def verify():
  import json
  if OUT!=PAGED_OUT or not OUT.is_dir():
   raise RuntimeError('No complete Next.js static build to verify')
+ from audit_museum_static_internal_links import audit as check_links
+ links=check_links(OUT)
  docs=check_docs(verify_only=True)
  photos=check_photos(DEFAULT_MAX_EDGE,True)
  source=json.loads((NEWS_DATA/'official-museum-news-archive.json').read_text(encoding='utf-8'))
@@ -46,6 +48,8 @@ def verify():
  if 'Disallow: /' not in robot or '<url>' in sitemap:
   raise RuntimeError('Pre-award prototype unexpectedly indexable')
  print('MUSEUM_COMPLETE_LOCAL_ARTIFACT_PASS',{
+  'local_HTML_internal_links_verified':links['checked_local_references'],
+  'known_original_museum_broken_link_occurrences':links['known_upstream_breaks'],
   'museum_PDF_DOCX_exact_sha256':docs['count'],
   'museum_original_photo_source_URLs_selfhosted':photos['count'],
   'museum_unique_photo_static_assets':photos['unique'],
