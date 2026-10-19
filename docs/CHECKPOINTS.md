@@ -1,5 +1,8 @@
 # MusBread — чекпоинты исполнения и денежная смета
 
+> **19.10.2026 / CP-TZ238–240, VoiceOver, Safari:** [Нативный Page Zoom Firefox](tz-audit/CP_TZ238_240_NATIVE_FIREFOX_VOICEOVER_SAFARI_20261019.md). Официальный Firefox 158: **90/90 реальных macOS Command+Plus/0** (6 разделов × 3 ширины 1280/1024/768 × 5 уровней 100/120/150/~170/200%); 0 горизонтальных переполнений, при 768 px и 200% CSS viewport 384 px. WebKit доступность **15/15 E2E PASS**. VoiceOver запускался/выключался, но AppleScript-запросы произнесённой фразы и текста курсора не ответили — **VoiceOver чтение НЕ подтверждено**. Реальный Safari Zoom и полный Edge 100–200% не подтверждены; в Edge отдельно 110/125% GUI проверены. TZ-238/240/259 по-прежнему 🟡; светофор **85/118/122**, live не тронут.
+
+
 > **19.10.2026 / CP-TZ193-06:** [Нулевые ошибки alt и реальные браузеры](tz-audit/CP_TZ193_06_ZERO_AUTOMATIC_ALT_ERRORS_NATIVE_BROWSERS_20261019.md). Все **945 HTML**: 293 → **0 ALT_POLICY**, 0 других ошибок, 10 предупреждений; 125 оригинальных фото получили source-anchored редакционные alt DRAFT_FOR_MUSEUM_REVIEW, 5 длинных музейных атрибуций сохранены полностью, 5 архивных объявлений имеют частичные доступные выдержки. 25 unit + 11 Chrome E2E PASS, 101 оригинальный документ и 881 HTTP 301 PASS. Opera/Яндекс 12/12 страниц + pointer search PASS, Edge 12/12 и Enter PASS, **Edge headless pointer пока НЕ PASS** (RAF=false). Реальные дикторы, согласование музеем, Firefox/Safari/Atom и zoom остаются открыты; **матрица 85/118/122**, публикации нет.
 
 
