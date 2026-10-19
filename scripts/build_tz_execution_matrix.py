@@ -148,7 +148,7 @@ with (OUT/'TZ_EXECUTION_MATRIX.csv').open('w',newline='',encoding='utf-8-sig') a
 # JSON explicitly intended for portable, spreadsheet-independent rendering.
 (OUT/'TZ_EXECUTION_MATRIX.json').write_text(json.dumps({
     'source':'requirements.psv, 325 verified primary-source clauses',
-    'date':'2026-10-16','columns':HEADERS,'rows':DATA,
+    'date':'2026-10-19','columns':HEADERS,'rows':DATA,
     'counts':stats,'workflow':regime,
 },ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
@@ -161,7 +161,7 @@ def escape_md(text):
 lines=[
 '# MusBread — матрица выполнения каждого пункта ТЗ по логическим группам',
 '',
-'> **Источник:** приложение 3 к извещению №0372200172326000015, построчный реестр [`requirements.psv`](requirements.psv). Точная формулировка оригинального DOCX при расхождении имеет приоритет. Дата контрольного снимка: 16.10.2026; актуальный источник `requirements.psv`.',
+'> **Источник:** приложение 3 к извещению №0372200172326000015, построчный реестр [`requirements.psv`](requirements.psv). Точная формулировка оригинального DOCX при расхождении имеет приоритет. Дата контрольного снимка: 19.10.2026; актуальный источник `requirements.psv`.',
 '',
 '**Легенда:** 🟢 готово в техническом прототипе, 🟡 частично, 🔴 не готово. «Готово» **не означает приёмку заказчиком**. Номер очереди означает *можно начать следующий внутренний этап уже сейчас*, но не отсутствие будущих согласований. Нет номера = явный внешний блокер, обязательная стадия или решение музея.',
 '',

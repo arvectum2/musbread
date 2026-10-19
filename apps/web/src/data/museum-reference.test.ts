@@ -11,7 +11,7 @@ test("семь верхних категорий обязательны, slug в
 test("официальные контакты и билетная площадка — временные сведения со старого сайта", () => {
   assert.match(museumReference.address, /Михайлова/);
   assert.equal(museumReference.email, "musbread@cult.gugov.spb.ru");
-  assert.equal(new URL(museumReference.ticketUrl).hostname, "vmuzey.com");
+  assert.equal(museumReference.ticketUrl, "https://vmuzey.com/museum/sankt-peterburgskiy-muzey-hleba");
 });
 
 test("ссылки на старый сайт ограничены доменом музея", () => {
