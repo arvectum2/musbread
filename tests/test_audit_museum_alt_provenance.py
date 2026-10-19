@@ -12,6 +12,7 @@ class MuseumSourceAltReviewTests(unittest.TestCase):
         rows,summary=build_review(ROOT)
         self.assertGreaterEqual(summary["total_html_pages"],900)
         self.assertGreater(summary["total_audit_occurrences"],0)
+        self.assertLessEqual(summary["total_audit_occurrences"],50)  # pre-award reviewed drafts, not museum approval
         self.assertEqual(sum(r["render_occurrences"] for r in rows),summary["total_audit_occurrences"])
         self.assertEqual(len(rows),summary["unique_image_and_alt_pairs"])
         self.assertEqual(summary["unlinked_source_pairs"],0)

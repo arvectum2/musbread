@@ -2,6 +2,7 @@ import photoIndex from "./official-museum-photo-assets.json";
 import newsIndexPhotos from "./official-news-index-photo-assets.json";
 import deeperNewsPhotos from "./official-deep-news-image-assets.json";
 import originalExhibitionPhotos from "./official-historical-exhibition-image-assets.json";
+import reviewedAlts from "./official-museum-reviewed-alt.json";
 
 /** Map actual old official museum photo URLs to permanently self-hosted files. */
 const photoLookup={...photoIndex.photos,...newsIndexPhotos.photos,...deeperNewsPhotos.photos,...originalExhibitionPhotos.photos} as Record<string,{path:string;static_sha256:string}>;
@@ -18,4 +19,13 @@ export function localMuseumPhoto(url:string):string|null {
     const local=photoLookup[stableKey]?.path;
     return local && /^\/media\/museum-source\/[a-f0-9]{64}\.webp$/.test(local)?local:null;
   }catch{return null;}
+}
+
+/** Editorial drafts based on visually inspected ORIGINAL museum images.
+ * Not official museum captions: keep any nonempty official source alt first.
+ */
+export function reviewedMuseumPhotoAlt(staticPath:string):string|null {
+  if(!/^\/media\/museum-source\/[a-f0-9]{64}\.webp$/.test(staticPath))return null;
+  const photos=reviewedAlts.photos as Record<string,string>;
+  return photos[staticPath]?.trim() || null;
 }
