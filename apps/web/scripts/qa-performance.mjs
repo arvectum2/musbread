@@ -7,7 +7,13 @@ import {writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 const port=19871;
 const output=process.argv[2] ?? 'tz241-local-lab.json';
-const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.1','--directory','out'],{
+// Benchmark may target an independently running ISOLATED localhost Nginx.
+// It must never generate traffic toward a customer or public server.
+const external=process.argv[3];
+if(external && !/^http:\/\/127\.0\.0\.1:[0-9]{4,5}\/?$/.test(external))
+  throw new Error('Benchmark restricted to literal 127.0.0.1 HTTP loopback');
+const base=external?external.replace(/\/$/,''):'http://127.0.0.1:'+port;
+const server=external?null:spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.1','--directory','out'],{
   stdio:'ignore',cwd:process.cwd(),detached:false,
 });
 const sleep=ms=>new Promise(res=>setTimeout(res,ms));
@@ -15,7 +21,7 @@ let browser;
 try{
  let alive=false;
  for(let i=0;i<50;i++){
-  try{const response=await fetch(`http://127.0.0.1:${port}/`);
+  try{const response=await fetch(base+'/');
       if(response.ok){alive=true;break;}}catch{}
   await sleep(90);
  }
@@ -40,7 +46,7 @@ try{
     offline:false,latency:150,downloadThroughput:200_000,uploadThroughput:75_000,
    });
    await session.send('Emulation.setCPUThrottlingRate',{rate:4});
-   await page.goto(`http://127.0.0.1:${port}${route}`,{waitUntil:'load',timeout:30000});
+   await page.goto(base+route,{waitUntil:'load',timeout:30000});
    await sleep(90);
    const timing=await page.evaluate(()=>{
     const nav=performance.getEntriesByType('navigation')[0];
@@ -64,7 +70,7 @@ try{
      p75_lcp_ms:p75(measures.map(s=>s.largest_contentful_paint_ms??0)),
    };
  });
- const report={kind:'local-lab-NOT-production-SLA',timestamp:new Date().toISOString(),
+ const report={kind:'local-lab-NOT-production-SLA',server_kind:external?'isolated-loopback-nginx':'uncompressed-loopback-python',timestamp:new Date().toISOString(),
    network:'150ms RTT, 1.6Mbps, CPU slowdown x4; 390px mobile, cold context',
    samples,summary,all_p75_load_within_3s:summary.every(s=>s.p75_load_ms<=3000)};
  writeFileSync(resolve(output),JSON.stringify(report,null,2)+'\n',{mode:0o600});
@@ -72,5 +78,5 @@ try{
  console.log('TZ241_LOCAL_LAB',report.all_p75_load_within_3s?'PASS':'OVER_BUDGET','not real visitor SLA');
 }finally{
  await browser?.close();
- server.kill('SIGTERM');
+ server?.kill('SIGTERM');
 }
