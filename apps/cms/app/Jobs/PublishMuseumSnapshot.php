@@ -51,6 +51,32 @@ final class PublishMuseumSnapshot implements ShouldQueue
             // Warnings remain advisory; critical published-content errors
             // fail this run with only the safe exception class in the log.
             $parameters = ['--preflight-strict' => true];
+            // Keep normal CMS scheduler/queue behavior backward compatible.
+            // When an explicitly configured PRIVATE staging root exists, the
+            // queued worker must not overwrite the tracked Next.js fixture or
+            // static public webroot. The receiver reads only after SHA-256.
+            $privateStage = config('museum.queued_export_staging_dir');
+            if ($privateStage !== null && $privateStage !== '') {
+                if (! is_string($privateStage) || ! str_starts_with($privateStage, '/')
+                    || ! is_dir($privateStage) || is_link($privateStage)) {
+                    throw new RuntimeException('Unsafe private queued export staging directory');
+                }
+                $resolvedStage = realpath($privateStage);
+                $publicRoots = array_filter([
+                    realpath(public_path()),
+                    realpath(base_path('../web/public')),
+                    realpath(base_path('../web/src')),
+                ]);
+                if ($resolvedStage === false || $resolvedStage === '/'
+                    || array_any($publicRoots, static fn (string $root): bool =>
+                        $resolvedStage === $root || str_starts_with($resolvedStage, $root.'/'))) {
+                    throw new RuntimeException('Queued publication stage cannot be inside public or tracked web source');
+                }
+                $parameters['--output'] = rtrim($resolvedStage, '/').'/published.json';
+                $parameters['--manifest'] = rtrim($privateStage, '/').'/snapshot-manifest.json';
+                $parameters['--media-output-dir'] = rtrim($privateStage, '/').'/media';
+                $parameters['--document-output-dir'] = rtrim($privateStage, '/').'/documents';
+            }
             if ($this->outputPath !== null) $parameters['--output'] = $this->outputPath;
             if ($this->manifestPath !== null) $parameters['--manifest'] = $this->manifestPath;
             if ($this->mediaOutputDir !== null) $parameters['--media-output-dir'] = $this->mediaOutputDir;
@@ -59,8 +85,8 @@ final class PublishMuseumSnapshot implements ShouldQueue
                 throw new RuntimeException('museum:export returned a nonzero status');
             }
 
-            $snapshot = $this->outputPath ?? base_path('../web/src/data/published.json');
-            $manifest = $this->manifestPath ?? base_path('../web/public/snapshot-manifest.json');
+            $snapshot = $parameters['--output'] ?? base_path('../web/src/data/published.json');
+            $manifest = $parameters['--manifest'] ?? base_path('../web/public/snapshot-manifest.json');
             $audit = json_decode(file_get_contents($manifest), true, flags: JSON_THROW_ON_ERROR);
             $hash = hash_file('sha256', $snapshot);
             if (($audit['files']['published.json']['sha256'] ?? '') !== $hash) {

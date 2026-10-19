@@ -40,12 +40,17 @@ def assert_http(url,expect,content=None):
    raise AssertionError('Wrong public response bytes '+url)
   return raw
 
-def test():
- src=ROOT/'apps/web/out'
+def test(source_output:Path|None=None,required_news:str|None=None):
+ src=source_output if source_output is not None else ROOT/'apps/web/out'
+ if source_output is not None and (not src.is_dir() or src.is_symlink()):
+  raise ValueError('Isolated source build is missing or unsafe')
+ if required_news is not None and (not required_news.startswith('news/') or not required_news.endswith('/index.html') or '..' in Path(required_news).parts):
+  raise ValueError('Expected queued CMS publication route is invalid')
  files=['index.html','robots.txt','sitemap.xml','novosty/index.html']
  photo=next(iter(sorted((src/'media/museum-source').glob('*.webp'))),None)
  if not photo:raise RuntimeError('Missing source-verified local museum WebP')
  files.append('media/museum-source/'+photo.name)
+ if required_news is not None: files.append(required_news)
  for name in files:
   if not (src/name).is_file():raise RuntimeError('Build museum site before testing: '+name)
  tag=uuid.uuid4().hex[:9]
@@ -105,7 +110,7 @@ def test():
     dest=staged/m.name;dest.parent.mkdir(parents=True,exist_ok=True)
     with tf.extractfile(m) as source, dest.open('wb') as output:shutil.copyfileobj(source,output)
   expected=verify_manifest(staged,trusted)
-  if expected!=inventory or len(expected['files'])!=5:raise AssertionError('Trusted manifest mismatch')
+  if expected!=inventory or len(expected['files'])!=len(files):raise AssertionError('Trusted manifest mismatch')
   # Attack: altered transfer must be rejected before public activation.
   probe=staged/'index.html';original=probe.read_bytes();probe.write_bytes(original+b'TAMPERED')
   assert_error(lambda:verify_manifest(staged,trusted),'tampered remote static HTML must fail closed')
@@ -183,6 +188,13 @@ http { include /etc/nginx/mime.types; default_type application/octet-stream;
     if getattr(exc,'code',None)!=404:
      raise AssertionError('Expected precise 404 for '+private_path+': '+str(exc))
    else:raise AssertionError('Sensitive path publicly reachable '+private_path)
+  # A real queued CMS-export -> Next.js build must reach the public Docker
+  # Nginx directly by its static URL, with editorial drafts absent.
+  if required_news is not None:
+   real_html=assert_http(f'http://127.0.0.1:{PORT}/'+required_news,200,(src/required_news).read_bytes())
+   if (b'qa-real-laravel-queue-news' not in real_html
+       or b'qa-real-queue-draft-hidden' in real_html):
+    raise AssertionError('Real queued publisher page missing, or draft leaked in Docker public HTTP')
   # Verify fallback release pointer switch uses original trusted checksum.
   live_pointer=run('exec',relay,'readlink','/published/current').stdout.strip()
   if live_pointer!='releases/'+release_id:
@@ -231,13 +243,14 @@ http { include /etc/nginx/mime.types; default_type application/octet-stream;
    observed=run('exec',relay,'sha256sum','/published/current/'+name).stdout.split()[0]
    if observed!=checksum:raise AssertionError('Rolled-back museum file checksum mismatch: '+name)
   evidence={'scenario':'CP-ARCH-01_ISOLATED_DOCKER_TRANSFER_SUBSET',
-   'scope':'5 REAL Next.js static output files, private PHP transfer surrogate; NOT actual Laravel CMS publisher',
+   'scope':('6 files including REAL Laravel database queued worker -> Next.js HTML' if required_news else '5 REAL Next.js static output files, private PHP transfer surrogate; NOT actual Laravel CMS publisher'),
    'private_cms_network_only':True,'public_nginx_network_only':True,
    'sole_two_network_courier':True,'cms_host_ports_published':0,
    'private_to_public_direct_access_denied':True,'public_to_private_direct_access_denied':True,
    'courier_sourced_private_package_over_real_Docker_network':True,
    'trusted_manifest_outside_package':True,
    'receiver_files_sha256_verified':len(files),
+   'queue_built_news_visible_by_HTTP':required_news is not None,
    'modified_static_html_rejected':True,'injected_php_file_rejected':True,
    'public_files_HTTP_200_byte_identical':len(files),
    'public_sensitive_paths_HTTP_404':6,
