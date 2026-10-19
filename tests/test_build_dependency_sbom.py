@@ -20,13 +20,13 @@ class LockedSbomTests(unittest.TestCase):
         self.assertEqual(count["composer"],len(c["packages"]))
         self.assertEqual(count["composer-dev"],len(c["packages-dev"]))
         self.assertEqual(count["npm"],len(n["packages"])-1)
-        self.assertEqual(len(cyclo["components"]),560)
+        self.assertEqual(len(cyclo["components"]),559)
         self.assertEqual(cyclo["bomFormat"],"CycloneDX")
         self.assertEqual(cyclo["specVersion"],"1.6")
-        self.assertEqual(len(cyclo["dependencies"]),561)
+        self.assertEqual(len(cyclo["dependencies"]),560)
         refs={i["bom-ref"] for i in cyclo["components"]}
         self.assertEqual(len(refs),len(cyclo["components"]))
-        self.assertIn("embedded:tinymce-runtime",refs)
+        self.assertIn("embedded:jodit-runtime",refs)
         self.assertIn("native:librsvg",refs)
         self.assertEqual({i["class"] for i in missing},{"optional_or_peer"})
         self.assertEqual(len(missing),4)
@@ -36,14 +36,14 @@ class LockedSbomTests(unittest.TestCase):
                       if i["ref"]=="musbread:source-project")
         self.assertIn("npm:node_modules/next",rootdeps)
         self.assertTrue(any(x.startswith("composer:laravel/framework@") for x in rootdeps))
-        self.assertIn("embedded:tinymce-runtime",rootdeps)
+        self.assertIn("embedded:jodit-runtime",rootdeps)
         self.assertIn("native:librsvg",rootdeps)
 
     def test_license_risks_and_conditional_platforms_kept(self):
         document, details, missing, count = bom()
         names={i["name"]:i for i in document["components"]}
-        self.assertIn("GPL-2.0-or-later",
-                      [x["license"]["name"] for x in names["TinyMCE bundled editor runtime"]["licenses"]])
+        self.assertIn("MIT",
+                      [x["license"]["name"] for x in names["Jodit Community WYSIWYG runtime"]["licenses"]])
         self.assertEqual(details["npm:node_modules/@img/sharp-libvips-darwin-arm64"]["risk"],
                          "WEAK_COPYLEFT_LGPL")
         self.assertTrue(details["npm:node_modules/@img/sharp-libvips-darwin-arm64"]["optional"])
@@ -59,9 +59,9 @@ class LockedSbomTests(unittest.TestCase):
         stats=json.loads(summary)
         self.assertFalse(stats["legal_clearance"])
         self.assertFalse(stats["transferred_exclusive_third_party_rights"])
-        self.assertGreaterEqual(len(list(csv.DictReader(licenses.splitlines()))),560)
+        self.assertGreaterEqual(len(list(csv.DictReader(licenses.splitlines()))),559)
         self.assertEqual(document["components"],report()[0]["components"])
-        self.assertEqual(write_or_check(ROOT,True)["total_components"],560)
+        self.assertEqual(write_or_check(ROOT,True)["total_components"],559)
 
     def test_changing_an_entire_locked_package_or_its_license_fails_report_gate(self):
         with tempfile.TemporaryDirectory() as dirname:

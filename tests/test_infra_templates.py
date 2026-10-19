@@ -30,7 +30,7 @@ class InfraTemplateTests(unittest.TestCase):
         self.assertIn("frame-ancestors 'none'", config)
         # Private MoonShine uses public/vendor for its runtime assets, but
         # Composer code/docs and any other vendor trees must be 404.
-        self.assertIn("location ~ ^/vendor/(moonshine|moonshine-tinymce)/",config)
+        self.assertIn("location ~ ^/vendor/(moonshine|museum-jodit)/",config)
         self.assertIn("location ~ ^/(storage|database|bootstrap|vendor)/ { return 404; }",config)
         self.assertLess(config.index("location ~ \\.php$"),
                         config.index("location ~ ^/vendor/(moonshine"))

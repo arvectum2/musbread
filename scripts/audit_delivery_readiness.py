@@ -66,7 +66,7 @@ BLOCKERS = [
     ("ux_customer_tests", "Required real respondent sessions and museum feedback"),
     ("pentest", "Authorized independent test on museum-accepted target"),
     ("support_sla", "Production monitoring and 12-month support obligations"),
-    ("third_party_rights", "Verified licensing and transferability, including TinyMCE"),
+    ("third_party_rights", "Verified licensing and transferability, including Jodit MIT notices and museum image/font rights"),
     ("editable_design_formats", "Approved AI/EPS/SVG/PSD/TIFF and PPT/PPTX outputs as required"),
     ("museum_approval", "Formal acceptance, signed acts and handover of media/documents"),
 ]

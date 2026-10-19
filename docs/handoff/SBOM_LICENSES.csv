@@ -36,7 +36,6 @@ composer:lee-to/laravel-package-command@0.9.2,lee-to/laravel-package-command,0.9
 composer:mockery/mockery@1.6.15,mockery/mockery,1.6.15,composer-dev,development,1,0,BSD-3-Clause,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:monolog/monolog@3.12.1,monolog/monolog,3.12.1,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:moonshine/moonshine@4.19.5,moonshine/moonshine,4.19.5,composer,production,1,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
-composer:moonshine/tinymce@2.0.0,moonshine/tinymce,2.0.0,composer,production,1,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:myclabs/deep-copy@1.14.0,myclabs/deep-copy,1.14.0,composer-dev,development,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:nesbot/carbon@3.14.2,nesbot/carbon,3.14.2,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:nette/schema@v1.3.6,nette/schema,v1.3.6,composer,production,0,0,BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only,PERMISSIVE_NOTICE_CHECK;STRONG_COPYLEFT_OR_DUAL_REVIEW,apps/cms/composer.lock
@@ -115,7 +114,7 @@ composer:theseer/tokenizer@2.0.1,theseer/tokenizer,2.0.1,composer-dev,developmen
 composer:tijsverkoyen/css-to-inline-styles@v2.4.0,tijsverkoyen/css-to-inline-styles,v2.4.0,composer,production,0,0,BSD-3-Clause,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:vlucas/phpdotenv@v5.7.0,vlucas/phpdotenv,v5.7.0,composer,production,0,0,BSD-3-Clause,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:voku/portable-ascii@2.1.1,voku/portable-ascii,2.1.1,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
-embedded:tinymce-runtime,TinyMCE bundled editor runtime,,bundled-asset,CMS_RUNTIME,0,0,GPL-2.0-or-later,STRONG_COPYLEFT_OR_DUAL_REVIEW,apps/cms/vendor/moonshine/tinymce/public/license.md (local evidence)
+embedded:jodit-runtime,Jodit Community WYSIWYG runtime,4.18.4,bundled-asset,CMS_RUNTIME,1,0,MIT,PERMISSIVE_NOTICE_CHECK,"apps/cms/public/vendor/museum-jodit/LICENSE.txt (MIT, pinned npm 4.18.4)"
 native:librsvg,librsvg/rsvg-convert,,native-build,build_only,0,1,UNVERIFIED_NATIVE_PACKAGE_LICENSE,UNKNOWN_REQUIRES_VERIFICATION,"Mac mini / Linux package manager, outside lockfiles"
 npm:node_modules/@axe-core/playwright,@axe-core/playwright,4.13.0,npm,development,1,0,MPL-2.0,FILE_LEVEL_COPYLEFT_REVIEW,apps/web/package-lock.json
 npm:node_modules/@axe-core/playwright/node_modules/axe-core,axe-core,4.13.0,npm,development,0,0,MPL-2.0,FILE_LEVEL_COPYLEFT_REVIEW,apps/web/package-lock.json

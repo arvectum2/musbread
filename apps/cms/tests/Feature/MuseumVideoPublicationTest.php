@@ -89,7 +89,7 @@ final class MuseumVideoPublicationTest extends TestCase
         $this->assertStringNotContainsString('<iframe',$published['body']);
         $article->update(['body'=>'<p>Inline error [[museum-video:seminar-demo]] with text</p>']);
         [$status,$data]=$this->exportTo('bad-position');
-        $this->assertSame(1,$status,'An inline marker must be its own TinyMCE paragraph');
+        $this->assertSame(1,$status,'An inline marker must be its own editor paragraph');
         $this->assertSame([],$data);
         $article->update(['body'=>'<p>До текста</p><p>[[museum-video:seminar-demo]]</p><p>После текста</p>']);
         $this->assertArrayNotHasKey('rights_confirmed',$published['videos'][0]);

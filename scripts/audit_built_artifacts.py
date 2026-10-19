@@ -31,7 +31,11 @@ STATIC_TYPES={".js",".css",".svg",".png",".jpg",".jpeg",".woff",".woff2",
 WEB_TYPES={".js",".css",".woff",".woff2",".html",".png",".jpg",".jpeg",".webp",
            ".svg",".ico",".json",".txt",".xml",".pdf",".docx",".xlsx"}
 BAD_PATHS=("..",)
-TINY_LICENSE="GNU General Public License Version 2 or later"
+JODIT_SHA={
+ "LICENSE.txt":"b6eccb41553c575c01f6a1261e87fdc7b842a721d6ba9daa88bdbd9259865d55",
+ "jodit.min.js":"d65fd78a72e6acfdae4cb0f47fef3c90f72ff8b40d5043313b49c4757db62008",
+ "jodit.min.css":"4195186166912468e2a361c6be27d42f5b78b7487fb54f14155ca83d3a6e9035",
+}
 
 def sha_file(path: Path)->str:
     h=hashlib.sha256()
@@ -91,22 +95,18 @@ def cms_report(public:Path,vendor:Path,composer_lock:Path,*,install_profile:str=
     rows,types=collect(root,STATIC_TYPES,source="private CMS public vendor")
     if not rows:raise ValueError("CMS installed public assets missing")
     required={"moonshine/assets/app.js","moonshine/assets/main.css",
-              "moonshine-tinymce/tinymce.min.js",
-              "moonshine-tinymce/license.md"}
+              "museum-jodit/jodit.min.js", "museum-jodit/jodit.min.css",
+              "museum-jodit/LICENSE.txt", "museum-jodit/museum-jodit-init.js"}
     found={row["path"] for row in rows}
     if not required.issubset(found):
         raise ValueError("Installed CMS asset expected but missing: "+str(sorted(required-found)))
-    # Scope the Nginx allowlist to verified static vendor files only.
-    if any(not x["path"].startswith(("moonshine/","moonshine-tinymce/")) for x in rows):
-        raise ValueError("Unexpected private CMS vendor namespace")
-    license_path=root/"moonshine-tinymce/license.md"
-    actual=license_path.read_text(encoding="utf-8")
-    if TINY_LICENSE not in actual:
-        raise ValueError("Installed TinyMCE GPL notice missing/changed")
-    tiny_path=root/"moonshine-tinymce/tinymce.min.js"
-    with tiny_path.open("rb") as tiny_stream:
-        version=re.search(rb"TinyMCE version\s+([0-9.]+)",tiny_stream.read(350),re.I)
-    if not version:raise ValueError("Bundled TinyMCE JS version cannot be identified")
+    if any(not x["path"].startswith(("moonshine/","museum-jodit/")) for x in rows):
+        raise ValueError("Unexpected private CMS vendor namespace (old TinyMCE?)")
+    for filename,wanted in JODIT_SHA.items():
+        if sha_file(root/"museum-jodit"/filename)!=wanted:
+            raise ValueError("Bundled Jodit v4.18.4 MIT checksum mismatch: "+filename)
+    if (root/"museum-jodit/museum-jodit-init.js").stat().st_size<100:
+        raise ValueError("Jodit MoonShine init script missing/empty")
     fonts=[{"path":x["path"],"sha256":x["sha256"],"bytes":x["bytes"],
             "license":"UNVERIFIED_LICENSE_FOR_MUSEUM_REDISTRIBUTION"}
            for x in rows if x["path"].lower().endswith((".woff",".woff2",".ttf",".otf"))]
@@ -173,9 +173,9 @@ def cms_report(public:Path,vendor:Path,composer_lock:Path,*,install_profile:str=
         "development_packages_installed":len(installed_names&dev_names),
         "production_profile_verified":install_profile=="production" and not (installed_names&dev_names),
         "installed_vendor_files":sum(x["files"] for x in packages),
-        "embedded_tinymce_version":version.group(1).decode(),
-        "embedded_tinymce_license":"GPL-2.0-or-later_NOTICE_OBSERVED",
-        "tiny_mce_removal_status":"STILL_INSTALLED",
+        "embedded_jodit_version":"4.18.4",
+        "embedded_jodit_license":"MIT_LICENSE_AND_ASSET_HASHES_VERIFIED",
+        "tiny_mce_removal_status":"REMOVED_FROM_RUNTIME_AND_PUBLISHED_ASSETS",
         "bundled_script_and_font_rights":"NOT_LEGALLY_CLEARED",
         "font_license_blockers":fonts,
         "binary_assets_mapped_exactly_to_lock":"NOT_PROVED_FOR_COMPILED_MOONSHINE",

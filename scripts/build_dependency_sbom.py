@@ -2,7 +2,7 @@
 """CP-34D: deterministic CycloneDX 1.6 pre-award inventory from lockfiles.
 
 Enumerates ALL locked Node and Composer records, dev and optional included.
-Includes build tools and explicitly reported bundled TinyMCE GPL asset.
+Includes build tools and self-hosted MIT Jodit Community runtime.
 Does not claim legal clearance, reproducible binary installation, or production
 shipment of every platform-specific optional locked package.
 """
@@ -204,11 +204,13 @@ def bom(root: Path = ROOT) -> dict:
         add(ref,name,ver,"python-design","scripts/requirements-design-tools.txt",
             [lic],"build_only",True,purl=f"pkg:pypi/{name}@{ver}")
         graph[rootref].add(ref)
-    add("embedded:tinymce-runtime","TinyMCE bundled editor runtime",None,
-        "bundled-asset","apps/cms/vendor/moonshine/tinymce/public/license.md (local evidence)",
-        ["GPL-2.0-or-later"],"CMS_RUNTIME",False,False,
-        extra={"version-status":"UNVERIFIED","source-code-ownership":"THIRD_PARTY"})
-    graph[rootref].add("embedded:tinymce-runtime")
+    add("embedded:jodit-runtime","Jodit Community WYSIWYG runtime","4.18.4",
+        "bundled-asset","apps/cms/public/vendor/museum-jodit/LICENSE.txt (MIT, pinned npm 4.18.4)",
+        ["MIT"],"CMS_RUNTIME",True,False,
+        extra={"version-status":"PINNED","source-code-ownership":"THIRD_PARTY",
+               "network-backend":"NONE","premium-components":"NONE"},
+        purl="pkg:npm/jodit@4.18.4")
+    graph[rootref].add("embedded:jodit-runtime")
     add("native:librsvg","librsvg/rsvg-convert",None,"native-build",
         "Mac mini / Linux package manager, outside lockfiles",
         ["UNVERIFIED_NATIVE_PACKAGE_LICENSE"],"build_only",False,True,
@@ -230,7 +232,7 @@ def bom(root: Path = ROOT) -> dict:
                     "properties":[
                         {"name":"musbread:legal-status","value":"NOT_A_LEGAL_CLEARANCE"},
                         {"name":"musbread:scope","value":"ALL_LOCKED_PRODUCTION_DEV_OPTIONAL_BUT_NOT_FULL_BINARY_SBOM"},
-                        {"name":"musbread:source","value":"composer.lock + package-lock.json + design-pins + manual embedded notice"},
+                        {"name":"musbread:source","value":"composer.lock + package-lock.json + design-pins + self-hosted Jodit MIT notice"},
                     ]},
         "components":comp,
         "dependencies":deps,
@@ -253,9 +255,10 @@ def report(root:Path=ROOT)->tuple[dict,str,str]:
         "risk_classification_counts":{k.removeprefix("risk:"):v for k,v in counts.items() if k.startswith("risk:")},
         "unresolved_lockfile_edges":len(unresolved),
         "unresolved_edge_examples":unresolved[:35],
-        "embedded_editor":{"name":"TinyMCE JavaScript","license_notice":"GPL-2.0-or-later",
-                           "wrapper":"moonshine/tinymce MIT in composer.lock",
-                           "open":{"legal_review":True,"replacement_evaluation":True}},
+        "embedded_editor":{"name":"Jodit Community 4.18.4","license_notice":"MIT",
+                           "source":"locally vendored original npm tarball",
+                           "requires_notice_preserved":True,
+                           "open":{"license_text_verified":False,"all_distributed_components_reviewed":False}},
         "legal_clearance":False,
         "transferred_exclusive_third_party_rights":False,
         "limitations":[
@@ -263,7 +266,7 @@ def report(root:Path=ROOT)->tuple[dict,str,str]:
             "Unknown licenses and mixed expressions require verification against original texts",
             "CycloneDX graph includes resolved peer and optional dependency relationships",
             "Source packages do not prove provenance of built/minified vendored bundles",
-            "Manual TinyMCE embedded runtime license is explicitly separate from MIT PHP wrapper",
+            "Jodit Community MIT license notice must accompany all distributed copies",
             "Native renderer version/license and some transitive binary assets outside locks are unknown",
             "No museum artwork, employee/contractor rights or customer approvals have been audited",
         ],
@@ -309,7 +312,7 @@ def summary_markdown(summary:dict)->str:
         "",
         "## High-priority review",
         "",
-        "- TinyMCE embedded JS GPL-2.0-or-later is distinct from MIT moonshine/tinymce wrapper.",
+        "- Jodit Community is locally vendored under MIT; the copyright/license notice is mandatory.",
         "- Composer nette/schema and nette/utils declare BSD-3-Clause OR GPL choices;",
         "  review alternatives and notices, do not call them GPL-only.",
         "- HTMLPurifier LGPL-2.1-or-later and platform-optional sharp/libvips",
@@ -329,7 +332,7 @@ def summary_markdown(summary:dict)->str:
         "## Legal and delivery boundaries",
         "",
         "- All locked Composer/npm production, dev and platform-optional records included.",
-        "- Two pinned Python design tools, bundled TinyMCE and one native renderer disclosed.",
+        "- Two pinned Python design tools, bundled Jodit CE MIT and one native renderer disclosed.",
         "- This does NOT establish an optional OS package is installed or distributed.",
         "- Built vendored bundles, original license notices and transitive binaries still need inspection.",
         "- Final deployment needs a new installed-binary artifact/SBOM comparison.",

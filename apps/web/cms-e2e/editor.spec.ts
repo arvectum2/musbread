@@ -70,35 +70,34 @@ test("реальный вход и редактор материалов в Moon
 
   await page.goto("/admin/resource/museum-entry-resource/museum-entry-form-page");
   await expect(page.getByText("Основной текст")).toBeVisible();
-  await expect(page.locator("iframe.tox-edit-area__iframe")).toBeVisible();
+  await expect(page.locator(".jodit-wysiwyg")).toBeVisible();
+  await expect(page.locator("textarea[data-museum-jodit]")).toHaveAttribute("data-museum-jodit-ready", "true");
+  await expect(page.locator("script[src*=moonshine-tinymce]")).toHaveCount(0);
   // TZ-234: scheduled unpublication must be present in the REAL CMS editor.
   await expect(page.locator('input[name="unpublish_at"]')).toBeVisible();
   await page.locator('select[name="type"]').selectOption('news');
   await page.locator('input[name="title"]').fill('QA: публикация из настоящего браузера');
   await page.locator('input[name="slug"]').fill('qa-browser-news');
   await page.locator('textarea[name="excerpt"]').fill('Тестовый анонс');
-  await page.frameLocator('iframe.tox-edit-area__iframe').locator('body')
-    .fill('Демонстрационная публикация из браузерного теста');
+  await page.locator('.jodit-wysiwyg').fill('Демонстрационная публикация из браузерного теста');
   await page.locator('select[name="status"]').selectOption('published');
   await page.locator('button[type="submit"]').filter({ hasText: 'Save' }).click();
   await expect(page).toHaveURL(/museum-entry-form-page\/\d+/, { timeout: 10_000 });
 
-  // TZ-308/309: on the SAME ordinary non-programmer WYSIWYG form, switch
-  // to built-in TinyMCE source code. Preserve semantic headings, ordered
-  // lists and contextual links through real Save → SQLite → static HTML.
-  await expect(page.frameLocator("iframe.tox-edit-area__iframe").locator("body")).toContainText(
+  // TZ-308/309: the SAME MIT-licensed Jodit visual field has a source
+  // mode. Preserve semantic HTML and links through real Save/SQLite/Next.
+  await expect(page.locator('.jodit-wysiwyg')).toContainText(
     "Демонстрационная публикация из браузерного теста");
-  await page.getByRole("button",{name:"Исходный код"}).click();
-  const sourceDialog=page.getByRole("dialog",{name:"Исходный код"});
-  await expect(sourceDialog).toBeVisible();
-  await sourceDialog.locator("textarea").fill(
+  await page.locator('.jodit-toolbar-button_source').click();
+  const source=page.locator('textarea.jodit-source__mirror');
+  await expect(source).toBeVisible();
+  await source.fill(
     '<p><strong>Демонстрационная публикация из браузерного теста</strong></p>'
     +'<h2>QA: заголовок из HTML-источника</h2>'
     +'<ol><li>QA: первый пункт редакторского списка</li></ol>'
     +'<p>Посмотрите <a href="/events/qa-browser-event/">программу тестового события</a>.</p>');
-  await sourceDialog.getByRole("button",{name:/Сохранить|Save/}).click();
-  await expect(sourceDialog).toBeHidden();
-  await expect(page.frameLocator("iframe.tox-edit-area__iframe").locator("h2")).toHaveText(
+  await page.locator('.jodit-toolbar-button_source').click();
+  await expect(page.locator('.jodit-wysiwyg h2')).toHaveText(
     "QA: заголовок из HTML-источника");
   await page.locator('button[type="submit"]').filter({hasText:"Save"}).click();
   await expect(page).toHaveURL(/museum-entry-form-page\/\d+/,{timeout:10_000});

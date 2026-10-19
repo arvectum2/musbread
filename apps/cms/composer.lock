@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2c7e5023d1b2a8a7fd18d1662e7dcbb",
+    "content-hash": "27f1db52007a2d26b939174461210410",
     "packages": [
         {
             "name": "brick/math",
@@ -2410,70 +2410,6 @@
                 }
             ],
             "time": "2026-09-30T12:34:35+00:00"
-        },
-        {
-            "name": "moonshine/tinymce",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moonshine-software/tinymce.git",
-                "reference": "d7bfd0d112e431ecfb09f27399dad219df7ce4dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/tinymce/zipball/d7bfd0d112e431ecfb09f27399dad219df7ce4dd",
-                "reference": "d7bfd0d112e431ecfb09f27399dad219df7ce4dd",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "php": "^8.2|^8.3"
-            },
-            "conflict": {
-                "moonshine/moonshine": "<3.0.0"
-            },
-            "require-dev": {
-                "moonshine/moonshine": "^4.0",
-                "orchestra/testbench": "^9.0",
-                "phpunit/phpunit": "^11.0.1",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "MoonShine\\TinyMce\\Providers\\TinyMceServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MoonShine\\TinyMce\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Danil Shutsky",
-                    "email": "info@cutcode.ru",
-                    "homepage": "https://cutcode.dev"
-                }
-            ],
-            "description": "TinyMce editor for MoonShine",
-            "homepage": "https://moonshine-laravel.com",
-            "keywords": [
-                "moonshine",
-                "tinymce"
-            ],
-            "support": {
-                "issues": "https://github.com/moonshine-software/tinymce/issues",
-                "source": "https://github.com/moonshine-software/tinymce"
-            },
-            "time": "2025-11-11T10:06:23+00:00"
         },
         {
             "name": "nesbot/carbon",

@@ -20,7 +20,7 @@
       },
       {
         "name": "musbread:source",
-        "value": "composer.lock + package-lock.json + design-pins + manual embedded notice"
+        "value": "composer.lock + package-lock.json + design-pins + self-hosted Jodit MIT notice"
       }
     ]
   },
@@ -1356,42 +1356,6 @@
       ],
       "version": "4.19.5",
       "purl": "pkg:composer/moonshine/moonshine@4.19.5"
-    },
-    {
-      "type": "library",
-      "bom-ref": "composer:moonshine/tinymce@2.0.0",
-      "name": "moonshine/tinymce",
-      "licenses": [
-        {
-          "license": {
-            "name": "MIT"
-          }
-        }
-      ],
-      "properties": [
-        {
-          "name": "musbread:source-lockfile",
-          "value": "apps/cms/composer.lock"
-        },
-        {
-          "name": "musbread:dependency-scope",
-          "value": "production"
-        },
-        {
-          "name": "musbread:direct-dependency",
-          "value": "true"
-        },
-        {
-          "name": "musbread:optional-or-platform-specific",
-          "value": "false"
-        },
-        {
-          "name": "musbread:manual-license-risk",
-          "value": "PERMISSIVE_NOTICE_CHECK"
-        }
-      ],
-      "version": "2.0.0",
-      "purl": "pkg:composer/moonshine/tinymce@2.0.0"
     },
     {
       "type": "library",
@@ -4223,19 +4187,19 @@
     },
     {
       "type": "library",
-      "bom-ref": "embedded:tinymce-runtime",
-      "name": "TinyMCE bundled editor runtime",
+      "bom-ref": "embedded:jodit-runtime",
+      "name": "Jodit Community WYSIWYG runtime",
       "licenses": [
         {
           "license": {
-            "name": "GPL-2.0-or-later"
+            "name": "MIT"
           }
         }
       ],
       "properties": [
         {
           "name": "musbread:source-lockfile",
-          "value": "apps/cms/vendor/moonshine/tinymce/public/license.md (local evidence)"
+          "value": "apps/cms/public/vendor/museum-jodit/LICENSE.txt (MIT, pinned npm 4.18.4)"
         },
         {
           "name": "musbread:dependency-scope",
@@ -4243,7 +4207,7 @@
         },
         {
           "name": "musbread:direct-dependency",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "musbread:optional-or-platform-specific",
@@ -4251,7 +4215,15 @@
         },
         {
           "name": "musbread:manual-license-risk",
-          "value": "STRONG_COPYLEFT_OR_DUAL_REVIEW"
+          "value": "PERMISSIVE_NOTICE_CHECK"
+        },
+        {
+          "name": "musbread:network-backend",
+          "value": "NONE"
+        },
+        {
+          "name": "musbread:premium-components",
+          "value": "NONE"
         },
         {
           "name": "musbread:source-code-ownership",
@@ -4259,9 +4231,11 @@
         },
         {
           "name": "musbread:version-status",
-          "value": "UNVERIFIED"
+          "value": "PINNED"
         }
-      ]
+      ],
+      "version": "4.18.4",
+      "purl": "pkg:npm/jodit@4.18.4"
     },
     {
       "type": "application",
@@ -22917,10 +22891,6 @@
       ]
     },
     {
-      "ref": "composer:moonshine/tinymce@2.0.0",
-      "dependsOn": []
-    },
-    {
       "ref": "composer:myclabs/deep-copy@1.14.0",
       "dependsOn": []
     },
@@ -23377,7 +23347,7 @@
       "dependsOn": []
     },
     {
-      "ref": "embedded:tinymce-runtime",
+      "ref": "embedded:jodit-runtime",
       "dependsOn": []
     },
     {
@@ -26332,10 +26302,9 @@
         "composer:laravel/tinker@v3.0.2",
         "composer:mockery/mockery@1.6.15",
         "composer:moonshine/moonshine@4.19.5",
-        "composer:moonshine/tinymce@2.0.0",
         "composer:nunomaduro/collision@v8.9.5",
         "composer:phpunit/phpunit@12.5.39",
-        "embedded:tinymce-runtime",
+        "embedded:jodit-runtime",
         "native:librsvg",
         "npm:node_modules/@axe-core/playwright",
         "npm:node_modules/@playwright/test",

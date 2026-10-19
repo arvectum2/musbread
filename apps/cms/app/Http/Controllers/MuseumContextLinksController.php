@@ -10,7 +10,7 @@ use App\Support\MuseumSectionAccess;
 use Illuminate\Http\Response;
 
 /**
- * Private, read-only editorial link picker for TinyMCE.
+ * Private, read-only editorial link picker for visual CMS editor.
  * Every URL is recomputed from the SAME eligibility conditions as exporter:
  * time window, approved ancestors, title+body for optional EN.
  * Draft titles and secrets never enter the page.

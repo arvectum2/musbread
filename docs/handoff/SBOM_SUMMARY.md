@@ -4,13 +4,13 @@
 
 | Package source | Entries |
 |---|---:|
-| Composer production | 83 |
+| Composer production | 82 |
 | Composer development | 33 |
 | npm all locked (including optional platform and dev) | 440 |
 | Pinned design Python tools | 2 |
 | Explicit embedded editor asset | 1 |
 | Native build tool | 1 |
-| **Total distinct component records** | **560** |
+| **Total distinct component records** | **559** |
 
 ## Declared license risk buckets (one highest-priority bucket per component)
 
@@ -19,7 +19,7 @@
 | FILE_LEVEL_COPYLEFT_REVIEW | 3 |
 | NON_STANDARD_OR_MANUAL_REVIEW | 2 |
 | PERMISSIVE_NOTICE_CHECK | 536 |
-| STRONG_COPYLEFT_OR_DUAL_REVIEW | 3 |
+| STRONG_COPYLEFT_OR_DUAL_REVIEW | 2 |
 | UNKNOWN_REQUIRES_VERIFICATION | 1 |
 | WEAK_COPYLEFT_LGPL | 15 |
 
@@ -29,7 +29,7 @@ Components may be optional on a target OS, build-only or dev-only.
 
 ## High-priority review
 
-- TinyMCE embedded JS GPL-2.0-or-later is distinct from MIT moonshine/tinymce wrapper.
+- Jodit Community is locally vendored under MIT; the copyright/license notice is mandatory.
 - Composer nette/schema and nette/utils declare BSD-3-Clause OR GPL choices;
   review alternatives and notices, do not call them GPL-only.
 - HTMLPurifier LGPL-2.1-or-later and platform-optional sharp/libvips
@@ -49,7 +49,7 @@ only optional peer targets remain, not missing locked mandatory runtime packages
 ## Legal and delivery boundaries
 
 - All locked Composer/npm production, dev and platform-optional records included.
-- Two pinned Python design tools, bundled TinyMCE and one native renderer disclosed.
+- Two pinned Python design tools, bundled Jodit CE MIT and one native renderer disclosed.
 - This does NOT establish an optional OS package is installed or distributed.
 - Built vendored bundles, original license notices and transitive binaries still need inspection.
 - Final deployment needs a new installed-binary artifact/SBOM comparison.

@@ -42,18 +42,6 @@
       "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
     },
     {
-      "name": "moonshine/tinymce",
-      "ecosystem": "composer",
-      "version": "2.0.0",
-      "declared_licenses": [
-        "MIT"
-      ],
-      "evidence": "apps/cms/composer.lock",
-      "direct_runtime": true,
-      "redistributed_upstream_code_owned_by_arvectum": false,
-      "license_review": "NOTICE_AND_COMPLIANCE_REQUIRED"
-    },
-    {
       "name": "next",
       "ecosystem": "npm",
       "version": "16.4.1",
@@ -126,16 +114,16 @@
       "license_review": "VERIFY_EXACT_LICENSE_AND_NOTICES"
     },
     {
-      "name": "tinymce/embedded-runtime",
+      "name": "jodit/community-runtime",
       "ecosystem": "bundled-javascript",
-      "version": "UNVERIFIED_ASSET_VERSION",
+      "version": "4.18.4",
       "declared_licenses": [
-        "GPL-2.0-or-later"
+        "MIT"
       ],
-      "evidence": "apps/cms/vendor/moonshine/tinymce/public/license.md (vendored, not tracked), independently listed in docs/THIRD_PARTY.md",
+      "evidence": "apps/cms/public/vendor/museum-jodit/LICENSE.txt; npm jodit@4.18.4 pinned SHA-256",
       "direct_runtime": true,
       "redistributed_upstream_code_owned_by_arvectum": false,
-      "license_review": "BLOCKS_EXCLUSIVE_IP_CLAIM_UNTIL_LEGAL_REVIEW_OR_REPLACEMENT"
+      "license_review": "MIT_NOTICE_MUST_ACCOMPANY_DISTRIBUTED_ASSET"
     },
     {
       "name": "librsvg/native-rsvg-convert",
@@ -151,7 +139,7 @@
     }
   ],
   "mandatory_reviews": [
-    "TinyMCE runtime GPL-2.0-or-later vs MIT integration: must assess distribution and replacement/obligations",
+    "Jodit CE 4.18.4 MIT: retain author copyright and license notice in distributed copies",
     "HTMLPurifier LGPL-2.1-or-later: comply with notice, attribution and replacement rights",
     "Original source copyright ownership/contractor IP chain and third-party content is NOT audited",
     "Fonts and photos for customer-specific brand do not exist: actual licenses require documentation",
@@ -159,10 +147,10 @@
     "No library is transferred under exclusive Arvectum ownership; rights act must carve out all third party parts"
   ],
   "summary": {
-    "direct_php": 4,
+    "direct_php": 3,
     "direct_web": 4,
     "design_python": 2,
-    "embedded_gpl_bundles": 1,
+    "embedded_gpl_bundles": 0,
     "license_review_blockers": 6
   }
 }

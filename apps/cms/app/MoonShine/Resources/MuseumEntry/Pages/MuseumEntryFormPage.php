@@ -16,7 +16,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
-use MoonShine\TinyMce\Fields\TinyMce;
+use App\MoonShine\Fields\Jodit;
 
 final class MuseumEntryFormPage extends FormPage
 {
@@ -65,20 +65,14 @@ final class MuseumEntryFormPage extends FormPage
      */
     private static function bodyEditorField(): Textarea
     {
-        $mode = config('museum.entry_body_editor', 'tinymce');
+        $mode = config('museum.entry_body_editor', 'jodit');
 
         return match ($mode) {
             'html-source' => Textarea::make('Основной текст (HTML-код; h2, p, ul, li, a)', 'body')
                 ->required(),
-            'tinymce' => TinyMce::make('Основной текст (для видео: отдельный абзац [[museum-video:код]], карточка — в Видео материалов)', 'body')
-                ->locale('ru')
-                ->plugins(['autolink', 'link', 'lists', 'code', 'wordcount', 'autoresize'])
-                ->menubar(false)
-                ->toolbar('undo redo | blocks | bold italic | bullist numlist | link | code | removeformat')
-                ->addOption('license_key', 'gpl')
-                ->required(),
+            'jodit' => Jodit::make('Основной текст (визуальный HTML; видео — [[museum-video:код]])', 'body')->required(),
             default => throw new \InvalidArgumentException(
-                'Unsupported museum.entry_body_editor mode; allowed: tinymce, html-source'
+                'Unsupported museum.entry_body_editor mode; allowed: jodit, html-source'
             ),
         };
     }

@@ -42,6 +42,7 @@ def verify():
    raise RuntimeError('Staging pagination index is absent, or could be indexed: '+str(p))
  robot=(OUT/'robots.txt').read_text(encoding='utf-8')
  sitemap=(OUT/'sitemap.xml').read_text(encoding='utf-8')
+ if any(OUT.rglob('.musbread-legacy-alias')):raise RuntimeError('Local alias markers must not enter public static release')
  if 'Disallow: /' not in robot or '<url>' in sitemap:
   raise RuntimeError('Pre-award prototype unexpectedly indexable')
  print('MUSEUM_COMPLETE_LOCAL_ARTIFACT_PASS',{
@@ -63,6 +64,13 @@ if __name__=='__main__':
  args=parser.parse_args()
  if args.build:
   run(['npm','run','build'],WEB)
+  # Next postbuild generates hidden local control markers for Drupal aliases.
+  # They are NOT museum content and must never enter public static releases.
+  removed=0
+  for marker in OUT.rglob('.musbread-legacy-alias'):
+   if not marker.is_file() or marker.is_symlink():raise RuntimeError('Unsafe legacy alias marker')
+   marker.unlink();removed+=1
+  print('STRIPPED_PRIVATE_LEGACY_ALIAS_BUILD_MARKERS',removed,flush=True)
   # Never serve just-cleared source files before all three steps have passed.
   run([sys.executable,str(SCRIPTS/'export_official_museum_original_documents.py'),'--apply'])
   run([sys.executable,str(SCRIPTS/'export_official_museum_static_photos.py')])

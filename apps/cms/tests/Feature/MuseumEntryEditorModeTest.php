@@ -22,17 +22,19 @@ class MuseumEntryEditorModeTest extends TestCase
         $response->assertDontSee('license_key', false);
     }
 
-    public function test_default_tinymce_mode_still_uses_the_existing_rich_editor(): void
+    public function test_default_mit_jodit_mode_loads_self_hosted_wysiwyg_and_source(): void
     {
-        config()->set('museum.entry_body_editor', 'tinymce');
+        config()->set('museum.entry_body_editor', 'jodit');
         $response = $this->actingAs(MoonshineUser::factory()->create(), 'moonshine')
             ->get('/admin/resource/museum-entry-resource/museum-entry-form-page');
         $response->assertOk();
-        $response->assertSee('vendor/moonshine-tinymce/tinymce.min.js', false);
-        // TZ-308/309: in the visual WYSIWYG toolbar editors can switch to
-        // sanctioned source HTML without changing server configuration.
-        $response->assertSee('&quot;plugins&quot;:&quot;autolink link lists code wordcount autoresize&quot;',false)
-            ->assertSee('link | code | removeformat',false);
+        $response->assertSee('vendor/museum-jodit/jodit.min.js', false)
+            ->assertSee('vendor/museum-jodit/jodit.min.css', false)
+            ->assertSee('vendor/museum-jodit/museum-jodit-init.js', false)
+            ->assertSee('data-museum-jodit', false)
+            ->assertDontSee('vendor/moonshine-tinymce/', false)
+            ->assertDontSee('cdn.tiny.cloud', false)
+            ->assertDontSee('license_key', false);
     }
 
     public function test_unsupported_editor_mode_fails_closed(): void
@@ -43,9 +45,9 @@ class MuseumEntryEditorModeTest extends TestCase
             ->assertStatus(500);
     }
 
-    public function test_tinymce_source_code_mode_never_bypasses_server_html_policy():void
+    public function test_jodit_source_code_mode_never_bypasses_server_html_policy():void
     {
-        config()->set('museum.entry_body_editor','tinymce');
+        config()->set('museum.entry_body_editor','jodit');
         $this->actingAs(MoonshineUser::factory()->create(),'moonshine')
             ->post('/admin/resource/museum-entry-resource/crud',[
                 'type'=>'news','slug'=>'html-modal-malicious','title'=>'HTML modal XSS test',

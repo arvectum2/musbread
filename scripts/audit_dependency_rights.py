@@ -2,7 +2,7 @@
 """CP-33D: evidence-based pre-award license inventory of direct locked deps.
 
 Provenance: composer.lock and package-lock.json; plus explicitly labelled
-manually observed embedded TinyMCE assets and locally installed design tools.
+locally vendored MIT-licensed Jodit editor assets and locally installed design tools.
 The tool never certifies relicensing, commercial use, or IP transfer.
 """
 from __future__ import annotations
@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LICENSE_RISKS = ("GPL-", "LGPL-", "AGPL-", "MPL-")
 PROD_PHP = (
-    "ezyang/htmlpurifier","laravel/framework","moonshine/moonshine","moonshine/tinymce",
+    "ezyang/htmlpurifier","laravel/framework","moonshine/moonshine",
 )
 PROD_WEB = ("next","react","react-dom","sanitize-html")
 DESIGN_PYTHON = (
@@ -68,23 +68,20 @@ def audit(root:Path=ROOT, check_vendor:bool=False)->dict:
             "redistributed_upstream_code_owned_by_arvectum":False,
             "license_review":"VERIFY_EXACT_LICENSE_AND_NOTICES",
         })
-    # Distinguish MIT MoonShine TinyMCE integration from the EMBEDDED editor.
-    wrapper=next(x for x in entries if x["name"]=="moonshine/tinymce")
-    if wrapper["declared_licenses"]!=["MIT"]:
-        raise ValueError("MoonShine TinyMCE wrapper license changed; stop and review")
-    bundled_license=root/"apps/cms/vendor/moonshine/tinymce/public/license.md"
+    # The self-hosted MIT editor is a bundled source dependency, not Composer.
+    bundled_license=root/"apps/cms/public/vendor/museum-jodit/LICENSE.txt"
     if bundled_license.is_file():
         actual=bundled_license.read_text(encoding="utf-8")
-        if not re.search("General Public License Version 2 or later",actual,re.I):
-            raise ValueError("Embedded TinyMCE license has changed, must manually review")
+        if not actual.startswith("Copyright (c) 2013-2026 https://xdsoft.net") or "Permission is hereby granted" not in actual:
+            raise ValueError("Installed Jodit MIT notice changed; stop release")
     elif check_vendor:
-        raise ValueError("Missing installed embedded TinyMCE license, cannot verify vendored CMS")
+        raise ValueError("Missing Jodit MIT license from installed CMS")
     entries.append({
-        "name":"tinymce/embedded-runtime", "ecosystem":"bundled-javascript", "version":"UNVERIFIED_ASSET_VERSION",
-        "declared_licenses":["GPL-2.0-or-later"],
-        "evidence":"apps/cms/vendor/moonshine/tinymce/public/license.md (vendored, not tracked), independently listed in docs/THIRD_PARTY.md",
+        "name":"jodit/community-runtime","ecosystem":"bundled-javascript","version":"4.18.4",
+        "declared_licenses":["MIT"],
+        "evidence":"apps/cms/public/vendor/museum-jodit/LICENSE.txt; npm jodit@4.18.4 pinned SHA-256",
         "direct_runtime":True,"redistributed_upstream_code_owned_by_arvectum":False,
-        "license_review":"BLOCKS_EXCLUSIVE_IP_CLAIM_UNTIL_LEGAL_REVIEW_OR_REPLACEMENT",
+        "license_review":"MIT_NOTICE_MUST_ACCOMPANY_DISTRIBUTED_ASSET",
     })
     entries.append({
         "name":"librsvg/native-rsvg-convert","ecosystem":"native-build-tool","version":"SYSTEM_VERSION_NOT_PINNED",
@@ -94,7 +91,7 @@ def audit(root:Path=ROOT, check_vendor:bool=False)->dict:
         "license_review":"CONFIRM_NATIVE_TOOL_LICENSES_AND_DISTRIBUTION_BEFORE_DELIVERY",
     })
     mandatory_risk=[
-        "TinyMCE runtime GPL-2.0-or-later vs MIT integration: must assess distribution and replacement/obligations",
+        "Jodit CE 4.18.4 MIT: retain author copyright and license notice in distributed copies",
         "HTMLPurifier LGPL-2.1-or-later: comply with notice, attribution and replacement rights",
         "Original source copyright ownership/contractor IP chain and third-party content is NOT audited",
         "Fonts and photos for customer-specific brand do not exist: actual licenses require documentation",
@@ -108,7 +105,7 @@ def audit(root:Path=ROOT, check_vendor:bool=False)->dict:
         "inventory_scope":"SELECTED_DIRECT_RUNTIME_AND_DESIGN_DEPENDENCIES_ONLY_NOT_FULL_SBOM",
         "entries":entries,"mandatory_reviews":mandatory_risk,
         "summary":{"direct_php":len(PROD_PHP),"direct_web":len(PROD_WEB),
-                   "design_python":len(DESIGN_PYTHON),"embedded_gpl_bundles":1,
+                   "design_python":len(DESIGN_PYTHON),"embedded_gpl_bundles":0,
                    "license_review_blockers":len(mandatory_risk)},
     }
 
@@ -126,8 +123,8 @@ def markdown(data:dict)->str:
     lines+=["","## Mandatory legal and customer gates",""]
     lines+=["- "+x for x in data["mandatory_reviews"]]
     lines+=["","## Interpretation","",
-        "- moonshine/tinymce is an MIT-licensed integration layer per composer.lock and vendored LICENSE.md.",
-        "- Its public editor runtime has a SEPARATE GPL-2.0-or-later notice in the locally installed public/license.md. Never infer editor license from the wrapper.",
+        "- Jodit CE 4.18.4 is a self-hosted, separately disclosed MIT-licensed WYSIWYG JavaScript editor.",
+        "- moonshine/tinymce and its GPL runtime are removed from the Composer lock and public CMS asset tree.",
         "- pypdf's observed packaging classifier indicates BSD family; this report does not assert exact legally binding text. Verify installed LICENSE text.",
         "- Fonts, logos, text, customer media and third-party services are not cleared by dependency locks.",
         "- Avoid distributing vendor/node_modules in the public pre-award handoff. Official delivery must address whether/how such code is transferred.",

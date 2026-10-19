@@ -1,5 +1,6 @@
 """CP-35D exact installed file inventory, license warnings and source-only ZIP."""
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -24,12 +25,12 @@ class BuiltArtifactTests(unittest.TestCase):
             self.assertFalse(data["external_binary_license_approved"])
         cms=ROOT/"apps/cms/public"
         vendor=ROOT/"apps/cms/vendor"
-        if (vendor/"composer/installed.json").is_file() and (cms/"vendor/moonshine-tinymce/license.md").is_file():
+        if (vendor/"composer/installed.json").is_file() and (cms/"vendor/museum-jodit/LICENSE.txt").is_file():
             data=cms_report(cms,vendor,ROOT/"apps/cms/composer.lock")
-            self.assertEqual(data["embedded_tinymce_version"],"7.2.1")
-            self.assertEqual(data["tiny_mce_removal_status"],"STILL_INSTALLED")
+            self.assertEqual(data["embedded_jodit_version"],"4.18.4")
+            self.assertEqual(data["tiny_mce_removal_status"],"REMOVED_FROM_RUNTIME_AND_PUBLISHED_ASSETS")
             self.assertGreater(data["installed_vendor_files"],1000)
-            self.assertGreater(data["public_vendor_count"],100)
+            self.assertGreater(data["public_vendor_count"],15)
             self.assertTrue(any("Gilroy-" in x["path"] for x in data["font_license_blockers"]))
             self.assertFalse(data["museum_production_delivery"])
 
@@ -58,10 +59,10 @@ class BuiltArtifactTests(unittest.TestCase):
             (d/"assets").mkdir(parents=True)
             (d/"assets/app.js").write_text("window.app=true")
             (d/"assets/main.css").write_text("body{margin:0}")
-            tiny=public/"vendor/moonshine-tinymce"
-            tiny.mkdir(parents=True)
-            (tiny/"license.md").write_text("GNU General Public License Version 2 or later")
-            (tiny/"tinymce.min.js").write_text("/** TinyMCE version 7.2.1 (2024-07-03) */\nwindow.tiny=1")
+            jodit=public/"vendor/museum-jodit"
+            jodit.mkdir(parents=True)
+            for file in ("jodit.min.js","jodit.min.css","LICENSE.txt","museum-jodit-init.js"):
+                shutil.copy2(ROOT/"apps/cms/public/vendor/museum-jodit"/file, jodit/file)
             (vendor/"composer").mkdir(parents=True)
             pkg=vendor/"example/package"
             pkg.mkdir(parents=True)
@@ -75,15 +76,15 @@ class BuiltArtifactTests(unittest.TestCase):
             report=cms_report(public,vendor,lock)
             self.assertEqual(report["composer_install_profile"], "all")
             self.assertEqual(report["production_locked_package_count"],1)
-            self.assertEqual(report["public_vendor_count"],4)
+            self.assertEqual(report["public_vendor_count"],6)
             self.assertEqual(report["installed_package_count"],1)
             self.assertEqual(report["installed_vendor_files"],1)
             self.assertEqual(report["font_license_blockers"],[])
-            # Unknown license change in the embedded JS must be explicit.
-            (tiny/"license.md").write_text("MIT")
-            with self.assertRaisesRegex(ValueError,"GPL notice"):
+            # A license text change, or an edited bundled JS, MUST fail closed.
+            (jodit/"LICENSE.txt").write_text("tampered")
+            with self.assertRaisesRegex(ValueError,"Jodit.*checksum mismatch"):
                 cms_report(public,vendor,lock)
-            (tiny/"license.md").write_text("GNU General Public License Version 2 or later")
+            shutil.copy2(ROOT/"apps/cms/public/vendor/museum-jodit/LICENSE.txt",jodit/"LICENSE.txt")
             (vendor/"composer/installed.json").write_text(json.dumps(
                 {"packages":[{"name":"example/package","version":"v1.0.1"}]}))
             with self.assertRaisesRegex(ValueError,"differs"):
@@ -96,8 +97,10 @@ class BuiltArtifactTests(unittest.TestCase):
             for rel,body in {
                 "moonshine/assets/app.js":"app",
                 "moonshine/assets/main.css":"css",
-                "moonshine-tinymce/license.md":"GNU General Public License Version 2 or later",
-                "moonshine-tinymce/tinymce.min.js":"/** TinyMCE version 7.2.1 */ editor",
+                "museum-jodit/LICENSE.txt":(ROOT/"apps/cms/public/vendor/museum-jodit/LICENSE.txt").read_text(),
+                "museum-jodit/jodit.min.js":(ROOT/"apps/cms/public/vendor/museum-jodit/jodit.min.js").read_text(),
+                "museum-jodit/jodit.min.css":(ROOT/"apps/cms/public/vendor/museum-jodit/jodit.min.css").read_text(),
+                "museum-jodit/museum-jodit-init.js":(ROOT/"apps/cms/public/vendor/museum-jodit/museum-jodit-init.js").read_text(),
             }.items():
                 f=public/rel;f.parent.mkdir(parents=True,exist_ok=True);f.write_text(body)
             vendor=root/"vendor"

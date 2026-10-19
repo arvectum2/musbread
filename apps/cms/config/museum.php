@@ -9,10 +9,8 @@ return [
     'queued_export_staging_dir' => env('MUSEUM_QUEUED_EXPORT_STAGING_DIR'),
     // Explicit private approval action and dispatch; OFF until museum-approved workflow.
     'editorial_approval_queue' => (bool) env('MUSEUM_ENABLE_APPROVAL_QUEUE', false),
-    // Pre-award license-risk fallback. Default keeps the current TinyMCE CMS
-    // workflow; html-source uses a built-in MoonShine textarea with NO TinyMCE
-    // JS for this field. This is NOT feature parity with a WYSIWYG editor.
-    'entry_body_editor' => env('MUSEUM_ENTRY_BODY_EDITOR', 'tinymce'),
+    // MIT-licensed self-hosted Jodit is default. html-source remains safe fallback.
+    'entry_body_editor' => env('MUSEUM_ENTRY_BODY_EDITOR', 'jodit'),
     // Only local verified pre-award releases; never infer live customer deployment.
     'local_release_root' => env('MUSEUM_LOCAL_RELEASE_ROOT', base_path('../../deploy/local')),
     // Pinned project Python for optional legacy XLS normalization in non-production.

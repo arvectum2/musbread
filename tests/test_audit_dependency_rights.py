@@ -16,16 +16,15 @@ class DependencyRightsTests(unittest.TestCase):
         self.assertFalse(obj["all_licenses_legally_cleared"])
         self.assertFalse(obj["contract_ready"])
         self.assertFalse(obj["third_party_exclusive_rights_transfer"])
-        self.assertEqual(obj["summary"]["embedded_gpl_bundles"],1)
-        self.assertEqual(obj["summary"]["direct_php"],4)
+        self.assertEqual(obj["summary"]["embedded_gpl_bundles"],0)
+        self.assertEqual(obj["summary"]["direct_php"],3)
         self.assertEqual(obj["summary"]["direct_web"],4)
         self.assertGreaterEqual(obj["summary"]["license_review_blockers"],6)
         self.assertTrue(all(not x["redistributed_upstream_code_owned_by_arvectum"] for x in obj["entries"]))
-        wrapper=next(x for x in obj["entries"] if x["name"]=="moonshine/tinymce")
-        runtime=next(x for x in obj["entries"] if x["name"]=="tinymce/embedded-runtime")
-        self.assertEqual(wrapper["declared_licenses"],["MIT"])
-        self.assertEqual(runtime["declared_licenses"],["GPL-2.0-or-later"])
-        self.assertIn("separate",markdown(obj).lower())
+        self.assertFalse(any("tinymce" in x["name"] for x in obj["entries"]))
+        runtime=next(x for x in obj["entries"] if x["name"]=="jodit/community-runtime")
+        self.assertEqual(runtime["declared_licenses"],["MIT"])
+        self.assertIn("jodit",markdown(obj).lower())
 
     def test_dependency_version_and_license_are_taken_from_locks(self):
         data=audit(ROOT)
@@ -52,7 +51,7 @@ class DependencyRightsTests(unittest.TestCase):
                 shutil.copy2(ROOT/item,target)
             path=root/"apps/cms/composer.lock"
             obj=json.loads(path.read_text())
-            obj["packages"]=[x for x in obj["packages"] if x["name"]!="moonshine/tinymce"]
+            obj["packages"]=[x for x in obj["packages"] if x["name"]!="moonshine/moonshine"]
             path.write_text(json.dumps(obj))
             with self.assertRaisesRegex(ValueError,"Missing required direct PHP"):
                 audit(root)
@@ -79,10 +78,10 @@ class DependencyRightsTests(unittest.TestCase):
                          "scripts/requirements-design-tools.txt"):
                 target=root/item;target.parent.mkdir(parents=True,exist_ok=True)
                 shutil.copy2(ROOT/item,target)
-            p=root/"apps/cms/vendor/moonshine/tinymce/public/license.md"
+            p=root/"apps/cms/public/vendor/museum-jodit/LICENSE.txt"
             p.parent.mkdir(parents=True)
-            p.write_text("License: unknown, do not infer MIT from wrapper")
-            with self.assertRaisesRegex(ValueError,"license has changed"):
+            p.write_text("License: unknown, different copyright holder")
+            with self.assertRaisesRegex(ValueError,"MIT notice changed"):
                 audit(root,check_vendor=True)
 
 

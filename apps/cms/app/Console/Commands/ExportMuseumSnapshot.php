@@ -108,7 +108,7 @@ class ExportMuseumSnapshot extends Command
             $body = (string) $publicEntry->body;
             preg_match_all('/\\[\\[museum-video:([a-z0-9]+(?:-[a-z0-9]+)*)\\]\\]/',
                 $body, $tokens);
-            // The public React renderer accepts only isolated TinyMCE
+            // The public React renderer accepts only sanitized CMS HTML
             // paragraphs; reject tokens glued to other text or HTML.
             preg_match_all('~<p(?:\\s[^>]*)?>\\s*\\[\\[museum-video:([a-z0-9]+(?:-[a-z0-9]+)*)\\]\\]\\s*</p>~',
                 $body, $placed);

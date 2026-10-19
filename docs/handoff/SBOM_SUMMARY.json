@@ -1,7 +1,7 @@
 {
   "status": "LOCKFILE_SBOM_NOT_COMPLIANCE_APPROVAL",
-  "total_components": 560,
-  "composer_production": 83,
+  "total_components": 559,
+  "composer_production": 82,
   "composer_development": 33,
   "npm_all_locked": 440,
   "python_design": 2,
@@ -11,7 +11,7 @@
     "FILE_LEVEL_COPYLEFT_REVIEW": 3,
     "NON_STANDARD_OR_MANUAL_REVIEW": 2,
     "PERMISSIVE_NOTICE_CHECK": 536,
-    "STRONG_COPYLEFT_OR_DUAL_REVIEW": 3,
+    "STRONG_COPYLEFT_OR_DUAL_REVIEW": 2,
     "UNKNOWN_REQUIRES_VERIFICATION": 1,
     "WEAK_COPYLEFT_LGPL": 15
   },
@@ -43,12 +43,13 @@
     }
   ],
   "embedded_editor": {
-    "name": "TinyMCE JavaScript",
-    "license_notice": "GPL-2.0-or-later",
-    "wrapper": "moonshine/tinymce MIT in composer.lock",
+    "name": "Jodit Community 4.18.4",
+    "license_notice": "MIT",
+    "source": "locally vendored original npm tarball",
+    "requires_notice_preserved": true,
     "open": {
-      "legal_review": true,
-      "replacement_evaluation": true
+      "license_text_verified": false,
+      "all_distributed_components_reviewed": false
     }
   },
   "legal_clearance": false,
@@ -58,7 +59,7 @@
     "Unknown licenses and mixed expressions require verification against original texts",
     "CycloneDX graph includes resolved peer and optional dependency relationships",
     "Source packages do not prove provenance of built/minified vendored bundles",
-    "Manual TinyMCE embedded runtime license is explicitly separate from MIT PHP wrapper",
+    "Jodit Community MIT license notice must accompany all distributed copies",
     "Native renderer version/license and some transitive binary assets outside locks are unknown",
     "No museum artwork, employee/contractor rights or customer approvals have been audited"
   ]
