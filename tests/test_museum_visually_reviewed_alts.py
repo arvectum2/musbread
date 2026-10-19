@@ -42,6 +42,17 @@ class ReviewedMuseumAltTests(unittest.TestCase):
                 self.assertNotRegex(caption,r"<|>|\u0000")
                 self.assertIsNone(ALT_GENERIC.search(caption))
 
+    def test_source_archival_announcements_are_explicitly_dated_drafts(self):
+        text=self.data["archival_image_text"]
+        self.assertEqual(len(text),5)
+        self.assertEqual(self.data["image_text_status"],"MANUALLY_READ_FROM_LOCAL_POSTER__DRAFT_NOT_APPROVED")
+        self.assertEqual(len(self.alts),125)
+        for path, excerpt in text.items():
+            with self.subTest(path=path):
+                self.assertIn(path,self.alts)
+                self.assertGreater(len(excerpt),60)
+                self.assertNotIn("<",excerpt)
+
     def test_real_generated_html_shows_reviewed_wording_where_source_alt_missing(self):
         applied=[]
         retained=[]

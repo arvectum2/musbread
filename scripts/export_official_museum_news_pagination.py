@@ -96,6 +96,7 @@ def emit():
                     and (OUT/local.lstrip('/')).is_file()):
                 raise RuntimeError('Museum photo source is not locally self hosted '+url)
             photos[url]=local
+    reviewed=json.loads((SRC/'official-museum-reviewed-alt.json').read_text(encoding='utf-8'))['photos']
     preview=os.environ.get('MUSBREAD_SITE_APPROVED')!='true' or os.environ.get('MUSBREAD_RELEASE_HOST')!='muzei-xleb.ru'
     robots='noindex,nofollow' if preview else 'noindex,follow'
     stylesheet=''.join(f'<link rel="stylesheet" href="{escape(uri,quote=True)}">' for uri in assets)
@@ -107,7 +108,15 @@ def emit():
             for original in a.get('image_links',[])[:2]:
                 url=original['url'];local=photos.get(url)
                 if local:
-                    img.append('<img src="'+escape(local,quote=True)+'" alt="'+escape(original.get('alt') or a['title'],quote=True)+'" loading="lazy">')
+                    caption=(original.get('alt') or a['title']).strip()
+                    # In these source-authentic archive indexes the image is
+                    # still ORIGINAL. Only generated generic alt is improved
+                    # from the visually verified self-hosted photograph.
+                    if local in reviewed and (
+                        len(caption)>125 or re.search(r'\bграфик\b|фотографи[яи]\s*\d+',caption,re.I)
+                    ):
+                        caption=reviewed[local]
+                    img.append('<img src="'+escape(local,quote=True)+'" alt="'+escape(caption,quote=True)+'" loading="lazy">')
             title=escape(a['title'])
             date=escape(a['published_on'])
             date_fmt='.'.join(reversed(date.split('-')))

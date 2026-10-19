@@ -29,3 +29,10 @@ export function reviewedMuseumPhotoAlt(staticPath:string):string|null {
   const photos=reviewedAlts.photos as Record<string,string>;
   return photos[staticPath]?.trim() || null;
 }
+
+/** Manually read from ORIGINAL historical notices, NOT current opening hours. */
+export function museumArchivalImageText(staticPath:string):string|null {
+  if(!/^\/media\/museum-source\/[a-f0-9]{64}\.webp$/.test(staticPath))return null;
+  const texts=reviewedAlts.archival_image_text as Record<string,string>;
+  return texts[staticPath]?.trim() || null;
+}

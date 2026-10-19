@@ -11,8 +11,8 @@ class MuseumSourceAltReviewTests(unittest.TestCase):
     def test_source_provenance_and_explicit_manual_review(self):
         rows,summary=build_review(ROOT)
         self.assertGreaterEqual(summary["total_html_pages"],900)
-        self.assertGreater(summary["total_audit_occurrences"],0)
-        self.assertLessEqual(summary["total_audit_occurrences"],50)  # pre-award reviewed drafts, not museum approval
+        self.assertEqual(summary["total_audit_occurrences"],0)
+        # No automatic ALT_POLICY issues in local HTML does not prove human screen-reader acceptance.
         self.assertEqual(sum(r["render_occurrences"] for r in rows),summary["total_audit_occurrences"])
         self.assertEqual(len(rows),summary["unique_image_and_alt_pairs"])
         self.assertEqual(summary["unlinked_source_pairs"],0)

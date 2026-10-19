@@ -83,7 +83,7 @@ def main() -> None:
         wr.writeheader()
         wr.writerows(rows)
     print("SOURCE_FIRST_ALT_REVIEW",json.dumps(summary,ensure_ascii=False,sort_keys=True))
-    if summary["total_html_pages"] < 900 or summary["total_audit_occurrences"]==0:
-        raise RuntimeError("Unexpected missing original pages or audit data")
+    if summary["total_html_pages"] < 900:
+        raise RuntimeError("Incomplete original museum HTML export")
 if __name__ == "__main__":
     main()
