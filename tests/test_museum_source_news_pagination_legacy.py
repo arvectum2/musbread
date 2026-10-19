@@ -43,6 +43,7 @@ class MuseumLegacyNewsPaginationTests(unittest.TestCase):
      self.assertEqual(item.xpath('./h2/a/@href'),[old+'/'])
      self.assertEqual(' '.join(item.xpath('./h2/a')[0].text_content().split()),details[old]['title'])
     self.assertEqual(tree.xpath('//script'),[])
+    self.assertTrue(all(a.get('tabindex')=='0' for a in tree.xpath('//a[@href]')))
     self.assertEqual(tree.xpath('//a[starts-with(@href,"https://muzei-xleb.ru/sites/default/files/")]'),[])
     styles=tree.xpath('//link[@rel="stylesheet"]/@href')
     self.assertTrue(styles)

@@ -9,5 +9,5 @@ export default function MuseumLink(props:ComponentProps<typeof NextLink>){
   // tabindex=0 retains the normal DOM order and enables real Tab navigation
   // without installing a keyboard listener or changing OS preferences.
   return <NextLink {...props} tabIndex={props.tabIndex ?? 0}
-    title={props.title || museumLinkTitle(href)}/>;
+    title={props.title || museumLinkTitle(href) || (href.startsWith("/") && !href.startsWith("//") ? "Открыть страницу музея" : undefined)}/>;
 }

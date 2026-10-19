@@ -27,6 +27,8 @@ export function museumLinkTitle(href:string):string|undefined{
   const fixed:Record<string,string>={
     "/events/":"Открыть афишу музея и архив мероприятий",
     "/search/":"Открыть поиск по сайту музея",
+    "/forms/feedback/":"Открыть форму связи с музеем",
+    "/forms/excursion/":"Открыть форму запроса экскурсии",
   };
   if(fixed[path]) return fixed[path];
   const clean=path.replace(/^\/|\/$/g,"");

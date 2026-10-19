@@ -34,8 +34,12 @@ class OriginalTenderTraceTests(unittest.TestCase):
         self.assertEqual(rows['TZ-085']['Учли в плане'], 'Да')
         self.assertEqual(rows['TZ-085']['Фактически готово'], 'Частично')
         self.assertEqual(rows['TZ-091']['Фактически готово'], 'Частично')
-        self.assertEqual(rows['TZ-080']['Фактически готово'], 'Нет')
-        self.assertEqual(rows['TZ-081']['Фактически готово'], 'Нет')
+        # Client-only email-draft forms are now built and tested, but production
+        # submissions, CMS ingestion and museum privacy approval are NOT done.
+        for requirement in ('TZ-080','TZ-081','TZ-203','TZ-204','TZ-219'):
+            self.assertEqual(rows[requirement]['Фактически готово'], 'Частично')
+        self.assertIn('e-mail',rows['TZ-203']['Чекпоинт/доказательство'])
+        self.assertIn('при необходимости',rows['TZ-219']['Чекпоинт/доказательство'])
         self.assertEqual(rows['TZ-283']['Фактически готово'], 'Нет')
 
     def test_original_structure_from_1_to_appendix_preserved(self):

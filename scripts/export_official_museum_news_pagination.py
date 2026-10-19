@@ -138,6 +138,10 @@ def emit():
         markup+='<div class="official-museum-program-grid">'+''.join(cards)+'</div>'
         markup+='<nav aria-label="Страницы архива новостей" class="museum-news-original-pagination"><div class="museum-news-original-pagination-links">'+''.join(pager)+'</div></nav>'
         markup+='</main></body></html>\n'
+        # TZ-207: WebKit macOS must be able to Tab through all pagination
+        # links even without changing OS/Safari settings. Generated HTML is
+        # ours (not original museum bytes), so preserve URLs and add focus.
+        markup=markup.replace('<a ', '<a tabindex="0" title="Открыть материал или страницу архива новостей" ')
         dest=folder/f'page-{page}.html'
         dest.write_text(markup,encoding='utf-8')
         # Must remain standalone STATIC HTML, not a copy of latest list.

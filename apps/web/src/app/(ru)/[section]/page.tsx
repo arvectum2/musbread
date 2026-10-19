@@ -46,7 +46,7 @@ export default async function MuseumSectionPage({ params }: Props) {
     {original.path==='/novosty' && <nav aria-label="Страницы архива новостей музея" className="museum-news-original-pagination">
       <p>Архив новостей: 28 страниц, включая 27 исторических. Все ссылки ведут на прежние адреса музея.</p>
       <div className="museum-news-original-pagination-links"><strong aria-current="page">1</strong>
-        {Array.from({length:27},(_,i)=><a key={i} href={`/novosty?page=${i+1}`}>{i+2}</a>)}
+        {Array.from({length:27},(_,i)=><a key={i} tabIndex={0} title={`Архив новостей, страница ${i+2}`} href={`/novosty?page=${i+1}`}>{i+2}</a>)}
       </div>
     </nav>}
     {original.path==='/gostevaya-kniga' && <p>Сохранён доступный на исходной странице отзыв. Отправка новых отзывов

@@ -26,6 +26,8 @@ export default function SiteFooter() {
       <Link href="/news/">Новости</Link>
       <Link href="/guide/plan-visit/">Спланировать визит</Link>
       <Link href="/guide/museum-contacts/">Контакты</Link>
+      <Link href="/forms/feedback/">Обратная связь</Link>
+      <Link href="/forms/excursion/">Запрос на экскурсию</Link>
     </div>
     <div className="footer-legal">
       <h2>Ссылки и документы</h2>

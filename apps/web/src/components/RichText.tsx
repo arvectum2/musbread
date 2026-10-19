@@ -42,7 +42,7 @@ export default function RichText({ html }: { html: string }) {
           // macOS WebKit also needs explicit 0 to focus article links via Tab.
           tabindex: attributes.href ? "0" : "-1",
           ...(attributes.title?.trim() || !attributes.href
-            ? {} : {title: museumLinkTitle(attributes.href) ?? ""}),
+            ? {} : {title: museumLinkTitle(attributes.href) ?? "Открыть ссылку из опубликованных материалов музея"}),
         },
       }),
     },

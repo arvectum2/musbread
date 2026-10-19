@@ -193,6 +193,8 @@ export default async function GuidePage({ params }: Props) {
     {(isContact || isPlanVisit) && <OfficialMuseumSocialLinks />}
     {isPlanVisit && <VisitAccessibilityGuide />}
     {isPlanVisit && <OfficialVisitorRules />}
+    {slug === "museum-feedback" && <p><Link className="text-link" href="/forms/feedback/">Написать в музей через форму →</Link></p>}
+    {slug === "excursion-overview" && <p><Link className="text-link" href="/forms/excursion/">Отправить запрос на экскурсию →</Link></p>}
     {slug === "museum-shop" && <MuseumShopShowcase />}
     {isScienceSection(slug) && <OfficialMuseumScience section={slug} />}
     {exhibitionSourceIndex(slug) && <OfficialMuseumExhibitions category={slug} />}

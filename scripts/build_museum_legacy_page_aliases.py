@@ -226,6 +226,9 @@ def build_aliases(write=True,strict=True):
                   '<body><p>Оригинальная страница музея переехала: '
                   '<a href="'+url+'">открыть материал нового сайта</a>.</p>'
                   '<p>Исторический адрес: '+origin_html+'</p></body></html>')
+            # TZ-207: historical meta-refresh fallback contains a normal,
+            # keyboard-focusable manual link (never alters canonical/301 map).
+            html=html.replace('<a ', '<a tabindex="0" title="Открыть материал музея" ')
             alias.write_text(html+'\n',encoding='utf-8')
             (alias.parent/'.musbread-legacy-alias').write_text(target+'\n')
             written.append(str(alias))
