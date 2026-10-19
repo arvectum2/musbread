@@ -1,0 +1,14 @@
+{
+  "checked_pdf": 96,
+  "passed": 96,
+  "failed": 0,
+  "total_bytes": 296223133,
+  "total_pages": 775,
+  "first_pages_rendered": 96,
+  "verified": "All original PDFs served intact via HTTP 200, inline application/pdf and rendered by Poppler PDF engine",
+  "not_verified": "This is NOT a screen-reader, tagged PDF or GOST/PDF-UA accessibility test",
+  "no_pdf_modified": true,
+  "no_ocr_performed": true,
+  "network": "127.0.0.1 isolated Nginx only",
+  "report": "docs/tz-audit/ORIGINAL_MUSEUM_PDF_OPENABILITY_HTTP_20261019.csv"
+}
