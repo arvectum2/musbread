@@ -54,7 +54,7 @@ class TestPrimaryContractQuestionAudit(unittest.TestCase):
 
  def test_ready_and_planning_count_match_verified_ui_and_92_item_audit(self):
   r=rows("requirements.psv","^")
-  self.assertEqual(Counter(x["Фактически готово"] for x in r),Counter({"Да":84,"Частично":118,"Нет":123}))
+  self.assertEqual(Counter(x["Фактически готово"] for x in r),Counter({"Да":85,"Частично":118,"Нет":122}))
   self.assertEqual(Counter(x["Учли в плане"] for x in r),Counter({"Да":325}))
   roadmap=(ROOT/"docs/ROADMAP.md").read_text()
   self.assertIn("Аудит дорожной карты против ПОЛНОГО ТЗ и проекта контракта",roadmap)

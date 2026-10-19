@@ -1,0 +1,126 @@
+{
+  "browser": "Chromium-Gost",
+  "version": "152.0.7977.149",
+  "native_arch": "macos-arm64",
+  "isolated_local_http": true,
+  "checks": 23,
+  "passed": 23,
+  "failed": 0,
+  "results": [
+    {
+      "test": "genuine GOST version",
+      "status": "PASS",
+      "detail": "152.0.7977.149"
+    },
+    {
+      "test": "page /",
+      "status": "PASS",
+      "detail": "200 Музей Хлеба — предконтрактный прототип"
+    },
+    {
+      "test": "page /novosty/",
+      "status": "PASS",
+      "detail": "200 Новости | Музей Хлеба"
+    },
+    {
+      "test": "page /guide/museum-contacts/",
+      "status": "PASS",
+      "detail": "200 Контакты | Музей Хлеба"
+    },
+    {
+      "test": "page /guide/museum-feedback/",
+      "status": "PASS",
+      "detail": "200 Гостевая книга (действующий сайт) | Музей Хлеба"
+    },
+    {
+      "test": "page /guide/excursion-overview/",
+      "status": "PASS",
+      "detail": "200 Обзорная экскурсия | Музей Хлеба"
+    },
+    {
+      "test": "page /forms/feedback/",
+      "status": "PASS",
+      "detail": "200 Обратная связь — Музей Хлеба | Музей Хлеба"
+    },
+    {
+      "test": "page /forms/excursion/",
+      "status": "PASS",
+      "detail": "200 Запрос на экскурсию — Музей Хлеба | Музей Хлеба"
+    },
+    {
+      "test": "page /documents/",
+      "status": "PASS",
+      "detail": "200 Документы | Музей Хлеба"
+    },
+    {
+      "test": "page /search/",
+      "status": "PASS",
+      "detail": "200 Поиск по сайту | Музей Хлеба"
+    },
+    {
+      "test": "actual Chromium GOST UA",
+      "status": "PASS",
+      "detail": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7; Chromium GOST) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36"
+    },
+    {
+      "test": "feedback form functional",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "no horizontal overflow 390 /",
+      "status": "PASS",
+      "detail": "scrollWidth=390"
+    },
+    {
+      "test": "no horizontal overflow 390 /novosty/",
+      "status": "PASS",
+      "detail": "scrollWidth=390"
+    },
+    {
+      "test": "no horizontal overflow 390 /forms/feedback/",
+      "status": "PASS",
+      "detail": "scrollWidth=390"
+    },
+    {
+      "test": "no horizontal overflow 768 /",
+      "status": "PASS",
+      "detail": "scrollWidth=768"
+    },
+    {
+      "test": "no horizontal overflow 768 /novosty/",
+      "status": "PASS",
+      "detail": "scrollWidth=768"
+    },
+    {
+      "test": "no horizontal overflow 768 /forms/feedback/",
+      "status": "PASS",
+      "detail": "scrollWidth=768"
+    },
+    {
+      "test": "no horizontal overflow 1366 /",
+      "status": "PASS",
+      "detail": "scrollWidth=1366"
+    },
+    {
+      "test": "no horizontal overflow 1366 /novosty/",
+      "status": "PASS",
+      "detail": "scrollWidth=1366"
+    },
+    {
+      "test": "no horizontal overflow 1366 /forms/feedback/",
+      "status": "PASS",
+      "detail": "scrollWidth=1366"
+    },
+    {
+      "test": "keyboard focus",
+      "status": "PASS",
+      "detail": "A"
+    },
+    {
+      "test": "all original site HTML pages in actual Chromium-GOST",
+      "status": "PASS",
+      "detail": "{\"checked\":467,\"failed\":[]}"
+    }
+  ]
+}

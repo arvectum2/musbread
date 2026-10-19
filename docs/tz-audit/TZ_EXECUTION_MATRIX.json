@@ -2124,10 +2124,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S0–S1 · инфраструктура",
-      "Что сделать для завершения": "Проверить Firefox запуск, Safari как отдельный бренд и две последние версии Chrome/Firefox/Safari/Edge/Yandex на целевых ОС",
+      "Что сделать для завершения": "Chromium-GOST на Mac подтверждён, теперь нужны последние две версии Chrome, Firefox, Safari, Edge, Yandex (по применимым поддерживаемым платформам), а также мобильные iOS/Android и финальная визуальная приёмка после дизайна.",
       "Что нужно от музея / внешний блокер": "Согласованная матрица браузеров и устройства музея; Edge/Yandex/сопоставление версий",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Проверить Firefox запуск, Safari как отдельный бренд и две последние версии Chrome/Firefox/Safari/Edge/Yandex на целевых ОС",
-      "Что уже есть (доказательство)": "Playwright Chrome/Chromium/WebKit 6/6 smoke; Firefox binary on SSD but profile launch failed; neither Edge/Yandex nor last-2 versions tested 18.10.2026: WebKit full 177 tests initial 174 PASS/3 FAIL on actual native Tab skip link/menu/document anchors; centralized tabindex=0 links in MuseumLink, MuseumAnchor, sanitized RichText fixed browser setting divergence without JS interception. All 185/185 WebKit after fix, includes 8 extra tests and 48 responsive width measures across 8 official museum site pages incl source document hyperlinks; CMS original documents Tab-to-next-link focus ring >=3px. Playwright Firefox installed only on external SSD but cannot launch: Could not find profile folder with default or external TMPDIR, NOT counted passed; native Safari/Edge/Yandex/Chromium-GOST version matrix and native other-browser Zoom remain customer UAT. docs/TZ111_207_208_210_WEBKIT_FOCUS_AND_REFLOW_20261018.md.",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Chromium-GOST на Mac подтверждён, теперь нужны последние две версии Chrome, Firefox, Safari, Edge, Yandex (по применимым поддерживаемым платформам), а также мобильные iOS/Android и финальная визуальная приёмка после дизайна.",
+      "Что уже есть (доказательство)": "Playwright Chrome/Chromium/WebKit 6/6 smoke; Firefox binary on SSD but profile launch failed; neither Edge/Yandex nor last-2 versions tested 18.10.2026: WebKit full 177 tests initial 174 PASS/3 FAIL on actual native Tab skip link/menu/document anchors; centralized tabindex=0 links in MuseumLink, MuseumAnchor, sanitized RichText fixed browser setting divergence without JS interception. All 185/185 WebKit after fix, includes 8 extra tests and 48 responsive width measures across 8 official museum site pages incl source document hyperlinks; CMS original documents Tab-to-next-link focus ring >=3px. Playwright Firefox installed only on external SSD but cannot launch: Could not find profile folder with default or external TMPDIR, NOT counted passed; native Safari/Edge/Yandex/Chromium-GOST version matrix and native other-browser Zoom remain customer UAT. docs/TZ111_207_208_210_WEBKIT_FOCUS_AND_REFLOW_20261018.md. CP-BROWSER-GOST-01: Chromium-GOST установлен на Mac mini и реально проверен на 467/467 оригинальных HTML-страницах и 23/23 browser-check PASS. Это НЕ заменяет двух последних версий Chrome/Firefox/Safari/Edge/Yandex.",
       "Учтено в плане": "Да"
     },
     {
@@ -2138,15 +2138,15 @@
       "Строки оригинала": "163",
       "Требование": "Работа в Chromium-GOST",
       "Приоритет": "P0",
-      "Светофор": "🔴 Не готово",
-      "Готовность": "Нет",
-      "Режим": "Внешний блокер / наступление этапа",
+      "Светофор": "🟢 Готово",
+      "Готовность": "Да",
+      "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S0–S1 · инфраструктура",
-      "Что сделать для завершения": "Реальные браузерные тесты",
-      "Что нужно от музея / внешний блокер": "Среда Chromium-GOST",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Реальные браузерные тесты",
-      "Что уже есть (доказательство)": "#13 UAT, браузер отсутствует",
+      "Что сделать для завершения": "По текущей версии сайта работа в Chromium-GOST подтверждена реальным браузером. Если после договора финальная вёрстка изменится, повторить браузерные регрессионные тесты; это стандартная повторная проверка, а не новая функция.",
+      "Что нужно от музея / внешний блокер": "",
+      "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
+      "Что уже есть (доказательство)": "CP-BROWSER-GOST-01: ОФИЦИАЛЬНЫЙ Chromium-Gost 152.0.7977.149 macos-arm64 скачан на Mac mini (SHA-256 совпал с официальным релизом) и реально запущен через Playwright executablePath, UA Chromium GOST; 23/23 реальных браузерных проверок PASS; 9 разделов, форма обратной связи, Tab, адаптивность на 390/768/1366, все 467 исходных страниц в реальном браузере HTTP 200 и HTML title. docs/tz-audit/TZ112_259_CHROMIUM_GOST_AND_ATOM_VERIFICATION_20261019.md и JSON.",
       "Учтено в плане": "Да"
     },
     {
@@ -4936,10 +4936,10 @@
       "Режим": "Внешний блокер / наступление этапа",
       "№ очереди": "",
       "Этап дорожной карты": "S2 / D25–D40 · UX",
-      "Что сделать для завершения": "Тестировать каждый заявленный бренд, включая Opera/Atom",
-      "Что нужно от музея / внешний блокер": "Инструменты/совместимость",
-      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Тестировать каждый заявленный бренд, включая Opera/Atom",
-      "Что уже есть (доказательство)": "CP-17 Playwright Chrome/WebKit only 18.10.2026: WebKit full 177 tests initial 174 PASS/3 FAIL on actual native Tab skip link/menu/document anchors; centralized tabindex=0 links in MuseumLink, MuseumAnchor, sanitized RichText fixed browser setting divergence without JS interception. All 185/185 WebKit after fix, includes 8 extra tests and 48 responsive width measures across 8 official museum site pages incl source document hyperlinks; CMS original documents Tab-to-next-link focus ring >=3px. Playwright Firefox installed only on external SSD but cannot launch: Could not find profile folder with default or external TMPDIR, NOT counted passed; native Safari/Edge/Yandex/Chromium-GOST version matrix and native other-browser Zoom remain customer UAT. docs/TZ111_207_208_210_WEBKIT_FOCUS_AND_REFLOW_20261018.md.",
+      "Что сделать для завершения": "GOST проверен. Остальные браузеры последних поддерживаемых версий и визуальный дизайн после договора; Atom снят с поддержки разработчиком в 2024 году, провести его испытание на Mac mini официальным дистрибутивом невозможно. Не подменять Chromium или UA.",
+      "Что нужно от музея / внешний блокер": "Решение о применимости Atom, которого официально не распространяют с 13.09.2024, при финальной приёмке; подтверждение финального дизайна. Для испытания GOST данные музея не потребовались.",
+      "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. GOST проверен. Остальные браузеры последних поддерживаемых версий и визуальный дизайн после договора; Atom снят с поддержки разработчиком в 2024 году, провести его испытание на Mac mini официальным дистрибутивом невозможно. Не подменять Chromium или UA.",
+      "Что уже есть (доказательство)": "CP-17 Playwright Chrome/WebKit only 18.10.2026: WebKit full 177 tests initial 174 PASS/3 FAIL on actual native Tab skip link/menu/document anchors; centralized tabindex=0 links in MuseumLink, MuseumAnchor, sanitized RichText fixed browser setting divergence without JS interception. All 185/185 WebKit after fix, includes 8 extra tests and 48 responsive width measures across 8 official museum site pages incl source document hyperlinks; CMS original documents Tab-to-next-link focus ring >=3px. Playwright Firefox installed only on external SSD but cannot launch: Could not find profile folder with default or external TMPDIR, NOT counted passed; native Safari/Edge/Yandex/Chromium-GOST version matrix and native other-browser Zoom remain customer UAT. docs/TZ111_207_208_210_WEBKIT_FOCUS_AND_REFLOW_20261018.md. CP-BROWSER-GOST-01: установлен настоящий Chromium-GOST 152.0.7977.149 macos-arm64 с подтверждённым SHA; 23/23 браузерных проверок PASS, 467/467 исходных HTML в реальном движке 200. Atom официально прекращён VK с 13.09.2024, официальных загрузок и macOS сборки нет; НЕ объявлять Atom протестированным.",
       "Учтено в плане": "Да"
     },
     {
@@ -6198,12 +6198,12 @@
     }
   ],
   "counts": {
-    "Да": 84,
-    "Нет": 123,
+    "Да": 85,
+    "Нет": 122,
     "Частично": 118
   },
   "workflow": {
-    "Готово в прототипе": 84,
-    "Внешний блокер / наступление этапа": 241
+    "Готово в прототипе": 85,
+    "Внешний блокер / наступление этапа": 240
   }
 }
