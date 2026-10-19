@@ -61,10 +61,11 @@ export default function OfficialMuseumNews(){
             <OfficialMuseumSourcePhotos photos={item.image_links} label={item.title} limit={2}/>
             {item.image_only && !editor ? <p>Оригинальное объявление опубликовано музеем в виде изображения. Его можно посмотреть по исходной ссылке.</p>
               : <p>{editor?.excerpt?.trim() || item.intro}</p>}
-            {(editor?.body?.trim() || item.html) && <details>
-              <summary>Прочитать архивное сообщение</summary>
-              <div className="official-museum-program-body"><RichText html={editor?.body?.trim() || item.html}/></div>
-            </details>}
+            {(editor?.body?.trim() || item.html) && <p>
+              <Link className="text-link" href={`/news/${item.slug}/`}>
+                Читать полный текст архивной новости →
+              </Link>
+            </p>}
             <div className="official-museum-program-links">
               {editor && <Link href={entryPublicHref(editor)} className="text-link">Редакция на новом сайте →</Link>}
               <MuseumAnchor className="text-link" href={item.source_url} target="_blank"

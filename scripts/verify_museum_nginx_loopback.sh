@@ -33,6 +33,15 @@ while [ "$n" -lt 15 ]; do
   n=$((n+1)); sleep 1
 done
 [ "$ready" -eq 1 ] || { echo 'Isolated Nginx did not start' >&2; exit 1; }
+printf 'CP-TZ241: Nginx must gzip public HTML, leaving PDF originals unchanged.\n'
+gzip_headers=$(curl --silent --show-error --max-time 15 --dump-header - \
+  --output /dev/null --header "Accept-Encoding: gzip" "http://127.0.0.1:$PORT/news/")
+printf '%s\n' "$gzip_headers" | grep -qi "^Content-Encoding: gzip" || {
+  echo "Expected gzip news-index HTML on local Nginx" >&2; exit 1; }
+gzip_size=$(curl --silent --show-error --max-time 15 \
+  --header "Accept-Encoding: gzip" --output /dev/null \
+  --write-out "%{size_download}" "http://127.0.0.1:$PORT/news/")
+printf 'CP-TZ241: real Nginx gzip news transferred %s bytes\n' "$gzip_size"
 MUSBREAD_NGINX_PORT="$PORT" "$ROOT/.venv/bin/python" "$ROOT/scripts/audit_museum_nginx_http_loopback.py"
 MUSBREAD_NGINX_PORT="$PORT" "$ROOT/.venv/bin/python" "$ROOT/scripts/audit_museum_pdf_viewability_loopback.py"
 printf 'CP-SEO-06: isolated Nginx success; container is auto-removed. Live museum unchanged.\n'
