@@ -30,9 +30,9 @@ export default function SiteFooter() {
     <div className="footer-legal">
       <h2>Ссылки и документы</h2>
       <Link href="/guide/museum-documents/">Документы музея — каталог</Link>
-      <MuseumAnchor href={museumReference.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">Политика конфиденциальности (действующий сайт) ↗</MuseumAnchor>
+      <Link href="/guide/museum-privacy/">Политика конфиденциальности и обработки ПДн — действующая редакция музея</Link>
       <Link href="/guide/accessible-museum/">Доступная среда</Link>
-      <MuseumAnchor href={museumReference.visitorPricesUrl} target="_blank" rel="noopener noreferrer">Цены и льготы</MuseumAnchor>
+      <Link href="/guide/tickets-and-benefits/">Цены и льготы</Link>
       <Link href="/guide/ticket-refunds/">Правила посещения и возврата — документы музея</Link>
       <MuseumAnchor href={museumReference.refundsUrl} target="_blank" rel="noopener noreferrer">Возврат билетов</MuseumAnchor>
       <MuseumAnchor href={museumReference.vkUrl} target="_blank" rel="noopener noreferrer">ВКонтакте ↗</MuseumAnchor>
