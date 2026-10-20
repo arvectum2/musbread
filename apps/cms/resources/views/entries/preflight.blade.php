@@ -38,6 +38,11 @@
             <strong>{{ $runLabels[$latestRun->status] ?? 'Неизвестный статус' }}</strong>.
             @if($latestRun->status === 'succeeded')
             Подготовлен только приватный пакет, не публичный сайт.
+                @if($latestRun->archived_at !== null)
+                    Независимый архив: {{ $latestRun->archive_file_count }} файлов, контрольная сумма реестра сохранена в закрытом журнале.
+                @else
+                    Независимый архив не подтверждён.
+                @endif
             @elseif(in_array($latestRun->status, ['failed', 'abandoned']))
             Пакет не подтверждён как подготовленный; требуется диагностика.
             @else

@@ -77,6 +77,15 @@
                             <dt>Проверка состава</dt><dd class="pending">Не проводилась (прежний запуск или режим без обязательных одобрений)</dd>
                         @endif
                     @endif
+                    @if($run->status === 'succeeded')
+                        @if($run->archived_at !== null && $run->archive_receipt_sha256 !== null)
+                            <dt>Частный архив</dt><dd class="success">Сохранённая копия: {{ $run->archive_file_count }} файлов, UTC {{ $run->archived_at->utc()->format('d.m.Y H:i:s') }}. Проверить независимой командой.</dd>
+                            <dt>ID архива</dt><dd class="sha">{{ $run->archive_id }}</dd>
+                            <dt>SHA-256 реестра архива</dt><dd class="sha">{{ $run->archive_receipt_sha256 }}</dd>
+                        @else
+                            <dt>Частный архив</dt><dd class="pending">Не создавался (архивирование не включено для этого запуска).</dd>
+                        @endif
+                    @endif
                     @if(in_array($run->status, ['failed','abandoned']))
                         <dt>Техническая причина</dt><dd>{{ $run->error_type ?: 'Не указана. Проверьте закрытый журнал обработчика.' }}</dd>
                     @endif

@@ -7,6 +7,8 @@ return [
     // Optional isolated worker export destination, never a public webroot.
     // Intended for pre-award QA and later customer-approved private staging.
     'queued_export_staging_dir' => env('MUSEUM_QUEUED_EXPORT_STAGING_DIR'),
+    // Operator-provisioned PRIVATE directory. Null preserves legacy behavior.
+    'verified_archive_root' => env('MUSEUM_VERIFIED_ARCHIVE_ROOT'),
     // Explicit private approval action and dispatch; OFF until museum-approved workflow.
     'editorial_approval_queue' => (bool) env('MUSEUM_ENABLE_APPROVAL_QUEUE', false),
     // MIT-licensed self-hosted Jodit is default. html-source remains safe fallback.

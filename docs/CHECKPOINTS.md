@@ -1,5 +1,8 @@
 # MusBread — чекпоинты исполнения и денежная смета
 
+> **20.10.2026 / CODE-AUDIT-16 — архив проверенных приватных выпусков:** [реализация, границы и тесты](engineering/CODE_AUDIT_CMS_VERIFIED_PRIVATE_ARCHIVE_20261020.md). Выключенный по умолчанию контентно-адресованный закрытый архив CMS сохраняет точные JSON, manifest, WebP/PDF/DOCX/XLSX и пообъектные proof. Папка 0700 вне webroot, копирование с повторной SHA-проверкой, атомарная финализация и запрет перезаписи; SHA receipt отдельно в CMS. Read-only независимая Python CLI проверяет содержимое без CMS/БД. 7/7 Feature (50 assertions), полный Laravel 412/412 (4196 assertions), Python 360/360, static PASS, PostgreSQL 47 и race 8/8 PASS. Нет аппаратного WORM, offsite или боевого релиза. ТЗ 85/118/122 без изменений.
+
+
 > **20.10.2026 / CODE-AUDIT-15 — проверка точного графа одобренных материалов в закрытом экспорте:** [протокол](engineering/CODE_AUDIT_CMS_EXPORT_GRAPH_PROOF_20261020.md). Дополнение к CODE-AUDIT-14: независимая сверка CMS ↔ actual snapshot для related_entries, related_events и event cover (включая реальные WebP байты), а также allowlist полей и строгое site-level содержимое в explicit approval mode. Подмена связей/обложки/вставка неизвестного поля с пересчитанным JSON+manifest отклоняется без proof rows. Проверен реальный положительный граф 2 новости + событие = 3 proofs, 19 тестов proof/queue (125 assertions), полный Laravel **405/405 (4146 assertions)**, Python **360/360** и offline static PASS. Ни архив неизменяемых байтов, ни боевой релиз этим не заявлены; матрица ТЗ **85/118/122**.
 
 

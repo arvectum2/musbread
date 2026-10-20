@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\MuseumPublicationRun;
 use App\Models\MuseumExportContentProof;
 use App\Support\MuseumExportContentVerifier;
+use App\Support\MuseumVerifiedExportArchive;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Artisan;
@@ -55,6 +56,10 @@ final class PublishMuseumSnapshot implements ShouldQueue
                     'content_verified_at' => null,
                     'content_proof_count' => null,
                     'manifest_sha256' => null,
+                    'archive_id' => null,
+                    'archive_receipt_sha256' => null,
+                    'archive_file_count' => null,
+                    'archived_at' => null,
                 ]);
             });
             // Background publication must never bypass the same strict
@@ -114,17 +119,43 @@ final class PublishMuseumSnapshot implements ShouldQueue
                 $parameters['--media-output-dir'] ?? base_path('../web/public/media'),
                 $parameters['--document-output-dir'] ?? base_path('../web/public/documents')
             );
+            // Optional private archival AFTER independent per-object content
+            // proof and BEFORE reporting success. Archive failures fail this
+            // attempt closed, never claim a finished privately archived run.
+            $archive = app(MuseumVerifiedExportArchive::class)->archive(
+                $run->fresh(), $snapshot, $manifest,
+                $parameters['--media-output-dir'] ?? base_path('../web/public/media'),
+                $parameters['--document-output-dir'] ?? base_path('../web/public/documents')
+            );
             $run->update([
                 'status' => 'succeeded',
                 'snapshot_sha256' => $hash,
                 'finished_at' => now(),
+                ...($archive === null ? [] : [
+                    ...$archive,
+                    'archived_at' => now('UTC'),
+                ]),
             ]);
         } catch (Throwable $e) {
-            $run->update([
-                'status' => 'failed',
-                'error_type' => class_basename($e), // No raw exceptions containing paths or secrets.
-                'finished_at' => now(),
-            ]);
+            // A package whose archive could not be finalized is NOT a
+            // completed verified publication. Clear partially persisted
+            // proof claims before failing this worker/retry.
+            \Illuminate\Support\Facades\DB::transaction(static function () use ($run, $e): void {
+                MuseumExportContentProof::query()->where('publication_run_id', $run->id)->delete();
+                $run->update([
+                    'status' => 'failed',
+                    'error_type' => class_basename($e), // No raw paths or secrets.
+                    'finished_at' => now(),
+                    'content_verified_at' => null,
+                    'content_proof_count' => null,
+                    'manifest_sha256' => null,
+                    'snapshot_sha256' => null,
+                    'archive_id' => null,
+                    'archive_receipt_sha256' => null,
+                    'archive_file_count' => null,
+                    'archived_at' => null,
+                ]);
+            });
             throw $e;
         } finally {
             $lock->release();
