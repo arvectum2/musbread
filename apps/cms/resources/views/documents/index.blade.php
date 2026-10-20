@@ -4,13 +4,19 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Документы · MusBread CMS</title>
 <style>
+*{box-sizing:border-box}
 body{font:1rem/1.5 system-ui;color:#172433;background:#f5f7f8;margin:0}
-main{max-width:63rem;margin:2rem auto;padding:1rem}
-section{background:white;padding:1.5rem;margin:1rem 0;border:1px solid #c6cdd2;border-radius:.6rem}
+main{max-width:63rem;width:100%;min-width:0;margin:2rem auto;padding:1rem}
+section{min-width:0;background:white;padding:1.5rem;margin:1rem 0;border:1px solid #c6cdd2;border-radius:.6rem}
 label{display:block;margin-top:.7rem}
 input,select,button{font:inherit;padding:.45rem}
 input,select{max-width:100%}
-table{border-collapse:collapse;width:100%}td,th{padding:.65rem;border-bottom:1px solid #d7dcdf;text-align:left}
+table{border-collapse:collapse;width:100%;min-width:36rem}td,th{padding:.65rem;border-bottom:1px solid #d7dcdf;text-align:left}
+.table-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;border:1px solid #d7dcdf;border-radius:.4rem}
+.table-scroll:focus-visible{outline:.2rem solid #1679be;outline-offset:.2rem}
+.table-scroll textarea{box-sizing:border-box;max-width:100%;min-width:0}
+.table-hint{font-size:.875rem;color:#364451}
+@media(max-width:640px){main{margin:1rem auto}section{padding:1rem}}
 button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:.2rem solid #1679be}
 .warning{border-left:.35rem solid #c47411;padding:.8rem;background:#fff4dc}
 .drop{border:.15rem dashed #687f8b;padding:1rem;background:#f2f9f9;border-radius:.55rem;margin:.5rem 0}
@@ -57,6 +63,8 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,t
 <button type="submit">Сохранить в закрытой медиатеке</button>
 </form></section>
 <section><h2>Загружено: {{ $documents->total() }}</h2>
+<p class="table-hint" id="document-table-help">На узком экране таблица прокручивается горизонтально. Клавиатурой: перейдите к таблице и нажимайте стрелки вправо или влево.</p>
+<div class="table-scroll" role="region" aria-label="Таблица загруженных документов" aria-describedby="document-table-help" tabindex="0">
 <table><thead><tr><th>Название</th><th>Формат</th><th>Материал</th><th>Действие</th></tr></thead><tbody>
 @foreach($documents as $document)<tr>
 <td>{{ $document->label }}</td><td>{{ strtoupper($document->file_type) }} @if($document->source_type === "xls")(из XLS, только значения)@endif ({{ round($document->size_bytes/1024) }} КБ)
@@ -98,8 +106,8 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,t
 <button type="submit">Сохранить HTML-редакцию / подтверждение</button>
 </form>
 <form action="{{ route('museum.documents.destroy', ['document' => $document->id] + ($selectedEntry ? ['entry' => $selectedEntry->id] : [])) }}" method="post">@csrf @method('DELETE')
-<button type="submit">Удалить</button></form></td>
+<button type="submit">Удалить документ</button></form></td>
 </tr>@endforeach
-</tbody></table>{{ $documents->links() }}</section>
+</tbody></table></div>{{ $documents->links() }}</section>
 </main><script src="{{ asset('js/museum-file-drop.js') }}" defer></script>
 </body></html>

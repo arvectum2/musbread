@@ -1,0 +1,16 @@
+/*
+ * Local MoonShine desktop accessibility overrides.
+ * Keep upstream package intact; recheck rules when MoonShine is upgraded.
+ */
+html:not(.dark) .breadcrumbs-item a {
+  color: #514958 !important;
+  opacity: 1 !important;
+}
+html:not(.dark) a.font-semibold.text-primary {
+  color: #602ca7 !important;
+}
+@media (max-width: 360px) {
+  /* The off-canvas sidebar is positioned partly outside the viewport in
+   * WebKit; prevent its decorative 10px edge causing page-level scroll. */
+  html, body { overflow-x: clip; }
+}

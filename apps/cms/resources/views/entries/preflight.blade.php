@@ -39,12 +39,12 @@
     @endif
     @if($mayRequestExport)
     <section aria-label="Подготовка выгрузки по кнопке">
-        <h2>Публикация по событию</h2>
+        <h2>Подготовка закрытой выгрузки</h2>
         <p class="intro">Кнопка запускает <strong>только подготовку закрытой выгрузки CMS</strong>. Она не отправляет пакет на публичные серверы музея и не заменяет формального согласования.</p>
         @if($exportQueueConfigured && $report['errors'] === 0 && !config('museum.editorial_approval_queue', false))
         <form method="post" action="{{ route('museum.content.queue-publication') }}">
             @csrf
-            <button type="submit">Опубликовать — подготовить пакет в очереди</button>
+            <button type="submit">Сформировать закрытый пакет (не публикует сайт)</button>
         </form>
         @else
         <p role="status" class="notice">Запуск выгрузки недоступен: {{ !$exportQueueConfigured ? 'постоянная очередь не настроена.' : (config('museum.editorial_approval_queue', false) ? 'используйте одобрение конкретной редакции ниже.' : 'есть критические ошибки в готовых материалах.') }}</p>

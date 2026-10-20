@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\MoonShine\Layouts;
 
 use MoonShine\Laravel\Layouts\AppLayout;
+use MoonShine\AssetManager\Css;
+use MoonShine\AssetManager\Js;
 use MoonShine\ColorManager\Palettes\PurplePalette;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
@@ -32,6 +34,8 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             ...parent::assets(),
+            Css::make('/css/museum-cms-accessibility.css'),
+            Js::make('/js/museum-cms-accessibility.js')->defer(),
         ];
     }
 

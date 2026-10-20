@@ -76,6 +76,15 @@ final class MuseumMediaController extends Controller
             'long_description' => ['nullable', 'string', 'max:3000'],
             'caption' => ['nullable', 'string', 'max:255'],
             'image' => ['required', 'file', 'max:5120'],
+        ], [
+            'museum_entry_id.required' => 'Выберите материал, к которому относится изображение.',
+            'museum_entry_id.exists' => 'Материал не найден: откройте актуальную карточку.',
+            'alt.required' => 'Опишите, что видно на изображении, прежде чем загружать файл.',
+            'alt.min' => 'Описание слишком короткое: не менее :min символов.',
+            'alt.max' => 'Описание слишком длинное: не более :max символов.',
+            'image.required' => 'Выберите изображение для загрузки.',
+            'image.file' => 'Выберите файл изображения в поддерживаемом формате.',
+            'image.max' => 'Изображение больше 5 МБ: уменьшите файл и попробуйте ещё раз.',
         ]);
 
         $entry = MuseumEntry::findOrFail($validated['museum_entry_id']);

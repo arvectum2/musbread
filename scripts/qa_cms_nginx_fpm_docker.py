@@ -290,6 +290,17 @@ def bench():
                 raise RuntimeError('Live media/document library lost selected entry: '+path)
         print('NGINX_FPM_EDITOR_WORKFLOW_NAVIGATION_PASS',
               {'links':4,'scoped_libraries':2,'preselected_entry':True},flush=True)
+        if os.getenv('MUSBREAD_QA_BROWSER_AUDIT')=='1':
+            browser_env=os.environ.copy()
+            browser_env.update(MUSBREAD_QA_BASE_URL=endpoint,
+                MUSBREAD_QA_EMAIL=qa_email,MUSBREAD_QA_PASS=qa_password,
+                MUSBREAD_QA_ENTRY=str(conflict_entry_id),
+                MUSBREAD_QA_ENFORCE=os.getenv('MUSBREAD_QA_ENFORCE','1'))
+            audit=call(['node',str(ROOT/'scripts/qa_cms_editorial_browser_audit.mjs')],
+                env=browser_env,timeout=115,check=False)
+            print(audit.stdout[-7500:],flush=True)
+            if audit.returncode:
+                raise RuntimeError('Browser QA failed: '+audit.stderr[-950:])
         def form_field(html,key):
             pattern=r'<input[^>]*name="'+re.escape(key)+r'"[^>]*>'
             target=re.search(pattern,html)

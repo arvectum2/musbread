@@ -59,7 +59,7 @@ class MuseumPublishRequestButtonTest extends TestCase
                  'cache.default' => 'database']);
         Queue::fake();
         $this->get(route('museum.content.preflight'))->assertOk()
-            ->assertSee('Опубликовать — подготовить пакет в очереди')
+            ->assertSee('Сформировать закрытый пакет (не публикует сайт)')
             ->assertSee('name="_token"', false)
             ->assertSee('method="post"', false);
         $this->post(route('museum.content.queue-publication'))->assertRedirect(route('museum.content.preflight'))

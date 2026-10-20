@@ -48,6 +48,15 @@ final class MuseumDocumentController extends Controller
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
             'label' => ['required', 'string', 'min:3', 'max:180'],
             'document' => ['required', 'file', 'max:15360'],
+        ], [
+            'museum_entry_id.required' => 'Выберите материал, к которому относится документ.',
+            'museum_entry_id.exists' => 'Материал не найден: откройте актуальную карточку.',
+            'label.required' => 'Укажите понятное название документа для посетителей.',
+            'label.min' => 'Название документа слишком короткое: не менее :min символов.',
+            'label.max' => 'Название документа слишком длинное: не более :max символов.',
+            'document.required' => 'Выберите документ для загрузки.',
+            'document.file' => 'Выберите файл PDF, DOCX или XLSX.',
+            'document.max' => 'Документ больше 15 МБ: уменьшите размер и повторите загрузку.',
         ]);
         $entry = MuseumEntry::findOrFail($validated['museum_entry_id']);
         $this->requireEntry($entry);

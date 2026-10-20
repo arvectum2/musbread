@@ -18,7 +18,9 @@
     </style>
 </head>
 <body>
-<header><strong>MusBread · Закрытый предпросмотр</strong></header>
+<header><strong>MusBread · Закрытый предпросмотр</strong>
+    <p><a href="/admin/resource/museum-entry-resource/museum-entry-form-page/{{ $entry->id }}">← Вернуться к редактированию материала</a></p>
+</header>
 <main>
     <aside class="notice" aria-label="Статус предпросмотра">
         <strong>Только для редактора. Это сохранённая версия материала, а не публичная страница.</strong>
@@ -26,6 +28,13 @@
             @if($entry->published_at) Дата публикации: {{ $entry->published_at->format('d.m.Y H:i') }}. @endif
             Изменения в открытой форме редактора необходимо сначала сохранить.</p>
     </aside>
+    <nav class="notice" aria-label="Дальнейшие действия редактора">
+        <strong>Следующие шаги</strong>
+        <p><a href="{{ route('museum.media.index', ['entry' => $entry->id]) }}">Проверить изображения</a>
+            · <a href="{{ route('museum.documents.index', ['entry' => $entry->id]) }}">Проверить документы</a>
+            · <a href="{{ route('museum.content.preflight') }}#entry-{{ $entry->id }}">Проверить готовность к закрытой выгрузке</a></p>
+        <p class="meta">Предпросмотр не публикует материал. После проверки уполномоченный сотрудник отдельно одобряет редакцию для закрытой выгрузки.</p>
+    </nav>
     <article aria-labelledby="preview-title">
         <p class="meta">{{ \App\Models\MuseumEntry::TYPES[$entry->type] ?? 'Материал музея' }}</p>
         <h1 id="preview-title">{{ $entry->h1 ?: $entry->title }}</h1>
