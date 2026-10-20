@@ -67,6 +67,12 @@ class TzExecutionMatrixTest(unittest.TestCase):
         self.assertEqual(self.viewer.count('<tr data-group='),325)
         self.assertIn('матрица выполнения каждого пункта ТЗ',self.markdown)
 
+    def test_checkpoint_notes_are_source_controlled_and_preserved(self):
+        source=(AUDIT/'TZ_EXECUTION_MATRIX_CHECKPOINTS.md').read_text(encoding='utf-8').strip()
+        self.assertGreaterEqual(source.count('> **'),4)
+        self.assertIn('CODE-AUDIT-01',source)
+        self.assertIn(source,self.markdown)
+
     def test_generator_is_deterministic(self):
         outputs=[AUDIT/f'TZ_EXECUTION_MATRIX.{extension}' for extension in ['csv','md','json','html']]
         before=[f.read_bytes() for f in outputs]

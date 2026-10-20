@@ -40,6 +40,7 @@ import { officialMuseumGroupsForPage } from "@/data/museum-official-documents";
 import { content, entriesInCmsSection, entryPublicHref } from "@/data/content";
 import { siteSeoApproved } from "@/data/seo-routes";
 import {fixedPageSeo, fixedPageH1} from "@/data/fixed-page-seo";
+import {visibleGuideSectionEntries,shouldShowGuideReferenceBody} from "@/data/guide-page-rules";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -82,17 +83,20 @@ export default async function GuidePage({ params }: Props) {
   const directChildren = usesCmsNavigation ? findPublicNavigationNode(navigationTree, slug)?.children ?? [] : [];
   // A page published for this exact guide slug is the body of the
   // current route, not a second entry in its own "Материалы раздела" list.
+  const duplicateSourceSlugs = new Set<string>();
+  if(slug === "museum-exposition")
+    for(const sourceSlug of officialExpositionSlugs)duplicateSourceSlugs.add(sourceSlug);
+  if(isProgramCategory(slug))
+    for(const sourceSlug of originalMuseumProgramSlugs)duplicateSourceSlugs.add(sourceSlug);
+  if(slug === "children-workshops")
+    for(const sourceSlug of officialWorkshopSlugs)duplicateSourceSlugs.add(sourceSlug);
+  if(exhibitionSourceIndex(slug))
+    for(const sourceSlug of officialExhibitionSourceSlugs)duplicateSourceSlugs.add(sourceSlug);
+  if(slug === "science-materials")
+    for(const sourceSlug of ["science-organization","science-methodical-council"])
+      duplicateSourceSlugs.add(sourceSlug);
   const sectionEntries = usesCmsNavigation
-    ? entriesInCmsSection(slug).filter((entry) =>
-      !(entry.type === "page" && entry.slug === slug)
-      // Room catalogue already displays source-backed CMS room revisions.
-      && !(slug === "museum-exposition" && officialExpositionSlugs.has(entry.slug))
-      // Genuine source programs (including approved CMS revisions) are
-      // presented once in the detailed category cards, not duplicated below.
-      && !(isProgramCategory(slug) && originalMuseumProgramSlugs.has(entry.slug))
-      && !(slug === "children-workshops" && officialWorkshopSlugs.has(entry.slug))
-      && !(exhibitionSourceIndex(slug) && officialExhibitionSourceSlugs.has(entry.slug))
-      && !(slug === "science-materials" && ["science-organization","science-methodical-council"].includes(entry.slug)))
+    ? visibleGuideSectionEntries(slug,entriesInCmsSection(slug),duplicateSourceSlugs)
     : [];
   const sourceUrl = page?.legacyPath ? legacyUrl(page.legacyPath) : undefined;
   const officialSnapshot = officialSnapshotByPath(page?.legacyPath)
@@ -103,11 +107,14 @@ export default async function GuidePage({ params }: Props) {
   const referenceBody = cmsPage?.body?.trim() || officialSnapshot?.html;
   // The source-backed catalogue replaces the old 11-link index; still
   // show a museum-authored CMS introduction after its own publication.
-  const showReferenceBody = !!referenceBody
-    && !["museum-contacts", "museum-team", "museum-cookie"].includes(slug)
-    && (slug !== "museum-exposition" || !!cmsPage)
-    && (!isProgramCategory(slug) || !!cmsPage)
-    && (!exhibitionSourceIndex(slug) || !!cmsPage);
+  const showReferenceBody = shouldShowGuideReferenceBody({
+    slug,hasBody:!!referenceBody,hasCmsPage:!!cmsPage,
+    sourceProgramsCategory:isProgramCategory(slug),
+    sourceExhibitionCategory:!!exhibitionSourceIndex(slug),
+  });
+  // All date-dependent event sections use one build-day snapshot, even when
+  // a static export crosses midnight.
+  const buildDay = new Date().toISOString().slice(0,10);
   const sourceDate = officialSnapshot?.captured_utc.slice(0, 10);
 
   return <article className="section inner-page guide-page">
@@ -208,27 +215,27 @@ export default async function GuidePage({ params }: Props) {
     {isTeam && <MuseumTeam />}
     {slug === "museum-media" && <MuseumMediaHub />}
     {slug === "exhibitions-current" && <CurrentExhibitions
-      events={events} buildDay={new Date().toISOString().slice(0,10)} />}
+      events={events} buildDay={buildDay} />}
     {slug === "exhibitions-future" && <FutureExhibitions
-      events={events} buildDay={new Date().toISOString().slice(0,10)} />}
+      events={events} buildDay={buildDay} />}
     {(slug === "agenda" || slug === "agenda-events") && <p className="reference-source">
       <Link href="/events/" className="text-link">Открыть афишу и архив мероприятий →</Link>
       <span> · Пока там тестовые записи; программа публикуется на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">действующем сайте музея ↗</MuseumAnchor>.</span>
     </p>}
     {(slug==="agenda-archive" || slug==="agenda-events") &&
-      <OfficialMuseumNightArts events={events} buildDay={new Date().toISOString().slice(0,10)}
+      <OfficialMuseumNightArts events={events} buildDay={buildDay}
         archiveOnly={slug==="agenda-archive"} />}
     {(["agenda-excursions","agenda-children","agenda-meetings",
       "agenda-workshops","agenda-festivals","agenda-exhibitions",
       "agenda-archive"] as const).some(x=>x===slug) && <OfficialMuseumSessions
       section={slug as "agenda-excursions"|"agenda-children"|"agenda-meetings"|"agenda-workshops"|"agenda-festivals"|"agenda-exhibitions"|"agenda-archive"}
-      events={events} buildDay={new Date().toISOString().slice(0,10)}/>}
+      events={events} buildDay={buildDay}/>}
     {isAgendaSection(slug) && <section className="guide-agenda-category" aria-label={"Мероприятия раздела: " + title}>
       <h2>{slug === "agenda-archive" ? "Прошедшие мероприятия" : "События и программа"}</h2>
       <p>Ниже показаны только записи, опубликованные редактором CMS. Демонстрационные записи не являются официальным расписанием музея.</p>
       <EventAgenda
         events={publishedEventsForAgendaSection(events,slug)}
-        buildDay={new Date().toISOString().slice(0,10)}
+        buildDay={buildDay}
         initialPeriod={slug === "agenda-archive" ? "archive" : "upcoming"}
       />
       <p className="reference-source">Проверенная афиша музея доступна на <MuseumAnchor href={museumReference.newsUrl} target="_blank" rel="noopener noreferrer">официальном действующем сайте ↗</MuseumAnchor>.</p>

@@ -172,6 +172,17 @@ f'**Всего {len(DATA)}:** 🟢 {stats["Да"]} · 🟡 {stats["Частич�
 '| № | Логическая группа | Всего | 🟢 | 🟡 | 🔴 | В очереди | Внешний блокер |',
 '|---|---|---:|---:|---:|---:|---:|---:|',
 ]
+# Human-reviewed dated QA checkpoints live in a SEPARATE SOURCE file, not
+# handwritten inside a generated matrix that the CI determinism test rewrites.
+# This is a presentation appendix only; it never changes any TZ row/status.
+checkpoint_file=OUT/'TZ_EXECUTION_MATRIX_CHECKPOINTS.md'
+if checkpoint_file.exists():
+    appendix=checkpoint_file.read_text(encoding='utf-8').strip()
+    if appendix:
+        assert all(line.startswith('> ') or not line for line in appendix.splitlines())
+        assert len(lines)>8 and lines[8]=='## Сводка по группам'
+        lines[8:8]=appendix.splitlines()+['']
+
 for code,lo,hi,group,phase in GROUPS:
     rows=by_group[code];c=Counter(r['Готовность'] for r in rows);q=sum(bool(r['№ очереди']) for r in rows)
     lines.append(f'| {code} | {group} | {len(rows)} | {c["Да"]} | {c["Частично"]} | {c["Нет"]} | {q} | {len(rows)-c["Да"]-q} |')

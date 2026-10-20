@@ -17,6 +17,7 @@
     "test:search": "node --experimental-strip-types --test src/data/search-core.test.ts",
     "test:events": "node --experimental-strip-types --test src/data/event-archive.test.ts src/data/event-categories.test.ts src/data/current-exhibitions.test.ts",
     "test:navigation-tree": "node --experimental-strip-types --test src/data/navigation-tree.test.ts",
+    "test:guide-rules": "node --experimental-strip-types --test src/data/guide-page-rules.test.ts",
     "test:seo": "node --experimental-strip-types --test src/data/seo-routes.test.ts",
     "test:official-docs": "node --experimental-strip-types --test src/data/museum-official-documents.test.ts",
     "build:museum-deploy": "../../.venv/bin/python ../../scripts/build_complete_museum_static_release.py --build",

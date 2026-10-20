@@ -1,14 +1,22 @@
 'use client';
-import {useEffect,useState, type FormEvent} from 'react';
+import {useState,useSyncExternalStore, type FormEvent} from 'react';
 import MuseumAnchor from '@/components/MuseumAnchor';
 import Link from '@/components/MuseumLink';
 import {museumReference} from '@/data/museum-reference';
 import {museumInquiryEmailDraft,type MuseumInquiryKind} from '@/data/visitor-inquiry-email';
 
+/** Unlike an effect-triggered state update, this hydration indicator is
+ * guaranteed FALSE on the static/server snapshot (including JS-disabled
+ * visitors), and TRUE only after React hydrates in the browser. It never
+ * causes a POST of visitor data to a static or CMS endpoint.
+ */
+const subscribeHydration=()=>()=>{};
+const getClientHydration=()=>true;
+const getServerHydration=()=>false;
+
 /** Does not POST PII to Next static output or the restricted CMS. */
 export default function MuseumVisitorInquiryForm({kind}:{kind:MuseumInquiryKind}) {
- const [hydrated,setHydrated]=useState(false);
- useEffect(()=>{setHydrated(true);},[]);
+ const hydrated=useSyncExternalStore(subscribeHydration,getClientHydration,getServerHydration);
  const [name,setName]=useState('');
  const [message,setMessage]=useState('');
  const [date,setDate]=useState('');
