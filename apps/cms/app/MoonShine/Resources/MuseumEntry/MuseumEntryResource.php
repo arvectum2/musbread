@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Builder;
 use MoonShine\Laravel\MoonShineAuth;
 use MoonShine\Support\Enums\Ability;
 use App\Support\MuseumSectionAccess;
+use App\Support\MuseumEntryRevisionGuard;
+use Illuminate\Support\Facades\DB;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
+use MoonShine\Contracts\Core\DependencyInjection\FieldsContract;
 use App\Models\MuseumEntry;
 use App\MoonShine\Resources\MuseumEntry\Pages\MuseumEntryIndexPage;
 use App\MoonShine\Resources\MuseumEntry\Pages\MuseumEntryFormPage;
@@ -52,6 +56,33 @@ class MuseumEntryResource extends ModelResource
             }
         }
         return parent::isCan($ability);
+    }
+
+    /**
+     * Keep the fingerprint check and the actual MoonShine form mutation in
+     * ONE database transaction. PostgreSQL/MySQL lockForUpdate serializes
+     * editors; SQLite concurrent writes can fail closed with a busy error.
+     * A stale browser form may never silently overwrite a newer version.
+     */
+    public function save(DataWrapperContract $item, ?FieldsContract $fields = null): DataWrapperContract
+    {
+        return DB::transaction(fn (): DataWrapperContract => parent::save($item, $fields), 3);
+    }
+
+    protected function beforeUpdating(DataWrapperContract $item): DataWrapperContract
+    {
+        // Preserve the stronger 403 for unauthorized cross-section moves
+        // even when a forged update omits the editorial revision token.
+        $actor = MuseumSectionAccess::user();
+        $target = request()->input('museum_section_id');
+        if ($actor === null || ! MuseumSectionAccess::mayEdit($actor, $target)) {
+            abort(403);
+        }
+        app(MuseumEntryRevisionGuard::class)->assertCurrent(
+            (int) $item->getKey(),
+            request()->input('_museum_revision_sha256'),
+        );
+        return parent::beforeUpdating($item);
     }
 
     protected function search(): array

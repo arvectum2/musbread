@@ -7,12 +7,14 @@ namespace App\MoonShine\Resources\MuseumEntry\Pages;
 use App\Models\MuseumEntry;
 use App\Models\MuseumSection;
 use App\Support\MuseumSectionAccess;
+use App\Support\MuseumApprovalRevision;
 use Illuminate\Validation\Rule;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Hidden;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
@@ -25,6 +27,7 @@ final class MuseumEntryFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
+                self::revisionField(),
                 Select::make('Раздел', 'type')
                     ->options(MuseumEntry::TYPES)->required(),
                 Text::make('Название', 'title')->required(),
@@ -57,6 +60,20 @@ final class MuseumEntryFormPage extends FormPage
                 Textarea::make('English SEO description', 'seo_description_en'),
             ]),
         ];
+    }
+
+    /** Optimistic-lock value is visible only in the editor's HTML form.
+     * Never apply this form-only value to the Eloquent entry.
+     */
+    private function revisionField(): Hidden
+    {
+        $item = $this->getResource()->getItemOrInstance();
+        $fingerprint = $item instanceof MuseumEntry && $item->exists
+            ? MuseumApprovalRevision::fingerprint($item) : '';
+
+        return Hidden::make('Версия открытой редакции', '_museum_revision_sha256')
+            ->default($fingerprint)
+            ->canApply(static fn (): bool => false);
     }
 
     /**
