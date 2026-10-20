@@ -33,9 +33,10 @@ final class MuseumEntryOptimisticLockTest extends TestCase
         return $value[1];
     }
 
-    private function update(MuseumEntry $entry, string $revision, string $body): \Illuminate\Testing\TestResponse
+    private function update(MuseumEntry $entry, string $revision, string $body, ?string $csrf = null): \Illuminate\Testing\TestResponse
     {
         return $this->patch('/admin/resource/museum-entry-resource/crud/'.$entry->id, [
+            '_token' => $csrf,
             '_museum_revision_sha256' => $revision,
             'slug' => $entry->slug, 'type' => $entry->type,
             'title' => $entry->title, 'body' => $body, 'status' => 'draft',
@@ -68,7 +69,16 @@ final class MuseumEntryOptimisticLockTest extends TestCase
         $this->assertSame('<p>Правка Алисы</p>', $entry->fresh()->body);
 
         $this->actingAs($bob, 'moonshine');
-        $this->update($entry, $bobRevision, '<p>Устаревшая правка Боба</p>')->assertStatus(409);
+        $conflict = $this->update($entry, $bobRevision, '<p>Устаревшая правка Боба</p>')
+            ->assertStatus(409)
+            ->assertSee('Другой редактор изменил материал')
+            ->assertSee('Мой несохранённый вариант')
+            ->assertSee('Устаревшая правка Боба')
+            ->assertSee('Правка Алисы')
+            ->assertSee('Сохранить мой черновик')
+            ->assertSee('museum-editor-conflict.js');
+        $this->assertStringContainsString('no-store', $conflict->headers->get('Cache-Control'));
+        $this->assertStringContainsString("script-src 'self'", $conflict->headers->get('Content-Security-Policy'));
         $this->assertSame('<p>Правка Алисы</p>', $entry->fresh()->body);
 
         $current = $this->revisionFromForm($bob, $entry);
@@ -80,4 +90,87 @@ final class MuseumEntryOptimisticLockTest extends TestCase
         $this->update($entry, str_repeat('0', 64), '<p>Поддельный токен</p>')->assertStatus(409);
         $this->assertSame('<p>Правка Боба после обновления</p>', $entry->fresh()->body);
     }
+
+    public function test_stale_html_never_executes_as_markup_or_leaks_private_csrf_data(): void
+    {
+        $admin = MoonshineUser::factory()->create();
+        $entry = MuseumEntry::create([
+            'type' => 'news', 'slug' => 'conflict-escaped-data',
+            'title' => 'Старая новость',
+            'body' => '<p>Текст оригинала</p>',
+            'status' => 'draft',
+        ]);
+        $this->actingAs($admin, 'moonshine');
+        $opened = MuseumApprovalRevision::fingerprint($entry->fresh());
+        $entry->update(['body' => '<p>Текущая редакция</p>']);
+        $malicious = '<script>alert("unexpected")</script> & "test"';
+        $result = $this->update($entry, $opened, $malicious)
+            ->assertStatus(409)
+            ->assertSee('Сохранить мой черновик')
+            ->assertSee('Текущая редакция');
+        $html = $result->getContent();
+        $this->assertStringContainsString('&lt;script&gt;alert', $html);
+        $this->assertStringNotContainsString($malicious, $html);
+        $this->assertStringContainsString('data-conflict-draft="body"', $html);
+        $this->assertStringNotContainsString('_token', $html);
+        $this->assertSame('<p>Текущая редакция</p>', $entry->fresh()->body);
+    }
+
+    public function test_latest_text_is_not_shown_after_editor_loses_access_to_section(): void
+    {
+        $own = MuseumSection::create([
+            'slug' => 'conflict-allow-section', 'title' => 'Ранее разрешённый раздел',
+            'status' => 'published',
+        ]);
+        $other = MuseumSection::create([
+            'slug' => 'conflict-revoked-section', 'title' => 'Закрытый раздел',
+            'status' => 'published',
+        ]);
+        $role = MoonshineUserRole::where('name', 'Editor')->firstOrFail();
+        $editor = MoonshineUser::factory()->create(['moonshine_user_role_id' => $role->id]);
+        $own->editors()->attach($editor->id);
+        $entry = MuseumEntry::create([
+            'type' => 'news', 'slug' => 'conflict-revoked-article',
+            'title' => 'До перевода', 'body' => '<p>Исходный</p>',
+            'museum_section_id' => $own->id, 'status' => 'draft',
+        ]);
+        $revision = $this->revisionFromForm($editor, $entry);
+        // The administrator moves this item to another editor's section.
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $entry->update(['museum_section_id' => $other->id,
+            'body' => '<p>Закрытый текст другого раздела</p>']);
+        $this->actingAs($editor, 'moonshine');
+        $result = $this->update($entry, $revision, '<p>Несданная версия');
+        $this->assertContains($result->status(), [302, 403, 404],
+            'A revoked editor may never receive a 409 diff showing a now-private entry');
+        $result->assertDontSee('Закрытый текст другого раздела');
+        $this->assertSame('<p>Закрытый текст другого раздела</p>', $entry->fresh()->body);
+    }
+
+    public function test_conflict_page_works_with_moonshine_production_error_handling(): void
+    {
+        $admin = MoonshineUser::factory()->create();
+        $entry = MuseumEntry::create([
+            'type' => 'news', 'slug' => 'conflict-production-flow',
+            'title' => 'Старая новость',
+            'body' => '<p>Исходная редакция</p>',
+            'status' => 'draft',
+        ]);
+        $this->actingAs($admin, 'moonshine');
+        $oldRevision = MuseumApprovalRevision::fingerprint($entry->fresh());
+        $entry->update(['body' => '<p>Актуальный вариант</p>']);
+        $previous = app()->environment();
+        app()->instance('env', 'production');
+        try {
+            $this->withSession(['_token' => 'conflict-form-csrf-token']);
+            $this->update($entry, $oldRevision, '<p>Текст, который нужно сохранить</p>', 'conflict-form-csrf-token')
+                ->assertStatus(409)
+                ->assertSee('Текст, который нужно сохранить')
+                ->assertSee('Актуальный вариант');
+        } finally {
+            app()->instance('env', $previous);
+        }
+        $this->assertSame('<p>Актуальный вариант</p>', $entry->fresh()->body);
+    }
+
 }

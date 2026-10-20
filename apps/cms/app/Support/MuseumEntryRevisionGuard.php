@@ -18,11 +18,11 @@ final class MuseumEntryRevisionGuard
     public function assertCurrent(int $entryId, mixed $submitted): MuseumEntry
     {
         if (! is_string($submitted) || ! preg_match('/^[a-f0-9]{64}$/D', $submitted)) {
-            abort(409, 'Редакция материала не подтверждена. Откройте форму повторно.');
+            throw new MuseumEditConflict('Редакция материала не подтверждена. Откройте форму повторно.');
         }
         $fresh = MuseumEntry::query()->lockForUpdate()->findOrFail($entryId);
         if (! hash_equals(MuseumApprovalRevision::fingerprint($fresh), $submitted)) {
-            abort(409, 'Материал изменён другим редактором. Откройте последнюю версию перед сохранением.');
+            throw new MuseumEditConflict('Материал изменён другим редактором. Откройте последнюю версию перед сохранением.');
         }
         // The old read-and-compare guard was not enough: two concurrent
         // transactions could both pass it before either saved. Claim the
@@ -33,7 +33,7 @@ final class MuseumEntryRevisionGuard
             ->where('edit_version', (int) $fresh->edit_version)
             ->update(['edit_version' => DB::raw('edit_version + 1')]);
         if ($claimed !== 1) {
-            abort(409, 'Другая правка уже сохраняется. Загрузите актуальную редакцию.');
+            throw new MuseumEditConflict('Другая правка уже сохраняется. Загрузите актуальную редакцию.');
         }
         return $fresh;
     }

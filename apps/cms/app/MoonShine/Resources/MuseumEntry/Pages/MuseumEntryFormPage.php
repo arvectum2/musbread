@@ -22,6 +22,11 @@ use App\MoonShine\Fields\Jodit;
 
 final class MuseumEntryFormPage extends FormPage
 {
+    // MoonShine's asynchronous error toast would discard a 409 comparison
+    // page. Ordinary POST redirects work here, including Jodit's formdata.
+    // The dedicated conflict response preserves submitted values safely.
+    protected bool $isAsync = false;
+
     protected function fields(): iterable
     {
         return [

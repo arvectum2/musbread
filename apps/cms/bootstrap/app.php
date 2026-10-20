@@ -17,6 +17,20 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\ThrottleMuseumWrites::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        // In local development MoonShine rethrows errors before the resource
+        // response modifier. Render the SAME guarded conflict page as prod.
+        $exceptions->render(function (
+            \App\Support\MuseumEditConflict $exception,
+            Request $request
+        ): ?\Symfony\Component\HttpFoundation\Response {
+            if (! $request->is('admin/resource/museum-entry-resource/crud/*')) {
+                return null;
+            }
+            $id = $request->route('resourceItem');
+            if (! is_scalar($id) || ! ctype_digit((string) $id)) return null;
+            return app(\App\Support\MuseumEditConflictResponse::class)
+                ->render($request, (int) $id, $exception);
+        });
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );

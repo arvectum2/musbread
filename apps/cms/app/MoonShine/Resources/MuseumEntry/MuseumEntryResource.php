@@ -10,9 +10,13 @@ use MoonShine\Laravel\MoonShineAuth;
 use MoonShine\Support\Enums\Ability;
 use App\Support\MuseumSectionAccess;
 use App\Support\MuseumEntryRevisionGuard;
+use App\Support\MuseumEditConflict;
+use App\Support\MuseumEditConflictResponse;
 use Illuminate\Support\Facades\DB;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\Core\DependencyInjection\FieldsContract;
+use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 use App\Models\MuseumEntry;
 use App\MoonShine\Resources\MuseumEntry\Pages\MuseumEntryIndexPage;
 use App\MoonShine\Resources\MuseumEntry\Pages\MuseumEntryFormPage;
@@ -83,6 +87,19 @@ class MuseumEntryResource extends ModelResource
             request()->input('_museum_revision_sha256'),
         );
         return parent::beforeUpdating($item);
+    }
+
+    public function modifyErrorResponse(Response $response, Throwable $exception): Response
+    {
+        // MoonShine catches thrown errors in production, where its default
+        // handler redirects and would lose the comparison UX. Only our typed
+        // 409 is eligible; 403, CSRF and all other failures remain unchanged.
+        if ($exception instanceof MuseumEditConflict) {
+            return app(MuseumEditConflictResponse::class)->render(
+                request(), (int) $this->getItemID(), $exception
+            );
+        }
+        return parent::modifyErrorResponse($response, $exception);
     }
 
     protected function search(): array

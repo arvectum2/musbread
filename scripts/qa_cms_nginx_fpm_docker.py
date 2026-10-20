@@ -67,6 +67,10 @@ def bench():
     qa_password=secrets.token_urlsafe(22)
     env['MUSBREAD_QA_EMAIL']=qa_email
     env['MUSBREAD_QA_PASS']=qa_password
+    qa_email_b='cms-qa-second-'+suffix+'@example.invalid'
+    qa_password_b=secrets.token_urlsafe(22)
+    env['MUSBREAD_QA_EMAIL_B']=qa_email_b
+    env['MUSBREAD_QA_PASS_B']=qa_password_b
     # The CMS runs INSIDE container against a distinct mounted /app/storage DB.
     fpm_env=dict(APP_ENV='local',APP_DEBUG='false',APP_KEY=key,
                  DB_CONNECTION='sqlite',DB_DATABASE='/app/storage/qa.sqlite',DB_URL='',
@@ -112,8 +116,23 @@ def bench():
             "password"=>\\Illuminate\\Support\\Facades\\Hash::make(env("MUSBREAD_QA_PASS")),
             "moonshine_user_role_id"=>1
         ]);
+        \\MoonShine\\Laravel\\Models\\MoonshineUser::create([
+            "name"=>"QA Second Editor", "email"=>env("MUSBREAD_QA_EMAIL_B"),
+            "password"=>\\Illuminate\\Support\\Facades\\Hash::make(env("MUSBREAD_QA_PASS_B")),
+            "moonshine_user_role_id"=>1
+        ]);
+        $entry = \\App\\Models\\MuseumEntry::create([
+            "type"=>"news", "slug"=>"synthetic-conflict-test",
+            "title"=>"Synthetic editor conflict",
+            "body"=>"<p>Original synthetic material</p>",
+            "status"=>"draft"
+        ]);
+        echo "QA_ENTRY_ID=".$entry->id."\\n";
         '''.replace('\\\\','\\')
-        call(['php','artisan','tinker','--execute',seed],env=env,timeout=20)
+        seeded=call(['php','artisan','tinker','--execute',seed],env=env,timeout=20)
+        match=re.search(r'QA_ENTRY_ID=(\d+)', seeded.stdout)
+        if not match:raise RuntimeError('Did not create isolated synthetic entry')
+        conflict_entry_id=int(match.group(1))
         call(['docker','network','create',net],timeout=15)
         network=True
         argv=['docker','run','-d','--rm','--name',fpm,'--network',net,
@@ -223,6 +242,89 @@ def bench():
         print('NGINX_FPM_AUTHENTICATED_ADMIN_PASS',
               {'login_status':login_status,'documents_status':auth_status,
                'session_cookie_count':len(jar)},flush=True)
+        # Two actual, independent MoonShine browser sessions with different
+        # synthetic accounts now submit the SAME entry. The second uses a
+        # stale fingerprint, so the real Nginx HTTP response must be a usable
+        # conflict-comparison page, not MoonShine's generic 500 toast.
+        jar_b=http.cookiejar.CookieJar()
+        browser_b=urllib.request.build_opener(
+            urllib.request.HTTPCookieProcessor(jar_b),
+            type('NoFollow', (urllib.request.HTTPRedirectHandler,), {
+                'redirect_request':lambda self,req,fp,code,msg,headers,url:None})())
+        def browser_page(client,path):
+            with client.open(endpoint+path,timeout=12) as response:
+                return response.read(300000).decode('utf-8','replace')
+        login_html_b=browser_page(browser_b,'/admin/login')
+        token_b=re.search(r'name="_token"[^>]*value="([^"]+)"',login_html_b)
+        if not token_b:raise RuntimeError('Second editor CSRF field missing')
+        credentials_b=urllib.parse.urlencode({
+            'username':qa_email_b,'password':qa_password_b,
+            '_token':token_b.group(1)}).encode()
+        login_request_b=urllib.request.Request(endpoint+'/admin/authenticate',
+            data=credentials_b,method='POST',headers={
+                'Content-Type':'application/x-www-form-urlencoded',
+                'Origin':endpoint,'Referer':endpoint+'/admin/login'})
+        try:
+            browser_b.open(login_request_b,timeout=10)
+        except urllib.error.HTTPError as error:
+            if error.code!=302:raise
+        form_url='/admin/resource/museum-entry-resource/museum-entry-form-page/'+str(conflict_entry_id)
+        form_a=browser_page(browser,form_url)
+        form_b=browser_page(browser_b,form_url)
+        def form_field(html,key):
+            pattern=r'<input[^>]*name="'+re.escape(key)+r'"[^>]*>'
+            target=re.search(pattern,html)
+            if not target:raise RuntimeError('MoonShine form missing '+key)
+            value=re.search(r'value="([^"]*)"',target.group(0))
+            if not value:raise RuntimeError('MoonShine form missing value '+key)
+            return value.group(1)
+        revision_a=form_field(form_a,'_museum_revision_sha256')
+        revision_b=form_field(form_b,'_museum_revision_sha256')
+        if revision_a!=revision_b:raise RuntimeError('Two editors opened different versions')
+        if 'data-async' in form_a.split('form-resource-museum-entry-resource',1)[-1].split('</form>',1)[0]:
+            raise RuntimeError('Conflict editor form is unexpectedly AJAX-only')
+        def submit(client,html,body):
+            values={
+                '_token':form_field(html,'_token'),'_method':'PUT',
+                '_museum_revision_sha256':form_field(html,'_museum_revision_sha256'),
+                'slug':'synthetic-conflict-test','title':'Synthetic editor conflict',
+                'type':'news','status':'draft','body':body,
+            }
+            request=urllib.request.Request(
+                endpoint+'/admin/resource/museum-entry-resource/crud/'+str(conflict_entry_id),
+                data=urllib.parse.urlencode(values).encode(),method='POST',
+                headers={'Content-Type':'application/x-www-form-urlencoded',
+                         'Origin':endpoint,'Referer':endpoint+form_url})
+            try:
+                with client.open(request,timeout=12) as response:
+                    return response.status,response.read(300000).decode('utf-8','replace'),dict(response.headers)
+            except urllib.error.HTTPError as e:
+                return e.code,e.read(300000).decode('utf-8','replace'),dict(e.headers)
+        first_status,first_body,_=submit(browser,form_a,"<p>Editor saved a newer version</p>")
+        if first_status not in (302,303):
+            raise RuntimeError('First editor did not save via HTTP: '+str(first_status))
+        second_status,comparison,comparison_headers=submit(
+            browser_b,form_b,'<p>My stale UNSAVED editor draft & special symbols</p>')
+        if second_status!=409 or not all(fragment in comparison for fragment in (
+            'Другой редактор изменил материал','Мой несохранённый вариант',
+            'saved a newer version','UNSAVED editor draft','museum-editor-conflict.js'
+        )):
+            raise RuntimeError('Live conflict response failed '+str(second_status)+' '+comparison[-420:])
+        if '<p>My stale UNSAVED' in comparison or 'no-store' not in comparison_headers.get('Cache-Control',''):
+            raise RuntimeError('Unsaved HTML not escaped or private no-store missing')
+        if 'javascript' in comparison_headers.get('Content-Type','').lower():
+            raise RuntimeError('Unexpected MIME for conflict response')
+        with browser_b.open(endpoint+'/js/museum-editor-conflict.js',timeout=8) as js_resp:
+            if js_resp.status!=200 or b'museum-unsaved-draft.json' not in js_resp.read():
+                raise RuntimeError('Local conflict download UX script inaccessible')
+        latest_form=browser_page(browser_b,form_url)
+        if 'saved a newer version' not in latest_form:
+            raise RuntimeError('Current saved source differs from winner')
+        print('NGINX_FPM_TWO_EDITOR_CONFLICT_HTTP_PASS',
+            {'different_session_cookies':sorted(c.value for c in jar)!=sorted(c.value for c in jar_b),
+             'first_save_status':first_status,'second_save_status':second_status,
+             'draft_preserved_escaped':True,'latest_form_unchanged_by_stale_submit':True},
+            flush=True)
         # Hold only temporary localhost cookies; never write cookie values
         # to the report or another file.
         cookie_header='; '.join(c.name+'='+c.value for c in jar)
@@ -256,6 +358,10 @@ def bench():
             'nginx_fpm_routes_tested':['/up','/admin/login','/admin/authenticate',
                                        '/admin/museum-documents (guest and authenticated)',
                                        '/storage/museum/media/secret.webp','/.env'],
+            'two_editor_conflict_real_http_tested':True,
+            'two_editor_stale_submit_status':second_status,
+            'two_editor_first_save_status':first_status,
+            'unsaved_draft_preserved_in_escaped_409_html':True,
             'authenticated_parallel_requests':32,
             'anonymous_private_route_requests':32,
             'https_tested':False,
