@@ -33,7 +33,9 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // Never register framework signed GET/PUT routes for CMS originals.
+            // Private files are available only via authenticated museum controllers.
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],

@@ -1,5 +1,8 @@
 # MusBread — чекпоинты исполнения и денежная смета
 
+> **20.10.2026 / CODE-AUDIT-05 — безопасность CMS:** [подтверждённый аудит](engineering/CODE_AUDIT_CMS_SECURITY_20261020.md). Отключены лишние подписанные Laravel GET/PUT-маршруты к закрытому storage/app/private (serve=false); предпросмотр исходных WebP сверяет SHA-256 именно выдаваемых байтов, размер/формат и отвергает symlink. Composer: 0 advisory; npm prod: 0; npm dev: 5 High в одной нерешённой транзитивной цепочке braces/ESLint без совместимого патча. 360 Python PASS, статический музей без изменений. Матрица 85/118/122, без новых вопросов музею/публикации.
+
+
 > **20.10.2026 / CODE-AUDIT-04 — SIGKILL и параллельные выпуски:** [доказательства](engineering/CODE_AUDIT_PUBLIC_RELEASE_RECOVERY_20261020.md). Переключение current/previous дополнено приватным fsync-журналом, fail-closed восстановлением прежних указателей и безопасным удалением прерванного staging. SIGKILL до/после переключения и во время копирования; конкурирующие процессы и занятый Laravel lock проверены. **360 Python + 358 Laravel (3707 assertions) PASS**, локальный CMS→Next→Nginx HTTP E2E за **12,992 сек PASS**. Физическое power-loss не испытано, светофор **85/118/122**, без боевого сайта.
 
 

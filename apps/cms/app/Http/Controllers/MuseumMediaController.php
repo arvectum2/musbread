@@ -183,11 +183,23 @@ final class MuseumMediaController extends Controller
     public function preview(MuseumMedia $media): Response
     {
         $this->requireEntry($media->entry);
-        if (! Storage::disk('local')->exists($media->storage_path)) {
+        // Media preview must enforce the same content-addressed integrity as
+        // private document download and static export. A disk-side mutation
+        // must never be served as a previously reviewed museum image.
+        $path = Storage::disk('local')->path($media->storage_path);
+        if (! is_file($path) || is_link($path)
+            || filesize($path) !== (int) $media->size_bytes) abort(404);
+        // Read once, validate EXACT bytes being returned. Hashing the path
+        // before a second read would leave a file-replacement race window.
+        $image = file_get_contents($path);
+        if (! is_string($image)
+            || strlen($image) !== (int) $media->size_bytes
+            || ! hash_equals((string) $media->sha256, hash('sha256', $image))
+            || (@getimagesizefromstring($image)[2] ?? null) !== IMAGETYPE_WEBP) {
             abort(404);
         }
 
-        return response(Storage::disk('local')->get($media->storage_path), 200, [
+        return response($image, 200, [
             'Content-Type' => 'image/webp',
             'X-Content-Type-Options' => 'nosniff',
             'Cache-Control' => 'private, max-age=300',

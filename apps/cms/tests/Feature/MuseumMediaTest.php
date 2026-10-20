@@ -70,6 +70,45 @@ class MuseumMediaTest extends TestCase
         $this->assertSame(0, MuseumMedia::count());
     }
 
+    public function test_private_preview_rejects_tampered_image_without_exposing_changed_bytes(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry('published');
+        $admin = MoonshineUser::factory()->create();
+        $this->actingAs($admin, 'moonshine');
+        $this->post('/admin/museum-media', [
+            'museum_entry_id' => $entry->id,
+            'alt' => 'Деревянная лопата рядом с хлебной печью',
+            'image' => UploadedFile::fake()->image('original.png', 25, 25),
+        ])->assertRedirect();
+        $media = MuseumMedia::firstOrFail();
+        $this->get(route('museum.media.preview', $media))->assertOk()
+            ->assertHeader('Cache-Control', 'max-age=300, private')
+            ->assertHeader('X-Content-Type-Options', 'nosniff');
+        $original = Storage::disk('local')->get($media->storage_path);
+
+        // A file edited out-of-band must not be served even if its byte count
+        // still matches the reviewed file's metadata.
+        $changed = substr_replace($original, 'X', 17, 1);
+        $this->assertSame(strlen($original), strlen($changed));
+        Storage::disk('local')->put($media->storage_path, $changed);
+        $this->get(route('museum.media.preview', $media))->assertNotFound();
+
+        Storage::disk('local')->delete($media->storage_path);
+        $this->get(route('museum.media.preview', $media))->assertNotFound();
+
+        // Symlinked private filenames cannot point outside CMS storage.
+        $outside = storage_path('framework/testing/private-preview-outside.webp');
+        file_put_contents($outside, $original);
+        try {
+            symlink($outside, Storage::disk('local')->path($media->storage_path));
+            $this->get(route('museum.media.preview', $media))->assertNotFound();
+        } finally {
+            @unlink(Storage::disk('local')->path($media->storage_path));
+            @unlink($outside);
+        }
+    }
+
     public function test_invalid_files_and_missing_alt_are_rejected(): void
     {
         Storage::fake('local');
