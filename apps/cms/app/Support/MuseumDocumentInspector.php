@@ -31,17 +31,9 @@ final class MuseumDocumentInspector
         fclose($handle);
 
         if ($extension === 'pdf') {
-            if (! str_starts_with($header, '%PDF-') ||
-                ! preg_match('/^%PDF-[12]\.[0-9]/', $header)) $this->invalid();
-            $mime = mime_content_type($path);
-            if ($mime !== 'application/pdf') $this->invalid();
-            $tail = file_get_contents($path, false, null, max(0, $size - 2048));
-            if ($tail === false || ! str_contains($tail, '%%EOF')) $this->invalid();
-            // JavaScript and launch actions in PDFs are not accepted here.
             $pdf = file_get_contents($path);
-            if ($pdf === false || preg_match('#/(?:JavaScript|JS|Launch|RichMedia|EmbeddedFile|OpenAction)\b#i', $pdf)) {
-                $this->invalid();
-            }
+            if (! is_string($pdf)) $this->invalid();
+            $this->verifyPdfBytes($pdf, (string) mime_content_type($path));
             return;
         }
 
@@ -100,6 +92,14 @@ final class MuseumDocumentInspector
         if (strlen($bytes) < 16 || strlen($bytes) > self::MAX_BYTES) {
             $this->invalid();
         }
+        // The PDF is ALREADY held in the approved HTTP response buffer.
+        // Re-reading it and writing another 15 MiB copy to storage adds
+        // latency and memory without improving the security gate.
+        if (strtolower($extension) === 'pdf') {
+            $mime = (new \finfo(FILEINFO_MIME_TYPE))->buffer($bytes);
+            $this->verifyPdfBytes($bytes, is_string($mime) ? $mime : '');
+            return;
+        }
         $file = tempnam(storage_path('framework'), 'museum-check-');
         if ($file === false) throw new \RuntimeException('Cannot create private document inspection file');
         try {
@@ -109,6 +109,19 @@ final class MuseumDocumentInspector
             $this->verify($file, $extension);
         } finally {
             @unlink($file);
+        }
+    }
+
+    /** One identical policy for disk-side PDF validation and fixed HTTP bytes. */
+    private function verifyPdfBytes(string $pdf, string $mime): void
+    {
+        $header = substr($pdf, 0, 16);
+        if (! str_starts_with($header, '%PDF-')
+            || ! preg_match('/^%PDF-[12]\.[0-9]/', $header)
+            || $mime !== 'application/pdf'
+            || ! str_contains(substr($pdf, -2048), '%%EOF')
+            || preg_match('#/(?:JavaScript|JS|Launch|RichMedia|EmbeddedFile|OpenAction)\b#i', $pdf)) {
+            $this->invalid();
         }
     }
 
