@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Models\MuseumContentApproval;
+use App\Models\MuseumExportContentProof;
 use App\Models\MuseumEntry;
 use App\Models\MuseumEvent;
 use App\Models\MuseumPublicationRun;
@@ -52,6 +53,14 @@ final class MuseumPublicationJourneyStatus
         $events = MuseumEvent::query()->whereIn('id', $ids['event'])->get()->keyBy('id');
         $sections = MuseumSection::query()->whereIn('id', $ids['section'])->get()->keyBy('id');
         $runs = MuseumPublicationRun::query()->whereIn('id', $ids['run'])->get()->keyBy('id');
+        // Coalesced approvals can appear in a later run unrelated to their
+        // initial dispatch. Only completed, hash-matching proof runs count.
+        $proofs = MuseumExportContentProof::query()
+            ->whereIn('approval_id', $approvals->modelKeys())
+            ->orderByDesc('publication_run_id')->get()->groupBy('approval_id');
+        $proofRuns = MuseumPublicationRun::query()->whereIn(
+            'id', $proofs->flatten(1)->pluck('publication_run_id')->unique()->all()
+        )->get()->keyBy('id');
 
         $out = [];
         foreach ($approvals as $approval) {
@@ -83,6 +92,17 @@ final class MuseumPublicationJourneyStatus
                     ? 'Запуск ещё не привязан'
                     : 'Связанный запуск отсутствует в базе');
 
+            $includedProof = null;
+            foreach ($proofs->get($approval->id, collect()) as $proof) {
+                $evidenceRun = $proofRuns->get($proof->publication_run_id);
+                if ($evidenceRun !== null && $evidenceRun->status === 'succeeded'
+                    && $evidenceRun->content_verified_at !== null
+                    && $evidenceRun->snapshot_sha256 === $proof->snapshot_sha256) {
+                    $includedProof = $proof;
+                    break;
+                }
+            }
+
             $out[] = [
                 'approval' => $approval,
                 'subject_label' => $subjectLabel,
@@ -91,6 +111,7 @@ final class MuseumPublicationJourneyStatus
                     ?? 'Неизвестный статус постановки в очередь',
                 'run' => $run,
                 'run_label' => $runLabel,
+                'included_proof' => $includedProof,
             ];
         }
         return $out;

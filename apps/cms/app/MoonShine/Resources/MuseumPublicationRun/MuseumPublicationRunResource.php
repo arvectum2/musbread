@@ -16,7 +16,7 @@ use MoonShine\Support\ListOf;
 final class MuseumPublicationRunResource extends ModelResource
 {
     protected string $model = MuseumPublicationRun::class;
-    protected string $title = 'Запуски публикации';
+    protected string $title = 'Запуски закрытой выгрузки';
 
     protected function pages(): array
     {

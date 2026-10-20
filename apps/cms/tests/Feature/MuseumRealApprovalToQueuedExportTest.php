@@ -97,6 +97,15 @@ final class MuseumRealApprovalToQueuedExportTest extends TestCase
             $sha = hash_file('sha256', $snapshot);
             $this->assertSame($sha, $signed['files']['published.json']['sha256']);
             $this->assertSame($sha, $run->snapshot_sha256);
+            $this->assertSame(2, $run->content_proof_count);
+            $this->assertNotNull($run->content_verified_at);
+            $this->assertSame(hash_file('sha256', $manifest), $run->manifest_sha256);
+            $this->assertDatabaseCount('museum_export_content_proofs', 2);
+            $this->assertSame(['entry', 'event'], \App\Models\MuseumExportContentProof::query()
+                ->orderBy('subject_kind')->pluck('subject_kind')->all());
+            $this->get(route('museum.content.approval-journal'))->assertOk()
+                ->assertSee('Подтверждено в проверенном пакете')
+                ->assertSee('Подтверждено 2 одобренных объектов');
             $lastApproval = $approvals->max(static fn ($item) => $item->approved_at->getTimestamp());
             $elapsedAtExport = microtime(true) - $lastApproval;
             $this->assertTrue($elapsedAtExport >= 0);

@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\Models\MuseumPublicationRun;
+use App\Models\MuseumExportContentProof;
+use App\Support\MuseumExportContentVerifier;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Artisan;
@@ -39,12 +41,22 @@ final class PublishMuseumSnapshot implements ShouldQueue
         }
 
         try {
-            $run->update([
-                'status' => 'running',
-                'attempts' => $run->attempts + 1,
-                'started_at' => now(),
-                'error_type' => null,
-            ]);
+            // A retry must never inherit a stale proof from a previously
+            // interrupted or failed attempt, including if strict mode was
+            // disabled between attempts. Completed runs return above.
+            \Illuminate\Support\Facades\DB::transaction(static function () use ($run): void {
+                MuseumExportContentProof::query()->where('publication_run_id', $run->id)->delete();
+                $run->update([
+                    'status' => 'running',
+                    'attempts' => $run->attempts + 1,
+                    'started_at' => now(),
+                    'error_type' => null,
+                    'snapshot_sha256' => null,
+                    'content_verified_at' => null,
+                    'content_proof_count' => null,
+                    'manifest_sha256' => null,
+                ]);
+            });
             // Background publication must never bypass the same strict
             // content/link preflight that protects an operator-triggered
             // final export. The exporter checks BEFORE writing any files.
@@ -93,6 +105,15 @@ final class PublishMuseumSnapshot implements ShouldQueue
                 throw new RuntimeException('Publication snapshot checksum mismatch');
             }
 
+            // In strict editorial-approval mode, a correct manifest digest is
+            // necessary but not sufficient: establish which individually
+            // approved CMS revisions actually appear in these exported bytes.
+            // Fail closed on stale/missing/unapproved entries or assets.
+            app(MuseumExportContentVerifier::class)->verify(
+                $run, $snapshot, $manifest,
+                $parameters['--media-output-dir'] ?? base_path('../web/public/media'),
+                $parameters['--document-output-dir'] ?? base_path('../web/public/documents')
+            );
             $run->update([
                 'status' => 'succeeded',
                 'snapshot_sha256' => $hash,

@@ -6,6 +6,7 @@ use App\Models\MuseumContentApproval;
 use App\Models\MuseumEntry;
 use App\Models\MuseumEvent;
 use App\Models\MuseumPublicationRun;
+use App\Models\MuseumExportContentProof;
 use App\Models\MuseumSection;
 use App\Support\MuseumApprovalRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -167,6 +168,41 @@ final class MuseumPublicationJourneyStatusTest extends TestCase
         $this->get(route('museum.content.preflight'))->assertOk()
             ->assertSee('Приватный пакет подготовлен')
             ->assertSee('не публичный сайт');
+    }
+
+    public function test_later_verified_coalesced_export_can_prove_inclusion_after_original_dispatch_failed(): void
+    {
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $entry = $this->news('coalesced-evidence');
+        $originalRun = MuseumPublicationRun::create([
+            'status'=>'failed','error_type'=>'RuntimeException',
+        ]);
+        $approval = $this->approval($entry,'queued',$originalRun);
+        $later = MuseumPublicationRun::create([
+            'status'=>'succeeded',
+            'snapshot_sha256'=>str_repeat('a',64),
+            'manifest_sha256'=>str_repeat('b',64),
+            'content_verified_at'=>now('UTC'),
+            'content_proof_count'=>1,
+        ]);
+        $proof = MuseumExportContentProof::create([
+            'publication_run_id'=>$later->id,
+            'approval_id'=>$approval->id,
+            'subject_kind'=>'entry', 'subject_id'=>$entry->id,
+            'revision_sha256'=>$approval->revision_sha256,
+            'snapshot_sha256'=>$later->snapshot_sha256,
+            'export_record_sha256'=>str_repeat('c',64),
+        ]);
+        $this->get(route('museum.content.approval-journal'))->assertOk()
+            ->assertSee('Ошибка подготовки приватного пакета')
+            ->assertSee('Подтверждено в проверенном пакете')
+            ->assertSee('(запуск #'.$later->id.')')
+            ->assertSee($proof->export_record_sha256);
+        // No success claim from a proof whose run has not finished.
+        $later->update(['status'=>'running']);
+        $this->get(route('museum.content.approval-journal'))->assertOk()
+            ->assertSee('Не подтверждено для связанного запуска')
+            ->assertDontSee('Подтверждено в проверенном пакете');
     }
 
     public function test_journal_is_admin_only_and_exposes_no_status_to_editor_or_guest(): void

@@ -79,6 +79,51 @@ class MuseumPublicationQueueTest extends TestCase
         }
     }
 
+    public function test_retry_wipes_old_inclusion_proofs_and_never_promotes_legacy_export_to_verified(): void
+    {
+        MuseumEntry::create([
+            'type'=>'news','slug'=>'retry-proof-clear','title'=>'Синтетическая новость',
+            'body'=>'<p>Новая версия без ручных одобрений</p>', 'status'=>'published',
+        ]);
+        $run = MuseumPublicationRun::create([
+            'status'=>'failed',
+            'attempts'=>1,
+            'snapshot_sha256'=>str_repeat('e',64),
+            'manifest_sha256'=>str_repeat('f',64),
+            'content_verified_at'=>now('UTC'),
+            'content_proof_count'=>1,
+        ]);
+        \App\Models\MuseumExportContentProof::create([
+            'publication_run_id'=>$run->id,'approval_id'=>1,
+            'subject_kind'=>'entry','subject_id'=>1,
+            'revision_sha256'=>str_repeat('a',64),
+            'snapshot_sha256'=>str_repeat('e',64),
+            'export_record_sha256'=>str_repeat('b',64),
+        ]);
+        $dir=storage_path('framework/testing/proof-retry-'.bin2hex(random_bytes(6)));
+        mkdir($dir,0700,true);
+        try {
+            (new PublishMuseumSnapshot($run->id, $dir.'/published.json',
+                $dir.'/snapshot-manifest.json',$dir.'/media'))->handle();
+            $run->refresh();
+            $this->assertSame('succeeded',$run->status);
+            $this->assertSame(2,$run->attempts);
+            $this->assertNull($run->content_verified_at);
+            $this->assertNull($run->content_proof_count);
+            $this->assertNull($run->manifest_sha256);
+            $this->assertDatabaseCount('museum_export_content_proofs',0);
+        } finally {
+            foreach (glob($dir.'/*') ?: [] as $file) {
+                if (is_file($file)) @unlink($file);
+                elseif (is_dir($file)) {
+                    foreach (glob($file.'/*') ?: [] as $nested) @unlink($nested);
+                    @rmdir($file);
+                }
+            }
+            @rmdir($dir);
+        }
+    }
+
     public function test_job_exports_and_verifies_an_integrity_manifest(): void
     {
         $entry = MuseumEntry::create([
@@ -98,6 +143,9 @@ class MuseumPublicationQueueTest extends TestCase
             $run->refresh();
             $this->assertSame('succeeded', $run->status);
             $this->assertSame(1, $run->attempts);
+            $this->assertNull($run->content_verified_at);
+            $this->assertNull($run->content_proof_count);
+            $this->assertDatabaseCount('museum_export_content_proofs', 0);
             $this->assertNotNull($run->started_at);
             $this->assertNotNull($run->finished_at);
             $this->assertSame(hash_file('sha256', $output), $run->snapshot_sha256);

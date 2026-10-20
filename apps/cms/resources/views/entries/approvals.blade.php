@@ -70,6 +70,12 @@
                     <dt>Завершён (UTC)</dt><dd>{{ $run->finished_at?->utc()->format('d.m.Y H:i:s') ?? 'Не завершён' }}</dd>
                     @if($run->status === 'succeeded' && $run->snapshot_sha256)
                         <dt>SHA-256 пакета</dt><dd class="sha">{{ $run->snapshot_sha256 }}</dd>
+                        @if($run->content_verified_at !== null)
+                            <dt>Проверка состава</dt><dd class="success">Подтверждено {{ $run->content_proof_count }} одобренных объектов по содержимому, SHA-256 записей и манифесту</dd>
+                            <dt>SHA-256 манифеста</dt><dd class="sha">{{ $run->manifest_sha256 }}</dd>
+                        @else
+                            <dt>Проверка состава</dt><dd class="pending">Не проводилась (прежний запуск или режим без обязательных одобрений)</dd>
+                        @endif
                     @endif
                     @if(in_array($run->status, ['failed','abandoned']))
                         <dt>Техническая причина</dt><dd>{{ $run->error_type ?: 'Не указана. Проверьте закрытый журнал обработчика.' }}</dd>
@@ -113,6 +119,18 @@
                             #{{ $approval->publication_run_id }}:
                         @endif
                         {{ $row['run_label'] }}
+                    </dd>
+                    <dt>Включение в пакет</dt>
+                    <dd>
+                        @if($row['included_proof'])
+                            <strong class="success">Подтверждено в проверенном пакете</strong>
+                            (запуск #{{ $row['included_proof']->publication_run_id }}).
+                            <span class="meta">SHA-256 экспортированной записи:</span>
+                            <code class="sha">{{ $row['included_proof']->export_record_sha256 }}</code>
+                        @else
+                            <span class="pending">Не подтверждено для связанного запуска</span>
+                            <span class="meta">(ожидание, неудача, неподтверждённый состав или пакет другого запуска)</span>
+                        @endif
                     </dd>
                     <dt>SHA-256 редакции</dt><dd class="sha">{{ $approval->revision_sha256 }}</dd>
                 </dl>
