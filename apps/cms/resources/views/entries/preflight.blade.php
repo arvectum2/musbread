@@ -72,6 +72,8 @@
                 <a href="/admin/resource/museum-entry-resource/museum-entry-form-page/{{ $record['id'] }}">Исправить в CMS</a>
                 <a href="{{ route('museum.entries.preview', ['entry' => $record['id']]) }}">Предпросмотр</a>
                 <a href="{{ route('museum.entries.relations.edit', ['entry' => $record['id']]) }}">Связи</a>
+                <a href="{{ route('museum.media.index', ['entry' => $record['id']]) }}">Изображения</a>
+                <a href="{{ route('museum.documents.index', ['entry' => $record['id']]) }}">Документы</a>
             </nav>
             @if($mayApprove && isset($revisionChecksums[$record['id']]))
             <form method="post" action="{{ route('museum.entries.approve-and-queue', ['entry' => $record['id']]) }}">

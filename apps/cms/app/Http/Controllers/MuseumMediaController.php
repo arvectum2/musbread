@@ -9,6 +9,7 @@ use App\Support\MuseumSvgRasterizer;
 use App\Support\MuseumGifProcessor;
 use App\Support\MuseumAltDraft;
 use App\Support\MuseumAltPolicy;
+use App\Support\MuseumWorkflowEntry;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
@@ -28,16 +29,22 @@ final class MuseumMediaController extends Controller
         }
     }
 
-    public function index(): \Illuminate\Contracts\View\View
+    public function index(Request $request, MuseumWorkflowEntry $context): \Illuminate\Contracts\View\View
     {
         $user = MuseumSectionAccess::user();
         if ($user === null) throw new AuthorizationException();
+        $selectedEntry = $context->selected($request, $user);
         $entries = MuseumEntry::query()->editableBy($user)
             ->orderBy('title')->get(['id', 'title', 'slug', 'status']);
+        $query = MuseumMedia::query()->with('entry:id,title,status')
+            ->whereIn('museum_entry_id', $entries->pluck('id'));
+        if ($selectedEntry !== null) {
+            $query->where('museum_entry_id', $selectedEntry->id);
+        }
         return view('media.index', [
             'entries' => $entries,
-            'media' => MuseumMedia::query()->with('entry:id,title,status')
-                ->whereIn('museum_entry_id', $entries->pluck('id'))->latest()->paginate(30),
+            'selectedEntry' => $selectedEntry,
+            'media' => $query->latest()->paginate(30)->withQueryString(),
         ]);
     }
 
@@ -57,7 +64,8 @@ final class MuseumMediaController extends Controller
         ])->header('Cache-Control', 'private, no-store')->header('X-Content-Type-Options', 'nosniff');
     }
 
-    public function store(Request $request, MuseumSvgRasterizer $svgRasterizer, MuseumGifProcessor $gifProcessor): RedirectResponse
+    public function store(Request $request, MuseumSvgRasterizer $svgRasterizer, MuseumGifProcessor $gifProcessor,
+        MuseumWorkflowEntry $context): RedirectResponse
     {
         $validated = $request->validate([
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
@@ -148,10 +156,10 @@ final class MuseumMediaController extends Controller
             throw $e;
         }
 
-        return redirect()->route('museum.media.index')->with('status', 'Изображение добавлено.');
+        return $context->redirect($request, 'museum.media.index', 'Изображение добавлено.');
     }
 
-    public function update(Request $request, MuseumMedia $media): RedirectResponse
+    public function update(Request $request, MuseumMedia $media, MuseumWorkflowEntry $context): RedirectResponse
     {
         $validated = $request->validate([
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
@@ -167,17 +175,17 @@ final class MuseumMediaController extends Controller
         $this->requireEntry(MuseumEntry::findOrFail($validated['museum_entry_id']));
         $media->update($validated);
 
-        return redirect()->route('museum.media.index')->with('status', 'Подпись и привязка обновлены.');
+        return $context->redirect($request, 'museum.media.index', 'Подпись и привязка обновлены.');
     }
 
-    public function destroy(MuseumMedia $media): RedirectResponse
+    public function destroy(Request $request, MuseumMedia $media, MuseumWorkflowEntry $context): RedirectResponse
     {
         $this->requireEntry($media->entry);
         $path = $media->storage_path;
         $media->delete();
         Storage::disk('local')->delete($path);
 
-        return redirect()->route('museum.media.index')->with('status', 'Изображение удалено.');
+        return $context->redirect($request, 'museum.media.index', 'Изображение удалено.');
     }
 
     public function preview(MuseumMedia $media): Response

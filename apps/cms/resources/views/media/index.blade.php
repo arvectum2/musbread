@@ -39,7 +39,20 @@
 </header>
 <main>
     <h1>Изображения материалов</h1>
-    <p><a href="{{ route('museum.documents.index') }}">К библиотеке PDF/DOCX/XLSX →</a></p>
+    @if($selectedEntry)
+        <div class="notice" role="status">
+            <strong>Текущий материал: {{ $selectedEntry->title }}</strong>
+            <p>Показаны только изображения этого материала. В форме он уже выбран.</p>
+            <p><a href="/admin/resource/museum-entry-resource/museum-entry-form-page/{{ $selectedEntry->id }}">← К редактированию</a>
+            · <a href="{{ route('museum.documents.index', ['entry' => $selectedEntry->id]) }}">Его документы</a>
+            · <a href="{{ route('museum.entries.preview', ['entry' => $selectedEntry->id]) }}">Предпросмотр</a>
+            · <a href="{{ route('museum.content.preflight') }}#entry-{{ $selectedEntry->id }}">Проверка</a>
+            · <a href="{{ route('museum.media.index') }}">Вся медиатека</a></p>
+        </div>
+    @else
+        <p>Показана общая медиатека доступных разделов. Для работы с одним материалом откройте его карточку в редакторе.</p>
+        <p><a href="{{ route('museum.documents.index') }}">К библиотеке PDF/DOCX/XLSX →</a></p>
+    @endif
     <p>Файлы до 5 МБ: JPG, PNG, WebP, GIF (обычный или анимированный до 60 кадров/30 секунд; для анимации установлен gif2webp) и SVG (строгая геометрия, преобразование в WebP). Изображение привязывается к странице или новости. EXIF и другие метаданные удаляются при перекодировании в WebP. Файлы в черновиках не попадают на публичный сайт.</p>
     @if(session('status')) <p role="status" class="notice">{{ session('status') }}</p> @endif
     @if($errors->any())
@@ -50,13 +63,13 @@
     @endif
     <section class="panel" aria-labelledby="new-media">
         <h2 id="new-media">Добавить изображение</h2>
-        <form method="post" action="{{ route('museum.media.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('museum.media.store', $selectedEntry ? ['entry' => $selectedEntry->id] : []) }}" enctype="multipart/form-data">
             @csrf
             <label for="entry">Материал музея *</label>
             <select id="entry" name="museum_entry_id" required>
                 <option value="">Выберите материал</option>
                 @foreach($entries as $entry)
-                    <option value="{{ $entry->id }}" @selected(old('museum_entry_id') == $entry->id)>
+                    <option value="{{ $entry->id }}" @selected(old('museum_entry_id', $selectedEntry?->id) == $entry->id)>
                         {{ $entry->title }} ({{ $entry->slug }}, {{ $entry->status }})
                     </option>
                 @endforeach
@@ -108,7 +121,7 @@
                                       rel="noopener noreferrer">исходный файл на сайте музея ↗</a></p>
                             @endif
                         @endif
-                        <form method="post" action="{{ route('museum.media.update', $item) }}">
+                        <form method="post" action="{{ route('museum.media.update', ['media' => $item->id] + ($selectedEntry ? ['entry' => $selectedEntry->id] : [])) }}">
                             @csrf @method('PATCH')
                             <label for="edit-alt-{{ $item->id }}">Alt-текст</label>
                             <input id="edit-alt-{{ $item->id }}" name="alt" required minlength="3" maxlength="125" value="{{ $item->alt }}">
@@ -124,7 +137,7 @@
                             </select>
                             <button type="submit">Сохранить</button>
                         </form>
-                        <form method="post" action="{{ route('museum.media.destroy', $item) }}" onsubmit="return confirm('Удалить изображение? В следующей публикации оно исчезнет с публичного сайта.')">
+                        <form method="post" action="{{ route('museum.media.destroy', ['media' => $item->id] + ($selectedEntry ? ['entry' => $selectedEntry->id] : [])) }}" onsubmit="return confirm('Удалить изображение? В следующей публикации оно исчезнет с публичного сайта.')">
                             @csrf @method('DELETE')
                             <button class="danger" type="submit">Удалить</button>
                         </form>

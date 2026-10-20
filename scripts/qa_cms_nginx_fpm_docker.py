@@ -271,6 +271,25 @@ def bench():
         form_url='/admin/resource/museum-entry-resource/museum-entry-form-page/'+str(conflict_entry_id)
         form_a=browser_page(browser,form_url)
         form_b=browser_page(browser_b,form_url)
+        # Real authenticated editor navigation; the query context must
+        # select the current entry in BOTH attachment libraries.
+        scoped_media='/admin/museum-media?entry='+str(conflict_entry_id)
+        scoped_docs='/admin/museum-documents?entry='+str(conflict_entry_id)
+        if not all(path in form_a for path in (
+            scoped_media,scoped_docs,
+            '/admin/museum-entries/'+str(conflict_entry_id)+'/preview',
+            '/admin/museum-content/preflight#entry-'+str(conflict_entry_id)
+        )):
+            raise RuntimeError('Live editor form is missing contextual workflow links')
+        for path in (scoped_media, scoped_docs):
+            scoped_html=browser_page(browser,path)
+            if ('Текущий материал:' not in scoped_html or
+                'Synthetic editor conflict' not in scoped_html or
+                not re.search(r'<option[^>]*value="'+str(conflict_entry_id)
+                              +r'"[^>]*selected', scoped_html)):
+                raise RuntimeError('Live media/document library lost selected entry: '+path)
+        print('NGINX_FPM_EDITOR_WORKFLOW_NAVIGATION_PASS',
+              {'links':4,'scoped_libraries':2,'preselected_entry':True},flush=True)
         def form_field(html,key):
             pattern=r'<input[^>]*name="'+re.escape(key)+r'"[^>]*>'
             target=re.search(pattern,html)
@@ -358,6 +377,9 @@ def bench():
             'nginx_fpm_routes_tested':['/up','/admin/login','/admin/authenticate',
                                        '/admin/museum-documents (guest and authenticated)',
                                        '/storage/museum/media/secret.webp','/.env'],
+            'editorial_workflow_navigation_tested':True,
+            'scoped_editor_libraries_tested':['/admin/museum-media?entry',
+                                             '/admin/museum-documents?entry'],
             'two_editor_conflict_real_http_tested':True,
             'two_editor_stale_submit_status':second_status,
             'two_editor_first_save_status':first_status,

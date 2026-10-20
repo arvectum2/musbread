@@ -21,16 +21,29 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,t
 <body><main>
 <a href="/admin">← MoonShine</a>
 <h1>Документы материалов (закрытый контур)</h1>
+@if($selectedEntry)
+<div class="warning" role="status">
+  <strong>Текущий материал: {{ $selectedEntry->title }}</strong>
+  <p>Показаны документы только этого материала; в форме привязка выбрана заранее.</p>
+  <p><a href="/admin/resource/museum-entry-resource/museum-entry-form-page/{{ $selectedEntry->id }}">← К редактированию</a>
+   · <a href="{{ route('museum.media.index', ['entry' => $selectedEntry->id]) }}">Его изображения</a>
+   · <a href="{{ route('museum.entries.preview', ['entry' => $selectedEntry->id]) }}">Предпросмотр</a>
+   · <a href="{{ route('museum.content.preflight') }}#entry-{{ $selectedEntry->id }}">Проверка</a>
+   · <a href="{{ route('museum.documents.index') }}">Все документы</a></p>
+</div>
+@else
+<p>Показаны документы доступных разделов. Для работы с одним материалом откройте его карточку в редакторе.</p>
+@endif
 <p class="warning">Предварительная версия. Поддерживаются PDF, DOCX и XLSX до 15 МБ. В разработке поддерживается XLS: конвертируется в XLSX без формул, макросов и объектов; на production загрузка XLS закрыта до проверки антивирусом. Документы публикуются только вместе с утверждённым материалом. Не загружайте реальные материалы музея без прав.</p>
 @if(session('status')) <p role="status">{{ session('status') }}</p> @endif
 @if($errors->any())<div role="alert"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 <section>
 <h2>Добавить файл</h2>
-<form action="{{ route('museum.documents.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('museum.documents.store', $selectedEntry ? ['entry' => $selectedEntry->id] : []) }}" method="post" enctype="multipart/form-data">
 @csrf
 <label for="entry">Связанный материал</label>
 <select name="museum_entry_id" id="entry" required><option value="">Выберите материал</option>
-@foreach($entries as $entry)<option value="{{ $entry->id }}" @selected(old('museum_entry_id') == $entry->id)>{{ $entry->title }} ({{ $entry->slug }})</option>@endforeach
+@foreach($entries as $entry)<option value="{{ $entry->id }}" @selected(old('museum_entry_id', $selectedEntry?->id) == $entry->id)>{{ $entry->title }} ({{ $entry->slug }})</option>@endforeach
 </select>
 <label for="label">Короткое доступное название файла</label><input name="label" id="label" maxlength="180" minlength="3" value="{{ old('label') }}" required>
 <label for="document">Файл PDF / DOCX / XLSX (на локальном стенде также XLS)</label>
@@ -52,7 +65,7 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,t
   : ($document->accessibility_reviewed ? 'Проверено только пояснение (не полная HTML-редакция)' : 'Доступность не подтверждена') }}</p></td>
 <td>{{ $document->entry?->title }}</td>
 <td><a href="{{ route('museum.documents.download', $document) }}">Скачать</a>
-<form action="{{ route('museum.documents.accessibility', $document) }}" method="post">
+<form action="{{ route('museum.documents.accessibility', ['document' => $document->id] + ($selectedEntry ? ['entry' => $selectedEntry->id] : [])) }}" method="post">
 @csrf @method('PATCH')
 <label for="accessibility-{{ $document->id }}">Пояснение по доступности (не равно полной HTML-версии)</label>
 <textarea id="accessibility-{{ $document->id }}" name="accessibility_note" maxlength="2000"
@@ -62,7 +75,7 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,t
   name="accessibility_reviewed" type="checkbox" value="1"
   @checked($document->accessibility_reviewed)> Пояснение проверено редактором (не подтверждает эквивалентность HTML или PDF/UA)</label>
 <button type="submit">Сохранить пояснение</button></form>
-<form action="{{ route('museum.documents.accessible-edition', $document) }}" method="post">
+<form action="{{ route('museum.documents.accessible-edition', ['document' => $document->id] + ($selectedEntry ? ['entry' => $selectedEntry->id] : [])) }}" method="post">
 @csrf @method('PATCH')
 <input type="hidden" name="source_sha256" value="{{ $document->sha256 }}">
 <label for="html-edition-{{ $document->id }}">Полнотекстовая доступная HTML-редакция исходного файла (до 200 КБ)</label>
@@ -84,7 +97,7 @@ button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,t
 </label>
 <button type="submit">Сохранить HTML-редакцию / подтверждение</button>
 </form>
-<form action="{{ route('museum.documents.destroy', $document) }}" method="post">@csrf @method('DELETE')
+<form action="{{ route('museum.documents.destroy', ['document' => $document->id] + ($selectedEntry ? ['entry' => $selectedEntry->id] : [])) }}" method="post">@csrf @method('DELETE')
 <button type="submit">Удалить</button></form></td>
 </tr>@endforeach
 </tbody></table>{{ $documents->links() }}</section>

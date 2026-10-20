@@ -8,6 +8,7 @@ use App\Support\MuseumDocumentInspector;
 use App\Support\MuseumDocumentAccessibleEdition;
 use App\Support\MuseumLegacySpreadsheetNormalizer;
 use App\Support\MuseumSectionAccess;
+use App\Support\MuseumWorkflowEntry;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -25,19 +26,23 @@ final class MuseumDocumentController extends Controller
         }
     }
 
-    public function index(): View
+    public function index(Request $request, MuseumWorkflowEntry $context): View
     {
         $user = MuseumSectionAccess::user();
         if ($user === null) throw new AuthorizationException();
+        $selectedEntry = $context->selected($request, $user);
         $entries = MuseumEntry::query()->editableBy($user)->orderBy('title')->get(['id', 'title', 'slug']);
-        $documents = MuseumDocument::query()->with('entry:id,title,museum_section_id')
-            ->whereIn('museum_entry_id', $entries->pluck('id'))
-            ->latest()->paginate(30);
-        return view('documents.index', compact('entries', 'documents'));
+        $query = MuseumDocument::query()->with('entry:id,title,museum_section_id')
+            ->whereIn('museum_entry_id', $entries->pluck('id'));
+        if ($selectedEntry !== null) {
+            $query->where('museum_entry_id', $selectedEntry->id);
+        }
+        $documents = $query->latest()->paginate(30)->withQueryString();
+        return view('documents.index', compact('entries', 'selectedEntry', 'documents'));
     }
 
     public function store(Request $request, MuseumDocumentInspector $inspector,
-        MuseumLegacySpreadsheetNormalizer $normalizer): RedirectResponse
+        MuseumLegacySpreadsheetNormalizer $normalizer, MuseumWorkflowEntry $context): RedirectResponse
     {
         $validated = $request->validate([
             'museum_entry_id' => ['required', 'integer', 'exists:museum_entries,id'],
@@ -80,10 +85,11 @@ final class MuseumDocumentController extends Controller
             Storage::disk('local')->delete($path);
             throw $error;
         }
-        return redirect()->route('museum.documents.index')->with('status', 'Документ загружен.');
+        return $context->redirect($request, 'museum.documents.index', 'Документ загружен.');
     }
 
-    public function accessibility(Request $request, MuseumDocument $document): RedirectResponse
+    public function accessibility(Request $request, MuseumDocument $document,
+        MuseumWorkflowEntry $context): RedirectResponse
     {
         $this->requireEntry($document->entry);
         $validated = $request->validate([
@@ -100,8 +106,8 @@ final class MuseumDocumentController extends Controller
             'accessibility_note' => $validated['accessibility_note'] ?? null,
             'accessibility_reviewed' => (bool) $validated['accessibility_reviewed'],
         ]);
-        return redirect()->route('museum.documents.index')
-            ->with('status', 'Отметка редакторской проверки доступности сохранена.');
+        return $context->redirect($request, 'museum.documents.index',
+            'Отметка редакторской проверки доступности сохранена.');
     }
 
     /** Draft and independently verify an equivalence candidate against the
@@ -109,7 +115,7 @@ final class MuseumDocumentController extends Controller
      */
     public function accessibleEdition(
         Request $request, MuseumDocument $document,
-        MuseumDocumentAccessibleEdition $edition
+        MuseumDocumentAccessibleEdition $edition, MuseumWorkflowEntry $context
     ): RedirectResponse {
         $this->requireEntry($document->entry);
         $validated=$request->validate([
@@ -138,19 +144,19 @@ final class MuseumDocumentController extends Controller
             'accessible_reviewed_at'=>$approved ? now() : null,
             'accessible_reviewed_by'=>$approved ? MuseumSectionAccess::user()?->id : null,
         ]);
-        return redirect()->route('museum.documents.index')
-            ->with('status',$approved
-                ? 'Редактор подтвердил эквивалентную HTML-редакцию исходного документа.'
-                : 'HTML-черновик сохранён приватно; эквивалентность ещё не подтверждена.');
+        return $context->redirect($request, 'museum.documents.index', $approved
+            ? 'Редактор подтвердил эквивалентную HTML-редакцию исходного документа.'
+            : 'HTML-черновик сохранён приватно; эквивалентность ещё не подтверждена.');
     }
 
-    public function destroy(MuseumDocument $document): RedirectResponse
+    public function destroy(Request $request, MuseumDocument $document,
+        MuseumWorkflowEntry $context): RedirectResponse
     {
         $this->requireEntry($document->entry);
         $path = $document->storage_path;
         $document->delete();
         Storage::disk('local')->delete($path);
-        return redirect()->route('museum.documents.index')->with('status', 'Документ удалён.');
+        return $context->redirect($request, 'museum.documents.index', 'Документ удалён.');
     }
 
     public function download(MuseumDocument $document, MuseumDocumentInspector $inspector): Response

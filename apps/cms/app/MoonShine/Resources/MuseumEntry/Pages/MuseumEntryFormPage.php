@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Components\FlexibleRender;
 use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Hidden;
@@ -26,6 +27,16 @@ final class MuseumEntryFormPage extends FormPage
     // page. Ordinary POST redirects work here, including Jodit's formdata.
     // The dedicated conflict response preserves submitted values safely.
     protected bool $isAsync = false;
+
+    protected function topLayer(): array
+    {
+        $entry = $this->getResource()->getItemOrInstance();
+
+        return [
+            ...parent::topLayer(),
+            FlexibleRender::make(view('entries.workflow-nav', ['entry' => $entry])),
+        ];
+    }
 
     protected function fields(): iterable
     {
