@@ -10,15 +10,16 @@ import fcntl
 from contextlib import contextmanager
 import hashlib
 import json
-import re
-
-VALID_DOCUMENT = re.compile(r"^documents/[a-f0-9]{64}\.(?:pdf|docx|xlsx)$")
 import os
+import re
 import shutil
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+TRANSITION_FILE = ".release-transition.json"
+RELEASE_ID = re.compile(r"[0-9a-f]{16}\Z")
+VALID_DOCUMENT = re.compile(r"^documents/[a-f0-9]{64}\.(?:pdf|docx|xlsx)$")
 
 
 def digest(path: Path) -> str:
@@ -52,6 +53,189 @@ def release_lock(dest: Path):
             yield
         finally:
             fcntl.flock(lockfile.fileno(), fcntl.LOCK_UN)
+
+
+def _release_pointer_id(dest: Path, role: str) -> str | None:
+    """Return a strictly local immutable release ID; refuse unsafe pointers."""
+    ptr = dest / role
+    if not ptr.is_symlink():
+        if ptr.exists():
+            raise ValueError("Unsafe release pointer: " + role)
+        return None
+    target = ptr.readlink()
+    if len(target.parts) != 2 or target.parts[0] != "releases" or not RELEASE_ID.fullmatch(target.parts[1]):
+        raise ValueError("Invalid release pointer: " + role)
+    return target.parts[1]
+
+
+def _fsync_directory(directory: Path) -> None:
+    """Persist rename metadata on a local POSIX filesystem."""
+    fd = os.open(directory, os.O_RDONLY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def _transition_path(dest: Path) -> Path:
+    return dest / TRANSITION_FILE
+
+
+def _write_transition(dest: Path, *, action: str,
+                      before: dict[str, str | None],
+                      after: dict[str, str | None]) -> None:
+    """Durably journal pointers before either can be changed."""
+    journal = _transition_path(dest)
+    if journal.exists() or journal.is_symlink():
+        raise ValueError("Unrecovered release transition must be resolved first")
+    temp = dest / (".release-transition-" + str(os.getpid()) + ".tmp")
+    if temp.exists() or temp.is_symlink():
+        raise ValueError("Untrusted release journal temporary path")
+    payload = json.dumps({
+        "version": 1, "action": action, "before": before, "after": after,
+    }, sort_keys=True, separators=(",", ":")).encode("utf-8") + b"\n"
+    try:
+        with temp.open("xb") as out:
+            os.fchmod(out.fileno(), 0o600)
+            out.write(payload)
+            out.flush()
+            os.fsync(out.fileno())
+        os.replace(temp, journal)
+        _fsync_directory(dest)
+    finally:
+        temp.unlink(missing_ok=True)
+
+
+def _remove_transition(dest: Path) -> None:
+    path = _transition_path(dest)
+    if path.is_symlink():
+        raise ValueError("Unsafe release journal symlink")
+    path.unlink(missing_ok=True)
+    _fsync_directory(dest)
+
+
+def _remove_interrupted_staging_unlocked(dest: Path) -> bool:
+    """Reclaim only our recognizable abandoned temporary release directories.
+
+    The caller holds flock; a live publisher cannot be copying concurrently.
+    Completed immutable SHA-ID releases and unrelated files are never removed.
+    """
+    changed = False
+    releases = dest / "releases"
+    if releases.exists():
+        if not releases.is_dir() or releases.is_symlink():
+            raise ValueError("Unsafe release staging parent")
+        for item in releases.iterdir():
+            if not item.name.startswith(".release-"):
+                continue
+            if not re.fullmatch(r"\.release-[A-Za-z0-9_]{8}", item.name):
+                raise ValueError("Unrecognized interrupted release staging name")
+            if item.is_symlink() or not item.is_dir():
+                raise ValueError("Unsafe interrupted release staging entry")
+            shutil.rmtree(item)  # rmtree never follows symlinks; under flock.
+            changed = True
+        if changed:
+            _fsync_directory(releases)
+
+    # SIGKILL before the journal's atomic replace may leave only this
+    # private, incomplete file; it cannot have changed a public pointer.
+    for item in dest.iterdir():
+        if not item.name.startswith(".release-transition-") or not item.name.endswith(".tmp"):
+            continue
+        if not re.fullmatch(r"\.release-transition-[0-9]+\.tmp", item.name):
+            raise ValueError("Unrecognized interrupted journal staging name")
+        if not item.is_file() or item.is_symlink():
+            raise ValueError("Unsafe incomplete release journal")
+        item.unlink()
+        changed = True
+    if changed:
+        _fsync_directory(dest)
+    return changed
+
+
+def _recover_unlocked(dest: Path) -> bool:
+    """Fail-closed restore of PRE-transition pointers after an interrupted swap.
+
+    Caller holds release_lock. A successful release may be re-attempted by
+    the scheduler after the previous stable state has been restored.
+    """
+    journal = _transition_path(dest)
+    if journal.is_symlink():
+        raise ValueError("Unsafe release journal symlink")
+    if not journal.exists():
+        return _remove_interrupted_staging_unlocked(dest)
+    raw = json.loads(journal.read_text(encoding="utf-8"))
+    if not isinstance(raw, dict) or set(raw) != {"version", "action", "before", "after"}:
+        raise ValueError("Invalid release recovery journal")
+    if raw["version"] != 1 or raw["action"] not in ("deploy", "rollback"):
+        raise ValueError("Invalid release recovery action")
+    for label in ("before", "after"):
+        refs = raw[label]
+        if not isinstance(refs, dict) or set(refs) != {"current", "previous"}:
+            raise ValueError("Invalid release recovery pointers")
+        for release_id in refs.values():
+            if release_id is not None:
+                if not isinstance(release_id, str) or not RELEASE_ID.fullmatch(release_id):
+                    raise ValueError("Invalid release journal identifier")
+    if raw["before"]["current"] is None and raw["action"] == "rollback":
+        raise ValueError("Cannot recover rollback without prior current release")
+    for release_id in set(raw["before"].values()) - {None}:
+        validate_release(dest / "releases" / release_id)
+
+    for role in ("current", "previous"):
+        present = _release_pointer_id(dest, role)
+        if present not in (raw["before"][role], raw["after"][role]):
+            raise ValueError("Release pointer differs from recorded interrupted transition")
+
+    # Restore the previous *complete* state, never finalize a partly applied
+    # deployment after a crash. A retry can independently verify/redeploy it.
+    for role in ("previous", "current"):
+        old = raw["before"][role]
+        ptr = dest / role
+        if old is None:
+            if ptr.is_symlink():
+                ptr.unlink()
+                _fsync_directory(dest)
+        elif _release_pointer_id(dest, role) != old:
+            _swap_link(ptr, Path("releases") / old)
+    _remove_transition(dest)
+    _remove_interrupted_staging_unlocked(dest)
+    return True
+
+
+def recover(dest: Path) -> bool:
+    """Safe operator command for interrupted local release transitions."""
+    with release_lock(dest):
+        return _recover_unlocked(dest)
+
+
+def _transition_unlocked(dest: Path, *, action: str,
+                         next_current: str, next_previous: str | None) -> None:
+    before = {role: _release_pointer_id(dest, role) for role in ("current", "previous")}
+    after = {"current": next_current, "previous": next_previous}
+    for release_id in {next_current, next_previous} - {None}:
+        validate_release(dest / "releases" / release_id)
+    if before == after:
+        return
+    _write_transition(dest, action=action, before=before, after=after)
+    try:
+        # The active site remains on a known good immutable release at every
+        # point. A crash mid-transition is recovered via the durable journal.
+        for role in ("previous", "current"):
+            target = after[role]
+            old = before[role]
+            if target == old:
+                continue
+            ptr = dest / role
+            if target is None:
+                ptr.unlink(missing_ok=True)
+                _fsync_directory(dest)
+            else:
+                _swap_link(ptr, Path("releases") / target)
+    except Exception:
+        _recover_unlocked(dest)
+        raise
+    _remove_transition(dest)
 
 
 def validate_release(path: Path) -> str:
@@ -111,6 +295,8 @@ def archive_snapshot(snapshot: Path, manifest: Path, dest: Path) -> str:
 def archive_current(dest: Path, snapshot: Path) -> str:
     """Backfill only when local fixture exactly matches the verified current release."""
     with release_lock(dest):
+        if _transition_path(dest).exists() or _transition_path(dest).is_symlink():
+            raise ValueError("Unrecovered release transition: run recover first")
         current = dest / "current"
         if not current.is_symlink() or current.resolve().parent != (dest / "releases").resolve():
             raise ValueError("No valid current local release")
@@ -124,6 +310,7 @@ def prepare(source: Path, snapshot: Path, manifest: Path, dest: Path) -> str:
 
 
 def _prepare_unlocked(source: Path, snapshot: Path, manifest: Path, dest: Path) -> str:
+    _recover_unlocked(dest)
     if not source.is_dir() or not snapshot.is_file() or not manifest.is_file():
         raise ValueError("Build the site and export CMS snapshot first")
     raw = json.loads(manifest.read_text(encoding="utf-8"))
@@ -168,6 +355,7 @@ def _prepare_unlocked(source: Path, snapshot: Path, manifest: Path, dest: Path) 
                 encoding="utf-8",
             )
             staging.rename(final)
+            _fsync_directory(releases)
         finally:
             if staging.exists():
                 shutil.rmtree(staging)
@@ -175,18 +363,23 @@ def _prepare_unlocked(source: Path, snapshot: Path, manifest: Path, dest: Path) 
     # Archival precedes the pointer swap: a failed archive cannot create an
     # un-comparable new release. The archive is NOT inside public output.
     archive_snapshot(snapshot, manifest, dest)
-    current = dest / "current"
-    if current.is_symlink() and current.resolve() != final.resolve():
-        _swap_link(dest / "previous", current.readlink())
-    _swap_link(current, Path("releases") / release_id)
+    current_id = _release_pointer_id(dest, "current")
+    previous_id = _release_pointer_id(dest, "previous")
+    _transition_unlocked(
+        dest, action="deploy", next_current=release_id,
+        next_previous=current_id if current_id != release_id else previous_id,
+    )
     return release_id
 
 
 def _swap_link(link: Path, target: Path) -> None:
     temporary = link.with_name("." + link.name + ".tmp")
+    if temporary.exists() and not temporary.is_symlink():
+        raise ValueError("Unexpected release pointer temporary file")
     temporary.unlink(missing_ok=True)
     temporary.symlink_to(target)
     os.replace(temporary, link)
+    _fsync_directory(link.parent)
 
 
 def rollback(dest: Path) -> str:
@@ -195,20 +388,17 @@ def rollback(dest: Path) -> str:
 
 
 def _rollback_unlocked(dest: Path) -> str:
-    previous = dest / "previous"
-    current = dest / "current"
-    if not previous.is_symlink() or not current.is_symlink():
+    _recover_unlocked(dest)
+    previous_id = _release_pointer_id(dest, "previous")
+    current_id = _release_pointer_id(dest, "current")
+    if previous_id is None or current_id is None:
         raise ValueError("No previous release available")
-    old = previous.readlink()
-    new = current.readlink()
-    release = (dest / old).resolve()
-    if not release.is_dir() or release.parent != (dest / "releases").resolve():
-        raise ValueError("Invalid rollback target")
+    release = dest / "releases" / previous_id
     validate_release(release)
-    _swap_link(current, old)
-    _swap_link(previous, new)
+    _transition_unlocked(
+        dest, action="rollback", next_current=previous_id, next_previous=current_id
+    )
     return release.name
-
 
 
 def history(dest: Path) -> dict:
@@ -218,6 +408,8 @@ def history(dest: Path) -> dict:
     archived release fails the whole report instead of being called available.
     """
     with release_lock(dest):
+        if _transition_path(dest).exists() or _transition_path(dest).is_symlink():
+            raise ValueError("Unrecovered release transition: run recover first")
         releases = dest / "releases"
         if not releases.is_dir() or releases.is_symlink():
             raise ValueError("No safe local release inventory")
@@ -267,7 +459,7 @@ def history(dest: Path) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("action", choices=("deploy", "rollback", "verify", "archive-current", "history"))
+    parser.add_argument("action", choices=("deploy", "rollback", "verify", "archive-current", "history", "recover"))
     parser.add_argument("--output", type=Path, default=ROOT / "apps/web/out")
     parser.add_argument("--dest", type=Path, default=ROOT / "deploy/local")
     args = parser.parse_args()
@@ -278,12 +470,16 @@ def main() -> None:
             print("DEPLOYED " + version)
         elif args.action == "rollback":
             print("ROLLED BACK " + rollback(args.dest))
+        elif args.action == "recover":
+            print("RECOVERED " + ("interrupted transition" if recover(args.dest) else "clean"))
         elif args.action == "archive-current":
             print("ARCHIVED PRIVATE SNAPSHOT " + archive_current(args.dest, ROOT / "apps/web/src/data/published.json"))
         elif args.action == "history":
             print(json.dumps(history(args.dest), ensure_ascii=False, indent=2))
         else:
             with release_lock(args.dest):
+                if _transition_path(args.dest).exists() or _transition_path(args.dest).is_symlink():
+                    raise ValueError("Unrecovered release transition: run recover first")
                 current = args.dest / "current"
                 if not current.is_symlink() or not current.resolve().is_dir():
                     raise ValueError("No current release to verify")

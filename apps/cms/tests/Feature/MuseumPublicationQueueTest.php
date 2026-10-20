@@ -6,6 +6,7 @@ use App\Jobs\PublishMuseumSnapshot;
 use App\Models\MuseumEntry;
 use App\Models\MuseumPublicationRun;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
@@ -23,6 +24,59 @@ class MuseumPublicationQueueTest extends TestCase
         Queue::assertPushed(PublishMuseumSnapshot::class, 1);
         $this->assertSame(1, MuseumPublicationRun::count());
         $this->assertSame('queued', MuseumPublicationRun::first()->status);
+    }
+
+    public function test_competing_worker_cannot_export_while_publication_lock_is_held(): void
+    {
+        // Real Laravel lock, not a mocked HTTP/UI claim. The rejected worker
+        // must not increment its attempt count or overwrite the last version.
+        MuseumEntry::create([
+            'type' => 'news',
+            'slug' => 'queue-lock-one',
+            'title' => 'Одна одобренная запись',
+            'body' => '<p>Только опубликованные данные</p>',
+            'status' => 'published',
+        ]);
+        $run = MuseumPublicationRun::create(['status' => 'queued']);
+        $root = storage_path('framework/testing/concurrent-queue-'.bin2hex(random_bytes(8)));
+        mkdir($root, 0700, true);
+        $output = $root.'/published.json';
+        $manifest = $root.'/manifest.json';
+        file_put_contents($output, "PRIOR_RELEASE_STILL_ACTIVE\n");
+        file_put_contents($manifest, "PRIOR_MANIFEST_STILL_ACTIVE\n");
+        $held = Cache::lock('museum:publication-export', 1200);
+        $this->assertTrue($held->get());
+        try {
+            $job = new PublishMuseumSnapshot($run->id, $output, $manifest, $root.'/media');
+            try {
+                $job->handle();
+                $this->fail('Concurrent publication worker acquired an occupied lock');
+            } catch (\RuntimeException $error) {
+                $this->assertStringContainsString('already in progress', $error->getMessage());
+            }
+            $this->assertSame('queued', $run->fresh()->status);
+            $this->assertSame(0, $run->fresh()->attempts);
+            $this->assertSame("PRIOR_RELEASE_STILL_ACTIVE\n", file_get_contents($output));
+            $this->assertSame("PRIOR_MANIFEST_STILL_ACTIVE\n", file_get_contents($manifest));
+            $this->assertDirectoryDoesNotExist($root.'/media');
+        } finally {
+            $held->release();
+        }
+        try {
+            (new PublishMuseumSnapshot($run->id, $output, $manifest, $root.'/media'))->handle();
+            $this->assertSame('succeeded', $run->fresh()->status);
+            $this->assertSame(1, $run->fresh()->attempts);
+            $this->assertSame(hash_file('sha256', $output), $run->fresh()->snapshot_sha256);
+            // A duplicate queue delivery after success must be a no-op.
+            (new PublishMuseumSnapshot($run->id, $output, $manifest, $root.'/media'))->handle();
+            $this->assertSame(1, $run->fresh()->attempts);
+        } finally {
+            foreach (glob($root.'/*') ?: [] as $file) {
+                if (is_dir($file)) @rmdir($file);
+                else @unlink($file);
+            }
+            @rmdir($root);
+        }
     }
 
     public function test_job_exports_and_verifies_an_integrity_manifest(): void
