@@ -223,6 +223,49 @@ class MuseumDocumentsTest extends TestCase
         }
     }
 
+    public function test_private_download_returns_exact_approved_bytes_even_after_source_replacement(): void
+    {
+        Storage::fake('local');
+        $entry = $this->entry('document-frozen-response');
+        $this->actingAs(MoonshineUser::factory()->create(), 'moonshine');
+        $this->upload($entry->id, $this->pdf())->assertRedirect();
+        $document = MuseumDocument::firstOrFail();
+        $original = Storage::disk('local')->get($document->storage_path);
+        $before = glob(storage_path('framework/museum-check-*')) ?: [];
+
+        $response = $this->get(route('museum.documents.download', $document))
+            ->assertOk()
+            ->assertHeader('Content-Type', 'application/octet-stream')
+            ->assertHeader('Content-Disposition',
+                'attachment; filename="museum-document-'.$document->id.'.pdf"')
+            ->assertHeader('Cache-Control', 'no-store, private');
+        $this->assertSame($original, $response->getContent());
+        $this->assertSame($before, glob(storage_path('framework/museum-check-*')) ?: [],
+            'Temporary inspector must delete its own private file before return');
+
+        // The HTTP response MUST NOT reopen the mutable CMS source later.
+        Storage::disk('local')->put($document->storage_path, 'REPLACED_SOURCE');
+        $this->assertSame($original, $response->getContent());
+        $this->get(route('museum.documents.download', $document))->assertNotFound();
+
+        Storage::disk('local')->put($document->storage_path, $original);
+        $changed = substr_replace($original, 'X', 19, 1);
+        $this->assertSame(strlen($original), strlen($changed));
+        Storage::disk('local')->put($document->storage_path, $changed);
+        $this->get(route('museum.documents.download', $document))->assertNotFound();
+
+        Storage::disk('local')->delete($document->storage_path);
+        $outside = storage_path('framework/testing/doc-original-external.pdf');
+        file_put_contents($outside, $original);
+        try {
+            symlink($outside, Storage::disk('local')->path($document->storage_path));
+            $this->get(route('museum.documents.download', $document))->assertNotFound();
+        } finally {
+            @unlink(Storage::disk('local')->path($document->storage_path));
+            @unlink($outside);
+        }
+    }
+
     public function test_modified_document_fails_closed_during_export_and_download(): void
     {
         Storage::fake('local');

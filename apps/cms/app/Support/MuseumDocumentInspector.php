@@ -89,6 +89,29 @@ final class MuseumDocumentInspector
         }
     }
 
+    /**
+     * Validate the exact immutable byte snapshot that will be returned in an
+     * authenticated download, not a source path that can change afterwards.
+     * ZipArchive/mime_content_type require a private file; it exists only
+     * during this check, under the CMS framework storage on ArvectumSSD.
+     */
+    public function verifyBytes(string $bytes, string $extension): void
+    {
+        if (strlen($bytes) < 16 || strlen($bytes) > self::MAX_BYTES) {
+            $this->invalid();
+        }
+        $file = tempnam(storage_path('framework'), 'museum-check-');
+        if ($file === false) throw new \RuntimeException('Cannot create private document inspection file');
+        try {
+            if (file_put_contents($file, $bytes, LOCK_EX) !== strlen($bytes)) {
+                throw new \RuntimeException('Cannot write private document inspection file');
+            }
+            $this->verify($file, $extension);
+        } finally {
+            @unlink($file);
+        }
+    }
+
     private function invalid(): never
     {
         throw ValidationException::withMessages([

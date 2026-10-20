@@ -6,6 +6,8 @@
 
 **Всего 325:** 🟢 85 · 🟡 118 · 🔴 122. **В очереди внутренних работ: 0**, внешняя зависимость/этап: 240.
 
+> **20.10.2026 / CODE-AUDIT-06:** [скачивание приватных документов, CSRF и права редакторов](../engineering/CODE_AUDIT_CMS_RACES_CSRF_ROLES_20261020.md). Выдача только проверенного SHA снимка байтов, недопущение замен после проверки; production-CSRF middleware (HTTP 419), 403 на чужих разделах; Laravel 366/366 и Python 360/360 PASS. ТЗ 85/118/122.
+
 > **20.10.2026 / CODE-AUDIT-05:** [безопасность CMS/зависимостей](../engineering/CODE_AUDIT_CMS_SECURITY_20261020.md): убраны framework signed GET/PUT маршруты приватного local-диска; CMS media preview проверяет SHA/размер/формат и отвергает symlink. Composer 0 известных advisory, npm production 0, npm dev 5 High в незакрытой транзитивной цепочке braces. Статический выпуск и матрица 85/118/122 не менялись.
 
 > **20.10.2026 / CODE-AUDIT-04:** [аварийный выпуск / SIGKILL](../engineering/CODE_AUDIT_PUBLIC_RELEASE_RECOVERY_20261020.md). Долговечный журнал current/previous с восстановлением прежних SHA-верных релизов, безопасная очистка остатков и конкурентный flock. Laravel cache lock не допускает второй worker. 360 Python, 358 Laravel PASS, локальный HTTP E2E PASS; power-loss остаётся внешней проверкой. Матрица 85/118/122.

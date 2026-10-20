@@ -14,7 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Http\Response;
 
 final class MuseumDocumentController extends Controller
 {
@@ -153,15 +153,26 @@ final class MuseumDocumentController extends Controller
         return redirect()->route('museum.documents.index')->with('status', 'Документ удалён.');
     }
 
-    public function download(MuseumDocument $document, MuseumDocumentInspector $inspector): BinaryFileResponse
+    public function download(MuseumDocument $document, MuseumDocumentInspector $inspector): Response
     {
         $this->requireEntry($document->entry);
         $path = Storage::disk('local')->path($document->storage_path);
-        if (! is_file($path) || hash_file('sha256', $path) !== $document->sha256 ||
-            filesize($path) !== $document->size_bytes) abort(404);
-        $inspector->verify($path, $document->file_type);
-        $download = response()->download($path, 'museum-document-'.$document->id.'.'.$document->file_type, [
+        $size = (int) $document->size_bytes;
+        if ($size < 16 || $size > MuseumDocumentInspector::MAX_BYTES
+            || ! is_file($path) || is_link($path) || filesize($path) !== $size) abort(404);
+
+        // BinaryFileResponse opens the source later, after controller checks.
+        // Capture ONE bounded byte snapshot; approve and send exactly those
+        // bytes, so an on-disk edit/rename can never change the response.
+        $bytes = file_get_contents($path, false, null, 0, $size + 1);
+        if (! is_string($bytes) || strlen($bytes) !== $size
+            || ! hash_equals((string) $document->sha256, hash('sha256', $bytes))) abort(404);
+        $inspector->verifyBytes($bytes, $document->file_type);
+
+        $download = response($bytes, 200, [
             'Content-Type' => 'application/octet-stream',
+            'Content-Disposition' => 'attachment; filename="museum-document-'
+                .$document->id.'.'.$document->file_type.'"',
             'X-Content-Type-Options' => 'nosniff',
             'Content-Security-Policy' => "default-src 'none'; sandbox",
         ]);
