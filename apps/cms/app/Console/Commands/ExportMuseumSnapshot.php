@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Support\MuseumAltPolicy;
 use App\Support\MuseumVideoUrlPolicy;
 use App\Models\MuseumEvent;
 use App\Models\MuseumEntry;
@@ -10,7 +9,10 @@ use App\Models\MuseumSection;
 use App\Models\MuseumFixedPageSeo;
 use App\Models\MuseumVisitorContacts;
 use App\Support\MuseumDocumentInspector;
-use Illuminate\Support\Facades\Storage;
+use App\Support\MuseumPublishedSections;
+use App\Support\MuseumSnapshotPreflight;
+use App\Support\MuseumSnapshotSerializer;
+use App\Support\MuseumStaticAssetPublisher;
 use Illuminate\Console\Command;
 
 class ExportMuseumSnapshot extends Command
@@ -54,22 +56,13 @@ class ExportMuseumSnapshot extends Command
         $mediaFiles = [];
         $documentFiles = [];
         $inspector = app(MuseumDocumentInspector::class);
+        $assets = app(MuseumStaticAssetPublisher::class);
 
         // A section is public only when all its ancestors are approved as well.
         // No editing rights, user emails or permission mappings leave the CMS.
         $allSections = MuseumSection::query()->orderByRaw('CASE WHEN parent_id IS NULL THEN 0 ELSE 1 END')->orderBy('sort_order')->orderBy('slug')->get();
         $byId = $allSections->keyBy('id');
-        $publishedSections = $allSections->filter(static function (MuseumSection $section) use ($byId): bool {
-            $seen = [];
-            $node = $section;
-            while ($node !== null) {
-                if ($node->status !== 'published' || isset($seen[$node->id])) return false;
-                $seen[$node->id] = true;
-                if ($node->parent_id !== null && ! $byId->has($node->parent_id)) return false;
-                $node = $node->parent_id === null ? null : $byId->get($node->parent_id);
-            }
-            return true;
-        });
+        $publishedSections = MuseumPublishedSections::filter($allSections);
         $approvedIds = $publishedSections->modelKeys();
         $publicEvents = MuseumEvent::query()->public()->with(['relatedEntries', 'section', 'coverMedia.entry'])
             ->orderBy('starts_at')->orderBy('slug')->get()
@@ -100,59 +93,8 @@ class ExportMuseumSnapshot extends Command
             ->filter(static fn (MuseumEntry $entry) =>
                 $entry->museum_section_id === null || in_array($entry->museum_section_id, $approvedIds, true));
 
-        // Fail closed BEFORE exporting files if ANY CMS WYSIWYG placeholder
-        // points at an unapproved, withdrawn or malformed publisher record.
-        // This protects generated document/media directories from partial
-        // changes caused by an invalid late-arriving video marker.
-        foreach ($publicEntries as $publicEntry) {
-            $body = (string) $publicEntry->body;
-            preg_match_all('/\\[\\[museum-video:([a-z0-9]+(?:-[a-z0-9]+)*)\\]\\]/',
-                $body, $tokens);
-            // The public React renderer accepts only sanitized CMS HTML
-            // paragraphs; reject tokens glued to other text or HTML.
-            preg_match_all('~<p(?:\\s[^>]*)?>\\s*\\[\\[museum-video:([a-z0-9]+(?:-[a-z0-9]+)*)\\]\\]\\s*</p>~',
-                $body, $placed);
-            if (count($tokens[0]) !== substr_count($body, '[[museum-video:')
-                || count($tokens[0]) !== count($placed[0])) {
-                throw new \RuntimeException('Invalid inline placement for video marker in published entry: '.$publicEntry->slug);
-            }
-            $ready = $publicEntry->videos
-                ->where('status', 'published')->keyBy('code');
-            foreach ($tokens[1] as $code) {
-                $candidate = $ready->get($code);
-                if ($candidate === null
-                    || MuseumVideoUrlPolicy::safeEmbed((string)$candidate->embed_url) !== $candidate->embed_url
-                    || !MuseumVideoUrlPolicy::sourceValid((string)$candidate->source_url)
-                    || !$candidate->rights_confirmed
-                    || mb_strlen(trim((string)$candidate->transcript)) < 60) {
-                    throw new \RuntimeException('Unapproved video marker in published entry: '.$publicEntry->slug);
-                }
-            }
-        }
-
-        // Accessible HTML is independent of the shorter accessibility note.
-        // Never deliver an edition whose editorial approval no longer matches
-        // the *current* PDF SHA and the *exact* cleaned text.
-        $accessibleEdition = app(\App\Support\MuseumDocumentAccessibleEdition::class);
-        foreach ($publicEntries as $publicEntry) {
-            foreach ($publicEntry->documents as $document) {
-                if ($document->accessible_edition_sha256 === null) continue;
-                $html=(string)$document->accessible_html;
-                if ($document->accessible_reviewed_at === null
-                    || $document->accessible_reviewed_by === null
-                    || $html === ''
-                    || $accessibleEdition->clean($html) !== $html
-                    || !hash_equals((string)$document->accessible_edition_sha256,
-                        $accessibleEdition->signature((string)$document->sha256,$html))) {
-                    throw new \RuntimeException('Accessible document edition needs new editorial approval: '.$document->id);
-                }
-                try {
-                    $accessibleEdition->assertReviewable($html);
-                } catch (\Illuminate\Validation\ValidationException $e) {
-                    throw new \RuntimeException('Incomplete accessible HTML edition: '.$document->id,0,$e);
-                }
-            }
-        }
+        // Check every public entry before generated media/documents are touched.
+        app(MuseumSnapshotPreflight::class)->validate($publicEntries);
 
         // Resolve relation links ONLY among approved public records (including
         // the section ancestor check). IDs and CMS pivot rows stay private.
@@ -221,49 +163,9 @@ class ExportMuseumSnapshot extends Command
 
         $entries = $publicEntries
             ->map(function (MuseumEntry $entry) use (&$mediaFiles, &$documentFiles, $mediaDir, $documentDir, $inspector,
-                $entryById, $eventById, $entryLink, $eventLink, $publicLinks): array {
-                $images = [];
-                foreach ($entry->media as $image) {
-                    // Original museum source photos are copied ONLY into the
-                    // private CMS until rights/alt and eventual release are
-                    // explicitly reviewed. Publishing the parent entry alone
-                    // must never leak a source-restricted photo.
-                    if ($image->source_rights_pending) continue;
-                    // Also protect older records inserted before the new
-                    // upload policy. Never export a non-compliant public alt.
-                    if ($issue = MuseumAltPolicy::issue($image->alt)) {
-                        throw new \RuntimeException('Public media alt policy failed; fix in private CMS: '.$image->id);
-                    }
-                    $raw = Storage::disk('local')->get($image->storage_path);
-                    if (! is_string($raw) || hash('sha256', $raw) !== $image->sha256
-                        || strlen($raw) !== $image->size_bytes
-                        || (@getimagesizefromstring($raw)[2] ?? null) !== IMAGETYPE_WEBP) {
-                        throw new \RuntimeException('Uploaded image checksum or format invalid: '.$image->id);
-                    }
-                    if (! is_dir($mediaDir) && ! mkdir($mediaDir, 0755, true) && ! is_dir($mediaDir)) {
-                        throw new \RuntimeException('Cannot create public media directory');
-                    }
-                    if (! preg_match('/^[a-f0-9]{64}$/D', $image->sha256)) {
-                        throw new \RuntimeException('Invalid image digest');
-                    }
-                    $target = rtrim($mediaDir, '/').'/'.$image->sha256.'.webp';
-                    if (! is_file($target) || hash_file('sha256', $target) !== $image->sha256) {
-                        $tmp = $target.'.tmp.'.getmypid();
-                        if (file_put_contents($tmp, $raw, LOCK_EX) === false || ! rename($tmp, $target)) {
-                            throw new \RuntimeException('Cannot publish media file');
-                        }
-                    }
-                    $mediaFiles['media/'.$image->sha256.'.webp'] = [
-                        'sha256' => $image->sha256, 'bytes' => $image->size_bytes,
-                    ];
-                    $images[] = [
-                        'src' => '/media/'.$image->sha256.'.webp',
-                        'alt' => $image->alt, 'caption' => $image->caption,
-                        ...($image->long_description !== null && trim($image->long_description) !== ''
-                            ? ['long_description' => $image->long_description] : []),
-                        'width' => $image->width, 'height' => $image->height,
-                    ];
-                }
+                $entryById, $eventById, $entryLink, $eventLink, $publicLinks, $assets): array {
+                $images = $assets->publishImages($entry, $mediaDir, $mediaFiles);
+
                 // Editor inserts [[museum-video:code]] as a standalone
                 // WYSIWYG paragraph. Unapproved/missing media must fail a
                 // publication, never become an uncontrolled third-party iframe.
@@ -292,47 +194,9 @@ class ExportMuseumSnapshot extends Command
                     && count($matches[0]) !== substr_count((string)$entry->body,'[[museum-video:')) {
                     throw new \RuntimeException('A video token is invalid or not approved for '.$entry->slug);
                 }
-                $documents = [];
-                foreach ($entry->documents as $document) {
-                    $path = Storage::disk('local')->path($document->storage_path);
-                    if (! is_file($path) || hash_file('sha256', $path) !== $document->sha256
-                        || filesize($path) !== $document->size_bytes
-                        || ! in_array($document->file_type, ['pdf', 'docx', 'xlsx'], true)) {
-                        throw new \RuntimeException('Document checksum or format invalid: '.$document->id);
-                    }
-                    $inspector->verify($path, $document->file_type);
-                    if (! preg_match('/^[a-f0-9]{64}$/D', $document->sha256)) {
-                        throw new \RuntimeException('Invalid document digest');
-                    }
-                    if (! is_dir($documentDir) && ! mkdir($documentDir, 0755, true) && ! is_dir($documentDir)) {
-                        throw new \RuntimeException('Cannot create static document directory');
-                    }
-                    $name = $document->sha256.'.'.$document->file_type;
-                    $target = rtrim($documentDir, '/').'/'.$name;
-                    if (! is_file($target) || hash_file('sha256', $target) !== $document->sha256) {
-                        $temp = $target.'.tmp.'.getmypid();
-                        if (! copy($path, $temp) || ! rename($temp, $target)) {
-                            throw new \RuntimeException('Cannot publish document');
-                        }
-                    }
-                    $documentFiles['documents/'.$name] = [
-                        'sha256' => $document->sha256, 'bytes' => $document->size_bytes,
-                    ];
-                    $documents[] = [
-                        'href' => '/documents/'.$name,
-                        'label' => $document->label,
-                        'format' => $document->file_type,
-                        'size_bytes' => $document->size_bytes,
-                        'accessibility_reviewed' => $document->accessibility_reviewed,
-                        // Unreviewed editorial notes must never leak to the public JSON.
-                        'accessibility_note' => $document->accessibility_reviewed
-                            ? $document->accessibility_note : null,
-                        // Distinct full-text HTML, published only after human
-                        // equivalence attestation and immutable hash binding.
-                        ...($document->accessible_edition_sha256 !== null
-                            ? ['accessible_html'=>$document->accessible_html] : []),
-                    ];
-                }
+                $documents = $assets->publishDocuments(
+                    $entry, $documentDir, $inspector, $documentFiles
+                );
 
                 return array_filter([
                 'type' => $entry->type,
@@ -369,27 +233,8 @@ class ExportMuseumSnapshot extends Command
             }, ARRAY_FILTER_USE_BOTH);
             })->values()->all();
 
-        // Prune assets withdrawn by the editor from this *generated-only* folder.
-        // Otherwise a formerly published image would remain publicly accessible.
-        if (is_dir($mediaDir)) {
-            foreach (glob(rtrim($mediaDir, '/').'/*.webp') ?: [] as $existing) {
-                if (! array_key_exists('media/'.basename($existing), $mediaFiles)) {
-                    unlink($existing);
-                }
-            }
-        }
-
-        // Withdraw generated documents removed by the editor or hidden by draft status.
-        // Never touch arbitrary files beyond the content-addressed export directory.
-        if (is_dir($documentDir)) {
-            foreach (glob(rtrim($documentDir, '/').'/*') ?: [] as $existing) {
-                if (is_file($existing)
-                    && preg_match('/^[a-f0-9]{64}\\.(?:pdf|docx|xlsx)$/D', basename($existing))
-                    && ! array_key_exists('documents/'.basename($existing), $documentFiles)) {
-                    unlink($existing);
-                }
-            }
-        }
+        // Remove only withdrawn files from the generated public asset trees.
+        $assets->pruneWithdrawn($mediaDir, $documentDir, $mediaFiles, $documentFiles);
 
         // Public export intentionally excludes draft/private properties, role info and PII.
         $data = [
@@ -435,24 +280,14 @@ class ExportMuseumSnapshot extends Command
             ])->filter(static fn (array $values): bool => $values !== [])->all();
         if ($fixedSeo !== []) $data['fixed_page_seo'] = $fixedSeo;
 
-        // Match the Python fixture publisher canonical JSON serializer.
-        $normalize = function ($obj) use (&$normalize) {
-            if (! is_array($obj)) return $obj;
-            if (array_is_list($obj)) return array_map($normalize, $obj);
-            ksort($obj);
-            return array_map($normalize, $obj);
-        };
-        $payload = json_encode($normalize($data), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n";
-        $audit = [
-            'schema_version' => 1,
-            'files' => array_merge(['published.json' => ['sha256' => hash('sha256', $payload), 'bytes' => strlen($payload)]], $mediaFiles, $documentFiles),
-            'event_count' => count($events),
-            'entry_count' => count($entries),
-        ];
-        if ($allSections->isNotEmpty()) {
-            $audit['section_count'] = count($sections);
-        }
-        $manifestData = json_encode($normalize($audit), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n";
+        // Canonical JSON + SHA manifest must match the Python fixture exporter
+        // byte for byte. Do not expose raw CMS attributes in either artifact.
+        $serializer = app(MuseumSnapshotSerializer::class);
+        $payload = $serializer->encode($data);
+        $manifestData = $serializer->manifest(
+            $payload, $mediaFiles, $documentFiles, count($events), count($entries),
+            $allSections->isNotEmpty() ? count($sections) : null
+        );
 
         // Detect edits/attachment changes occurring during snapshot construction.
         // This is a second safety check, not a substitute for an immutable DB snapshot.

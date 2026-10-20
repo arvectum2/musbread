@@ -22,18 +22,7 @@ final class MuseumEntryPublicationState
     public static function publishedSectionIds(): array
     {
         $all = MuseumSection::query()->get(['id', 'parent_id', 'status']);
-        $byId = $all->keyBy('id');
-        return $all->filter(static function (MuseumSection $section) use ($byId): bool {
-            $seen = [];
-            $node = $section;
-            while ($node !== null) {
-                if ($node->status !== 'published' || isset($seen[$node->id])) return false;
-                $seen[$node->id] = true;
-                if ($node->parent_id !== null && ! $byId->has($node->parent_id)) return false;
-                $node = $node->parent_id === null ? null : $byId->get($node->parent_id);
-            }
-            return true;
-        })->modelKeys();
+        return MuseumPublishedSections::filter($all)->modelKeys();
     }
 
     /** Build SQL predicates instead of fetching/filtering private records in PHP. */
