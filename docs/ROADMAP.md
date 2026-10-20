@@ -1,5 +1,8 @@
 # MusBread · Дорожная карта
 
+> **20.10.2026 / CODE-AUDIT-09 — PostgreSQL и Nginx/PHP-FPM:** [протокол](engineering/CODE_AUDIT_CMS_POSTGRES_NGINX_FPM_20261020.md). Исправлена PostgreSQL sequence роли Admin/MoonShine отдельной PG-only миграцией, 45 чистых миграций PostgreSQL16 PASS. Два PHP-процесса на общей PG БД: 8/8 гонок без потерянных правок, один 409. Реальные Nginx→FastCGI→PHP-FPM→Laravel и CSRF-вход с сессией: 96/96 HTTP при 1/2/4/8 клиентах, 32 авторизованных запроса; p95 при 8 = 32,35 мс. Laravel 369/369 (3835 assertions), Python 360/360, статический музей PASS. Боевой HTTPS не проверялся, ТЗ 85/118/122 не меняем.
+
+
 > **20.10.2026 / CODE-AUDIT-08 — shared entry save и локальный PHP-FPM:** [инженерный отчёт](engineering/CODE_AUDIT_CMS_SHARED_EDIT_AND_FPM_20261020.md). Устранено silent lost-update при двух редакторах одного материала: скрытый SHA-256 версии формы, SQL compare-and-swap edit_version (миграция), транзакция/403 по чужому разделу. 15/15 гонок двух процессов общей SQLite БД — один успешный коммит и один отказ, потерянных правок 0. Изолированный PHP-FPM 3 workers и локальный HTTP gateway 127.0.0.1 — 96/96 запросов, p95 при 8 клиентах 175 мс; это не Nginx/HTTPS/production. Полный Laravel 369/369, Python 360/360, локальный музейный export PASS. Матрица **85/118/122**, без вопросов и деплоя.
 
 
