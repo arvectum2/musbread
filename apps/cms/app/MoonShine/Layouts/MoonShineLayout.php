@@ -60,6 +60,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make('/admin/museum-sections/tree', 'Карта разделов'),
                 MenuItem::make('/admin/museum-content/compare', 'Сравнить версии'),
                 MenuItem::make('/admin/museum-content/review-notes', 'Согласование материалов'),
+                MenuItem::make('/admin/museum-content/approval-journal', 'Ход закрытых выгрузок'),
                 // Demonstration requests are not a live museum inbox.
                 MenuItem::make(MuseumRequestResource::class, 'Обращения (демо)'),
                 MenuItem::make(MuseumRequestTransitionResource::class, 'История обращений'),

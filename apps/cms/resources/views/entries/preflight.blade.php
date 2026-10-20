@@ -31,11 +31,33 @@
     <h1>Проверка перед публикацией</h1>
     <p><a href="{{ route('museum.content.compare') }}">Сравнить версии перед выпуском →</a> · <a href="#events-check">К проверке событий афиши ↓</a></p>
     @if($mayRequestExport)
-    <p><a href="{{ route('museum.content.approval-journal') }}">Журнал фактических редакторских одобрений (UTC) →</a></p>
+    <section class="notice" aria-label="Состояние закрытой выгрузки">
+        <h2>Последний технический запуск закрытой выгрузки</h2>
+        @if($latestRun)
+        <p>Запуск #{{ $latestRun->id }}:
+            <strong>{{ $runLabels[$latestRun->status] ?? 'Неизвестный статус' }}</strong>.
+            @if($latestRun->status === 'succeeded')
+            Подготовлен только приватный пакет, не публичный сайт.
+            @elseif(in_array($latestRun->status, ['failed', 'abandoned']))
+            Пакет не подтверждён как подготовленный; требуется диагностика.
+            @else
+            Отсутствие ошибки здесь не подтверждает успешного завершения.
+            @endif
+        </p>
+        @else
+        <p>Задания закрытой выгрузки ещё не создавались.</p>
+        @endif
+        <p><a href="{{ route('museum.content.approval-journal') }}">Посмотреть одобрения, актуальность редакций и результаты заданий →</a></p>
+        <p class="meta">Запуск очереди, подготовка пакета и размещение на сайте музея — разные этапы. Сведения обновятся после перезагрузки страницы.</p>
+    </section>
     @endif
     <p class="intro">Это предварительная проверка сохранённых записей и файлов. Она ничего не публикует и не изменяет. «Готово к экспорту» означает доступность записи для следующей выгрузки, а не подтверждение её размещения на сайте музея.</p>
     @if(session('museum_export_queue_result'))
-    <p role="status" class="notice">{{ session('museum_export_queue_result') }}</p>
+    <p role="status" class="notice">{{ session('museum_export_queue_result') }}
+        @if($mayRequestExport)
+            <a href="{{ route('museum.content.approval-journal') }}">Проверить фактический статус задания и одобрения</a>.
+        @endif
+    </p>
     @endif
     @if($mayRequestExport)
     <section aria-label="Подготовка выгрузки по кнопке">

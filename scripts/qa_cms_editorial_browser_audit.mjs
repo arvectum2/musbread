@@ -27,6 +27,7 @@ const pages=[
  ['documents','/admin/museum-documents?entry='+entry],
  ['preview','/admin/museum-entries/'+entry+'/preview'],
  ['preflight','/admin/museum-content/preflight'],
+ ['journal','/admin/museum-content/approval-journal'],
 ];
 const findings=[];
 for (const [engineName,engine] of [['chromium',chromium],['webkit',webkit]]) {
@@ -46,6 +47,10 @@ for (const [engineName,engine] of [['chromium',chromium],['webkit',webkit]]) {
         for (const [name,path] of pages) {
           const response=await page.goto(base+path,{waitUntil:'domcontentloaded'});
           assert.equal(response.status(),200,engineName+' '+width+' '+name+' HTTP');
+          if (name==='journal') {
+            await page.getByRole('heading',{name:'Ход одобрений и закрытых выгрузок'}).waitFor();
+            assert.ok((await page.locator('main').innerText()).includes('Подготовка закрытого пакета'));
+          }
           const layout=await page.evaluate(()=>{
             const viewport=document.documentElement.clientWidth;
             const content=document.documentElement.scrollWidth;

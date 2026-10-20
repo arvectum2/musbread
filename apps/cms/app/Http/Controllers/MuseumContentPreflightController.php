@@ -7,10 +7,12 @@ namespace App\Http\Controllers;
 use App\Models\MuseumEntry;
 use App\Models\MuseumEvent;
 use App\Models\MuseumSection;
+use App\Models\MuseumPublicationRun;
 use App\Support\MuseumEntryPublicationState;
 use App\Support\MuseumApprovalRevision;
 use App\Support\MuseumContentPreflight;
 use App\Support\MuseumSectionAccess;
+use App\Support\MuseumPublicationJourneyStatus;
 use Illuminate\Http\Response;
 
 /** Authenticated read-only editor checklist; no publication action is exposed. */
@@ -65,6 +67,11 @@ final class MuseumContentPreflightController extends Controller
             'sections' => $sections,
             'mayRequestExport' => $actor->isSuperUser(),
             'exportQueueConfigured' => $durableQueue,
+            // Only administrators may inspect private queue/run history.
+            'latestRun' => $actor->isSuperUser()
+                ? MuseumPublicationRun::query()->latest('id')->first()
+                : null,
+            'runLabels' => MuseumPublicationJourneyStatus::RUN_LABELS,
         ], 200, [
             'Cache-Control' => 'private, no-store, max-age=0',
             'Pragma' => 'no-cache',

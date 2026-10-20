@@ -83,6 +83,16 @@ def main():
           "body"=>"<p>Only fake data in this test material.</p>",
           "status"=>"draft"
         ]);
+        $run=\App\Models\MuseumPublicationRun::create([
+            "status"=>"failed", "attempts"=>1, "error_type"=>"RuntimeException",
+            "started_at"=>now()->subMinute(), "finished_at"=>now()
+        ]);
+        \App\Models\MuseumContentApproval::create([
+            "museum_entry_id"=>$entry->id, "actor_id"=>1,
+            "revision_sha256"=>\App\Support\MuseumApprovalRevision::fingerprint($entry->fresh()),
+            "approved_at"=>now("UTC"), "dispatch_status"=>"queued",
+            "publication_run_id"=>$run->id
+        ]);
         echo "QA_ENTRY_ID=".$entry->id."\n";
         '''
         created=run(['php','artisan','tinker','--execute',seed],env,timeout=25)
