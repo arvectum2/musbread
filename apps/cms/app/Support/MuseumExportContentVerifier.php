@@ -51,6 +51,20 @@ final class MuseumExportContentVerifier
             throw new RuntimeException('Unsupported exported content proof schema');
         }
 
+        // Approval mode explicitly disallows CMS-owned site-wide metadata
+        // until those fields have their own editorial approval. Never allow
+        // an injected top-level collection or tampered prototype identity to
+        // be laundered through a freshly rehashed manifest.
+        if (array_diff(array_keys($snapshot),
+            ['schema_version','site','entries','events','sections']) !== []
+            || ! $this->matchesJson($snapshot['site'] ?? null, [
+                'name' => 'Музей Хлеба',
+                'subtitle' => 'Демонстрационная версия · концепция не утверждена',
+                'description' => 'Предконтрактный прототип информационного сайта музея.',
+            ])) {
+            throw new RuntimeException('Export contains unapproved top-level site data');
+        }
+
         $hash = hash('sha256', $raw);
         $manifestFiles = $manifest['files'] ?? null;
         if (! is_array($manifestFiles)
@@ -87,6 +101,15 @@ final class MuseumExportContentVerifier
             ],
         ];
         $serializer = app(MuseumSnapshotSerializer::class);
+        // Use the SAME public-and-visible subject inventory for independent
+        // cross-reference verification. A link cannot leak a draft, expired or
+        // ancestor-blocked target even if the attacker's manifest is rehashed.
+        $publicEntryIds = array_fill_keys(
+            $expectedGroups['entry'][0]->pluck('id')->all(), true
+        );
+        $publicEventIds = array_fill_keys(
+            $expectedGroups['event'][0]->pluck('id')->all(), true
+        );
         $evidence = [];
         foreach ($expectedGroups as $kind => [$records, $groupName]) {
             $index = [];
@@ -104,7 +127,9 @@ final class MuseumExportContentVerifier
                 $identity = $kind === 'entry' ? $subject->type.':'.$subject->slug : $subject->slug;
                 $row = $index[$identity] ?? null;
                 if ($row === null) throw new RuntimeException('Approved CMS subject absent from export');
-                $this->checkCoreFields($kind, $subject, $row);
+                $this->checkCoreFields(
+                    $kind, $subject, $row, $publicEntryIds, $publicEventIds
+                );
 
                 $revision = MuseumApprovalRevision::forSubject($subject);
                 $key = match ($kind) {
@@ -185,8 +210,31 @@ final class MuseumExportContentVerifier
         return $kind === 'entry' ? $type.':'.$slug : $slug;
     }
 
-    private function checkCoreFields(string $kind, $model, array $row): void
-    {
+    /**
+     * @param array<int,bool> $publicEntryIds
+     * @param array<int,bool> $publicEventIds
+     */
+    private function checkCoreFields(
+        string $kind, $model, array $row,
+        array $publicEntryIds, array $publicEventIds
+    ): void {
+        // These allowlists mirror only the PUBLIC schema-v1 serializer.
+        // No private CMS IDs, author emails, non-exported fields or injected
+        // arbitrary HTML properties may silently pass as an approved row.
+        $allowed = match ($kind) {
+            'entry' => ['type','slug','title','h1','parent_slug','section_slug',
+                'excerpt','body','seo_title','seo_description','sort_order',
+                'related_entries','related_events','media','videos',
+                'documents','translations'],
+            'event' => ['slug','title','h1','seo_title','seo_description',
+                'category','date','excerpt','body','cover_image','section_slug',
+                'ends_on','related_entries'],
+            'section' => ['slug','title','parent_slug','sort_order','legacy_path',
+                'h1','seo_title','seo_description'],
+        };
+        if (array_diff(array_keys($row), $allowed) !== []) {
+            throw new RuntimeException('Export contains unexpected public-schema fields');
+        }
         $fields = match ($kind) {
             'entry' => ['type','slug','title','h1','parent_slug','excerpt','body',
                 'seo_title','seo_description','sort_order'],
@@ -272,8 +320,58 @@ final class MuseumExportContentVerifier
             if (! $this->matchesJson(($row['videos'] ?? []), $expectedVideos)) {
                 throw new RuntimeException('Exported video metadata differs from approved CMS source');
             }
+
+            // Independently rebuild the exporter-facing links from the
+            // exact approved public target set, using stable title/ID order.
+            // A harmless change to a linked target's title MUST change its
+            // exported link and invalidate the original approval fingerprint.
+            $related = $model->relatedEntries
+                ->filter(static fn ($target) => isset($publicEntryIds[$target->id]))
+                ->sortBy(static fn ($target) => $target->title.'|'.$target->id)
+                ->map(static fn ($target) => self::entryLink($target))
+                ->filter()->values()->all();
+            if (! $this->matchesJson(($row['related_entries'] ?? []), $related)) {
+                throw new RuntimeException('Exported related entry links differ from approved CMS source');
+            }
+            $events = $model->linkedEvents
+                ->filter(static fn ($event) => isset($publicEventIds[$event->id]))
+                ->sortBy(static fn ($event) => $event->title.'|'.$event->id)
+                ->map(static fn ($event) => self::eventLink($event))
+                ->filter()->values()->all();
+            if (! $this->matchesJson(($row['related_events'] ?? []), $events)) {
+                throw new RuntimeException('Exported related event links differ from approved CMS source');
+            }
         }
         if ($kind === 'event') {
+            $related = $model->relatedEntries
+                ->filter(static fn ($target) => isset($publicEntryIds[$target->id]))
+                ->sortBy(static fn ($target) => $target->title.'|'.$target->id)
+                ->map(static fn ($target) => self::entryLink($target))
+                ->filter()->values()->all();
+            if (! $this->matchesJson(($row['related_entries'] ?? []), $related)) {
+                throw new RuntimeException('Exported event related links differ from approved CMS source');
+            }
+            $cover = $model->coverMedia;
+            $expectedCover = null;
+            if ($cover !== null && ! $cover->source_rights_pending
+                && $cover->entry !== null
+                && isset($publicEntryIds[$cover->museum_entry_id])
+                && $cover->entry->museum_section_id === $model->museum_section_id
+                && preg_match('/^[a-f0-9]{64}$/D', (string) $cover->sha256)) {
+                $expectedCover = [
+                    'src'=>'/media/'.$cover->sha256.'.webp',
+                    'alt'=>$cover->alt,
+                    'width'=>$cover->width,
+                    'height'=>$cover->height,
+                    'caption'=>$cover->caption,
+                    ...($cover->long_description !== null
+                        && trim($cover->long_description) !== ''
+                        ? ['long_description'=>$cover->long_description] : []),
+                ];
+            }
+            if (! $this->matchesJson(($row['cover_image'] ?? null), $expectedCover)) {
+                throw new RuntimeException('Exported event cover differs from approved CMS source');
+            }
             if (($row['date'] ?? null) !== $model->starts_at?->format('Y-m-d')
                 || (($row['ends_on'] ?? null) !== $model->ends_at?->format('Y-m-d'))) {
                 throw new RuntimeException('Exported event dates differ from approved CMS source');
@@ -286,6 +384,30 @@ final class MuseumExportContentVerifier
         } elseif (($row['parent_slug'] ?? null) !== $model->parent?->slug) {
             throw new RuntimeException('Exported section parent differs from approved CMS source');
         }
+    }
+
+    private static function entryLink(MuseumEntry $entry): ?array
+    {
+        $prefix = [
+            'page'=>'museum', 'news'=>'news', 'excursion'=>'excursions',
+            'exhibition'=>'exhibitions', 'document'=>'documents',
+        ][$entry->type] ?? null;
+        if ($prefix === null
+            || ! preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $entry->slug)) {
+            return null;
+        }
+        return [
+            'type'=>$entry->type, 'title'=>$entry->title,
+            'href'=>'/'.$prefix.'/'.$entry->slug.'/',
+        ];
+    }
+
+    private static function eventLink(MuseumEvent $event): ?array
+    {
+        if (! preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $event->slug)) {
+            return null;
+        }
+        return ['title'=>$event->title,'href'=>'/events/'.$event->slug.'/'];
     }
 
     private function collectAssets(string $kind, array $row, array &$assets): void
