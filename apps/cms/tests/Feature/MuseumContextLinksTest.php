@@ -56,7 +56,9 @@ class MuseumContextLinksTest extends TestCase
             ->assertSee('/news/public-article/',false)
             ->assertSee('/events/public-event/',false)
             ->assertSee('/en/news/translated-article/',false)
-            ->assertSee('Approved English article'); // HTML has no write form
+            ->assertSee('Approved English article')
+            ->assertSee('редактора Jodit')
+            ->assertDontSee('редактора TinyMCE'); // HTML has no write form
         foreach(['draft-secret','draft-event','hidden-article','future-article','expired-article',
                 'SECRET English title'] as $hiddenSlug) {
             $response->assertDontSee($hiddenSlug);

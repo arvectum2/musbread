@@ -3362,7 +3362,7 @@
       "Что сделать для завершения": "Редакционно расставить смысловые ссылки в подтверждённых оригинальных текстах музея, утвердить отношения между материалами и проверить глазами на публичной странице.",
       "Что нужно от музея / внешний блокер": "Утверждённые исходные тексты, выбор смысловых связей редактором музея и итоговая контентная приёмка",
       "Следующее действие / комментарий": "Приступить после получения указанного подтверждения/данных либо наступления контрактной стадии. Редакционно расставить смысловые ссылки в подтверждённых оригинальных текстах музея, утвердить отношения между материалами и проверить глазами на публичной странице.",
-      "Что уже есть (доказательство)": "Existing TinyMCE supports meaningful in-paragraph CMS links, public sanitized RichText and strict preflight for missing/draft/future/excluded targets. NEW authenticated read-only contextual URL/title catalog lists only actually exportable CMS entries/events incl separately approved EN texts (no draft names), available to editors from MoonShine; empty anchors now error and generic \"здесь/подробнее\" or self-link warnings. PHP 13 focused tests plus genuine CMS browser 8/8 and static export with no private links.",
+      "Что уже есть (доказательство)": "Self-hosted Jodit CE 4.18.4 MIT supports meaningful in-paragraph CMS links; public RichText is sanitized and strict preflight rejects missing/draft/future/excluded targets. Authenticated read-only URL/title catalog lists only actually exportable CMS entries/events and separately approved EN texts (without draft names). Empty anchors fail and generic «здесь/подробнее» or self-links produce warnings. Targeted PHP and isolated browser E2E verified the link workflow; semantic links in official text still require museum approval.",
       "Учтено в плане": "Да"
     },
     {
@@ -4423,10 +4423,10 @@
       "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "S0–S1 · backend",
-      "Что сделать для завершения": "Уточнить лицензии и полное UX",
+      "Что сделать для завершения": "Лицензия Jodit MIT подтверждена; выполнить финальный редакторский UX/UAT музея на согласованном контенте.",
       "Что нужно от музея / внешний блокер": "",
       "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
-      "Что уже есть (доказательство)": "CP-16 TinyMCE+HTMLPurifier",
+      "Что уже есть (доказательство)": "CP-JODIT-01: self-hosted Jodit CE 4.18.4 (MIT) replaces GPL TinyMCE; WYSIWYG links, lists and source-code mode, restricted HTMLPurifier server allowlist, local licensing notice and browser/editor tests verified.",
       "Учтено в плане": "Да"
     },
     {
@@ -5867,10 +5867,10 @@
       "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "D35–D40 · передача",
-      "Что сделать для завершения": "Визуальное редактирование без программирования работает. Остались реальное обучение и пользовательская приёмка; соблюдение лицензии выбранного нами редактора обеспечить силами исполнителя.",
+      "Что сделать для завершения": "Визуальное редактирование без программирования локально подтверждено; лицензия Jodit MIT и notice сохранены. Остались обучение сотрудников и пользовательская приёмка.",
       "Что нужно от музея / внешний блокер": "",
       "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
-      "Что уже есть (доказательство)": "Original MoonShine PHP resource has visual Russian TinyMCE WYSIWYG title, content, lists, links, dates, media, statuses and role restrictions; newly wired built-in Source Code modal accessible from same toolbar with no manual server configuration. Real browser MoonShine editor demonstrates no-code entry creation, editing and source-switch roundtrip into SQLite/static HTML; safe HTMLPurifier and frontend preserved, 8/8 isolated E2E.",
+      "Что уже есть (доказательство)": "MoonShine provides self-hosted Jodit CE 4.18.4 MIT WYSIWYG with visual links/lists and source-code mode, editorial content fields, statuses, media and roles. Previous GPL editor removed. Actual CMS tests and isolated browser E2E cover no-code creation/edit/save and HTML roundtrip to static export; HTMLPurifier server-side sanitation remains active.",
       "Учтено в плане": "Да"
     },
     {
@@ -5886,10 +5886,10 @@
       "Режим": "Готово в прототипе",
       "№ очереди": "",
       "Этап дорожной карты": "D35–D40 · передача",
-      "Что сделать для завершения": "HTML-редактирование в карточке реализовано; проверить whitelist и приёмку. Лицензия установленного TinyMCE — ответственность исполнителя, возможна равнозначная замена.",
+      "Что сделать для завершения": "HTML-редактирование реализовано; HTML whitelist защищён сервером. Jodit CE MIT лицензионно проверен; требуется финальная редакторская приёмка на материалах музея.",
       "Что нужно от музея / внешний блокер": "",
       "Следующее действие / комментарий": "Технически подтверждено. Сверить с фактическими критериями приёмки музея; не равно принятому контракту.",
-      "Что уже есть (доказательство)": "Built-in TinyMCE 7.2.1 locally installed code plugin added to existing WYSIWYG toolbar (no external CDN); real MoonShine browser opens Russian Исходный код dialog, edits H2/OL/LI/semantic a href, returns to WYSIWYG, saves to DB and exports actual Next published HTML with same semantic nodes. PHP tests confirm html-source emergency fallback and default editor code plugin; HTMLPurifier server-side sanitization/XSS denial unchanged.",
+      "Что уже есть (доказательство)": "Self-hosted Jodit CE 4.18.4 MIT provides WYSIWYG and source-code toolbar mode (no external CDN); editor can change H2/OL/LI/semantic a href, switch back, save to CMS and export sanitized HTML to Next.js. Local PHP tests verify source mode and server HTMLPurifier rejects script, iframe, javascript: and event handlers. Isolated Jodit browser E2E and licensing notice verified.",
       "Учтено в плане": "Да"
     },
     {

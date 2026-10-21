@@ -3,7 +3,7 @@ import MuseumInlineVideo from "@/components/MuseumInlineVideo";
 import type {MuseumPublishedVideo} from "@/data/types";
 import {trustedMuseumVideoEmbed} from "@/data/museum-video-security";
 
-/** TinyMCE-friendly placement: a paragraph containing ONLY
+/** WYSIWYG-independent placement: a paragraph containing ONLY
  * [[museum-video:code]] is replaced by a verified approved video.
  * The CMS exporter refuses unknown/unapproved markers. Never parses iframe
  * HTML from editor and never trusts unapproved published.json rows.

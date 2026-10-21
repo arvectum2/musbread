@@ -29,6 +29,13 @@ class TzExecutionMatrixTest(unittest.TestCase):
         self.assertEqual([r['Строки оригинала'] for r in self.matrix], [r['Строки tz.txt'] for r in self.original])
         self.assertEqual([r['Готовность'] for r in self.matrix], [r['Фактически готово'] for r in self.original])
 
+    def test_current_wysiwyg_evidence_matches_installed_mit_editor(self):
+        # Prevent stale historical TinyMCE claims from re-entering handoff.
+        for tz in ('TZ-176', 'TZ-232', 'TZ-308', 'TZ-309'):
+            row = next(r for r in self.original if r['ID'] == tz)
+            self.assertIn('Jodit', row['Чекпоинт/доказательство'])
+            self.assertNotIn('TinyMCE 7.2.1', row['Чекпоинт/доказательство'])
+
     def test_traffic_lights_and_nineteen_groups_are_complete(self):
         status = Counter(r['Готовность'] for r in self.matrix)
         self.assertEqual(status, Counter(r['Фактически готово'] for r in self.original))
