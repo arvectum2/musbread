@@ -28,6 +28,8 @@ jobs:
         run: npm audit --omit=dev --audit-level=high
       - name: Verify Node lockfile is consistent with package.json
         run: npm ci --ignore-scripts --no-audit --prefer-offline
+      - name: Strictly gate known-only ESLint dev advisories and all production packages
+        run: python3 ../../scripts/audit_npm_release_security.py
       - name: Verify project security and source inventory are not disabled
         run: |
           test -f ../../docs/SECURITY.md

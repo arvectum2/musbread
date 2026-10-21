@@ -17,6 +17,17 @@ final class PublishMuseumSnapshot implements ShouldQueue
 {
     use Queueable;
 
+    // Guard the lease: a queued export must time out well BEFORE its shared
+    // cache lock expires. The retry_after must outlive BOTH job and lock, so
+    // a dead worker cannot be redelivered while holding an expired lease.
+    // Laravel enforces this per-job timeout even if a worker is launched with
+    // a larger --timeout; timeout failure must never launch a late retry.
+    public const JOB_TIMEOUT_SECONDS = 540;
+    public const LOCK_TTL_SECONDS = 840;
+    public const MIN_RETRY_AFTER_SECONDS = 900;
+    public int $timeout = self::JOB_TIMEOUT_SECONDS;
+    public bool $failOnTimeout = true;
+
     public int $tries = 3;
     public array $backoff = [30, 120];
 
@@ -36,7 +47,7 @@ final class PublishMuseumSnapshot implements ShouldQueue
             return; // Idempotency: never re-export a completed request on retry.
         }
 
-        $lock = Cache::lock('museum:publication-export', 1200);
+        $lock = Cache::lock('museum:publication-export', self::LOCK_TTL_SECONDS);
         if (! $lock->get()) {
             throw new RuntimeException('Another publication is already in progress');
         }

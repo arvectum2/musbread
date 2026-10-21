@@ -13,6 +13,16 @@ class MuseumPublicationRecoveryTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_publication_timeout_is_bounded_by_shared_lock_and_queue_retry(): void
+    {
+        $job = new PublishMuseumSnapshot(123);
+        $this->assertSame(PublishMuseumSnapshot::JOB_TIMEOUT_SECONDS, $job->timeout);
+        $this->assertTrue($job->failOnTimeout);
+        $this->assertLessThan(PublishMuseumSnapshot::MIN_RETRY_AFTER_SECONDS, $job->timeout);
+        $this->assertLessThan(PublishMuseumSnapshot::LOCK_TTL_SECONDS, $job->timeout);
+        $this->assertLessThan(PublishMuseumSnapshot::MIN_RETRY_AFTER_SECONDS, PublishMuseumSnapshot::LOCK_TTL_SECONDS);
+    }
+
     public function test_expired_queue_and_worker_requests_are_abandoned(): void
     {
         $queued = MuseumPublicationRun::create(['status' => 'queued']);

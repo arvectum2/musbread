@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\MuseumPublicationRun;
+use App\Jobs\PublishMuseumSnapshot;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
@@ -24,7 +25,7 @@ final class RecoverStalePublications extends Command
         }
 
         // Must not alter status while a legitimate exporter holds its lock.
-        $lock = Cache::lock('museum:publication-export', 1200);
+        $lock = Cache::lock('museum:publication-export', PublishMuseumSnapshot::LOCK_TTL_SECONDS);
         if (! $lock->get()) {
             $this->info('Publisher is active; skipping stale-run recovery');
             return self::SUCCESS;

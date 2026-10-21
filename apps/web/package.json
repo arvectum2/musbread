@@ -21,7 +21,8 @@
     "test:seo": "node --experimental-strip-types --test src/data/seo-routes.test.ts",
     "test:official-docs": "node --experimental-strip-types --test src/data/museum-official-documents.test.ts",
     "build:museum-deploy": "../../.venv/bin/python ../../scripts/build_complete_museum_static_release.py --build",
-    "verify:museum-deploy": "../../.venv/bin/python ../../scripts/build_complete_museum_static_release.py --verify-only"
+    "verify:museum-deploy": "../../.venv/bin/python ../../scripts/build_complete_museum_static_release.py --verify-only",
+    "preflight:museum": "../../.venv/bin/python ../../scripts/preflight_museum_release.py"
   },
   "dependencies": {
     "next": "16.4.1",

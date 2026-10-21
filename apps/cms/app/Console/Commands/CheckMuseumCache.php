@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Jobs\PublishMuseumSnapshot;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -35,7 +36,10 @@ final class CheckMuseumCache extends Command
         if ($this->option('require-queue-worker')
             && (! config('museum.queue_publication')
                 || config('queue.default') !== 'database'
-                || (int) config('queue.connections.database.retry_after') < 900)) {
+                || (int) config('queue.connections.database.retry_after') < PublishMuseumSnapshot::MIN_RETRY_AFTER_SECONDS
+                || PublishMuseumSnapshot::JOB_TIMEOUT_SECONDS >= (int) config('queue.connections.database.retry_after')
+                || PublishMuseumSnapshot::JOB_TIMEOUT_SECONDS >= PublishMuseumSnapshot::LOCK_TTL_SECONDS
+                || PublishMuseumSnapshot::LOCK_TTL_SECONDS >= (int) config('queue.connections.database.retry_after'))) {
             $this->error('Museum queued publication is not safely configured.');
             return self::FAILURE;
         }

@@ -6,6 +6,8 @@
 
 **Всего 325:** 🟢 85 · 🟡 118 · 🔴 122. **В очереди внутренних работ: 0**, внешняя зависимость/этап: 240.
 
+> **21.10.2026 / CP-RELEASE-HARDEN:** [три инженерных улучшения](../engineering/CP_RELEASE_HARDENING_20261021.md). Per-job fail-on-timeout 540с, lock 840с, retry >=900с; npm production 0 advisory и контролируемые 5 High dev-only (патча upstream пока нет); изолированный preflight сборки, индексации, Nginx и реального rollback, боевые HTTPS/redirects активируются только по явному `--live-url`. **Без утверждения/деплоя, ТЗ 85/118/122.**
+
 > **20.10.2026 / CODE-AUDIT-16:** [локальный архив проверенных приватных выпусков](../engineering/CODE_AUDIT_CMS_VERIFIED_PRIVATE_ARCHIVE_20261020.md). Все байты snapshot/manifest/media/documents, объектные proof и отдельный SHA receipt доступны независимой Python CLI без доступа к CMS. Тесты Laravel 412/412, PostgreSQL миграции 47 и 8/8 race PASS. По умолчанию OFF, вне боевого релиза. Матрица ТЗ 85/118/122.
 
 > **20.10.2026 / CODE-AUDIT-15:** [закрытый proof полного графа связей](../engineering/CODE_AUDIT_CMS_EXPORT_GRAPH_PROOF_20261020.md). Независимо от экспортера проверяются связанные entry/event/cover, допустимые свойства публичной JSON-схемы; целостность доказательства при пересчитанном manifest и незаявленных полях подтверждена негативными тестами. Laravel 405/405, Python 360/360, локальная поставка PASS. 325 пунктов ТЗ: 85/118/122 без изменения.

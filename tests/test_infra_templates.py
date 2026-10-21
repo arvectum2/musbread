@@ -44,7 +44,7 @@ class InfraTemplateTests(unittest.TestCase):
 
     def test_worker_timeout_must_be_lower_than_retry_window(self):
         queue = (ROOT / "infra/systemd/musbread-publisher.service").read_text()
-        self.assertIn("--timeout=600", queue)
+        self.assertIn("--timeout=540", queue)
         self.assertIn("--queue=museum-publish", queue)
         config = (ROOT / "apps/cms/config/queue.php").read_text()
         self.assertIn("DB_QUEUE_RETRY_AFTER', 900", config)
@@ -61,10 +61,10 @@ class InfraTemplateTests(unittest.TestCase):
         self.assertIn("StartLimitBurst=5", unit)
         self.assertIn("UMask=0027", unit)
         self.assertIn("ProtectSystem=strict", unit)
-        self.assertIn("--timeout=600", unit)
+        self.assertIn("--timeout=540", unit)
         self.assertNotIn("--timeout=900", unit)
         queue_docs = (ROOT / "docs/PUBLICATION_QUEUE.md").read_text()
-        self.assertIn("timeout=600", queue_docs)
+        self.assertIn("timeout=540", queue_docs)
         self.assertIn("DB_QUEUE_RETRY_AFTER=900", queue_docs)
         self.assertIn("systemd/musbread-scheduler.timer", queue_docs)
 
