@@ -49,6 +49,8 @@ jobs:
           php-version: '8.4'
           tools: composer
           coverage: none
+      - name: Reject PHP runtimes vulnerable to PHP2Shell
+        run: python3 ../../scripts/check_php_runtime.py
       - name: Audit package versions already pinned in composer.lock
         run: composer audit --locked --no-interaction
 
