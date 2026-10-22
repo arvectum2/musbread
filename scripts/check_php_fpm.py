@@ -35,8 +35,14 @@ def examine(
 
     banner = version.stdout + version.stderr
     match = re.search(r"PHP\s+(\d+)\.(\d+)\.(\d+).*?fpm-fcgi", banner, re.I | re.S)
-    if match is None or tuple(map(int, match.groups())) < (8, 4, 0):
-        raise FpmConfigurationError("An actual PHP-FPM (fpm-fcgi) executable 8.4+ is required")
+    # PHP2Shell: CVE-2026-109618 / CVE-2026-109619 (patched 2026-10-21).
+    # Never approve an FPM runtime solely because its minor branch is supported.
+    fixed_patches = {(8, 4): 27, (8, 5): 12}
+    parsed = tuple(map(int, match.groups())) if match is not None else None
+    if parsed is None or parsed[:2] not in fixed_patches:
+        raise FpmConfigurationError("A supported and security-patched PHP-FPM (fpm-fcgi) runtime is required")
+    if parsed[2] < fixed_patches[parsed[:2]]:
+        raise FpmConfigurationError("PHP-FPM is vulnerable to PHP2Shell; upgrade PHP before deployment")
 
     details = config.stdout + config.stderr
     listeners = re.findall(r"\blisten\s*=\s*([^\s]+)", details)

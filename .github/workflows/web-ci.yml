@@ -220,6 +220,8 @@ jobs:
           php-version: '8.4'
           extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3, gd, zip
           coverage: none
+      - name: Reject PHP runtimes vulnerable to PHP2Shell
+        run: python3 ../../scripts/check_php_runtime.py
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -262,6 +264,8 @@ jobs:
           php-version: '8.4'
           extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3, gd, zip
           coverage: none
+      - name: Reject PHP runtimes vulnerable to PHP2Shell
+        run: python3 ../../scripts/check_php_runtime.py
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -305,6 +309,8 @@ jobs:
           php-version: '8.4'
           extensions: mbstring, dom, fileinfo, pdo_sqlite, sqlite3, gd, zip
           coverage: none
+      - name: Reject PHP runtimes vulnerable to PHP2Shell
+        run: python3 scripts/check_php_runtime.py
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
