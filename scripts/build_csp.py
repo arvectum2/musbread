@@ -11,6 +11,8 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
+import os
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -48,7 +50,17 @@ class InlineScriptCollector(HTMLParser):
             self.inside = False
 
 
-def make_csp(build: Path) -> str:
+def make_csp(build: Path, requests_origin: str | None = None) -> str:
+    # Explicitly opt in a single museum-approved HTTPS origin. No wildcard
+    # connect-src, no cookies, and no private CMS/localhost/credentials.
+    if requests_origin is not None:
+        if (not re.fullmatch(r"https://[a-zA-Z0-9.-]+(?::[0-9]{2,5})?", requests_origin)
+            or requests_origin.startswith("https://localhost")
+            or ".local" in requests_origin
+            or re.fullmatch(r"https://[0-9.]+(?::[0-9]{2,5})?", requests_origin)
+            or requests_origin.endswith(".invalid")):
+            raise ValueError("Invalid approved HTTPS request origin")
+
     if not (build / "index.html").is_file():
         raise ValueError("Static site must be built before CSP generation")
     all_html = sorted(build.rglob("*.html"))
@@ -74,7 +86,7 @@ def make_csp(build: Path) -> str:
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data:",
         "font-src 'self' data:",
-        "connect-src 'self'",
+        "connect-src 'self'" + (" " + requests_origin if requests_origin else ""),
         # A specific pre-verified museum-owned Yandex constructor may load
         # only after the visitor explicitly activates its iframe.
         # Never open script-src / connect-src / img-src to Yandex at top level.
@@ -89,8 +101,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("static_output", type=Path)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--requests-origin", default=None,
+                        help="Museum-approved HTTPS ingress origin; never a private CMS URL")
     args = parser.parse_args()
-    csp = make_csp(args.static_output)
+    requests_origin = args.requests_origin or os.environ.get("MUSEUM_REQUESTS_CSP_ORIGIN")
+    csp = make_csp(args.static_output, requests_origin)
     if '"' in csp or "\r" in csp or "\n" in csp:
         raise ValueError("CSP contains unsafe Nginx header characters")
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -17,6 +17,7 @@ use App\MoonShine\Resources\MuseumSection\MuseumSectionResource;
 use App\MoonShine\Resources\MuseumFixedPageSeo\MuseumFixedPageSeoResource;
 use App\MoonShine\Resources\MuseumVisitorContacts\MuseumVisitorContactsResource;
 use App\MoonShine\Resources\MuseumRequest\MuseumRequestResource;
+use App\MoonShine\Resources\MuseumInboundRequest\MuseumInboundRequestResource;
 use App\MoonShine\Resources\MuseumRequestTransition\MuseumRequestTransitionResource;
 use App\MoonShine\Resources\MuseumAuditRecord\MuseumAuditRecordResource;
 use App\MoonShine\Resources\MuseumPublicationRun\MuseumPublicationRunResource;
@@ -39,6 +40,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 MuseumFixedPageSeoResource::class,
                 MuseumVisitorContactsResource::class,
                 MuseumRequestResource::class,
+                MuseumInboundRequestResource::class,
                 MuseumRequestTransitionResource::class,
                 MuseumAuditRecordResource::class,
                 MuseumPublicationRunResource::class,

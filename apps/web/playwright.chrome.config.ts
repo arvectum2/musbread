@@ -8,7 +8,7 @@ export default defineConfig(baseConfig, {
   use: {
     ...devices["Desktop Chrome"],
     channel: "chrome",
-    baseURL: "http://127.0.0.1:18765",
+    baseURL: "http://127.0.0.1:18766",
     screenshot: "only-on-failure",
     trace: "on-first-retry",
   },

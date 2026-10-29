@@ -18,6 +18,7 @@ use App\MoonShine\Resources\MuseumSection\MuseumSectionResource;
 use App\MoonShine\Resources\MuseumFixedPageSeo\MuseumFixedPageSeoResource;
 use App\MoonShine\Resources\MuseumVisitorContacts\MuseumVisitorContactsResource;
 use App\MoonShine\Resources\MuseumRequest\MuseumRequestResource;
+use App\MoonShine\Resources\MuseumInboundRequest\MuseumInboundRequestResource;
 use App\MoonShine\Resources\MuseumRequestTransition\MuseumRequestTransitionResource;
 use App\MoonShine\Resources\MuseumAuditRecord\MuseumAuditRecordResource;
 use App\MoonShine\Resources\MuseumPublicationRun\MuseumPublicationRunResource;
@@ -62,6 +63,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make('/admin/museum-content/review-notes', 'Согласование материалов'),
                 MenuItem::make('/admin/museum-content/approval-journal', 'Ход закрытых выгрузок'),
                 // Demonstration requests are not a live museum inbox.
+                MenuItem::make(MuseumInboundRequestResource::class, 'Обращения посетителей'),
                 MenuItem::make(MuseumRequestResource::class, 'Обращения (демо)'),
                 MenuItem::make(MuseumRequestTransitionResource::class, 'История обращений'),
                 MenuItem::make(MuseumAuditRecordResource::class, 'Журнал изменений'),

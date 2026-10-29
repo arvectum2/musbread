@@ -31,6 +31,18 @@ class CspTests(unittest.TestCase):
         self.assertNotIn("connect-src 'self' https://yandex.ru", policy)
         self.assertIn("object-src 'none'", policy)
 
+    def test_request_ingress_is_allowlisted_only_explicitly(self):
+        (self.root / "index.html").write_text("<script>app()</script>")
+        self.assertIn("connect-src 'self';", make_csp(self.root))
+        approved = make_csp(self.root, "https://requests.musbread.ru")
+        self.assertIn("connect-src 'self' https://requests.musbread.ru;", approved)
+        self.assertNotIn("script-src 'self' https://requests.musbread.ru", approved)
+        for invalid in ("http://requests.musbread.ru", "https://localhost:8080",
+                        "https://private.local", "https://127.0.0.1", "https://a.example.com/path",
+                        "https://user:pass@requests.musbread.ru"):
+            with self.assertRaises(ValueError):
+                make_csp(self.root, invalid)
+
     def test_collects_all_pages_not_just_home(self):
         (self.root / "index.html").write_text("<script>one()</script>")
         (self.root / "news").mkdir()

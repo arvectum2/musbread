@@ -10,7 +10,7 @@ export default defineConfig({
     {name:"firefox",use:{...devices["Desktop Firefox"]}},
     {name:"google-chrome",use:{...devices["Desktop Chrome"],channel:"chrome"}},
   ],
-  use: {baseURL:"http://127.0.0.1:18765",screenshot:"only-on-failure"},
-  webServer: {command:"python3 -m http.server 18765 --bind 127.0.0.1 --directory out",
-    url:"http://127.0.0.1:18765/",reuseExistingServer: !process.env.CI,timeout:20_000},
+  use: {baseURL:"http://127.0.0.1:18766",screenshot:"only-on-failure"},
+  webServer: {command:"php -S 127.0.0.1:18766 -t out",
+    url:"http://127.0.0.1:18766/",reuseExistingServer: !process.env.CI,timeout:20_000},
 });

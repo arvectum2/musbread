@@ -10,13 +10,13 @@ export default defineConfig({
   reporter: process.env.CI ? "github" : "list",
   use: {
     ...devices["Desktop Chrome"],
-    baseURL: "http://127.0.0.1:18765",
+    baseURL: "http://127.0.0.1:18766",
     screenshot: "only-on-failure",
     trace: "on-first-retry",
   },
   webServer: {
-    command: "python3 -m http.server 18765 --bind 127.0.0.1 --directory out",
-    url: "http://127.0.0.1:18765/",
+    command: "php -S 127.0.0.1:18766 -t out",
+    url: "http://127.0.0.1:18766/",
     reuseExistingServer: !process.env.CI,
     timeout: 20_000,
   },

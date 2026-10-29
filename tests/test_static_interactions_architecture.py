@@ -32,9 +32,13 @@ class VisitorArchitectureTests(unittest.TestCase):
         self.assertFalse(req["live_enabled"])
         source = (ROOT / "apps/web/src/components/MuseumVisitorInquiryForm.tsx").read_text(encoding="utf-8")
         self.assertIn("museumInquiryEmailDraft", source)
-        for forbidden in ["fetch(", "sendBeacon(", "localStorage", "sessionStorage"]:
+        self.assertIn("NEXT_PUBLIC_MUSEUM_REQUESTS_ENABLED", source)
+        self.assertIn("if(!enabled)", source)
+        self.assertIn("const response=await fetch(endpoint", source)
+        self.assertIn("consentVersion.length>0", source)
+        for forbidden in ["sendBeacon(", "localStorage", "sessionStorage"]:
             self.assertNotIn(forbidden, source)
-        self.assertIn("disabled={!hydrated}", source)
+        self.assertIn("disabled={!hydrated||pending}", source)
 
     def test_segmented_ingress_does_not_reach_cms(self):
         ingress = self.data["requests"]["ingress"]

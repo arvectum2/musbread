@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lifecycle": "architecture-only-disabled",
+  "lifecycle": "implemented-disabled-pending-customer-network-privacy-uat",
   "public": {
     "server": "nginx-static-only",
     "generator": "nextjs-static-export",
@@ -17,7 +17,10 @@
     "current_delivery": "mailto-draft",
     "live_delivery": "separate-segmented-ingress",
     "live_enabled": false,
-    "kinds": ["feedback", "excursion"],
+    "kinds": [
+      "feedback",
+      "excursion"
+    ],
     "ingress": {
       "method": "POST",
       "path": "/v1/requests",
@@ -29,14 +32,17 @@
       "max_payload_bytes": 8192,
       "rate_limit": true,
       "antispam": true,
-      "attachments": false
+      "attachments": false,
+      "client_idempotency": "optional-random-128-bit-id-7-day-deduplication",
+      "implementation": "services/request-ingress/public/index.php"
     },
     "closed_worker": {
       "initiates_private_mtls_pull": true,
       "public_inbound_access": false,
       "transfer_via_internet": false,
       "idempotent_import": true,
-      "ack_after_durable_import": true
+      "ack_after_durable_import": true,
+      "implementation": "apps/cms/app/Console/Commands/PullMuseumInboundRequests.php"
     },
     "fields": {
       "name_max": 100,
@@ -45,7 +51,8 @@
       "group_min": 1,
       "group_max": 100,
       "personal_data_notice_approved_required": true,
-      "extra_fields": false
+      "extra_fields": false,
+      "email_max": 254
     },
     "http": {
       "accepted": 202,

@@ -48,7 +48,7 @@ test('TZ-080/081 security: with JavaScript disabled public forms cannot submit n
  const context=await browser.newContext({javaScriptEnabled:false});
  const page=await context.newPage();
  for(const kind of ['feedback','excursion']){
-  await page.goto('http://127.0.0.1:18765/forms/'+kind+'/');
+  await page.goto('http://127.0.0.1:18766/forms/'+kind+'/');
   await expect(page.locator('form')).toHaveAttribute('method','post');
   await expect(page.locator('form fieldset')).toHaveAttribute('disabled','');
   await expect(page.getByRole('button',{name:'Сформировать письмо'})).toBeDisabled();

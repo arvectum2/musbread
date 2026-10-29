@@ -26,3 +26,8 @@ if (config('museum.editorial_approval_queue', false)) {
     // material with a critical link/editorial error unattended.
     Schedule::command('museum:export --preflight-strict')->hourly()->withoutOverlapping();
 }
+
+// Private outbound import, disabled until legal and network approval.
+if (config('museum_requests.enabled', false)) {
+    Schedule::command('museum:pull-requests')->everyMinute()->withoutOverlapping();
+}
