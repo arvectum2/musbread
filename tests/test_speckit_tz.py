@@ -25,6 +25,23 @@ class SpecKitTzTests(unittest.TestCase):
         self.assertEqual(mod.SHA, self.source_map["source_sha256"])
         self.assertEqual(mod.sha(mod.MAP.read_bytes()), mod.PINNED_MAP_SHA)
 
+    def test_all_325_operational_evidence_rows_are_projected(self):
+        projection = mod.render_acceptance(self.source_map, self.rows)
+        self.assertEqual(mod.ACCEPTANCE.read_text(encoding="utf-8"), projection)
+        self.assertEqual(sum(line.startswith("| TZ-") for line in projection.splitlines()), 325)
+        self.assertIn("NOT quoted contractual acceptance", projection)
+
+    def test_high_risk_excerpt_anchors_are_relevant(self):
+        for entry in self.source_map["items"]:
+            anchor = mod.FOCUSED_ANCHORS.get(entry["id"])
+            if anchor is not None:
+                with self.subTest(id=entry["id"]):
+                    self.assertIn(anchor, entry["exact_excerpt"])
+        for index, needle in [(80, "записи на экскурсию"),
+                              (103, "каждый час или по событию"),
+                              (259, "единой сетки")]:
+            self.assertIn(needle, self.source_map["items"][index]["exact_excerpt"])
+
     def test_projection_is_exactly_generated(self):
         self.assertEqual(mod.SPEC.read_text(encoding="utf-8"),
                          mod.render_spec(self.source_map, self.rows))

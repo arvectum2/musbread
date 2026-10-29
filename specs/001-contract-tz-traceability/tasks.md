@@ -10,3 +10,12 @@
 - [x] T008 Update root documentation and canonical roadmap; commit/push GitHub and GitVerse with synchronized SHA. (SHA to be verified by final Git sync.)
 - [ ] T009 After customer supplies **signed annex** copy, attest full original text identity or record discrepancies — do not assume signatures.
 - [ ] T010 No production claims: validate each of 325 items through real artifacts, test evidence and signed stage acceptance; remain OPEN.
+
+
+## Внеплановый углублённый аудит 30.10.2026
+
+- [x] T011 Проверить все 325 связей с исходным текстом, последовательность DOCX и нумерацию LF; независимо оценить 195 непривязанных строк.
+- [x] T012 Пересмотреть релевантность 100-символьных выдержек, внедрить проверяемые точные смысловые якоря и тесты.
+- [x] T013 Сформировать отдельный, не нормативный реестр `acceptance.md` из остающихся проверок и свидетельств 325 атомов; синхронизировать при `--render`.
+- [x] T014 Найденную через CI advisory в Symfony Mime закрыть точечным обновлением lock; проверить Laravel 418/418, Composer audit и SBOM.
+- [ ] T015 Оставшиеся сбои общего CI / юридические лицензии / подписанное приложение / реальные ВМ закрывать в соответствующих стадиях, не отмечать выполненными без доказательств.

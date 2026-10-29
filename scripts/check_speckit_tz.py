@@ -16,15 +16,51 @@ ROOT = Path(__file__).resolve().parents[1]
 FEATURE = ROOT / "specs/001-contract-tz-traceability"
 MAP = FEATURE / "source-map.json"
 SPEC = FEATURE / "spec.md"
+ACCEPTANCE = FEATURE / "acceptance.md"
 PSV = ROOT / "docs/tz-audit/requirements.psv"
 ORIGINAL = Path("/Volumes/ArvectumSSD/Arvectum/data/tenders/eis/0372200172326000015/tz.txt")
 SHA = "92c4db2a3f47988f4fc4c96b5ae652baa3faaa62a772e55a167c7cbaafb67420"
 DOCX = ORIGINAL.with_suffix(".docx")
 DOCX_SHA = "3e029344d179742632d519d4e425e6f8e9f757ce4df23e0419aa4302d4068536"
 # Independent code-reviewed pin: changing a committed quote requires review of this script too.
-PINNED_MAP_SHA = "1e35884c3c165201078d57e3e225a55501e9f2a9d6adf5d1ea3b0ac174737f19"
+PINNED_MAP_SHA = "798e45888eeb594192c1006c8a851d8fb275b2b472bc14579205c4d1a984d936"
 COUNT = 325
 LINES = 485
+
+# Manually reviewed anchors for compound clauses where a naive lexical window
+# can quote a true but irrelevant fragment (e.g. feedback instead of excursions).
+# Every anchor MUST occur literally within one of its registry source lines.
+FOCUSED_ANCHORS = {
+    "TZ-005": "с надлежащим качеством",
+    "TZ-019": "не должен копировать существующие логотипы",
+    "TZ-020": "русская и английская версии",
+    "TZ-032": "Главная страница стайта",
+    "TZ-051": "пригласительного билета",
+    "TZ-052": "благодарности",
+    "TZ-053": "поздравительной открытки",
+    "TZ-058": "соотношешение сторон 4:3, 16:9",
+    "TZ-060": "футболка",
+    "TZ-061": "термокружка",
+    "TZ-066": ".ai, .eps, .svg",
+    "TZ-069": ".pdf, .jpg, .png",
+    "TZ-075": "единообразие в расположении",
+    "TZ-081": "записи на экскурсию",
+    "TZ-104": "каждый час или по событию",
+    "TZ-140": "доступной среде",
+    "TZ-174": "с выпадающими блоками",
+    "TZ-180": "Поддержка форматов: текст",
+    "TZ-182": "SVG, GIF",
+    "TZ-195": "отдельного текстового блока",
+    "TZ-231": "интуитивный интерфейс",
+    "TZ-256": "в ручном режиме",
+    "TZ-260": "единой сетки",
+    "TZ-261": "Боковую панель",
+    "TZ-262": "Нижний колонтитул",
+    "TZ-264": "Разработка прототипа",
+    "TZ-274": "Нагрузочное тестирование",
+    "TZ-278": "Качество результата",
+    "TZ-298": "устраняет неисправности",
+}
 
 
 def sha(raw: bytes) -> str:
@@ -87,7 +123,18 @@ def words(text: str) -> set[str]:
     return {w.lower() for w in re.findall(r"[^\W_]{4,}", text)}
 
 
-def excerpt(lines: list[bytes], refs: list[int], atom: str) -> tuple[int, int, str]:
+def excerpt(lines: list[bytes], refs: list[int], atom: str, tz_id: str) -> tuple[int, int, str]:
+    focus = FOCUSED_ANCHORS.get(tz_id)
+    if focus is not None:
+        for n in refs:
+            line = lines[n-1].decode("utf-8-sig")
+            pos = line.find(focus)
+            if pos >= 0:
+                start = min(max(0, pos - 22), max(0, len(line)-100))
+                if start + 100 < pos + len(focus):
+                    start = max(0, pos+len(focus)-100)
+                return n, start, line[start:start+100]
+        raise ValueError(f"Focused TZ excerpt anchor not present in cited originals: {tz_id}")
     target = words(atom)
     best = None
     for n in refs:
@@ -115,7 +162,7 @@ def build_source_map(rows: list[dict], source: list[bytes]) -> dict:
     result = []
     for r in rows:
         refs = references(r["Строки tz.txt"])
-        number, offset, quote = excerpt(source, refs, r["Атомарное обязательство"])
+        number, offset, quote = excerpt(source, refs, r["Атомарное обязательство"], r["ID"])
         result.append({
             "id": r["ID"],
             "clause": r["Пункт ТЗ"],
@@ -158,11 +205,9 @@ def render_spec(data: dict, rows: list[dict]) -> str:
 
 ## Scope and evidentiary limits
 
-This is a **full 325-ID traceability table**, not a reprint of the signed TZ. Each excerpt is literal and source-fingerprint-locked, but is often a **short part** of a compound clause. The «Engineering summary» column is an **existing interpretation**, not contractual text. For disputes the entire original line and original DOCX are required. One line may ground several atomic rows. No item changes status merely because it appears here.
+This covers **325 DERIVED engineering atoms**, NOT 325 original numbered contractual clauses and NOT a reprint of the signed TZ. Each excerpt is literal and source-fingerprint-locked, but is often a **short part** of a compound clause. The «Engineering summary» column is an **existing interpretation**, not contractual text. For disputes the entire original line and original DOCX are required. One line may ground several atomic rows. No item changes status merely because it appears here.
 
-## Source-linked requirements
-
-| TZ-ID | Clause | Physical source lines | Exact excerpt (NOT full clause) | Existing engineering summary (NOT a quote) | Current status |
+**Separate implementation evidence/remaining work (not original TZ):** §acceptance.md§; **coverage of unreferenced original lines:** §source-coverage-review.md§.\n\n## Source-linked requirements\n\n| TZ-ID | Clause | Physical source lines | Exact excerpt (NOT full clause) | Existing engineering summary (NOT a quote) | Current status |
 |---|---|---|---|---|---|
 """
     intro = intro.replace("§", chr(96))
@@ -187,6 +232,40 @@ This is a **full 325-ID traceability table**, not a reprint of the signed TZ. Ea
 
 
 
+
+def render_acceptance(data: dict, rows: list[dict]) -> str:
+    """Existing operational evidence, NOT new contractual acceptance criteria."""
+    lines = [
+        "# Acceptance / evidence ledger — derived from existing operational register",
+        "",
+        "**IMPORTANT:** These are *our existing verification steps*, NOT quoted contractual acceptance",
+        "conditions and NOT signed customer approval. Source of truth: original annex + real UAT.",
+        "Exact TZ citation and excerpt: §spec.md§; authoritative full text: verified private original.",
+        "Changes to evidence/needs/status in §requirements.psv§ require regenerating this projection.",
+        "",
+        "| ID | Priority | Current state | Existing evidence (engineering) | Remaining verification / delivery | Customer dependency |",
+        "|---|---|---|---|---|---|",
+    ]
+    for entry, row in zip(data["items"], rows):
+        def safe(value: object) -> str:
+            return str(value or "—").replace("|", r"\|").replace("\n", " ↵ ").replace("\r", "")
+        lines.append(
+            "| " + " | ".join(safe(v) for v in (
+                entry["id"], row["Приоритет"], row["Фактически готово"],
+                row["Чекпоинт/доказательство"], row["Осталось выполнить"],
+                row["Нужно от заказчика"]
+            )) + " |"
+        )
+    lines += [
+        "",
+        "**NO-GO** until the museum-provided environment, the source contract, tested real results",
+        "and relevant formal stage acceptance have been checked. An evidence row may be empty,",
+        "incomplete, disputed or a plan rather than proof; it MUST NOT be auto-closed.",
+        "",
+    ]
+    return "\n".join(lines).replace("§", chr(96))
+
+
 def verify_docx_text_matches_source(data: dict, source: list[bytes]) -> int:
     # Ignore punctuation and typography without altering the normative original.
     def letters(text: str) -> str:
@@ -197,13 +276,16 @@ def verify_docx_text_matches_source(data: dict, source: list[bytes]) -> int:
     tag = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t"
     text = letters("".join(node.text or "" for node in tree.iter(tag)))
     checked = 0
+    last_position = 0
     refs = {line for item in data["items"] for line in item["physical_lines"]}
     for n in sorted(refs):
         fragment = letters(source[n-1].decode("utf-8-sig"))
         if len(fragment) < 12:  # short headings aren't reliable unique evidence
             continue
-        if fragment not in text:
-            raise ValueError(f"Original DOCX and derived TXT disagree at physical line L{n}")
+        found = text.find(fragment, last_position)
+        if found < 0:
+            raise ValueError(f"Original DOCX and derived TXT disagree or have inconsistent order at L{n}")
+        last_position = found + len(fragment)
         checked += 1
     if checked < 250:
         raise ValueError(f"Too few substantive source lines verified against DOCX: {checked}")
@@ -237,7 +319,7 @@ def verify_source_section_links(data: dict, source: list[bytes]) -> int:
         actual = [section_at[n] for n in item["physical_lines"]]
         for expected in expected_sections(item["clause"]):
             if not any(a == expected or a.startswith(expected + ".")
-                       or expected.startswith(a + ".") for a in actual if a):
+                       for a in actual if a):
                 raise ValueError(f"Clause mismatch: {item['id']} claims {expected}, source scopes {actual}")
     return len(data["items"])
 
@@ -262,6 +344,9 @@ def validate_map(data: dict, rows: list[dict], source: list[bytes] | None) -> No
         n, offset, quote = entry["quote_line"], entry["quote_offset"], entry["exact_excerpt"]
         if n not in refs or not isinstance(offset, int) or offset < 0 or not quote or len(quote) > 100:
             raise ValueError(f"Invalid literal excerpt: {row['ID']}")
+        focus = FOCUSED_ANCHORS.get(entry["id"])
+        if focus is not None and focus not in quote:
+            raise ValueError(f"Expected relevant anchored quote missing: {entry['id']}")
         if entry["excerpt_is_full_clause"] is not False:
             raise ValueError("Must not promote shortened excerpt to full original clause")
         if source is not None:
@@ -300,13 +385,19 @@ def main() -> int:
             matched = verify_docx_text_matches_source(data, original)
             print(f"Original source scopes: {scoped}/325 mapped clauses; DOCX match: {matched} substantive lines")
         projection = render_spec(data, rows)
+        acceptance_projection = render_acceptance(data, rows)
         if args.bootstrap:
             MAP.write_text(json.dumps(data, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
             SPEC.write_text(projection, encoding="utf-8")
+            ACCEPTANCE.write_text(acceptance_projection, encoding="utf-8")
         elif args.render:
             SPEC.write_text(projection, encoding="utf-8")
-        elif SPEC.read_text(encoding="utf-8") != projection:
-            raise ValueError("Spec projection drift: --render after approved status change")
+            ACCEPTANCE.write_text(acceptance_projection, encoding="utf-8")
+        else:
+            if SPEC.read_text(encoding="utf-8") != projection:
+                raise ValueError("Spec projection drift: --render after approved status change")
+            if ACCEPTANCE.read_text(encoding="utf-8") != acceptance_projection:
+                raise ValueError("Acceptance evidence projection drift: --render after verified update")
         if args.show:
             match = next(((item, row) for item, row in zip(data["items"], rows)
                           if item["id"] == args.show), None)

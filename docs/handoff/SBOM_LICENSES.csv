@@ -89,12 +89,12 @@ composer:symfony/finder@v8.1.8,symfony/finder,v8.1.8,composer,production,0,0,MIT
 composer:symfony/http-foundation@v8.1.9,symfony/http-foundation,v8.1.9,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/http-kernel@v8.1.9,symfony/http-kernel,v8.1.9,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/mailer@v8.1.7,symfony/mailer,v8.1.7,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
-composer:symfony/mime@v8.1.7,symfony/mime,v8.1.7,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
+composer:symfony/mime@v8.1.10,symfony/mime,v8.1.10,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/polyfill-ctype@v1.37.0,symfony/polyfill-ctype,v1.37.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/polyfill-intl-grapheme@v1.43.0,symfony/polyfill-intl-grapheme,v1.43.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/polyfill-intl-idn@v1.43.0,symfony/polyfill-intl-idn,v1.43.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/polyfill-intl-normalizer@v1.43.0,symfony/polyfill-intl-normalizer,v1.43.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
-composer:symfony/polyfill-mbstring@v1.43.0,symfony/polyfill-mbstring,v1.43.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
+composer:symfony/polyfill-mbstring@v1.43.3,symfony/polyfill-mbstring,v1.43.3,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/polyfill-php80@v1.43.0,symfony/polyfill-php80,v1.43.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/polyfill-php82@v1.43.0,symfony/polyfill-php82,v1.43.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/polyfill-php84@v1.43.0,symfony/polyfill-php84,v1.43.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock

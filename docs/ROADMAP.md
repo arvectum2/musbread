@@ -1,4 +1,4 @@
-> **29.10.2026 / SPECKIT-TZ:** [Spec Kit v1.2.4](../specs/001-contract-tz-traceability/spec.md) установлен по схеме Tender Agent; 325 оригинальных пунктов привязаны к проверенным строкам и цитатам в [source-map.json](../specs/001-contract-tz-traceability/source-map.json) с отдельной защитой SHA. [Спорные интерпретации](../specs/001-contract-tz-traceability/interpretation-review.md) не закрывать без полного оригинала и подписанного приложения. Ни одной договорной стадии/статуса не изменено.
+> **29.10.2026 / SPECKIT-TZ:** [Spec Kit v1.2.4](../specs/001-contract-tz-traceability/spec.md) установлен по схеме Tender Agent; 325 производных атомарных требований привязаны к проверенным строкам и цитатам в [source-map.json](../specs/001-contract-tz-traceability/source-map.json) с отдельной защитой SHA. [Спорные интерпретации](../specs/001-contract-tz-traceability/interpretation-review.md) не закрывать без полного оригинала и подписанного приложения. Ни одной договорной стадии/статуса не изменено.
 
 # MusBread · Дорожная карта
 

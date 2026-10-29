@@ -9,7 +9,7 @@
 
 Initialize Spec Kit (no external coding assistant), governance adapter and 325-atom exact-source index. Preserve `requirements.psv` as the only operational status ledger and the existing roadmap. No source copy in public Git: anchor normalized verbatim snippets by physical original line and SHA-256 of exact LF-separated line bytes.
 
-For each atom generate: TZ-ID, exact original clause reference, physical source line numbers, SHA-256 of each referenced line, one verbatim excerpt with source line and full source line length, and the *separate* existing atomic engineering summary. A short excerpt (maximum 100 characters per atom) is navigation evidence, **not** a complete verbatim replacement of an entire source clause; when unsure open the whole source line. Reject ambiguous references, duplicates, hash drift or truncated files.
+For each atom generate: TZ-ID, exact original clause reference, physical source line numbers, SHA-256 of each referenced line, one verbatim excerpt with original physical line number and exact character offset, and the *separate* existing atomic engineering summary. A short excerpt (maximum 100 characters per atom) is navigation evidence, **not** a complete verbatim replacement of an entire source clause; when unsure open the whole source line. Reject ambiguous references, duplicates, hash drift or truncated files.
 
 ## Phase B — enforceable gates
 
@@ -28,3 +28,5 @@ Before any architectural change cite TZ-ID and original quote, distinguish expli
 - `requirements.psv` summaries may omit a conjunctive obligation; a passing summary checker is no substitute for opening exact source.
 - Public CI cannot access private original; do not print whole original text into public logs or commit original DOCX/TXT.
 - Revert the isolated new Spec Kit files/CI step if needed; no DB migrations, live deployments, DNS or customer communication.
+
+**Independent coverage and delivery evidence review (30.10.2026):** see `source-coverage-review.md` for 195 noncited physical lines; `acceptance.md` for all 325 *existing operational* acceptance/evidence plans. No proof of equivalent signed annex or completion of production CI. CVE-2026-45070 found in the existing CI security job and patched by updating the targeted Composer lock, separately from normative source mapping.

@@ -3287,7 +3287,7 @@
     },
     {
       "type": "library",
-      "bom-ref": "composer:symfony/mime@v8.1.7",
+      "bom-ref": "composer:symfony/mime@v8.1.10",
       "name": "symfony/mime",
       "licenses": [
         {
@@ -3318,8 +3318,8 @@
           "value": "PERMISSIVE_NOTICE_CHECK"
         }
       ],
-      "version": "v8.1.7",
-      "purl": "pkg:composer/symfony/mime@v8.1.7"
+      "version": "v8.1.10",
+      "purl": "pkg:composer/symfony/mime@v8.1.10"
     },
     {
       "type": "library",
@@ -3467,7 +3467,7 @@
     },
     {
       "type": "library",
-      "bom-ref": "composer:symfony/polyfill-mbstring@v1.43.0",
+      "bom-ref": "composer:symfony/polyfill-mbstring@v1.43.3",
       "name": "symfony/polyfill-mbstring",
       "licenses": [
         {
@@ -3498,8 +3498,8 @@
           "value": "PERMISSIVE_NOTICE_CHECK"
         }
       ],
-      "version": "v1.43.0",
-      "purl": "pkg:composer/symfony/polyfill-mbstring@v1.43.0"
+      "version": "v1.43.3",
+      "purl": "pkg:composer/symfony/polyfill-mbstring@v1.43.3"
     },
     {
       "type": "library",
@@ -22753,9 +22753,9 @@
         "composer:symfony/http-foundation@v8.1.9",
         "composer:symfony/http-kernel@v8.1.9",
         "composer:symfony/mailer@v8.1.7",
-        "composer:symfony/mime@v8.1.7",
+        "composer:symfony/mime@v8.1.10",
         "composer:symfony/polyfill-ctype@v1.37.0",
-        "composer:symfony/polyfill-mbstring@v1.43.0",
+        "composer:symfony/polyfill-mbstring@v1.43.3",
         "composer:symfony/polyfill-php84@v1.43.0",
         "composer:symfony/polyfill-php85@v1.43.0",
         "composer:symfony/polyfill-php86@v1.43.0",
@@ -22774,7 +22774,7 @@
         "composer:laravel/framework@v13.36.0",
         "composer:nunomaduro/termwind@v2.4.0",
         "composer:symfony/console@v8.1.9",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -22786,14 +22786,14 @@
     {
       "ref": "composer:laravel/pint@v1.32.1",
       "dependsOn": [
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
       "ref": "composer:laravel/prompts@v0.3.26",
       "dependsOn": [
         "composer:symfony/console@v8.1.9",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -22814,7 +22814,7 @@
         "composer:league/config@v1.2.0",
         "composer:psr/event-dispatcher@1.0.0",
         "composer:symfony/deprecation-contracts@v3.7.1",
-        "composer:symfony/polyfill-mbstring@v1.43.0",
+        "composer:symfony/polyfill-mbstring@v1.43.3",
         "composer:symfony/polyfill-php80@v1.43.0"
       ]
     },
@@ -22900,7 +22900,7 @@
         "composer:carbonphp/carbon-doctrine-types@3.2.1",
         "composer:psr/clock@1.0.0",
         "composer:symfony/clock@v8.1.9",
-        "composer:symfony/polyfill-mbstring@v1.43.0",
+        "composer:symfony/polyfill-mbstring@v1.43.3",
         "composer:symfony/translation@v8.1.5"
       ]
     },
@@ -22930,7 +22930,7 @@
       "ref": "composer:nunomaduro/termwind@v2.4.0",
       "dependsOn": [
         "composer:symfony/console@v8.1.9",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -23004,7 +23004,7 @@
         "composer:sebastian/type@6.0.4",
         "composer:sebastian/version@6.0.1",
         "composer:staabm/side-effects-detector@1.0.5",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -23071,7 +23071,7 @@
       "dependsOn": [
         "composer:sebastian/diff@7.0.1",
         "composer:sebastian/exporter@7.0.3",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -23092,7 +23092,7 @@
       "ref": "composer:sebastian/exporter@7.0.3",
       "dependsOn": [
         "composer:sebastian/recursion-context@7.0.1",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -23145,7 +23145,7 @@
       "ref": "composer:symfony/console@v8.1.9",
       "dependsOn": [
         "composer:symfony/deprecation-contracts@v3.7.1",
-        "composer:symfony/polyfill-mbstring@v1.43.0",
+        "composer:symfony/polyfill-mbstring@v1.43.3",
         "composer:symfony/polyfill-php85@v1.43.0",
         "composer:symfony/service-contracts@v3.7.3",
         "composer:symfony/string@v8.1.9"
@@ -23188,7 +23188,7 @@
       "ref": "composer:symfony/http-foundation@v8.1.9",
       "dependsOn": [
         "composer:symfony/deprecation-contracts@v3.7.1",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -23209,15 +23209,15 @@
         "composer:psr/event-dispatcher@1.0.0",
         "composer:psr/log@3.0.2",
         "composer:symfony/event-dispatcher@v8.1.5",
-        "composer:symfony/mime@v8.1.7",
+        "composer:symfony/mime@v8.1.10",
         "composer:symfony/service-contracts@v3.7.3"
       ]
     },
     {
-      "ref": "composer:symfony/mime@v8.1.7",
+      "ref": "composer:symfony/mime@v8.1.10",
       "dependsOn": [
         "composer:symfony/polyfill-intl-idn@v1.43.0",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -23239,7 +23239,7 @@
       "dependsOn": []
     },
     {
-      "ref": "composer:symfony/polyfill-mbstring@v1.43.0",
+      "ref": "composer:symfony/polyfill-mbstring@v1.43.3",
       "dependsOn": []
     },
     {
@@ -23296,7 +23296,7 @@
         "composer:symfony/polyfill-ctype@v1.37.0",
         "composer:symfony/polyfill-intl-grapheme@v1.43.0",
         "composer:symfony/polyfill-intl-normalizer@v1.43.0",
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -23306,7 +23306,7 @@
     {
       "ref": "composer:symfony/translation@v8.1.5",
       "dependsOn": [
-        "composer:symfony/polyfill-mbstring@v1.43.0",
+        "composer:symfony/polyfill-mbstring@v1.43.3",
         "composer:symfony/translation-contracts@v3.7.1"
       ]
     },
@@ -23319,7 +23319,7 @@
     {
       "ref": "composer:symfony/var-dumper@v8.1.9",
       "dependsOn": [
-        "composer:symfony/polyfill-mbstring@v1.43.0"
+        "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
@@ -23338,7 +23338,7 @@
         "composer:graham-campbell/result-type@v1.2.0",
         "composer:phpoption/phpoption@1.10.0",
         "composer:symfony/polyfill-ctype@v1.37.0",
-        "composer:symfony/polyfill-mbstring@v1.43.0",
+        "composer:symfony/polyfill-mbstring@v1.43.3",
         "composer:symfony/polyfill-php80@v1.43.0"
       ]
     },
