@@ -1,3 +1,5 @@
+> **29.10.2026 / SPECKIT-TZ:** [Spec Kit v1.2.4](../specs/001-contract-tz-traceability/spec.md) установлен по схеме Tender Agent; 325 оригинальных пунктов привязаны к проверенным строкам и цитатам в [source-map.json](../specs/001-contract-tz-traceability/source-map.json) с отдельной защитой SHA. [Спорные интерпретации](../specs/001-contract-tz-traceability/interpretation-review.md) не закрывать без полного оригинала и подписанного приложения. Ни одной договорной стадии/статуса не изменено.
+
 # MusBread · Дорожная карта
 
 > **29.10.2026 / ING-2VM:** [реализована двухсерверная схема защищённого приёма обращений](architecture/ADR_20261029_TWO_VM_REQUEST_INTAKE.md): точечный mTLS proxy Nginx на публичной ВМ (после проверки требований ТЗ на стадии согласования), отдельный network-isolated PHP-FPM/SQLite на закрытой ВМ, Laravel pull через loopback. Третья ВМ не требуется; существующие статические страницы и CMS сохранены. Production выключен, требуется подтверждение соответствия маршрута ТЗ на целевой инфраструктуре, ПДн, firewall/TLS и UAT; светoфор ТЗ без повышения.

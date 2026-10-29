@@ -6,6 +6,18 @@ on:
 permissions:
   contents: read
 jobs:
+  contract-tz-spec:
+    name: Spec Kit / 325 original-TZ traceability (offline integrity only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check 325 IDs and pinned source-map projection without private originals
+        run: python3 scripts/check_speckit_tz.py --check
+      - name: Reject fake quoted/source statuses and Unicode line renumbering
+        run: python3 -m unittest tests/test_speckit_tz.py -v
   publisher:
     name: Static publication integrity
     runs-on: ubuntu-latest

@@ -1,0 +1,5094 @@
+{
+  "schema": 1,
+  "authority": "original EIS procurement tz.txt; signed annex takes precedence",
+  "source_sha256": "92c4db2a3f47988f4fc4c96b5ae652baa3faaa62a772e55a167c7cbaafb67420",
+  "source_docx_sha256": "3e029344d179742632d519d4e425e6f8e9f757ce4df23e0419aa4302d4068536",
+  "source_physical_lf_lines": 485,
+  "original_in_public_git": false,
+  "source_excerpt_warning": "Fragments are byte-verified navigational quotations, NOT full normative text.",
+  "items": [
+    {
+      "id": "TZ-001",
+      "clause": "1.1–1.3",
+      "physical_lines": [
+        61,
+        62,
+        63
+      ],
+      "source_line_sha256": [
+        "44ab1b7b6499f8925e4cfde8dbc770e27c01dee2a9f5c1b0275411e6f9c78d8c",
+        "ff08801e1ed0480250aa483c429b7cd8c090e7bd219934c39e2712eb250992b9",
+        "482f200d3d61068b741bfbcb7c3ff470b73ec90d8641f3cc6687d30500674de7"
+      ],
+      "quote_line": 61,
+      "quote_offset": 0,
+      "exact_excerpt": "1.1. Идентификационный код закупки в плане-графике: 262780801852378040100100190000000244.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Идентификация закупки, предмет IT плюс оригинальный дизайн, СМП"
+    },
+    {
+      "id": "TZ-002",
+      "clause": "1.4",
+      "physical_lines": [
+        64
+      ],
+      "source_line_sha256": [
+        "0594c65163a5b63f2a7303d9023a927f09474f3fa5b46b1c37cd05d43a2581ce"
+      ],
+      "quote_line": 64,
+      "quote_offset": 25,
+      "exact_excerpt": ": 195009, г. Санкт-Петербург, ул. Михайлова, д. 2, лит. А и удаленно (по согласованию с Заказчиком).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Очно по адресу Михайлова, 2, лит. А, удалённо только по согласованию"
+    },
+    {
+      "id": "TZ-003",
+      "clause": "1.5",
+      "physical_lines": [
+        65
+      ],
+      "source_line_sha256": [
+        "cb01367ca0935c2306ab02763313ff8e75f684063054b3bb280368742cac8282"
+      ],
+      "quote_line": 65,
+      "quote_offset": 0,
+      "exact_excerpt": "1.5. Сроки оказания услуг: с момента заключения Контракта по 07.12.2026 г. (включительно).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Окончание услуг не позднее 07.12.2026 включительно"
+    },
+    {
+      "id": "TZ-004",
+      "clause": "1.6, 2.1.1, 2.2.3.1",
+      "physical_lines": [
+        66,
+        71,
+        129
+      ],
+      "source_line_sha256": [
+        "e0c02ce234beb922b0e928fa0cd785c20859950d6f8737071de04e955f17d571",
+        "06d3e2437c7a9fa406b1c2ab15743cbebdc4d51eaa21e3d2ad37b8bf00963b48",
+        "44354804a3f48f075789b944845933955143816921bc7317271319d9fb3a80e6"
+      ],
+      "quote_line": 71,
+      "quote_offset": 111,
+      "exact_excerpt": "тку дизайна сайта, верстку, испытания, размещение, обучение работников Заказчика и исправление неисп",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Сайт деятельности, структуры, адресов, мероприятий плюс фирменный стиль, размещение, испытания и обучение"
+    },
+    {
+      "id": "TZ-005",
+      "clause": "2.1.2",
+      "physical_lines": [
+        72
+      ],
+      "source_line_sha256": [
+        "21a73b3735b7e7592b5c4c5b1442d40e6bac03b4ed27731e27be96513052c90e"
+      ],
+      "quote_line": 72,
+      "quote_offset": 0,
+      "exact_excerpt": "2.1.2. Услуги должны быть оказаны Исполнителем должным образом и с надлежащим качеством в соответств",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Качество и приёмка согласно описанию и контракту"
+    },
+    {
+      "id": "TZ-006",
+      "clause": "2.2.1.1",
+      "physical_lines": [
+        76
+      ],
+      "source_line_sha256": [
+        "d9d93668fbe4e6ca99d3830ad2c35f8586818e0727824198e9d514b1de968554"
+      ],
+      "quote_line": 76,
+      "quote_offset": 198,
+      "exact_excerpt": "ове устного интервью Заказчика, которое проводится Исполнителем лично на территории музея, ключевые ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Личное устное интервью в музее с фиксацией ключевых положений"
+    },
+    {
+      "id": "TZ-007",
+      "clause": "2.2.1.1",
+      "physical_lines": [
+        76
+      ],
+      "source_line_sha256": [
+        "d9d93668fbe4e6ca99d3830ad2c35f8586818e0727824198e9d514b1de968554"
+      ],
+      "quote_line": 76,
+      "quote_offset": 35,
+      "exact_excerpt": "работать не менее 3 (трех) вариантов концепции фирменного визуального стиля, который будет использов",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Не менее трёх действительно разных концепций фирменного стиля на основе интервью"
+    },
+    {
+      "id": "TZ-008",
+      "clause": "2.2.1.2",
+      "physical_lines": [
+        77
+      ],
+      "source_line_sha256": [
+        "fa602570fde6fe208568240842bcfa4eaa6607e5352c9906810f8cfb55c96804"
+      ],
+      "quote_line": 77,
+      "quote_offset": 0,
+      "exact_excerpt": "2.2.1.2. Каждый вариант концепции должен включать: логотип, шрифт, цветовые сочетания, пример главно",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Каждая концепция включает логотип"
+    },
+    {
+      "id": "TZ-009",
+      "clause": "2.2.1.2",
+      "physical_lines": [
+        77
+      ],
+      "source_line_sha256": [
+        "fa602570fde6fe208568240842bcfa4eaa6607e5352c9906810f8cfb55c96804"
+      ],
+      "quote_line": 77,
+      "quote_offset": 0,
+      "exact_excerpt": "2.2.1.2. Каждый вариант концепции должен включать: логотип, шрифт, цветовые сочетания, пример главно",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Каждая концепция включает шрифт"
+    },
+    {
+      "id": "TZ-010",
+      "clause": "2.2.1.2",
+      "physical_lines": [
+        77
+      ],
+      "source_line_sha256": [
+        "fa602570fde6fe208568240842bcfa4eaa6607e5352c9906810f8cfb55c96804"
+      ],
+      "quote_line": 77,
+      "quote_offset": 0,
+      "exact_excerpt": "2.2.1.2. Каждый вариант концепции должен включать: логотип, шрифт, цветовые сочетания, пример главно",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Каждая концепция включает цветовые сочетания"
+    },
+    {
+      "id": "TZ-011",
+      "clause": "2.2.1.2",
+      "physical_lines": [
+        77
+      ],
+      "source_line_sha256": [
+        "fa602570fde6fe208568240842bcfa4eaa6607e5352c9906810f8cfb55c96804"
+      ],
+      "quote_line": 77,
+      "quote_offset": 75,
+      "exact_excerpt": " сочетания, пример главной страницы сайта и визуальные примеры использования на сувенирной продукции",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Каждая концепция включает пример главной страницы сайта"
+    },
+    {
+      "id": "TZ-012",
+      "clause": "2.2.1.2",
+      "physical_lines": [
+        77
+      ],
+      "source_line_sha256": [
+        "fa602570fde6fe208568240842bcfa4eaa6607e5352c9906810f8cfb55c96804"
+      ],
+      "quote_line": 77,
+      "quote_offset": 77,
+      "exact_excerpt": "очетания, пример главной страницы сайта и визуальные примеры использования на сувенирной продукции. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Каждая концепция включает визуальные примеры сувенирной продукции"
+    },
+    {
+      "id": "TZ-013",
+      "clause": "2.2.1.3",
+      "physical_lines": [
+        78
+      ],
+      "source_line_sha256": [
+        "8b5d5e720c5f95d5618c22f4bf315c38ac38911012843f12a55d4acd488d5121"
+      ],
+      "quote_line": 78,
+      "quote_offset": 87,
+      "exact_excerpt": " для каждой концепции количество страниц — не менее пяти. Не позднее, чем через 2 (два) рабочих дня ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Три PDF-концепции по не менее пяти страниц каждая"
+    },
+    {
+      "id": "TZ-014",
+      "clause": "2.2.1.3",
+      "physical_lines": [
+        78
+      ],
+      "source_line_sha256": [
+        "8b5d5e720c5f95d5618c22f4bf315c38ac38911012843f12a55d4acd488d5121"
+      ],
+      "quote_line": 78,
+      "quote_offset": 0,
+      "exact_excerpt": "2.2.1.3. Все концепции направляются на электронный адрес Заказчика в формате PDF-файла, для каждой к",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Направить концепции на электронный адрес заказчика"
+    },
+    {
+      "id": "TZ-015",
+      "clause": "2.2.1.3",
+      "physical_lines": [
+        78
+      ],
+      "source_line_sha256": [
+        "8b5d5e720c5f95d5618c22f4bf315c38ac38911012843f12a55d4acd488d5121"
+      ],
+      "quote_line": 78,
+      "quote_offset": 136,
+      "exact_excerpt": "ее пяти. Не позднее, чем через 2 (два) рабочих дня после получения Заказчиком всех концепций, должна",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Презентовать концепции не позднее двух рабочих дней после получения"
+    },
+    {
+      "id": "TZ-016",
+      "clause": "2.2.1.4",
+      "physical_lines": [
+        79
+      ],
+      "source_line_sha256": [
+        "5fe11cea1d6343d1f7003e314fa88732e688e93b7237200d365b1e3ff49f2dc9"
+      ],
+      "quote_line": 79,
+      "quote_offset": 0,
+      "exact_excerpt": "2.2.1.4. После утверждения выбранной концепции Заказчиком Исполнитель должен  разработать набор элем",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Разрабатывать итоговый набор фирменных элементов лишь после утверждения выбранной концепции"
+    },
+    {
+      "id": "TZ-017",
+      "clause": "2.2.2.1",
+      "physical_lines": [
+        82
+      ],
+      "source_line_sha256": [
+        "1627e89fb628adbc49c935b7a082b59f5b3a857a9d5c205340ea71a7d8844607"
+      ],
+      "quote_line": 82,
+      "quote_offset": 174,
+      "exact_excerpt": ". Фирменный стиль должен быть масштабируемым, сохранять удобство использования на носителях разных р",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Современный, гибкий, расширяемый стиль с удобством разных масштабов цифровых и печатных носителей"
+    },
+    {
+      "id": "TZ-018",
+      "clause": "2.2.2.2",
+      "physical_lines": [
+        83
+      ],
+      "source_line_sha256": [
+        "43d1a00871874bc6c519904a09f6b9e646773568a2a9617d018caad38b0cb492"
+      ],
+      "quote_line": 83,
+      "quote_offset": 349,
+      "exact_excerpt": "действий по государственной регистрации товарных знаков, знаков обслуживания, коллективных знаков, Т",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Пригодность элементов к государственной регистрации по приказу Минэкономразвития 482"
+    },
+    {
+      "id": "TZ-019",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        85
+      ],
+      "source_line_sha256": [
+        "e8b7e92c7f43b499c26bdb0b40166ada0dfe3caedf327f7338a0f80375df6f15"
+      ],
+      "quote_line": 85,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДизайн основного логотипа (русская и английская версии). Вариации и компоновки логотипа (горизонт",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Оригинальность дизайна без копирования существующих логотипов"
+    },
+    {
+      "id": "TZ-020",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        85
+      ],
+      "source_line_sha256": [
+        "e8b7e92c7f43b499c26bdb0b40166ada0dfe3caedf327f7338a0f80375df6f15"
+      ],
+      "quote_line": 85,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДизайн основного логотипа (русская и английская версии). Вариации и компоновки логотипа (горизонт",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Основной логотип RU и EN"
+    },
+    {
+      "id": "TZ-021",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        85
+      ],
+      "source_line_sha256": [
+        "e8b7e92c7f43b499c26bdb0b40166ada0dfe3caedf327f7338a0f80375df6f15"
+      ],
+      "quote_line": 85,
+      "quote_offset": 59,
+      "exact_excerpt": " Вариации и компоновки логотипа (горизонтальная, вертикальная, цветная, черно-белая, на контрастном ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Горизонтальная/вертикальная компоновки"
+    },
+    {
+      "id": "TZ-022",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        85
+      ],
+      "source_line_sha256": [
+        "e8b7e92c7f43b499c26bdb0b40166ada0dfe3caedf327f7338a0f80375df6f15"
+      ],
+      "quote_line": 85,
+      "quote_offset": 39,
+      "exact_excerpt": " английская версии). Вариации и компоновки логотипа (горизонтальная, вертикальная, цветная, черно-бе",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Цветная/чёрно-белая/контрастная версии"
+    },
+    {
+      "id": "TZ-023",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        85
+      ],
+      "source_line_sha256": [
+        "e8b7e92c7f43b499c26bdb0b40166ada0dfe3caedf327f7338a0f80375df6f15"
+      ],
+      "quote_line": 85,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДизайн основного логотипа (русская и английская версии). Вариации и компоновки логотипа (горизонт",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Правила допустимого и запрещённого использования логотипа"
+    },
+    {
+      "id": "TZ-024",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        86
+      ],
+      "source_line_sha256": [
+        "a1deeee63a4379d878939655e52375f20be2d1ec9a467066d51f41d535ec460c"
+      ],
+      "quote_line": 86,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШрифты и шрифтовые пары (начертания, размеры для заголовков, подзаголовков, основного текста). Шр",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Типографические пары и начертания/размеры H1/H2/текста"
+    },
+    {
+      "id": "TZ-025",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        86
+      ],
+      "source_line_sha256": [
+        "a1deeee63a4379d878939655e52375f20be2d1ec9a467066d51f41d535ec460c"
+      ],
+      "quote_line": 86,
+      "quote_offset": 103,
+      "exact_excerpt": " должен иметь открытую (бесплатную) лицензию и быть бесплатным для использования на всех носителях. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Шрифты с открытой бесплатной лицензией на всех носителях"
+    },
+    {
+      "id": "TZ-026",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        87
+      ],
+      "source_line_sha256": [
+        "7886b03fd4282a9d14bb904825a9c3f004be4ba6e26e37f7049cac5a4b70a46b"
+      ],
+      "quote_line": 87,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПалитру цветов с указанием кодов RGB, CMYK, Pantone и HEX для точной передачи оттенков на любых у",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Цвета с кодами RGB/CMYK/Pantone/HEX"
+    },
+    {
+      "id": "TZ-027",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        88
+      ],
+      "source_line_sha256": [
+        "7bb08c2e9247988d131beb00865bc6e1ad777efc3434320f62eefd31f620b135"
+      ],
+      "quote_line": 88,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФирменные градиенты (не менее 2 вариантов);",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Не менее двух фирменных градиентов"
+    },
+    {
+      "id": "TZ-028",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        89
+      ],
+      "source_line_sha256": [
+        "6559de27bdf66254f6c809af05e0a300958a3a58d5cb7124d2fd707c9f815040"
+      ],
+      "quote_line": 89,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФирменные графические элементы – плашки, пиктограммы (не менее 10 элементов);",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Фирменные плашки/графические элементы и не менее десяти пиктограмм"
+    },
+    {
+      "id": "TZ-029",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        90
+      ],
+      "source_line_sha256": [
+        "6fcc53dbd3a60c2c02c30c5acd1e7024158a69a85db31864f870cb27c8e4f7ff"
+      ],
+      "quote_line": 90,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФирменные паттерны (не менее 3 вариантов) в разных стилях – деловом, детском и др.; ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Не менее трёх паттернов, в том числе в разных стилях"
+    },
+    {
+      "id": "TZ-030",
+      "clause": "2.2.2.3",
+      "physical_lines": [
+        91
+      ],
+      "source_line_sha256": [
+        "7e4c4819a37d5c250ce81c2a6c2381e611a300cf6d0eaa79d74b51668d052438"
+      ],
+      "quote_line": 91,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПравила использования сетки для построения графических материалов.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Правила построения сеток для графики"
+    },
+    {
+      "id": "TZ-031",
+      "clause": "2.2.2.4",
+      "physical_lines": [
+        92
+      ],
+      "source_line_sha256": [
+        "50a1e338a6440db2da5f976b73beee0d7e382c038a05948dee19ad447e5b74bb"
+      ],
+      "quote_line": 92,
+      "quote_offset": 0,
+      "exact_excerpt": "2.2.2.4. Презентация всех носителей фирменного стиля осуществляется посредством ВКС (видеоконференцс",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Презентация всех носителей ВКС либо очно"
+    },
+    {
+      "id": "TZ-032",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        95
+      ],
+      "source_line_sha256": [
+        "9e967622adf57910e4e91ca8368d7589eb200d88f27bc867ac53ed85098844c2"
+      ],
+      "quote_line": 95,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tГлавная страница стайта;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Дизайн главной страницы сайта как фирменного носителя"
+    },
+    {
+      "id": "TZ-033",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        96
+      ],
+      "source_line_sha256": [
+        "f4a2aad7b70b32ec6f7f5dc5c0629ae70c6026cd0473e57e63f706125943188a"
+      ],
+      "quote_line": 96,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tТиповая внутренняя страница сайта;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Макет типовой внутренней страницы сайта"
+    },
+    {
+      "id": "TZ-034",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        97
+      ],
+      "source_line_sha256": [
+        "cbc0b8372f853b2d4e3cf064df61b72e968d02ab4f8b71ff57ebb60f3664340b"
+      ],
+      "quote_line": 97,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблоны для создания афиш и других материалов для публикации на сайте;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Шаблоны афиш и иных материалов для сайта"
+    },
+    {
+      "id": "TZ-035",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        98
+      ],
+      "source_line_sha256": [
+        "7d053eb2017bbe220c798f9527472f919d8ca5da1658fe2dd6ef7d17d1f9c273"
+      ],
+      "quote_line": 98,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tОформление страницы социальной сети «вконтакте» (аватар, шапка профиля, шаблоны для афиш для разн",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "VK: аватар сообщества"
+    },
+    {
+      "id": "TZ-036",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        98
+      ],
+      "source_line_sha256": [
+        "7d053eb2017bbe220c798f9527472f919d8ca5da1658fe2dd6ef7d17d1f9c273"
+      ],
+      "quote_line": 98,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tОформление страницы социальной сети «вконтакте» (аватар, шапка профиля, шаблоны для афиш для разн",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "VK: шапка профиля"
+    },
+    {
+      "id": "TZ-037",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        98
+      ],
+      "source_line_sha256": [
+        "7d053eb2017bbe220c798f9527472f919d8ca5da1658fe2dd6ef7d17d1f9c273"
+      ],
+      "quote_line": 98,
+      "quote_offset": 26,
+      "exact_excerpt": "иальной сети «вконтакте» (аватар, шапка профиля, шаблоны для афиш для разных рубрик (не менее 4).   ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "VK: афиши минимум четырёх рубрик"
+    },
+    {
+      "id": "TZ-038",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        100
+      ],
+      "source_line_sha256": [
+        "1658d72b916bd63659244a301257b1dcf63ae7e13312570844b12b1742e59c58"
+      ],
+      "quote_line": 100,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон для афиши временной выставки (форматы А3, А2).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша временной выставки в А3 и А2"
+    },
+    {
+      "id": "TZ-039",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        101
+      ],
+      "source_line_sha256": [
+        "4eb6a73428c0e23c0eb0f6af0a692f7092ac6d24ca2ed404337512e8c5f63948"
+      ],
+      "quote_line": 101,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон для афиши мастер-класса для детей (форматы А4, А3, А2).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша детского мастер-класса А4, А3, А2"
+    },
+    {
+      "id": "TZ-040",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        102
+      ],
+      "source_line_sha256": [
+        "775075869fad068b09ca06eb59f7c65765d2bbdc49637408195efc5b8c067072"
+      ],
+      "quote_line": 102,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон для афиши научного мероприятия (форматы А4, А3, А2).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша научного события А4, А3, А2"
+    },
+    {
+      "id": "TZ-041",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        103
+      ],
+      "source_line_sha256": [
+        "320f6c14c93fe2c8f147f329bd77ad998ed6a821958963b292d51b0a3f51b2cd"
+      ],
+      "quote_line": 103,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон для афиши развлекательного мероприятия (форматы А4, А3, А2).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша развлекательного события А4, А3, А2"
+    },
+    {
+      "id": "TZ-042",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        104
+      ],
+      "source_line_sha256": [
+        "5b7a2f9d520f080918ca2f36515e334c61199496ed0ef3958a24422c3b1e4d64"
+      ],
+      "quote_line": 104,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон информационного стенда музея с ключевой информацией (цены, режим работы и пр., форматы А4,",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Стенд цен/часов работы в А4 и А3"
+    },
+    {
+      "id": "TZ-043",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        105
+      ],
+      "source_line_sha256": [
+        "6e1b939db52d29d7491cf9ab05d753b7e04ee54c5ac500988ca7d667da81085d"
+      ],
+      "quote_line": 105,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tУказатель входа на экспозицию.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Отдельный указатель входа на экспозицию"
+    },
+    {
+      "id": "TZ-044",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        106
+      ],
+      "source_line_sha256": [
+        "dd575ef3f1731cd33debd1a2e1c6ca0b6a3e118f1c9d2b059da2bcb77af17338"
+      ],
+      "quote_line": 106,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tУказатель выхода с экспозиции.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Отдельный указатель выхода с экспозиции"
+    },
+    {
+      "id": "TZ-045",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        107
+      ],
+      "source_line_sha256": [
+        "bfc5c2e65cda1fa279bfb160d7513ffe0adfa3a338402ba66c28d960f51983a4"
+      ],
+      "quote_line": 107,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон этикетки.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Шаблон этикетки экспоната"
+    },
+    {
+      "id": "TZ-046",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        108
+      ],
+      "source_line_sha256": [
+        "1a7a3894fd0847d1306121d17f726487d8b86198a679845027a17cf94717aa9d"
+      ],
+      "quote_line": 108,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон аннотации.   ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Шаблон музейной аннотации"
+    },
+    {
+      "id": "TZ-047",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        110
+      ],
+      "source_line_sha256": [
+        "f06300dd027e6da88bf5a3720d5fe3fc0066b595a8ac27e2b20bbf5c1965e29c"
+      ],
+      "quote_line": 110,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФирменный бланк.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Фирменный бланк"
+    },
+    {
+      "id": "TZ-048",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        111
+      ],
+      "source_line_sha256": [
+        "d695b24e6973cde89e1ea2e6f1ed299b4ca2c4cbbed0e9c9fba230fbc2cf2167"
+      ],
+      "quote_line": 111,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБилет на экспозицию.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Билет на экспозицию"
+    },
+    {
+      "id": "TZ-049",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        112
+      ],
+      "source_line_sha256": [
+        "c029d5022838f0190c3664a2f28402aaad806bcc89611982bff42afcd823d436"
+      ],
+      "quote_line": 112,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tВизитная карточка (не менее 2 вариантов).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Не менее двух вариантов визитки"
+    },
+    {
+      "id": "TZ-050",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        113
+      ],
+      "source_line_sha256": [
+        "3dc506b1b012a93befd2c5c3553dc8340497a268167074d07ddec58a173fb61c"
+      ],
+      "quote_line": 113,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБейдж сотрудника (не менее 2 вариантов).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Не менее двух вариантов бейджа сотрудника"
+    },
+    {
+      "id": "TZ-051",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        114
+      ],
+      "source_line_sha256": [
+        "c61cc3e9ee5ad1838fd5d1c6f3476ed99d2313db337e24246a17a1d4deaa335f"
+      ],
+      "quote_line": 114,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон пригласительного билета. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Пригласительный билет"
+    },
+    {
+      "id": "TZ-052",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        115
+      ],
+      "source_line_sha256": [
+        "5bac001f31f972f330f5364b0a5a67931ab8f0290abc2347e070dd54d5613ac4"
+      ],
+      "quote_line": 115,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон благодарности. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Благодарность"
+    },
+    {
+      "id": "TZ-053",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        116
+      ],
+      "source_line_sha256": [
+        "1ff37cdacfc1f150de3761791e2f82dd771e8ba0cb5591c22f42a644547e0c98"
+      ],
+      "quote_line": 116,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон поздравительной открытки. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Поздравительная открытка"
+    },
+    {
+      "id": "TZ-054",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        117
+      ],
+      "source_line_sha256": [
+        "f6559958a52d95c6c61c318405a87ec1dc8956e157374ef5bdba9c8b0c0a4073"
+      ],
+      "quote_line": 117,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон презентации в PowerPoint (обложка, закрывающий слайд, типовые слайды с разным объемом текс",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Презентация PowerPoint: обложка и заключительный слайд"
+    },
+    {
+      "id": "TZ-055",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        117
+      ],
+      "source_line_sha256": [
+        "f6559958a52d95c6c61c318405a87ec1dc8956e157374ef5bdba9c8b0c0a4073"
+      ],
+      "quote_line": 117,
+      "quote_offset": 52,
+      "exact_excerpt": "ющий слайд, типовые слайды с разным объемом текста и разным размером изображений, слайд с четырьмя и",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "PPT: типовые слайды с различными объёмами текста и изображений"
+    },
+    {
+      "id": "TZ-056",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        117
+      ],
+      "source_line_sha256": [
+        "f6559958a52d95c6c61c318405a87ec1dc8956e157374ef5bdba9c8b0c0a4073"
+      ],
+      "quote_line": 117,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон презентации в PowerPoint (обложка, закрывающий слайд, типовые слайды с разным объемом текс",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "PPT: слайды на 4 и 6 текстовых блоков"
+    },
+    {
+      "id": "TZ-057",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        117
+      ],
+      "source_line_sha256": [
+        "f6559958a52d95c6c61c318405a87ec1dc8956e157374ef5bdba9c8b0c0a4073"
+      ],
+      "quote_line": 117,
+      "quote_offset": 140,
+      "exact_excerpt": "с четырьмя и шестью блоками текста, всего не менее 8 видов слайдов, соотношешение сторон 4:3, 16:9).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "PPT: всего не менее восьми видов слайдов"
+    },
+    {
+      "id": "TZ-058",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        117
+      ],
+      "source_line_sha256": [
+        "f6559958a52d95c6c61c318405a87ec1dc8956e157374ef5bdba9c8b0c0a4073"
+      ],
+      "quote_line": 117,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШаблон презентации в PowerPoint (обложка, закрывающий слайд, типовые слайды с разным объемом текс",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "PPT: размеры экрана 4:3 и 16:9"
+    },
+    {
+      "id": "TZ-059",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        118
+      ],
+      "source_line_sha256": [
+        "b1f78407d7b992abb2ed9398f39623ba7f37d4f3b14e951607dfc3f5dd267c36"
+      ],
+      "quote_line": 118,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПримеры использования фирменного стиля в сувенирной продукции музея (блокнот, жилетка, футболка, ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Пример использования на блокноте и жилетке"
+    },
+    {
+      "id": "TZ-060",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        118
+      ],
+      "source_line_sha256": [
+        "b1f78407d7b992abb2ed9398f39623ba7f37d4f3b14e951607dfc3f5dd267c36"
+      ],
+      "quote_line": 118,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПримеры использования фирменного стиля в сувенирной продукции музея (блокнот, жилетка, футболка, ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Пример на футболке, штампе и стикерпаке"
+    },
+    {
+      "id": "TZ-061",
+      "clause": "2.2.2.5",
+      "physical_lines": [
+        118
+      ],
+      "source_line_sha256": [
+        "b1f78407d7b992abb2ed9398f39623ba7f37d4f3b14e951607dfc3f5dd267c36"
+      ],
+      "quote_line": 118,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПримеры использования фирменного стиля в сувенирной продукции музея (блокнот, жилетка, футболка, ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Пример на календаре, открытке, термокружке и шоппере"
+    },
+    {
+      "id": "TZ-062",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        119
+      ],
+      "source_line_sha256": [
+        "610ebb501656b1237b50cb1674eead8cdd3ffc1d774aa42ab8f05c2e1cd16f8c"
+      ],
+      "quote_line": 119,
+      "quote_offset": 0,
+      "exact_excerpt": "2.2.2.6. Количество возможных доработок элементов фирменного стиля: не более 3 (трех) итераций. През",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Не более трёх итераций доработок элементов стиля"
+    },
+    {
+      "id": "TZ-063",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        119
+      ],
+      "source_line_sha256": [
+        "610ebb501656b1237b50cb1674eead8cdd3ffc1d774aa42ab8f05c2e1cd16f8c"
+      ],
+      "quote_line": 119,
+      "quote_offset": 0,
+      "exact_excerpt": "2.2.2.6. Количество возможных доработок элементов фирменного стиля: не более 3 (трех) итераций. През",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Презентовать носители после доработок"
+    },
+    {
+      "id": "TZ-064",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        119
+      ],
+      "source_line_sha256": [
+        "610ebb501656b1237b50cb1674eead8cdd3ffc1d774aa42ab8f05c2e1cd16f8c"
+      ],
+      "quote_line": 119,
+      "quote_offset": 287,
+      "exact_excerpt": "путем загрузки структурированной папки в облачное хранилище Яндекс.Диск и на внешнем жестком диске. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Структурированная папка итогового стиля на Яндекс.Диске"
+    },
+    {
+      "id": "TZ-065",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        119
+      ],
+      "source_line_sha256": [
+        "610ebb501656b1237b50cb1674eead8cdd3ffc1d774aa42ab8f05c2e1cd16f8c"
+      ],
+      "quote_line": 119,
+      "quote_offset": 287,
+      "exact_excerpt": "путем загрузки структурированной папки в облачное хранилище Яндекс.Диск и на внешнем жестком диске. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Идентичная копия стиля на внешнем жёстком диске"
+    },
+    {
+      "id": "TZ-066",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        120,
+        121
+      ],
+      "source_line_sha256": [
+        "da7ebbd2220e087c5c1cd165d02a3467657f46e4c860e3041f0ed61cf3de1869",
+        "25e068406725e5a45fc0d8ce32831864af40cf601651d91ed8d4ce5d4704b004"
+      ],
+      "quote_line": 121,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tвекторные форматы: .ai, .eps, .svg;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Исходники в .ai, .eps, .svg"
+    },
+    {
+      "id": "TZ-067",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        122
+      ],
+      "source_line_sha256": [
+        "fd8c527934dfaea1c5a74c8d001267d5a753b69143a8b87c7de8dad755765ad9"
+      ],
+      "quote_line": 122,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tрастровые форматы: .psd, .tiff (с разрешением не менее 300 dpi для печатной продукции с адаптацие",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Исходники .psd и .tiff для растров"
+    },
+    {
+      "id": "TZ-068",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        122
+      ],
+      "source_line_sha256": [
+        "fd8c527934dfaea1c5a74c8d001267d5a753b69143a8b87c7de8dad755765ad9"
+      ],
+      "quote_line": 122,
+      "quote_offset": 25,
+      "exact_excerpt": "d, .tiff (с разрешением не менее 300 dpi для печатной продукции с адаптацией под размеры носителей);",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Печатные растры не ниже 300 dpi и адаптация под размеры"
+    },
+    {
+      "id": "TZ-069",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        123
+      ],
+      "source_line_sha256": [
+        "9f88916e722197b4392e47e2808ee52e6dbea2372214e36f9396daf8ebe74459"
+      ],
+      "quote_line": 123,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tформаты для просмотра: .pdf, .jpg, .png;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Просмотровые .pdf, .jpg, .png"
+    },
+    {
+      "id": "TZ-070",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        124
+      ],
+      "source_line_sha256": [
+        "02eea49b40af3b9d91d1e5b08acd10cdf4568201d1f58fb594a60a824a6ac97c"
+      ],
+      "quote_line": 124,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tшаблоны презентаций: .ppt, .pptx;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Шаблоны презентаций .ppt и .pptx"
+    },
+    {
+      "id": "TZ-071",
+      "clause": "2.2.2.6",
+      "physical_lines": [
+        125
+      ],
+      "source_line_sha256": [
+        "cf81c4c24d2f2ff90378bbbecb215d2204f0a999b0bf74916654d58acf0a8564"
+      ],
+      "quote_line": 125,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tмакеты для веб и цифровых каналов: .ai, .eps, .svg, .png, .jpg.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Цифровые макеты во всех названных .ai/.eps/.svg/.png/.jpg"
+    },
+    {
+      "id": "TZ-072",
+      "clause": "2.2.3.1",
+      "physical_lines": [
+        131,
+        132,
+        133,
+        134,
+        135,
+        136
+      ],
+      "source_line_sha256": [
+        "b3a858cdaf35da9920d00ec479e523fc9c7a7a66255b462ecb6de1ee3834ada2",
+        "562702cdf457a352934fb598fe37369e92655699a6bb8824b58509096b1b3974",
+        "c793349f1766c44ec52b1e1dd8e3e87ac60f9074dbec7dfbbbd4e4f74d0ce51b",
+        "39fd73d3a784b7276331b10ef553d9c1bc021fb8313b6a1706b4a0c59c4acee0",
+        "fd5df481cf79f131969639bb0f61943caa8ae06187201ad543e4cd539d72468c",
+        "72a94320c773f247bf665662591caddd3b37e83beec0cd4db833f79bfee4e6fc"
+      ],
+      "quote_line": 131,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tясность и простота иерархии разделов и подразделов;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Понятная и простая иерархия разделов/подразделов"
+    },
+    {
+      "id": "TZ-073",
+      "clause": "2.2.3.1",
+      "physical_lines": [
+        132
+      ],
+      "source_line_sha256": [
+        "562702cdf457a352934fb598fe37369e92655699a6bb8824b58509096b1b3974"
+      ],
+      "quote_line": 132,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tчеткая идентификация каждого блока контента;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Чёткая идентификация каждого контентного блока"
+    },
+    {
+      "id": "TZ-074",
+      "clause": "2.2.3.1",
+      "physical_lines": [
+        133
+      ],
+      "source_line_sha256": [
+        "c793349f1766c44ec52b1e1dd8e3e87ac60f9074dbec7dfbbbd4e4f74d0ce51b"
+      ],
+      "quote_line": 133,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tиспользование понятных и коротких формулировок – наименования разделов, пунктов меню и кнопок при",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Короткие однозначные пункты меню, кнопки и CTA"
+    },
+    {
+      "id": "TZ-075",
+      "clause": "2.2.3.1",
+      "physical_lines": [
+        134
+      ],
+      "source_line_sha256": [
+        "39fd73d3a784b7276331b10ef553d9c1bc021fb8313b6a1706b4a0c59c4acee0"
+      ],
+      "quote_line": 134,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tлогическая последовательность переходов внутри сайта – единообразие в расположении и оформлении н",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Последовательная структура и единый вид навигации на всём сайте"
+    },
+    {
+      "id": "TZ-076",
+      "clause": "2.2.3.1",
+      "physical_lines": [
+        135
+      ],
+      "source_line_sha256": [
+        "fd5df481cf79f131969639bb0f61943caa8ae06187201ad543e4cd539d72468c"
+      ],
+      "quote_line": 135,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tмасштабируемость – архитектура сайта должна допускать добавление новых разделов и сервисов без ка",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Добавление новых разделов и сервисов без перепроектирования"
+    },
+    {
+      "id": "TZ-077",
+      "clause": "2.2.3.1",
+      "physical_lines": [
+        136
+      ],
+      "source_line_sha256": [
+        "72a94320c773f247bf665662591caddd3b37e83beec0cd4db833f79bfee4e6fc"
+      ],
+      "quote_line": 136,
+      "quote_offset": 94,
+      "exact_excerpt": "овательская часть) работает в режиме «только для чтения». Все операции по изменению контента, обрабо",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Публичная часть read-only, все изменения только из защищённого backend"
+    },
+    {
+      "id": "TZ-078",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        139
+      ],
+      "source_line_sha256": [
+        "0c87bd84bbd657ec23fadde2bd1ff138521d540371ade63d77d75afbadc4ab01"
+      ],
+      "quote_line": 139,
+      "quote_offset": 0,
+      "exact_excerpt": "Посетитель: покупка билетов, доступ к публичной информации, просмотру материалов, новостей, списка к",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетитель: информация, новости и контакты"
+    },
+    {
+      "id": "TZ-079",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        139
+      ],
+      "source_line_sha256": [
+        "0c87bd84bbd657ec23fadde2bd1ff138521d540371ade63d77d75afbadc4ab01"
+      ],
+      "quote_line": 139,
+      "quote_offset": 0,
+      "exact_excerpt": "Посетитель: покупка билетов, доступ к публичной информации, просмотру материалов, новостей, списка к",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетитель: покупка билетов"
+    },
+    {
+      "id": "TZ-080",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        139
+      ],
+      "source_line_sha256": [
+        "0c87bd84bbd657ec23fadde2bd1ff138521d540371ade63d77d75afbadc4ab01"
+      ],
+      "quote_line": 139,
+      "quote_offset": 79,
+      "exact_excerpt": "в, новостей, списка контактов и пр.; использование форм обратной связи, поиска, записи на экскурсию.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетитель: формы обратной связи"
+    },
+    {
+      "id": "TZ-081",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        139
+      ],
+      "source_line_sha256": [
+        "0c87bd84bbd657ec23fadde2bd1ff138521d540371ade63d77d75afbadc4ab01"
+      ],
+      "quote_line": 139,
+      "quote_offset": 0,
+      "exact_excerpt": "Посетитель: покупка билетов, доступ к публичной информации, просмотру материалов, новостей, списка к",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетитель: запись на экскурсию"
+    },
+    {
+      "id": "TZ-082",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        140
+      ],
+      "source_line_sha256": [
+        "a64a4e3d86f7dd4c5125e336742c5b4d647f62a3018b3a58af0835c6eaf0732f"
+      ],
+      "quote_line": 140,
+      "quote_offset": 0,
+      "exact_excerpt": "Редактор: создание, редактирование, публикация и снятие с публикации материалов, проверка достоверно",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Редактор: создание и изменение материалов"
+    },
+    {
+      "id": "TZ-083",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        140
+      ],
+      "source_line_sha256": [
+        "a64a4e3d86f7dd4c5125e336742c5b4d647f62a3018b3a58af0835c6eaf0732f"
+      ],
+      "quote_line": 140,
+      "quote_offset": 0,
+      "exact_excerpt": "Редактор: создание, редактирование, публикация и снятие с публикации материалов, проверка достоверно",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Редактор: публикация и снятие с публикации"
+    },
+    {
+      "id": "TZ-084",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        140
+      ],
+      "source_line_sha256": [
+        "a64a4e3d86f7dd4c5125e336742c5b4d647f62a3018b3a58af0835c6eaf0732f"
+      ],
+      "quote_line": 140,
+      "quote_offset": 53,
+      "exact_excerpt": "ие с публикации материалов, проверка достоверности размещаемых сведений; модерация запросов из форм.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Редактор: проверка достоверности публикуемых сведений"
+    },
+    {
+      "id": "TZ-085",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        140
+      ],
+      "source_line_sha256": [
+        "a64a4e3d86f7dd4c5125e336742c5b4d647f62a3018b3a58af0835c6eaf0732f"
+      ],
+      "quote_line": 140,
+      "quote_offset": 53,
+      "exact_excerpt": "ие с публикации материалов, проверка достоверности размещаемых сведений; модерация запросов из форм.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Редактор: модерация запросов из форм"
+    },
+    {
+      "id": "TZ-086",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        141
+      ],
+      "source_line_sha256": [
+        "1e9e2904dcab93fe1c7db3be44f2563561e3a5f6f2f23f37815f44d617b4470a"
+      ],
+      "quote_line": 141,
+      "quote_offset": 0,
+      "exact_excerpt": "Администратор: доступ ко всем функциям CMS (Content Management System – система управления контентом",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Администратор: все функции CMS и её настройки"
+    },
+    {
+      "id": "TZ-087",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        141
+      ],
+      "source_line_sha256": [
+        "1e9e2904dcab93fe1c7db3be44f2563561e3a5f6f2f23f37815f44d617b4470a"
+      ],
+      "quote_line": 141,
+      "quote_offset": 99,
+      "exact_excerpt": "м), включая управление структурой сайта, настройки системы, резервное копирование, просмотр полной с",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Администратор: управление структурой сайта"
+    },
+    {
+      "id": "TZ-088",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        141
+      ],
+      "source_line_sha256": [
+        "1e9e2904dcab93fe1c7db3be44f2563561e3a5f6f2f23f37815f44d617b4470a"
+      ],
+      "quote_line": 141,
+      "quote_offset": 147,
+      "exact_excerpt": "ки системы, резервное копирование, просмотр полной статистики, мониторинг активности пользователей, ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Администратор: резервное копирование и восстановление"
+    },
+    {
+      "id": "TZ-089",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        141
+      ],
+      "source_line_sha256": [
+        "1e9e2904dcab93fe1c7db3be44f2563561e3a5f6f2f23f37815f44d617b4470a"
+      ],
+      "quote_line": 141,
+      "quote_offset": 0,
+      "exact_excerpt": "Администратор: доступ ко всем функциям CMS (Content Management System – система управления контентом",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Администратор: полная статистика и активность пользователей"
+    },
+    {
+      "id": "TZ-090",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        141
+      ],
+      "source_line_sha256": [
+        "1e9e2904dcab93fe1c7db3be44f2563561e3a5f6f2f23f37815f44d617b4470a"
+      ],
+      "quote_line": 141,
+      "quote_offset": 209,
+      "exact_excerpt": " мониторинг активности пользователей, настройка прав доступа редакторам, контроль выполнения заявок.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Администратор: настройка прав редакторов"
+    },
+    {
+      "id": "TZ-091",
+      "clause": "2.2.3.2",
+      "physical_lines": [
+        141
+      ],
+      "source_line_sha256": [
+        "1e9e2904dcab93fe1c7db3be44f2563561e3a5f6f2f23f37815f44d617b4470a"
+      ],
+      "quote_line": 141,
+      "quote_offset": 209,
+      "exact_excerpt": " мониторинг активности пользователей, настройка прав доступа редакторам, контроль выполнения заявок.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Администратор: контроль выполнения заявок"
+    },
+    {
+      "id": "TZ-092",
+      "clause": "2.2.3.3",
+      "physical_lines": [
+        143
+      ],
+      "source_line_sha256": [
+        "88a9639cfee0ded4415d8670a37c6b2fbce4a0599400416de7910bf4e22012ea"
+      ],
+      "quote_line": 143,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tвсе передаваемые данные должны шифроваться с использованием протокола HTTPS/TLS 1.2+;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "HTTPS/TLS версии не ниже 1.2 при передаче всех данных"
+    },
+    {
+      "id": "TZ-093",
+      "clause": "2.2.3.3",
+      "physical_lines": [
+        144
+      ],
+      "source_line_sha256": [
+        "0a55e42c87e71d78646aab1ea480465efb78bf1cd566cf5c6939398ef91d71e8"
+      ],
+      "quote_line": 144,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tобязательное проведение пентеста (тестирования на проникновение) внешнего контура перед сдачей в ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Обязательный пентест внешнего контура до эксплуатации"
+    },
+    {
+      "id": "TZ-094",
+      "clause": "2.2.3.3",
+      "physical_lines": [
+        145
+      ],
+      "source_line_sha256": [
+        "d1ec8aa8c8663a08efe3e51fa1f11d666a9aa3553dd203fa369952ded4629e80"
+      ],
+      "quote_line": 145,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tрегулярное обновление используемого ПО для устранения известных уязвимостей;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Регулярное обновление используемого ПО"
+    },
+    {
+      "id": "TZ-095",
+      "clause": "2.2.3.3",
+      "physical_lines": [
+        146
+      ],
+      "source_line_sha256": [
+        "22afd80585434c207aca19b82fd1e4c6b4663e0c4e2d964cc08054bf352a4e77"
+      ],
+      "quote_line": 146,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tзащита от распространенных атак: SQL-инъекции, XSS, CSRF, DDoS.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Защита от SQL injection"
+    },
+    {
+      "id": "TZ-096",
+      "clause": "2.2.3.3",
+      "physical_lines": [
+        146
+      ],
+      "source_line_sha256": [
+        "22afd80585434c207aca19b82fd1e4c6b4663e0c4e2d964cc08054bf352a4e77"
+      ],
+      "quote_line": 146,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tзащита от распространенных атак: SQL-инъекции, XSS, CSRF, DDoS.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Защита от XSS"
+    },
+    {
+      "id": "TZ-097",
+      "clause": "2.2.3.3",
+      "physical_lines": [
+        146
+      ],
+      "source_line_sha256": [
+        "22afd80585434c207aca19b82fd1e4c6b4663e0c4e2d964cc08054bf352a4e77"
+      ],
+      "quote_line": 146,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tзащита от распространенных атак: SQL-инъекции, XSS, CSRF, DDoS.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Защита от CSRF"
+    },
+    {
+      "id": "TZ-098",
+      "clause": "2.2.3.3",
+      "physical_lines": [
+        146
+      ],
+      "source_line_sha256": [
+        "22afd80585434c207aca19b82fd1e4c6b4663e0c4e2d964cc08054bf352a4e77"
+      ],
+      "quote_line": 146,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tзащита от распространенных атак: SQL-инъекции, XSS, CSRF, DDoS.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Защита от DDoS"
+    },
+    {
+      "id": "TZ-099",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        150
+      ],
+      "source_line_sha256": [
+        "42848ebb6abf4d81a49aca6ee1ccffe10bea0bdd79b35aeff9adec67eee5e14f"
+      ],
+      "quote_line": 150,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tсервер обновлений: изолированный сервер в защищенном сегменте сети музея (CMS, СУБД (система упра",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "CMS и СУБД на изолированном сервере музея"
+    },
+    {
+      "id": "TZ-100",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        151
+      ],
+      "source_line_sha256": [
+        "792e11e4eca030853819c417fdd8555279b8a12c08e3d69e26a0c9d35e59ea6e"
+      ],
+      "quote_line": 151,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tдоступ: с закрепленных доверенных IP-адресов сотрудников (предоставляется Заказчиком).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Доступ в backend лишь с закреплённых доверенных IP сотрудников"
+    },
+    {
+      "id": "TZ-101",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        153
+      ],
+      "source_line_sha256": [
+        "fb8d5b0046365c554ad8d11aff0c4986369988e971cca44a9bb5beed358882a4"
+      ],
+      "quote_line": 153,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tфронтенд-сервер: публично доступный веб-сервер (хранение только статического контент (HTML, CSS, ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Публичный веб-сервер хранит только статику и кэш"
+    },
+    {
+      "id": "TZ-102",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        154
+      ],
+      "source_line_sha256": [
+        "fd6d1d87f057b52a53a1be59427c3d950b7c746be1f5ce85315966c0cfb04737"
+      ],
+      "quote_line": 154,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tрежим работы: только на чтение (read-only), отсутствие прямого доступа к CMS.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Публичный контур строго read-only без CMS доступа"
+    },
+    {
+      "id": "TZ-103",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        156
+      ],
+      "source_line_sha256": [
+        "b9c52a26d0f5e1c28fd5c4d35ea91e097a0d98a5cf73b287e52c9ff059f99390"
+      ],
+      "quote_line": 156,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tканал связи: выделенный внутренний канал связи между серверами изолированный от внешнего мира;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Выделенный внутренний канал между контурами без выхода в интернет"
+    },
+    {
+      "id": "TZ-104",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        157
+      ],
+      "source_line_sha256": [
+        "e53918e99677e48d0d492bd48211cad0f673535c0733b835248b31f3022268aa"
+      ],
+      "quote_line": 157,
+      "quote_offset": 19,
+      "exact_excerpt": "изированная выгрузка актуального контента и статики из контура управления на публичный сервер каждый",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Выгрузка автоматически каждый час"
+    },
+    {
+      "id": "TZ-105",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        157
+      ],
+      "source_line_sha256": [
+        "e53918e99677e48d0d492bd48211cad0f673535c0733b835248b31f3022268aa"
+      ],
+      "quote_line": 157,
+      "quote_offset": 119,
+      "exact_excerpt": " час или по событию (по кнопке «Опубликовать»); использование систем контроля версий для трекинга из",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Публикация по событию кнопкой «Опубликовать»"
+    },
+    {
+      "id": "TZ-106",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        157
+      ],
+      "source_line_sha256": [
+        "e53918e99677e48d0d492bd48211cad0f673535c0733b835248b31f3022268aa"
+      ],
+      "quote_line": 157,
+      "quote_offset": 127,
+      "exact_excerpt": " по событию (по кнопке «Опубликовать»); использование систем контроля версий для трекинга изменений;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Версионность/история изменений при выгрузке"
+    },
+    {
+      "id": "TZ-107",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        158
+      ],
+      "source_line_sha256": [
+        "4a7df3dbe342263d205ab62b6d444fddc54052783a7f0d4b951fd78aeddcf023"
+      ],
+      "quote_line": 158,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tцелостность: обязательная проверка checksum передаваемых пакетов для исключения компрометации дан",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Checksum каждого передаваемого пакета"
+    },
+    {
+      "id": "TZ-108",
+      "clause": "2.2.3.4",
+      "physical_lines": [
+        159
+      ],
+      "source_line_sha256": [
+        "78e33d078155045ff60634288f21f04e7fe4fad84049235b3a81f18196a4cfd8"
+      ],
+      "quote_line": 159,
+      "quote_offset": 0,
+      "exact_excerpt": "Доступ к сервисам сайта должен осуществляться круглосуточно. Исключениями являются случаи планового ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Круглосуточный доступ, кроме плановых работ и ЧС"
+    },
+    {
+      "id": "TZ-109",
+      "clause": "2.2.3.5",
+      "physical_lines": [
+        161
+      ],
+      "source_line_sha256": [
+        "03305e2ea162e358efdb64e932e8f3c93b2f8c58c4069808cd9076a718a68157"
+      ],
+      "quote_line": 161,
+      "quote_offset": 0,
+      "exact_excerpt": "Техническая доступность. Целевой уровень доступности сайта должен составлять не менее 99% за календа",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Доступность не менее 99% календарного месяца при исправной инфраструктуре заказчика"
+    },
+    {
+      "id": "TZ-110",
+      "clause": "2.2.3.5",
+      "physical_lines": [
+        162
+      ],
+      "source_line_sha256": [
+        "44d2341500ce8c1a4727f106d41b0c97348c5f209e4141f36eec61eb394ed1bc"
+      ],
+      "quote_line": 162,
+      "quote_offset": 33,
+      "exact_excerpt": "льность: максимальный лаг между одобрением контента редактором и его появлением на сайте — 60 минут;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Лаг между одобрением и публичностью не больше 60 минут"
+    },
+    {
+      "id": "TZ-111",
+      "clause": "2.2.3.5",
+      "physical_lines": [
+        163
+      ],
+      "source_line_sha256": [
+        "9146af41b9eeb6ef09036bbb460554337601b8ce848cbf98d8ee5819dd895cff"
+      ],
+      "quote_line": 163,
+      "quote_offset": 129,
+      "exact_excerpt": "вух версий (Chrome, Firefox, Safari, Edge, Yandex Browser), включая Chromium-GOST, и на мобильных ус",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Последние две версии Chrome, Firefox, Safari, Edge, Yandex"
+    },
+    {
+      "id": "TZ-112",
+      "clause": "2.2.3.5",
+      "physical_lines": [
+        163
+      ],
+      "source_line_sha256": [
+        "9146af41b9eeb6ef09036bbb460554337601b8ce848cbf98d8ee5819dd895cff"
+      ],
+      "quote_line": 163,
+      "quote_offset": 154,
+      "exact_excerpt": "ox, Safari, Edge, Yandex Browser), включая Chromium-GOST, и на мобильных устройствах (iOS, Android).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Работа в Chromium-GOST"
+    },
+    {
+      "id": "TZ-113",
+      "clause": "2.2.3.5",
+      "physical_lines": [
+        163
+      ],
+      "source_line_sha256": [
+        "9146af41b9eeb6ef09036bbb460554337601b8ce848cbf98d8ee5819dd895cff"
+      ],
+      "quote_line": 163,
+      "quote_offset": 154,
+      "exact_excerpt": "ox, Safari, Edge, Yandex Browser), включая Chromium-GOST, и на мобильных устройствах (iOS, Android).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Мобильные iOS и Android"
+    },
+    {
+      "id": "TZ-114",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        168,
+        169,
+        170,
+        171,
+        172
+      ],
+      "source_line_sha256": [
+        "a5616d879195e782fa08c3ed1c7a74fddb4914a5c5cfe9bac99c53b0f7418e2e",
+        "e0ab18c4956c6fe8dae64759238cfdd7778e6efbb0d440f8dfeffa207f1abda5",
+        "95805ac139072a5849bfc40fde4baa434243889ef0a63560a2def750f5b76918",
+        "064844d43e5b2209ed6d28bf5f59a90619731600bbd3c8b2a4ad04845bf48777",
+        "ec73c1479451d14dc69ba9504d6960239c10de67e409e3f053abce9cfdd08243"
+      ],
+      "quote_line": 169,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tЛоготип и название (в хедере) ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Главная: логотип и название в хедере"
+    },
+    {
+      "id": "TZ-115",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        170
+      ],
+      "source_line_sha256": [
+        "95805ac139072a5849bfc40fde4baa434243889ef0a63560a2def750f5b76918"
+      ],
+      "quote_line": 170,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tСписок разделов (в хедере)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Главная: список всех разделов в хедере"
+    },
+    {
+      "id": "TZ-116",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        171
+      ],
+      "source_line_sha256": [
+        "064844d43e5b2209ed6d28bf5f59a90619731600bbd3c8b2a4ad04845bf48777"
+      ],
+      "quote_line": 171,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКнопки «Купить билет», «Для слабовидящих» (или кнопка с изображением глаза), «Доступная среда» (в",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Кнопка «Купить билет» в хедере"
+    },
+    {
+      "id": "TZ-117",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        171
+      ],
+      "source_line_sha256": [
+        "064844d43e5b2209ed6d28bf5f59a90619731600bbd3c8b2a4ad04845bf48777"
+      ],
+      "quote_line": 171,
+      "quote_offset": 19,
+      "exact_excerpt": "илет», «Для слабовидящих» (или кнопка с изображением глаза), «Доступная среда» (в хедере, по кнопке ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Кнопка «Для слабовидящих» в хедере, переключение режима"
+    },
+    {
+      "id": "TZ-118",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        171
+      ],
+      "source_line_sha256": [
+        "064844d43e5b2209ed6d28bf5f59a90619731600bbd3c8b2a4ad04845bf48777"
+      ],
+      "quote_line": 171,
+      "quote_offset": 38,
+      "exact_excerpt": "дящих» (или кнопка с изображением глаза), «Доступная среда» (в хедере, по кнопке переход на соответс",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Кнопка «Доступная среда» в хедере"
+    },
+    {
+      "id": "TZ-119",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        172
+      ],
+      "source_line_sha256": [
+        "ec73c1479451d14dc69ba9504d6960239c10de67e409e3f053abce9cfdd08243"
+      ],
+      "quote_line": 172,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКнопки соцсетей музея, кнопка поиска по сайту (в хедере)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Кнопки официальных соцсетей в хедере"
+    },
+    {
+      "id": "TZ-120",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        172
+      ],
+      "source_line_sha256": [
+        "ec73c1479451d14dc69ba9504d6960239c10de67e409e3f053abce9cfdd08243"
+      ],
+      "quote_line": 172,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКнопки соцсетей музея, кнопка поиска по сайту (в хедере)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Кнопка поиска по всему сайту в хедере"
+    },
+    {
+      "id": "TZ-121",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        173
+      ],
+      "source_line_sha256": [
+        "446baa74ac9e82fdfb53928655548773618699b0375c6c1763b090023ddd2bb8"
+      ],
+      "quote_line": 173,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tГалерея с фотографиями экспозиции ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Галерея фотографий экспозиции на главной"
+    },
+    {
+      "id": "TZ-122",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        174
+      ],
+      "source_line_sha256": [
+        "0e0b9e567740835edf1a6d0804fd76181acb61939cc4faad47e6a4a0b7904b3c"
+      ],
+      "quote_line": 174,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tАфиша событий",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша событий на главной"
+    },
+    {
+      "id": "TZ-123",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        175
+      ],
+      "source_line_sha256": [
+        "0ffd8837bdf71a83d5b9618a5be19ec12cafab3e639976b5a4b5c911bf3a9a8e"
+      ],
+      "quote_line": 175,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tЛоготип и название (в футере)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Логотип и название в футере"
+    },
+    {
+      "id": "TZ-124",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        176
+      ],
+      "source_line_sha256": [
+        "35bc7b83f7927a12850203211abe59297e9338e344fae47389cb89f607df2497"
+      ],
+      "quote_line": 176,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tОценка работы музея (примечание: ссылка на форму с опросом; в футере).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Оценка работы музея — ссылка на форму опроса в футере"
+    },
+    {
+      "id": "TZ-125",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        177
+      ],
+      "source_line_sha256": [
+        "b6f83b101f474f671b2ece10f1ae75a071a00c26831c22f9bb28b0f14913a5a0"
+      ],
+      "quote_line": 177,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tОбщая информация о музее (примечание: адрес, телефон, режим работы; в футере).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Футер: адрес, телефон и режим работы"
+    },
+    {
+      "id": "TZ-126",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        178
+      ],
+      "source_line_sha256": [
+        "f10e8fd0d6b4bfa08ac16f90c57d9b8d773185d6eea5193727b280ccf98a1384"
+      ],
+      "quote_line": 178,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПолитика конфиденциальности (в футере)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Футер: политика конфиденциальности"
+    },
+    {
+      "id": "TZ-127",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        179
+      ],
+      "source_line_sha256": [
+        "65bb45b181a2637a3b3635cf9944a5339d5e356657f0976f694d9a6593f2f3e9"
+      ],
+      "quote_line": 179,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПодписка на рассылку (в футере)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Футер: подписка на рассылку"
+    },
+    {
+      "id": "TZ-128",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        180
+      ],
+      "source_line_sha256": [
+        "3d2cd17c5c008a5471e01430d3fdac19ec491836f5a8c71d0cd64c1c1a338f62"
+      ],
+      "quote_line": 180,
+      "quote_offset": 5,
+      "exact_excerpt": "ые данные и баннеры, предусмотренные действующим законодательством РФ, включая необходимые документы",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Другие обязательные по законам РФ баннеры/документы о ПДн"
+    },
+    {
+      "id": "TZ-129",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191
+      ],
+      "source_line_sha256": [
+        "7f76f5bdcdc3256fd7d5c53a1b1dc2a17fa87f44ac05d70b9535757eeabd871e",
+        "46e18d5b61ed510190979ae7fd27ffc89ce733e02c7dfba9c056b70ea8cf7277",
+        "8e6540b7f1a463b43c56b201c849fb3e8181ba36c9f033740104a481223d1618",
+        "a3c9b04a854061d187339dc6accb1a2331605a386badf540bb3a079f3ecc5a65",
+        "198a5328e3e9113353c04b3a9c3af3def5e6e91d98277aec2fd7aa5fa409ee80",
+        "2896be6230ecac0dd9a6adf31a0007051dce1028f5d447b14fbb5694c7d97649",
+        "13fb93bd26ea9a1019f5d498ca23bc8da99e6a84bacc8bb7301ff37b017ba88d",
+        "3f48f40d4f7cf577c5e594408a6413d8524cf6801739b301b5a68785c04d2394",
+        "09577850ee81807dff55f960ecd941cf74ce3268c77847f1786cf875a9f7e7eb",
+        "65dc867f7eaf9374b6f67d22913a18d448396c0f35ed6e5c7e70a7fbd6f2b106",
+        "087c973df1d9cb824d68fe6f0a6ab4536c7c84fe168e6383e7b26bde790e890a"
+      ],
+      "quote_line": 182,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tИстория музея",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: раздел «История музея»"
+    },
+    {
+      "id": "TZ-130",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        183
+      ],
+      "source_line_sha256": [
+        "8e6540b7f1a463b43c56b201c849fb3e8181ba36c9f033740104a481223d1618"
+      ],
+      "quote_line": 183,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tИстория здания",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: история здания"
+    },
+    {
+      "id": "TZ-131",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        184
+      ],
+      "source_line_sha256": [
+        "a3c9b04a854061d187339dc6accb1a2331605a386badf540bb3a079f3ecc5a65"
+      ],
+      "quote_line": 184,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tЭкспозиция",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: экспозиция"
+    },
+    {
+      "id": "TZ-132",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        185
+      ],
+      "source_line_sha256": [
+        "198a5328e3e9113353c04b3a9c3af3def5e6e91d98277aec2fd7aa5fa409ee80"
+      ],
+      "quote_line": 185,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКоманда (примечание: ФИО, должность, фото сотрудника, контакт)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: команда, ФИО, должность, фото, контакт"
+    },
+    {
+      "id": "TZ-133",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        186
+      ],
+      "source_line_sha256": [
+        "2896be6230ecac0dd9a6adf31a0007051dce1028f5d447b14fbb5694c7d97649"
+      ],
+      "quote_line": 186,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДрузья музея",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: друзья музея"
+    },
+    {
+      "id": "TZ-134",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        187
+      ],
+      "source_line_sha256": [
+        "13fb93bd26ea9a1019f5d498ca23bc8da99e6a84bacc8bb7301ff37b017ba88d"
+      ],
+      "quote_line": 187,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tОфициальные документы  ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: официальные документы"
+    },
+    {
+      "id": "TZ-135",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        188
+      ],
+      "source_line_sha256": [
+        "3f48f40d4f7cf577c5e594408a6413d8524cf6801739b301b5a68785c04d2394"
+      ],
+      "quote_line": 188,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tНовости ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: новости"
+    },
+    {
+      "id": "TZ-136",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        189
+      ],
+      "source_line_sha256": [
+        "09577850ee81807dff55f960ecd941cf74ce3268c77847f1786cf875a9f7e7eb"
+      ],
+      "quote_line": 189,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tМедиа  ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: медиа"
+    },
+    {
+      "id": "TZ-137",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        190
+      ],
+      "source_line_sha256": [
+        "65dc867f7eaf9374b6f67d22913a18d448396c0f35ed6e5c7e70a7fbd6f2b106"
+      ],
+      "quote_line": 190,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tВакансии",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: вакансии"
+    },
+    {
+      "id": "TZ-138",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        191
+      ],
+      "source_line_sha256": [
+        "087c973df1d9cb824d68fe6f0a6ab4536c7c84fe168e6383e7b26bde790e890a"
+      ],
+      "quote_line": 191,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКонтакты",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Музей: контакты"
+    },
+    {
+      "id": "TZ-139",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198
+      ],
+      "source_line_sha256": [
+        "f896a3f05ceac9d2187f45c862e1d135849bd69c0d166a882a4ac3b7ae14b798",
+        "fe10c7c1d99dbde6c7474d6bfcc4e0605bb4fc36eb05cf7136b7cfb36c7763bb",
+        "9509e4316bffdceacde96f35e70862a723f4dbec2873b5aa93e8d51625774927",
+        "eeb2aab428c28fd67048bd1060d099c30f892d16a7afd0ecbee9e5ab79cd37b9",
+        "6641a363853ebbffc583387e0fc23c156481fd81f3fabb2bfdc6db1f33aba840",
+        "1b5075f1cde537e928ef37c39c9131f20309ec59d0e6e5c77bb29be0758e852a",
+        "282bcb3d441f653d8289e0baeb58560b02fef29fc2e222ef9ebb18d3299c2d93"
+      ],
+      "quote_line": 193,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tСпланировать визит (примечание: часы работы, адрес, как добраться, информация о доступной среде, ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетителям: спланировать визит"
+    },
+    {
+      "id": "TZ-140",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        193
+      ],
+      "source_line_sha256": [
+        "fe10c7c1d99dbde6c7474d6bfcc4e0605bb4fc36eb05cf7136b7cfb36c7763bb"
+      ],
+      "quote_line": 193,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tСпланировать визит (примечание: часы работы, адрес, как добраться, информация о доступной среде, ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетителям: доступная среда в планировании визита"
+    },
+    {
+      "id": "TZ-141",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        194
+      ],
+      "source_line_sha256": [
+        "9509e4316bffdceacde96f35e70862a723f4dbec2873b5aa93e8d51625774927"
+      ],
+      "quote_line": 194,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБилеты и льготы (примечание: порядок возврата билетов + кнопка (ссылка) «Купить билет» с переводо",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетителям: билеты и льготы"
+    },
+    {
+      "id": "TZ-142",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        194
+      ],
+      "source_line_sha256": [
+        "9509e4316bffdceacde96f35e70862a723f4dbec2873b5aa93e8d51625774927"
+      ],
+      "quote_line": 194,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБилеты и льготы (примечание: порядок возврата билетов + кнопка (ссылка) «Купить билет» с переводо",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетителям: порядок возврата билетов"
+    },
+    {
+      "id": "TZ-143",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        195
+      ],
+      "source_line_sha256": [
+        "eeb2aab428c28fd67048bd1060d099c30f892d16a7afd0ecbee9e5ab79cd37b9"
+      ],
+      "quote_line": 195,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПушкинская карта",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетителям: Пушкинская карта"
+    },
+    {
+      "id": "TZ-144",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        196
+      ],
+      "source_line_sha256": [
+        "6641a363853ebbffc583387e0fc23c156481fd81f3fabb2bfdc6db1f33aba840"
+      ],
+      "quote_line": 196,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДоступная среда",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетителям: доступная среда отдельной страницей"
+    },
+    {
+      "id": "TZ-145",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        197
+      ],
+      "source_line_sha256": [
+        "1b5075f1cde537e928ef37c39c9131f20309ec59d0e6e5c77bb29be0758e852a"
+      ],
+      "quote_line": 197,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tМагазин (примечание: без функции продажи)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетителям: магазин БЕЗ функции продажи"
+    },
+    {
+      "id": "TZ-146",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        198
+      ],
+      "source_line_sha256": [
+        "282bcb3d441f653d8289e0baeb58560b02fef29fc2e222ef9ebb18d3299c2d93"
+      ],
+      "quote_line": 198,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tЧастые вопросы",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Посетителям: частые вопросы"
+    },
+    {
+      "id": "TZ-147",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        199,
+        200
+      ],
+      "source_line_sha256": [
+        "87d8582c97ab9c79a3d7005e85787f86f6489400fc366873f58af8b390485374",
+        "2bbe38d4fb71192412d194ca229f6b7c5bed0088f3411fe909fedae4931c1ee4"
+      ],
+      "quote_line": 200,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tВсе события",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша: все события в карточках/баннерах"
+    },
+    {
+      "id": "TZ-148",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        201
+      ],
+      "source_line_sha256": [
+        "384473bb7b1fb533444dbd9e93c7954439e494bee1f05b6baf2d5d179b2f084a"
+      ],
+      "quote_line": 201,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tЭкскурсии",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша: экскурсии"
+    },
+    {
+      "id": "TZ-149",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        202
+      ],
+      "source_line_sha256": [
+        "81b5e4f73b841611f786e8467ba6b63d8702fb96062bbdd9d58f4e497c03694a"
+      ],
+      "quote_line": 202,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДетям",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша: детям"
+    },
+    {
+      "id": "TZ-150",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        203
+      ],
+      "source_line_sha256": [
+        "953dee66604de7c261d8585afb5994b35d3bc9b6b65bd8d4f30b9c202445eee4"
+      ],
+      "quote_line": 203,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tВыставки",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша: выставки"
+    },
+    {
+      "id": "TZ-151",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        204
+      ],
+      "source_line_sha256": [
+        "788340d244256e5e075304d4bede056b2d96bcba16857f306432a06eb4561162"
+      ],
+      "quote_line": 204,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tВстречи (примечание: информация о встречах, лекциях, презентациях)",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша: встречи/лекции/презентации"
+    },
+    {
+      "id": "TZ-152",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        205
+      ],
+      "source_line_sha256": [
+        "ba084294f0ca24ab7068ac3c4a018374bda63190388f1b154829fa5abcb76f29"
+      ],
+      "quote_line": 205,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФестивали",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша: фестивали"
+    },
+    {
+      "id": "TZ-153",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        206
+      ],
+      "source_line_sha256": [
+        "011c03efe022cb09bf239702cf9baea3433c91b504790a9f8d9a2ff69bd7a5c7"
+      ],
+      "quote_line": 206,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tМастер-классы",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша: мастер-классы"
+    },
+    {
+      "id": "TZ-154",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        207
+      ],
+      "source_line_sha256": [
+        "d8c3ec7e54655d161512824edf5a318386b0c1a727ce7bd2aab9f93982e5b2d9"
+      ],
+      "quote_line": 207,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tАрхив",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Афиша: архив прошлых событий"
+    },
+    {
+      "id": "TZ-155",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        208,
+        209
+      ],
+      "source_line_sha256": [
+        "da91cb14da3941660f4a3bff1255161a06dd4bf448347569b756c6a6ba6c84ee",
+        "4eef6498ccc7180df9576b2820d137a3c366fecbbeeeb6a2cb17379ea55ba2ea"
+      ],
+      "quote_line": 208,
+      "quote_offset": 0,
+      "exact_excerpt": "Экскурсии",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Экскурсии: обзорная"
+    },
+    {
+      "id": "TZ-156",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        210
+      ],
+      "source_line_sha256": [
+        "1e0f638af51101501324dc9eff60e0f1e60dc09e2f5e765eb75d065dbe0dcc4c"
+      ],
+      "quote_line": 210,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tИнтерактивные экскурсии",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Экскурсии: интерактивные"
+    },
+    {
+      "id": "TZ-157",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        211
+      ],
+      "source_line_sha256": [
+        "263ea67c3e84699cc76ce6a4fcd2f62294402cafcd5c08bfb5552fecc60dadf0"
+      ],
+      "quote_line": 211,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tТематические экскурсии",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Экскурсии: тематические"
+    },
+    {
+      "id": "TZ-158",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        212
+      ],
+      "source_line_sha256": [
+        "2e719c6e6049d7ad088a5f4f4ee56ada714dc7afcab21d6c0bd7f0e13f57f1b4"
+      ],
+      "quote_line": 212,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tМастер-классы для взрослых",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Экскурсии: мастер-классы для взрослых"
+    },
+    {
+      "id": "TZ-159",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        213,
+        214
+      ],
+      "source_line_sha256": [
+        "81176f9f58d468b11607fe8a37ec3b94996d20c3ace682934d0d067cf65b5360",
+        "1e0f638af51101501324dc9eff60e0f1e60dc09e2f5e765eb75d065dbe0dcc4c"
+      ],
+      "quote_line": 214,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tИнтерактивные экскурсии",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Детям: интерактивные экскурсии"
+    },
+    {
+      "id": "TZ-160",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        215
+      ],
+      "source_line_sha256": [
+        "263ea67c3e84699cc76ce6a4fcd2f62294402cafcd5c08bfb5552fecc60dadf0"
+      ],
+      "quote_line": 215,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tТематические экскурсии",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Детям: тематические экскурсии"
+    },
+    {
+      "id": "TZ-161",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        216
+      ],
+      "source_line_sha256": [
+        "97b09f333c169e62db5f9bb987bd17ea62a0330b17216295e893ff22f9783660"
+      ],
+      "quote_line": 216,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tМастер-классы для детей",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Детям: мастер-классы для детей"
+    },
+    {
+      "id": "TZ-162",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        217
+      ],
+      "source_line_sha256": [
+        "56331ae7fc4c55318ba9d29b3437260d292d19820cbc0a40ee4040ed16fa1ea4"
+      ],
+      "quote_line": 217,
+      "quote_offset": 0,
+      "exact_excerpt": "+ Кнопка (ссылка) с переводом на страницу «Пушкинской карты»",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Детям: CTA Пушкинской карты"
+    },
+    {
+      "id": "TZ-163",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        218,
+        219
+      ],
+      "source_line_sha256": [
+        "59c74a04caba02481e1d342c8d4c162ae29c651016c9d1a66aa91300df1622bc",
+        "cb865cc3a1f77e18f8c3f1afed125a4c37aae0a2504c6cc4275077749bb5b16f"
+      ],
+      "quote_line": 219,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tТекущие выставки",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Выставки: текущие"
+    },
+    {
+      "id": "TZ-164",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        220
+      ],
+      "source_line_sha256": [
+        "d1feb3e0aef23cc070c82f9b3388fd8dcf35af872772be3f4d566f45c82c5277"
+      ],
+      "quote_line": 220,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБудущие выставки",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Выставки: будущие"
+    },
+    {
+      "id": "TZ-165",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        221
+      ],
+      "source_line_sha256": [
+        "e45e107d94bf67b379472d27fd8a068d3b5e97cbcd39fae0d9f6dcb0a4385ef9"
+      ],
+      "quote_line": 221,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПередвижные выставки",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Выставки: передвижные"
+    },
+    {
+      "id": "TZ-166",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        222
+      ],
+      "source_line_sha256": [
+        "e9f378899bde8e3d900004e9e884df77c386fe6adc8010c08fe26dd043edfe23"
+      ],
+      "quote_line": 222,
+      "quote_offset": 0,
+      "exact_excerpt": "+ Кнопка (ссылка)  с переводом на страницу  «Пушкинской карты»",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Выставки: CTA Пушкинской карты"
+    },
+    {
+      "id": "TZ-167",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        223,
+        224
+      ],
+      "source_line_sha256": [
+        "1ee24243481ca6dd499eda50feb173fdaccbea64f5d90d7c96d6b254308423b8",
+        "af1ee39e4752d1bf01c768e98d61a58ddebaf3b4f12fb13a4ffe9da0a620cbfb"
+      ],
+      "quote_line": 224,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tСеминары и конференции",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Наука: семинары и конференции"
+    },
+    {
+      "id": "TZ-168",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        225
+      ],
+      "source_line_sha256": [
+        "7f77d3968d29f2c87566a8cc133c199f91e4fe2a1d3af11f470104b7ee10d7a1"
+      ],
+      "quote_line": 225,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПубликации",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Наука: публикации"
+    },
+    {
+      "id": "TZ-169",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        226
+      ],
+      "source_line_sha256": [
+        "6916c2c94e886fa9cfff82c0ab43c042f36f7414c66763cf14994cd7cd95007d"
+      ],
+      "quote_line": 226,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКоллекция (примечание: описание, фото избранных экспонатов, кнопка (ссылка) на страницу музея в Г",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Наука: коллекция, описание и фото отдельных экспонатов"
+    },
+    {
+      "id": "TZ-170",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        226
+      ],
+      "source_line_sha256": [
+        "6916c2c94e886fa9cfff82c0ab43c042f36f7414c66763cf14994cd7cd95007d"
+      ],
+      "quote_line": 226,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКоллекция (примечание: описание, фото избранных экспонатов, кнопка (ссылка) на страницу музея в Г",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Коллекция: ссылка на страницу музея в Госкаталоге"
+    },
+    {
+      "id": "TZ-171",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        227
+      ],
+      "source_line_sha256": [
+        "60842f2a7c726760ce555fc468210d82f315671e8313cff859d4ce2e6fa9e997"
+      ],
+      "quote_line": 227,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tИсследователям ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Наука: исследователям"
+    },
+    {
+      "id": "TZ-172",
+      "clause": "2.2.3.6.1",
+      "physical_lines": [
+        228
+      ],
+      "source_line_sha256": [
+        "794bfc5998bc581f7da4c6147cea84eac6d8b8ce883b8f28c0a6d26d18b308c2"
+      ],
+      "quote_line": 228,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tМатериалы по теме ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Наука: материалы по теме"
+    },
+    {
+      "id": "TZ-173",
+      "clause": "2.2.3.6.2",
+      "physical_lines": [
+        231
+      ],
+      "source_line_sha256": [
+        "84f5a5a23d4221a0cdd530134fb3e59e51dc33772518f8ac612aed3ea228682b"
+      ],
+      "quote_line": 231,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tГлобальная навигация: фиксированное горизонтальное мега-меню в шапке сайта, доступное при скролле",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Фиксированное горизонтальное мега-меню при скролле"
+    },
+    {
+      "id": "TZ-174",
+      "clause": "2.2.3.6.2",
+      "physical_lines": [
+        231
+      ],
+      "source_line_sha256": [
+        "84f5a5a23d4221a0cdd530134fb3e59e51dc33772518f8ac612aed3ea228682b"
+      ],
+      "quote_line": 231,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tГлобальная навигация: фиксированное горизонтальное мега-меню в шапке сайта, доступное при скролле",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Выпадающие блоки подразделов"
+    },
+    {
+      "id": "TZ-175",
+      "clause": "2.2.3.6.2",
+      "physical_lines": [
+        232
+      ],
+      "source_line_sha256": [
+        "c26ac9ba57e83125e916551a11528939e3cc0f3a073bd705f9c4ff95e439a89c"
+      ],
+      "quote_line": 232,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tЛокальная навигация: «хлебные крошки» (Breadcrumbs) на всех страницах, кроме главной.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Breadcrumbs на всех страницах кроме главной"
+    },
+    {
+      "id": "TZ-176",
+      "clause": "2.2.3.6.2",
+      "physical_lines": [
+        233
+      ],
+      "source_line_sha256": [
+        "d7fd5addf3313577ed9af1cca7ffe6559857cdb9ca05d3bee12e79b813c45b6c"
+      ],
+      "quote_line": 233,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКонтекстная навигация: внутренние перелинковки (например, ссылка на статью в анонсе выставки).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Контекстная перелинковка внутри материалов"
+    },
+    {
+      "id": "TZ-177",
+      "clause": "2.2.3.6.2",
+      "physical_lines": [
+        234
+      ],
+      "source_line_sha256": [
+        "065ac0b5dbe0101cf26d35da5b9d3dc207e3f59edf36640361e918a30b098e43"
+      ],
+      "quote_line": 234,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПоиск: умная поисковая строка с автодополнением.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Умная поисковая строка с автодополнением"
+    },
+    {
+      "id": "TZ-178",
+      "clause": "2.2.3.6.2",
+      "physical_lines": [
+        235
+      ],
+      "source_line_sha256": [
+        "ca72995e3ea115936c3befb2b483ee5c7a233a043342b85d34c8c574eaa0651e"
+      ],
+      "quote_line": 235,
+      "quote_offset": 16,
+      "exact_excerpt": "ствию (CTA): кнопка с action-текстом («Купить билет») должна быть на видном месте на всех страницах.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Кнопка «Купить билет» на видном месте ВСЕХ страниц"
+    },
+    {
+      "id": "TZ-179",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        237
+      ],
+      "source_line_sha256": [
+        "785203d31e454e5fce5027a772048eb0cd03a37ac3d21118fe188c1a695323c9"
+      ],
+      "quote_line": 237,
+      "quote_offset": 63,
+      "exact_excerpt": "ром, которые могут публиковать новые материалы и контролировать актуальность существующего контента.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Редактор/администратор создают и контролируют актуальность контента"
+    },
+    {
+      "id": "TZ-180",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        238
+      ],
+      "source_line_sha256": [
+        "91bd74174104cfe10e85738b253410b478074e02eb1f242e9317faf200cf44c4"
+      ],
+      "quote_line": 238,
+      "quote_offset": 0,
+      "exact_excerpt": "Поддержка форматов: текст, графические материалы, изображения (JPG, PNG, WebP, SVG, GIF), видео, док",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Сохранение и вывод обычного текста"
+    },
+    {
+      "id": "TZ-181",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        238
+      ],
+      "source_line_sha256": [
+        "91bd74174104cfe10e85738b253410b478074e02eb1f242e9317faf200cf44c4"
+      ],
+      "quote_line": 238,
+      "quote_offset": 0,
+      "exact_excerpt": "Поддержка форматов: текст, графические материалы, изображения (JPG, PNG, WebP, SVG, GIF), видео, док",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Изображения JPG, PNG, WebP"
+    },
+    {
+      "id": "TZ-182",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        238
+      ],
+      "source_line_sha256": [
+        "91bd74174104cfe10e85738b253410b478074e02eb1f242e9317faf200cf44c4"
+      ],
+      "quote_line": 238,
+      "quote_offset": 0,
+      "exact_excerpt": "Поддержка форматов: текст, графические материалы, изображения (JPG, PNG, WebP, SVG, GIF), видео, док",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Графика SVG и GIF в контенте"
+    },
+    {
+      "id": "TZ-183",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        238
+      ],
+      "source_line_sha256": [
+        "91bd74174104cfe10e85738b253410b478074e02eb1f242e9317faf200cf44c4"
+      ],
+      "quote_line": 238,
+      "quote_offset": 0,
+      "exact_excerpt": "Поддержка форматов: текст, графические материалы, изображения (JPG, PNG, WebP, SVG, GIF), видео, док",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Видео в контенте"
+    },
+    {
+      "id": "TZ-184",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        238
+      ],
+      "source_line_sha256": [
+        "91bd74174104cfe10e85738b253410b478074e02eb1f242e9317faf200cf44c4"
+      ],
+      "quote_line": 238,
+      "quote_offset": 24,
+      "exact_excerpt": "т, графические материалы, изображения (JPG, PNG, WebP, SVG, GIF), видео, документы (PDF, DOCX, XLS).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Документы PDF, DOCX и XLS"
+    },
+    {
+      "id": "TZ-185",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        240
+      ],
+      "source_line_sha256": [
+        "7cbca23bfd927b47d2a0c9d9b7764de882e04111ebf20e7f5f9376c7fe4fc741"
+      ],
+      "quote_line": 240,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДля каждой страницы: редактируемые Meta-title, Meta-description, заголовок H1.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Editable meta-title каждой страницы"
+    },
+    {
+      "id": "TZ-186",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        240
+      ],
+      "source_line_sha256": [
+        "7cbca23bfd927b47d2a0c9d9b7764de882e04111ebf20e7f5f9376c7fe4fc741"
+      ],
+      "quote_line": 240,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДля каждой страницы: редактируемые Meta-title, Meta-description, заголовок H1.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Editable meta-description каждой страницы"
+    },
+    {
+      "id": "TZ-187",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        240
+      ],
+      "source_line_sha256": [
+        "7cbca23bfd927b47d2a0c9d9b7764de882e04111ebf20e7f5f9376c7fe4fc741"
+      ],
+      "quote_line": 240,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tДля каждой страницы: редактируемые Meta-title, Meta-description, заголовок H1.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Editable H1 каждой страницы"
+    },
+    {
+      "id": "TZ-188",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        241
+      ],
+      "source_line_sha256": [
+        "0bb10b8f02d680a68c75c1700f6ae8dfe4c46b8326686f9ff66bca752e576b64"
+      ],
+      "quote_line": 241,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tАвтоматическое генерирование SEO-атрибутов: alt для изображений, title для ссылок.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Автоматическая генерация alt для изображений"
+    },
+    {
+      "id": "TZ-189",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        241
+      ],
+      "source_line_sha256": [
+        "0bb10b8f02d680a68c75c1700f6ae8dfe4c46b8326686f9ff66bca752e576b64"
+      ],
+      "quote_line": 241,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tАвтоматическое генерирование SEO-атрибутов: alt для изображений, title для ссылок.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Автоматическая генерация title для ссылок"
+    },
+    {
+      "id": "TZ-190",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        242
+      ],
+      "source_line_sha256": [
+        "8bc9980dcfe3e9abe6c168efab4c973e7c5f1cd1d9bf383c66b6a6069935026c"
+      ],
+      "quote_line": 242,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tСистема перелинковки для удержания пользователя и роста SEO-показателей.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Автоматическая или управляемая система внутренней перелинковки"
+    },
+    {
+      "id": "TZ-191",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        243
+      ],
+      "source_line_sha256": [
+        "a316b299275130c8ec21961bfacfe240d40c5d9eeb3a61bc338df79c92f20b23"
+      ],
+      "quote_line": 243,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tАвтоматическое создание sitemap.xml и robots.txt.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Автоматическое создание sitemap.xml"
+    },
+    {
+      "id": "TZ-192",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        243
+      ],
+      "source_line_sha256": [
+        "a316b299275130c8ec21961bfacfe240d40c5d9eeb3a61bc338df79c92f20b23"
+      ],
+      "quote_line": 243,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tАвтоматическое создание sitemap.xml и robots.txt.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Автоматическое создание robots.txt"
+    },
+    {
+      "id": "TZ-193",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        244,
+        245
+      ],
+      "source_line_sha256": [
+        "4c6e317fd59dc92f19ba7bfe94a0202dc2372d2daa4dbb8dfe16aad2b7c0eb81",
+        "3b3d4b4b7761259e4eda2dc7002b88930b1732f2c22eda83dbaea14806095d88"
+      ],
+      "quote_line": 245,
+      "quote_offset": 83,
+      "exact_excerpt": "кциональных изображений (иконки-ссылки, кнопки) описание должно пояснять действие. Alt-текст не долж",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Осмысленные краткие alt для всех содержательных изображений"
+    },
+    {
+      "id": "TZ-194",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        245
+      ],
+      "source_line_sha256": [
+        "3b3d4b4b7761259e4eda2dc7002b88930b1732f2c22eda83dbaea14806095d88"
+      ],
+      "quote_line": 245,
+      "quote_offset": 167,
+      "exact_excerpt": "lt-текст не должен содержать фразы «изображение», «картинка», «фотография» или «графика», так как пр",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Alt не должен говорить «картинка/изображение/фото/графика», до 100–125 символов"
+    },
+    {
+      "id": "TZ-195",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        245
+      ],
+      "source_line_sha256": [
+        "3b3d4b4b7761259e4eda2dc7002b88930b1732f2c22eda83dbaea14806095d88"
+      ],
+      "quote_line": 245,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tAlt-текст должен однозначно передавать функцию и назначение изображения. Для функциональных изобр",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Для длинного описания — отдельный текстовый блок"
+    },
+    {
+      "id": "TZ-196",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        246
+      ],
+      "source_line_sha256": [
+        "0a6837db75b7504f8a06cb427b0aff00bb71d89fee9290d5f50fd2d211272ed5"
+      ],
+      "quote_line": 246,
+      "quote_offset": 0,
+      "exact_excerpt": "Сайт должен предусматривать возможность перевода на английский язык и возможность добавления новых с",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Возможность перевода сайта на английский"
+    },
+    {
+      "id": "TZ-197",
+      "clause": "2.2.3.6.3",
+      "physical_lines": [
+        246
+      ],
+      "source_line_sha256": [
+        "0a6837db75b7504f8a06cb427b0aff00bb71d89fee9290d5f50fd2d211272ed5"
+      ],
+      "quote_line": 246,
+      "quote_offset": 31,
+      "exact_excerpt": "можность перевода на английский язык и возможность добавления новых страниц в существующие разделы. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Добавление страниц в существующие разделы"
+    },
+    {
+      "id": "TZ-198",
+      "clause": "2.2.3.6.4",
+      "physical_lines": [
+        248
+      ],
+      "source_line_sha256": [
+        "5295aeedaba4944276a594c68e59e828b6b90add380abad8ae4e082d567944f4"
+      ],
+      "quote_line": 248,
+      "quote_offset": 0,
+      "exact_excerpt": "Необходима интеграфия билетной системы, картографического сервиса, системы веб-аналитики, социальных",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интеграция билетной системы"
+    },
+    {
+      "id": "TZ-199",
+      "clause": "2.2.3.6.4",
+      "physical_lines": [
+        248
+      ],
+      "source_line_sha256": [
+        "5295aeedaba4944276a594c68e59e828b6b90add380abad8ae4e082d567944f4"
+      ],
+      "quote_line": 248,
+      "quote_offset": 0,
+      "exact_excerpt": "Необходима интеграфия билетной системы, картографического сервиса, системы веб-аналитики, социальных",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интеграция картографического сервиса"
+    },
+    {
+      "id": "TZ-200",
+      "clause": "2.2.3.6.4",
+      "physical_lines": [
+        248
+      ],
+      "source_line_sha256": [
+        "5295aeedaba4944276a594c68e59e828b6b90add380abad8ae4e082d567944f4"
+      ],
+      "quote_line": 248,
+      "quote_offset": 0,
+      "exact_excerpt": "Необходима интеграфия билетной системы, картографического сервиса, системы веб-аналитики, социальных",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интеграция веб-аналитики"
+    },
+    {
+      "id": "TZ-201",
+      "clause": "2.2.3.6.4",
+      "physical_lines": [
+        248
+      ],
+      "source_line_sha256": [
+        "5295aeedaba4944276a594c68e59e828b6b90add380abad8ae4e082d567944f4"
+      ],
+      "quote_line": 248,
+      "quote_offset": 74,
+      "exact_excerpt": " веб-аналитики, социальных сетей, видеохостинга, формы обратной связи, формы заявки на экскурсию.   ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интеграция социальных сетей"
+    },
+    {
+      "id": "TZ-202",
+      "clause": "2.2.3.6.4",
+      "physical_lines": [
+        248
+      ],
+      "source_line_sha256": [
+        "5295aeedaba4944276a594c68e59e828b6b90add380abad8ae4e082d567944f4"
+      ],
+      "quote_line": 248,
+      "quote_offset": 74,
+      "exact_excerpt": " веб-аналитики, социальных сетей, видеохостинга, формы обратной связи, формы заявки на экскурсию.   ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интеграция видеохостинга"
+    },
+    {
+      "id": "TZ-203",
+      "clause": "2.2.3.6.4",
+      "physical_lines": [
+        248
+      ],
+      "source_line_sha256": [
+        "5295aeedaba4944276a594c68e59e828b6b90add380abad8ae4e082d567944f4"
+      ],
+      "quote_line": 248,
+      "quote_offset": 74,
+      "exact_excerpt": " веб-аналитики, социальных сетей, видеохостинга, формы обратной связи, формы заявки на экскурсию.   ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интеграция формы обратной связи"
+    },
+    {
+      "id": "TZ-204",
+      "clause": "2.2.3.6.4",
+      "physical_lines": [
+        248
+      ],
+      "source_line_sha256": [
+        "5295aeedaba4944276a594c68e59e828b6b90add380abad8ae4e082d567944f4"
+      ],
+      "quote_line": 248,
+      "quote_offset": 74,
+      "exact_excerpt": " веб-аналитики, социальных сетей, видеохостинга, формы обратной связи, формы заявки на экскурсию.   ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интеграция формы заявки на экскурсию"
+    },
+    {
+      "id": "TZ-205",
+      "clause": "2.2.3.6.4",
+      "physical_lines": [
+        249
+      ],
+      "source_line_sha256": [
+        "71e0445b3f05dc0fce5f18ca38563f2cddd245195e88ac83025395f8c8944968"
+      ],
+      "quote_line": 249,
+      "quote_offset": 0,
+      "exact_excerpt": "Продажа билетов должна осуществляться на посещение музея, экскурсии, мероприятия и другие позиции из",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Продажа билетов: музей, экскурсии, мероприятия и иные позиции прейскуранта"
+    },
+    {
+      "id": "TZ-206",
+      "clause": "2.2.3.6.5",
+      "physical_lines": [
+        251
+      ],
+      "source_line_sha256": [
+        "ec83f0c91c28981c62a1d72b3b7a1c645504ebd675d8ce7afc88596510a30404"
+      ],
+      "quote_line": 251,
+      "quote_offset": 0,
+      "exact_excerpt": "Версия сайта для людей с ограниченными возможностями зрения должна соответствовать всем актуальным т",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Отдельная версия/режим для слабовидящих: крупные шрифты и контраст"
+    },
+    {
+      "id": "TZ-207",
+      "clause": "2.2.3.6.5",
+      "physical_lines": [
+        252
+      ],
+      "source_line_sha256": [
+        "38004d977ebcaf5b984a4e82456731568faa105d581d260bbee91b7a839e9f20"
+      ],
+      "quote_line": 252,
+      "quote_offset": 0,
+      "exact_excerpt": "Сайт должен обеспечивать полную функциональность и навигацию с использованием только клавиатуры (без",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Полная работа сайта исключительно с клавиатуры"
+    },
+    {
+      "id": "TZ-208",
+      "clause": "2.2.3.6.5",
+      "physical_lines": [
+        253
+      ],
+      "source_line_sha256": [
+        "66e960e9e392dcc892f8c1e5f665766dc01a35dec79eb1decf1cef4cf1962828"
+      ],
+      "quote_line": 253,
+      "quote_offset": 0,
+      "exact_excerpt": "Любой интерактивный элемент страницы – ссылки, кнопки, поля форм, элементы выпадающих списков, перек",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Все интерактивные элементы Tab/Shift+Tab"
+    },
+    {
+      "id": "TZ-209",
+      "clause": "2.2.3.6.5",
+      "physical_lines": [
+        253
+      ],
+      "source_line_sha256": [
+        "66e960e9e392dcc892f8c1e5f665766dc01a35dec79eb1decf1cef4cf1962828"
+      ],
+      "quote_line": 253,
+      "quote_offset": 294,
+      "exact_excerpt": "выполняться клавишами Enter или Пробел. Клавишу Enter следует использовать для подтверждения действи",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Активация клавишами Enter/Space, включая слайдеры и dropdown"
+    },
+    {
+      "id": "TZ-210",
+      "clause": "2.2.3.6.5",
+      "physical_lines": [
+        253
+      ],
+      "source_line_sha256": [
+        "66e960e9e392dcc892f8c1e5f665766dc01a35dec79eb1decf1cef4cf1962828"
+      ],
+      "quote_line": 253,
+      "quote_offset": 498,
+      "exact_excerpt": "м находится фокус, должен иметь четкий видимый индикатор (например, контрастную рамку, изменение цве",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Чёткий видимый фокус на любом фоне"
+    },
+    {
+      "id": "TZ-211",
+      "clause": "2.2.3.6.5",
+      "physical_lines": [
+        254,
+        255,
+        256,
+        257
+      ],
+      "source_line_sha256": [
+        "a9aa973720f283042c3a24d0f66181aa5007296a90f10b4077940f28dbf54e87",
+        "a6769993b6395bfb811ab485bdb8fda87fe76f57196afd1f18b8258d18c1eb6a",
+        "69b506b64cfeeea771157c0cd5c7915e6b2aee330cb86155cbe4e05ba39b373e",
+        "52a0d450afb400e6484403d2c2b77edfcc1c0b2a412a89192e2499820dd50f30"
+      ],
+      "quote_line": 254,
+      "quote_offset": 0,
+      "exact_excerpt": "Официальные документы музея должны быть доступны для чтения при помощи вспомогательных технологий, в",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Все официальные документы доступны вспомогательным технологиям"
+    },
+    {
+      "id": "TZ-212",
+      "clause": "2.2.3.6.5",
+      "physical_lines": [
+        254,
+        255,
+        256
+      ],
+      "source_line_sha256": [
+        "a9aa973720f283042c3a24d0f66181aa5007296a90f10b4077940f28dbf54e87",
+        "a6769993b6395bfb811ab485bdb8fda87fe76f57196afd1f18b8258d18c1eb6a",
+        "69b506b64cfeeea771157c0cd5c7915e6b2aee330cb86155cbe4e05ba39b373e"
+      ],
+      "quote_line": 254,
+      "quote_offset": 625,
+      "exact_excerpt": "и «Интернет» и ГОСТ Р 70176-2022 для обеспечения их доступности для людей с инвалидностью по зрению.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "PDF доступен по постановлению 102 и ГОСТ Р 70176-2022 с машинным текстом/структурой"
+    },
+    {
+      "id": "TZ-213",
+      "clause": "2.2.3.6.5",
+      "physical_lines": [
+        257
+      ],
+      "source_line_sha256": [
+        "52a0d450afb400e6484403d2c2b77edfcc1c0b2a412a89192e2499820dd50f30"
+      ],
+      "quote_line": 257,
+      "quote_offset": 106,
+      "exact_excerpt": "а в формате HTML либо в ином согласованном Сторонами текстовом машиночитаемом формате, доступном для",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Альтернатива: эквивалентная HTML/машиночитаемая версия PDF"
+    },
+    {
+      "id": "TZ-214",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        260
+      ],
+      "source_line_sha256": [
+        "37824b8f61977e292d33ce41d3b111d139fff12b15edcdba31876b42ef17e381"
+      ],
+      "quote_line": 260,
+      "quote_offset": 0,
+      "exact_excerpt": "Используемая система управления сайтом должна быть  разработана на фреймворке Laravel актуальной вер",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "CMS разработана на актуальном Laravel (MVC)"
+    },
+    {
+      "id": "TZ-215",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        260
+      ],
+      "source_line_sha256": [
+        "37824b8f61977e292d33ce41d3b111d139fff12b15edcdba31876b42ef17e381"
+      ],
+      "quote_line": 260,
+      "quote_offset": 153,
+      "exact_excerpt": " механизмами безопасности (CSRF, ORM-защита от SQL-инъекций), очередью задач (queues) и кеширования.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Laravel ORM, CSRF и защита от SQL injection"
+    },
+    {
+      "id": "TZ-216",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        260
+      ],
+      "source_line_sha256": [
+        "37824b8f61977e292d33ce41d3b111d139fff12b15edcdba31876b42ef17e381"
+      ],
+      "quote_line": 260,
+      "quote_offset": 0,
+      "exact_excerpt": "Используемая система управления сайтом должна быть  разработана на фреймворке Laravel актуальной вер",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Очереди задач Laravel"
+    },
+    {
+      "id": "TZ-217",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        260
+      ],
+      "source_line_sha256": [
+        "37824b8f61977e292d33ce41d3b111d139fff12b15edcdba31876b42ef17e381"
+      ],
+      "quote_line": 260,
+      "quote_offset": 0,
+      "exact_excerpt": "Используемая система управления сайтом должна быть  разработана на фреймворке Laravel актуальной вер",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Кэширование Laravel"
+    },
+    {
+      "id": "TZ-218",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        261
+      ],
+      "source_line_sha256": [
+        "a1e449a78b7d3c9694277638702043f008590e47fed9c40b4cc127bfc8298e0a"
+      ],
+      "quote_line": 261,
+      "quote_offset": 0,
+      "exact_excerpt": "Фронтенд должет быть выполнен по следующим характеристикам – JavaScript Framework –Next.js реактивно",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Фронтенд реализован на Next.js, компонентная реактивность"
+    },
+    {
+      "id": "TZ-219",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        261
+      ],
+      "source_line_sha256": [
+        "a1e449a78b7d3c9694277638702043f008590e47fed9c40b4cc127bfc8298e0a"
+      ],
+      "quote_line": 261,
+      "quote_offset": 159,
+      "exact_excerpt": "сокая производительность для сложных интерактивных интерфейсов (личный кабинет, многошаговые формы).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Поддержка сложных UI вроде кабинета/многошаговых форм если они нужны"
+    },
+    {
+      "id": "TZ-220",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        263
+      ],
+      "source_line_sha256": [
+        "5d1a662206fa2ab63478f897811664575ce181e6beac3acaf38edf9e8cee0454"
+      ],
+      "quote_line": 263,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБазовые технологии – HTML5, CSS3, Sass (SCSS). ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "HTML5"
+    },
+    {
+      "id": "TZ-221",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        263
+      ],
+      "source_line_sha256": [
+        "5d1a662206fa2ab63478f897811664575ce181e6beac3acaf38edf9e8cee0454"
+      ],
+      "quote_line": 263,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБазовые технологии – HTML5, CSS3, Sass (SCSS). ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "CSS3"
+    },
+    {
+      "id": "TZ-222",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        263
+      ],
+      "source_line_sha256": [
+        "5d1a662206fa2ab63478f897811664575ce181e6beac3acaf38edf9e8cee0454"
+      ],
+      "quote_line": 263,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБазовые технологии – HTML5, CSS3, Sass (SCSS). ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Sass (SCSS) прямо назван как базовая технология"
+    },
+    {
+      "id": "TZ-223",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        264
+      ],
+      "source_line_sha256": [
+        "41d3e15a8ae3ba5dc71945ec7f8ed3d80946017deeb7967a37a66e9e4fd5aeba"
+      ],
+      "quote_line": 264,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tВеб-сервер  –  Nginx (как reverse proxy и для отдачи статики).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Nginx как reverse proxy и для отдачи статики"
+    },
+    {
+      "id": "TZ-224",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        265
+      ],
+      "source_line_sha256": [
+        "8c6beca3c34e7d8a130b7d9af7426d2f639cb3e04409c6bfd5ce46a626db80b7"
+      ],
+      "quote_line": 265,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tИнтерпретатор  – PHP-FPM 8.4+.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "PHP-FPM 8.4+"
+    },
+    {
+      "id": "TZ-225",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        266
+      ],
+      "source_line_sha256": [
+        "89d0b8fb2465ca595dd33932abb4d00d2f1e7ebff1819e67be973cbceffb0001"
+      ],
+      "quote_line": 266,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tМенеджер процессов  – systemd для управления очередями и фоновыми процессами Laravel. Менеджер за",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "systemd для очередей и фоновых процессов"
+    },
+    {
+      "id": "TZ-226",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        266
+      ],
+      "source_line_sha256": [
+        "89d0b8fb2465ca595dd33932abb4d00d2f1e7ebff1819e67be973cbceffb0001"
+      ],
+      "quote_line": 266,
+      "quote_offset": 70,
+      "exact_excerpt": "роцессами Laravel. Менеджер задач на усмотрение подрядчика, система контроля версий (например, Git).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Система контроля версий Git или аналог"
+    },
+    {
+      "id": "TZ-227",
+      "clause": "2.2.3.7.1",
+      "physical_lines": [
+        267
+      ],
+      "source_line_sha256": [
+        "546279abc67347a7e01da14aa5bad88fd8abcdd5329498b31d343c16fec79c9f"
+      ],
+      "quote_line": 267,
+      "quote_offset": 0,
+      "exact_excerpt": "Хостинг и доменное имя (musbread.ru) предоставляет Заказчик.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Хостинг и домен musbread.ru предоставляет заказчик"
+    },
+    {
+      "id": "TZ-228",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        269
+      ],
+      "source_line_sha256": [
+        "af4d8028b3faba5607d6fb6359a593026ec53558f8ff1f956743a1dbf13993ff"
+      ],
+      "quote_line": 269,
+      "quote_offset": 0,
+      "exact_excerpt": "а) Разработка кастомной административной панели на Laravel MoonShine для обеспечения:",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Кастомная административная панель на MoonShine"
+    },
+    {
+      "id": "TZ-229",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        270
+      ],
+      "source_line_sha256": [
+        "10fe1edc76304386b2ded8e64df2c22fb693ee7498c4cc9595b961c9c416beca"
+      ],
+      "quote_line": 270,
+      "quote_offset": 5,
+      "exact_excerpt": "бкости и производительности: система настроена строго под нужды проекта без избыточного функционала;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "CMS строго под задачи музея без избыточного функционала"
+    },
+    {
+      "id": "TZ-230",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        271
+      ],
+      "source_line_sha256": [
+        "3b93728aa6e95a1dd562c84c95736918a059dedc2527cbc5ff85ff71922d13f8"
+      ],
+      "quote_line": 271,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tбезопасности: полный контроль над кодом, отсутствие уязвимостей, характерных для массовых CMS;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Контроль исходного кода и безопасности CMS"
+    },
+    {
+      "id": "TZ-231",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        272
+      ],
+      "source_line_sha256": [
+        "e0e897efdb460498b5170c668127eea3645adf0421036af6875a572460f1da06"
+      ],
+      "quote_line": 272,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tудобство управления: интуитивный интерфейс для редакторов, сформированный вокруг их задач;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интуитивная CMS для сотрудников"
+    },
+    {
+      "id": "TZ-232",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        274
+      ],
+      "source_line_sha256": [
+        "e30860b4a88b0a7eae9e6fb60c4baf00806186a0948b777c43f4f1df8759cd84"
+      ],
+      "quote_line": 274,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tвизуальный редактор (WYSIWYG) с white-list функционалом для форматирования и вставки медиа;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "WYSIWYG с белым списком операций и вставкой медиа"
+    },
+    {
+      "id": "TZ-233",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        275
+      ],
+      "source_line_sha256": [
+        "8e972044be2993201d1e5cd715072794b3de4fd34c15a83398de410c296a4e60"
+      ],
+      "quote_line": 275,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tуправление SEO-атрибутами (title, description, h1) для каждой страницы;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Настройка SEO title/description/H1 для каждой страницы"
+    },
+    {
+      "id": "TZ-234",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        276
+      ],
+      "source_line_sha256": [
+        "dfb67630394da256d58a8b3658b289144735f4b5e4a2cdecff9e25bdfe8497a0"
+      ],
+      "quote_line": 276,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tсистема для запланированной публикации контента и снятия с публикации;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Запланированная публикация и снятие с публикации"
+    },
+    {
+      "id": "TZ-235",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        277
+      ],
+      "source_line_sha256": [
+        "7c4778748ffcf90e1d21758535fd3d5f7af0b6027639924b0273c9fce1300b08"
+      ],
+      "quote_line": 277,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tменеджер файлов с поддержкой drag-and-drop загрузки;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Файловый менеджер и drag-and-drop"
+    },
+    {
+      "id": "TZ-236",
+      "clause": "2.2.3.7.2",
+      "physical_lines": [
+        278
+      ],
+      "source_line_sha256": [
+        "9de159cd0605af132da65dc9d95545f7018ada3cfe87c6d8112f4e8cf6ba1aa5"
+      ],
+      "quote_line": 278,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tполная статистика по действиям пользователей.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Полная статистика действий пользователей"
+    },
+    {
+      "id": "TZ-237",
+      "clause": "2.2.3.8.1",
+      "physical_lines": [
+        281
+      ],
+      "source_line_sha256": [
+        "7afc50be7c4399b48bc8561dc8f32dbaefd7764f680a8deaed35131097499eac"
+      ],
+      "quote_line": 281,
+      "quote_offset": 0,
+      "exact_excerpt": "Адаптивная верстка. Сайт должен быть адаптивным и корректно отображаться на любых устройствах, включ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Адаптивная верстка на desktop/laptop/tablet/mobile"
+    },
+    {
+      "id": "TZ-238",
+      "clause": "2.2.3.8.1",
+      "physical_lines": [
+        281
+      ],
+      "source_line_sha256": [
+        "7afc50be7c4399b48bc8561dc8f32dbaefd7764f680a8deaed35131097499eac"
+      ],
+      "quote_line": 281,
+      "quote_offset": 422,
+      "exact_excerpt": "р и перестраиваться, полностью подстраиваясь под новое разрешение экрана без «разрывов» и искажений.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Реальный browser zoom 100–200% и перестроение без разрывов"
+    },
+    {
+      "id": "TZ-239",
+      "clause": "2.2.3.8.1",
+      "physical_lines": [
+        282
+      ],
+      "source_line_sha256": [
+        "b3fc955497abe4caf8d3d6c603ba6d24a96109b8beb25dc1b01314453e878829"
+      ],
+      "quote_line": 282,
+      "quote_offset": 0,
+      "exact_excerpt": "Размер шрифта всех текстовых элементов (заголовков, абзацев, подписей кнопок и т. д.) должен быть за",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ВСЕ размеры текстовых шрифтов только rem/em, без px/pt"
+    },
+    {
+      "id": "TZ-240",
+      "clause": "2.2.3.8.1",
+      "physical_lines": [
+        283
+      ],
+      "source_line_sha256": [
+        "51a465f838e4e45897c9e9a68b3e85148867c50af50869dfbeeb22de45aaf4e9"
+      ],
+      "quote_line": 283,
+      "quote_offset": 0,
+      "exact_excerpt": "При любом масштабе страницы (от 100 до 200 процентов) горизонтальная полоса прокрутки должна отсутст",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Нет горизонтальной полосы при любом масштабе 100–200%"
+    },
+    {
+      "id": "TZ-241",
+      "clause": "2.2.3.8.1",
+      "physical_lines": [
+        284
+      ],
+      "source_line_sha256": [
+        "ef1e78eadc00be73a8dd7af7d627e343f0566c1bd0a0f4d6bf9e31b47d8346eb"
+      ],
+      "quote_line": 284,
+      "quote_offset": 24,
+      "exact_excerpt": "ть загрузки страниц должна быть оптимальной, не превышающей 3 секунды на большинстве устройств, без ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Загрузка страниц до 3 секунд на большинстве устройств"
+    },
+    {
+      "id": "TZ-242",
+      "clause": "2.2.3.8.1",
+      "physical_lines": [
+        285
+      ],
+      "source_line_sha256": [
+        "f7c19bfca93a5f05513929f6e48158957a1d104dddfabf68e17007e8b8957869"
+      ],
+      "quote_line": 285,
+      "quote_offset": 0,
+      "exact_excerpt": "Лаконичный и стильный дизайн. Без сложных узоров и отвлекающих внимание анимации, больших баннеров и",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Лаконичный дизайн, без тяжёлых баннеров/скриптов и отвлекающих анимаций"
+    },
+    {
+      "id": "TZ-243",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        287,
+        288,
+        289,
+        290,
+        291
+      ],
+      "source_line_sha256": [
+        "d5296e13edeaf10d853cb4c086100d1f8472eaecd3c7ccd4c4ee7805748452d5",
+        "a6ad6c3316df923c501c5df771a36b8d1535a7d02659838e1946c4e0b1743426",
+        "b8c62913389acc12e9e6f6916f7c1ce66d4a811ab46ba38d1c7868bd8e6cfddd",
+        "41472a7503e56c68b6c006e7b558e2be0268c44fdebf46d6c581fd3c8a5376a2",
+        "03bde78195d349f6d133f70ec1b89e5083fdea4778ce05a0254d40a4b4392151"
+      ],
+      "quote_line": 288,
+      "quote_offset": 22,
+      "exact_excerpt": "ание интерактивных low-fidelity и high-fidelity прототипов (в Figma или аналоге) ключевых сценариев:",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Интерактивные low-fidelity и high-fidelity прототипы в Figma или аналоге с учётом актуальных музейных сайтов"
+    },
+    {
+      "id": "TZ-244",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        289
+      ],
+      "source_line_sha256": [
+        "b8c62913389acc12e9e6f6916f7c1ce66d4a811ab46ba38d1c7868bd8e6cfddd"
+      ],
+      "quote_line": 289,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tсценарий покупки билета,",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "UX-сценарий покупки билета"
+    },
+    {
+      "id": "TZ-245",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        290
+      ],
+      "source_line_sha256": [
+        "41472a7503e56c68b6c006e7b558e2be0268c44fdebf46d6c581fd3c8a5376a2"
+      ],
+      "quote_line": 290,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tсценарий поиска информации,",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "UX-сценарий поиска информации"
+    },
+    {
+      "id": "TZ-246",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        291
+      ],
+      "source_line_sha256": [
+        "03bde78195d349f6d133f70ec1b89e5083fdea4778ce05a0254d40a4b4392151"
+      ],
+      "quote_line": 291,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tсценарий ключевых страниц.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "UX-сценарий ключевых страниц"
+    },
+    {
+      "id": "TZ-247",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        292
+      ],
+      "source_line_sha256": [
+        "0f86d925df1dff02d031b14e1c6d2489aefbd45462cf6471b630deb205415dd1"
+      ],
+      "quote_line": 292,
+      "quote_offset": 69,
+      "exact_excerpt": "ототипов на представителях целевых аудиторий (5+ человек на раунд) с последующей итерационной дорабо",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Минимум два UX-раунда на представителях ЦА, каждый не меньше пяти человек"
+    },
+    {
+      "id": "TZ-248",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        293
+      ],
+      "source_line_sha256": [
+        "4cb70a71aa96de6ffdeae6db641e08761f1d7d4c90c364e93716d5f2942cba7d"
+      ],
+      "quote_line": 293,
+      "quote_offset": 0,
+      "exact_excerpt": "Ключевые метрики UX: Completion Rate: уровень успешного завершения целевых действий — не менее 85%. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Completion Rate не ниже 85% для целевых действий"
+    },
+    {
+      "id": "TZ-249",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        294
+      ],
+      "source_line_sha256": [
+        "05e2e47768043649d2c161abc0c979ad3a18f7c4b732ebb036c813c84de23c75"
+      ],
+      "quote_line": 294,
+      "quote_offset": 162,
+      "exact_excerpt": "навигации – активные ссылки должны выделяться визуально, крупные кнопки должны обеспечивать доступно",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Наглядные активные ссылки, крупные CTA, минимум кликов"
+    },
+    {
+      "id": "TZ-250",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        295
+      ],
+      "source_line_sha256": [
+        "8bc5a8a0281b008b889f55e4fb575abbd62042683f4ff8ed9a7b7cdcfb1c5bc8"
+      ],
+      "quote_line": 295,
+      "quote_offset": 61,
+      "exact_excerpt": "о серединой экрана, должно использоваться все пространство (не менее 80% по ширине), при этом ширина",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Контент занимает не менее 80% ширины экрана при читаемости текста"
+    },
+    {
+      "id": "TZ-251",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        296
+      ],
+      "source_line_sha256": [
+        "689fd262690f24835394d6a2b5486b1a2f60e7f88531186ff125c24744d6b9b9"
+      ],
+      "quote_line": 296,
+      "quote_offset": 0,
+      "exact_excerpt": "Горизонтальные отступы. Баланс вертикальных и горизонтальных отступов. Контент должен свободно распо",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Сбалансированные горизонтальные и вертикальные отступы"
+    },
+    {
+      "id": "TZ-252",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        297,
+        298,
+        299,
+        300
+      ],
+      "source_line_sha256": [
+        "9779222f33a52120ad3ca2762adc6d3c595e9672752c3c2aae908c0036594071",
+        "bad88da2b3a354a5c2599f2c9581d40da0e3cc0b41d077c009eba7c254cd60e5",
+        "a01f3b049cfd7b635ccd2de60df6e1a12f79222c99d96fd235697d055e146525",
+        "b8b2135e00c7f4fd844f2fb6a1e9910db70631bdf3a7f18af4406ba82c0927e0"
+      ],
+      "quote_line": 299,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКонтент-блок. Содержимое должно формироваться исходя из типа страницы. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Шапка, адаптивный основной блок, футер как обязательные части"
+    },
+    {
+      "id": "TZ-253",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        298
+      ],
+      "source_line_sha256": [
+        "bad88da2b3a354a5c2599f2c9581d40da0e3cc0b41d077c009eba7c254cd60e5"
+      ],
+      "quote_line": 298,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tШапка. Должна содержать логотип организации, меню разделов, кнопки «Купить билет» и   активация р",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Шапка с логотипом, меню, CTA «Купить билет», режимом слабовидящих"
+    },
+    {
+      "id": "TZ-254",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        300
+      ],
+      "source_line_sha256": [
+        "b8b2135e00c7f4fd844f2fb6a1e9910db70631bdf3a7f18af4406ba82c0927e0"
+      ],
+      "quote_line": 300,
+      "quote_offset": 97,
+      "exact_excerpt": "фактический адрес, время работы, электронную почту, номера телефонов), ссылки на юридически значимые",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Футер: полный официальный титул, email, телефоны, часы, фактический адрес, значимые ссылки"
+    },
+    {
+      "id": "TZ-255",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        302
+      ],
+      "source_line_sha256": [
+        "590863bfccd75bac334d699f823a8706a0e3e6df7cd2f474e5d5ab53aa036c6f"
+      ],
+      "quote_line": 302,
+      "quote_offset": 0,
+      "exact_excerpt": "Главная. Корневая страница сайта должна содержать краткое и лаконичное представление о музее, не пер",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Главная с музеем/зданием, посещением/ценой, ключевой афишей в плитках с фото и заголовками"
+    },
+    {
+      "id": "TZ-256",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        303
+      ],
+      "source_line_sha256": [
+        "2909a3cf18b0d7ab39f7f1a9dc774144d335c9ffd116573d2e82f726a9316447"
+      ],
+      "quote_line": 303,
+      "quote_offset": 0,
+      "exact_excerpt": "Страница новости или события. Должна содержать текст и иллюстрации по теме, должны формироваться в р",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Редактор вручную формирует новость или событие с текстом и иллюстрациями"
+    },
+    {
+      "id": "TZ-257",
+      "clause": "2.2.3.8.2",
+      "physical_lines": [
+        304
+      ],
+      "source_line_sha256": [
+        "541c373516284fb0666c00f4c622ccafa4ca896256a1122a259415d98ec94dc6"
+      ],
+      "quote_line": 304,
+      "quote_offset": 59,
+      "exact_excerpt": "и данными). Страницы заполняются Исполнителем, при необходимости, содержимое в дальнейшем корректиру",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Неформализованные страницы (контакты) заполняются исполнителем и могут редактироваться музеем"
+    },
+    {
+      "id": "TZ-258",
+      "clause": "2.2.3.8.3",
+      "physical_lines": [
+        306
+      ],
+      "source_line_sha256": [
+        "f0e55f29b50a6777e36b66b250229c8b1e4025fa771934ef8063729c1781a280"
+      ],
+      "quote_line": 306,
+      "quote_offset": 0,
+      "exact_excerpt": "UI-дизайн должен быть основан на концепции минимализма и строгих форм. Все интерфейсные решения долж",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Все интерфейсные решения основаны на согласованном минималистичном фирменном стиле"
+    },
+    {
+      "id": "TZ-259",
+      "clause": "2.2.3.8.3",
+      "physical_lines": [
+        306
+      ],
+      "source_line_sha256": [
+        "f0e55f29b50a6777e36b66b250229c8b1e4025fa771934ef8063729c1781a280"
+      ],
+      "quote_line": 306,
+      "quote_offset": 481,
+      "exact_excerpt": " в различных интернет-браузерах (Edge, Mozilla, Chrome, Opera, Yandex, Chromium-GOST, Safari, Atom).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Работоспособность в Edge/Mozilla/Chrome/Opera/Yandex/Chromium-GOST/Safari/Atom"
+    },
+    {
+      "id": "TZ-260",
+      "clause": "2.2.3.8.3",
+      "physical_lines": [
+        307,
+        308
+      ],
+      "source_line_sha256": [
+        "ddb51d05a223126e23b562dfa320e7329a121bc2569a40226d55cd77fef13e0f",
+        "8fb5850e5da498dd60bff635fe5ba5d5b66a2f0668b365f01b5a0386d8c10ca3"
+      ],
+      "quote_line": 307,
+      "quote_offset": 0,
+      "exact_excerpt": "Структура шаблона.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Единая сетка и чёткие зоны в UI"
+    },
+    {
+      "id": "TZ-261",
+      "clause": "2.2.3.8.3",
+      "physical_lines": [
+        309,
+        310,
+        311,
+        312,
+        313
+      ],
+      "source_line_sha256": [
+        "29eb44b762fb2a73b1f0ba1d84888c76ca76a33763a184e3a93658be97f6a812",
+        "291a36ca45f6d0ba77144f7ce37b8eb2d47f0f008fc45fdb367157295c33d0a0",
+        "42089804d823118cbe10943458a37762d179efd57ce9d9cc1a27571c2a130635",
+        "49901cd2e7e59b965b2942c09366559652e8973c81f509bc99ca05e45cbc6f89",
+        "af1139723360d9852454a4f43290db65c58e302fee4a59d92c64ae257c1aaa0c"
+      ],
+      "quote_line": 309,
+      "quote_offset": 0,
+      "exact_excerpt": "Каждый шаблон должен включать:",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Шаблоны с header/content/optional sidebar/footer"
+    },
+    {
+      "id": "TZ-262",
+      "clause": "2.2.3.8.3",
+      "physical_lines": [
+        313
+      ],
+      "source_line_sha256": [
+        "af1139723360d9852454a4f43290db65c58e302fee4a59d92c64ae257c1aaa0c"
+      ],
+      "quote_line": 313,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tНижний колонтитул с контактной информацией и социальными сетями.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Футер содержит контакты и социальные сети"
+    },
+    {
+      "id": "TZ-263",
+      "clause": "2.2.3.9.1",
+      "physical_lines": [
+        316
+      ],
+      "source_line_sha256": [
+        "91563e55d2ad29bec9c1b59086c8247eb66a8d4324fe7dae406fb56f742d16b6"
+      ],
+      "quote_line": 316,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tРазработки моделей поведения для широкой аудитории. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Разработать модели поведения широкой аудитории"
+    },
+    {
+      "id": "TZ-264",
+      "clause": "2.2.3.9.1",
+      "physical_lines": [
+        317
+      ],
+      "source_line_sha256": [
+        "55833d773d627e49065934ed694f0ac28a8f99305f904d6ed7b83d049b452eb6"
+      ],
+      "quote_line": 317,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tРазработка прототипа дизайна (UX-дизайн), согласование с Заказчиком.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Разработать и согласовать UX-прототип"
+    },
+    {
+      "id": "TZ-265",
+      "clause": "2.2.3.9.1",
+      "physical_lines": [
+        318
+      ],
+      "source_line_sha256": [
+        "a774af65bdbddfdd136fb40fc55c03c29adb0d5748f246b6552298e572852593"
+      ],
+      "quote_line": 318,
+      "quote_offset": 45,
+      "exact_excerpt": "айна сайта на примере презентационной страницы для трех типов устройств, согласование с Заказчиком. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Разработать основную UI-тему на презентационной странице для трёх типов устройств"
+    },
+    {
+      "id": "TZ-266",
+      "clause": "2.2.3.9.1",
+      "physical_lines": [
+        319
+      ],
+      "source_line_sha256": [
+        "4ab20386572971864737de628d5c004c2c7edefb2553c7839e6034a004ba64ac"
+      ],
+      "quote_line": 319,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tРазработка визуального шаблона (UI-дизайн) сайта с представлением примеров всех типов страниц для",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Показать все типы страниц в 3 размерах, согласовать визуальные шаблоны"
+    },
+    {
+      "id": "TZ-267",
+      "clause": "2.2.3.9.1",
+      "physical_lines": [
+        320
+      ],
+      "source_line_sha256": [
+        "96182d9e068ddc6773f86742ba0d1376b1fab63ee3aaefefdd646a3896cc7c90"
+      ],
+      "quote_line": 320,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tРазработка ядра сайта (программирование). ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Программирование ядра сайта"
+    },
+    {
+      "id": "TZ-268",
+      "clause": "2.2.3.9.1",
+      "physical_lines": [
+        321
+      ],
+      "source_line_sha256": [
+        "c8b689d391b48dec8ae28fa97c257b49e464ab9c25f1520b66778a89dbcbc588"
+      ],
+      "quote_line": 321,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tНаполнение сайта содержимым (первичным контентом), согласование с Заказчиком. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Первичное наполнение сайта исполнителем и письменное согласование"
+    },
+    {
+      "id": "TZ-269",
+      "clause": "2.2.3.9.1",
+      "physical_lines": [
+        322
+      ],
+      "source_line_sha256": [
+        "1d8c84a2f42250629bff081a1d018fac6a94d0e91274e8d336763c263400adfd"
+      ],
+      "quote_line": 322,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tОбщая приемка, предрелизные тестирования, корректировки и запуск проекта. Обучение работников Зак",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Общая приёмка, предрелизные испытания, исправления и запуск"
+    },
+    {
+      "id": "TZ-270",
+      "clause": "2.2.3.9.1",
+      "physical_lines": [
+        322
+      ],
+      "source_line_sha256": [
+        "1d8c84a2f42250629bff081a1d018fac6a94d0e91274e8d336763c263400adfd"
+      ],
+      "quote_line": 322,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tОбщая приемка, предрелизные тестирования, корректировки и запуск проекта. Обучение работников Зак",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Обучение сотрудников музея"
+    },
+    {
+      "id": "TZ-271",
+      "clause": "2.2.3.9.2",
+      "physical_lines": [
+        324
+      ],
+      "source_line_sha256": [
+        "55aee72f1c90ed92991cf5772bf568a4f1a3abd58f3db92cb827bd3a95caf3cb"
+      ],
+      "quote_line": 324,
+      "quote_offset": 51,
+      "exact_excerpt": "ий. Подтверждение соответствия выбранной архитектуры и технологии требованиями технического задания.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Стадия 1: концепция и проверка архитектуры/технологии"
+    },
+    {
+      "id": "TZ-272",
+      "clause": "2.2.3.9.2",
+      "physical_lines": [
+        325
+      ],
+      "source_line_sha256": [
+        "860444a0517d8cc2dee35034b670a892ca9b5570d91979b16ca193cdd5d9eca8"
+      ],
+      "quote_line": 325,
+      "quote_offset": 19,
+      "exact_excerpt": "го рабочего прототипа. Тестирование базовых функций и проверка работоспособности основных сценариев ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Стадия 2: рабочий прототип и проверка основных сценариев"
+    },
+    {
+      "id": "TZ-273",
+      "clause": "2.2.3.9.2",
+      "physical_lines": [
+        326
+      ],
+      "source_line_sha256": [
+        "99e0ed535d7579481561bade6a17dc24cf5431bd597582d61e356e3386a4e93c"
+      ],
+      "quote_line": 326,
+      "quote_offset": 32,
+      "exact_excerpt": "нала и интеграция всех компонентов. Проведение комплексных тестов всех функций и интеграции системы.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Стадия 3: весь функционал, интеграции и комплексные испытания"
+    },
+    {
+      "id": "TZ-274",
+      "clause": "2.2.3.9.2",
+      "physical_lines": [
+        327
+      ],
+      "source_line_sha256": [
+        "c9359ea1556aa10db3ab9d99479faeda1c2eab070122601d0de7ab53697b3cef"
+      ],
+      "quote_line": 327,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tТестирование и оценка производительности. Нагрузочное тестирование и проверка устойчивости сайта ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Стадия 4: производительность и нагрузочная устойчивость"
+    },
+    {
+      "id": "TZ-275",
+      "clause": "2.2.3.9.2",
+      "physical_lines": [
+        328
+      ],
+      "source_line_sha256": [
+        "5e6bc89a52c46226bd20cb035e4cc5b3a5caf975eaf1597f2f560ee42203faf2"
+      ],
+      "quote_line": 328,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПодготовка финальной версии сайта. Проверка готовности сайта к публикации и началу эксплуатации.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Стадия 5: финальная версия и готовность к эксплуатации"
+    },
+    {
+      "id": "TZ-276",
+      "clause": "2.2.3.9.2",
+      "physical_lines": [
+        329
+      ],
+      "source_line_sha256": [
+        "865b059ad6e4e3009e64ed3261387706415b1f5c224a09905918783fa1c011e1"
+      ],
+      "quote_line": 329,
+      "quote_offset": 39,
+      "exact_excerpt": "оцессе проверок, подлежат устранению силами и за счет Исполнителя в установленные Заказчиком сроки. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Устранение замечаний за счёт исполнителя в сроки заказчика"
+    },
+    {
+      "id": "TZ-277",
+      "clause": "2.2.3.9.2",
+      "physical_lines": [
+        330
+      ],
+      "source_line_sha256": [
+        "68df39dee8e6b0fe4e3e69caf5869659e1a9cb308d459a106ea34f81d200a415"
+      ],
+      "quote_line": 330,
+      "quote_offset": 13,
+      "exact_excerpt": "аказчика на запросы Исполнителя о согласовании исполнительских решений – в течение 2 (Двух) рабочих ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Заказчик отвечает на запросы согласования в течение 2 рабочих дней"
+    },
+    {
+      "id": "TZ-278",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348
+      ],
+      "source_line_sha256": [
+        "71da6ad4a53507cd2367f93e35322f5a501fbc10657a7105fd7655c671ae3799",
+        "b592d7aead20a92fc100fa90dce7b3cf624fab728e5dd0bc65d376f9d246b7b1",
+        "171857618c2137e182feb98147e07e62273cce5bfeda7e13b99d23b64546dfee",
+        "6ac22d46a017bf2d991c6126b9842ef74231076353422cf941e79227aacd7f49",
+        "3d11bd8564ec2bbe28dc060ff945e1759c33e864ca54e0b2ba4076d4f6906837",
+        "61c6ddfa7f9e19b65de895f8514a6c3c7e70976bd71d87162b143917aa57ea3d",
+        "8c6749bfc006f1846fff9585d476bdbd0b3bef0b9b1a79b65969d2cecd634ab9",
+        "a25c3603bea8f5c9316f92dc5c2e645f9adf3f715a8e28ddea9ffa9ca6abfec0",
+        "9628c2ccff31203af3e081b5795e220674b27ce896941d6e0c26dbb84c46e0d8",
+        "299457836e5364274c903afc43f8e35773e55a2647fc390dd4ecd5c7e15abd0f",
+        "c53a28bb8e451ee35c6cf63a2780c556c86aefb1e5cfc85a2880a6aacb9bcb33",
+        "3659ebdf4fd7cfd86ec8d067350fb853579b77895626798e1fd45ccb4a33c4f5",
+        "29de1ff982ef1f42725f69df84ea8478018c97f1d3f73178a63154551a3cedab",
+        "80bf9f6313da3e79cfa4f321e4a498449bff80b180456c046b52ed560a7552b9",
+        "f08cbde35c288ad3bc2c771921a269158b190bdf7dec5844f8ee51aa2d27c8de",
+        "6ffbc2672ad5f31839bacc88baedcdce25f9bd0f703b6ece4d9368483185af99",
+        "bbcb9448b6fae8c6ca0e1648e400cc650947f744a9e12d2bc4eee4adc0c434b0"
+      ],
+      "quote_line": 333,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 07.07.2003 № 126-ФЗ «О связи»;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Общее соответствие нормативным актам в применимой к функциям сайта части"
+    },
+    {
+      "id": "TZ-279",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        333
+      ],
+      "source_line_sha256": [
+        "b592d7aead20a92fc100fa90dce7b3cf624fab728e5dd0bc65d376f9d246b7b1"
+      ],
+      "quote_line": 333,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 07.07.2003 № 126-ФЗ «О связи»;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 126-ФЗ «О связи» в относящейся части"
+    },
+    {
+      "id": "TZ-280",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        334
+      ],
+      "source_line_sha256": [
+        "171857618c2137e182feb98147e07e62273cce5bfeda7e13b99d23b64546dfee"
+      ],
+      "quote_line": 334,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 27.07.2006 № 149-ФЗ «Об информации, информационных технологиях и о защите ин",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 149-ФЗ об информации и защите"
+    },
+    {
+      "id": "TZ-281",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        335
+      ],
+      "source_line_sha256": [
+        "6ac22d46a017bf2d991c6126b9842ef74231076353422cf941e79227aacd7f49"
+      ],
+      "quote_line": 335,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 28.12.2010 № 390-ФЗ «О безопасности»;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 390-ФЗ о безопасности"
+    },
+    {
+      "id": "TZ-282",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        336
+      ],
+      "source_line_sha256": [
+        "3d11bd8564ec2bbe28dc060ff945e1759c33e864ca54e0b2ba4076d4f6906837"
+      ],
+      "quote_line": 336,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 27.07.2006 № 152-ФЗ «О персональных данных»;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 152-ФЗ о персональных данных"
+    },
+    {
+      "id": "TZ-283",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        337
+      ],
+      "source_line_sha256": [
+        "61c6ddfa7f9e19b65de895f8514a6c3c7e70976bd71d87162b143917aa57ea3d"
+      ],
+      "quote_line": 337,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 02.05.2006 № 59-ФЗ «О порядке рассмотрения обращений граждан Российской Феде",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 59-ФЗ об обращениях граждан"
+    },
+    {
+      "id": "TZ-284",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        338
+      ],
+      "source_line_sha256": [
+        "8c6749bfc006f1846fff9585d476bdbd0b3bef0b9b1a79b65969d2cecd634ab9"
+      ],
+      "quote_line": 338,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 09.10.1992 № 3612-1 «Основы законодательства Российской Федерации о культуре",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Основы законодательства о культуре 3612-1"
+    },
+    {
+      "id": "TZ-285",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        339
+      ],
+      "source_line_sha256": [
+        "a25c3603bea8f5c9316f92dc5c2e645f9adf3f715a8e28ddea9ffa9ca6abfec0"
+      ],
+      "quote_line": 339,
+      "quote_offset": 114,
+      "exact_excerpt": "доставления информации о деятельности организаций культуры, размещаемой на официальных сайтах уполно",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Приказ Минкультуры 277 по информации организаций культуры"
+    },
+    {
+      "id": "TZ-286",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        340
+      ],
+      "source_line_sha256": [
+        "9628c2ccff31203af3e081b5795e220674b27ce896941d6e0c26dbb84c46e0d8"
+      ],
+      "quote_line": 340,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 24.11.1995 № 181-ФЗ «О социальной защите инвалидов в Российской Федерации»;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 181-ФЗ о социальной защите инвалидов"
+    },
+    {
+      "id": "TZ-287",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        341
+      ],
+      "source_line_sha256": [
+        "299457836e5364274c903afc43f8e35773e55a2647fc390dd4ecd5c7e15abd0f"
+      ],
+      "quote_line": 341,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПостановление Правительства от 07.02.2026 № 102 «Об утверждении требований к обеспечению для инва",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Постановление 102 от 07.02.2026 по доступности информации для людей с нарушением зрения"
+    },
+    {
+      "id": "TZ-288",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        342
+      ],
+      "source_line_sha256": [
+        "c53a28bb8e451ee35c6cf63a2780c556c86aefb1e5cfc85a2880a6aacb9bcb33"
+      ],
+      "quote_line": 342,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПриказ Минкомсвязи России от 25 августа 2009 г. № 104 «Об утверждении требований по обеспечению ц",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Приказ Минкомсвязи 104 по целостности и устойчивости"
+    },
+    {
+      "id": "TZ-289",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        343
+      ],
+      "source_line_sha256": [
+        "3659ebdf4fd7cfd86ec8d067350fb853579b77895626798e1fd45ccb4a33c4f5"
+      ],
+      "quote_line": 343,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tГОСТ Р 52872-2019. Национальный стандарт Российской Федерации. Интернет-ресурсы и другая информац",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ГОСТ Р 52872-2019 по интерфейсной доступности"
+    },
+    {
+      "id": "TZ-290",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        344
+      ],
+      "source_line_sha256": [
+        "29de1ff982ef1f42725f69df84ea8478018c97f1d3f73178a63154551a3cedab"
+      ],
+      "quote_line": 344,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tГОСТ Р 70176-2022. Национальный стандарт Российской Федерации. «Интернет-ресурсы и другая информа",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ГОСТ Р 70176-2022 по доступным PDF"
+    },
+    {
+      "id": "TZ-291",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        345
+      ],
+      "source_line_sha256": [
+        "80bf9f6313da3e79cfa4f321e4a498449bff80b180456c046b52ed560a7552b9"
+      ],
+      "quote_line": 345,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции»;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 273-ФЗ о противодействии коррупции"
+    },
+    {
+      "id": "TZ-292",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        346
+      ],
+      "source_line_sha256": [
+        "f08cbde35c288ad3bc2c771921a269158b190bdf7dec5844f8ee51aa2d27c8de"
+      ],
+      "quote_line": 346,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 13.03.2006 № 38-ФЗ «О рекламе»;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 38-ФЗ о рекламе"
+    },
+    {
+      "id": "TZ-293",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        347
+      ],
+      "source_line_sha256": [
+        "6ffbc2672ad5f31839bacc88baedcdce25f9bd0f703b6ece4d9368483185af99"
+      ],
+      "quote_line": 347,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон Российской Федерации от 27.12.1991 № 2124-1 «О средствах массовой информации»;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Закон 2124-1 о СМИ"
+    },
+    {
+      "id": "TZ-294",
+      "clause": "2.2.3.10",
+      "physical_lines": [
+        348
+      ],
+      "source_line_sha256": [
+        "bbcb9448b6fae8c6ca0e1648e400cc650947f744a9e12d2bc4eee4adc0c434b0"
+      ],
+      "quote_line": 348,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tФедеральный закон от 29.12.2010 № 436-ФЗ «О защите детей от информации, причиняющей вред их здоро",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "ФЗ 436-ФЗ о защите детей от вредной информации"
+    },
+    {
+      "id": "TZ-295",
+      "clause": "2.2.3.10.3",
+      "physical_lines": [
+        349
+      ],
+      "source_line_sha256": [
+        "61e8b39952a6d45ff16ff32f787651b24ae843df6a81afe85b9ca15c2e9f109c"
+      ],
+      "quote_line": 349,
+      "quote_offset": 84,
+      "exact_excerpt": "требованиям нормативных актов в действующей редакции, исключительно в части требований, непосредстве",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Применимость нормативных требований ограничена функциями сайта из ТЗ"
+    },
+    {
+      "id": "TZ-296",
+      "clause": "Раздел 3",
+      "physical_lines": [
+        352,
+        353
+      ],
+      "source_line_sha256": [
+        "cb4aa94e1e00a6bee4b38430641a92f7261c6480bcdd565266bcbca79af86f7b",
+        "f4f334ce0c90f4685040fd120735ba68690070cec5af72fa86a173833848dddb"
+      ],
+      "quote_line": 352,
+      "quote_offset": 3,
+      "exact_excerpt": "Гарантийный срок на результат оказанных услуг – 12 (двенадцать) месяцев с даты подписания документа ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Гарантийный срок 12 месяцев с документа приёмки"
+    },
+    {
+      "id": "TZ-297",
+      "clause": "Раздел 3",
+      "physical_lines": [
+        354
+      ],
+      "source_line_sha256": [
+        "aa56f2161e8eb575ce9b73ed85de08bc7c9b81ba9c5d353ccc1fb4f09b974f9d"
+      ],
+      "quote_line": 354,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tКоммуницирует с технической поддержкой подключенных провайдеров и сервисов, с целью решения техни",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Коммуникации с технической поддержкой внешних провайдеров"
+    },
+    {
+      "id": "TZ-298",
+      "clause": "Раздел 3",
+      "physical_lines": [
+        355
+      ],
+      "source_line_sha256": [
+        "e0d9b2363f5262b461a8fe9bb136d4c36bab6b3fd26a612ce2da5bbe441b798a"
+      ],
+      "quote_line": 355,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tГарантирует работоспособность сайта, устраняет неисправности, выявленные Заказчиком.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Поддержание работоспособности и исправление выявленных дефектов"
+    },
+    {
+      "id": "TZ-299",
+      "clause": "Раздел 3",
+      "physical_lines": [
+        356
+      ],
+      "source_line_sha256": [
+        "43638e6a63c74fc82c589d61a04c7a21ef8ac34b0b5300d7367fb7b5fc7cb65b"
+      ],
+      "quote_line": 356,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tСрок устранения неисправностей: Исполнитель должен приступить к устранению неисправностей сайта в",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Приступить к устранению неисправности за 24 часа"
+    },
+    {
+      "id": "TZ-300",
+      "clause": "Раздел 3",
+      "physical_lines": [
+        356
+      ],
+      "source_line_sha256": [
+        "43638e6a63c74fc82c589d61a04c7a21ef8ac34b0b5300d7367fb7b5fc7cb65b"
+      ],
+      "quote_line": 356,
+      "quote_offset": 153,
+      "exact_excerpt": "нформации о неисправности и устранить в максимально короткий срок, по сложным неисправностям срок ус",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Сложные неисправности устранить не позднее 5 рабочих дней"
+    },
+    {
+      "id": "TZ-301",
+      "clause": "Раздел 3",
+      "physical_lines": [
+        357,
+        358,
+        359,
+        360,
+        361
+      ],
+      "source_line_sha256": [
+        "812416352b61b3aa151d19810d211f3f2a295cf8585627e509c356b07d55600a",
+        "4914ba8310911669d4a4552b2abff00b712130506036c05820e7233ac70628cd",
+        "01198c0d4e33a482426327ed64a833219afdab127d2ecb6f5791f1e916f9561b",
+        "d0046c1ea61d6bb2d8c59656c12b34213bd095c7bc72c9a21107930b81fe51e0",
+        "abc297ccfda85f77765af23379dd54722711e6428ae2aa915e4f6e9302ed5873"
+      ],
+      "quote_line": 361,
+      "quote_offset": 16,
+      "exact_excerpt": "емное и иное программное обеспечение, влияющее на работу сайта на сервере и(или) хостинге Заказчика.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Случаи снятия гарантии при изменении кода/файлов/ПО или серверных сбоях заказчика"
+    },
+    {
+      "id": "TZ-302",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        364,
+        365,
+        366,
+        367,
+        368,
+        369
+      ],
+      "source_line_sha256": [
+        "c1f95f560b88dd889cd32f5591bfcc89d7c54c908560bb357f291dac59d946d8",
+        "a1c89f77d67a298e9cccc1854c2507e01cfec7a3fa2ecced53de3d4e926cc610",
+        "1d30353b9c47d65e0c657e2ff3a672f072e2075edf96bbcd6216f89c3f9bb5e6",
+        "f0ba395bdc2fd97eaa7ded2cd16c663085ea941e68800b64db4eee45a1f11902",
+        "6eb6911cb26e1aea2bec8c087e4fe8c71200895a24f890ac16a84ba051f764b7",
+        "0e3fe0c11d94731193f2aea3ad62687b5e6bbb64ae9494253d382ee3b644a2a7"
+      ],
+      "quote_line": 367,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tБезопасность: отсутствие уязвимых мест и высокая степень защиты от взломов и атак.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Стабильная круглосуточная работа, безопасность, удобство и совместимость под нагрузкой"
+    },
+    {
+      "id": "TZ-303",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        370
+      ],
+      "source_line_sha256": [
+        "9897da868e6dd3b050a76b1a2445b6b6c98ada5f52955fdd2c77a30e62b53bfb"
+      ],
+      "quote_line": 370,
+      "quote_offset": 68,
+      "exact_excerpt": "казчику все ключи и пароли, данные авторизации, коды и иные данные обеспечивающие доступ и возможнос",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Передать все ключи, пароли, коды и данные авторизации"
+    },
+    {
+      "id": "TZ-304",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        371
+      ],
+      "source_line_sha256": [
+        "f1d03c5ef7baea1313ff5f7dd11a8546e16b4bc1830864d291d7200d6556093a"
+      ],
+      "quote_line": 371,
+      "quote_offset": 0,
+      "exact_excerpt": "Способ передачи – в электронном виде и на бумажном носителе в 1 (Одном) экземпляре, а также исходные",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Электронная передача результата, бумажная документация в одном экземпляре"
+    },
+    {
+      "id": "TZ-305",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        371
+      ],
+      "source_line_sha256": [
+        "f1d03c5ef7baea1313ff5f7dd11a8546e16b4bc1830864d291d7200d6556093a"
+      ],
+      "quote_line": 371,
+      "quote_offset": 0,
+      "exact_excerpt": "Способ передачи – в электронном виде и на бумажном носителе в 1 (Одном) экземпляре, а также исходные",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Исходники дизайна на съёмном носителе"
+    },
+    {
+      "id": "TZ-306",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        371
+      ],
+      "source_line_sha256": [
+        "f1d03c5ef7baea1313ff5f7dd11a8546e16b4bc1830864d291d7200d6556093a"
+      ],
+      "quote_line": 371,
+      "quote_offset": 161,
+      "exact_excerpt": "информации, программное обеспечение (набор исходного кода страниц сайта), развернутое в формате web-",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Программное обеспечение: исходный код страниц сайта"
+    },
+    {
+      "id": "TZ-307",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        371
+      ],
+      "source_line_sha256": [
+        "f1d03c5ef7baea1313ff5f7dd11a8546e16b4bc1830864d291d7200d6556093a"
+      ],
+      "quote_line": 371,
+      "quote_offset": 215,
+      "exact_excerpt": "ода страниц сайта), развернутое в формате web-сайта в глобальной сети Интернет и иные документы, пре",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Сайт должен быть развёрнут в глобальной сети Интернет"
+    },
+    {
+      "id": "TZ-308",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        372,
+        373
+      ],
+      "source_line_sha256": [
+        "f49d75bcb3370cd0b4dae06f38c3fd611c0449364684cac09e4385dcf2c9fe5c",
+        "8326d964cf678025210cad5660342cf20dc995532872c8a6a737ad58ff3159e6"
+      ],
+      "quote_line": 373,
+      "quote_offset": 86,
+      "exact_excerpt": "аний языков программирования и особых навыков, позволяющий подготовить, отформатировать и опубликова",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Управление контентом без знания программирования"
+    },
+    {
+      "id": "TZ-309",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        373
+      ],
+      "source_line_sha256": [
+        "8326d964cf678025210cad5660342cf20dc995532872c8a6a737ad58ff3159e6"
+      ],
+      "quote_line": 373,
+      "quote_offset": 201,
+      "exact_excerpt": "Сайте по инструкции. При этом иметь возможность редактировать страницу в формате гипертекста (html).",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Редактирование страницы как гипертекста HTML"
+    },
+    {
+      "id": "TZ-310",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        374,
+        375,
+        376,
+        377
+      ],
+      "source_line_sha256": [
+        "b27c06f24801f245b74c2d66413b19a530d22a23ef49f36370eee0d7cef60701",
+        "799d61ffe2468672fd1b36af9f02229f674facbbabe48c734b997ec726def780",
+        "94bac3837bfac48cba09b954beba48e65f7628ced8680941d070666b37533814",
+        "aeef46e0ce41349cd41c936ef2ea697bbaec0fa7ef3b40f700ad5cd5fe7b4e6b"
+      ],
+      "quote_line": 376,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tдобавления новых разделов и подразделов Сайта;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Добавление/редактирование разделов и подразделов непосредственно в CMS"
+    },
+    {
+      "id": "TZ-311",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        378
+      ],
+      "source_line_sha256": [
+        "1b696da9e4449ba791055a2022b27d5dc8771b42707ca372ff1b304e13bedaca"
+      ],
+      "quote_line": 378,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tудаления созданных ранее разделов;",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Удаление ранее созданных разделов"
+    },
+    {
+      "id": "TZ-312",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        379
+      ],
+      "source_line_sha256": [
+        "33ba18e4f5826391eee760bdf142b3b1f4b619a4d181614745f1705f6f51f973"
+      ],
+      "quote_line": 379,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tограничения доступа к разделам и подразделам в соответствии с правами доступа пользователей.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Разграничение доступа к отдельным разделам/подразделам"
+    },
+    {
+      "id": "TZ-313",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        380
+      ],
+      "source_line_sha256": [
+        "3b08891b97a90ec5e937b682ccd85628afdb6d27610db99c49e54a0a622fbfed"
+      ],
+      "quote_line": 380,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tРезультаты услуг должны быть свободны от возможных претензий третьих лиц и не нарушать права трет",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Результаты не должны нарушать права третьих лиц"
+    },
+    {
+      "id": "TZ-314",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        382
+      ],
+      "source_line_sha256": [
+        "77b4ca675bdfc62fde85f9d8219703ca6129ea40f467cbb32abd2a671962f5e4"
+      ],
+      "quote_line": 382,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tНабор материалов по фирменному стилю. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Передать полный набор материалов фирменного стиля"
+    },
+    {
+      "id": "TZ-315",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        381,
+        382,
+        383
+      ],
+      "source_line_sha256": [
+        "384df6184af0e0aea852423ee624b29a6ef48007ee9844079071f8fb83a1ba34",
+        "77b4ca675bdfc62fde85f9d8219703ca6129ea40f467cbb32abd2a671962f5e4",
+        "9005a5873f24fcedbe908d1661d754292e65c3b503f405b1252cef46fb07e0ba"
+      ],
+      "quote_line": 383,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tРуководство администратора и редактора по управлению сайтом.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Передать руководство администратора и редактора"
+    },
+    {
+      "id": "TZ-316",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        384
+      ],
+      "source_line_sha256": [
+        "dec4b780d982bc064c8e1536e84303272581bae1b964ed7064c4d10072b6c777"
+      ],
+      "quote_line": 384,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tРуководство пользователя. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Передать самостоятельное руководство пользователя/посетителя"
+    },
+    {
+      "id": "TZ-317",
+      "clause": "Раздел 4",
+      "physical_lines": [
+        385
+      ],
+      "source_line_sha256": [
+        "41261273a770288a66f040a0d987a76c7056cdec568d88f5c75d8d948acc2ee8"
+      ],
+      "quote_line": 385,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tОтчёт о тестировании и нагрузочном тестировании сайта.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Передать отчёт тестирования И ОТДЕЛЬНЫЙ отчёт нагрузочного тестирования"
+    },
+    {
+      "id": "TZ-318",
+      "clause": "Раздел 5, 5.1",
+      "physical_lines": [
+        388
+      ],
+      "source_line_sha256": [
+        "4ad390060c60bf19527e8e870af998c0f02dcd9b51f41d291bdecd6f0170febb"
+      ],
+      "quote_line": 388,
+      "quote_offset": 0,
+      "exact_excerpt": "5.1. Исполнитель передает Заказчику исключительные права на созданный сайт с элементами фирменного с",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Передать исключительные права на созданный сайт и фирменный стиль по форме приложения 1"
+    },
+    {
+      "id": "TZ-319",
+      "clause": "Раздел 5, 5.2",
+      "physical_lines": [
+        389
+      ],
+      "source_line_sha256": [
+        "e3c6f5d0f63c0ed02f02b0789b344fac93bc8d7195866ee758b7eb1162988c84"
+      ],
+      "quote_line": 389,
+      "quote_offset": 0,
+      "exact_excerpt": "5.2. Исключительные права передаются Заказчику на весь срок их действия, установленный законодательс",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Срок исключительных прав — весь срок действия, использование по всему миру"
+    },
+    {
+      "id": "TZ-320",
+      "clause": "Раздел 5, 5.3",
+      "physical_lines": [
+        390
+      ],
+      "source_line_sha256": [
+        "71a49c51e861da073938d0e8b5e4d13d6f7aecd646c231fa5ea2e7eefcaf414f"
+      ],
+      "quote_line": 390,
+      "quote_offset": 111,
+      "exact_excerpt": "ости принадлежат исключительно и в полном объеме Заказчику с момента подписания документа о приемке.",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Переход авторских прав к заказчику с даты приёмки согласно ТЗ"
+    },
+    {
+      "id": "TZ-321",
+      "clause": "Приложение 1",
+      "physical_lines": [
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465
+      ],
+      "source_line_sha256": [
+        "54be99377c0b69cd147b9f4c7f42b3306a1ba8eb8d58d8bf7c96f16296b83d21",
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "b26b88d6d29bce09dcd0d5825b35025cd41e8d00aff11f5fddf685bc9e0b2f80",
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "9acd4598b45208e379e3573fcef9ff0f74310ab52c99dd8f4ce4fca44836eda8",
+        "29c654a79fb22621fbba0e49764cabf836fc74a193ad4b1d91fbf994dcbccb15",
+        "27307454e7fbac27e2fb78c6fcc2ab85274dd2401a722c98174f0df45970635e",
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "9c1d7b82c338d011853ee9c84dd79efb6be5d0c21a23f8d6d56e845a55bcc081",
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "da5d1303d7c9b27bb44e3512da70cf6dfa97d4d77b0d4623e63fb5a982cb3557",
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ad9d20400d8e13f931a97bcd7042df4690b19d6f2fb114fcb885643c004412ad",
+        "0b3ae96009f9dff11529a4c28040e715eb95fdf951c15a69e9a2c412db2fba34",
+        "08239ef1702b139455db04729767a218e0fd36808a98f3462fef931ff1ce5281",
+        "f1f8f1c73aa4fdb5021fc8bdfabc51e323a0e6e9e5f6de28d6fdf74574ad1a72",
+        "162397baf42f9722521b7ebd9e54a0af7bc2864ab730f36be54b3ebcbcb9406a"
+      ],
+      "quote_line": 454,
+      "quote_offset": 0,
+      "exact_excerpt": "приема-передачи исключительных прав на сайт СПб ГБУК «Санкт-Петербургский музей Хлеба» ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Использовать приложенную заказчиком форму акта передачи исключительных прав"
+    },
+    {
+      "id": "TZ-322",
+      "clause": "Приложение 1",
+      "physical_lines": [
+        461,
+        462
+      ],
+      "source_line_sha256": [
+        "ad9d20400d8e13f931a97bcd7042df4690b19d6f2fb114fcb885643c004412ad",
+        "0b3ae96009f9dff11529a4c28040e715eb95fdf951c15a69e9a2c412db2fba34"
+      ],
+      "quote_line": 461,
+      "quote_offset": 132,
+      "exact_excerpt": "ский музей Хлеба» с элементами фирменного стиля, включая публичное использование и воспроизведение. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Акт содержит предмет прав, публичное воспроизведение и переданные документы"
+    },
+    {
+      "id": "TZ-323",
+      "clause": "Приложение 1",
+      "physical_lines": [
+        463,
+        464
+      ],
+      "source_line_sha256": [
+        "08239ef1702b139455db04729767a218e0fd36808a98f3462fef931ff1ce5281",
+        "f1f8f1c73aa4fdb5021fc8bdfabc51e323a0e6e9e5f6de28d6fdf74574ad1a72"
+      ],
+      "quote_line": 463,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tПретензий у Приобретателя к Правообладателю по передаваемым исключительным правам на ____________",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Фразы об отсутствии претензий и надлежащем исполнении только при фактической сдаче"
+    },
+    {
+      "id": "TZ-324",
+      "clause": "Приложение 1",
+      "physical_lines": [
+        465
+      ],
+      "source_line_sha256": [
+        "162397baf42f9722521b7ebd9e54a0af7bc2864ab730f36be54b3ebcbcb9406a"
+      ],
+      "quote_line": 465,
+      "quote_offset": 0,
+      "exact_excerpt": "\t•\tНастоящий акт подписан в 2 (двух) подлинных экземплярах на русском языке по одному для каждой из ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Акт составляется в двух подлинных экземплярах на русском языке"
+    },
+    {
+      "id": "TZ-325",
+      "clause": "Раздел 4 / 2.2.2.6",
+      "physical_lines": [
+        371,
+        119
+      ],
+      "source_line_sha256": [
+        "f1d03c5ef7baea1313ff5f7dd11a8546e16b4bc1830864d291d7200d6556093a",
+        "610ebb501656b1237b50cb1674eead8cdd3ffc1d774aa42ab8f05c2e1cd16f8c"
+      ],
+      "quote_line": 119,
+      "quote_offset": 287,
+      "exact_excerpt": "путем загрузки структурированной папки в облачное хранилище Яндекс.Диск и на внешнем жестком диске. ",
+      "excerpt_is_full_clause": false,
+      "atomic_registry_summary": "Согласовать объём и носители: диск, Яндекс.Диск, бумажная копия и исходный код"
+    }
+  ]
+}
