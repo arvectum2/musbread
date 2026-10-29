@@ -28,10 +28,15 @@ class ExportMuseumSnapshot extends Command
         // shared command instance may replace this call's bound options.
         $reviewPack = $this->option('review-pack');
         $preflightStrict = (bool) $this->option('preflight-strict');
-        $output = $this->option('output') ?: base_path('../web/src/data/published.json');
-        $manifest = $this->option('manifest') ?: base_path('../web/public/snapshot-manifest.json');
-        $mediaDir = $this->option('media-output-dir') ?: base_path('../web/public/media');
-        $documentDir = $this->option('document-output-dir') ?: base_path('../web/public/documents');
+        // Derive a canonical-looking sibling path without dot segments.
+        // The staged-commit guard intentionally rejects '..' and symlinked
+        // parents; do not weaken that security boundary to accommodate
+        // base_path('../web') on Linux CI or museum production.
+        $webRoot = dirname(base_path()).'/web';
+        $output = $this->option('output') ?: $webRoot.'/src/data/published.json';
+        $manifest = $this->option('manifest') ?: $webRoot.'/public/snapshot-manifest.json';
+        $mediaDir = $this->option('media-output-dir') ?: $webRoot.'/public/media';
+        $documentDir = $this->option('document-output-dir') ?: $webRoot.'/public/documents';
 
         if ($reviewPack !== null) {
             $result = app(\App\Support\MuseumReviewPackVerifier::class)

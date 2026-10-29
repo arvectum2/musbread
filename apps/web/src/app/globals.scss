@@ -291,7 +291,7 @@ html[data-vision-mode="on"] .museum-team-list li{background:#fff;color:#111;bord
 
 
 /* TZ-252: long headings such as "Документы" must wrap/scale on 320px. */
-.inner-page h1{font-size:clamp(2.25rem,8vw,4.2rem);overflow-wrap:anywhere}
+.inner-page h1{font-size:4.2rem;overflow-wrap:anywhere}
 
 /* TZ-195: extended image descriptions are visible selectable text, not overloaded alt. */
 .museum-media-long-description{margin:.55rem 0 .9rem;padding:.8rem 1rem;border-left:.2rem solid #236e68;background:#f5f8f5;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;font-size:.92rem}
@@ -527,7 +527,7 @@ main :is(.hero,.section,.guide-primary,.museum-list,.events-grid,.museum-gallery
 
 /* TZ-131. Official source-backed gallery rooms, without unlicensed photos. */
 .exposition-catalog{margin:2rem 0 2.5rem;max-width:100%;min-width:0}
-.exposition-catalog h2{font-size:clamp(1.65rem,2.5vw,2.1rem);margin-bottom:.75rem}
+.exposition-catalog h2{font-size:2.1rem;margin-bottom:.75rem}
 .exposition-catalog-intro{color:var(--mute);max-width:72ch;overflow-wrap:anywhere}
 .exposition-catalog-intro a{text-decoration:underline}
 .exposition-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.5rem}
@@ -549,7 +549,7 @@ html[data-vision-mode="on"] .exposition-catalog-intro{color:#111}
 
 /* TZ-140 — source-backed, keyboard-readable accessibility facts in visit plan. */
 .visit-accessibility{margin:1.5rem 0 2rem;min-width:0;max-width:100%}
-.visit-accessibility>h2{font-size:clamp(1.45rem,2.4vw,1.9rem);line-height:1.3}
+.visit-accessibility>h2{font-size:1.9rem;line-height:1.3}
 .visit-accessibility>p{overflow-wrap:anywhere;max-width:75ch}
 .visit-accessibility-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.25rem 0}
 .visit-accessibility-fact{border:1px solid var(--line);padding:1rem 1.1rem;min-width:0}
@@ -563,7 +563,7 @@ html[data-vision-mode="on"] .visit-accessibility-fact{border:2px solid currentCo
 
 /* Verified current museum visitor conditions and source-backed FAQ (TZ-139/146). */
 .visit-practical-rules{margin:1.5rem 0 2rem;min-width:0;overflow-wrap:anywhere}
-.visit-practical-rules>h2,.visitor-faq>h2{font-size:clamp(1.45rem,2.5vw,1.9rem)}
+.visit-practical-rules>h2,.visitor-faq>h2{font-size:1.9rem}
 .visit-practical-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:1.2rem 0}
 .visit-practical-list>div{min-width:0;border:1px solid var(--line);padding:1rem}
 .visit-practical-list dt{font-weight:700;margin-bottom:.5rem}
@@ -586,7 +586,7 @@ html[data-vision-mode="on"] .visitor-faq-number,.visit-practical-doc span{color:
 
 /* Verified source photos, displayed directly from the museum in our working prototype. */
 .official-museum-programs{margin:2rem 0;min-width:0;overflow-wrap:anywhere}
-.official-museum-programs>h2{font-size:clamp(1.55rem,2.6vw,2rem)}
+.official-museum-programs>h2{font-size:2rem}
 .official-museum-programs>p{max-width:76ch}
 .official-museum-program-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.5rem 0}
 .official-museum-program-card{border:1px solid var(--line);min-width:0;padding:1.2rem;overflow-wrap:anywhere}
@@ -611,7 +611,7 @@ html[data-vision-mode="on"] .official-museum-program-number{color:inherit}
 
 /* TZ-145 display-only museum souvenir catalogue: intentionally no commerce UX. */
 .museum-shop-showcase{margin:1.5rem 0 2.5rem;min-width:0}
-.museum-shop-showcase h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+.museum-shop-showcase h2{font-size:2rem}
 .museum-shop-showcase>p{max-width:75ch;line-height:1.6}
 .museum-shop-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.4rem 0}
 .museum-shop-item,.museum-shop-empty{padding:1.25rem;border:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
@@ -628,7 +628,7 @@ html[data-vision-mode="on"] .museum-shop-item,html[data-vision-mode="on"] .museu
 
 
 .museum-science-portal{margin:1.6rem 0 2rem;min-width:0;overflow-wrap:anywhere}
-.museum-science-portal>h2{font-size:clamp(1.5rem,2.4vw,2rem)}
+.museum-science-portal>h2{font-size:2rem}
 .museum-science-portal>p{max-width:79ch;line-height:1.6}
 .museum-science-portal .museum-science-note{border-left:3px solid currentColor;padding-left:1rem;max-width:78ch;margin:1.25rem 0}
 .museum-science-portal .official-museum-program-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -727,3 +727,14 @@ html[data-vision-mode="on"] .official-source-content .rich-text table:focus-visi
 .museum-news-original-pagination-links {display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;}
 .museum-news-original-pagination-links a,.museum-news-original-pagination-links strong {min-width:2rem;min-height:2rem;display:inline-flex;align-items:center;justify-content:center;border:1px solid currentColor;border-radius:.25rem;padding:.18rem .45rem;}
 .museum-news-original-pagination-links a:focus-visible {outline:3px solid currentColor;outline-offset:2px;}
+
+
+/* OOZ п.2.2.3.8.1: font-size must use rem/em only (no vw in clamp).
+   Use responsive breakpoints to preserve readable mobile headings. */
+@media(max-width:650px){
+  .inner-page h1{font-size:2.25rem}
+  .exposition-catalog h2{font-size:1.65rem}
+  .visit-accessibility>h2,.visit-practical-rules>h2,.visitor-faq>h2{font-size:1.45rem}
+  .official-museum-programs>h2{font-size:1.55rem}
+  .museum-shop-showcase h2,.museum-science-portal>h2{font-size:1.5rem}
+}

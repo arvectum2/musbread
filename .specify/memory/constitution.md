@@ -4,7 +4,7 @@
 
 ## Order of authority
 
-1. Signed contract and its signed annex describing the subject of procurement; original official procurement specification when identical to annex. In any discrepancy, stop and reconcile the signed original.
+1. Signed contract and its signed annex describing the subject of procurement; original official procurement specification when identical to annex. **Verified EIS signed PDF SHA 24616d4c274e7de1efe3bbe0b7c9605af9967f5a1e7087704a2db579c3e96ba8 is privately held on Mac mini; indexed 1–29 pages in specs/002-signed-contract/signed-line-map.json.** In any discrepancy, stop and reconcile the signed original.
 2. Official customer written agreements and accepted stage decisions **only within contractual authority**; a stage note cannot unilaterally waive requirements.
 3. Original SHA-256 locked EIS `tz.txt` and `tz.docx` stored privately on Mac mini. Fixed line numbering: physical LF-separated lines, not Python `splitlines()`.
 4. `specs/001-contract-tz-traceability/source-map.json` — 325 **derived** source-linked atoms and exact excerpts, NOT the full normative document. `docs/tz-audit/requirements.psv` — existing operational status/summary, NOT normative.

@@ -22,6 +22,17 @@ VALID_SLUG=re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 VALID_SOURCE=re.compile(r'^/(?:[a-z0-9-]+/)*[a-z0-9-]+/?$')
 MENU_RE=re.compile(r'legacy\("([a-z0-9-]+)",\s*"[^"]+",\s*"(/[^"?#]+)"\)')
 
+# Pages independently rendered at their original path are NOT redirects.
+# A navigation fallback target can be absent under CMS-approved navigation,
+# while the canonical source page is still present and must not be deleted.
+NATIVE_REASONS=frozenset({
+    'original-news-article','original-exhibition-detail',
+    'original-news-node-exhibition','original-excursion-detail',
+    'original-workshop-detail','original-exposition-room',
+    'original-source-section','original-crosslink-page','original-deep-page',
+})
+
+
 
 def build_map():
     mapping={}
@@ -172,14 +183,15 @@ def build_aliases(write=True,strict=True):
     for source,meta in sorted(mapping.items()):
         target=meta['target'];uri=urlsplit(target)
         dest=OUT/(uri.path.lstrip('/'))/'index.html'
-        if not dest.is_file():
+        native=meta['why'] in NATIVE_REASONS
+        if not dest.is_file() and (not native or bool(uri.fragment)):
             missing.append((source,target));continue
         if uri.fragment:
             payload=dest.read_text(encoding='utf-8')
             if f'id="{uri.fragment}"' not in payload and f'id=\"{uri.fragment}\"' not in payload:
                 missing.append((source,target+' (missing anchor)'));continue
         alias=OUT/(source.lstrip('/'))/'index.html'
-        if meta['why'] in ('original-news-article','original-exhibition-detail','original-news-node-exhibition','original-excursion-detail','original-workshop-detail','original-exposition-room','original-source-section','original-crosslink-page','original-deep-page'):
+        if native:
             # Native, independently generated Next.js route at the ORIGINAL
             # indexable museum URL. Never overwrite it with a meta-refresh.
             if not alias.is_file():
@@ -209,7 +221,7 @@ def build_aliases(write=True,strict=True):
                 or 'http-equiv="refresh"' in original_html.lower()
                 or (alias.parent/'.musbread-legacy-alias').exists()):
                 raise RuntimeError('Original museum source URL lacks standalone source-exact canonical HTML: '+source)
-            rows.append({'legacy_path':source,'new_relative_url':target,'source_kind':meta['why'],
+            rows.append({'legacy_path':source,'new_relative_url':target if dest.is_file() else source,'source_kind':meta['why'],
                          'mode':'native-source-URL-200; no redirect'})
             continue
         # The full static release intentionally strips private marker files.
