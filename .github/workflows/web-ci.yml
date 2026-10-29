@@ -410,14 +410,17 @@ jobs:
           # Even private MoonShine depends on static /vendor CSS/JS/font paths.
           # Only allow the two known namespaces and static extensions.
           sudo mkdir -p /srv/musbread/cms/public/vendor/moonshine/assets
-          sudo mkdir -p /srv/musbread/cms/public/vendor/museum-jodit\n          sudo mkdir -p /srv/musbread/cms/public/vendor/moonshine-tinymce
+          sudo mkdir -p /srv/musbread/cms/public/vendor/museum-jodit
+          sudo mkdir -p /srv/musbread/cms/public/vendor/moonshine-tinymce
           sudo mkdir -p /srv/musbread/cms/public/vendor/evil
           printf 'window.__moonshine=true;' | sudo tee /srv/musbread/cms/public/vendor/moonshine/assets/app.js >/dev/null
-          printf 'window.__editor=true;' | sudo tee /srv/musbread/cms/public/vendor/museum-jodit/editor.js >/dev/null\n          printf 'never serve this' | sudo tee /srv/musbread/cms/public/vendor/moonshine-tinymce/tinymce.min.js >/dev/null
+          printf 'window.__editor=true;' | sudo tee /srv/musbread/cms/public/vendor/museum-jodit/editor.js >/dev/null
+          printf 'never serve this' | sudo tee /srv/musbread/cms/public/vendor/moonshine-tinymce/tinymce.min.js >/dev/null
           printf 'never serve this' | sudo tee /srv/musbread/cms/public/vendor/moonshine-tinymce/license.md >/dev/null
           printf 'never serve this' | sudo tee /srv/musbread/cms/public/vendor/evil/executable.js >/dev/null
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine/assets/app.js)" = 200
-          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/museum-jodit/editor.js)" = 200\n          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine-tinymce/tinymce.min.js)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/museum-jodit/editor.js)" = 200
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine-tinymce/tinymce.min.js)" = 404
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine-tinymce/license.md)" = 404
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/evil/executable.js)" = 404
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18082/vendor/moonshine/.env)" = 404

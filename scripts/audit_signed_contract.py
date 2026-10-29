@@ -16,6 +16,7 @@ ROOT=Path(__file__).resolve().parents[1]
 FEATURE=ROOT/"specs/002-signed-contract"
 MAP=FEATURE/"signed-line-map.json"
 REPORT=FEATURE/"source-audit.md"
+CHECKLIST=FEATURE/"contract-clause-checklist.md"
 SIGNED=Path("/Volumes/ArvectumSSD/Arvectum/data/tenders/eis/0372200172326000015/signed_archive_20261023/signed_contract.pdf")
 TXT=Path("/Volumes/ArvectumSSD/Arvectum/data/tenders/eis/0372200172326000015/tz.txt")
 OOZ=ROOT/"docs/contract/OOZ_EIS_0372200172326000015.docx"
@@ -218,6 +219,53 @@ def report(data: dict) -> str:
 подписанным PDF с приложениями, а не за этим производным отчётом.
 """.replace("§",chr(96))
 
+
+SECTION_CATEGORY={
+    "1":("Предмет и сроки","Объём и срок услуг"),
+    "2":("Права и обязанности","Выполнение, подтверждение и документирование обязанностей сторон"),
+    "3":("Финансы","Бюджет, обеспечение и порядок платежей"),
+    "4":("Срок действия","Проверка договорного графика"),
+    "5":("Приёмка","ЕИС, документы и устранение замечаний"),
+    "6":("Гарантии","Качество, права, лицензии"),
+    "7":("Ответственность","Риски, сроки, санкции, документирование"),
+    "8":("Изменения","Только письменные законные изменения и прекращение"),
+    "9":("Форс-мажор","Условный порядок уведомления и доказательств"),
+    "10":("Прочие условия","Юридический/процедурный анализ"),
+    "11":("Корреспонденция","Уведомления, реквизиты, переписка"),
+    "12":("Приложения","Проверка ООЗ и расчёта цены"),
+}
+
+def clause_checklist(data: dict) -> str:
+    lines=[
+        "# Основной подписанный контракт — индекс 124 пунктов и матрица проверки",
+        "",
+        "**Все пункты индексированы по подписанному PDF.** Это перечень",
+        "**вопросов/свидетельств для проверки**, а не подмена нормативного текста;",
+        "категоризация по разделу НЕ доказывает точное истолкование всех условий",
+        "(особенно условных положений о санкциях и правах сторон).",
+        "Дата, подписи и реквизиты есть только в закрытом оригинале.",
+        "",
+        "| Пункт | PDF:страница/строка | Раздел | Проверить и подтвердить (не цитата) | SHA первой строки |",
+        "|---|---|---|---|---|",
+    ]
+    for item in data["contract_clauses"]:
+        n=item["clause"];sect=n.split(".")[0]
+        cat,verification=SECTION_CATEGORY.get(sect,("Другое","Проверить оригинал и применимость"))
+        lines.append(f'| {n} | {item["page"]}:{item["line"]} | {cat} | {verification}; '
+                     f'источник открыть полностью | §{item["line_sha256"][:16]}…§ |')
+    if len(lines)-10!=len(data["contract_clauses"]):
+        raise ValueError("Checklist does not represent all signed clauses")
+    lines+=["",
+       "**Отдельно согласовать и проверить:** контракт §5.1§ (3 рабочих дня на",
+       "ЕИС-документ после срока услуг), §5.4§ (20 рабочих дней для применимой",
+       "процедуры заказчика), §5.8§ (исправление замечаний за свой счёт),",
+       "§2.4.10–2.4.15§ и §6§ (права и лицензии), §12.1–12.2§ (оба",
+       "приложения). Исполнение конкретного пункта НЕ отмечается «готово»",
+       "по одному присутствию строки в списке.",
+       ""]
+    return "\n".join(lines).replace("§",chr(96))
+
+
 def validate(data: dict, pages: list[list[str]] | None) -> None:
     if data.get("schema")!=1 or data.get("pdf_sha256")!=PDF_SHA or data.get("ooz_docx_sha256")!=OOZ_SHA or data.get("original_tz_sha256")!=SOURCE_SHA or data.get("pages")!=29:
         raise ValueError("Signed source identity does not match pinned contract")
@@ -267,6 +315,7 @@ def main() -> int:
             MAP.parent.mkdir(exist_ok=True,parents=True)
             MAP.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
             REPORT.write_text(report(data),encoding="utf-8")
+            CHECKLIST.write_text(clause_checklist(data),encoding="utf-8")
         else:
             if digest(MAP.read_bytes())!=REVIEWED_MAP_SHA:
                 raise ValueError("Review-locked signed PDF map changed without source review")
@@ -278,6 +327,8 @@ def main() -> int:
                 if data!=expected:raise ValueError("Signed appendix alignment has changed")
             if REPORT.read_text(encoding="utf-8")!=report(data):
                 raise ValueError("Signed contract report is out of sync")
+            if CHECKLIST.read_text(encoding="utf-8")!=clause_checklist(data):
+                raise ValueError("Signed clause checklist projection is out of sync")
         typ="SIGNED PDF VERIFIED" if args.bootstrap or args.verify_source else "CI STRUCTURE ONLY"
         print(f"Signed Spec Kit {typ}: 29 pages, {len(data['all_lines'])} lines, "
               f"{len(data['contract_clauses'])} clauses, "

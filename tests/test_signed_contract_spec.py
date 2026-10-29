@@ -33,6 +33,14 @@ class SignedContractSpecTests(unittest.TestCase):
         self.assertEqual(manual["TZ-149"],[[19,51]])
         self.assertEqual(manual["TZ-150"],[[20,4]])
 
+    def test_each_of_124_contract_clauses_has_checklist_row(self):
+        table=signed.clause_checklist(self.data)
+        self.assertEqual(signed.CHECKLIST.read_text(encoding="utf-8"),table)
+        ids=[r.split(" | ")[1] for r in table.splitlines() if r.startswith("| ") and r[2:3].isdigit()]
+        self.assertEqual(len(ids),124)
+        self.assertEqual(len(ids),len(set(ids)))
+        self.assertIn("не подмена нормативного текста", table)
+
     def test_contract_clause_and_annex_ranges(self):
         clauses={x["clause"] for x in self.data["contract_clauses"]}
         for k in ("1.2","1.4","2.4.6","2.4.15","3.1","3.5","5.1","5.4","5.8","5.11","6.1","12.1","12.2"):

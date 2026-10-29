@@ -6,6 +6,7 @@
 - [x] C004 Build full 1522-line hash/page/category map and 124 numbered main-contract clause pointers.
 - [x] C005 Compare signed PDF OOZ to procurement source, map all 325 TZ atoms; manually check three PDF table-heading order differences.
 - [x] C006 Derive contract-specific dates, prices, confidentiality, licensing, rights and EIS acceptance obligations, with original PDF pointers.
+- [x] C006a Create a 124-row contract clause crosswalk (page/line, SHA and non-normative check category), pinned to the signed source map.
 - [x] C007 Wire source audit regression to CI and run fail/tamper tests.
 - [x] C008 Audit project code, infra, build, releases and delivery artifacts against signed contract and OOZ; patch verified defects.
 - [ ] C009 Run comprehensive local QA and external CI, update canonical roadmap and readiness truthfully.

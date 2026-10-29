@@ -36,6 +36,12 @@ class ContractDrivenRefactorTests(unittest.TestCase):
         self.assertIn("moonshine-tinymce/tinymce.min.js)",ci)
         self.assertIn("REMOVED_FROM_RUNTIME_AND_PUBLISHED_ASSETS",ci)
 
+    def test_nginx_ci_shell_lines_do_not_contain_literal_escaped_newlines(self):
+        ci=(ROOT/".github/workflows/web-ci.yml").read_text()
+        self.assertNotIn(r"\n          sudo", ci)
+        self.assertNotIn(r"\n          printf", ci)
+        self.assertNotIn(r"\n          test", ci)
+
     def test_ci_checks_both_normative_sources(self):
         ci=(ROOT/".github/workflows/web-ci.yml").read_text()
         self.assertIn("scripts/check_speckit_tz.py --check",ci)

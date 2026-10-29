@@ -16,7 +16,7 @@
 
 ## Mandatory signed-original facts
 
-See `source-audit.md` for the full categorized clause crosswalk, prices and deadlines; `signed-line-map.json` holds all 1522 line pointers, 124 independent clause IDs, 325 TZ-to-signed-PDF positions. The source is **29-page signed PDF**, not the procurement draft; an original PDF line/page must be opened for any contested legal obligation.
+See `source-audit.md` for key contractual deadlines and prices; `contract-clause-checklist.md` inventories EVERY one of the 124 numbered contract clauses with page/line and review category; `signed-line-map.json` holds all 1522 line pointers, 124 independent clause IDs, 325 TZ-to-signed-PDF positions. The source is **29-page signed PDF**, not the procurement draft; an original PDF line/page must be opened for any contested legal obligation.
 
 ### Boundaries
 
