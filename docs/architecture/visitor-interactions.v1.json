@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "lifecycle": "architecture-only-disabled",
+  "public": {
+    "server": "nginx-static-only",
+    "generator": "nextjs-static-export",
+    "stores_personal_data": false,
+    "can_contact_cms_or_db": false,
+    "accepts_post": false
+  },
+  "search": {
+    "index": "published-snapshot-build-time",
+    "autocomplete": "browser-local",
+    "cms_queries_at_runtime": false
+  },
+  "requests": {
+    "current_delivery": "mailto-draft",
+    "live_delivery": "separate-segmented-ingress",
+    "live_enabled": false,
+    "kinds": ["feedback", "excursion"],
+    "ingress": {
+      "method": "POST",
+      "path": "/v1/requests",
+      "isolated_from_static_host": true,
+      "has_cms_or_database_route": false,
+      "has_cms_secrets": false,
+      "durable_encrypted_queue": true,
+      "plaintext_persistent_storage": false,
+      "max_payload_bytes": 8192,
+      "rate_limit": true,
+      "antispam": true,
+      "attachments": false
+    },
+    "closed_worker": {
+      "initiates_private_mtls_pull": true,
+      "public_inbound_access": false,
+      "transfer_via_internet": false,
+      "idempotent_import": true,
+      "ack_after_durable_import": true
+    },
+    "fields": {
+      "name_max": 100,
+      "message_max": 1200,
+      "excursion_date": "YYYY-MM-DD",
+      "group_min": 1,
+      "group_max": 100,
+      "personal_data_notice_approved_required": true,
+      "extra_fields": false
+    },
+    "http": {
+      "accepted": 202,
+      "invalid": 422,
+      "limited": 429,
+      "unavailable": 503,
+      "accepted_is_booking_confirmation": false
+    },
+    "activation_requires": [
+      "museum-approved-forms-workflow",
+      "museum-approved-personal-data-notice-and-retention",
+      "isolated-ingress-host-and-private-mtls-network",
+      "ingress-worker-implemented-and-security-tested",
+      "synthetic-end-to-end-uat-and-museum-acceptance"
+    ]
+  },
+  "third_party": {
+    "tickets": "official-external-link",
+    "maps": "opt-in-embed",
+    "socials": "official-links",
+    "video": "opt-in-embed",
+    "analytics_enabled": false
+  }
+}
