@@ -56,7 +56,7 @@
 
 `Infrastructure templates and Nginx parser` всё ещё FAIL: логи выявили буквальные последовательности `\n` в теле YAML после рефакторинга,
 из-за которых shell обращался к `/dev/nulln` и получал `test: too many arguments`. Строки исправлены с отдельным тестом,
-но **GitHub повторная приёмка этого исправления ещё не завершена**.
+в **GitHub run 40965340470 новая проверка Infrastructure templates and Nginx parser завершилась SUCCESS**, без ослабления негативных HTTP-проверок.
 Независимо проверено в одноразовом Nginx Docker с 200 для Jodit/MoonShine и 404 для TinyMCE, private, PHP.
 
 `Static publication integrity` всё ещё FAIL: test runner публичного репозитория не получает приватную `.local_archive`
