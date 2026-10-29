@@ -40,8 +40,11 @@
       "trusted_proxy_ip_required": true,
       "public_ingress_private_only": true,
       "private_worker_loopback_mtls": true,
-      "proxy_exception_requires_customer_approval": true,
-      "no_extra_virtual_machine": true
+      "no_extra_virtual_machine": true,
+      "reverse_proxy_explicit_in_tz_2_2_3_7_1": true,
+      "specific_route_and_closed_contour_acceptance_required": true,
+      "nginx_request_body_buffering": false,
+      "public_request_body_disk_storage": false
     },
     "closed_worker": {
       "initiates_private_mtls_pull": true,
@@ -69,10 +72,11 @@
       "accepted_is_booking_confirmation": false
     },
     "activation_requires": [
-      "customer-written-approval-of-exact-post-proxy-exception-to-static-only",
+      "approved-specific-public-nginx-reverse-proxy-route-with-isolated-private-ingress",
       "museum-approved-forms-workflow",
       "museum-approved-personal-data-notice-and-retention",
       "two-vm-private-network-and-fail-closed-firewall",
+      "verified-closed-cms-reachable-only-from-customer-trusted-staff-ips",
       "dedicated-locked-down-ingress-fpm-on-private-vm",
       "verified-mtls-and-private-loopback-poller",
       "synthetic-end-to-end-uat-and-museum-acceptance"

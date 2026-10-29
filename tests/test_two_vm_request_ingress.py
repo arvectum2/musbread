@@ -28,7 +28,8 @@ class TwoVmIntakeTests(unittest.TestCase):
         self.assertFalse(req["live_enabled"])
         ingress=req["ingress"]
         self.assertTrue(ingress["no_extra_virtual_machine"])
-        self.assertTrue(ingress["proxy_exception_requires_customer_approval"])
+        self.assertTrue(ingress["reverse_proxy_explicit_in_tz_2_2_3_7_1"])
+        self.assertTrue(ingress["specific_route_and_closed_contour_acceptance_required"])
         self.assertTrue(ingress["private_worker_loopback_mtls"])
         self.assertEqual(ingress["host_role"],"private-vm-dedicated-restricted-php-fpm")
 
@@ -38,6 +39,10 @@ class TwoVmIntakeTests(unittest.TestCase):
         static=source("infra/nginx/public-static.conf")
         self.assertIn("location = /v1/requests {",public)
         self.assertIn("limit_except POST",public)
+        self.assertIn("proxy_request_buffering off;",public)
+        self.assertIn("proxy_buffering off;",public)
+        self.assertIn("client_body_buffer_size 16k;",public)
+        self.assertNotIn("proxy_request_buffering on;",public)
         self.assertIn("proxy_ssl_verify on;",public)
         self.assertIn("proxy_ssl_certificate ",public)
         self.assertIn("proxy_ssl_trusted_certificate ",public)

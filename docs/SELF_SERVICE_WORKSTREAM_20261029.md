@@ -5,7 +5,7 @@
 ## Результаты экспресс-приёмки и следующий автономный пакет
 
 - [x] **QA-29OCT:** генератор открытых требований с `--check` PASS; Laravel 418 PASS; ingress 2 PASS; адресные Python unittest 24 PASS; ESLint PASS. Полная Python-регрессия завершилась отдельно с 103 failures/32 errors из 333 тестов (не PASS); локально после реализации 11 архитектурных тестов и Nginx/PHP-FPM syntax PASS.
-- [x] **ING-2VM (технический проект):** [ADR](architecture/ADR_20261029_TWO_VM_REQUEST_INTAKE.md), mTLS Nginx templates, отдельный network-isolated PHP-FPM, rate limit и fail-closed client IP. **Не закрыто по ТЗ**: согласование единственного POST proxy на публичном Nginx, ПДн, hardening/production tests и UAT.
+- [x] **ING-2VM (технический проект):** [ADR](architecture/ADR_20261029_TWO_VM_REQUEST_INTAKE.md), mTLS Nginx templates, отдельный network-isolated PHP-FPM, rate limit и fail-closed client IP. **Не закрыто по ТЗ**: проверка соблюдения требований ТЗ для Nginx reverse proxy и закрытого CMS, ПДн, hardening/production tests и UAT.
 - [ ] **QA-NEXT (P1):** полный Python-suite выполнен: 333 tests, 103 failures/32 errors (в том числе отсутствуют исторические PDF, xlrd); необходима подготовка fixtures/окружения, повторная регрессия. [Локальный Chromium 4/4, WebKit 5/5 PASS; браузерная матрица](qa/BROWSER_ACCESSIBILITY_PREFLIGHT_20261029.md) готова, но ручные испытания не проведены.
 - [x] **UX-READY (подготовка):** [вопросы и 2 сценарных раунда ≥5 человек](ux/INTERVIEW_AND_TWO_ROUND_UX_PACK_20261029.md). Интервью/пользовательские тесты ещё не проведены.
 - [x] **DELIVERY-READY (пакет):** [чек-лист артефактов, лицензий, носителей, актов, передачи](handoff/DELIVERY_READINESS_20261029.md). Фактическая передача не проведена.
