@@ -1,0 +1,38 @@
+[Unit]
+Description=MusBread isolated visitor request ingress PHP-FPM (private VM1)
+After=local-fs.target
+ConditionPathExists=/etc/musbread/ingress.env
+ConditionPathExists=/etc/musbread/ingress-php-fpm.conf
+
+[Service]
+Type=simple
+User=musbread-ingress
+Group=musbread-ingress
+SupplementaryGroups=musbread-ingress-socket
+EnvironmentFile=/etc/musbread/ingress.env
+RuntimeDirectory=musbread-ingress
+RuntimeDirectoryMode=0755
+StateDirectory=musbread-requests
+StateDirectoryMode=0700
+UMask=0077
+ExecStart=/usr/sbin/php-fpm8.4 --nodaemonize --fpm-config /etc/musbread/ingress-php-fpm.conf
+Restart=on-failure
+RestartSec=5s
+NoNewPrivileges=true
+PrivateNetwork=true
+RestrictAddressFamilies=AF_UNIX
+ProtectSystem=strict
+ProtectHome=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+ReadWritePaths=/var/lib/musbread-requests /run/musbread-ingress
+InaccessiblePaths=-/srv/musbread/cms -/etc/musbread/cms.env -/run/postgresql -/run/mysqld -/var/lib/postgresql -/var/lib/mysql
+
+[Install]
+WantedBy=multi-user.target

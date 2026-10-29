@@ -15,7 +15,7 @@
   },
   "requests": {
     "current_delivery": "mailto-draft",
-    "live_delivery": "separate-segmented-ingress",
+    "live_delivery": "two-vm-public-exact-post-proxy-to-private-isolated-ingress",
     "live_enabled": false,
     "kinds": [
       "feedback",
@@ -34,7 +34,14 @@
       "antispam": true,
       "attachments": false,
       "client_idempotency": "optional-random-128-bit-id-7-day-deduplication",
-      "implementation": "services/request-ingress/public/index.php"
+      "implementation": "services/request-ingress/public/index.php",
+      "host_role": "private-vm-dedicated-restricted-php-fpm",
+      "public_transport": "exact-post-path-nginx-mtls-reverse-proxy-only",
+      "trusted_proxy_ip_required": true,
+      "public_ingress_private_only": true,
+      "private_worker_loopback_mtls": true,
+      "proxy_exception_requires_customer_approval": true,
+      "no_extra_virtual_machine": true
     },
     "closed_worker": {
       "initiates_private_mtls_pull": true,
@@ -62,10 +69,12 @@
       "accepted_is_booking_confirmation": false
     },
     "activation_requires": [
+      "customer-written-approval-of-exact-post-proxy-exception-to-static-only",
       "museum-approved-forms-workflow",
       "museum-approved-personal-data-notice-and-retention",
-      "isolated-ingress-host-and-private-mtls-network",
-      "ingress-worker-implemented-and-security-tested",
+      "two-vm-private-network-and-fail-closed-firewall",
+      "dedicated-locked-down-ingress-fpm-on-private-vm",
+      "verified-mtls-and-private-loopback-poller",
       "synthetic-end-to-end-uat-and-museum-acceptance"
     ]
   },

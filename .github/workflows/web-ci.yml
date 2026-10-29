@@ -361,6 +361,10 @@ jobs:
           python-version: '3.12'
       - name: Check templates do not expose private CMS
         run: python3 -m unittest tests/test_infra_templates.py -v
+      - name: Validate two-VM mTLS request proxy Nginx using disposable certificates
+        run: bash scripts/test_two_vm_nginx_syntax.sh
+      - name: Parse dedicated private-ingress PHP-FPM sandbox example
+        run: bash scripts/test_two_vm_php_fpm_syntax.sh
       - name: Parse both Linux Nginx examples
         run: |
           mkdir -p /tmp/musbread-csp-fixture

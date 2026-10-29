@@ -80,7 +80,14 @@ try {
   $pub=base64_decode(cfg('MUSEUM_INGRESS_PUBLIC_KEY'),true);
   if($pub===false||strlen($pub)!==SODIUM_CRYPTO_BOX_PUBLICKEYBYTES||strlen(cfg('MUSEUM_RATE_SECRET'))<32)
    reply(503,['error'=>'unavailable']);
-  $ipHash=hash_hmac('sha256',(string)($_SERVER['REMOTE_ADDR']??''),cfg('MUSEUM_RATE_SECRET'));
+  $clientIp=(string)($_SERVER['REMOTE_ADDR']??'');
+  if(cfg('MUSEUM_TRUSTED_PROXY')==='1'){
+   // Only dedicated nginx FastCGI param on VM1 is trusted, never HTTP_X_*.
+   $clientIp=(string)($_SERVER['MUSEUM_CLIENT_IP']??'');
+   if(filter_var($clientIp,FILTER_VALIDATE_IP)===false)
+    reply(503,['error'=>'unavailable']);
+  }
+  $ipHash=hash_hmac('sha256',$clientIp,cfg('MUSEUM_RATE_SECRET'));
   $bucket=intdiv(time(),60);$id=bin2hex(random_bytes(16));
   $encrypted=base64_encode(sodium_crypto_box_seal(json_encode($data,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE),$pub));
   $digest=hash_hmac('sha256',json_encode($data,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE),cfg('MUSEUM_RATE_SECRET'));

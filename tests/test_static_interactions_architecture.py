@@ -47,6 +47,8 @@ class VisitorArchitectureTests(unittest.TestCase):
         self.assertTrue(ingress["isolated_from_static_host"])
         self.assertFalse(ingress["has_cms_or_database_route"])
         self.assertFalse(ingress["has_cms_secrets"])
+        self.assertTrue(ingress["no_extra_virtual_machine"])
+        self.assertTrue(ingress["proxy_exception_requires_customer_approval"])
         self.assertTrue(ingress["durable_encrypted_queue"])
         self.assertFalse(ingress["plaintext_persistent_storage"])
         self.assertTrue(worker["initiates_private_mtls_pull"])
