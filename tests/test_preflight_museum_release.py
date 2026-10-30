@@ -71,6 +71,14 @@ class PreflightTests(unittest.TestCase):
             '/old/': (301,b'',{'Location':'/news/'})}
         def fake(url): return answers[url.removeprefix(base)]
         self.assertEqual(pre.verify_live_site(base,[('/old/','/news/')],fake)['redirect_samples'],1)
+        answers['/']=(200,b'<html>Site</html>',{'X-Content-Type-Options':'nosniff',
+            'Content-Security-Policy': 'script-src '+('a'*8192),
+            'Strict-Transport-Security':'max-age=31536000'})
+        with self.assertRaisesRegex(pre.PreflightError, '8 KiB'):
+            pre.verify_live_site(base,[('/old/','/news/')],fake)
+        answers['/']=(200,b'<html>Site</html>',{'X-Content-Type-Options':'nosniff',
+            'Content-Security-Policy': "default-src 'self'",
+            'Strict-Transport-Security':'max-age=31536000'})
         answers['/robots.txt']=(200,b'User-Agent: *\nDisallow: /',{})
         with self.assertRaisesRegex(pre.PreflightError, 'robots'):
             pre.verify_live_site(base,[('/old/','/news/')],fake)

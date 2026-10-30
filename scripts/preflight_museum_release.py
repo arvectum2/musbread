@@ -140,6 +140,8 @@ def verify_live_site(base: str, mappings: list[tuple[str, str]], fetch=get_https
     headers = {str(k).lower(): str(v) for k, v in root_headers.items()}
     require(headers.get('x-content-type-options', '').lower() == 'nosniff', 'Missing X-Content-Type-Options')
     require(bool(headers.get('content-security-policy')), 'Missing Content-Security-Policy')
+    require(len(headers['content-security-policy'].encode('utf-8')) <= 8192,
+            'Content-Security-Policy response header exceeds conservative 8 KiB limit; use per-route hashes, never disable CSP')
     require(bool(headers.get('strict-transport-security')), 'Missing TLS HSTS policy')
     require('noindex' not in headers.get('x-robots-tag','').lower(), 'Production X-Robots-Tag blocks indexing')
     robots_status, robots, _ = fetch(origin+'/robots.txt')
