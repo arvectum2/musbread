@@ -196,7 +196,8 @@ def bom(root: Path = ROOT) -> dict:
                 raise ValueError("Missing npm root direct dependency "+name)
             graph[rootref].add("npm:"+target)
     python_entries=(("python-pptx","1.0.2","MIT"),
-                    ("pypdf","5.6.1","BSD-family-classifier-exact-notice-verify"))
+                    ("pypdf","5.6.1","BSD-family-classifier-exact-notice-verify"),
+                    ("lxml","6.1.3","BSD-3-Clause;native-libxml2-libxslt-notices-review"))
     for name,ver,lic in python_entries:
         if f"{name}=={ver}" not in pin_lines:
             raise ValueError("Design dependency pin changed "+name)

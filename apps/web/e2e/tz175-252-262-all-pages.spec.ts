@@ -16,12 +16,19 @@ function getPages(dir:string):string[]{
 }
 const routes=getPages(root).sort();
 
-test("TZ-175/252/262: all public static pages at desktop and mobile width",async ({page})=>{
+// CI has only the Git-tracked export. Every route's HTML is still checked
+// structurally by Python; the full 945-page browser census is a local gate.
+const browserRoutes = process.env.MUSBREAD_CI_PUBLIC_FIXTURES
+  ? [...new Set([...routes.slice(0, 4), ...Array.from({length: 28}, (_,i) =>
+      routes[Math.floor(i * (routes.length - 1) / 27)]), ...routes.slice(-4)])]
+  : routes;
+
+test("TZ-175/252/262: browser viewport census (CI representative; local complete)",async ({page})=>{
   test.setTimeout(150_000);
   expect(routes.length).toBeGreaterThanOrEqual(75);
   for(const viewport of [{width:1440,height:900},{width:320,height:740}]){
     await page.setViewportSize(viewport);
-    for(const route of routes){
+    for(const route of browserRoutes){
       await page.goto(route,{waitUntil:"domcontentloaded"});
       await expect(page.locator("header.site-header"),"header "+route).toHaveCount(1);
       await expect(page.locator("main"),"main "+route).toHaveCount(1);

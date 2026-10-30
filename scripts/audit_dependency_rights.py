@@ -22,6 +22,8 @@ DESIGN_PYTHON = (
     ("python-pptx","1.0.2","MIT","Installed python-pptx dist metadata on Mac mini; version pinned in requirements"),
     ("pypdf","5.6.1","BSD family (classifier, exact version needs manual legal confirmation)",
      "Installed pypdf dist metadata on Mac mini; version pinned in requirements"),
+    ("lxml","6.1.3","BSD-3-Clause (native libxml2/libxslt license review required)",
+     "Installed lxml dist metadata on Mac mini; native linked libraries and notice obligations not cleared"),
 )
 
 

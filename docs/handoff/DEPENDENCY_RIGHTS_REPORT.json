@@ -114,6 +114,18 @@
       "license_review": "VERIFY_EXACT_LICENSE_AND_NOTICES"
     },
     {
+      "name": "lxml",
+      "ecosystem": "python-design-only",
+      "version": "6.1.3",
+      "declared_licenses": [
+        "BSD-3-Clause (native libxml2/libxslt license review required)"
+      ],
+      "evidence": "Installed lxml dist metadata on Mac mini; native linked libraries and notice obligations not cleared",
+      "direct_runtime": false,
+      "redistributed_upstream_code_owned_by_arvectum": false,
+      "license_review": "VERIFY_EXACT_LICENSE_AND_NOTICES"
+    },
+    {
       "name": "jodit/community-runtime",
       "ecosystem": "bundled-javascript",
       "version": "4.18.4",
@@ -149,7 +161,7 @@
   "summary": {
     "direct_php": 3,
     "direct_web": 4,
-    "design_python": 2,
+    "design_python": 3,
     "embedded_gpl_bundles": 0,
     "license_review_blockers": 6
   }

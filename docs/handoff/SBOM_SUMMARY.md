@@ -7,10 +7,10 @@
 | Composer production | 82 |
 | Composer development | 33 |
 | npm all locked (including optional platform and dev) | 440 |
-| Pinned design Python tools | 2 |
+| Pinned design Python tools | 3 |
 | Explicit embedded editor asset | 1 |
 | Native build tool | 1 |
-| **Total distinct component records** | **559** |
+| **Total distinct component records** | **560** |
 
 ## Declared license risk buckets (one highest-priority bucket per component)
 
@@ -18,7 +18,7 @@
 |---|---:|
 | FILE_LEVEL_COPYLEFT_REVIEW | 3 |
 | NON_STANDARD_OR_MANUAL_REVIEW | 2 |
-| PERMISSIVE_NOTICE_CHECK | 536 |
+| PERMISSIVE_NOTICE_CHECK | 537 |
 | STRONG_COPYLEFT_OR_DUAL_REVIEW | 2 |
 | UNKNOWN_REQUIRES_VERIFICATION | 1 |
 | WEAK_COPYLEFT_LGPL | 15 |

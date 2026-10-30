@@ -36,7 +36,8 @@ jobs:
           sudo apt-get install -y -qq librsvg2-bin
           python3 -m pip install "xlrd==2.0.2"
           python3 -m pip install -r scripts/requirements-design-tools.txt
-      - run: python3 -m unittest discover -s tests -v
+      - name: Run hermetic Python regression tests (private source corpus is verified on Mac mini)
+        run: python3 scripts/run_ci_python_tests.py --profile public
       - name: Verify actual physical print sizes and editable PPTX slide geometry
         run: python3 scripts/generate_technical_carriers.py --verify
       - name: Verify museum signage, labels and office carrier SVG/PDF geometry
@@ -128,6 +129,8 @@ jobs:
   web:
     name: Next.js lint, types and static export
     runs-on: ubuntu-latest
+    env:
+      MUSBREAD_CI_PUBLIC_FIXTURES: "1"
     defaults:
       run:
         working-directory: apps/web
@@ -179,7 +182,7 @@ jobs:
       - name: Block premature search indexing
         run: python3 ../../scripts/check_preaward_seo.py out
       - name: Install headless Chromium (Playwright)
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps chromium webkit
       - name: Browser smoke tests
         run: npm run test:e2e
       - name: TZ-111 cross-engine smoke baseline (CI Chromium)

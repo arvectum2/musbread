@@ -20,10 +20,10 @@ class LockedSbomTests(unittest.TestCase):
         self.assertEqual(count["composer"],len(c["packages"]))
         self.assertEqual(count["composer-dev"],len(c["packages-dev"]))
         self.assertEqual(count["npm"],len(n["packages"])-1)
-        self.assertEqual(len(cyclo["components"]),559)
+        self.assertEqual(len(cyclo["components"]),560)
         self.assertEqual(cyclo["bomFormat"],"CycloneDX")
         self.assertEqual(cyclo["specVersion"],"1.6")
-        self.assertEqual(len(cyclo["dependencies"]),560)
+        self.assertEqual(len(cyclo["dependencies"]),561)
         refs={i["bom-ref"] for i in cyclo["components"]}
         self.assertEqual(len(refs),len(cyclo["components"]))
         self.assertIn("embedded:jodit-runtime",refs)
@@ -59,9 +59,9 @@ class LockedSbomTests(unittest.TestCase):
         stats=json.loads(summary)
         self.assertFalse(stats["legal_clearance"])
         self.assertFalse(stats["transferred_exclusive_third_party_rights"])
-        self.assertGreaterEqual(len(list(csv.DictReader(licenses.splitlines()))),559)
+        self.assertGreaterEqual(len(list(csv.DictReader(licenses.splitlines()))),560)
         self.assertEqual(document["components"],report()[0]["components"])
-        self.assertEqual(write_or_check(ROOT,True)["total_components"],559)
+        self.assertEqual(write_or_check(ROOT,True)["total_components"],560)
 
     def test_changing_an_entire_locked_package_or_its_license_fails_report_gate(self):
         with tempfile.TemporaryDirectory() as dirname:

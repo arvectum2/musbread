@@ -12,6 +12,7 @@ test("museum's original /novosty root links to all twenty-seven historic ?page=N
 });
 
 test("each old paginated index is locally materialized with original articles and correct canonical",async({page})=>{
+ test.skip(Boolean(process.env.MUSBREAD_CI_PUBLIC_FIXTURES), "Private museum originals restored only in complete Mac mini release; local archive browser gate required");
  for(const n of [1,3,13,27]){
   const response=await page.goto(`/__museum_legacy_pager/page-${n}.html`);
   expect(response?.status(),`Old page index ${n} source-backed HTML file`).toBe(200);

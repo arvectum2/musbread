@@ -31,6 +31,7 @@ test("archived 2019 Petersburg tea exhibition keeps its old independent page and
 });
 
 test("original museum government PDF URLs remain fetchable as genuine PDF byte streams",async({page})=>{
+ test.skip(Boolean(process.env.MUSBREAD_CI_PUBLIC_FIXTURES), "Private museum originals restored only in complete Mac mini release; local archive browser gate required");
  for(const name of ["20240826123831-gz_2024_1.pdf","20240829122031-otchet_o_vypolnenii_gos_zadaniya_za_2023.pdf",
   "20250704154330-otchet_gos_zadanie_2_kv_2025.pdf"]){
   const result=await page.request.get(`/sites/default/files/page/${name}`);

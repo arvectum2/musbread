@@ -13,6 +13,7 @@
 | sanitize-html | 2.18.1 | MIT | apps/web/package-lock.json | NOTICE_AND_COMPLIANCE_REQUIRED |
 | python-pptx | 1.0.2 | MIT | Installed python-pptx dist metadata on Mac mini; version pinned in requirements | VERIFY_EXACT_LICENSE_AND_NOTICES |
 | pypdf | 5.6.1 | BSD family (classifier, exact version needs manual legal confirmation) | Installed pypdf dist metadata on Mac mini; version pinned in requirements | VERIFY_EXACT_LICENSE_AND_NOTICES |
+| lxml | 6.1.3 | BSD-3-Clause (native libxml2/libxslt license review required) | Installed lxml dist metadata on Mac mini; native linked libraries and notice obligations not cleared | VERIFY_EXACT_LICENSE_AND_NOTICES |
 | jodit/community-runtime | 4.18.4 | MIT | apps/cms/public/vendor/museum-jodit/LICENSE.txt; npm jodit@4.18.4 pinned SHA-256 | MIT_NOTICE_MUST_ACCOMPANY_DISTRIBUTED_ASSET |
 | librsvg/native-rsvg-convert | SYSTEM_VERSION_NOT_PINNED | REQUIRES_NATIVE_PACKAGE_LICENSE_INVENTORY | Native Mac / Linux package outside locked application dependency tree | CONFIRM_NATIVE_TOOL_LICENSES_AND_DISTRIBUTION_BEFORE_DELIVERY |
 

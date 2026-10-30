@@ -24,6 +24,7 @@ test("an original museum historical opening-hours poster has concise alt and dat
 });
 
 test("legacy local archive index renders source photos with concise alts", async ({page}) => {
+  test.skip(Boolean(process.env.MUSBREAD_CI_PUBLIC_FIXTURES), "Requires complete private museum archive restored on Mac mini");
   await page.goto("/__museum_legacy_pager/page-6.html");
   const images=page.locator(".official-museum-program-card img");
   await expect(images).toHaveCount(2); // 10 articles, but only two genuine image links in this source page

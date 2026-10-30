@@ -1,6 +1,7 @@
 import {expect,test} from "@playwright/test";
 
 test("original public museum PDF and DOCX URLs stay alive after changing DNS",async({page})=>{
+ test.skip(Boolean(process.env.MUSBREAD_CI_PUBLIC_FIXTURES), "Private museum originals restored only in complete Mac mini release; local archive browser gate required");
   const cases=[
     ["/sites/default/files/page/20240117170312-uchetnaya_politika.pdf","application/pdf","%PDF"],
     ["/sites/default/files/page/20260203104919-1.pdf","application/pdf","%PDF"],

@@ -1,16 +1,16 @@
 {
   "status": "LOCKFILE_SBOM_NOT_COMPLIANCE_APPROVAL",
-  "total_components": 559,
+  "total_components": 560,
   "composer_production": 82,
   "composer_development": 33,
   "npm_all_locked": 440,
-  "python_design": 2,
+  "python_design": 3,
   "bundled_assets": 1,
   "native_build_tools": 1,
   "risk_classification_counts": {
     "FILE_LEVEL_COPYLEFT_REVIEW": 3,
     "NON_STANDARD_OR_MANUAL_REVIEW": 2,
-    "PERMISSIVE_NOTICE_CHECK": 536,
+    "PERMISSIVE_NOTICE_CHECK": 537,
     "STRONG_COPYLEFT_OR_DUAL_REVIEW": 2,
     "UNKNOWN_REQUIRES_VERIFICATION": 1,
     "WEAK_COPYLEFT_LGPL": 15
