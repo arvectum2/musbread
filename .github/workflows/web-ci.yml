@@ -209,7 +209,7 @@ jobs:
       - name: Reject private files and secrets in static export
         run: python3 ../../scripts/audit_public_artifacts.py out
       - name: Verify all internal routes and anchors
-        run: python3 ../../scripts/audit_static_navigation.py out
+        run: python3 ../../scripts/audit_static_navigation.py out --private-document-manifest ../../docs/source-migration/OFFICIAL_ORIGINAL_DOCUMENTS_DEPLOYMENT_20261018.json
       - name: "TZ-175/252/262: complete structural coverage for published static pages"
         run: python3 ../../scripts/audit_structural_tz.py out
       - name: "TZ-189: all published link titles from their destination"

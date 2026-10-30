@@ -52,6 +52,23 @@ class StructuralAuditTests(unittest.TestCase):
             with self.assertRaisesRegex(AssertionError,'breadcrumbs'):
                 audit(root)
 
+    def test_verified_alias_fallback_is_not_misclassified_as_full_visitor_page(self):
+        from scripts.build_museum_legacy_page_aliases import render_alias
+        import csv
+        manifest=Path(__file__).resolve().parents[1]/"docs/source-migration/LEGACY_MUSEUM_PAGE_ALIASES_20261018.csv"
+        with manifest.open(encoding="utf-8-sig",newline="") as h:
+            row=next(r for r in csv.DictReader(h,delimiter=";") if r["mode"].startswith("static-meta-refresh"))
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/"index.html").write_text(html_doc(crumb=False))
+            alias=root/row["legacy_path"].lstrip("/")/"index.html";alias.parent.mkdir(parents=True)
+            alias.write_text(render_alias(row["legacy_path"],row["new_relative_url"]))
+            result=audit(root)
+            self.assertEqual(result["tested_visitor_pages"],1)
+            self.assertEqual(result["verified_legacy_redirect_fallbacks"],1)
+            alias.write_text(alias.read_text().replace("noindex","index"))
+            with self.assertRaisesRegex(AssertionError,"fallback was modified"):
+                audit(root)
+
     def test_en_sentinel_requires_noindex(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)

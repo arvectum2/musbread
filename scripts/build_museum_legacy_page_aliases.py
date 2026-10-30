@@ -175,6 +175,25 @@ def build_map():
     return mapping
 
 
+
+def render_alias(source: str, target: str) -> str:
+    """Single authoritative, noindex, title-complete legacy fallback document."""
+    origin_html=escape(source,quote=True)
+    url=escape(target,quote=True)
+    html=('<!doctype html><html lang="ru"><head><meta charset="utf-8">'
+          '<meta name="viewport" content="width=device-width,initial-scale=1">'
+          '<meta name="robots" content="noindex,follow">'
+          '<meta http-equiv="refresh" content="0;url='+url+'">'
+          '<title>Страница музея перенесена</title></head>'
+          '<body><a tabindex="0" class="skip-link" title="Перейти к основному содержимому" href="#main">'
+          'Перейти к основному содержимому</a>'
+          '<main id="main"><h1>Страница музея перенесена</h1>'
+          '<p>Оригинальная страница музея переехала: '
+          '<a tabindex="0" title="Открыть материал музея" href="'+url+'">'
+          'открыть материал нового сайта</a>.</p>'
+          '<p>Исторический адрес: '+origin_html+'</p></main></body></html>')
+    return html + "\n"
+
 def build_aliases(write=True,strict=True):
     mapping=build_map()
     if not OUT.is_dir():raise RuntimeError('Next.js static output missing; build first')
@@ -228,20 +247,7 @@ def build_aliases(write=True,strict=True):
         # A later read-only audit must nevertheless recognise its *exact*
         # generated fallback HTML without treating it as an unsafe collision.
         # Any unknown/mutated HTML at this original URL remains a hard error.
-        origin_html=escape(source,quote=True)
-        url=escape(target,quote=True)
-        html=('<!doctype html><html lang="ru"><head><meta charset="utf-8">'
-              '<meta name="viewport" content="width=device-width,initial-scale=1">'
-              '<meta name="robots" content="noindex,follow">'
-              '<meta http-equiv="refresh" content="0;url='+url+'">'
-              '<title>Страница музея перенесена</title></head>'
-              '<body><a tabindex="0" class="skip-link" href="#main">'
-              'Перейти к основному содержимому</a>'
-              '<main id="main"><h1>Страница музея перенесена</h1>'
-              '<p>Оригинальная страница музея переехала: '
-              '<a tabindex="0" title="Открыть материал музея" href="'+url+'">'
-              'открыть материал нового сайта</a>.</p>'
-              '<p>Исторический адрес: '+origin_html+'</p></main></body></html>')
+        html=render_alias(source,target).removesuffix("\n")
         if (alias.resolve()==dest.resolve()
             or (alias.exists() and not (alias.parent/'.musbread-legacy-alias').exists()
                 and alias.read_text(encoding='utf-8') != html+'\n')):

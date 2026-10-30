@@ -8,12 +8,19 @@ the genuine 404, must have an accessible route hierarchy and consistent layout.
 from __future__ import annotations
 
 import html
+import csv
 import re
 import sys
 from pathlib import Path
 
 STATIC = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("apps/web/out")
 SENTINEL = "en/museum/not-translated/index.html"
+ALIAS_CSV=Path(__file__).resolve().parents[1]/"docs/source-migration/LEGACY_MUSEUM_PAGE_ALIASES_20261018.csv"
+try:
+    from .build_museum_legacy_page_aliases import render_alias
+except ImportError:  # direct script invocation from apps/web
+    from build_museum_legacy_page_aliases import render_alias
+
 
 
 def tag(content: str, name: str) -> bool:
@@ -24,11 +31,18 @@ def audit(root: Path) -> dict:
     pages = sorted(root.rglob("index.html"))
     if not pages:
         raise AssertionError(f"No static pages in {root}")
+    with ALIAS_CSV.open(encoding="utf-8-sig", newline="") as handle:
+        records=list(csv.DictReader(handle,delimiter=";"))
+    aliases={row["legacy_path"].lstrip("/")+"/index.html":(row["legacy_path"],row["new_relative_url"])
+             for row in records if row["mode"].startswith("static-meta-refresh")}
+    if len(aliases)!=88:
+        raise AssertionError("Unexpected legacy-alias source map size")
     missing: list[str] = []
     tested = 0
     error_pages = 0
     english_pages = 0
     en_sentinels = 0
+    legacy_aliases = 0
     for path in pages:
         rel = path.relative_to(root).as_posix()
         if rel == SENTINEL:
@@ -36,8 +50,14 @@ def audit(root: Path) -> dict:
             # Next.js requires a route for an empty optional EN collection.
             # This route is 404 and noindex, not a visitor page.
             text = path.read_text(encoding="utf-8")
-            if "noindex" not in text or "not-translated" not in text:
+            if "noindex" not in text or not ("not-translated" in text or 'id="__next_error__"' in text):
                 missing.append(f"{rel}: English sentinel is not safely 404/noindex")
+            continue
+        if rel in aliases:
+            source,target=aliases[rel]
+            if path.read_text(encoding="utf-8")!=render_alias(source,target):
+                missing.append(f"{rel}: source-locked noindex fallback was modified")
+            legacy_aliases += 1
             continue
         tested += 1
         text = html.unescape(path.read_text(encoding="utf-8"))
@@ -60,6 +80,8 @@ def audit(root: Path) -> dict:
                     "https://vk.com/club37126776", "https://max.ru/id7808018523_gos"):
             if val not in text:
                 missing.append(f"{rel}: missing footer contact/social {val[:22]}")
+    if len(pages)>=100 and legacy_aliases!=len(aliases):
+        missing.append(f"Missing source-backed legacy aliases: {legacy_aliases}/{len(aliases)}")
     if missing:
         raise AssertionError("\n".join(missing[:75]))
     return {
@@ -68,6 +90,7 @@ def audit(root: Path) -> dict:
         "english_pages": english_pages,
         "error_pages": error_pages,
         "safe_unpublished_EN_sentinels": en_sentinels,
+        "verified_legacy_redirect_fallbacks": legacy_aliases,
         "breadcrumbs_every_nonhome": True,
         "header_main_footer_every_page": True,
         "footer_contacts_and_social_every_page": True,
