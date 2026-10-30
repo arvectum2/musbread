@@ -95,9 +95,9 @@ test("поиск: отсутствие результатов сообщает �
   const search = page.getByRole("combobox", { name: "Поиск по событиям" });
   await expect(search).toHaveAttribute("data-ready", "true");
   await search.fill("несуществующеесобытие");
-  await expect(page.getByRole("status")).toContainText("не найдено");
+  await expect(page.locator('.search-empty[role="status"]')).toContainText("не найдено");
   await expect(search).toHaveAttribute("aria-expanded", "false");
-  await expect(page.getByRole("listbox")).toBeHidden();
+  await expect(page.getByRole("listbox",{name:"Результаты поиска по событиям"})).toBeHidden();
 });
 
 test("Контакты из музея ведут на страницу с подтверждённым адресом", async ({ page }) => {

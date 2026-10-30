@@ -7,6 +7,21 @@ from scripts.check_css_font_units import disallowed
 ROOT=Path(__file__).resolve().parents[1]
 
 class ContractDrivenRefactorTests(unittest.TestCase):
+    def test_private_original_source_gate_is_fail_closed_not_a_public_ci_fake(self):
+        gate=(ROOT/"scripts/qa_private_source_gate.sh").read_text(encoding="utf-8")
+        for marker in ("--verify-source", "--verify-only",
+                       "unittest discover -s tests", "composer audit --locked",
+                       "PRIVATE_GATE_BLOCKED", "PRIVATE_MUSBREAD_ORIGINAL_GATE_PASS", "--with-browser", "npm run test:e2e"):
+            self.assertIn(marker,gate)
+        self.assertNotIn("git push",gate)
+        self.assertNotIn("ssh ",gate)
+        self.assertNotIn("curl ",gate)
+
+    def test_unbroken_source_archive_urls_can_wrap_on_narrow_phones(self):
+        css=(ROOT/"apps/web/src/app/globals.scss").read_text(encoding="utf-8")
+        self.assertIn(".rich-text{white-space:normal;min-width:0;max-width:100%;overflow-wrap:anywhere}",css)
+        self.assertIn(".rich-text :is(p,li,a,span,code){overflow-wrap:anywhere}",css)
+
     def test_font_sizes_are_only_relative_rem_or_em(self):
         css=(ROOT/"apps/web/src/app/globals.scss").read_text(encoding="utf-8")
         self.assertEqual(disallowed(css), [])

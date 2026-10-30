@@ -1,6 +1,12 @@
 import {expect,test} from "@playwright/test";
 
+// Reproduce the original museum bulletin's October 18 snapshot; these
+// historical 5/119 counts are not unconditional live future availability.
+const bulletinSnapshotTime = new Date("2026-10-18T09:00:00+03:00");
+
+
 test("six museum weekly programmes yield 124 real dated sessions, 5 on Oct 18-19",async({page})=>{
+  await page.clock.setFixedTime(bulletinSnapshotTime);
   await page.goto("/events/");
   const area=page.getByRole("region",{name:"Проверенные сеансы из официальных недельных афиш музея"});
   await expect(area).toContainText("140 строк");
@@ -17,6 +23,7 @@ test("six museum weekly programmes yield 124 real dated sessions, 5 on Oct 18-19
 });
 
 test("museum Sep-Oct archived sessions remain dated and fully expandable",async({page})=>{
+  await page.clock.setFixedTime(bulletinSnapshotTime);
   await page.goto("/guide/agenda-archive/");
   const area=page.getByRole("region",{name:"Проверенные сеансы из официальных недельных афиш музея"});
   await expect(area.getByRole("button",{name:/Показать все 119 подтверждённых записей/})).toBeVisible();
@@ -29,6 +36,7 @@ test("museum Sep-Oct archived sessions remain dated and fully expandable",async(
 });
 
 test("excursion category holds 100 original sessions with real source dates, not generic guesses",async({page})=>{
+  await page.clock.setFixedTime(bulletinSnapshotTime);
   await page.goto("/guide/agenda-excursions/");
   const area=page.getByRole("region",{name:"Проверенные сеансы из официальных недельных афиш музея"});
   await expect(area).toContainText("18.10.2026");
@@ -67,4 +75,14 @@ test("source schedules are accessible on 320px without fake images or horizontal
     await expect(page.locator(".official-agenda-sessions")).toBeVisible();
     expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
   }
+});
+
+
+test("expired historical bulletin sessions are not presented as upcoming in October 2026", async ({page})=>{
+  await page.clock.setFixedTime(new Date("2026-10-30T09:00:00+03:00"));
+  await page.goto("/events/");
+  const area=page.getByRole("region",{name:"Проверенные сеансы из официальных недельных афиш музея"});
+  await expect(area.getByRole("button",{name:/По расписанию/})).toContainText("(0)");
+  await expect(area.getByRole("button",{name:/Архив/})).toContainText("(124)");
+  await expect(area).toContainText("нет подтверждённых будущих сеансов");
 });

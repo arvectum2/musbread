@@ -73,7 +73,9 @@ h1,h2,h3,p{margin-top:0}h1,h2{font-weight:690;line-height:1.1;letter-spacing:-.0
 .museum-detail .article-content{font-size:1.1rem;max-width:760px;white-space:pre-line}
 @media(max-width:650px){.museum-list{grid-template-columns:1fr}}
 
-.rich-text{white-space:normal}.rich-text p{margin-bottom:1rem}.rich-text ul,.rich-text ol{padding-left:1.75rem}.rich-text a{text-decoration:underline;color:var(--green)}
+.rich-text{white-space:normal;min-width:0;max-width:100%;overflow-wrap:anywhere}
+.rich-text :is(p,li,a,span,code){overflow-wrap:anywhere}
+.rich-text p{margin-bottom:1rem}.rich-text ul,.rich-text ol{padding-left:1.75rem}.rich-text a{text-decoration:underline;color:var(--green)}
 
 
 .museum-gallery { margin-top:3rem; }

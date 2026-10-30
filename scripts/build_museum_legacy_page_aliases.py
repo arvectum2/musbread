@@ -221,7 +221,7 @@ def build_aliases(write=True,strict=True):
                 or 'http-equiv="refresh"' in original_html.lower()
                 or (alias.parent/'.musbread-legacy-alias').exists()):
                 raise RuntimeError('Original museum source URL lacks standalone source-exact canonical HTML: '+source)
-            rows.append({'legacy_path':source,'new_relative_url':target if dest.is_file() else source,'source_kind':meta['why'],
+            rows.append({'legacy_path':source,'new_relative_url':source,'source_kind':meta['why'],
                          'mode':'native-source-URL-200; no redirect'})
             continue
         # The full static release intentionally strips private marker files.

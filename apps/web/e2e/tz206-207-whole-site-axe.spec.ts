@@ -1,6 +1,6 @@
 import {expect,test} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import {readdirSync} from "node:fs";
+import {readdirSync,readFileSync,existsSync} from "node:fs";
 import {join,relative} from "node:path";
 
 const out=join(process.cwd(),"out");
@@ -17,13 +17,39 @@ function discover(base:string):string[]{
   return paths;
 }
 const routes=discover(out).sort();
-test("TZ-206/207: complete generated museum pages have no serious/critical axe WCAG violations",async({page})=>{
+// HTTP legacy aliases self-redirect immediately. Axe cannot inspect a stable
+// DOM while the browser follows meta-refresh, so verify every alias's exact
+// safety/target separately, and run full WCAG checks on ALL content documents.
+const aliases=routes.filter(route=>/http-equiv=["']refresh["']/i.test(
+  readFileSync(join(out,route.slice(1),"index.html"),"utf-8")));
+const aliasSet=new Set(aliases);
+const contentRoutes=routes.filter(route=>!aliasSet.has(route));
+const batchSize=75;
+const batches=Array.from({length:Math.ceil(contentRoutes.length/batchSize)},
+  (_,n)=>contentRoutes.slice(n*batchSize,(n+1)*batchSize));
+
+test("TZ-206/207: every immediate historical redirect has noindex and a valid local destination",()=>{
+  expect(aliases.length).toBeGreaterThan(0);
+  for(const route of aliases){
+    const html=readFileSync(join(out,route.slice(1),"index.html"),"utf-8");
+    expect(html,route).toMatch(/<meta name="robots" content="noindex/);
+    const match=html.match(/<meta http-equiv="refresh" content="0;url=(\/[^"]+)"/);
+    expect(match,route).not.toBeNull();
+    const destination=decodeURIComponent(match![1].split(/[?#]/,1)[0]);
+    expect(destination,route).toMatch(/^\/(?:[a-z0-9-]+\/)*$/);
+    expect(existsSync(join(out,destination.slice(1),"index.html")),
+      "Missing source-verified redirect target: "+route+" -> "+destination).toBe(true);
+  }
+});
+
+for(const [batchIndex,batch] of batches.entries()){
+test('TZ-206/207: no severe axe violations, content batch '+(batchIndex+1)+'/'+batches.length,async({page})=>{
   test.setTimeout(300_000);
   const failures:string[]=[];
   const counts:Record<string,number>={};
   const affected:Record<string,string[]>={};
-  for(const route of routes){
-    await page.goto(route,{waitUntil:"domcontentloaded"});
+  for(const route of batch){
+    await page.goto(route,{waitUntil:"load"});
     const result=await new AxeBuilder({page})
       .withTags(["wcag2a","wcag2aa","wcag21a","wcag21aa","best-practice"])
       .analyze();
@@ -36,13 +62,15 @@ test("TZ-206/207: complete generated museum pages have no serious/critical axe W
       }
     }
   }
-  console.log("TOTAL AXE ROUTES",routes.length, "VIOLATION COUNTS",JSON.stringify(counts),
+  console.log("TOTAL AXE ROUTES",batch.length, "VIOLATION COUNTS",JSON.stringify(counts),
     "EXAMPLE AFFECTED",JSON.stringify(affected));
-  expect(routes.length).toBeGreaterThanOrEqual(75);
+  expect(contentRoutes.length).toBeGreaterThanOrEqual(75);
   expect(failures,"Accessibility regressions: "+failures.slice(0,40).join("\n")).toEqual([]);
 });
+}
 
-test("TZ-206: all published museum routes in visitor large-text high-contrast mode at 320px",async({page})=>{
+for(const [batchIndex,batch] of batches.entries()){
+test('TZ-206: visitor high-contrast at 320px, content batch '+(batchIndex+1)+'/'+batches.length,async({page})=>{
   test.setTimeout(300_000);
   await page.setViewportSize({width:320,height:780});
   await page.goto("/",{waitUntil:"domcontentloaded"});
@@ -50,8 +78,8 @@ test("TZ-206: all published museum routes in visitor large-text high-contrast mo
   await expect(page.locator("html")).toHaveAttribute("data-vision-mode","on");
   const failures:string[]=[];
   const violations:Record<string,number>={};
-  for(const route of routes){
-    await page.goto(route,{waitUntil:"domcontentloaded"});
+  for(const route of batch){
+    await page.goto(route,{waitUntil:"load"});
     await expect(page.locator("html")).toHaveAttribute("data-vision-mode","on");
     const result=await new AxeBuilder({page})
       .withTags(["wcag2a","wcag2aa","wcag21a","wcag21aa","best-practice"])
@@ -67,9 +95,10 @@ test("TZ-206: all published museum routes in visitor large-text high-contrast mo
   }
   console.log("HIGH CONTRAST MOBILE ROUTES",routes.length,
     "VIOLATIONS",JSON.stringify(violations));
-  expect(routes.length).toBeGreaterThanOrEqual(75);
+  expect(contentRoutes.length).toBeGreaterThanOrEqual(75);
   expect(failures,failures.slice(0,45).join("\n")).toEqual([]);
 });
+}
 
 test("TZ-206/207: real source museum ticket-price table is keyboard scrollable at 320px",async({page})=>{
   await page.setViewportSize({width:320,height:780});

@@ -56,6 +56,8 @@ test("TZ-075/078: мобильное меню и подвал содержат �
   const footer = page.locator(".site-footer");
   await expect(footer.getByRole("link", {name:"Контакты",exact:true})).toHaveAttribute("href","/guide/museum-contacts/");
   await expect(footer.getByRole("link", {name:"Спланировать визит",exact:true})).toHaveAttribute("href","/guide/plan-visit/");
-  await expect(footer.locator('a[href*="politika-konfidencialnosti"]')).toHaveCount(1);
+  const policies=footer.getByRole("link",{name:/Политика конфиденциальности/});
+  await expect(policies).toHaveCount(1);
+  await expect(policies).toHaveAttribute("href","/guide/museum-privacy/");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBeTruthy();
 });

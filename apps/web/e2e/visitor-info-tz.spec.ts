@@ -12,7 +12,9 @@ test("TZ-125/TZ-138: footer contact facts and contacts route with external map l
  await expect(main.getByRole("link",{name:"Условия доступности музея"})).toHaveAttribute("href","/guide/accessible-museum/");
  const footer=page.locator(".site-footer");
  for(const fragment of ["195009","294-50-82","10:00–18:00","Вторник"]){await expect(footer).toContainText(fragment)}
- await expect(footer.getByRole("link",{name:/Политика конфиденциальности/})).toHaveAttribute("href",/^https:\/\/muzei-xleb\.ru\//);
+ // The museum's actual policy is rendered at a local verified source-backed
+ // page, not redirected back to old hosting after DNS cutover.
+ await expect(footer.getByRole("link",{name:/Политика конфиденциальности/})).toHaveAttribute("href","/guide/museum-privacy/");
 });
 
 test("TZ-118/TZ-139: visit-planning and accessible-information pages link to official source",async({page})=>{
