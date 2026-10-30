@@ -55,6 +55,21 @@ class TestStaticLightweightUI(unittest.TestCase):
         (p/"_next/static/chunks/app.js").write_bytes(b"a"*(module.MAX_JS_CHUNK+1))
         self.assertEqual(module.audit(p)["status"],"FAIL")
 
+    def test_externalized_content_stays_within_per_page_budget(self):
+        p=self.fixture()
+        directory=p/"_next/static/musbread-inline"
+        directory.mkdir(parents=True)
+        excessive="a.js"
+        (directory/excessive).write_bytes(b"x"*(module.MAX_HYDRATION_ASSET+1))
+        (p/"index.html").write_text(
+            '<script src="/_next/static/musbread-inline/a.js"></script>',encoding="utf-8")
+        result=module.audit(p)
+        self.assertEqual(result["status"],"FAIL")
+        self.assertTrue(any("Oversized page hydration content asset" in x
+                            for x in result["issues"]))
+        self.assertTrue(any("Oversized per-page React data transfer" in x
+                            for x in result["issues"]))
+
     def test_media_size_limit_and_symlink_are_enforced(self):
         p=self.fixture()
         (p/"media").mkdir()

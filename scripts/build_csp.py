@@ -15,6 +15,10 @@ import os
 import re
 from html.parser import HTMLParser
 from pathlib import Path
+try:
+    from scripts.externalize_inline_scripts import externalize, MANIFEST_REL
+except ModuleNotFoundError:
+    from externalize_inline_scripts import externalize, MANIFEST_REL
 
 
 class InlineScriptCollector(HTMLParser):
@@ -28,7 +32,7 @@ class InlineScriptCollector(HTMLParser):
         if tag != "script":
             return
         attributes = dict(attrs)
-        self.inside = attributes.get("src") is None
+        self.inside = attributes.get("src") is None and (attributes.get("type") or "").lower() in ("", "text/javascript", "application/javascript", "module")
         self.chunks = []
 
     def handle_data(self, data):
@@ -71,7 +75,13 @@ def make_csp(build: Path, requests_origin: str | None = None) -> str:
         for script in parser.scripts:
             digest = base64.b64encode(hashlib.sha256(script.encode("utf-8")).digest()).decode("ascii")
             hashes.add("'sha256-" + digest + "'")
-    if not hashes:
+    if (build / MANIFEST_REL).is_file():
+        # The final Next.js pages must contain ONLY immutable external JS with
+        # exact SRI checksums. No large hash list is required in HTTP headers.
+        externalize(build, verify_only=True)
+        if hashes:
+            raise ValueError("Externalized build unexpectedly retains inline executable scripts")
+    elif not hashes:
         raise ValueError("Refusing CSP without any inline script hashes: verify Next.js build")
     directives = [
         "default-src 'none'",
@@ -79,7 +89,7 @@ def make_csp(build: Path, requests_origin: str | None = None) -> str:
         "object-src 'none'",
         "frame-ancestors 'none'",
         "form-action 'self'",
-        "script-src 'self' " + " ".join(sorted(hashes)),
+        "script-src 'self'" + (" " + " ".join(sorted(hashes)) if hashes else ""),
         "script-src-attr 'none'",
         # Next.js and the current site need inline style properties. JS remains
         # strictly hashed; further style hardening is a separate task.
@@ -108,6 +118,8 @@ def main():
     csp = make_csp(args.static_output, requests_origin)
     if '"' in csp or "\r" in csp or "\n" in csp:
         raise ValueError("CSP contains unsafe Nginx header characters")
+    if len(csp.encode("utf-8")) > 8192:
+        raise ValueError("CSP header >8 KiB: externalize executable Next.js inline JS; never permit oversized/unsafe CSP")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         '# Automatically generated from THIS EXACT static Next.js build.\n'

@@ -166,8 +166,17 @@ def run(args: argparse.Namespace) -> dict:
     require(args.output.resolve() == (ROOT/'apps/web/out').resolve(),
             'Full inventory check only supports the canonical repository static output')
     verify_full()  # Existing 945-page full link/doc/photo checksum gate.
+    from build_csp import make_csp
+    generated_csp = make_csp(args.output)
+    require(len(generated_csp.encode('utf-8')) <= 8192,
+            'Local release CSP exceeds safe HTTP header limit')
     checks = {
         'static_inventory': 'PASS',
+        'csp_strict_external_js': {
+            'policy_bytes': len(generated_csp.encode('utf-8')),
+            'inline_js_authorized': False,
+            'self_hosted_js_with_sri': True,
+        },
         'staging_seo': verify_staging_seo(args.output),
         'nginx_template': verify_nginx_template(ROOT/'infra/nginx/public-static.conf'),
         'rollback': rehearse_rollback(ROOT/'.local_archive'),

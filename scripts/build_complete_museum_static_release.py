@@ -28,6 +28,11 @@ def verify():
  import json
  if OUT!=PAGED_OUT or not OUT.is_dir():
   raise RuntimeError('No complete Next.js static build to verify')
+ from externalize_inline_scripts import externalize
+ # The released bundle may not retain executable JS in HTML: fail-closed
+ # on any missing/tampered content-addressed SRI file before handoff.
+ sri=externalize(OUT,verify_only=True)
+ if sri['remaining_inline']!=0:raise RuntimeError('Unexpected inline JS in public export')
  from audit_museum_static_internal_links import audit as check_links
  links=check_links(OUT)
  docs=check_docs(verify_only=True)

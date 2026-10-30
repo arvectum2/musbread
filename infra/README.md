@@ -35,12 +35,15 @@ PHP 8.4 FPM, Nginx, Linux systemd, приватная БД и защищённа
 
 ## Security headers / CSP — подготовлено до победы
 
-Генератор scripts/build_csp.py вычисляет SHA-256 каждого inline-script во всех HTML-страницах готовой сборки Next.js и формирует заголовок Content-Security-Policy без unsafe-inline для JavaScript и без unsafe-eval.
+С 30.10.2026 штатный `npm run build` автоматически выполняет `scripts/externalize_inline_scripts.py`: исполняемые inline Next.js скрипты становятся content-addressed локальными SHA256/SRI файлами. Соседние React Flight пакеты объединяются без изменения порядка DOM. Для конкретного готового экспорта генерировать CSP:
 
-После каждой сборки запустить:
     python3 scripts/build_csp.py apps/web/out --output /tmp/musbread-csp.conf
 
-Критично: политика связана с конкретной версией статической сборки. Нельзя обновлять HTML без соответствующего CSP или откатывать релиз, не пересчитав политику и не перезагрузив Nginx. Генератор не очищает пользовательский HTML и не заменяет HTMLPurifier / sanitize-html. Для CSS пока разрешено style-src 'self' 'unsafe-inline' (требуется текущему интерфейсу), для JavaScript это запрещено. CSP растёт с числом страниц; перед промышленным запуском оценить размер заголовка и при необходимости перейти к отдельным политикам для маршрутов либо к выносу inline-кода.
+Размер политики на локальном релизе уменьшен с 227 КБ до 343 байт, при сохранении `script-src 'self'` и запрете `unsafe-inline`/`unsafe-eval` для JavaScript. Каждый generated script проверяется через SHA384 SRI; исполняемый JS не вставляется обратно inline. Для CSS пока разрешено `style-src 'self' 'unsafe-inline'`, эта отдельная задача остаётся открытой.
+
+Критично: HTML, CSP, manifest и все `_next/static/musbread-inline/*.js` передаются и откатываются атомарно. `scripts/build_complete_museum_static_release.py --verify-only` и `scripts/preflight_museum_release.py` отвергают подменённый JS/неправильную SRI и слишком большую CSP. Не развёртывать отдельно только HTML или отдельно JS. Протокол локальной реализации: `docs/qa/CSP_EXTERNALIZED_BUILD_20261030.md`. Проверка не заменяет санитизацию контента, пентест, лицензионное разрешение и измерения на ВМ музея.
+
+CI проверяет Nginx синтаксис, localhost HTTP smoke и правила изоляции. Реальные TLS/mTLS, независимый пентест и условия сети музея пока не проверены.
 
 Конфигурацию infra/nginx/http-rates.conf включать на уровне http Nginx: лимиты считаются только для POST. Laravel отдельно ограничивает MoonShine login до 8 POST/мин с IP, upload до 30 POST/мин с IP; бюджет надо проверить для реальной NAT/сетевой схемы. Rate-limit не заменяет изоляцию CMS.
 

@@ -23,6 +23,8 @@ python3 scripts/check_speckit_tz.py --verify-source
 python3 scripts/audit_signed_contract.py --verify-source
 echo "PRIVATE_GATE: 101 exact PDF/DOCX originals, 259 original photos, 27 archived news indexes and all local links"
 "$PY" scripts/build_complete_museum_static_release.py --verify-only
+echo "PRIVATE_GATE: build-specific short CSP/SRI and offline rollback preflight"
+"$PY" scripts/preflight_museum_release.py > /dev/null
 echo "PRIVATE_GATE: complete unrestricted Python test suite, including source SHA proof"
 "$PY" -m unittest discover -s tests
 echo "PRIVATE_GATE: production PHP dependencies, and native Laravel regression"
