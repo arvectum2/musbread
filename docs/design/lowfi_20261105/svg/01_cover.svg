@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#ffffff"/>
+<text x="75" y="142" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="700" fill="#1c2a3b">UX-модель сайта</text>
+<text x="75" y="209" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="700" fill="#1c2a3b">Музея хлеба</text>
+<text x="78" y="264" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="400" fill="#627284">Для очного обсуждения · 6 ноября 2026</text>
+<path d="M78 302 L1360 302" stroke="#d4dce4" stroke-width="1" fill="none"/>
+<text x="78" y="363" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#627284">ЧТО ПРОВЕРЯЕМ</text>
+<text x="78" y="405" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="400" fill="#1c2a3b">Сценарии основных групп посетителей</text>
+<text x="78" y="457" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="400" fill="#1c2a3b">Структуру разделов и навигацию</text>
+<text x="78" y="509" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="400" fill="#1c2a3b">Расположение блоков ключевых страниц</text>
+<text x="78" y="646" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#627284">12 ЛИСТОВ</text>
+<text x="78" y="688" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Модели поведения · карта сайта</text>
+<text x="78" y="723" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Экраны для компьютера, планшета и телефона</text>
+<text x="78" y="758" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Вопросы для согласования</text>
+<rect x="910" y="343" width="456" height="342" rx="12" fill="#f5f7f9"/>
+<rect x="935" y="369" width="407" height="60" rx="5" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="954" y="405" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="#1c2a3b">Музей хлеба</text>
+<rect x="935" y="445" width="241" height="102" rx="5" fill="#e9edf2"/>
+<text x="953" y="476" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#627284">ОСНОВНОЙ БЛОК</text>
+<rect x="1191" y="445" width="151" height="102" rx="5" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="1204" y="482" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#627284">ПОСЕЩЕНИЕ</text>
+<rect x="935" y="563" width="129" height="99" rx="5" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<rect x="946" y="576" width="107" height="43" rx="3" fill="#e9edf2"/>
+<path d="M947 634 L1047 634" stroke="#627284" stroke-width="1" fill="none"/>
+<rect x="1074" y="563" width="129" height="99" rx="5" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<rect x="1085" y="576" width="107" height="43" rx="3" fill="#e9edf2"/>
+<path d="M1086 634 L1186 634" stroke="#627284" stroke-width="1" fill="none"/>
+<rect x="1213" y="563" width="129" height="99" rx="5" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<rect x="1224" y="576" width="107" height="43" rx="3" fill="#e9edf2"/>
+<path d="M1225 634 L1325 634" stroke="#627284" stroke-width="1" fill="none"/>
+</svg>

@@ -1,41 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
-<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
-<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
-<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Пользовательские сценарии</text>
-<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Гипотезы для уточнения, не результаты завершённого исследования</text>
-<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
-<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
-<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
-<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">2/12</text>
-<rect x="69" y="190" width="1302" height="52" rx="7" fill="#263547" stroke="#c7ced6"/>
-<text x="95" y="224" font-family="Arial" font-size="16" font-weight="700" fill="#fff">АУДИТОРИЯ</text>
-<text x="380" y="224" font-family="Arial" font-size="16" font-weight="700" fill="#fff">ЗАДАЧА</text>
-<text x="688" y="224" font-family="Arial" font-size="16" font-weight="700" fill="#fff">ПУТЬ</text>
-<text x="1030" y="224" font-family="Arial" font-size="16" font-weight="700" fill="#fff">РЕЗУЛЬТАТ</text>
-<rect x="69" y="250" width="1302" height="101" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
-<text x="95" y="305" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Первый посетитель</text>
-<text x="380" y="305" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Время и адрес</text>
-<text x="688" y="305" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Главная → Посетителям</text>
-<text x="1030" y="305" font-family="Arial" font-size="17" font-weight="400" fill="#243042">План визита</text>
-<rect x="69" y="358" width="1302" height="101" rx="7" fill="#fff" stroke="#c7ced6"/>
-<text x="95" y="413" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Семья с ребёнком</text>
-<text x="380" y="413" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Найти программу</text>
-<text x="688" y="413" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Детям → Афиша</text>
-<text x="1030" y="413" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Возраст и запись</text>
-<rect x="69" y="466" width="1302" height="101" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
-<text x="95" y="521" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Турист</text>
-<text x="380" y="521" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Купить билет</text>
-<text x="688" y="521" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Билеты и льготы</text>
-<text x="1030" y="521" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Внешний билетный сервис</text>
-<rect x="69" y="574" width="1302" height="101" rx="7" fill="#fff" stroke="#c7ced6"/>
-<text x="95" y="629" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Исследователь</text>
-<text x="380" y="629" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Найти материал</text>
-<text x="688" y="629" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Наука → Публикации</text>
-<text x="1030" y="629" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Найден документ</text>
-<rect x="69" y="682" width="1302" height="101" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
-<text x="95" y="737" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Особые потребности</text>
-<text x="380" y="737" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Условия доступности</text>
-<text x="688" y="737" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Доступная среда</text>
-<text x="1030" y="737" font-family="Arial" font-size="17" font-weight="400" fill="#243042">Ответ о возможностях</text>
-<text x="78" y="826" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">Уточнить приоритеты групп, частоту обращений и источники переходов.</text>
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#ffffff"/>
+<text x="64" y="88" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="700" fill="#1c2a3b">Пользовательские сценарии</text>
+<text x="66" y="128" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#627284">Какие задачи должен решать сайт за минимальное число шагов</text>
+<rect x="66" y="187" width="1309" height="65" rx="8" fill="#1c2a3b"/>
+<text x="78" y="228" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#ffffff">Аудитория</text>
+<text x="349" y="228" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#ffffff">Задача</text>
+<text x="626" y="228" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#ffffff">Маршрут</text>
+<text x="1007" y="228" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#ffffff">Результат</text>
+<rect x="66" y="265" width="1309" height="99" rx="7" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="78" y="322" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#1c2a3b">Первый посетитель</text>
+<text x="349" y="322" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Режим и адрес</text>
+<text x="626" y="322" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Главная  /  Посетителям</text>
+<text x="1007" y="322" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Спланирован визит</text>
+<rect x="66" y="375" width="1309" height="99" rx="7" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="78" y="432" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#1c2a3b">Семья с детьми</text>
+<text x="349" y="432" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Подобрать программу</text>
+<text x="626" y="432" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Детям  /  Афиша</text>
+<text x="1007" y="432" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Выбрано событие</text>
+<rect x="66" y="485" width="1309" height="99" rx="7" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="78" y="542" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#1c2a3b">Турист</text>
+<text x="349" y="542" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Приобрести билет</text>
+<text x="626" y="542" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Посетителям  /  Билеты</text>
+<text x="1007" y="542" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Переход к оператору</text>
+<rect x="66" y="595" width="1309" height="99" rx="7" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="78" y="652" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#1c2a3b">Исследователь</text>
+<text x="349" y="652" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Найти материал</text>
+<text x="626" y="652" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Наука  /  Публикации</text>
+<text x="1007" y="652" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Найден документ</text>
+<rect x="66" y="705" width="1309" height="99" rx="7" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="78" y="762" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#1c2a3b">Маломобильный гость</text>
+<text x="349" y="762" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Проверить условия</text>
+<text x="626" y="762" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Доступная среда</text>
+<text x="1007" y="762" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Понятны условия визита</text>
 </svg>

@@ -1,29 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
-<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
-<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
-<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Главная / планшет</text>
-<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Меню с компактной навигацией и события в двух колонках</text>
-<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
-<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
-<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
-<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">5/12</text>
-<rect x="260" y="175" width="920" height="650" rx="7" fill="#fff" stroke="#8995a2"/>
-<rect x="260" y="175" width="920" height="44" rx="6" fill="#e9edf1"/>
-<text x="280" y="205" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">◀  ▶   musbread.ru</text>
-<text x="280" y="270" font-family="Arial" font-size="20" font-weight="700" fill="#243042">МУЗЕЙ ХЛЕБА</text>
-<text x="1127" y="270" font-family="Arial" font-size="26" font-weight="700" fill="#243042">☰</text>
-<line x1="280" y1="328" x2="1160" y2="328" stroke="#c7ced6"/>
-<rect x="284" y="333" width="872" height="173" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
-<text x="301" y="368" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Музей хлеба</text>
-<text x="301" y="405" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Посещение · выставки · события</text>
-<text x="301" y="437" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Купить билет      /      Как добраться</text>
-<text x="284" y="539" font-family="Arial" font-size="23" font-weight="700" fill="#243042">Ближайшие события</text>
-<rect x="284" y="556" width="430" height="214" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
-<text x="301" y="591" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Выставка</text>
-<text x="301" y="628" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Место для изображения</text>
-<text x="301" y="660" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Дата / возраст / кратко</text>
-<rect x="725" y="556" width="430" height="214" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
-<text x="742" y="591" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Мастер-класс</text>
-<text x="742" y="628" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Место для изображения</text>
-<text x="742" y="660" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Дата / возраст / кратко</text>
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#ffffff"/>
+<text x="64" y="88" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="700" fill="#1c2a3b">Главная · планшет</text>
+<text x="66" y="128" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#627284">Уплотнение навигации и двухколоночная сетка событий</text>
+<rect x="247" y="164" width="946" height="661" rx="15" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<rect x="264" y="180" width="912" height="87" rx="0" fill="#ffffff"/>
+<path d="M264 266 L1176 266" stroke="#d4dce4" stroke-width="1" fill="none"/>
+<text x="285" y="222" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700" fill="#1c2a3b">МУЗЕЙ ХЛЕБА</text>
+<text x="1120" y="222" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#4b6176" text-anchor="end">Меню</text>
+<rect x="277" y="296" width="888" height="192" rx="9" fill="#f5f7f9"/>
+<text x="300" y="352" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700" fill="#1c2a3b">Музей хлеба</text>
+<text x="300" y="390" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#627284">Посещение, выставки и события</text>
+<rect x="300" y="412" width="198" height="42" rx="6" fill="#4b6176" stroke="#4b6176" stroke-width="1"/>
+<text x="399.0" y="439" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Купить билет</text>
+<rect x="511" y="412" width="206" height="42" rx="6" fill="#ffffff" stroke="#4b6176" stroke-width="1"/>
+<text x="614.0" y="439" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#4b6176" text-anchor="middle">Как добраться</text>
+<rect x="825" y="315" width="320" height="146" rx="5" fill="#e9edf2"/>
+<text x="843" y="346" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#627284">ФОТО МУЗЕЯ</text>
+<text x="278" y="536" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" fill="#1c2a3b">Ближайшие события</text>
+<rect x="278" y="555" width="427" height="238" rx="8" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<rect x="292" y="569" width="399" height="138" rx="5" fill="#e9edf2"/>
+<text x="310" y="600" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#627284">ФОТО СОБЫТИЯ</text>
+<text x="296" y="744" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="#1c2a3b">Выставка</text>
+<text x="296" y="773" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Дата / подробности</text>
+<rect x="725" y="555" width="439" height="238" rx="8" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<rect x="739" y="569" width="411" height="138" rx="5" fill="#e9edf2"/>
+<text x="757" y="600" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#627284">ФОТО СОБЫТИЯ</text>
+<text x="743" y="744" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="#1c2a3b">Мастер-класс</text>
+<text x="743" y="773" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Возраст / запись</text>
 </svg>
