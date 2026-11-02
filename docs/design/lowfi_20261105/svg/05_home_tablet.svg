@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
+<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
+<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Главная / планшет</text>
+<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Меню с компактной навигацией и события в двух колонках</text>
+<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
+<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
+<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
+<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">5/12</text>
+<rect x="260" y="175" width="920" height="650" rx="7" fill="#fff" stroke="#8995a2"/>
+<rect x="260" y="175" width="920" height="44" rx="6" fill="#e9edf1"/>
+<text x="280" y="205" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">◀  ▶   musbread.ru</text>
+<text x="280" y="270" font-family="Arial" font-size="20" font-weight="700" fill="#243042">МУЗЕЙ ХЛЕБА</text>
+<text x="1127" y="270" font-family="Arial" font-size="26" font-weight="700" fill="#243042">☰</text>
+<line x1="280" y1="328" x2="1160" y2="328" stroke="#c7ced6"/>
+<rect x="284" y="333" width="872" height="173" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="301" y="368" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Музей хлеба</text>
+<text x="301" y="405" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Посещение · выставки · события</text>
+<text x="301" y="437" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Купить билет      /      Как добраться</text>
+<text x="284" y="539" font-family="Arial" font-size="23" font-weight="700" fill="#243042">Ближайшие события</text>
+<rect x="284" y="556" width="430" height="214" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="301" y="591" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Выставка</text>
+<text x="301" y="628" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Место для изображения</text>
+<text x="301" y="660" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Дата / возраст / кратко</text>
+<rect x="725" y="556" width="430" height="214" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="742" y="591" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Мастер-класс</text>
+<text x="742" y="628" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Место для изображения</text>
+<text x="742" y="660" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Дата / возраст / кратко</text>
+</svg>

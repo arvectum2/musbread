@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
+<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
+<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Цели и состав UX low-fi</text>
+<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Предварительный комплект к очному интервью с заказчиком</text>
+<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
+<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
+<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
+<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">1/12</text>
+<rect x="65" y="194" width="1310" height="180" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="82" y="229" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Что обсуждаем</text>
+<text x="82" y="266" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Структуру и смысл основных экранов, сценарии пользователей, приоритеты контента.</text>
+<text x="82" y="298" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Окончательные цвета, шрифты и бренд-элементы будут согласованы отдельно.</text>
+<rect x="65" y="410" width="309" height="190" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="82" y="445" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Аудитории</text>
+<text x="82" y="482" font-family="Arial" font-size="16" font-weight="400" fill="#243042">5 сценариев</text>
+<text x="82" y="514" font-family="Arial" font-size="16" font-weight="400" fill="#243042">для проверки</text>
+<rect x="398" y="410" width="309" height="190" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="415" y="445" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Карта сайта</text>
+<text x="415" y="482" font-family="Arial" font-size="16" font-weight="400" fill="#243042">7 разделов</text>
+<text x="415" y="514" font-family="Arial" font-size="16" font-weight="400" fill="#243042">по ТЗ</text>
+<rect x="731" y="410" width="309" height="190" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="748" y="445" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Экраны</text>
+<text x="748" y="482" font-family="Arial" font-size="16" font-weight="400" fill="#243042">3 типа устройств</text>
+<text x="748" y="514" font-family="Arial" font-size="16" font-weight="400" fill="#243042">6 шаблонов</text>
+<rect x="1064" y="410" width="309" height="190" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="1081" y="445" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Встреча</text>
+<text x="1081" y="482" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Вопросы</text>
+<text x="1081" y="514" font-family="Arial" font-size="16" font-weight="400" fill="#243042">к интервью</text>
+<rect x="65" y="632" width="1310" height="177" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="82" y="667" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Навигация по комплекту</text>
+<text x="82" y="704" font-family="Arial" font-size="16" font-weight="400" fill="#243042">01 Обзор • 02 Аудитории • 03 Структура • 04–06 Главная / разные устройства</text>
+<text x="82" y="736" font-family="Arial" font-size="16" font-weight="400" fill="#243042">07 Посетителям • 08 Афиша • 09 Событие / экскурсия • 10 Музей / Наука</text>
+<text x="82" y="768" font-family="Arial" font-size="16" font-weight="400" fill="#243042">11 Контакты / формы • 12 Вопросы для встречи</text>
+</svg>

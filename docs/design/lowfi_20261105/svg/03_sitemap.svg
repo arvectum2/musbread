@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
+<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
+<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Информационная архитектура</text>
+<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Семь разделов из п. 2.2.3.6.1 ТЗ</text>
+<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
+<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
+<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
+<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">3/12</text>
+<rect x="560" y="178" width="320" height="64" rx="7" fill="#263547" stroke="#c7ced6"/>
+<text x="668" y="214" font-family="Arial" font-size="24" font-weight="700" fill="#fff">Главная</text>
+<line x1="720" y1="242" x2="720" y2="269" stroke="#c7ced6"/>
+<line x1="140" y1="269" x2="1320" y2="269" stroke="#c7ced6"/>
+<line x1="135" y1="269" x2="135" y2="296" stroke="#c7ced6"/>
+<rect x="44" y="298" width="185" height="47" rx="7" fill="#263547" stroke="#c7ced6"/>
+<text x="57" y="329" font-family="Arial" font-size="17" font-weight="700" fill="#fff">Музей</text>
+<rect x="44" y="353" width="185" height="426" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="54" y="381" font-family="Arial" font-size="13" font-weight="400" fill="#243042">История музея</text>
+<text x="54" y="416" font-family="Arial" font-size="13" font-weight="400" fill="#243042">История здания</text>
+<text x="54" y="451" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Экспозиция</text>
+<text x="54" y="486" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Команда</text>
+<text x="54" y="521" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Друзья музея</text>
+<text x="54" y="556" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Документы</text>
+<text x="54" y="591" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Новости</text>
+<text x="54" y="626" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Медиа</text>
+<text x="54" y="661" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Вакансии</text>
+<text x="54" y="696" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Контакты</text>
+<line x1="334" y1="269" x2="334" y2="296" stroke="#c7ced6"/>
+<rect x="243" y="298" width="185" height="47" rx="7" fill="#263547" stroke="#c7ced6"/>
+<text x="256" y="329" font-family="Arial" font-size="17" font-weight="700" fill="#fff">Посетителям</text>
+<rect x="243" y="353" width="185" height="426" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="253" y="381" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Спланировать визит</text>
+<text x="253" y="416" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Билеты и льготы</text>
+<text x="253" y="451" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Пушкинская карта</text>
+<text x="253" y="486" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Доступная среда</text>
+<text x="253" y="521" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Магазин без продажи</text>
+<text x="253" y="556" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Частые вопросы</text>
+<line x1="533" y1="269" x2="533" y2="296" stroke="#c7ced6"/>
+<rect x="442" y="298" width="185" height="47" rx="7" fill="#263547" stroke="#c7ced6"/>
+<text x="455" y="329" font-family="Arial" font-size="17" font-weight="700" fill="#fff">Афиша</text>
+<rect x="442" y="353" width="185" height="426" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="452" y="381" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Все события</text>
+<text x="452" y="416" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Экскурсии</text>
+<text x="452" y="451" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Детям</text>
+<text x="452" y="486" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Выставки</text>
+<text x="452" y="521" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Встречи</text>
+<text x="452" y="556" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Фестивали</text>
+<text x="452" y="591" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Мастер-классы</text>
+<text x="452" y="626" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Архив</text>
+<line x1="732" y1="269" x2="732" y2="296" stroke="#c7ced6"/>
+<rect x="641" y="298" width="185" height="47" rx="7" fill="#263547" stroke="#c7ced6"/>
+<text x="654" y="329" font-family="Arial" font-size="17" font-weight="700" fill="#fff">Экскурсии</text>
+<rect x="641" y="353" width="185" height="426" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="651" y="381" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Обзорная</text>
+<text x="651" y="416" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Интерактивные</text>
+<text x="651" y="451" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Тематические</text>
+<text x="651" y="486" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Мастер-классы</text>
+<line x1="931" y1="269" x2="931" y2="296" stroke="#c7ced6"/>
+<rect x="840" y="298" width="185" height="47" rx="7" fill="#263547" stroke="#c7ced6"/>
+<text x="853" y="329" font-family="Arial" font-size="17" font-weight="700" fill="#fff">Детям</text>
+<rect x="840" y="353" width="185" height="426" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="850" y="381" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Интерактивные</text>
+<text x="850" y="416" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Тематические</text>
+<text x="850" y="451" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Мастер-классы</text>
+<line x1="1130" y1="269" x2="1130" y2="296" stroke="#c7ced6"/>
+<rect x="1039" y="298" width="185" height="47" rx="7" fill="#263547" stroke="#c7ced6"/>
+<text x="1052" y="329" font-family="Arial" font-size="17" font-weight="700" fill="#fff">Выставки</text>
+<rect x="1039" y="353" width="185" height="426" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="1049" y="381" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Текущие</text>
+<text x="1049" y="416" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Будущие</text>
+<text x="1049" y="451" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Передвижные</text>
+<line x1="1329" y1="269" x2="1329" y2="296" stroke="#c7ced6"/>
+<rect x="1238" y="298" width="185" height="47" rx="7" fill="#263547" stroke="#c7ced6"/>
+<text x="1251" y="329" font-family="Arial" font-size="17" font-weight="700" fill="#fff">Наука</text>
+<rect x="1238" y="353" width="185" height="426" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="1248" y="381" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Семинары</text>
+<text x="1248" y="416" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Публикации</text>
+<text x="1248" y="451" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Коллекция</text>
+<text x="1248" y="486" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Исследователям</text>
+<text x="1248" y="521" font-family="Arial" font-size="13" font-weight="400" fill="#243042">Материалы по теме</text>
+<text x="63" y="828" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">Сквозные элементы: поиск с подсказками, билеты, версия для слабовидящих, контактная информация.</text>
+</svg>

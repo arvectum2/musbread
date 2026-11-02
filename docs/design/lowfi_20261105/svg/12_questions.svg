@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
+<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
+<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Вопросы на встречу 6 ноября</text>
+<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Результат обсуждения — перечень решений и открытых уточнений</text>
+<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
+<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
+<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
+<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">12/12</text>
+<rect x="67" y="186" width="643" height="189" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="84" y="221" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Аудитории</text>
+<text x="84" y="258" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Приоритеты посетителей?</text>
+<text x="84" y="290" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Главные сценарии?</text>
+<rect x="740" y="186" width="643" height="189" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="757" y="221" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Структура</text>
+<text x="757" y="258" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Названия разделов сохраняем?</text>
+<text x="757" y="290" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Что важно на главной?</text>
+<rect x="67" y="391" width="643" height="189" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="84" y="426" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Билеты</text>
+<text x="84" y="463" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Какой оператор?</text>
+<text x="84" y="495" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Какая схема перехода?</text>
+<rect x="740" y="391" width="643" height="189" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="757" y="426" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Афиша</text>
+<text x="757" y="463" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Какие фильтры нужны?</text>
+<text x="757" y="495" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Разделение с экскурсиями?</text>
+<rect x="67" y="596" width="643" height="189" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="84" y="631" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Контент</text>
+<text x="84" y="668" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Фото, документы, права?</text>
+<text x="84" y="700" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Нужен ли перенос архива?</text>
+<rect x="740" y="596" width="643" height="189" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="757" y="631" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Согласования</text>
+<text x="757" y="668" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Кто утверждает UX?</text>
+<text x="757" y="700" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Как фиксируем замечания?</text>
+<text x="75" y="826" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">Интервью не является формальной приёмкой итоговых UX/UI-макетов.</text>
+</svg>

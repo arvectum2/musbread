@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
+<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
+<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Афиша</text>
+<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Категории по ТЗ; набор фильтров обсуждается с музеем</text>
+<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
+<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
+<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
+<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">8/12</text>
+<rect x="70" y="175" width="1300" height="650" rx="7" fill="#fff" stroke="#8995a2"/>
+<rect x="70" y="175" width="1300" height="44" rx="6" fill="#e9edf1"/>
+<text x="90" y="205" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">◀  ▶   musbread.ru</text>
+<text x="90" y="270" font-family="Arial" font-size="20" font-weight="700" fill="#243042">МУЗЕЙ ХЛЕБА</text>
+<text x="297" y="270" font-family="Arial" font-size="14" font-weight="400" fill="#243042">Музей    Посетителям    Афиша    Экскурсии    Детям    Выставки    Наука</text>
+<text x="1132" y="303" font-family="Arial" font-size="13" font-weight="400" fill="#64748b">Поиск  ·  Для слабовидящих</text>
+<rect x="1210" y="239" width="139" height="37" rx="5" fill="#263547"/>
+<text x="1222" y="264" font-family="Arial" font-size="14" font-weight="700" fill="#fff">Купить билет</text>
+<line x1="90" y1="328" x2="1350" y2="328" stroke="#c7ced6"/>
+<text x="99" y="361" font-family="Arial" font-size="29" font-weight="700" fill="#243042">Афиша</text>
+<rect x="98" y="407" width="291" height="38" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="115" y="442" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Все события</text>
+<rect x="407" y="407" width="291" height="38" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="424" y="442" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Экскурсии</text>
+<rect x="716" y="407" width="291" height="38" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="733" y="442" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Детям</text>
+<rect x="1025" y="407" width="291" height="38" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="1042" y="442" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Выставки</text>
+<rect x="98" y="455" width="291" height="38" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="115" y="490" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Встречи</text>
+<rect x="407" y="455" width="291" height="38" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="424" y="490" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Фестивали</text>
+<rect x="716" y="455" width="291" height="38" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="733" y="490" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Мастер-классы</text>
+<rect x="1025" y="455" width="291" height="38" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="1042" y="490" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Архив</text>
+<rect x="96" y="533" width="394" height="190" rx="7" fill="#fff" stroke="#c7ced6"/>
+<rect x="108" y="545" width="370" height="106" rx="3" fill="#e8ecf0" stroke="#c7ced6"/>
+<line x1="120" y1="639" x2="274.5" y2="594.82" stroke="#c7ced6"/>
+<line x1="274.5" y1="594.82" x2="348.5" y2="612.84" stroke="#c7ced6"/>
+<line x1="348.5" y1="612.84" x2="466" y2="557" stroke="#c7ced6"/>
+<text x="112" y="685" font-family="Arial" font-size="19" font-weight="700" fill="#243042">Экскурсия</text>
+<text x="112" y="708" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Дата / возраст</text>
+<rect x="512" y="533" width="394" height="190" rx="7" fill="#fff" stroke="#c7ced6"/>
+<rect x="524" y="545" width="370" height="106" rx="3" fill="#e8ecf0" stroke="#c7ced6"/>
+<line x1="536" y1="639" x2="690.5" y2="594.82" stroke="#c7ced6"/>
+<line x1="690.5" y1="594.82" x2="764.5" y2="612.84" stroke="#c7ced6"/>
+<line x1="764.5" y1="612.84" x2="882" y2="557" stroke="#c7ced6"/>
+<text x="528" y="685" font-family="Arial" font-size="19" font-weight="700" fill="#243042">Выставка</text>
+<text x="528" y="708" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Дата / кратко</text>
+<rect x="928" y="533" width="394" height="190" rx="7" fill="#fff" stroke="#c7ced6"/>
+<rect x="940" y="545" width="370" height="106" rx="3" fill="#e8ecf0" stroke="#c7ced6"/>
+<line x1="952" y1="639" x2="1106.5" y2="594.82" stroke="#c7ced6"/>
+<line x1="1106.5" y1="594.82" x2="1180.5" y2="612.84" stroke="#c7ced6"/>
+<line x1="1180.5" y1="612.84" x2="1298" y2="557" stroke="#c7ced6"/>
+<text x="944" y="685" font-family="Arial" font-size="19" font-weight="700" fill="#243042">Мастер-класс</text>
+<text x="944" y="708" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Запись / возраст</text>
+<text x="99" y="810" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Вопросы: фильтры по дате и возрасту, граница между афишей и экскурсиями.</text>
+</svg>

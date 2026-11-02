@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
+<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
+<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Посетителям</text>
+<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Шесть информационных путей без отдельной продажи товаров</text>
+<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
+<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
+<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
+<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">7/12</text>
+<rect x="70" y="175" width="1300" height="650" rx="7" fill="#fff" stroke="#8995a2"/>
+<rect x="70" y="175" width="1300" height="44" rx="6" fill="#e9edf1"/>
+<text x="90" y="205" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">◀  ▶   musbread.ru</text>
+<text x="90" y="270" font-family="Arial" font-size="20" font-weight="700" fill="#243042">МУЗЕЙ ХЛЕБА</text>
+<text x="297" y="270" font-family="Arial" font-size="14" font-weight="400" fill="#243042">Музей    Посетителям    Афиша    Экскурсии    Детям    Выставки    Наука</text>
+<text x="1132" y="303" font-family="Arial" font-size="13" font-weight="400" fill="#64748b">Поиск  ·  Для слабовидящих</text>
+<rect x="1210" y="239" width="139" height="37" rx="5" fill="#263547"/>
+<text x="1222" y="264" font-family="Arial" font-size="14" font-weight="700" fill="#fff">Купить билет</text>
+<line x1="90" y1="328" x2="1350" y2="328" stroke="#c7ced6"/>
+<text x="99" y="356" font-family="Arial" font-size="30" font-weight="700" fill="#243042">Посетителям</text>
+<rect x="99" y="406" width="395" height="160" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="116" y="441" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Спланировать визит</text>
+<text x="116" y="478" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Время, маршрут, правила</text>
+<text x="116" y="510" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Подробнее →</text>
+<rect x="516" y="406" width="395" height="160" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="533" y="441" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Билеты и льготы</text>
+<text x="533" y="478" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Стоимость, возврат</text>
+<text x="533" y="510" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Подробнее →</text>
+<rect x="933" y="406" width="395" height="160" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="950" y="441" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Доступная среда</text>
+<text x="950" y="478" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Условия визита</text>
+<text x="950" y="510" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Подробнее →</text>
+<rect x="99" y="582" width="395" height="160" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="116" y="617" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Пушкинская карта</text>
+<text x="116" y="654" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Информация и ссылка</text>
+<text x="116" y="686" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Подробнее →</text>
+<rect x="516" y="582" width="395" height="160" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="533" y="617" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Магазин</text>
+<text x="533" y="654" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Без функции продажи</text>
+<text x="533" y="686" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Подробнее →</text>
+<rect x="933" y="582" width="395" height="160" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="950" y="617" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Частые вопросы</text>
+<text x="950" y="654" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Ответы перед визитом</text>
+<text x="950" y="686" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Подробнее →</text>
+</svg>

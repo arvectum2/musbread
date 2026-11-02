@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#fff"/>
+<text x="60" y="45" font-family="Arial" font-size="15" font-weight="700" fill="#64748b">МУЗЕЙ ХЛЕБА  /  UX LOW-FI  /  05.11.2026</text>
+<text x="60" y="105" font-family="Arial" font-size="34" font-weight="700" fill="#243042">Обратная связь и контакты</text>
+<text x="60" y="135" font-family="Arial" font-size="16" font-weight="400" fill="#64748b">Формы предусмотрены ТЗ; поля и способ обработки уточняются</text>
+<line x1="60" y1="155" x2="1380" y2="155" stroke="#c7ced6"/>
+<line x1="60" y1="851" x2="1380" y2="851" stroke="#c7ced6"/>
+<text x="60" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">Для обсуждения 06.11.2026 · не окончательный UI</text>
+<text x="1300" y="879" font-family="Arial" font-size="14" font-weight="400" fill="#64748b">11/12</text>
+<rect x="70" y="175" width="1300" height="650" rx="7" fill="#fff" stroke="#8995a2"/>
+<rect x="70" y="175" width="1300" height="44" rx="6" fill="#e9edf1"/>
+<text x="90" y="205" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">◀  ▶   musbread.ru</text>
+<text x="90" y="270" font-family="Arial" font-size="20" font-weight="700" fill="#243042">МУЗЕЙ ХЛЕБА</text>
+<text x="297" y="270" font-family="Arial" font-size="14" font-weight="400" fill="#243042">Музей    Посетителям    Афиша    Экскурсии    Детям    Выставки    Наука</text>
+<text x="1132" y="303" font-family="Arial" font-size="13" font-weight="400" fill="#64748b">Поиск  ·  Для слабовидящих</text>
+<rect x="1210" y="239" width="139" height="37" rx="5" fill="#263547"/>
+<text x="1222" y="264" font-family="Arial" font-size="14" font-weight="700" fill="#fff">Купить билет</text>
+<line x1="90" y1="328" x2="1350" y2="328" stroke="#c7ced6"/>
+<text x="99" y="354" font-family="Arial" font-size="29" font-weight="700" fill="#243042">Контакты</text>
+<rect x="99" y="388" width="440" height="339" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="116" y="423" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Контактные сведения</text>
+<text x="116" y="460" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Адрес / карта</text>
+<text x="116" y="492" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Режим работы / телефон</text>
+<text x="116" y="524" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Электронная почта</text>
+<text x="116" y="556" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Информация о доступности</text>
+<rect x="559" y="388" width="777" height="337" rx="7" fill="#f3f5f7" stroke="#c7ced6"/>
+<text x="576" y="423" font-family="Arial" font-size="20" font-weight="700" fill="#243042">Форма обратной связи</text>
+<text x="576" y="460" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Имя: _____________________________</text>
+<text x="576" y="492" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Контакт: _________________________</text>
+<text x="576" y="524" font-family="Arial" font-size="16" font-weight="400" fill="#243042">Сообщение: _______________________</text>
+<text x="576" y="556" font-family="Arial" font-size="16" font-weight="400" fill="#243042">□ Согласие на обработку данных</text>
+<rect x="1081" y="743" width="218" height="37" rx="5" fill="#263547"/>
+<text x="1093" y="768" font-family="Arial" font-size="14" font-weight="700" fill="#fff">Отправить</text>
+<text x="99" y="802" font-family="Arial" font-size="15" font-weight="400" fill="#64748b">Дополнительно: отдельный маршрут для заявки на экскурсию.</text>
+</svg>
