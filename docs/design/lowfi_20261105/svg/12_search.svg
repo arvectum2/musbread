@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#ffffff"/>
+<text x="64" y="88" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="700" fill="#1c2a3b">Поиск по сайту</text>
+<text x="66" y="128" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#627284">Поиск с автодополнением и понятными результатами — п. 2.2.3.6.2</text>
+<rect x="67" y="177" width="417" height="621" rx="9" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="87" y="217" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#627284">01</text>
+<text x="128" y="218" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#1c2a3b">Ввод запроса</text>
+<path d="M87 240 L463 240" stroke="#d4dce4" stroke-width="1" fill="none"/>
+<rect x="510" y="177" width="417" height="621" rx="9" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="530" y="217" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#627284">02</text>
+<text x="571" y="218" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#1c2a3b">Подсказки</text>
+<path d="M530 240 L906 240" stroke="#d4dce4" stroke-width="1" fill="none"/>
+<rect x="953" y="177" width="417" height="621" rx="9" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="973" y="217" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#627284">03</text>
+<text x="1014" y="218" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#1c2a3b">Результаты</text>
+<path d="M973 240 L1349 240" stroke="#d4dce4" stroke-width="1" fill="none"/>
+<text x="88" y="280" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Поиск</text>
+<rect x="88" y="300" width="372" height="54" rx="5" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="108" y="335" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#627284">Введите запрос</text>
+<text x="88" y="392" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Поиск доступен из шапки</text>
+<text x="88" y="424" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">на любой странице сайта.</text>
+<text x="88" y="483" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Частые переходы</text>
+<rect x="88" y="504" width="371" height="44" rx="5" fill="#f5f7f9"/>
+<text x="107" y="531" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Посетителям</text>
+<rect x="88" y="557" width="371" height="44" rx="5" fill="#f5f7f9"/>
+<text x="107" y="584" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Экскурсии</text>
+<rect x="88" y="610" width="371" height="44" rx="5" fill="#f5f7f9"/>
+<text x="107" y="637" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Новости</text>
+<rect x="88" y="663" width="371" height="44" rx="5" fill="#f5f7f9"/>
+<text x="107" y="690" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Контакты</text>
+<text x="531" y="280" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Запрос</text>
+<rect x="531" y="300" width="370" height="53" rx="5" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="551" y="333" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Экспозиция</text>
+<rect x="531" y="363" width="370" height="199" rx="7" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="551" y="394" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Экспозиция</text>
+<text x="551" y="416" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" fill="#627284">Раздел музея</text>
+<path d="M546 424 L881 424" stroke="#d4dce4" stroke-width="1" fill="none"/>
+<text x="551" y="452" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Выставки</text>
+<text x="551" y="474" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" fill="#627284">Раздел сайта</text>
+<path d="M546 482 L881 482" stroke="#d4dce4" stroke-width="1" fill="none"/>
+<text x="551" y="510" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Материалы по теме</text>
+<text x="551" y="532" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" fill="#627284">Научные публикации</text>
+<text x="531" y="600" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Подсказки ведут к страницам</text>
+<text x="531" y="628" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">опубликованного сайта.</text>
+<text x="974" y="281" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Результаты по запросу</text>
+<rect x="974" y="318" width="370" height="87" rx="5" fill="#f5f7f9"/>
+<text x="990" y="349" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Страница музея</text>
+<text x="990" y="375" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" fill="#627284">Раздел / короткий фрагмент</text>
+<rect x="974" y="419" width="370" height="87" rx="5" fill="#f5f7f9"/>
+<text x="990" y="450" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Публикация</text>
+<text x="990" y="476" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" fill="#627284">Наука / короткий фрагмент</text>
+<rect x="974" y="520" width="370" height="87" rx="5" fill="#f5f7f9"/>
+<text x="990" y="551" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Выставка</text>
+<text x="990" y="577" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" fill="#627284">Выставки / короткий фрагмент</text>
+<rect x="974" y="648" width="370" height="109" rx="7" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="990" y="681" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#1c2a3b">Если совпадений нет</text>
+<text x="990" y="710" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Предложить вернуться к</text>
+<text x="990" y="731" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">разделам и поиску.</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#ffffff"/>
+<text x="64" y="88" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="700" fill="#1c2a3b">Путь к покупке билета</text>
+<text x="66" y="128" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#627284">Пользовательская задача: попасть из музея в действующую билетную систему</text>
+<rect x="66" y="231" width="308" height="234" rx="9" fill="#f5f7f9"/>
+<text x="88" y="277" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#627284">01</text>
+<text x="88" y="315" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" fill="#1c2a3b">Вход на сайт</text>
+<text x="88" y="359" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Кнопка «Купить билет»</text>
+<text x="88" y="390" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">в шапке всех страниц</text>
+<text x="380" y="350" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700" fill="#4b6176">→</text>
+<rect x="401" y="231" width="308" height="234" rx="9" fill="#f5f7f9"/>
+<text x="423" y="277" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#627284">02</text>
+<text x="423" y="315" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" fill="#1c2a3b">Билеты и льготы</text>
+<text x="423" y="359" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Виды билетов, правила</text>
+<text x="423" y="390" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">и информация о возврате</text>
+<text x="715" y="350" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700" fill="#4b6176">→</text>
+<rect x="736" y="231" width="308" height="234" rx="9" fill="#f5f7f9"/>
+<text x="758" y="277" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#627284">03</text>
+<text x="758" y="315" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" fill="#1c2a3b">Внешняя система</text>
+<text x="758" y="359" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Переход на билетного</text>
+<text x="758" y="390" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">оператора по ссылке</text>
+<text x="1050" y="350" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700" fill="#4b6176">→</text>
+<rect x="1071" y="231" width="308" height="234" rx="9" fill="#f5f7f9"/>
+<text x="1093" y="277" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#627284">04</text>
+<text x="1093" y="315" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" fill="#1c2a3b">Оформление</text>
+<text x="1093" y="359" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Покупка в интерфейсе</text>
+<text x="1093" y="390" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">внешнего оператора</text>
+<text x="68" y="534" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" fill="#1c2a3b">Что нужно уточнить на встрече</text>
+<rect x="66" y="565" width="308" height="152" rx="8" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="85" y="602" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="#1c2a3b">Билетный оператор</text>
+<text x="85" y="637" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Точный URL, способ передачи</text>
+<rect x="401" y="565" width="308" height="152" rx="8" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="420" y="602" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="#1c2a3b">Стоимость</text>
+<text x="420" y="637" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Утверждённый прейскурант</text>
+<rect x="736" y="565" width="308" height="152" rx="8" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="755" y="602" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="#1c2a3b">Возвраты</text>
+<text x="755" y="637" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Где описаны правила</text>
+<rect x="1071" y="565" width="308" height="152" rx="8" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="1090" y="602" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="#1c2a3b">Проверка сценария</text>
+<text x="1090" y="637" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#314052">Тест перехода на телефоне</text>
+</svg>

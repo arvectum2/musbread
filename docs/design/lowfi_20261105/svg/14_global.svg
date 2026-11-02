@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#ffffff"/>
+<text x="64" y="88" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="700" fill="#1c2a3b">Сквозные элементы интерфейса</text>
+<text x="66" y="128" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#627284">Единая навигация, поиск, доступность и служебные ссылки</text>
+<text x="69" y="196" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#627284">ШАПКА САЙТА</text>
+<rect x="66" y="215" width="1307" height="213" rx="10" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="88" y="257" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700" fill="#1c2a3b">Логотип  МУЗЕЙ ХЛЕБА</text>
+<text x="435" y="257" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Музей</text>
+<text x="526" y="257" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Посетителям</text>
+<text x="688" y="257" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Афиша</text>
+<text x="786" y="257" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Экскурсии</text>
+<text x="922" y="257" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Детям</text>
+<text x="1005" y="257" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Выставки</text>
+<rect x="1208" y="230" width="144" height="42" rx="6" fill="#4b6176" stroke="#4b6176" stroke-width="1"/>
+<text x="1280.0" y="257" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Купить билет</text>
+<path d="M87 284 L1354 284" stroke="#d4dce4" stroke-width="1" fill="none"/>
+<text x="91" y="332" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#4b6176">Поиск по всему сайту</text>
+<text x="358" y="332" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#4b6176">Режим для слабовидящих</text>
+<text x="711" y="332" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#4b6176">Доступная среда</text>
+<text x="995" y="332" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#4b6176">VK / MAX и другие официальные сети</text>
+<text x="91" y="389" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#627284">Меню закрепляется при прокрутке, подразделы раскрываются.</text>
+<text x="69" y="472" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#627284">НИЖНЯЯ ЧАСТЬ САЙТА</text>
+<rect x="66" y="491" width="1307" height="311" rx="10" fill="#f5f7f9"/>
+<text x="90" y="542" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" fill="#1c2a3b">О музее</text>
+<text x="90" y="588" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Полное официальное наименование</text>
+<text x="90" y="629" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Фактический адрес</text>
+<text x="90" y="670" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Телефон, электронная почта</text>
+<text x="90" y="711" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Часы работы</text>
+<text x="515" y="542" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" fill="#1c2a3b">Информация</text>
+<text x="515" y="588" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Политика конфиденциальности</text>
+<text x="515" y="629" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Иные обязательные документы</text>
+<text x="515" y="670" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Оценить работу музея</text>
+<text x="515" y="711" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Переходы по разделам</text>
+<text x="940" y="542" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" fill="#1c2a3b">Связь</text>
+<text x="940" y="588" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Подписка на рассылку</text>
+<text x="940" y="629" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Контакты и обратная связь</text>
+<text x="940" y="670" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Ссылки на официальные соцсети</text>
+</svg>

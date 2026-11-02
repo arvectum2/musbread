@@ -13,7 +13,10 @@
 <text x="687" y="220" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Детям</text>
 <text x="759" y="220" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Выставки</text>
 <text x="862" y="220" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Наука</text>
-<text x="1076" y="247" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" fill="#627284">Поиск    Для слабовидящих</text>
+<text x="303" y="247" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#4b6176">Поиск</text>
+<text x="394" y="247" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#4b6176">Для слабовидящих</text>
+<text x="588" y="247" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#4b6176">Доступная среда</text>
+<text x="811" y="247" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#627284">Соцсети</text>
 <rect x="1193" y="196" width="147" height="42" rx="6" fill="#4b6176" stroke="#4b6176" stroke-width="1"/>
 <text x="1266.5" y="223" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Купить билет</text>
 <text x="101" y="337" font-family="Arial,Helvetica,sans-serif" font-size="32" font-weight="700" fill="#1c2a3b">Афиша</text>

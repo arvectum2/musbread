@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#ffffff"/>
+<text x="64" y="88" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="700" fill="#1c2a3b">Доступность и запись на экскурсию</text>
+<text x="66" y="128" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#627284">Два независимых сценария: режим просмотра и обращение к музею</text>
+<rect x="67" y="177" width="632" height="636" rx="9" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="91" y="222" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#1c2a3b">Режим для слабовидящих</text>
+<text x="91" y="257" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#627284">Настройки представления</text>
+<rect x="91" y="283" width="577" height="91" rx="8" fill="#f5f7f9"/>
+<text x="110" y="322" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#1c2a3b">Размер текста</text>
+<rect x="440" y="298" width="100" height="42" rx="6" fill="#4b6176" stroke="#4b6176" stroke-width="1"/>
+<text x="490.0" y="325" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">А+</text>
+<rect x="552" y="298" width="98" height="42" rx="6" fill="#ffffff" stroke="#4b6176" stroke-width="1"/>
+<text x="601.0" y="325" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#4b6176" text-anchor="middle">А−</text>
+<rect x="91" y="398" width="577" height="216" rx="8" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="114" y="441" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#1c2a3b">Заголовок крупным шрифтом</text>
+<text x="114" y="484" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">Повышенный контраст, видимый фокус</text>
+<text x="114" y="518" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#314052">и управление с клавиатуры.</text>
+<rect x="115" y="554" width="22" height="22" rx="3" fill="#ffffff" stroke="#4b6176" stroke-width="2"/>
+<text x="154" y="572" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#314052">Контрастная тема</text>
+<text x="91" y="676" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#627284">Проверка: Tab / Shift+Tab / Enter / Space</text>
+<rect x="744" y="177" width="628" height="636" rx="9" fill="#ffffff" stroke="#d4dce4" stroke-width="1"/>
+<text x="768" y="222" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#1c2a3b">Заявка на экскурсию</text>
+<text x="768" y="255" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#627284">Отдельная форма от обратной связи</text>
+<text x="767" y="290" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#1c2a3b">Программа</text>
+<rect x="766" y="303" width="579" height="53" rx="6" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="783" y="337" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#627284">Выберите экскурсию</text>
+<text x="767" y="377" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#1c2a3b">Дата посещения</text>
+<rect x="766" y="390" width="579" height="53" rx="6" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="783" y="424" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#627284">Укажите желаемую дату</text>
+<text x="767" y="464" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#1c2a3b">Контакт для ответа</text>
+<rect x="766" y="477" width="579" height="53" rx="6" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="783" y="511" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#627284">E-mail или телефон</text>
+<text x="767" y="551" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#1c2a3b">Комментарий</text>
+<rect x="766" y="564" width="579" height="53" rx="6" fill="#f5f7f9" stroke="#d4dce4" stroke-width="1"/>
+<text x="783" y="598" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#627284">Дополнительная информация</text>
+<rect x="768" y="652" width="20" height="20" rx="3" fill="#ffffff" stroke="#4b6176" stroke-width="1"/>
+<text x="800" y="669" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#314052">Согласие на обработку данных</text>
+<rect x="1134" y="714" width="210" height="42" rx="6" fill="#4b6176" stroke="#4b6176" stroke-width="1"/>
+<text x="1239.0" y="741" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Отправить</text>
+</svg>
