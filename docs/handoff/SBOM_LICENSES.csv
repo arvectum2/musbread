@@ -17,7 +17,7 @@ composer:guzzlehttp/psr7@3.1.0,guzzlehttp/psr7,3.1.0,composer,production,0,0,MIT
 composer:guzzlehttp/uri-template@v2.0.1,guzzlehttp/uri-template,v2.0.1,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:hamcrest/hamcrest-php@v3.0.0,hamcrest/hamcrest-php,v3.0.0,composer-dev,development,0,0,BSD-3-Clause,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:laravel/agent-detector@v2.0.4,laravel/agent-detector,v2.0.4,composer-dev,development,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
-composer:laravel/framework@v13.36.0,laravel/framework,v13.36.0,composer,production,1,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
+composer:laravel/framework@v13.43.0,laravel/framework,v13.43.0,composer,production,1,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:laravel/pail@v1.2.7,laravel/pail,v1.2.7,composer-dev,development,1,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:laravel/pao@v1.1.5,laravel/pao,v1.1.5,composer-dev,development,1,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:laravel/pint@v1.32.1,laravel/pint,v1.32.1,composer-dev,development,1,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
@@ -86,8 +86,8 @@ composer:symfony/error-handler@v8.1.8,symfony/error-handler,v8.1.8,composer,prod
 composer:symfony/event-dispatcher-contracts@v3.7.1,symfony/event-dispatcher-contracts,v3.7.1,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/event-dispatcher@v8.1.5,symfony/event-dispatcher,v8.1.5,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/finder@v8.1.8,symfony/finder,v8.1.8,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
-composer:symfony/http-foundation@v8.1.9,symfony/http-foundation,v8.1.9,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
-composer:symfony/http-kernel@v8.1.9,symfony/http-kernel,v8.1.9,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
+composer:symfony/http-foundation@v8.1.11,symfony/http-foundation,v8.1.11,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
+composer:symfony/http-kernel@v8.1.11,symfony/http-kernel,v8.1.11,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/mailer@v8.1.7,symfony/mailer,v8.1.7,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/mime@v8.1.10,symfony/mime,v8.1.10,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/polyfill-ctype@v1.37.0,symfony/polyfill-ctype,v1.37.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
@@ -103,7 +103,7 @@ composer:symfony/polyfill-php86@v1.43.0,symfony/polyfill-php86,v1.43.0,composer,
 composer:symfony/polyfill-uuid@v1.43.0,symfony/polyfill-uuid,v1.43.0,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/process@v8.1.9,symfony/process,v8.1.9,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/psr-http-message-bridge@v8.1.9,symfony/psr-http-message-bridge,v8.1.9,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
-composer:symfony/routing@v8.1.9,symfony/routing,v8.1.9,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
+composer:symfony/routing@v8.1.11,symfony/routing,v8.1.11,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/service-contracts@v3.7.3,symfony/service-contracts,v3.7.3,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/string@v8.1.9,symfony/string,v8.1.9,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock
 composer:symfony/translation-contracts@v3.7.1,symfony/translation-contracts,v3.7.1,composer,production,0,0,MIT,PERMISSIVE_NOTICE_CHECK,apps/cms/composer.lock

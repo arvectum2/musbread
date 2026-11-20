@@ -72,11 +72,14 @@ test("TZ-245: find published content, recover from zero results and preserve que
 });
 
 test("TZ-249: menu, footer and event titles look like links even without hover",async({page})=>{
+  // Fixed time belongs only to the synthetic fixture scenario; never to the production clock.
+  await page.clock.setFixedTime(new Date("2026-11-01T12:00:00Z"));
   await page.setViewportSize({width:1440,height:850});
   await page.goto("/",{waitUntil:"networkidle"});
   const menu=page.getByRole("navigation",{name:"Основное меню"}).getByRole("link",{name:"Новости"});
   const footer=page.locator("footer.site-footer").getByRole("link",{name:"Новости"});
   const event=page.locator(".event-card h3 a").first();
+  await expect(page.locator(".event-agenda")).toHaveAttribute("data-ready","true");
   for(const link of [menu,footer,event]){
     await expect(link).toBeVisible();
     const decoration=await link.evaluate(el=>getComputedStyle(el).textDecorationLine);

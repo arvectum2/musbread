@@ -675,7 +675,7 @@
     },
     {
       "type": "library",
-      "bom-ref": "composer:laravel/framework@v13.36.0",
+      "bom-ref": "composer:laravel/framework@v13.43.0",
       "name": "laravel/framework",
       "licenses": [
         {
@@ -706,8 +706,8 @@
           "value": "PERMISSIVE_NOTICE_CHECK"
         }
       ],
-      "version": "v13.36.0",
-      "purl": "pkg:composer/laravel/framework@v13.36.0"
+      "version": "v13.43.0",
+      "purl": "pkg:composer/laravel/framework@v13.43.0"
     },
     {
       "type": "library",
@@ -3179,7 +3179,7 @@
     },
     {
       "type": "library",
-      "bom-ref": "composer:symfony/http-foundation@v8.1.9",
+      "bom-ref": "composer:symfony/http-foundation@v8.1.11",
       "name": "symfony/http-foundation",
       "licenses": [
         {
@@ -3210,12 +3210,12 @@
           "value": "PERMISSIVE_NOTICE_CHECK"
         }
       ],
-      "version": "v8.1.9",
-      "purl": "pkg:composer/symfony/http-foundation@v8.1.9"
+      "version": "v8.1.11",
+      "purl": "pkg:composer/symfony/http-foundation@v8.1.11"
     },
     {
       "type": "library",
-      "bom-ref": "composer:symfony/http-kernel@v8.1.9",
+      "bom-ref": "composer:symfony/http-kernel@v8.1.11",
       "name": "symfony/http-kernel",
       "licenses": [
         {
@@ -3246,8 +3246,8 @@
           "value": "PERMISSIVE_NOTICE_CHECK"
         }
       ],
-      "version": "v8.1.9",
-      "purl": "pkg:composer/symfony/http-kernel@v8.1.9"
+      "version": "v8.1.11",
+      "purl": "pkg:composer/symfony/http-kernel@v8.1.11"
     },
     {
       "type": "library",
@@ -3791,7 +3791,7 @@
     },
     {
       "type": "library",
-      "bom-ref": "composer:symfony/routing@v8.1.9",
+      "bom-ref": "composer:symfony/routing@v8.1.11",
       "name": "symfony/routing",
       "licenses": [
         {
@@ -3822,8 +3822,8 @@
           "value": "PERMISSIVE_NOTICE_CHECK"
         }
       ],
-      "version": "v8.1.9",
-      "purl": "pkg:composer/symfony/routing@v8.1.9"
+      "version": "v8.1.11",
+      "purl": "pkg:composer/symfony/routing@v8.1.11"
     },
     {
       "type": "library",
@@ -22708,7 +22708,7 @@
     {
       "ref": "composer:fruitcake/php-cors@v1.4.0",
       "dependsOn": [
-        "composer:symfony/http-foundation@v8.1.9"
+        "composer:symfony/http-foundation@v8.1.11"
       ]
     },
     {
@@ -22758,7 +22758,7 @@
       "dependsOn": []
     },
     {
-      "ref": "composer:laravel/framework@v13.36.0",
+      "ref": "composer:laravel/framework@v13.43.0",
       "dependsOn": [
         "composer:brick/math@1.0.0",
         "composer:doctrine/inflector@2.1.0",
@@ -22786,8 +22786,8 @@
         "composer:symfony/console@v8.1.9",
         "composer:symfony/error-handler@v8.1.8",
         "composer:symfony/finder@v8.1.8",
-        "composer:symfony/http-foundation@v8.1.9",
-        "composer:symfony/http-kernel@v8.1.9",
+        "composer:symfony/http-foundation@v8.1.11",
+        "composer:symfony/http-kernel@v8.1.11",
         "composer:symfony/mailer@v8.1.7",
         "composer:symfony/mime@v8.1.10",
         "composer:symfony/polyfill-ctype@v1.37.0",
@@ -22796,7 +22796,7 @@
         "composer:symfony/polyfill-php85@v1.43.0",
         "composer:symfony/polyfill-php86@v1.43.0",
         "composer:symfony/process@v8.1.9",
-        "composer:symfony/routing@v8.1.9",
+        "composer:symfony/routing@v8.1.11",
         "composer:symfony/uid@v8.1.9",
         "composer:symfony/var-dumper@v8.1.9",
         "composer:tijsverkoyen/css-to-inline-styles@v2.4.0",
@@ -22807,7 +22807,7 @@
     {
       "ref": "composer:laravel/pail@v1.2.7",
       "dependsOn": [
-        "composer:laravel/framework@v13.36.0",
+        "composer:laravel/framework@v13.43.0",
         "composer:nunomaduro/termwind@v2.4.0",
         "composer:symfony/console@v8.1.9",
         "composer:symfony/polyfill-mbstring@v1.43.3"
@@ -22839,7 +22839,7 @@
     {
       "ref": "composer:laravel/tinker@v3.0.2",
       "dependsOn": [
-        "composer:laravel/framework@v13.36.0",
+        "composer:laravel/framework@v13.43.0",
         "composer:psy/psysh@v0.12.24",
         "composer:symfony/var-dumper@v8.1.9"
       ]
@@ -22915,14 +22915,14 @@
     {
       "ref": "composer:moonshine/moonshine@4.19.5",
       "dependsOn": [
-        "composer:laravel/framework@v13.36.0",
+        "composer:laravel/framework@v13.43.0",
         "composer:lee-to/fast-attributes@0.3.0",
         "composer:lee-to/laravel-package-command@0.9.2",
         "composer:nyholm/psr7@1.8.2",
         "composer:psr/container@2.0.2",
         "composer:psr/http-message@2.0",
         "composer:psr/simple-cache@3.0.0",
-        "composer:symfony/http-foundation@v8.1.9",
+        "composer:symfony/http-foundation@v8.1.11",
         "composer:symfony/psr-http-message-bridge@v8.1.9"
       ]
     },
@@ -23221,20 +23221,20 @@
       "dependsOn": []
     },
     {
-      "ref": "composer:symfony/http-foundation@v8.1.9",
+      "ref": "composer:symfony/http-foundation@v8.1.11",
       "dependsOn": [
         "composer:symfony/deprecation-contracts@v3.7.1",
         "composer:symfony/polyfill-mbstring@v1.43.3"
       ]
     },
     {
-      "ref": "composer:symfony/http-kernel@v8.1.9",
+      "ref": "composer:symfony/http-kernel@v8.1.11",
       "dependsOn": [
         "composer:psr/log@3.0.2",
         "composer:symfony/deprecation-contracts@v3.7.1",
         "composer:symfony/error-handler@v8.1.8",
         "composer:symfony/event-dispatcher@v8.1.5",
-        "composer:symfony/http-foundation@v8.1.9",
+        "composer:symfony/http-foundation@v8.1.11",
         "composer:symfony/polyfill-ctype@v1.37.0"
       ]
     },
@@ -23310,11 +23310,11 @@
       "ref": "composer:symfony/psr-http-message-bridge@v8.1.9",
       "dependsOn": [
         "composer:psr/http-message@2.0",
-        "composer:symfony/http-foundation@v8.1.9"
+        "composer:symfony/http-foundation@v8.1.11"
       ]
     },
     {
-      "ref": "composer:symfony/routing@v8.1.9",
+      "ref": "composer:symfony/routing@v8.1.11",
       "dependsOn": [
         "composer:symfony/deprecation-contracts@v3.7.1"
       ]
@@ -26335,7 +26335,7 @@
       "dependsOn": [
         "composer:ezyang/htmlpurifier@v4.19.1",
         "composer:fakerphp/faker@v1.24.1",
-        "composer:laravel/framework@v13.36.0",
+        "composer:laravel/framework@v13.43.0",
         "composer:laravel/pail@v1.2.7",
         "composer:laravel/pao@v1.1.5",
         "composer:laravel/pint@v1.32.1",
