@@ -63,7 +63,7 @@ test("TZ-177: автодополнение в шапке, немедленный
   await expect(page).toHaveURL(/\/events\/bread-history\/$/);
   await page.goto("/", { waitUntil: "networkidle" });
   await search.fill("никаких таких документов не существует");
-  await expect(page.getByRole("status")).toHaveText("Материалы не найдены.");
+  await expect(page.locator(".site-header").getByRole("status")).toHaveText("Материалы не найдены.");
   await expect(search).toHaveAttribute("aria-expanded", "false");
 });
 

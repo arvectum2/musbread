@@ -3,6 +3,8 @@ import {test,expect} from "@playwright/test";
 const representative=["/","/events/","/news/","/news/demo-news/","/guide/museum-contacts/","/search/"];
 
 test("TZ-189: all visitor links on representative published routes have a destination-derived title",async({page})=>{
+  // Fixed time belongs only to the synthetic fixture scenario; never to the production clock.
+  await page.clock.setFixedTime(new Date("2026-11-01T12:00:00Z"));
   for(const url of representative){
     await page.goto(url,{waitUntil:"domcontentloaded"});
     const missing=await page.locator("a[href]").evaluateAll(els=>els.filter(el=>
@@ -16,6 +18,7 @@ test("TZ-189: all visitor links on representative published routes have a destin
     ).first()).toBeVisible();
   }
   await page.goto("/events/",{waitUntil:"domcontentloaded"});
+  await expect(page.locator(".event-agenda")).toHaveAttribute("data-ready","true");
   const details=page.getByRole("link",{name:/Подробнее/}).first();
   await expect(details).toHaveAttribute("title",/Открыть событие «/);
   await details.focus();
