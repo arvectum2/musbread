@@ -5,7 +5,7 @@
 | Component | Locked version | Declared license | Evidence | Delivery review |
 |---|---|---|---|---|
 | ezyang/htmlpurifier | v4.19.1 | LGPL-2.1-or-later | apps/cms/composer.lock | REQUIRED |
-| laravel/framework | v13.36.0 | MIT | apps/cms/composer.lock | NOTICE_AND_COMPLIANCE_REQUIRED |
+| laravel/framework | v13.43.0 | MIT | apps/cms/composer.lock | NOTICE_AND_COMPLIANCE_REQUIRED |
 | moonshine/moonshine | 4.19.5 | MIT | apps/cms/composer.lock | NOTICE_AND_COMPLIANCE_REQUIRED |
 | next | 16.4.1 | MIT | apps/web/package-lock.json | NOTICE_AND_COMPLIANCE_REQUIRED |
 | react | 19.3.0 | MIT | apps/web/package-lock.json | NOTICE_AND_COMPLIANCE_REQUIRED |

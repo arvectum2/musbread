@@ -20,7 +20,7 @@
     {
       "name": "laravel/framework",
       "ecosystem": "composer",
-      "version": "v13.36.0",
+      "version": "v13.43.0",
       "declared_licenses": [
         "MIT"
       ],
