@@ -1,0 +1,23 @@
+name: Contract acceptance traceability
+on:
+  pull_request:
+    paths:
+      - 'specs/001-contract-tz-traceability/**'
+      - 'specs/002-signed-contract/**'
+      - 'docs/tz-audit/**'
+      - '.github/workflows/contract-acceptance-review.yml'
+permissions:
+  contents: read
+jobs:
+  contract-acceptance-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python specs/002-signed-contract/checks/check_acceptance_review.py
+      - run: python -m unittest discover -s specs/002-signed-contract/checks -p test_acceptance_review.py

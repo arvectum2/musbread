@@ -1,0 +1,3036 @@
+{
+  "schema": "arvectum.musbread.acceptance-review/1",
+  "source_commit": "e1504385d6227c44611027dc0547bcd8f0e6105e",
+  "actual_customer_acceptance_verified": false,
+  "execution_authorized": false,
+  "scope": "native TZ register and separate contract crosswalk perspectives; not additive obligation count",
+  "tz": [
+    {
+      "id": "TZ-001",
+      "native_task_ref": "TZ-001",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-002",
+      "native_task_ref": "TZ-002",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-003",
+      "native_task_ref": "TZ-003",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-004",
+      "native_task_ref": "TZ-004",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-005",
+      "native_task_ref": "TZ-005",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-006",
+      "native_task_ref": "TZ-006",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-007",
+      "native_task_ref": "TZ-007",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-008",
+      "native_task_ref": "TZ-008",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-009",
+      "native_task_ref": "TZ-009",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-010",
+      "native_task_ref": "TZ-010",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-011",
+      "native_task_ref": "TZ-011",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-012",
+      "native_task_ref": "TZ-012",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-013",
+      "native_task_ref": "TZ-013",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-014",
+      "native_task_ref": "TZ-014",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-015",
+      "native_task_ref": "TZ-015",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-016",
+      "native_task_ref": "TZ-016",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-017",
+      "native_task_ref": "TZ-017",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-018",
+      "native_task_ref": "TZ-018",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-019",
+      "native_task_ref": "TZ-019",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-020",
+      "native_task_ref": "TZ-020",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-021",
+      "native_task_ref": "TZ-021",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-022",
+      "native_task_ref": "TZ-022",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-023",
+      "native_task_ref": "TZ-023",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-024",
+      "native_task_ref": "TZ-024",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-025",
+      "native_task_ref": "TZ-025",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-026",
+      "native_task_ref": "TZ-026",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-027",
+      "native_task_ref": "TZ-027",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-028",
+      "native_task_ref": "TZ-028",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-029",
+      "native_task_ref": "TZ-029",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-030",
+      "native_task_ref": "TZ-030",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-031",
+      "native_task_ref": "TZ-031",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-032",
+      "native_task_ref": "TZ-032",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-033",
+      "native_task_ref": "TZ-033",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-034",
+      "native_task_ref": "TZ-034",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-035",
+      "native_task_ref": "TZ-035",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-036",
+      "native_task_ref": "TZ-036",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-037",
+      "native_task_ref": "TZ-037",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-038",
+      "native_task_ref": "TZ-038",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-039",
+      "native_task_ref": "TZ-039",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-040",
+      "native_task_ref": "TZ-040",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-041",
+      "native_task_ref": "TZ-041",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-042",
+      "native_task_ref": "TZ-042",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-043",
+      "native_task_ref": "TZ-043",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-044",
+      "native_task_ref": "TZ-044",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-045",
+      "native_task_ref": "TZ-045",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-046",
+      "native_task_ref": "TZ-046",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-047",
+      "native_task_ref": "TZ-047",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-048",
+      "native_task_ref": "TZ-048",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-049",
+      "native_task_ref": "TZ-049",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-050",
+      "native_task_ref": "TZ-050",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-051",
+      "native_task_ref": "TZ-051",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-052",
+      "native_task_ref": "TZ-052",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-053",
+      "native_task_ref": "TZ-053",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-054",
+      "native_task_ref": "TZ-054",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-055",
+      "native_task_ref": "TZ-055",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-056",
+      "native_task_ref": "TZ-056",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-057",
+      "native_task_ref": "TZ-057",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-058",
+      "native_task_ref": "TZ-058",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-059",
+      "native_task_ref": "TZ-059",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-060",
+      "native_task_ref": "TZ-060",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-061",
+      "native_task_ref": "TZ-061",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-062",
+      "native_task_ref": "TZ-062",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-063",
+      "native_task_ref": "TZ-063",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-064",
+      "native_task_ref": "TZ-064",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-065",
+      "native_task_ref": "TZ-065",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-066",
+      "native_task_ref": "TZ-066",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-067",
+      "native_task_ref": "TZ-067",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-068",
+      "native_task_ref": "TZ-068",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-069",
+      "native_task_ref": "TZ-069",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-070",
+      "native_task_ref": "TZ-070",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-071",
+      "native_task_ref": "TZ-071",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-072",
+      "native_task_ref": "TZ-072",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-073",
+      "native_task_ref": "TZ-073",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-074",
+      "native_task_ref": "TZ-074",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-075",
+      "native_task_ref": "TZ-075",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-076",
+      "native_task_ref": "TZ-076",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-077",
+      "native_task_ref": "TZ-077",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-078",
+      "native_task_ref": "TZ-078",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-079",
+      "native_task_ref": "TZ-079",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-080",
+      "native_task_ref": "TZ-080",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-081",
+      "native_task_ref": "TZ-081",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-082",
+      "native_task_ref": "TZ-082",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-083",
+      "native_task_ref": "TZ-083",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-084",
+      "native_task_ref": "TZ-084",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-085",
+      "native_task_ref": "TZ-085",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-086",
+      "native_task_ref": "TZ-086",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-087",
+      "native_task_ref": "TZ-087",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-088",
+      "native_task_ref": "TZ-088",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-089",
+      "native_task_ref": "TZ-089",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-090",
+      "native_task_ref": "TZ-090",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-091",
+      "native_task_ref": "TZ-091",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-092",
+      "native_task_ref": "TZ-092",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-093",
+      "native_task_ref": "TZ-093",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-094",
+      "native_task_ref": "TZ-094",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-095",
+      "native_task_ref": "TZ-095",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-096",
+      "native_task_ref": "TZ-096",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-097",
+      "native_task_ref": "TZ-097",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-098",
+      "native_task_ref": "TZ-098",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-099",
+      "native_task_ref": "TZ-099",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-100",
+      "native_task_ref": "TZ-100",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-101",
+      "native_task_ref": "TZ-101",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-102",
+      "native_task_ref": "TZ-102",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-103",
+      "native_task_ref": "TZ-103",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-104",
+      "native_task_ref": "TZ-104",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-105",
+      "native_task_ref": "TZ-105",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-106",
+      "native_task_ref": "TZ-106",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-107",
+      "native_task_ref": "TZ-107",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-108",
+      "native_task_ref": "TZ-108",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-109",
+      "native_task_ref": "TZ-109",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-110",
+      "native_task_ref": "TZ-110",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-111",
+      "native_task_ref": "TZ-111",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-112",
+      "native_task_ref": "TZ-112",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-113",
+      "native_task_ref": "TZ-113",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-114",
+      "native_task_ref": "TZ-114",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-115",
+      "native_task_ref": "TZ-115",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-116",
+      "native_task_ref": "TZ-116",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-117",
+      "native_task_ref": "TZ-117",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-118",
+      "native_task_ref": "TZ-118",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-119",
+      "native_task_ref": "TZ-119",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-120",
+      "native_task_ref": "TZ-120",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-121",
+      "native_task_ref": "TZ-121",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-122",
+      "native_task_ref": "TZ-122",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-123",
+      "native_task_ref": "TZ-123",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-124",
+      "native_task_ref": "TZ-124",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-125",
+      "native_task_ref": "TZ-125",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-126",
+      "native_task_ref": "TZ-126",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-127",
+      "native_task_ref": "TZ-127",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-128",
+      "native_task_ref": "TZ-128",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-129",
+      "native_task_ref": "TZ-129",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-130",
+      "native_task_ref": "TZ-130",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-131",
+      "native_task_ref": "TZ-131",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-132",
+      "native_task_ref": "TZ-132",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-133",
+      "native_task_ref": "TZ-133",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-134",
+      "native_task_ref": "TZ-134",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-135",
+      "native_task_ref": "TZ-135",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-136",
+      "native_task_ref": "TZ-136",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-137",
+      "native_task_ref": "TZ-137",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-138",
+      "native_task_ref": "TZ-138",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-139",
+      "native_task_ref": "TZ-139",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-140",
+      "native_task_ref": "TZ-140",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-141",
+      "native_task_ref": "TZ-141",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-142",
+      "native_task_ref": "TZ-142",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-143",
+      "native_task_ref": "TZ-143",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-144",
+      "native_task_ref": "TZ-144",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-145",
+      "native_task_ref": "TZ-145",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-146",
+      "native_task_ref": "TZ-146",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-147",
+      "native_task_ref": "TZ-147",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-148",
+      "native_task_ref": "TZ-148",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-149",
+      "native_task_ref": "TZ-149",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-150",
+      "native_task_ref": "TZ-150",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-151",
+      "native_task_ref": "TZ-151",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-152",
+      "native_task_ref": "TZ-152",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-153",
+      "native_task_ref": "TZ-153",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-154",
+      "native_task_ref": "TZ-154",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-155",
+      "native_task_ref": "TZ-155",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-156",
+      "native_task_ref": "TZ-156",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-157",
+      "native_task_ref": "TZ-157",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-158",
+      "native_task_ref": "TZ-158",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-159",
+      "native_task_ref": "TZ-159",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-160",
+      "native_task_ref": "TZ-160",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-161",
+      "native_task_ref": "TZ-161",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-162",
+      "native_task_ref": "TZ-162",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-163",
+      "native_task_ref": "TZ-163",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-164",
+      "native_task_ref": "TZ-164",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-165",
+      "native_task_ref": "TZ-165",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-166",
+      "native_task_ref": "TZ-166",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-167",
+      "native_task_ref": "TZ-167",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-168",
+      "native_task_ref": "TZ-168",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-169",
+      "native_task_ref": "TZ-169",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-170",
+      "native_task_ref": "TZ-170",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-171",
+      "native_task_ref": "TZ-171",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-172",
+      "native_task_ref": "TZ-172",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-173",
+      "native_task_ref": "TZ-173",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-174",
+      "native_task_ref": "TZ-174",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-175",
+      "native_task_ref": "TZ-175",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-176",
+      "native_task_ref": "TZ-176",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-177",
+      "native_task_ref": "TZ-177",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-178",
+      "native_task_ref": "TZ-178",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-179",
+      "native_task_ref": "TZ-179",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-180",
+      "native_task_ref": "TZ-180",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-181",
+      "native_task_ref": "TZ-181",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-182",
+      "native_task_ref": "TZ-182",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-183",
+      "native_task_ref": "TZ-183",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-184",
+      "native_task_ref": "TZ-184",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-185",
+      "native_task_ref": "TZ-185",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-186",
+      "native_task_ref": "TZ-186",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-187",
+      "native_task_ref": "TZ-187",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-188",
+      "native_task_ref": "TZ-188",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-189",
+      "native_task_ref": "TZ-189",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-190",
+      "native_task_ref": "TZ-190",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-191",
+      "native_task_ref": "TZ-191",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-192",
+      "native_task_ref": "TZ-192",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-193",
+      "native_task_ref": "TZ-193",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-194",
+      "native_task_ref": "TZ-194",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-195",
+      "native_task_ref": "TZ-195",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-196",
+      "native_task_ref": "TZ-196",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-197",
+      "native_task_ref": "TZ-197",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-198",
+      "native_task_ref": "TZ-198",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-199",
+      "native_task_ref": "TZ-199",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-200",
+      "native_task_ref": "TZ-200",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-201",
+      "native_task_ref": "TZ-201",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-202",
+      "native_task_ref": "TZ-202",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-203",
+      "native_task_ref": "TZ-203",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-204",
+      "native_task_ref": "TZ-204",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-205",
+      "native_task_ref": "TZ-205",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-206",
+      "native_task_ref": "TZ-206",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-207",
+      "native_task_ref": "TZ-207",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-208",
+      "native_task_ref": "TZ-208",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-209",
+      "native_task_ref": "TZ-209",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-210",
+      "native_task_ref": "TZ-210",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-211",
+      "native_task_ref": "TZ-211",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-212",
+      "native_task_ref": "TZ-212",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-213",
+      "native_task_ref": "TZ-213",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-214",
+      "native_task_ref": "TZ-214",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-215",
+      "native_task_ref": "TZ-215",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-216",
+      "native_task_ref": "TZ-216",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-217",
+      "native_task_ref": "TZ-217",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-218",
+      "native_task_ref": "TZ-218",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-219",
+      "native_task_ref": "TZ-219",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-220",
+      "native_task_ref": "TZ-220",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-221",
+      "native_task_ref": "TZ-221",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-222",
+      "native_task_ref": "TZ-222",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-223",
+      "native_task_ref": "TZ-223",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-224",
+      "native_task_ref": "TZ-224",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-225",
+      "native_task_ref": "TZ-225",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-226",
+      "native_task_ref": "TZ-226",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-227",
+      "native_task_ref": "TZ-227",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-228",
+      "native_task_ref": "TZ-228",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-229",
+      "native_task_ref": "TZ-229",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-230",
+      "native_task_ref": "TZ-230",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-231",
+      "native_task_ref": "TZ-231",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-232",
+      "native_task_ref": "TZ-232",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-233",
+      "native_task_ref": "TZ-233",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-234",
+      "native_task_ref": "TZ-234",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-235",
+      "native_task_ref": "TZ-235",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-236",
+      "native_task_ref": "TZ-236",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-237",
+      "native_task_ref": "TZ-237",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-238",
+      "native_task_ref": "TZ-238",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-239",
+      "native_task_ref": "TZ-239",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-240",
+      "native_task_ref": "TZ-240",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-241",
+      "native_task_ref": "TZ-241",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-242",
+      "native_task_ref": "TZ-242",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-243",
+      "native_task_ref": "TZ-243",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-244",
+      "native_task_ref": "TZ-244",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-245",
+      "native_task_ref": "TZ-245",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-246",
+      "native_task_ref": "TZ-246",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-247",
+      "native_task_ref": "TZ-247",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-248",
+      "native_task_ref": "TZ-248",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-249",
+      "native_task_ref": "TZ-249",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-250",
+      "native_task_ref": "TZ-250",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-251",
+      "native_task_ref": "TZ-251",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-252",
+      "native_task_ref": "TZ-252",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-253",
+      "native_task_ref": "TZ-253",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-254",
+      "native_task_ref": "TZ-254",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-255",
+      "native_task_ref": "TZ-255",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-256",
+      "native_task_ref": "TZ-256",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-257",
+      "native_task_ref": "TZ-257",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-258",
+      "native_task_ref": "TZ-258",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-259",
+      "native_task_ref": "TZ-259",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-260",
+      "native_task_ref": "TZ-260",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-261",
+      "native_task_ref": "TZ-261",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-262",
+      "native_task_ref": "TZ-262",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-263",
+      "native_task_ref": "TZ-263",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-264",
+      "native_task_ref": "TZ-264",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-265",
+      "native_task_ref": "TZ-265",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-266",
+      "native_task_ref": "TZ-266",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-267",
+      "native_task_ref": "TZ-267",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-268",
+      "native_task_ref": "TZ-268",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-269",
+      "native_task_ref": "TZ-269",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-270",
+      "native_task_ref": "TZ-270",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-271",
+      "native_task_ref": "TZ-271",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-272",
+      "native_task_ref": "TZ-272",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-273",
+      "native_task_ref": "TZ-273",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-274",
+      "native_task_ref": "TZ-274",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-275",
+      "native_task_ref": "TZ-275",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-276",
+      "native_task_ref": "TZ-276",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-277",
+      "native_task_ref": "TZ-277",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-278",
+      "native_task_ref": "TZ-278",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-279",
+      "native_task_ref": "TZ-279",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-280",
+      "native_task_ref": "TZ-280",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-281",
+      "native_task_ref": "TZ-281",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-282",
+      "native_task_ref": "TZ-282",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-283",
+      "native_task_ref": "TZ-283",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-284",
+      "native_task_ref": "TZ-284",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-285",
+      "native_task_ref": "TZ-285",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-286",
+      "native_task_ref": "TZ-286",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-287",
+      "native_task_ref": "TZ-287",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-288",
+      "native_task_ref": "TZ-288",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-289",
+      "native_task_ref": "TZ-289",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-290",
+      "native_task_ref": "TZ-290",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-291",
+      "native_task_ref": "TZ-291",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-292",
+      "native_task_ref": "TZ-292",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-293",
+      "native_task_ref": "TZ-293",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-294",
+      "native_task_ref": "TZ-294",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-295",
+      "native_task_ref": "TZ-295",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-296",
+      "native_task_ref": "TZ-296",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-297",
+      "native_task_ref": "TZ-297",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-298",
+      "native_task_ref": "TZ-298",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-299",
+      "native_task_ref": "TZ-299",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-300",
+      "native_task_ref": "TZ-300",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-301",
+      "native_task_ref": "TZ-301",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-302",
+      "native_task_ref": "TZ-302",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-303",
+      "native_task_ref": "TZ-303",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-304",
+      "native_task_ref": "TZ-304",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-305",
+      "native_task_ref": "TZ-305",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-306",
+      "native_task_ref": "TZ-306",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-307",
+      "native_task_ref": "TZ-307",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-308",
+      "native_task_ref": "TZ-308",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-309",
+      "native_task_ref": "TZ-309",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-310",
+      "native_task_ref": "TZ-310",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-311",
+      "native_task_ref": "TZ-311",
+      "source_status": "Да",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-312",
+      "native_task_ref": "TZ-312",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-313",
+      "native_task_ref": "TZ-313",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-314",
+      "native_task_ref": "TZ-314",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-315",
+      "native_task_ref": "TZ-315",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-316",
+      "native_task_ref": "TZ-316",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-317",
+      "native_task_ref": "TZ-317",
+      "source_status": "Частично",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-318",
+      "native_task_ref": "TZ-318",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-319",
+      "native_task_ref": "TZ-319",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-320",
+      "native_task_ref": "TZ-320",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-321",
+      "native_task_ref": "TZ-321",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-322",
+      "native_task_ref": "TZ-322",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-323",
+      "native_task_ref": "TZ-323",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-324",
+      "native_task_ref": "TZ-324",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "TZ-325",
+      "native_task_ref": "TZ-325",
+      "source_status": "Нет",
+      "review_state": "unverified",
+      "evidence": []
+    }
+  ],
+  "clauses": [
+    {
+      "id": "1.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "1.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "1.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "1.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.1.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.1.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.1.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.1.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.1.5",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.1.6",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.1.7",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.2.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.2.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.2.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.3.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.3.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.5",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.6",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.7",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.8",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.9",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.10",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.11",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.12",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.13",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.14",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.15",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.16",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.17",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "2.4.18",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.5",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.6",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.7",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.8",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.9",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.10",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.11",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.12",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.13",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.14",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.15",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "3.16",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "4.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "4.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "4.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.1.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.1.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.1.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.3.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.3.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.3.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.4.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.5",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.5.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.6",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.7",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.8",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.9",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.10",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.11",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "5.12",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "6.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "6.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "6.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "6.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "6.5",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "6.6",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.2.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.2.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.2.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.3.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.3.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.3.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.3.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.5",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.6",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.7",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.8",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.9",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.10",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "7.11",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "8.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "8.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "8.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "8.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "8.5",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "8.6",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "8.7",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "9.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "9.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "9.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.3",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.4",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.5",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.6",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.7",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.8",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.9",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.10",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "11.11",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "12.1",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "12.2",
+      "source": "numbered_checklist",
+      "review_state": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "10",
+      "source": "section_level_crosswalk",
+      "review_state": "unverified",
+      "evidence": []
+    }
+  ]
+}
